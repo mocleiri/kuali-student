@@ -42,10 +42,10 @@
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-Link" p:linkText="Account Overview"
+                <bean parent="Uif-Link" p:linkText="Search"
                       p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView"/>
                 <bean parent="Uif-Link" p:linkText="Administration"
-                      p:href="adminView?methodToCall=get&amp;viewId=KsaAdminView&amp;pageId=ActivityPage"/>
+                      p:href="adminView?methodToCall=get&amp;viewId=AdminView&amp;pageId=AccountManagement"/>
                 <bean parent="Uif-Link" p:linkText="Reconciliation"
                       p:href="reportReconciliationView?methodToCall=get&amp;viewId=ReportReconciliationView"/>
                 <bean parent="Uif-Link" p:linkText="Collections"

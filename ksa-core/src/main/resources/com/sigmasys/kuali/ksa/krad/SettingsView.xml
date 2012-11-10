@@ -31,7 +31,6 @@
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
                     <list>
-                        <!-- TODO Advanced Search -->
                         <bean parent="Uif-HeaderTwo" p:headerText="Settings"/>
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="UserProfilePage"
                               p:actionLabel="User Profile"/>

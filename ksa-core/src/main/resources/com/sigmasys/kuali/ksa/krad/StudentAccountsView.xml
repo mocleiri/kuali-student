@@ -27,31 +27,94 @@
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <bean id="StudentAccountsView" parent="Uif-KsaFormView" p:footer.render="false">
-        <property name="title" value="Account Overview"/>
-        <property name="headerText" value="Accounts"/>
+        <property name="title" value="Search"/>
+        <property name="headerText" value="Search"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.StudentAccountsForm"/>
-        <property name="entryPageId" value="HomePage"/>
+        <property name="entryPageId" value="AccountSearch"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
-                    <list merge="true">
-                        <!-- TODO Advanced Search -->
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AdvancedSearch"
-                              p:actionLabel="Advanced Search"/>
+                    <list>
+                        <bean parent="Uif-HeaderTwo" p:headerText="Search"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountSearch" p:actionLabel="Account Search"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="TransactionSearch" p:actionLabel="Transaction Search"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="ActivitySearch" p:actionLabel="Activity Search"/>
                     </list>
                 </property>
             </bean>
         </property>
         <property name="items">
             <list merge="true">
-                <bean parent="Uif-Page" p:id="HomePage" p:title="Home">
-                    <property name="headerText" value="Account Home"/>
+
+                <!--Begin Account Search Page-->
+
+                <bean parent="Uif-Page" p:id="AccountSearch" p:title="Account Search">
+                    <property name="headerText" value="Account Search"/>
                     <property name="items">
                         <list>
-                            <ref bean="homeQuickOptions"/>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
                         </list>
                     </property>
                 </bean>
+
+                <!--End Account Search Page-->
+
+                <!--Begin Transaction Search Page-->
+
+                <bean parent="Uif-Page" p:id="TransactionSearch" p:title="Transaction Search">
+                    <property name="headerText" value="Transaction Search"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Transaction Search Page-->
+
+                <!--Begin Activity Search Page-->
+
+                <bean parent="Uif-Page" p:id="ActivitySearch" p:title="Activity Search">
+                    <property name="headerText" value="Activity Search"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Activity Search Page-->
+
+
+                <!--<bean parent="Uif-Page" p:id="AccountSearch" p:title="Account Search">
+                    <property name="headerText" value="Account Search"/>
+                    <property name="items">
+                        <list>
+                            <ref bean="AccountSearchForm"/>
+                        </list>
+                    </property>
+                </bean>-->
                 <!-- transactions overview for an account roll-up and ungroupded list -->
                 <bean parent="Uif-Page" p:id="AccountOVTransactionsPage" p:title="Account Transactions">
                     <property name="headerText" value="Account Transactions"/>
@@ -117,16 +180,17 @@
     ********************************************************************************************************************
     -->
     <!-- A quick menu of options with links to other pages -->
-    <bean id="homeQuickOptions" parent="Uif-VerticalBoxSection"
+<!--    <bean id="AccountSearchForm" parent="Uif-VerticalBoxSection"
           p:layoutManager.orientation="VERTICAL"
-          p:title="Quick Menu"
+          p:title="Account Search Form"
           p:instructionalText="This is the KSA home page. Here you would see a dashboard of actions available to the logged in user.">
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
             </list>
         </property>
-    </bean>
+    </bean>-->
+
 
     <!--
     ********************************************************************************************************************

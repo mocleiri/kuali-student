@@ -26,25 +26,53 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="KsaAdminView" parent="Uif-KsaFormView">
-        <property name="title" value=""/>
+    <bean id="AdminView" parent="Uif-KsaFormView">
+        <property name="title" value="Administration"/>
         <property name="headerText" value="Administration"/>
-        <property name="entryPageId" value="ActivityPage"/>
+        <property name="entryPageId" value="AccountManagement"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
-                    <list merge="true">
-                        <!-- TODO Advanced Search -->
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AdvancedSearch"
-                              p:actionLabel="Advanced Search"/>
+                    <list>
+                        <bean parent="Uif-HeaderTwo" p:headerText="Administration"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountManagement" p:actionLabel="Account Management"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="SystemActivity" p:actionLabel="System Activity"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="RegulatoryTracking" p:actionLabel="Regulatory Tracking"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="SystemRolesUsers" p:actionLabel="System Roles &amp; Users"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="GeneralLedger" p:actionLabel="General Ledger"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="Transactions" p:actionLabel="Transactions"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="Refunds" p:actionLabel="Refunds"/>
                     </list>
                 </property>
             </bean>
         </property>
         <property name="items">
             <list merge="true">
-                <bean parent="Uif-Page" p:id="ActivityPage" p:title="Activity">
-                    <property name="headerText" value="Activity List"/>
+
+                <!--Begin Account Management Page-->
+
+                <bean parent="Uif-Page" p:id="AccountManagement" p:title="Account Management">
+                    <property name="headerText" value="Account Management"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Account Management Page-->
+
+                <!--Begin System Activity Page-->
+
+                <bean parent="Uif-Page" p:id="SystemActivity" p:title="System Activity">
+                    <property name="headerText" value="System Activity"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"
@@ -55,6 +83,110 @@
                         </list>
                     </property>
                 </bean>
+
+                <!--End System Activity Page-->
+
+                <!--Begin Regulatory Tracking Page-->
+
+                <bean parent="Uif-Page" p:id="RegulatoryTracking" p:title="Regulatory Tracking">
+                    <property name="headerText" value="Account Management"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Regulatory Tracking Page-->
+
+                <!--Begin System Roles/Users Page-->
+
+                <bean parent="Uif-Page" p:id="SystemRolesUsers" p:title="System Roles &amp; Users">
+                    <property name="headerText" value="System Roles &amp; Users"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End System Roles/Users Page-->
+
+                <!--Begin General Ledger Page-->
+
+                <bean parent="Uif-Page" p:id="GeneralLedger" p:title="General Ledger">
+                    <property name="headerText" value="General Ledger"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End General Ledger Page-->
+
+                <!--Begin Transactions Page-->
+
+                <bean parent="Uif-Page" p:id="Transactions" p:title="Transactions">
+                    <property name="headerText" value="Transactions"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Transactions Page-->
+
+                <!--Begin Refunds Page-->
+
+                <bean parent="Uif-Page" p:id="Refunds" p:title="Refunds">
+                    <property name="headerText" value="Refunds"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Refunds Page-->
+
+
             </list>
         </property>
 <!--        <property name="additionalCssFiles" ref=""/>

@@ -94,11 +94,11 @@
           p:layoutManager.numberOfColumns="2"
           p:disclosure.render="false"
           p:progressiveRenderViaAJAX="true">
-        <property name="cssClasses">
+<!--        <property name="cssClasses">
             <list merge="true">
                 <value>ksa-quickview-table</value>
             </list>
-        </property>
+        </property>-->
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.krad.form.TemplateForm.StringModel"/>
         <property name="propertyName" value="stringModels"/>

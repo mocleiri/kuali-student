@@ -48,7 +48,8 @@ public class AdminController extends GenericSearchController {
          return getUIFModelAndView(form);
       }
 
-      throw new IllegalArgumentException("'pageId' request parameter must be specified");
+      /*throw new IllegalArgumentException("'pageId' request parameter must be specified");*/
+       return getUIFModelAndView(form);
 
    }
 
@@ -69,7 +70,8 @@ public class AdminController extends GenericSearchController {
          return getUIFModelAndView(form);
       }
 
-      throw new IllegalArgumentException("'pageId' request parameter must be specified");
+      /*throw new IllegalArgumentException("'pageId' request parameter must be specified");*/
+       return getUIFModelAndView(form);
 
    }
 }
