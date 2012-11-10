@@ -58,12 +58,13 @@ public class TransactionUtils {
      * @return a modified list of transactions
      */
     public static List<Transaction> removeFullyAllocatedTransactions(List<Transaction> transactions) {
-        for (Iterator<Transaction> iterator = transactions.iterator(); iterator.hasNext(); ) {
+        List<Transaction> newTransactions = getCopy(transactions);
+        for (Iterator<Transaction> iterator = newTransactions.iterator(); iterator.hasNext(); ) {
             if (getUnallocatedAmount(iterator.next()).compareTo(BigDecimal.ZERO) == 0) {
                 iterator.remove();
             }
         }
-        return transactions;
+        return newTransactions;
     }
 
     /**
@@ -245,19 +246,18 @@ public class TransactionUtils {
     }
 
     public static List<Transaction> getCopy(List<Transaction> transactions) {
-        List<Transaction> newList = new ArrayList<Transaction>(transactions.size());
-        Collections.copy(newList, transactions);
-        return newList;
+        return new ArrayList<Transaction>(transactions);
     }
 
     private static List<Transaction> removeTransactions(List<Transaction> transactions, TransactionTypeValue transactionType) {
-        for (Iterator<Transaction> iterator = transactions.iterator(); iterator.hasNext(); ) {
+        List<Transaction> newTransactions = getCopy(transactions);
+        for (Iterator<Transaction> iterator = newTransactions.iterator(); iterator.hasNext(); ) {
             Transaction transaction = iterator.next();
             if (transactionType == transaction.getTransactionTypeValue()) {
                 iterator.remove();
             }
         }
-        return transactions;
+        return newTransactions;
     }
 
     public static List<Transaction> removeCharges(List<Transaction> transactions) {
@@ -289,54 +289,56 @@ public class TransactionUtils {
     }
 
     public static List<Transaction> filterByEffectiveDate(List<Transaction> transactions, Date fromDate, Date toDate) {
-        for (Iterator<Transaction> iterator = transactions.iterator(); iterator.hasNext(); ) {
-            Date effectiveDate = iterator.next().getEffectiveDate();
+        List<Transaction> newTransactions = new LinkedList<Transaction>();
+        for (Transaction transaction : transactions) {
+            Date effectiveDate = transaction.getEffectiveDate();
             if (effectiveDate != null) {
-                if (effectiveDate.compareTo(fromDate) < 0 || effectiveDate.compareTo(toDate) > 0) {
-                    iterator.remove();
+                if (effectiveDate.compareTo(fromDate) >= 0 && effectiveDate.compareTo(toDate) <= 0) {
+                    newTransactions.add(transaction);
                 }
             }
         }
-        return transactions;
+        return newTransactions;
     }
 
     public static List<Transaction> filterByAmount(List<Transaction> transactions, BigDecimal fromAmount,
                                                    BigDecimal toAmount) {
-        for (Iterator<Transaction> iterator = transactions.iterator(); iterator.hasNext(); ) {
-            BigDecimal amount = iterator.next().getAmount();
+        List<Transaction> newTransactions = new LinkedList<Transaction>();
+        for (Transaction transaction : transactions) {
+            BigDecimal amount = transaction.getAmount();
             if (amount != null) {
-                if (amount.compareTo(fromAmount) < 0 || amount.compareTo(toAmount) > 0) {
-                    iterator.remove();
+                if (amount.compareTo(fromAmount) >= 0 && amount.compareTo(toAmount) <= 0) {
+                    newTransactions.add(transaction);
                 }
             }
         }
-        return transactions;
+        return newTransactions;
     }
 
     public static List<Transaction> filterByUnallocatedAmount(List<Transaction> transactions, BigDecimal fromAmount,
                                                               BigDecimal toAmount) {
-        for (Iterator<Transaction> iterator = transactions.iterator(); iterator.hasNext(); ) {
-            BigDecimal amount = getUnallocatedAmount(iterator.next());
-            if (amount.compareTo(fromAmount) < 0 || amount.compareTo(toAmount) > 0) {
-                iterator.remove();
+        List<Transaction> newTransactions = new LinkedList<Transaction>();
+        for (Transaction transaction : transactions) {
+            BigDecimal amount = getUnallocatedAmount(transaction);
+            if (amount.compareTo(fromAmount) >= 0 && amount.compareTo(toAmount) <= 0) {
+                newTransactions.add(transaction);
             }
         }
-        return transactions;
+        return newTransactions;
     }
 
     public static List<Transaction> filterByPriority(List<Transaction> transactions, int fromPriority, int toPriority) {
-        for (Iterator<Transaction> iterator = transactions.iterator(); iterator.hasNext(); ) {
-            TransactionType transactionType = iterator.next().getTransactionType();
-            if (transactionType == null || transactionType.getPriority() == null) {
-                iterator.remove();
-                continue;
-            }
-            int priority = transactionType.getPriority();
-            if (priority < fromPriority || priority > toPriority) {
-                iterator.remove();
+        List<Transaction> newTransactions = new LinkedList<Transaction>();
+        for (Transaction transaction : transactions) {
+            TransactionType transactionType = transaction.getTransactionType();
+            if (transactionType.getPriority() != null) {
+                int priority = transactionType.getPriority();
+                if (priority >= fromPriority && priority <= toPriority) {
+                    newTransactions.add(transaction);
+                }
             }
         }
-        return transactions;
+        return newTransactions;
     }
 
 }
