@@ -26,95 +26,32 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="StudentAccountsView" parent="Uif-KsaFormView" p:footer.render="false">
-        <property name="title" value="Search"/>
-        <property name="headerText" value="Search"/>
-        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.StudentAccountsForm"/>
-        <property name="entryPageId" value="AccountSearch"/>
+    <bean id="SearchView" parent="Uif-KsaFormView" p:footer.render="false">
+        <property name="title" value="Account Overview"/>
+        <property name="headerText" value="Accounts"/>
+        <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.SearchForm"/>
+        <property name="entryPageId" value="HomePage"/>
         <property name="navigation">
             <bean parent="Uif-KsaPageNavigation">
                 <property name="items">
-                    <list>
-                        <bean parent="Uif-HeaderTwo" p:headerText="Search"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountSearch" p:actionLabel="Account Search"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="TransactionSearch" p:actionLabel="Transaction Search"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="ActivitySearch" p:actionLabel="Activity Search"/>
+                    <list merge="true">
+                        <!-- TODO Advanced Search -->
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AdvancedSearch"
+                              p:actionLabel="Advanced Search"/>
                     </list>
                 </property>
             </bean>
         </property>
         <property name="items">
             <list merge="true">
-
-                <!--Begin Account Search Page-->
-
-                <bean parent="Uif-Page" p:id="AccountSearch" p:title="Account Search">
-                    <property name="headerText" value="Account Search"/>
+                <bean parent="Uif-Page" p:id="HomePage" p:title="Home">
+                    <property name="headerText" value="Account Home"/>
                     <property name="items">
                         <list>
-                            <bean parent="Uif-HorizontalBoxSection">
-                                <property name="items">
-                                    <list>
-                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
-                                    </list>
-                                </property>
-                            </bean>
-                            <!--<ref bean="PageSection"/>-->
+                            <ref bean="homeQuickOptions"/>
                         </list>
                     </property>
                 </bean>
-
-                <!--End Account Search Page-->
-
-                <!--Begin Transaction Search Page-->
-
-                <bean parent="Uif-Page" p:id="TransactionSearch" p:title="Transaction Search">
-                    <property name="headerText" value="Transaction Search"/>
-                    <property name="items">
-                        <list>
-                            <bean parent="Uif-HorizontalBoxSection">
-                                <property name="items">
-                                    <list>
-                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
-                                    </list>
-                                </property>
-                            </bean>
-                            <!--<ref bean="PageSection"/>-->
-                        </list>
-                    </property>
-                </bean>
-
-                <!--End Transaction Search Page-->
-
-                <!--Begin Activity Search Page-->
-
-                <bean parent="Uif-Page" p:id="ActivitySearch" p:title="Activity Search">
-                    <property name="headerText" value="Activity Search"/>
-                    <property name="items">
-                        <list>
-                            <bean parent="Uif-HorizontalBoxSection">
-                                <property name="items">
-                                    <list>
-                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
-                                    </list>
-                                </property>
-                            </bean>
-                            <!--<ref bean="PageSection"/>-->
-                        </list>
-                    </property>
-                </bean>
-
-                <!--End Activity Search Page-->
-
-
-                <!--<bean parent="Uif-Page" p:id="AccountSearch" p:title="Account Search">
-                    <property name="headerText" value="Account Search"/>
-                    <property name="items">
-                        <list>
-                            <ref bean="AccountSearchForm"/>
-                        </list>
-                    </property>
-                </bean>-->
                 <!-- transactions overview for an account roll-up and ungroupded list -->
                 <bean parent="Uif-Page" p:id="AccountOVTransactionsPage" p:title="Account Transactions">
                     <property name="headerText" value="Account Transactions"/>
@@ -131,7 +68,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Account Transactions" p:target="_self"
-                                  p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
+                                  p:href="searchView?methodToCall=get&amp;viewId=SearchView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
                             <ref bean="accountOVTransactionsByRollupSection"/>
                         </list>
                     </property>
@@ -142,7 +79,7 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-Link" p:linkText="Account Transactions" p:target="_self"
-                                  p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
+                                  p:href="searchView?methodToCall=get&amp;viewId=SearchView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
                             <ref bean="accountOVTransactionDetailSection"/>
                             <ref bean="auditInformationSection"/>
                             <ref bean="accountOVTransactionsControlSection"/>
@@ -180,17 +117,16 @@
     ********************************************************************************************************************
     -->
     <!-- A quick menu of options with links to other pages -->
-<!--    <bean id="AccountSearchForm" parent="Uif-VerticalBoxSection"
+    <bean id="homeQuickOptions" parent="Uif-VerticalBoxSection"
           p:layoutManager.orientation="VERTICAL"
-          p:title="Account Search Form"
+          p:title="Quick Menu"
           p:instructionalText="This is the KSA home page. Here you would see a dashboard of actions available to the logged in user.">
         <property name="disclosure.render" value="false"/>
         <property name="items">
             <list>
             </list>
         </property>
-    </bean>-->
-
+    </bean>
 
     <!--
     ********************************************************************************************************************
@@ -250,7 +186,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-LinkField" p:linkText="View" p:target="_self"
-                      p:href="studentAccountsView?viewId=StudentAccountsView&amp;pageId=AccountOVTransactionsRollupDetailPage&amp;methodToCall=get&amp;rollupId=@{#line.rollup.id}&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
+                      p:href="searchView?viewId=SearchView&amp;pageId=AccountOVTransactionsRollupDetailPage&amp;methodToCall=get&amp;rollupId=@{#line.rollup.id}&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
@@ -348,7 +284,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
-                      p:href="studentAccountsView?viewId=StudentAccountsView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
+                      p:href="searchView?viewId=SearchView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
@@ -441,7 +377,7 @@
                 </bean>
 
                 <bean parent="Uif-LinkField" p:linkText="Details" p:target="_self"
-                      p:href="studentAccountsView?viewId=StudentAccountsView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
+                      p:href="searchView?viewId=SearchView&amp;pageId=AccountOVTransactionDetailPage&amp;methodToCall=get&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
             </list>
         </property>
     </bean>
@@ -779,10 +715,10 @@
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);">
                 </bean>
                 <!-- TODO Really in the middle of a page -->
-<!--                <bean parent="Uif-NavigationActionLink"
-                      p:navigateToPageId="AccountOVTransactionAllocationPage" p:actionLabel="View Allocations"/>-->
+                <!--                <bean parent="Uif-NavigationActionLink"
+              p:navigateToPageId="AccountOVTransactionAllocationPage" p:actionLabel="View Allocations"/>-->
                 <bean parent="Uif-Link" p:linkText="View Allocations" p:target="_self"
-                      p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionAllocationPage&amp;userId=@{account.id}"/>
+                      p:href="searchView?methodToCall=get&amp;viewId=SearchView&amp;pageId=AccountOVTransactionAllocationPage&amp;userId=@{account.id}"/>
 
             </list>
         </property>
@@ -826,9 +762,9 @@
                     </property>
                 </bean>
                 <bean parent="Uif-LinkField" p:linkText="View" p:target="_self"
-                      p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
+                      p:href="searchView?methodToCall=get&amp;viewId=SearchView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
                 <bean parent="Uif-LinkField" p:linkText="Edit" p:target="_self"
-                      p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
+                      p:href="searchView?methodToCall=get&amp;viewId=SearchView&amp;pageId=AccountOVTransactionAllocationDetailPage&amp;id=@{#line.id}&amp;userId=@{account.id}"/>
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="lock"
                       p:actionLabel="Done"
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[userId]&quot;, &quot;@{account.id}&quot;);writeHiddenToForm(&quot;actionParameters[id]&quot;, &quot;@{#line.id}&quot;);">

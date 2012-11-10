@@ -1,6 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.krad.form.StudentAccountsForm;
+import com.sigmasys.kuali.ksa.krad.form.SearchForm;
 import com.sigmasys.kuali.ksa.krad.model.TransactionModel;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.InformationService;
@@ -25,10 +25,10 @@ import java.util.*;
  * Created by: dmulderink on 8/29/12 at 12:58 PM
  */
 @Controller
-@RequestMapping(value = "/studentAccountsView")
-public class StudentAccountsController extends GenericSearchController {
+@RequestMapping(value = "/searchView")
+public class SearchController extends GenericSearchController {
 
-    private static final Log logger = LogFactory.getLog(StudentAccountsController.class);
+    private static final Log logger = LogFactory.getLog(SearchController.class);
 
     @Autowired
     protected InformationService informationService;
@@ -37,9 +37,9 @@ public class StudentAccountsController extends GenericSearchController {
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
      */
     @Override
-    protected StudentAccountsForm createInitialForm(HttpServletRequest request) {
+    protected SearchForm createInitialForm(HttpServletRequest request) {
 
-        StudentAccountsForm form = new StudentAccountsForm();
+        SearchForm form = new SearchForm();
         // page can be used for editing or viewing
         form.setOvDetailReadWriteState("true");
         String userId = request.getParameter("userId");
@@ -72,7 +72,7 @@ public class StudentAccountsController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-    public ModelAndView get(@ModelAttribute("KualiForm") StudentAccountsForm form, BindingResult result,
+    public ModelAndView get(@ModelAttribute("KualiForm") SearchForm form, BindingResult result,
                             HttpServletRequest request, HttpServletResponse response) {
 
         // do get stuff...
@@ -242,7 +242,7 @@ public class StudentAccountsController extends GenericSearchController {
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
     @Transactional(readOnly = false)
-    public ModelAndView submit(@ModelAttribute("KualiForm") StudentAccountsForm form, BindingResult result,
+    public ModelAndView submit(@ModelAttribute("KualiForm") SearchForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
         // do submit stuff...
 
@@ -259,7 +259,7 @@ public class StudentAccountsController extends GenericSearchController {
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
     @Transactional(readOnly = false)
-    public ModelAndView save(@ModelAttribute("KualiForm") StudentAccountsForm form, BindingResult result,
+    public ModelAndView save(@ModelAttribute("KualiForm") SearchForm form, BindingResult result,
                              HttpServletRequest request, HttpServletResponse response) {
 
         // do save stuff...
@@ -275,7 +275,7 @@ public class StudentAccountsController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
-    public ModelAndView cancel(@ModelAttribute("KualiForm") StudentAccountsForm form, BindingResult result,
+    public ModelAndView cancel(@ModelAttribute("KualiForm") SearchForm form, BindingResult result,
                                HttpServletRequest request, HttpServletResponse response) {
         // do cancel stuff...
         return getUIFModelAndView(form);
@@ -289,7 +289,7 @@ public class StudentAccountsController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-    public ModelAndView refresh(@ModelAttribute("KualiForm") StudentAccountsForm form, BindingResult result,
+    public ModelAndView refresh(@ModelAttribute("KualiForm") SearchForm form, BindingResult result,
                                 HttpServletRequest request, HttpServletResponse response) {
         // do refresh stuff...
         return getUIFModelAndView(form);

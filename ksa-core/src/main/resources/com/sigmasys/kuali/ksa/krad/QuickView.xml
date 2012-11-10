@@ -137,7 +137,7 @@
                         <list>
                             <bean parent="Uif-MessageField" p:messageText="Account Overview"/>
                             <bean parent="Uif-Link" p:linkText="more" p:target="_self" p:style="font-size: .8em; float: right;"
-                                  p:href="studentAccountsView?methodToCall=get&amp;viewId=StudentAccountsView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
+                                  p:href="searchView?methodToCall=get&amp;viewId=SearchView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{account.id}"/>
                         </list>
                     </property>
                 </bean>

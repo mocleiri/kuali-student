@@ -12,7 +12,7 @@ import java.util.Locale;
 /**
  * Created by: dmulderink on 8/29/12 at 12:58 PM
  */
-public class StudentAccountsForm extends AbstractViewModel {
+public class SearchForm extends AbstractViewModel {
 
    private static final long serialVersionUID = -7525378097732916418L;
 
