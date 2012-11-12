@@ -56,6 +56,7 @@ import com.sigmasys.kuali.ksa.transform.BatchAch;
 import com.sigmasys.kuali.ksa.transform.BatchCheck;
 import com.sigmasys.kuali.ksa.transform.Check;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
+import com.sigmasys.kuali.ksa.util.TransactionUtils;
 
 /**
  * The refund service is the core of KSA-RM-RM. It handles the production of refunds from the system. 
@@ -1077,10 +1078,10 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 		if (StringUtils.isNotBlank(refundTypeMethod)) {
 			// Create a new Refund:
 			Refund refund = new Refund();
-			String debitTypeId = payment.getTransactionType().getId().getId();
-			RefundType refundType = getOrCreateRefundType(debitTypeId, refundTypeMethod);
+			RefundType refundType = getOrCreateRefundType(refundTypeMethod, refundTypeMethod);
+			BigDecimal refundAmount = TransactionUtils.getUnallocatedAmount(payment);
 			
-			refund.setAmount(payment.getAmount());
+			refund.setAmount(refundAmount);
 			refund.setRequestDate(requestDate);
 			refund.setRequestedBy(requestedBy);
 			refund.setTransaction(payment);
@@ -1104,11 +1105,12 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 	 */
 	private Refund createSourceRefund(Payment payment, Date requestDate, Account requestedBy, String refundRule) {
 		// Create a new Refund:
-		String refundTypeMethod = payment.getTransactionType().getId().getId();
+		String refundTypeMethod = configService.getInitialParameter(Constants.REFUND_SOURCE_TYPE);
 		RefundType refundType = getOrCreateRefundType(refundTypeMethod, refundTypeMethod);
+		BigDecimal refundAmount = TransactionUtils.getUnallocatedAmount(payment);
 		Refund refund = new Refund();
 		
-		refund.setAmount(payment.getAmount());
+		refund.setAmount(refundAmount);
 		refund.setRequestDate(requestDate);
 		refund.setRequestedBy(requestedBy);
 		refund.setTransaction(payment);
