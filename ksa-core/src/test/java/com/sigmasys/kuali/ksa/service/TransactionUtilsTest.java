@@ -162,4 +162,230 @@ public class TransactionUtilsTest extends AbstractServiceTest {
         isTrue(new BigDecimal(100).compareTo(TransactionUtils.getUnallocatedAmount(transactions.get(0))) == 0);
     }
 
+    @Test
+    public void orderByEffectiveDate() throws Exception {
+
+        Transaction transaction1 =
+                transactionService.createTransaction("cash", "admin", new Date(), new BigDecimal(200.00));
+
+        notNull(transaction1);
+        notNull(transaction1.getId());
+
+        Transaction transaction2 =
+                transactionService.createTransaction("1020", "admin", new Date(), new BigDecimal(501.999));
+
+        notNull(transaction2);
+        notNull(transaction2.getId());
+
+        List<Transaction> transactions = Arrays.asList(transaction1, transaction2);
+
+        transactions = TransactionUtils.orderByEffectiveDate(transactions, true);
+
+        notNull(transactions);
+        notEmpty(transactions);
+
+        isTrue(transactions.size() == 2);
+        isTrue(transaction1.equals(transactions.get(0)));
+        isTrue(transaction2.equals(transactions.get(1)));
+
+        transactions = TransactionUtils.orderByEffectiveDate(transactions, false);
+
+        notNull(transactions);
+        notEmpty(transactions);
+
+        isTrue(transactions.size() == 2);
+        isTrue(transaction2.equals(transactions.get(0)));
+        isTrue(transaction1.equals(transactions.get(1)));
+    }
+
+    @Test
+    public void orderByAmount() throws Exception {
+
+        Transaction transaction1 =
+                transactionService.createTransaction("cash", "admin", new Date(), new BigDecimal(2000.00));
+
+        notNull(transaction1);
+        notNull(transaction1.getId());
+
+        Transaction transaction2 =
+                transactionService.createTransaction("1020", "admin", new Date(), new BigDecimal(501.999));
+
+        notNull(transaction2);
+        notNull(transaction2.getId());
+
+        List<Transaction> transactions = Arrays.asList(transaction1, transaction2);
+
+        transactions = TransactionUtils.orderByAmount(transactions, true);
+
+        notNull(transactions);
+        notEmpty(transactions);
+
+        isTrue(transactions.size() == 2);
+        isTrue(transaction2.equals(transactions.get(0)));
+        isTrue(transaction1.equals(transactions.get(1)));
+
+        transactions = TransactionUtils.orderByAmount(transactions, false);
+
+        notNull(transactions);
+        notEmpty(transactions);
+
+        isTrue(transactions.size() == 2);
+        isTrue(transaction1.equals(transactions.get(0)));
+        isTrue(transaction2.equals(transactions.get(1)));
+    }
+
+    @Test
+    public void orderByUnallocatedAmount() throws Exception {
+
+        Transaction transaction1 =
+                transactionService.createTransaction("cash", "admin", new Date(), new BigDecimal(2000.00));
+
+        notNull(transaction1);
+        notNull(transaction1.getId());
+
+        Transaction transaction2 =
+                transactionService.createTransaction("1020", "admin", new Date(), new BigDecimal(501.999));
+
+        notNull(transaction2);
+        notNull(transaction2.getId());
+
+        List<Transaction> transactions = Arrays.asList(transaction1, transaction2);
+
+        transactionService.createAllocation(transaction1, transaction2, new BigDecimal(300.00), true, true);
+
+        isTrue(TransactionUtils.getUnallocatedAmount(transaction1).compareTo(BigDecimal.ZERO) > 0);
+        isTrue(TransactionUtils.getUnallocatedAmount(transaction2).compareTo(BigDecimal.ZERO) > 0);
+
+        transactions = TransactionUtils.orderByUnallocatedAmount(transactions, true);
+
+        notNull(transactions);
+        notEmpty(transactions);
+
+        isTrue(transactions.size() == 2);
+        isTrue(transaction2.equals(transactions.get(0)));
+        isTrue(transaction1.equals(transactions.get(1)));
+
+        transactions = TransactionUtils.orderByAmount(transactions, false);
+
+        notNull(transactions);
+        notEmpty(transactions);
+
+        isTrue(transactions.size() == 2);
+        isTrue(transaction1.equals(transactions.get(0)));
+        isTrue(transaction2.equals(transactions.get(1)));
+    }
+
+    @Test
+    public void removeCharges() throws Exception {
+
+        // Payment
+        Transaction transaction1 =
+                transactionService.createTransaction("cash", "admin", new Date(), new BigDecimal(2000.00));
+
+        notNull(transaction1);
+        notNull(transaction1.getId());
+
+        // Charge
+        Transaction transaction2 =
+                transactionService.createTransaction("1020", "admin", new Date(), new BigDecimal(501.999));
+
+        notNull(transaction2);
+        notNull(transaction2.getId());
+
+        // Deferment
+        Transaction transaction3 =
+                transactionService.createTransaction("chip", null, "admin", new Date(), new Date(), new BigDecimal(300.00));
+
+        notNull(transaction3);
+        notNull(transaction3.getId());
+
+        List<Transaction> transactions = Arrays.asList(transaction1, transaction2, transaction3);
+
+
+        transactions = TransactionUtils.removeCharges(transactions);
+
+        notNull(transactions);
+        notEmpty(transactions);
+
+        isTrue(transactions.size() == 2);
+        isTrue(!(transactions.get(0) instanceof Charge));
+        isTrue(!(transactions.get(1) instanceof Charge));
+    }
+
+    @Test
+    public void removePayments() throws Exception {
+
+        // Payment
+        Transaction transaction1 =
+                transactionService.createTransaction("cash", "admin", new Date(), new BigDecimal(2000.00));
+
+        notNull(transaction1);
+        notNull(transaction1.getId());
+
+        // Charge
+        Transaction transaction2 =
+                transactionService.createTransaction("1020", "admin", new Date(), new BigDecimal(501.999));
+
+        notNull(transaction2);
+        notNull(transaction2.getId());
+
+        // Deferment
+        Transaction transaction3 =
+                transactionService.createTransaction("chip", null, "admin", new Date(), new Date(), new BigDecimal(300.00));
+
+        notNull(transaction3);
+        notNull(transaction3.getId());
+
+        List<Transaction> transactions = Arrays.asList(transaction1, transaction2, transaction3);
+
+
+        transactions = TransactionUtils.removePayments(transactions);
+
+        notNull(transactions);
+        notEmpty(transactions);
+
+        isTrue(transactions.size() == 2);
+        isTrue(!(transactions.get(0) instanceof Payment));
+        isTrue(!(transactions.get(1) instanceof Payment));
+
+    }
+
+    @Test
+    public void removeDeferments() throws Exception {
+
+        // Payment
+        Transaction transaction1 =
+                transactionService.createTransaction("cash", "admin", new Date(), new BigDecimal(2000.00));
+
+        notNull(transaction1);
+        notNull(transaction1.getId());
+
+        // Charge
+        Transaction transaction2 =
+                transactionService.createTransaction("1020", "admin", new Date(), new BigDecimal(501.999));
+
+        notNull(transaction2);
+        notNull(transaction2.getId());
+
+        // Deferment
+        Transaction transaction3 =
+                transactionService.createTransaction("chip", null, "admin", new Date(), new Date(), new BigDecimal(300.00));
+
+        notNull(transaction3);
+        notNull(transaction3.getId());
+
+        List<Transaction> transactions = Arrays.asList(transaction1, transaction2, transaction3);
+
+
+        transactions = TransactionUtils.removeDeferments(transactions);
+
+        notNull(transactions);
+        notEmpty(transactions);
+
+        isTrue(transactions.size() == 2);
+        isTrue(!(transactions.get(0) instanceof Deferment));
+        isTrue(!(transactions.get(1) instanceof Deferment));
+
+    }
+
 }
