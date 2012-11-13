@@ -2,7 +2,9 @@
 
 delete from KSEN_ATPMSTONE_RELTN where id in (select id from KSEN_ATPMSTONE_RELTN WHERE MSTONE_ID in (select id from KSEN_MSTONE where MSTONE_STATE IN ('Official', 'Tentative', 'Actual')))
 /
+delete from KSEN_ATPMSTONE_RELTN where id in (select id from KSEN_ATPMSTONE_RELTN WHERE ATP_ID in (select id from KSEN_ATP where atp_state IN ('Official', 'Tentative', 'Actual')))
+/
 delete from KSEN_MSTONE where id in (select id from KSEN_MSTONE where MSTONE_STATE IN ('Official', 'Tentative', 'Actual'))
 /
-delete from KSEN_ATP where id in (select id from KSEN_ATP where atp_state = 'Official' or atp_state = 'Tentative' or atp_state = 'Actual')
+delete from KSEN_ATP where id in (select id from KSEN_ATP where atp_state IN ('Official', 'Tentative', 'Actual'))
 /
