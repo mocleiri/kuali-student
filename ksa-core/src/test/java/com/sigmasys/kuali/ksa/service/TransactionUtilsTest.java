@@ -163,6 +163,106 @@ public class TransactionUtilsTest extends AbstractServiceTest {
     }
 
     @Test
+    public void filterByAmount() throws Exception {
+
+        Transaction transaction1 =
+                transactionService.createTransaction("cash", "admin", new Date(), new BigDecimal(200.00));
+
+        notNull(transaction1);
+        notNull(transaction1.getId());
+
+        Transaction transaction2 =
+                transactionService.createTransaction("1020", "admin", new Date(), new BigDecimal(201.999));
+
+        notNull(transaction2);
+        notNull(transaction2.getId());
+
+        List<Transaction> transactions = Arrays.asList(transaction1, transaction2);
+
+        transactions = TransactionUtils.filterByAmount(transactions, new BigDecimal(200.001), new BigDecimal(300));
+
+        logger.info("Transaction list = " + transactions);
+
+        notNull(transactions);
+        notEmpty(transactions);
+        isTrue(transactions.size() == 1);
+
+        isTrue(transaction2.equals(transactions.get(0)));
+        isTrue(new BigDecimal(201.999).compareTo(transactions.get(0).getAmount()) == 0);
+    }
+
+    @Test
+    public void filterByPriority() throws Exception {
+
+        Transaction transaction1 =
+                transactionService.createTransaction("cash", "admin", new Date(), new BigDecimal(200.00));
+
+        notNull(transaction1);
+        notNull(transaction1.getId());
+
+        transaction1.getTransactionType().setPriority(35);
+
+        Transaction transaction2 =
+                transactionService.createTransaction("1020", "admin", new Date(), new BigDecimal(201.999));
+
+        notNull(transaction2);
+        notNull(transaction2.getId());
+
+        transaction2.getTransactionType().setPriority(20);
+
+        List<Transaction> transactions = Arrays.asList(transaction1, transaction2);
+
+        transactions = TransactionUtils.filterByPriority(transactions, 5, 20);
+
+        logger.info("Transaction list = " + transactions);
+
+        notNull(transactions);
+        notEmpty(transactions);
+        isTrue(transactions.size() == 1);
+
+        isTrue(transaction2.equals(transactions.get(0)));
+        notNull(transactions.get(0).getTransactionType());
+        notNull(transactions.get(0).getTransactionType().getPriority());
+        isTrue(20 == transactions.get(0).getTransactionType().getPriority());
+
+    }
+
+    @Test
+    public void filterByMatrixScore() throws Exception {
+
+        Transaction transaction1 =
+                transactionService.createTransaction("cash", "admin", new Date(), new BigDecimal(200.00));
+
+        notNull(transaction1);
+        notNull(transaction1.getId());
+
+        transaction1.setMatrixScore(567);
+
+        Transaction transaction2 =
+                transactionService.createTransaction("1020", "admin", new Date(), new BigDecimal(201.999));
+
+        notNull(transaction2);
+        notNull(transaction2.getId());
+
+        transaction2.setMatrixScore(6789);
+
+        List<Transaction> transactions = Arrays.asList(transaction1, transaction2);
+
+        transactions = TransactionUtils.filterByMatrixScore(transactions, 0, 1000);
+
+        logger.info("Transaction list = " + transactions);
+
+        notNull(transactions);
+        notEmpty(transactions);
+        isTrue(transactions.size() == 1);
+
+        isTrue(transaction1.equals(transactions.get(0)));
+        notNull(transactions.get(0).getMatrixScore());
+        isTrue(567 == transactions.get(0).getMatrixScore());
+
+    }
+
+    @Test
     public void orderByEffectiveDate() throws Exception {
 
         Transaction transaction1 =

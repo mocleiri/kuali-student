@@ -327,13 +327,26 @@ public class TransactionUtils {
         return newTransactions;
     }
 
-    public static List<Transaction> filterByPriority(List<Transaction> transactions, int fromPriority, int toPriority) {
+    public static List<Transaction> filterByPriority(List<Transaction> transactions, int minPriority, int maxPriority) {
         List<Transaction> newTransactions = new LinkedList<Transaction>();
         for (Transaction transaction : transactions) {
             TransactionType transactionType = transaction.getTransactionType();
             if (transactionType.getPriority() != null) {
                 int priority = transactionType.getPriority();
-                if (priority >= fromPriority && priority <= toPriority) {
+                if (priority >= minPriority && priority <= maxPriority) {
+                    newTransactions.add(transaction);
+                }
+            }
+        }
+        return newTransactions;
+    }
+
+    public static List<Transaction> filterByMatrixScore(List<Transaction> transactions, int minScore, int maxScore) {
+        List<Transaction> newTransactions = new LinkedList<Transaction>();
+        for (Transaction transaction : transactions) {
+            if (transaction.getMatrixScore() != null) {
+                int matrixScore = transaction.getMatrixScore();
+                if (matrixScore >= minScore && matrixScore <= maxScore) {
                     newTransactions.add(transaction);
                 }
             }
