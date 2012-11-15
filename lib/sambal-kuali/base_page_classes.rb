@@ -21,7 +21,7 @@ class PopulationsBase < BasePage
       element(:child_population) { |b| b.frm.text_field(name: "newCollectionLines['document.newMaintainableObject.dataObject.childPopulations'].name") }
       element(:reference_population) { |b| b.frm.text_field(name: "document.newMaintainableObject.dataObject.referencePopulation.name") }
 
-      action(:lookup_population) { |b| b.frm.link(id: "lookup_searchPopulation_add").click; b.loading.wait_while_present } 
+      action(:lookup_population) { |b| b.frm.link(id: "lookup_searchPopulation_add").click; b.loading.wait_while_present }
       action(:lookup_ref_population) { |b| b.frm.link(id: "lookup_searchRefPopulation").click; b.loading.wait_while_present }
       action(:add) { |b| b.child_populations_table.button(text: "add").click; b.loading.wait_while_present; sleep 1.5 }
     end
@@ -43,6 +43,7 @@ end
 module PopulationsSearch
 
   # Results Table Columns...
+  ACTION = 0
   POPULATION_NAME = 1
   POPULATION_DESCRIPTION = 2
   POPULATION_TYPE = 3
@@ -114,7 +115,11 @@ module PopulationsSearch
   private
 
   def target_row(name)
-    results_table.row(text: /#{name}/)
+    results_table.rows.each do |r|
+      if (r.cells[POPULATION_NAME].text =~ /#{name}/)
+        return r
+      end
+    end
   end
 
 end
