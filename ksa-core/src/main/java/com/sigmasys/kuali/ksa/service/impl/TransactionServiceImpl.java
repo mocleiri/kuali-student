@@ -1,6 +1,8 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -10,6 +12,7 @@ import javax.persistence.Query;
 
 import com.sigmasys.kuali.ksa.util.TransactionUtils;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -1804,6 +1807,128 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
 
         return null;
+    }
+
+    /**
+     * Checks if the given cancellation rule is legal.
+     *
+     * @param cancellationRule the cancellation rule
+     * @return true if the rule is valid or null, false - otherwise
+     */
+    @Override
+    public boolean isCancellationRuleValid(String cancellationRule) {
+
+        if (StringUtils.isBlank(cancellationRule) || cancellationRule.length() < 6) {
+            return false;
+        }
+
+        String rule = cancellationRule.toUpperCase().trim();
+
+        int curDays = -1;
+        Date curDate = null;
+        Boolean isDateRule = null;
+
+        logger.debug("Cancellation Rule = '" + rule + "'");
+
+        while (rule.length() > 0) {
+
+            boolean startsWithDate = rule.startsWith("DATE(");
+            boolean startsWithDays = rule.startsWith("DAYS(");
+
+            if (isDateRule == null) {
+                isDateRule = startsWithDate;
+            } else if (isDateRule && startsWithDays) {
+                return false;
+            } else if (!isDateRule && startsWithDate) {
+                return false;
+            }
+
+            if (startsWithDate || startsWithDays) {
+                rule = rule.substring(5);
+                int index = rule.indexOf(")");
+                if (index <= 0) {
+                    return false;
+                }
+                String dateDays = rule.substring(0, index);
+                if (StringUtils.isBlank(dateDays)) {
+                    return false;
+                }
+                try {
+                    int days = Integer.parseInt(dateDays);
+                    if (isDateRule) {
+                        return false;
+                    }
+                    if (days < 0 || days > 365 || days < curDays) {
+                        return false;
+                    }
+                    curDays = days;
+                } catch (NumberFormatException nfe) {
+                    if (!isDateRule) {
+                        return false;
+                    }
+                    try {
+                        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
+                        // We have to set "lenient" to false to prevent auto-conversion of dates like "13/23/1999"
+                        dateFormat.setLenient(false);
+                        Date date = dateFormat.parse(dateDays);
+                        if (curDate != null && date.compareTo(curDate) < 0) {
+                            return false;
+                        }
+                        curDate = date;
+                    } catch (ParseException pe) {
+                        logger.warn(pe.getMessage(), pe);
+                        return false;
+                    }
+                }
+                if (rule.length() <= index + 2) {
+                    return false;
+                }
+                rule = rule.substring(index + 1);
+                boolean startsWithAmount = rule.startsWith("AMOUNT(");
+                boolean startsWithPercentage = rule.startsWith("PERCENTAGE(");
+                if (startsWithAmount || startsWithPercentage) {
+                    rule = rule.substring(startsWithAmount ? 7 : 11);
+                    index = rule.indexOf(")");
+                    if (index <= 0) {
+                        return false;
+                    }
+                    String amountValue = rule.substring(0, index);
+                    if (StringUtils.isBlank(amountValue)) {
+                        return false;
+                    }
+                    try {
+                        double amount = Double.parseDouble(amountValue);
+                        if (amount < 0) {
+                            return false;
+                        }
+                        if (startsWithPercentage && amount > 100) {
+                            return false;
+                        }
+                    } catch (NumberFormatException nfe) {
+                        logger.warn(nfe.getMessage(), nfe);
+                        return false;
+                    }
+                    rule = rule.substring(index + 1);
+                    if (rule.length() > 0) {
+                        if (rule.startsWith(";")) {
+                            rule = rule.substring(1);
+                            if (StringUtils.isBlank(rule)) {
+                                return false;
+                            }
+                        } else {
+                            return false;
+                        }
+                    }
+                }
+
+            } else {
+                return false;
+            }
+
+            logger.debug("Remaining Cancellation Rule = '" + rule + "'");
+        }
+
+        return true;
     }
 
 }

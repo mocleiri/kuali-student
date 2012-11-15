@@ -576,4 +576,12 @@ public interface TransactionService {
      */
     BigDecimal getUnallocatedAmount(List<Transaction> transactions, TransactionTypeValue transactionType, boolean restricted);
 
+    /**
+     * Checks if the given cancellation rule is legal.
+     *
+     * @param cancellationRule the cancellation rule
+     * @return true if the rule is valid or null, false - otherwise
+     */
+    boolean isCancellationRuleValid(String cancellationRule);
+
 }

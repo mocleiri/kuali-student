@@ -829,4 +829,159 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
     }
 
+    @Test
+    public void isCancellationRuleValid() throws Exception {
+
+        // Valid cases
+
+        String rule = "DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(0)";
+
+        isTrue(transactionService.isCancellationRuleValid(rule));
+
+        rule = "DAYS(10)AMOUNT(500.99)";
+
+        isTrue(transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(12/31/2001)PERCENTAGE(100)";
+
+        isTrue(transactionService.isCancellationRuleValid(rule));
+
+        rule = "DAYS(0)PERCENTAGE(99.99);DAYS(365)AMOUNT(1160000.456)";
+
+        isTrue(transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(10/11/1789)PERCENTAGE(50);DATE(12/12/2012)AMOUNT(4333.45);DATE(12/13/2012)PERCENTAGE(0)";
+
+        isTrue(transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(10/10/2001)PERCENTAGE(50);DATE(01/01/2007)PERCENTAGE(20);DATE(11/23/2009)AMOUNT(1800.99)";
+
+        isTrue(transactionService.isCancellationRuleValid(rule));
+
+        rule = "  DAYS(0)PERCENTAGE(99.99);DAYS(365)AMOUNT(1160000.456)     ";
+
+        isTrue(transactionService.isCancellationRuleValid(rule));
+
+
+        // Invalid cases
+
+        rule = null;
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "        ";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "BLAH;BLAH;?{}!@~*&^%$";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(0";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "!!!DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(0)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(0);";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DAYS(10)PERCENTAGE(500);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(0)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(-30)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DAYS(10)PERCENTAGE(50);DATE(12/10/1999)PERCENTAGE(20);DAYS(30)PERCENTAGE(80)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DAYS(10)PERCENTAGE(50);DAYS(5)PERCENTAGE(20);DAYS(30)PERCENTAGE(80)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DAYS(10)PERCENTAGE(50);DAYS(25)PERCENTAGE(20);DAYS(30)PERSENTAGE(80)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(10/10/2001)PERCENTAGE(50);DATE(01/01/2007)PERCENTAGE(20);DATE(30)AMOUNT(800.99)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(10/10/2001)PERCENTAGE(50);DATE(01/01/2007)PERCENTAGE(20);DATE(11/23/2003)AMOUNT(800.99)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(10/10/2001)PERCENTAGE(50);DATE(01/01/2007)PERCENTAGE(20);DATE(11/23/2009)AMOUNT(-1800.99)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(10/10/2001)PERCENTAGE(50);DATE(01/01/2007)PERCENTAGE(20);DATE(11/23/2009))AMOUNT(1800.99)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(10/10/2001)PERCENTAGE(50);DATE(01/01/2007)PERCENTAGE(20);DATE(11/23/2009);AMOUNT(1800.99)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(13/10/2001)PERCENTAGE(50);DATE(01/01/2007)PERCENTAGE(20);DATE(11/23/2009)AMOUNT(1800.99)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(12/10/2001)PERCENTAGE(50);DATE(01-01-2007)PERCENTAGE(20);DATE(11/23/2009)AMOUNT(1800.99)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(12/10/2001PERCENTAGE(50);DATE(01/01/2007)PERCENTAGE(20);DATE(11/23/2009)AMOUNT(1800.99)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(12/10/2001)PERCENTAGE(50)PERCENTAGE(20);DATE(11/23/2009)AMOUNT(1800.99)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(12/10/2001)PERCENTAGE(50);;DATE(11/23/2009)AMOUNT(1800.99)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = ";DATE(12/10/2001)PERCENTAGE(50);DATE(11/23/2009)AMOUNT(1800.99)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(12/10/2001);PERCENTAGE(50);DATE(11/23/2009)AMOUNT(1800.99)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(12/10/2001)PERCENTAGE(50)DATE(11/23/2009)AMOUNT(1800.99)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(12/10/2001)PERCENTAGE(50);DATE(11/23/2009);AMOUNT(1800.99)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(12/10/2001)PERCENTAGE(50);DATE(11/23/2009)AMOUNT(1800.99);DATE";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(12/10/2001)PERCENTAGE(50);DATE(11/23/2009)AMOUNT(1800.99);DATE(02/12/2012)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DATE(12/10/2001)PERCENTAGE(50);DATE(11/23/2009)AMOUNT(1800.99);DATE(null)AMOUNT(0)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+    }
+
+
 }
