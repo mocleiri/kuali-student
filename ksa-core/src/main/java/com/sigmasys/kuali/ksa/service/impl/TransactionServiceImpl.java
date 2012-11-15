@@ -1926,7 +1926,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                         }
                         curDate = date;
                     } catch (ParseException pe) {
-                        logger.warn(pe.getMessage(), pe);
+                        logger.warn("isCancellationRuleValid: Rule = '" + cancellationRule + "' " + pe.getMessage());
                         return false;
                     }
                 }
@@ -1955,7 +1955,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                             return false;
                         }
                     } catch (NumberFormatException nfe) {
-                        logger.warn(nfe.getMessage(), nfe);
+                        logger.warn("isCancellationRuleValid: Rule = '" + cancellationRule + "' " + nfe.getMessage());
                         return false;
                     }
                     rule = rule.substring(index + 1);
