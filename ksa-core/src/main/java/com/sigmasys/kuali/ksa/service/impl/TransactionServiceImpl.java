@@ -10,6 +10,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.persistence.Query;
 
+import com.sigmasys.kuali.ksa.exception.*;
 import com.sigmasys.kuali.ksa.util.TransactionUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -19,13 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sigmasys.kuali.ksa.exception.CurrencyNotFoundException;
-import com.sigmasys.kuali.ksa.exception.InvalidTransactionTypeException;
-import com.sigmasys.kuali.ksa.exception.LockedAllocationException;
-import com.sigmasys.kuali.ksa.exception.TransactionNotAllowedException;
-import com.sigmasys.kuali.ksa.exception.TransactionNotFoundException;
-import com.sigmasys.kuali.ksa.exception.TransactionTypeNotAllowedException;
-import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.model.AbstractGlBreakdown;
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.Allocation;
@@ -1807,6 +1801,62 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
 
         return null;
+    }
+
+    /**
+     * Takes the cancellationRule and using the baseDate calculates the
+     * appropriate dates to be stored in the actual transaction version of the cancellation rule.
+     *
+     * @param cancellationRule the cancellation rule
+     * @param baseDate         the base date that is used for calculation by "DATE" values in the rule sentence
+     * @return the modified cancellation rule with the updated dates
+     */
+    @Override
+    public String calculateCancellationRule(String cancellationRule, Date baseDate) {
+
+        if (!isCancellationRuleValid(cancellationRule)) {
+            String errMsg = "Cancellation Rule '" + cancellationRule + "' is invalid";
+            logger.error(errMsg);
+            throw new InvalidCancellationRuleException(errMsg);
+        }
+
+        String rule = cancellationRule.toUpperCase().trim();
+
+        Date date = baseDate;
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
+
+        StringBuilder builder = new StringBuilder(cancellationRule.length());
+
+        String[] clauses = rule.split(";");
+
+        for (int i = 0; i < clauses.length; i++) {
+
+            String clause = clauses[i];
+
+            if (clause.startsWith("DAYS(")) {
+
+                int index = clause.indexOf(")");
+
+                String daysValue = clause.substring(5, index);
+                String ruleValue = clause.substring(index + 1);
+
+                int days = Integer.parseInt(daysValue);
+                date = calendarService.addCalendarDays(date, days);
+
+                builder.append("DATE(");
+                builder.append(dateFormat.format(date));
+                builder.append(")");
+                builder.append(ruleValue);
+
+                if (i < clauses.length - 1) {
+                    builder.append(";");
+                }
+
+            }
+        }
+
+        return builder.toString();
     }
 
     /**

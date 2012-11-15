@@ -577,6 +577,16 @@ public interface TransactionService {
     BigDecimal getUnallocatedAmount(List<Transaction> transactions, TransactionTypeValue transactionType, boolean restricted);
 
     /**
+     * Takes the cancellationRule and using the baseDate calculates the
+     * appropriate dates to be stored in the actual transaction version of the cancellation rule.
+     *
+     * @param cancellationRule the cancellation rule
+     * @param baseDate         the base date that is used for calculation by "DATE" values in the rule sentence
+     * @return the modified cancellation rule with the updated dates
+     */
+    String calculateCancellationRule(String cancellationRule, Date baseDate);
+
+    /**
      * Checks if the given cancellation rule is legal.
      *
      * @param cancellationRule the cancellation rule

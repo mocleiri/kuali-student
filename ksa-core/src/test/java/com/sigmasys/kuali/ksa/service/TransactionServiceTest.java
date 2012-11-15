@@ -983,5 +983,22 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
     }
 
+    @Test
+    public void calculateCancellationRule() throws Exception {
+
+        String rule = "DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(0)";
+
+        rule = transactionService.calculateCancellationRule(rule, new Date());
+
+        notNull(rule);
+        isTrue(!rule.isEmpty());
+        isTrue(rule.split(";").length == 3);
+        isTrue(!rule.contains("DAYS"));
+        isTrue(rule.contains("DATE"));
+
+        logger.info("Modified cancellation rule = " + rule);
+
+    }
+
 
 }
