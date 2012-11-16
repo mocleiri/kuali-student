@@ -14,7 +14,7 @@ import org.hibernate.Hibernate;
  * HibernateUtils.
  * It is primarily used for GWT serialization.
  *
- * @author ivanovm
+ * @author Michael Ivanov
  */
 public class HibernateUtils {
 

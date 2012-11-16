@@ -1,14 +1,12 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
-import java.io.StringReader;
 import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
 
+import com.sigmasys.kuali.ksa.util.JaxbUtils;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -77,6 +75,7 @@ public class AccountImportServiceImpl implements AccountImportService {
 	 */
 	@Override
 	public void importStudentProfile(String xml) {
+
 		// Validate the input:
 		if (StringUtils.isBlank(xml)) {
 			throw new IllegalArgumentException("Student profile XML is null. Abort import.");
@@ -88,11 +87,8 @@ public class AccountImportServiceImpl implements AccountImportService {
 		}
 		
 		try {
-			// Unmarshal the object:
-			JAXBContext jaxbContext = JAXBContext.newInstance(StudentProfile.class);
-			Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-			StringReader reader = new StringReader(xml);
-			StudentProfile profile = (StudentProfile)unmarshaller.unmarshal(reader);
+
+            StudentProfile profile = JaxbUtils.fromXml(xml, StudentProfile.class);
 			
 			// Invoke import:
 			importStudentProfile(profile);

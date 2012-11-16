@@ -5,6 +5,7 @@ import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.transform.*;
 
 import com.sigmasys.kuali.ksa.util.CalendarUtils;
+import com.sigmasys.kuali.ksa.util.JaxbUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import com.sigmasys.kuali.ksa.util.XmlSchemaValidator;
 import org.apache.commons.lang.StringUtils;
@@ -305,14 +306,9 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         // log the batch summary statics and values
 
         // Convert the batch response object to XML or return the exception
-        StringWriter writer = new StringWriter();
         try {
 
-            JAXBContext context = JAXBContext.newInstance(KsaBatchTransactionResponse.class);
-            Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-            m.marshal(ksaBatchTransactionResponse, writer);
-            String responseXml = writer.toString();
+            String responseXml = JaxbUtils.toXml(ksaBatchTransactionResponse);
 
             // Create a new BatchReceipt and persist
             BatchReceipt batchReceipt = new BatchReceipt();
