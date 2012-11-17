@@ -11,6 +11,7 @@ import javax.jws.WebService;
 import javax.persistence.Query;
 
 import com.sigmasys.kuali.ksa.exception.*;
+import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.util.TransactionUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -20,30 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sigmasys.kuali.ksa.model.AbstractGlBreakdown;
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.Allocation;
-import com.sigmasys.kuali.ksa.model.Charge;
-import com.sigmasys.kuali.ksa.model.CompositeAllocation;
-import com.sigmasys.kuali.ksa.model.Constants;
-import com.sigmasys.kuali.ksa.model.Credit;
-import com.sigmasys.kuali.ksa.model.CreditPermission;
-import com.sigmasys.kuali.ksa.model.CreditType;
-import com.sigmasys.kuali.ksa.model.Currency;
-import com.sigmasys.kuali.ksa.model.Debit;
-import com.sigmasys.kuali.ksa.model.DebitType;
-import com.sigmasys.kuali.ksa.model.Deferment;
-import com.sigmasys.kuali.ksa.model.GeneralLedgerMode;
-import com.sigmasys.kuali.ksa.model.GeneralLedgerType;
-import com.sigmasys.kuali.ksa.model.GlOperationType;
-import com.sigmasys.kuali.ksa.model.GlTransaction;
-import com.sigmasys.kuali.ksa.model.Pair;
-import com.sigmasys.kuali.ksa.model.Payment;
-import com.sigmasys.kuali.ksa.model.Rollup;
-import com.sigmasys.kuali.ksa.model.Transaction;
-import com.sigmasys.kuali.ksa.model.TransactionType;
-import com.sigmasys.kuali.ksa.model.TransactionTypeId;
-import com.sigmasys.kuali.ksa.model.TransactionTypeValue;
 import com.sigmasys.kuali.ksa.service.AccessControlService;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.CalendarService;
@@ -252,7 +229,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
 
         String currencyCode = java.util.Currency.getInstance(Locale.getDefault()).getCurrencyCode();
-        Currency currency = currencyService.getCurrency(currencyCode);
+        com.sigmasys.kuali.ksa.model.Currency currency = currencyService.getCurrency(currencyCode);
         if (currency == null) {
             String errMsg = "Currency does not exist for the given ISO code = " + currencyCode;
             logger.error(errMsg);
@@ -304,6 +281,8 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         transaction.setCreatorId(creatorId);
 
+        transaction.setStatus(TransactionStatus.ACTIVE);
+
         if (transaction instanceof Payment) {
             CreditType creditType = (CreditType) transactionType;
             Payment payment = (Payment) transaction;
@@ -314,7 +293,6 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         } else if (transaction instanceof Deferment) {
             Deferment deferment = (Deferment) transaction;
             deferment.setExpirationDate(expirationDate);
-            deferment.setExpired(false);
         }
 
         persistTransaction(transaction);
@@ -1289,9 +1267,9 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         removeAllocations(defermentId);
 
         deferment.setInternal(true);
-        deferment.setExpired(true);
         deferment.setAmount(BigDecimal.ZERO);
         deferment.setExpirationDate(new Date());
+        deferment.setStatus(TransactionStatus.EXPIRED);
 
         persistTransaction(deferment);
 
@@ -1629,6 +1607,8 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         if (rollup != null) {
             writeOffTransaction.setRollup(rollup);
         }
+
+        writeOffTransaction.setStatus(TransactionStatus.WRITTEN_OFF);
 
         persistTransaction(writeOffTransaction);
 

@@ -17,10 +17,6 @@ public class Deferment extends Credit {
      */
     private Date expirationDate;
 
-    /**
-     * Indicates that the deferment has gone through a process called "expireDeferment"
-     */
-    private Boolean isExpired;
 
     @Transient
     public TransactionTypeValue getTransactionTypeValue() {
@@ -37,14 +33,13 @@ public class Deferment extends Credit {
         this.expirationDate = expirationDate;
     }
 
-    @org.hibernate.annotations.Type(type = "yes_no")
-    @Column(name = "IS_EXPIRED")
-    public Boolean isExpired() {
-        return isExpired != null ? isExpired : false;
+    /**
+     * Indicates that the deferment has gone through a process called "expireDeferment"
+     */
+    @Transient
+    public boolean isExpired() {
+        return (getStatus() != null && getStatus() == TransactionStatus.EXPIRED);
     }
 
-    public void setExpired(Boolean expired) {
-        isExpired = expired;
-    }
 }
 

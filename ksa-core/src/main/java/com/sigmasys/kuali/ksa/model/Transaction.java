@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.model;
 
 import com.sigmasys.kuali.ksa.annotation.Auditable;
 import com.sigmasys.kuali.ksa.service.CalendarService;
+import com.sigmasys.kuali.ksa.util.EnumUtils;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -139,6 +140,27 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
      * This is a transient property used in payment application services
      */
     private Integer matrixScore;
+
+    /**
+     * Transaction status
+     */
+    private TransactionStatus status;
+
+    /**
+     * Transaction status code
+     */
+    private String statusCode;
+
+
+    @PrePersist
+    void populateDBFields() {
+        statusCode = (status != null) ? status.getId() : null;
+    }
+
+    @PostLoad
+    void populateTransientFields() {
+        status = (statusCode != null) ? EnumUtils.findById(TransactionStatus.class, statusCode) : null;
+    }
 
 
     @Id
@@ -362,6 +384,24 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
 
     public void setGlOverridden(Boolean glOverridden) {
         this.glOverridden = glOverridden;
+    }
+
+    @Column(name = "STATUS", length = 30)
+    protected String getStatusCode() {
+        return statusCode;
+    }
+
+    protected void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    @Transient
+    public TransactionStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TransactionStatus status) {
+        this.status = status;
     }
 
     @Transient
