@@ -561,7 +561,6 @@ public interface TransactionService {
      * @param transaction Transaction instance
      * @return the total unallocated amount
      */
-    @WebMethod(exclude = true)
     BigDecimal getUnallocatedAmount(Transaction transaction);
 
     /**
@@ -574,6 +573,7 @@ public interface TransactionService {
      *                        otherwise the mask ".*" will be used
      * @return BigDecimal of the sum of the Restricted Payment amount
      */
+    @WebMethod(exclude = true)
     BigDecimal getUnallocatedAmount(List<Transaction> transactions, TransactionTypeValue transactionType, boolean restricted);
 
     /**

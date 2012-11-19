@@ -1752,6 +1752,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * @return BigDecimal of the sum of the Restricted Payment amount
      */
     @Override
+    @WebMethod(exclude = true)
     public BigDecimal getUnallocatedAmount(List<Transaction> transactions, TransactionTypeValue transactionType,
                                            boolean restricted) {
 
