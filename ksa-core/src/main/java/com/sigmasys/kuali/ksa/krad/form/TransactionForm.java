@@ -6,7 +6,6 @@ import java.util.List;
 
 public class TransactionForm extends AbstractViewModel {
 
-   private static final long serialVersionUID = -7525378097732916420L;
 
    // use this object as a query argument for matching transactions by student name
    private String studentLookupByName;

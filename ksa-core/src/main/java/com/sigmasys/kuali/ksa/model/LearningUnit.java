@@ -32,8 +32,6 @@ import org.apache.commons.lang.time.DateUtils;
 @Table(name = "KSSA_LU")
 public class LearningUnit extends AccountIdAware implements Identifiable {
 	
-	private static final long serialVersionUID = 1L;
-	
 	/**
 	 * Unique identifier.
 	 */

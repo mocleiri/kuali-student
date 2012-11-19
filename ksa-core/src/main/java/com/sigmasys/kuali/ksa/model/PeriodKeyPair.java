@@ -20,8 +20,6 @@ import org.apache.commons.lang.ObjectUtils;
 @Entity
 @DiscriminatorValue(KeyPairType.PERIOD_KEY_PAIR_CODE)
 public class PeriodKeyPair extends KeyPair {
-
-	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * Due to the need to store different values by period, this is a key

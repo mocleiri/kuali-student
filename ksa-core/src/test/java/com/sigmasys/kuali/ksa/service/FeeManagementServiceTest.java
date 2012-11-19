@@ -873,8 +873,8 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		
 		calFrom.set(Calendar.YEAR, newYearFrom);
 		calTo.set(Calendar.YEAR, newYearTo);
-		newPeriod.setDateFrom(calFrom.getTime());
-		newPeriod.setDateTo(calTo.getTime());
+		newPeriod.setStartDate(calFrom.getTime());
+		newPeriod.setEndDate(calTo.getTime());
 		
 		// Find the original PeriodKeyPair being updated:
 		PeriodKeyPair originalPkp = null;
@@ -896,8 +896,8 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		Calendar calOriginalFrom = Calendar.getInstance();
 		Calendar calOriginalTo = Calendar.getInstance();
 		
-		calOriginalFrom.setTime(originalPkp.getLearningPeriod().getDateFrom());
-		calOriginalTo.setTime(originalPkp.getLearningPeriod().getDateTo());
+		calOriginalFrom.setTime(originalPkp.getLearningPeriod().getStartDate());
+		calOriginalTo.setTime(originalPkp.getLearningPeriod().getEndDate());
 		isTrue(calOriginalFrom.get(Calendar.YEAR) != newYearFrom);
 		isTrue(calOriginalTo.get(Calendar.YEAR) != newYearTo);
 		
@@ -918,8 +918,8 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		}
 		
 		// Validate:
-		isTrue(DateUtils.isSameDay(calFrom.getTime(), updatedPkp.getLearningPeriod().getDateFrom()));
-		isTrue(DateUtils.isSameDay(calTo.getTime(), updatedPkp.getLearningPeriod().getDateTo()));
+		isTrue(DateUtils.isSameDay(calFrom.getTime(), updatedPkp.getLearningPeriod().getStartDate()));
+		isTrue(DateUtils.isSameDay(calTo.getTime(), updatedPkp.getLearningPeriod().getEndDate()));
 	}
 	
 	@Test
@@ -1236,8 +1236,8 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		newDateTo.set(Calendar.MONTH, newDateToMonth);
 		newDateTo.set(Calendar.DAY_OF_MONTH, newDateToDay);
 		
-		newLp.setDateFrom(newDateFrom.getTime());
-		newLp.setDateTo(newDateTo.getTime());
+		newLp.setStartDate(newDateFrom.getTime());
+		newLp.setEndDate(newDateTo.getTime());
 		
 		// Get a fresh FeeBase from service:
 		FeeBase feeBaseFromService = feeManagementService.getFeeBase(accountId);
@@ -1308,8 +1308,8 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		newDateTo.set(Calendar.MONTH, newDateToMonth);
 		newDateTo.set(Calendar.DAY_OF_MONTH, newDateToDay);
 		
-		luFromService.getLearningPeriod().setDateFrom(newDateFrom.getTime());
-		luFromService.getLearningPeriod().setDateTo(newDateTo.getTime());
+		luFromService.getLearningPeriod().setStartDate(newDateFrom.getTime());
+		luFromService.getLearningPeriod().setEndDate(newDateTo.getTime());
 		
 		// Save the changes:
 		feeManagementService.persistLearningUnit(luFromService);
@@ -1350,8 +1350,8 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		newDateTo.set(Calendar.MONTH, newDateToMonth);
 		newDateTo.set(Calendar.DAY_OF_MONTH, newDateToDay);
 		
-		luFromService.getLearningPeriod().setDateFrom(newDateFrom.getTime());
-		luFromService.getLearningPeriod().setDateTo(newDateTo.getTime());
+		luFromService.getLearningPeriod().setStartDate(newDateFrom.getTime());
+		luFromService.getLearningPeriod().setEndDate(newDateTo.getTime());
 		
 		// Save the changes:
 		feeManagementService.persistLearningUnit(luFromService);
@@ -1411,15 +1411,15 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		newDateTo.set(Calendar.MONTH, newDateToMonth);
 		newDateTo.set(Calendar.DAY_OF_MONTH, newDateToDay);
 		
-		luFromService.getLearningPeriod().setDateFrom(newDateFrom.getTime());
-		luFromService.getLearningPeriod().setDateTo(newDateTo.getTime());
+		luFromService.getLearningPeriod().setStartDate(newDateFrom.getTime());
+		luFromService.getLearningPeriod().setEndDate(newDateTo.getTime());
 		
 		// Set new dates for LearningPeriod 2:
 		newDateFrom.set(Calendar.YEAR, newDateFromYear + 5);
 		newDateTo.set(Calendar.YEAR, newDateToYear + 5);
 		
-		luFromService2.getLearningPeriod().setDateFrom(newDateFrom.getTime());
-		luFromService2.getLearningPeriod().setDateTo(newDateTo.getTime());
+		luFromService2.getLearningPeriod().setStartDate(newDateFrom.getTime());
+		luFromService2.getLearningPeriod().setEndDate(newDateTo.getTime());
 		
 		// Save the changes:
 		feeManagementService.persistLearningUnit(luFromService);
@@ -1485,8 +1485,8 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		newDateTo.set(Calendar.MONTH, newDateToMonth);
 		newDateTo.set(Calendar.DAY_OF_MONTH, newDateToDay);
 		
-		luFromService.getLearningPeriod().setDateFrom(newDateFrom.getTime());
-		luFromService.getLearningPeriod().setDateTo(newDateTo.getTime());
+		luFromService.getLearningPeriod().setStartDate(newDateFrom.getTime());
+		luFromService.getLearningPeriod().setEndDate(newDateTo.getTime());
 		
 		// Save the changes:
 		feeManagementService.persistLearningUnit(luFromService);
@@ -1543,8 +1543,8 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		newDateTo.set(Calendar.MONTH, newDateToMonth);
 		newDateTo.set(Calendar.DAY_OF_MONTH, newDateToDay);
 		
-		luFromService.getLearningPeriod().setDateFrom(newDateFrom.getTime());
-		luFromService.getLearningPeriod().setDateTo(newDateTo.getTime());
+		luFromService.getLearningPeriod().setStartDate(newDateFrom.getTime());
+		luFromService.getLearningPeriod().setEndDate(newDateTo.getTime());
 		
 		// Save the changes:
 		feeManagementService.persistLearningUnit(luFromService);
@@ -1601,8 +1601,8 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		newDateTo.set(Calendar.MONTH, newDateToMonth);
 		newDateTo.set(Calendar.DAY_OF_MONTH, newDateToDay);
 		
-		luFromService.getLearningPeriod().setDateFrom(newDateFrom.getTime());
-		luFromService.getLearningPeriod().setDateTo(newDateTo.getTime());
+		luFromService.getLearningPeriod().setStartDate(newDateFrom.getTime());
+		luFromService.getLearningPeriod().setEndDate(newDateTo.getTime());
 		
 		// Save the changes:
 		feeManagementService.persistLearningUnit(luFromService);
@@ -1765,8 +1765,8 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		pkp4.setValue("foo4");
 		pkp4.setPreviousValue("previous foo4");
 		pkp4.setLearningPeriod(lp);
-		lp.setDateFrom(new Date());
-		lp.setDateTo(new Date());
+		lp.setStartDate(new Date());
+		lp.setEndDate(new Date());
 		lp.setName(lpName);
 		
 		return new ArrayList<PeriodKeyPair>(Arrays.asList(pkp1, pkp2, pkp3, pkp4));
@@ -1803,11 +1803,11 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		String lp2Name = "2012-ELECTION";
 		
 		// Set up learning periods:
-		lp1.setDateFrom(new Date());
-		lp1.setDateTo(new Date());
+		lp1.setStartDate(new Date());
+		lp1.setEndDate(new Date());
 		lp1.setName(lp1Name);
-		lp2.setDateFrom(new Date());
-		lp2.setDateTo(new Date());
+		lp2.setStartDate(new Date());
+		lp2.setEndDate(new Date());
 		lp2.setName(lp2Name);
 		
 		// Set up LearningUnit 1:
@@ -1938,8 +1938,8 @@ public class FeeManagementServiceTest extends AbstractServiceTest {
 		if (expected != null) {
 			notNull(actual);
 			assertEquals(expected.getId(), actual.getId());
-			isTrue(DateUtils.isSameDay(expected.getDateFrom(), actual.getDateFrom()));
-			isTrue(DateUtils.isSameDay(expected.getDateTo(), actual.getDateTo()));
+			isTrue(DateUtils.isSameDay(expected.getStartDate(), actual.getStartDate()));
+			isTrue(DateUtils.isSameDay(expected.getEndDate(), actual.getEndDate()));
 		} else {
 			isNull(actual);
 		}

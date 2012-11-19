@@ -1,29 +1,17 @@
 package com.sigmasys.kuali.ksa.model;
 
+import javax.persistence.*;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.TableGenerator;
-
 /**
- * This class represents a single period in a study process.
- * It can be a semester or a half-semester or any arbitrary period of time.
- * <p/>
- * Per existing documentation:
- * Simple dictionary table to define the acceptable period types in FeeBase.
+ * General Ledger Recognition Period model.
  *
- * @author Sergey
- * @version 1.0
+ * @author Michael Ivanov
  */
-
 @Entity
-@Table(name = "KSSA_LEARNING_PERIOD")
-public class LearningPeriod extends AuditableEntity {
+@Table(name = "KSSA_GL_RECOGNITION_PERIOD")
+public class GlRecognitionPeriod extends AuditableEntity {
+
 
     /**
      * Starting date of the period.
@@ -38,15 +26,19 @@ public class LearningPeriod extends AuditableEntity {
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
-    @TableGenerator(name = "TABLE_GEN_LEARNING_PERIOD",
+    @TableGenerator(name = "TABLE_GL_RECOGNITION_PERIOD",
             table = "KSSA_SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",
             valueColumnName = "SEQ_VALUE",
-            pkColumnValue = "LEARNING_PERIOD_SEQ")
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_LEARNING_PERIOD")
+            pkColumnValue = "GL_RECOGNITION_PERIOD_SEQ")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GL_RECOGNITION_PERIOD")
     @Override
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Column(name = "START_DATE", nullable = false)

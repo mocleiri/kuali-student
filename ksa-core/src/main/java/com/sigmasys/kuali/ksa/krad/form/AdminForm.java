@@ -9,8 +9,6 @@ import java.util.List;
  */
 public class AdminForm extends AbstractViewModel {
 
-   private static final long serialVersionUID = -7525378097732916418L;
-
    /*
      Activities
    */

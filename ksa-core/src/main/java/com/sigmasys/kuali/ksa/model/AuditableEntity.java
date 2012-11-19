@@ -64,7 +64,7 @@ public abstract class AuditableEntity implements Identifiable {
         this.id = id;
     }
 
-    @Column(name = "CODE", length = 100)
+    @Column(name = "CODE", length = 30)
     public String getCode() {
         return code;
     }

@@ -9,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public class FileUploadForm extends AbstractViewModel {
 
-   private static final long serialVersionUID = -7525378097732916418L;
 
    private MultipartFile uploadFile;
 

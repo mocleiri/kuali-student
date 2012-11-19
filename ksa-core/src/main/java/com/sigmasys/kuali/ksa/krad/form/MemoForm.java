@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class MemoForm extends AbstractViewModel {
 
-   private static final long serialVersionUID = -7525378097732916418L;
 
    private Account account;
 

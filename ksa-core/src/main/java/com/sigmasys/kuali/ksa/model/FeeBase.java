@@ -23,8 +23,6 @@ import com.sigmasys.kuali.ksa.service.FeeManagementService;
  */
 public class FeeBase implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     /**
      * Associated Account.
      */

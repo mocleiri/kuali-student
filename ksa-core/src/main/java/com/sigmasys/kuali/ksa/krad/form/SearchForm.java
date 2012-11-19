@@ -3,18 +3,13 @@ package com.sigmasys.kuali.ksa.krad.form;
 import com.sigmasys.kuali.ksa.krad.model.TransactionModel;
 import com.sigmasys.kuali.ksa.model.*;
 
-import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by: dmulderink on 8/29/12 at 12:58 PM
  */
 public class SearchForm extends AbstractViewModel {
-
-   private static final long serialVersionUID = -7525378097732916418L;
 
    /*
      Account Overview

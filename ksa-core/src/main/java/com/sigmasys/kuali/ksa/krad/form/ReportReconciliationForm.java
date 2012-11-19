@@ -7,8 +7,6 @@ import com.sigmasys.kuali.ksa.model.Account;
  */
 public class ReportReconciliationForm extends AbstractViewModel {
 
-   private static final long serialVersionUID = -7525378097732916418L;
-
    private Account account;
 
    /*

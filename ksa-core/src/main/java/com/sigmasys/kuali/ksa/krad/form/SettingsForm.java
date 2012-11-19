@@ -10,8 +10,6 @@ import java.util.List;
  */
 public class SettingsForm extends AbstractViewModel {
 
-   private static final long serialVersionUID = -7525378097732916418L;
-
    // Currency stuff
 
    private Account account;

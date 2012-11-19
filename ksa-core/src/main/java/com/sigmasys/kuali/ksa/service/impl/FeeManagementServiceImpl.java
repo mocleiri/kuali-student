@@ -497,9 +497,11 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     @Override
     public List<LearningPeriod> findLearningPeriods(Date dateFrom, Date dateTo) {
         // Create a Query:
-        Query query = em.createQuery("select lp from LearningPeriod lp where lp.dateFrom >= :dateFrom and lp.dateTo <= :dateTo")
-                .setParameter("dateFrom", dateFrom)
-                .setParameter("dateTo", dateTo);
+        Query query = em.createQuery("select lp from LearningPeriod lp where lp.startDate >= :dateFrom " +
+                " and lp.endDate <= :dateTo");
+
+                query.setParameter("dateFrom", dateFrom);
+                query.setParameter("dateTo", dateTo);
 
         return query.getResultList();
     }

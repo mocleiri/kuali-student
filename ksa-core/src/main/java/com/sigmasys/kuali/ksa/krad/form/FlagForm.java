@@ -12,7 +12,6 @@ import java.util.List;
  */
 public class FlagForm extends AbstractViewModel {
 
-   private static final long serialVersionUID = -7525378097732916418L;
 
    private Account account;
 
