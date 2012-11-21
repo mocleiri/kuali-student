@@ -153,12 +153,12 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
 
 
     @PrePersist
-    void populateDBFields() {
+    protected void populateDBFields() {
         statusCode = (status != null) ? status.getId() : null;
     }
 
     @PostLoad
-    void populateTransientFields() {
+    protected void populateTransientFields() {
         status = (statusCode != null) ? EnumUtils.findById(TransactionStatus.class, statusCode) : null;
     }
 

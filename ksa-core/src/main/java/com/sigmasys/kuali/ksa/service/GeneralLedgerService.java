@@ -83,29 +83,26 @@ public interface GeneralLedgerService {
     GeneralLedgerType getDefaultGeneralLedgerType();
 
     /**
-     * Gets all queued or in session general ledger transactions within the date range specified and
-     * adds the recognition period to the transmission
-     *
-     * @param recognitionPeriod Recognition period
-     * @param fromDate          Start date
-     * @param toDate            End date
-     * @return true if one or more records have been updated, false - otherwise
-     */
-    @WebMethod(exclude = true)
-    boolean setRecognitionPeriod(String recognitionPeriod, Date fromDate, Date toDate);
-
-
-    /**
-     * Prepares a transmission to the general ledger.
+     * Prepares a transmission to the general ledger for the given range of effective dates.
      * This process takes into account the different ways in which an institution may choose to transmit to
      * the general ledger, including real-time, batch, and rollup modes.
      *
-     * @param fromDate          start date
-     * @param toDate            end date
-     * @param recognitionPeriod recognition period
+     * @param fromDate Start effective date
+     * @param toDate   End effective date
      */
     @WebMethod(exclude = true)
-    void prepareGlTransmission(Date fromDate, Date toDate, String recognitionPeriod);
+    void prepareGlTransmissionForEffectiveDates(Date fromDate, Date toDate);
+
+    /**
+     * Prepares a transmission to the general ledger for the given range of recognition dates.
+     * This process takes into account the different ways in which an institution may choose to transmit to
+     * the general ledger, including real-time, batch, and rollup modes.
+     *
+     * @param fromDate Start recognition date
+     * @param toDate   End recognition date
+     */
+    @WebMethod(exclude = true)
+    void prepareGlTransmissionForRecognitionDates(Date fromDate, Date toDate);
 
     /**
      * Prepares a transmission to the general ledger for all GL transactions in status Q.

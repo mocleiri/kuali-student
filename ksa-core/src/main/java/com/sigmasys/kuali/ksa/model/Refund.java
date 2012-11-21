@@ -134,12 +134,12 @@ public class Refund implements Identifiable {
 
 
     @PrePersist
-    void populateDBFields() {
+    protected void populateDBFields() {
         statusCode = (status != null) ? status.getId() : null;
     }
 
     @PostLoad
-    void populateTransientFields() {
+    protected void populateTransientFields() {
         status = (statusCode != null) ? EnumUtils.findById(RefundStatus.class, statusCode): null;
     }
 

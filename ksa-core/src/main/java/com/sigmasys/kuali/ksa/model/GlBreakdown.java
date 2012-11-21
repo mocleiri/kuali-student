@@ -35,12 +35,12 @@ public class GlBreakdown extends AbstractGlBreakdown {
     private GeneralLedgerType generalLedgerType;
 
     @PrePersist
-    void populateDBFields() {
+    protected void populateDBFields() {
         glOperationCode = (glOperation != null) ? glOperation.getId() : null;
     }
 
     @PostLoad
-    void populateTransientFields() {
+    protected void populateTransientFields() {
         glOperation = (glOperationCode != null) ? EnumUtils.findById(GlOperationType.class, glOperationCode) : null;
     }
 

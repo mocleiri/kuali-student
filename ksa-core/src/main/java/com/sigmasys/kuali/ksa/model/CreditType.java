@@ -32,12 +32,12 @@ public class CreditType extends TransactionType {
 
 
     @PrePersist
-    void populateDBFields() {
+    protected void populateDBFields() {
         glOperationCode = (unallocatedGlOperation != null) ? unallocatedGlOperation.getId() : null;
     }
 
     @PostLoad
-    void populateTransientFields() {
+    protected void populateTransientFields() {
         unallocatedGlOperation = (glOperationCode != null) ?
                 EnumUtils.findById(GlOperationType.class, glOperationCode) : null;
     }

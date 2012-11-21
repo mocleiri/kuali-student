@@ -53,18 +53,4 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
 
     }
 
-    @Test
-    public void setRecognitionPeriod() throws Exception {
-
-        GlTransaction glTransaction = createGlTransaction("admin");
-
-        int offset = 20000;
-        glService.setRecognitionPeriod("SR062012", new Date(System.currentTimeMillis() - offset),
-                new Date(System.currentTimeMillis() - offset));
-
-        // TODO: add assertions
-
-    }
-
-
 }

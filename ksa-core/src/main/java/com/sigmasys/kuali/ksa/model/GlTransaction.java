@@ -3,7 +3,6 @@ package com.sigmasys.kuali.ksa.model;
 import com.sigmasys.kuali.ksa.util.EnumUtils;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
 
@@ -15,12 +14,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "KSSA_GL_TRANSACTION")
-public class GlTransaction implements Identifiable {
+public class GlTransaction extends AbstractGlEntity {
 
-    /**
-     * The unique identifier
-     */
-    private Long id;
 
     /**
      * Transactions associated with this GL transaction
@@ -33,21 +28,6 @@ public class GlTransaction implements Identifiable {
     private GlTransmission transmission;
 
     /**
-     * General ledger account ID
-     */
-    private String glAccountId;
-
-    /**
-     * Transaction date
-     */
-    private Date date;
-
-    /**
-     * Transaction amount
-     */
-    private BigDecimal amount;
-
-    /**
      * Generated text
      */
     private String description;
@@ -56,24 +36,17 @@ public class GlTransaction implements Identifiable {
 
     private String statusCode;
 
-    /**
-     * GL operation type. Can be 'C' or 'D'
-     */
-    private GlOperationType glOperation;
-
-    private String glOperationCode;
-
 
     @PrePersist
-    void populateDBFields() {
+    protected void populateDBFields() {
+        super.populateDBFields();
         statusCode = (status != null) ? status.getId() : null;
-        glOperationCode = (glOperation != null) ? glOperation.getId() : null;
     }
 
     @PostLoad
-    void populateTransientFields() {
+    protected void populateTransientFields() {
+        super.populateTransientFields();
         status = (statusCode != null) ? EnumUtils.findById(GlTransactionStatus.class, statusCode) : null;
-        glOperation = (glOperationCode != null) ? EnumUtils.findById(GlOperationType.class, glOperationCode) : null;
     }
 
 
@@ -112,7 +85,7 @@ public class GlTransaction implements Identifiable {
     }
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "TRANSMISSION_ID_FK")
+    @JoinColumn(name = "GL_TRANSMISSION_ID_FK")
     public GlTransmission getTransmission() {
         return transmission;
     }
@@ -121,31 +94,10 @@ public class GlTransaction implements Identifiable {
         this.transmission = transmission;
     }
 
-    @Column(name = "GL_ACCOUNT_ID", length = 45)
-    public String getGlAccountId() {
-        return glAccountId;
-    }
-
-    public void setGlAccountId(String glAccountId) {
-        this.glAccountId = glAccountId;
-    }
-
+    @Override
     @Column(name = "TRANSACTION_DATE")
     public Date getDate() {
         return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    @Column(name = "AMOUNT")
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
     }
 
     @Column(name = "GENERATED_TEXT", length = 1024)
@@ -173,24 +125,6 @@ public class GlTransaction implements Identifiable {
 
     public void setStatus(GlTransactionStatus status) {
         this.status = status;
-    }
-
-    @Column(name = "GL_OPERATION", length = 1)
-    protected String getGlOperationCode() {
-        return glOperationCode;
-    }
-
-    protected void setGlOperationCode(String glOperationCode) {
-        this.glOperationCode = glOperationCode;
-    }
-
-    @Transient
-    public GlOperationType getGlOperation() {
-        return glOperation;
-    }
-
-    public void setGlOperation(GlOperationType glOperation) {
-        this.glOperation = glOperation;
     }
 
 }

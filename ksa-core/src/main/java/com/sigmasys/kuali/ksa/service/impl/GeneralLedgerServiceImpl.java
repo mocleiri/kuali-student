@@ -65,6 +65,11 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         glTransaction.setTransactions(new HashSet<Transaction>(Arrays.asList(transaction)));
         glTransaction.setStatus(isQueued ? GlTransactionStatus.QUEUED : GlTransactionStatus.WAITING);
 
+        if (transaction.getRecognitionDate() != null) {
+            GlRecognitionPeriod recognitionPeriod = getGlRecognitionPeriod(transaction.getRecognitionDate());
+            glTransaction.setRecognitionPeriod(recognitionPeriod);
+        }
+
         persistEntity(glTransaction);
 
         return glTransaction;
@@ -98,6 +103,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @WebMethod(exclude = true)
     @Transactional(readOnly = false)
     public void summarizeGlTransactions(List<GlTransaction> glTransactions) {
+
         // Map of GL Account ID and set of transactions for this GL account
         Map<String, Set<Transaction>> transactionMap = new HashMap<String, Set<Transaction>>();
         // Map of GL Account ID and total transaction amount for this GL account
@@ -214,40 +220,16 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @Override
     public GeneralLedgerMode getDefaultGeneralLedgerMode() {
         String glMode = configService.getInitialParameter(Constants.DEFAULT_GL_MODE_PARAM_NAME);
-        if(glMode != null) {
-           return EnumUtils.findById(GeneralLedgerMode.class, glMode);
+        if (glMode != null) {
+            return EnumUtils.findById(GeneralLedgerMode.class, glMode);
         }
         String errMsg = "ksa.general.ledger.mode' parameter must be set in the KSA configuration";
         logger.error(errMsg);
         throw new IllegalStateException(errMsg);
     }
 
-    /**
-     * Gets all queued or in session general ledger transactions within the date range specified and
-     * adds the recognition period to the transmission
-     *
-     * @param recognitionPeriod Recognition period
-     * @param fromDate          Start date
-     * @param toDate            End date
-     * @return true if one or more records have been updated, false - otherwise
-     */
-    @Override
-    @WebMethod(exclude = true)
-    public boolean setRecognitionPeriod(String recognitionPeriod, Date fromDate, Date toDate) {
-        Query query = em.createQuery("update GlTransmission " +
-                " set recognitionPeriod = :recognitionPeriod " +
-                " where id in " +
-                " (select t.transmission.id " +
-                "  from GlTransaction t " +
-                "  where t.transmission <> null and t.date between :fromDate and :toDate)");
-        query.setParameter("recognitionPeriod", recognitionPeriod);
-        query.setParameter("fromDate", fromDate);
-        query.setParameter("toDate", toDate);
-        return query.executeUpdate() > 0;
-    }
-
-
-    private GlTransmission createGlTransmission(GlTransaction transaction, String batchId, String recognitionPeriod) {
+    private GlTransmission createGlTransmission(GlTransaction transaction, GlRecognitionPeriod recognitionPeriod,
+                                                String batchId) {
 
         GlTransmission transmission = new GlTransmission();
         transmission.setBatchId(batchId);
@@ -255,7 +237,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         transmission.setEarliestDate(transaction.getDate());
         transmission.setLatestDate(transaction.getDate());
         transmission.setRecognitionPeriod(recognitionPeriod);
-        transmission.setTimestamp(new Date());
+        transmission.setDate(new Date());
         transmission.setGlOperation(transaction.getGlOperation());
 
         persistEntity(transmission);
@@ -265,18 +247,19 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     }
 
     /**
-     * Prepares a transmission to the general ledger.
-     * This process takes into account the different ways in which an institution may choose to transmit to
-     * the general ledger, including real-time, batch, and rollup modes.
+     * Finds the GL recognition period for the given date.
      *
-     * @param fromDate          start date
-     * @param toDate            end date
-     * @param recognitionPeriod recognition period
+     * @param date <code>java.util.Date</code> instance
+     * @return GlRecognitionPeriod instance or null if not found
      */
-    @Override
-    @WebMethod(exclude = true)
-    @Transactional(readOnly = false)
-    public synchronized void prepareGlTransmission(Date fromDate, Date toDate, String recognitionPeriod) {
+    private GlRecognitionPeriod getGlRecognitionPeriod(Date date) {
+        Query query = em.createQuery("select rp from GlRecognitionPeriod rp where rp.startDate <= :date and rp.endDate >= :date");
+        query.setParameter("date", date);
+        List<GlRecognitionPeriod> results = (List<GlRecognitionPeriod>) query.getResultList();
+        return (results != null && !results.isEmpty()) ? results.get(0) : null;
+    }
+
+    private synchronized void prepareGlTransmission(Date fromDate, Date toDate, boolean isEffectiveDate) {
 
         if (fromDate != null && toDate != null && fromDate.after(toDate)) {
             String errMsg = "Start Date cannot be greater than End Date: fromDate = " + fromDate +
@@ -293,19 +276,30 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
             throw new IllegalStateException(errMsg);
         }
 
+        // If isEffectiveDate is true then use the transaction effective date, otherwise the recognition date
+        String dateField = isEffectiveDate ? "effectiveDate" : "recognitionDate";
+
         Query query;
         if (fromDate != null && toDate != null) {
-            query = em.createQuery("select t from GlTransaction t where t.statusCode = :status and t.date " +
-                    " between :fromDate and :toDate order by t.date asc");
+            query = em.createQuery("select distinct t from GlTransaction t " +
+                    " inner join fetch t.recognitionPeriod rp " +
+                    " left outer join t.transactions ts " +
+                    " where t.statusCode = :status and " +
+                    " ts." + dateField + " <> null && ts." + dateField + " between :fromDate and :toDate " +
+                    " order by t.date asc");
             query.setParameter("fromDate", fromDate);
             query.setParameter("toDate", toDate);
         } else {
-            query = em.createQuery("select t from GlTransaction t where t.statusCode = :status order by t.date asc");
+            query = em.createQuery("select t from GlTransaction t " +
+                    " inner join fetch t.recognitionPeriod rp " +
+                    " where t.statusCode = :status order by t.date asc");
         }
+
         query.setParameter("status", GlTransactionStatus.QUEUED.getId());
         if (glMode == GeneralLedgerMode.INDIVIDUAL) {
             query.setMaxResults(1);
         }
+
         List<GlTransaction> glTransactions = query.getResultList();
         if (CollectionUtils.isEmpty(glTransactions)) {
             if (fromDate != null && toDate != null) {
@@ -319,19 +313,22 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
 
         if (glMode == GeneralLedgerMode.INDIVIDUAL) {
             GlTransaction earliestGlTransaction = glTransactions.get(0);
-            GlTransmission transmission = createGlTransmission(earliestGlTransaction, "RT", recognitionPeriod);
+            GlRecognitionPeriod recognitionPeriod = earliestGlTransaction.getRecognitionPeriod();
+            GlTransmission transmission = createGlTransmission(earliestGlTransaction, recognitionPeriod, "RT");
             earliestGlTransaction.setTransmission(transmission);
             earliestGlTransaction.setStatus(GlTransactionStatus.COMPLETED);
             persistEntity(earliestGlTransaction);
         } else if (glMode == GeneralLedgerMode.BATCH) {
             for (GlTransaction transaction : glTransactions) {
-                GlTransmission transmission = createGlTransmission(transaction, null, recognitionPeriod);
+                GlRecognitionPeriod recognitionPeriod = transaction.getRecognitionPeriod();
+                GlTransmission transmission = createGlTransmission(transaction, recognitionPeriod, null);
                 transaction.setTransmission(transmission);
                 transaction.setStatus(GlTransactionStatus.COMPLETED);
                 persistEntity(transaction);
             }
 
         } else if (glMode == GeneralLedgerMode.BATCH_ROLLUP) {
+
             // Creating a map of <GL account, set of GL transactions>
             HashMap<String, Set<GlTransaction>> accountTransactions = new HashMap<String, Set<GlTransaction>>();
             for (GlTransaction transaction : glTransactions) {
@@ -345,16 +342,21 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
             }
 
             for (Map.Entry<String, Set<GlTransaction>> entry : accountTransactions.entrySet()) {
+
                 String accountId = entry.getKey();
+
                 Set<GlTransaction> glTransactionSet = entry.getValue();
-                if (glTransactions.isEmpty()) {
+
+                if (glTransactionSet.isEmpty()) {
                     continue;
                 }
+
                 GlOperationType groupOperation = null;
                 BigDecimal amount1 = BigDecimal.ZERO;
                 BigDecimal amount2 = BigDecimal.ZERO;
                 Date minDate = null;
                 Date maxDate = null;
+
                 for (GlTransaction transaction : glTransactionSet) {
                     if (groupOperation == null) {
                         groupOperation = transaction.getGlOperation();
@@ -374,15 +376,16 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
                         maxDate = transaction.getDate();
                     }
                 }
+
                 GlTransmission transmission = new GlTransmission();
                 transmission.setGlAccountId(accountId);
                 transmission.setEarliestDate(minDate);
                 transmission.setLatestDate(maxDate);
-                transmission.setTimestamp(new Date());
-                // TODO: what to do with group operation????
+                transmission.setDate(new Date());
                 transmission.setGlOperation(groupOperation);
                 transmission.setAmount(amount1.subtract(amount2));
                 persistEntity(transmission);
+
                 // Updating GL transactions for the current account
                 for (GlTransaction transaction : glTransactionSet) {
                     transaction.setStatus(GlTransactionStatus.COMPLETED);
@@ -399,6 +402,36 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     }
 
     /**
+     * Prepares a transmission to the general ledger for the given range of effective dates.
+     * This process takes into account the different ways in which an institution may choose to transmit to
+     * the general ledger, including real-time, batch, and rollup modes.
+     *
+     * @param fromDate Start effective date
+     * @param toDate   End effective date
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public void prepareGlTransmissionForEffectiveDates(Date fromDate, Date toDate) {
+        prepareGlTransmission(fromDate, toDate, true);
+    }
+
+    /**
+     * Prepares a transmission to the general ledger for the given range of recognition dates.
+     * This process takes into account the different ways in which an institution may choose to transmit to
+     * the general ledger, including real-time, batch, and rollup modes.
+     *
+     * @param fromDate Start recognition date
+     * @param toDate   End recognition date
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public void prepareGlTransmissionForRecognitionDates(Date fromDate, Date toDate) {
+        prepareGlTransmission(fromDate, toDate, false);
+    }
+
+    /**
      * Prepares a transmission to the general ledger for all GL transactions in status Q.
      * This process takes into account the different ways in which an institution may choose to transmit to
      * the general ledger, including real-time, batch, and rollup modes.
@@ -407,7 +440,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @WebMethod(exclude = true)
     @Transactional(readOnly = false)
     public void prepareGlTransmission() {
-        prepareGlTransmission(null, null, null);
+        prepareGlTransmission(null, null, true);
     }
 
 

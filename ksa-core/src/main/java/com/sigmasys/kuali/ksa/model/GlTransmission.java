@@ -1,10 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
 
-import com.sigmasys.kuali.ksa.util.EnumUtils;
-
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -15,22 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "KSSA_GL_TRANSMISSION")
-public class GlTransmission implements Identifiable {
-
-    /**
-     * The unique identifier
-     */
-    private Long id;
-
-    /**
-     * General ledger account ID
-     */
-    private String glAccountId;
-
-    /**
-     * Transmission timestamp
-     */
-    private Date timestamp;
+public class GlTransmission extends AbstractGlEntity {
 
     /**
      * Earliest transaction date
@@ -52,34 +34,6 @@ public class GlTransmission implements Identifiable {
      */
     private String result;
 
-    /**
-     * Recognition period
-     */
-    private String recognitionPeriod;
-
-    /**
-     * Transmission amount
-     */
-    private BigDecimal amount;
-
-    /**
-     * GL operation type. Can be 'C' or 'D'
-     */
-    private GlOperationType glOperation;
-
-    private String glOperationCode;
-
-
-    @PrePersist
-    void populateDBFields() {
-        glOperationCode = (glOperation != null) ? glOperation.getId() : null;
-    }
-
-    @PostLoad
-    void populateTransientFields() {
-        glOperation = (glOperationCode != null) ? EnumUtils.findById(GlOperationType.class, glOperationCode) : null;
-    }
-
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -98,22 +52,10 @@ public class GlTransmission implements Identifiable {
         this.id = id;
     }
 
-    @Column(name = "GL_ACCOUNT_ID", length = 45)
-    public String getGlAccountId() {
-        return glAccountId;
-    }
-
-    public void setGlAccountId(String glAccountId) {
-        this.glAccountId = glAccountId;
-    }
-
+    @Override
     @Column(name = "TRANSMISSION_DATE")
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+    public Date getDate() {
+        return date;
     }
 
     @Column(name = "EARLIEST_DATE")
@@ -150,42 +92,6 @@ public class GlTransmission implements Identifiable {
 
     public void setBatchId(String batchId) {
         this.batchId = batchId;
-    }
-
-    @Column(name = "AMOUNT")
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    @Column(name = "RECOGNITION_PERIOD", length = 45)
-    public String getRecognitionPeriod() {
-        return recognitionPeriod;
-    }
-
-    public void setRecognitionPeriod(String recognitionPeriod) {
-        this.recognitionPeriod = recognitionPeriod;
-    }
-
-    @Column(name = "GL_OPERATION", length = 1)
-    protected String getGlOperationCode() {
-        return glOperationCode;
-    }
-
-    protected void setGlOperationCode(String glOperationCode) {
-        this.glOperationCode = glOperationCode;
-    }
-
-    @Transient
-    public GlOperationType getGlOperation() {
-        return glOperation;
-    }
-
-    public void setGlOperation(GlOperationType glOperation) {
-        this.glOperation = glOperation;
     }
 
 }

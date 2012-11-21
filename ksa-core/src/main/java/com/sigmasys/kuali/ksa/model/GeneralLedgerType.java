@@ -32,12 +32,12 @@ public class GeneralLedgerType extends AuditableEntity {
 
 
     @PrePersist
-    void populateDBFields() {
+    protected void populateDBFields() {
         glOperationCode = (glOperationOnCharge != null) ? glOperationOnCharge.getId() : null;
     }
 
     @PostLoad
-    void populateTransientFields() {
+    protected void populateTransientFields() {
         glOperationOnCharge = (glOperationCode != null) ?
                 EnumUtils.findById(GlOperationType.class, glOperationCode) : null;
     }
