@@ -170,8 +170,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
             }
         }
 
-        Set<GlTransaction> glTransactionsToDelete = new HashSet<GlTransaction>();
-
+        Set<Long> glTransactionIdsToDelete = new HashSet<Long>();
         for (Pair<String, Long> key : glTransactionMap.keySet()) {
 
             List<GlTransaction> glTransactionsForAccount = glTransactionMap.get(key);
@@ -188,30 +187,30 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
                     firstGlTransaction.setTransactions(transactionMap.get(key));
                     firstGlTransaction.setAmount(totalAmount);
                     persistEntity(firstGlTransaction);
-
                     // We have to remove the rest of GL transactions
                     for (int i = 1; i < glTransactionsForAccount.size(); i++) {
-                        glTransactionsToDelete.add(glTransactionsForAccount.get(i));
+                        glTransactionIdsToDelete.add(glTransactionsForAccount.get(i).getId());
                     }
 
                 } else {
                     for (GlTransaction glTransaction : glTransactionsForAccount) {
-                        glTransactionsToDelete.add(glTransaction);
+                        glTransactionIdsToDelete.add(glTransaction.getId());
                     }
                 }
             }
         }
 
-        // Deleting GL transactions that must be eliminated from the list and database
-        for (GlTransaction glTransactionToDelete : glTransactionsToDelete) {
-            deleteEntity(glTransactionToDelete.getId(), GlTransaction.class);
-            glTransactions.remove(glTransactionToDelete);
-        }
-
-        // Persisting the remaining transactions in the database with the status 'Q'
-        for (GlTransaction glTransaction : glTransactions) {
-            glTransaction.setStatus(GlTransactionStatus.QUEUED);
-            persistEntity(glTransaction);
+        // Deleting GL transactions that must be eliminated from the list and database and
+        // persisting the rest with the status 'Q'
+        for (Iterator<GlTransaction> iterator = glTransactions.iterator(); iterator.hasNext(); ) {
+            GlTransaction glTransaction = iterator.next();
+            if (glTransactionIdsToDelete.contains(glTransaction.getId())) {
+                em.remove(glTransaction);
+                iterator.remove();
+            } else {
+                glTransaction.setStatus(GlTransactionStatus.QUEUED);
+                persistEntity(glTransaction);
+            }
         }
 
         return glTransactions;
@@ -293,7 +292,8 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         return (results != null && !results.isEmpty()) ? results.get(0) : null;
     }
 
-    private synchronized void prepareGlTransmission(Date fromDate, Date toDate, boolean isEffectiveDate) {
+    private synchronized void prepareGlTransmission(Date fromDate, Date toDate, boolean isEffectiveDate,
+                                                    String... recognitionPeriods) {
 
         if (fromDate != null && toDate != null && fromDate.after(toDate)) {
             String errMsg = "Start Date cannot be greater than End Date: fromDate = " + fromDate +
@@ -310,23 +310,27 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
             throw new IllegalStateException(errMsg);
         }
 
-        // If isEffectiveDate is true then use the transaction effective date, otherwise the recognition date
-        String dateField = isEffectiveDate ? "effectiveDate" : "recognitionDate";
-
         Query query;
         if (fromDate != null && toDate != null) {
+            // If isEffectiveDate is true then use the transaction effective date, otherwise the recognition date
+            String dateField = isEffectiveDate ? "effectiveDate" : "recognitionDate";
             query = em.createQuery("select distinct t from GlTransaction t " +
                     " inner join fetch t.recognitionPeriod rp " +
                     " left outer join t.transactions ts " +
                     " where t.statusCode = :status and " +
-                    " ts." + dateField + " <> null && ts." + dateField + " between :fromDate and :toDate " +
+                    " ts." + dateField + " <> null and ts." + dateField + " between :fromDate and :toDate " +
                     " order by t.date asc");
             query.setParameter("fromDate", fromDate);
             query.setParameter("toDate", toDate);
         } else {
+            boolean periodExists = (recognitionPeriods != null && recognitionPeriods.length > 0);
+            String inClause = periodExists ? " and rp.code in (:recognitionPeriods) " : "";
             query = em.createQuery("select t from GlTransaction t " +
                     " inner join fetch t.recognitionPeriod rp " +
-                    " where t.statusCode = :status order by t.date asc");
+                    " where t.statusCode = :status " + inClause + " order by t.date asc");
+            if (periodExists) {
+                query.setParameter("recognitionPeriods", Arrays.asList(recognitionPeriods));
+            }
         }
 
         query.setParameter("status", GlTransactionStatus.QUEUED.getId());
@@ -475,6 +479,18 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @Transactional(readOnly = false)
     public void prepareGlTransmission() {
         prepareGlTransmission(null, null, true);
+    }
+
+    /**
+     * Prepares a transmission to the general ledger for the given GL recognition
+     *
+     * @param recognitionPeriods an array of GL recognition period codes
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public void prepareGlTransmission(String... recognitionPeriods) {
+        prepareGlTransmission(null, null, true, recognitionPeriods);
     }
 
 

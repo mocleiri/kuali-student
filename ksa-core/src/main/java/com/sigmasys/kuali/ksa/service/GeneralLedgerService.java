@@ -106,6 +106,14 @@ public interface GeneralLedgerService {
     void prepareGlTransmissionForRecognitionDates(Date fromDate, Date toDate);
 
     /**
+     * Prepares a transmission to the general ledger for the given GL recognition
+     *
+     * @param recognitionPeriods an array of GL recognition period codes
+     */
+    @WebMethod(exclude = true)
+    void prepareGlTransmission(String... recognitionPeriods);
+
+    /**
      * Prepares a transmission to the general ledger for all GL transactions in status Q.
      * This process takes into account the different ways in which an institution may choose to transmit to
      * the general ledger, including real-time, batch, and rollup modes.
