@@ -749,6 +749,7 @@ Insert into KSSA_ELECTRONIC_CONTACT (ID,CREATOR_ID,IS_DEFAULT,EDITOR_ID,EMAIL_AD
 Insert into KSSA_ELECTRONIC_CONTACT (ID,CREATOR_ID,IS_DEFAULT,EDITOR_ID,EMAIL_ADDRESS,KIM_EMAIL_ADDRESS_TYPE,KIM_PHONE_TYPE,LAST_UPDATE,PHONE_COUNTRY,PHONE_EXTN,PHONE_NUMBER) values (3,'pheald','Y',null,'mgriffin@sigmauniversity.edu',null,null,to_timestamp('02-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'user1',null,'401-555-0121');
 Insert into KSSA_ELECTRONIC_CONTACT (ID,CREATOR_ID,IS_DEFAULT,EDITOR_ID,EMAIL_ADDRESS,KIM_EMAIL_ADDRESS_TYPE,KIM_PHONE_TYPE,LAST_UPDATE,PHONE_COUNTRY,PHONE_EXTN,PHONE_NUMBER) values (4,'pheald','N',null,null,null,null,to_timestamp('02-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'user1',null,'401-555-0114');
 
+
 REM INSERTING into KSSA_ELECTRONIC_CONTACT
 Insert into KSSA_ELECTRONIC_CONTACT_ACNT (ELECTRONIC_CONTACT_ID_FK, ACNT_ID_FK) values (1, 'user1');
 Insert into KSSA_ELECTRONIC_CONTACT_ACNT (ELECTRONIC_CONTACT_ID_FK, ACNT_ID_FK) values (2, 'user2');
@@ -759,14 +760,17 @@ Insert into KSSA_ELECTRONIC_CONTACT_ACNT (ELECTRONIC_CONTACT_ID_FK, ACNT_ID_FK) 
 --   END DATA FOR TABLE KSSA_ELECTRONIC_CONTACT
 ---------------------------------------------------
 
----------------------------------------------------
---   DATA FOR TABLE KSSA_SEQUENCE_TABLE
---   FILTER = none used
----------------------------------------------------
-REM INSERTING into KSSA_SEQUENCE_TABLE
 
 ---------------------------------------------------
---   END DATA FOR TABLE KSSA_SEQUENCE_TABLE
+--   DATA FOR TABLE KSSA_GL_RECOGNITION_PERIOD
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into KSSA_GL_RECOGNITION_PERIOD
+Insert into KSSA_GL_RECOGNITION_PERIOD (ID, CODE, START_DATE, END_DATE, CREATION_DATE, CREATOR_ID) values (1, 'SR2012', to_date('01/01/2012', 'MM/dd/yyyy'), to_date('12/31/2012', 'MM/dd/yyyy'), to_date('11/11/2011', 'MM/dd/yyyy'), 'admin');
+Insert into KSSA_GL_RECOGNITION_PERIOD (ID, CODE, START_DATE, END_DATE, CREATION_DATE, CREATOR_ID) values (2, 'SR2013', to_date('01/01/2013', 'MM/dd/yyyy'), to_date('12/31/2013', 'MM/dd/yyyy'), to_date('12/22/2012', 'MM/dd/yyyy'), 'admin');
+
+---------------------------------------------------
+--   END DATA FOR TABLE KSSA_GL_RECOGNITION_PERIOD
 ---------------------------------------------------
 
 ---------------------------------------------------

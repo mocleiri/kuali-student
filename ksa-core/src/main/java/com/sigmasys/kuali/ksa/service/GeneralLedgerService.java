@@ -55,10 +55,11 @@ public interface GeneralLedgerService {
     /**
      * Summarizes the general ledger transactions for the given GL transaction list
      *
-     * @param glTransactions List of general ledger transactions
+     * @param transactions List of general ledger transactions
+     * @return the modified list of GL transactions
      */
     @WebMethod(exclude = true)
-    void summarizeGlTransactions(List<GlTransaction> glTransactions);
+    List<GlTransaction> summarizeGlTransactions(List<GlTransaction> transactions);
 
     /**
      * Returns the general ledger type instance for the given code.

@@ -65,10 +65,19 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         glTransaction.setTransactions(new HashSet<Transaction>(Arrays.asList(transaction)));
         glTransaction.setStatus(isQueued ? GlTransactionStatus.QUEUED : GlTransactionStatus.WAITING);
 
-        if (transaction.getRecognitionDate() != null) {
-            GlRecognitionPeriod recognitionPeriod = getGlRecognitionPeriod(transaction.getRecognitionDate());
-            glTransaction.setRecognitionPeriod(recognitionPeriod);
+        Date recognitionDate = transaction.getRecognitionDate();
+        if (recognitionDate == null) {
+            String errMsg = "GL recognition date cannot be null, Transaction ID = " + transactionId;
+            throw new IllegalStateException(errMsg);
         }
+
+        GlRecognitionPeriod recognitionPeriod = getGlRecognitionPeriod(recognitionDate);
+        if (recognitionPeriod == null) {
+            String errMsg = "GL recognition period cannot be found for the given date = " + recognitionDate;
+            throw new IllegalStateException(errMsg);
+        }
+
+        glTransaction.setRecognitionPeriod(recognitionPeriod);
 
         persistEntity(glTransaction);
 
@@ -97,42 +106,56 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     /**
      * Summarizes the general ledger transactions for the given GL transaction list
      *
-     * @param glTransactions List of general ledger transactions
+     * @param transactions List of general ledger transactions
+     * @return the modified list of GL transactions
      */
     @Override
     @WebMethod(exclude = true)
     @Transactional(readOnly = false)
-    public void summarizeGlTransactions(List<GlTransaction> glTransactions) {
+    public List<GlTransaction> summarizeGlTransactions(List<GlTransaction> transactions) {
 
-        // Map of GL Account ID and set of transactions for this GL account
-        Map<String, Set<Transaction>> transactionMap = new HashMap<String, Set<Transaction>>();
-        // Map of GL Account ID and total transaction amount for this GL account
-        Map<String, BigDecimal> amountMap = new HashMap<String, BigDecimal>();
-        // Map of GL Account ID and the first GL transaction for this GL account from the given list
-        Map<String, List<GlTransaction>> glTransactionMap = new HashMap<String, List<GlTransaction>>();
+        // Creating a new array list based on the given GL transaction list
+        List<GlTransaction> glTransactions = new ArrayList<GlTransaction>(transactions);
+
+        // Map of [GL Account ID, GL Recognition Period ID] and set of transactions
+        Map<Pair<String, Long>, Set<Transaction>> transactionMap = new HashMap<Pair<String, Long>, Set<Transaction>>();
+
+        // Map of [GL Account ID, GL Recognition Period ID] and total transaction amount
+        Map<Pair<String, Long>, BigDecimal> amountMap = new HashMap<Pair<String, Long>, BigDecimal>();
+
+        // Map of [GL Account ID, GL Recognition Period ID] and the first GL transaction for this GL account from the given list
+        Map<Pair<String, Long>, List<GlTransaction>> glTransactionMap = new HashMap<Pair<String, Long>, List<GlTransaction>>();
 
         for (GlTransaction glTransaction : glTransactions) {
-            if (glTransaction.getStatus() != null && GlTransactionStatus.WAITING == glTransaction.getStatus()) {
-                String glAccountId = glTransaction.getGlAccountId();
-                if (glAccountId != null) {
 
-                    Set<Transaction> transactionsForAccount = transactionMap.get(glAccountId);
+            if (glTransaction.getStatus() != null && GlTransactionStatus.WAITING == glTransaction.getStatus()) {
+
+                String glAccountId = glTransaction.getGlAccountId();
+                Long recognitionPeriodId = glTransaction.getRecognitionPeriod().getId();
+
+                if (glAccountId != null && recognitionPeriodId != null) {
+
+                    final Pair<String, Long> key = new Pair<String, Long>(glAccountId, recognitionPeriodId);
+
+                    Set<Transaction> transactionsForAccount = transactionMap.get(key);
                     if (transactionsForAccount == null) {
                         transactionsForAccount = new HashSet<Transaction>();
-                        transactionMap.put(glAccountId, transactionsForAccount);
+                        transactionMap.put(key, transactionsForAccount);
                     }
-                    // Adding all transactions to the list of transactions for the current GL account
+
+                    // Adding all transactions to the list of transactions for the current GL account and Recognition Period
                     transactionsForAccount.addAll(glTransaction.getTransactions());
 
-                    List<GlTransaction> glTransactionsForAccount = glTransactionMap.get(glAccountId);
+                    List<GlTransaction> glTransactionsForAccount = glTransactionMap.get(key);
                     if (glTransactionsForAccount == null) {
                         glTransactionsForAccount = new LinkedList<GlTransaction>();
-                        glTransactionMap.put(glAccountId, glTransactionsForAccount);
+                        glTransactionMap.put(key, glTransactionsForAccount);
                     }
-                    // Adding GL transaction to the list of GL transactions for the current GL account
+
+                    // Adding GL transaction to the list of GL transactions for the current GL account and Recognition Period
                     glTransactionsForAccount.add(glTransaction);
 
-                    BigDecimal amount = amountMap.get(glAccountId);
+                    BigDecimal amount = amountMap.get(key);
                     if (amount == null) {
                         amount = BigDecimal.ZERO;
                     }
@@ -140,47 +163,58 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
                     for (Transaction trans : glTransaction.getTransactions()) {
                         amount = amount.add(trans.getAmount() != null ? trans.getAmount() : BigDecimal.ZERO);
                     }
-                    // Sum up the transaction amount for the current GL account
-                    amountMap.put(glAccountId, amount.add(amount));
+
+                    // Sum up the transaction amount for the current GL account and Recognition Period
+                    amountMap.put(key, amount.add(amount));
                 }
             }
         }
 
-        Set<Long> glTransactionIdsToDelete = new HashSet<Long>();
-        for (String glAccountId : glTransactionMap.keySet()) {
-            List<GlTransaction> glTransactionsForAccount = glTransactionMap.get(glAccountId);
-            if (glTransactionsForAccount != null && !glTransactionsForAccount.isEmpty()) {
-                BigDecimal totalAmount = amountMap.get(glAccountId);
+        Set<GlTransaction> glTransactionsToDelete = new HashSet<GlTransaction>();
+
+        for (Pair<String, Long> key : glTransactionMap.keySet()) {
+
+            List<GlTransaction> glTransactionsForAccount = glTransactionMap.get(key);
+
+            if (!CollectionUtils.isEmpty(glTransactionsForAccount)) {
+
+                BigDecimal totalAmount = amountMap.get(key);
+
                 if (!BigDecimal.ZERO.equals(totalAmount)) {
+
                     // Persisting the first GL transaction with the total amount and all
                     // transactions for the current GL account
                     GlTransaction firstGlTransaction = glTransactionsForAccount.get(0);
-                    firstGlTransaction.setTransactions(transactionMap.get(glAccountId));
+                    firstGlTransaction.setTransactions(transactionMap.get(key));
                     firstGlTransaction.setAmount(totalAmount);
                     persistEntity(firstGlTransaction);
+
                     // We have to remove the rest of GL transactions
                     for (int i = 1; i < glTransactionsForAccount.size(); i++) {
-                        glTransactionIdsToDelete.add(glTransactionsForAccount.get(i).getId());
+                        glTransactionsToDelete.add(glTransactionsForAccount.get(i));
                     }
 
                 } else {
                     for (GlTransaction glTransaction : glTransactionsForAccount) {
-                        glTransactionIdsToDelete.add(glTransaction.getId());
+                        glTransactionsToDelete.add(glTransaction);
                     }
                 }
             }
         }
+
         // Deleting GL transactions that must be eliminated from the list and database
-        for (Iterator<GlTransaction> iterator = glTransactions.iterator(); iterator.hasNext(); ) {
-            GlTransaction glTransaction = iterator.next();
-            if (glTransactionIdsToDelete.contains(glTransaction.getId())) {
-                deleteEntity(glTransaction.getId(), GlTransaction.class);
-                iterator.remove();
-            } else {
-                glTransaction.setStatus(GlTransactionStatus.QUEUED);
-                persistEntity(glTransaction);
-            }
+        for (GlTransaction glTransactionToDelete : glTransactionsToDelete) {
+            deleteEntity(glTransactionToDelete.getId(), GlTransaction.class);
+            glTransactions.remove(glTransactionToDelete);
         }
+
+        // Persisting the remaining transactions in the database with the status 'Q'
+        for (GlTransaction glTransaction : glTransactions) {
+            glTransaction.setStatus(GlTransactionStatus.QUEUED);
+            persistEntity(glTransaction);
+        }
+
+        return glTransactions;
     }
 
     /**
