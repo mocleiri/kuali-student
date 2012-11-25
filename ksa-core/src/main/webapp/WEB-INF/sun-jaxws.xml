@@ -10,6 +10,11 @@
               implementation="com.sigmasys.kuali.ksa.service.impl.TransactionImportServiceImpl"
               url-pattern="/transactionImport.webservice"/>
 
+    <!--  TransactionExportService WS Endpoint -->
+    <endpoint name="TransactionExportService"
+              implementation="com.sigmasys.kuali.ksa.service.impl.TransactionExportServiceImpl"
+              url-pattern="/transactionExport.webservice"/>
+
     <!--  LocalizationService WS Endpoint -->
     <endpoint name="LocalizationService"
               implementation="com.sigmasys.kuali.ksa.service.impl.LocalizationWebService"

@@ -75,4 +75,21 @@ public interface Constants {
     String OVERRIDE_REFUND_METHOD = "ksa.override.refund.method";
     String DEFAULT_REFUND_METHOD = "ksa.default.refund.method";
     String REFUND_SOURCE_TYPE = "ksa.refund.source.type";
+
+    // KFS constants (mostly used by Transaction XML export services)
+    String KFS_CHART_OF_ACCOUNTS_CODE_PARAM_NAME = "kfs.coa.code";
+    String KFS_ORGANIZATION_CODE_PARAM_NAME = "kfs.organization.code";
+    String KFS_BATCH_NUMBER_PREFIX_PARAM_NAME = "kfs.batch.number.prefix";
+    String KFS_DOCUMENT_NUMBER_PREFIX_PARAM_NAME = "kfs.document.number.prefix";
+    String KFS_EMAIL_ADDRESS_PARAM_NAME = "kfs.email.address";
+    String KFS_POSTAL_ADDRESS_PARAM_NAME = "kfs.postal.address";
+    String KFS_PHONE_NUMBER_PARAM_NAME = "kfs.phone.number";
+    String KFS_CAMPUS_CODE_PARAM_NAME = "kfs.campus.code";
+    String KFS_DEPARTMENT_NAME_PARAM_NAME = "kfs.department.name";
+    String KFS_BALANCE_TYPE_CODE_PARAM_NAME = "kfs.balance.type.code";
+    String KFS_DOCUMENT_TYPE_CODE_PARAM_NAME = "kfs.document.type.code";
+    String KFS_OBJECT_TYPE_CODE_PARAM_NAME = "kfs.object.type.code";
+    String KFS_ORIGINATION_CODE_PARAM_NAME = "kfs.origination.code";
+    String KFS_TRANSACTION_GL_ENTRY_DESCRIPTION_PARAM_NAME = "kfs.transaction.gl.entry.description";
+
 }

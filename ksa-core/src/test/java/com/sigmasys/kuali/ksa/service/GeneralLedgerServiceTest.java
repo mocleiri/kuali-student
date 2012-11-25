@@ -100,7 +100,7 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
         Assert.notNull(glTransaction2.getStatus());
         Assert.notNull(glTransaction2.getRecognitionPeriod());
 
-        glService.prepareGlTransmission();
+        glService.prepareGlTransmissions();
 
     }
 
@@ -119,7 +119,7 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
             Assert.notNull(glTransaction2.getStatus());
             Assert.notNull(glTransaction2.getRecognitionPeriod());
 
-            glService.prepareGlTransmission("SR2012", "SR2013");
+            glService.prepareGlTransmissions("SR2012", "SR2013");
 
      }
 
@@ -143,7 +143,7 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
                Date startDate = dateFormat.parse("01/01/2001");
                Date endDate = dateFormat.parse("01/01/2014");
 
-               glService.prepareGlTransmissionForEffectiveDates(startDate, endDate);
+               glService.prepareGlTransmissionsForEffectiveDates(startDate, endDate);
 
     }
 
@@ -167,7 +167,7 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
                    Date startDate = dateFormat.parse("01/01/2012");
                    Date endDate = dateFormat.parse("01/01/2015");
 
-                   glService.prepareGlTransmissionForRecognitionDates(startDate, endDate);
+                   glService.prepareGlTransmissionsForRecognitionDates(startDate, endDate);
 
     }
 

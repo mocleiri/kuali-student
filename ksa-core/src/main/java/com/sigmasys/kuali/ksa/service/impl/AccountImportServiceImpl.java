@@ -81,9 +81,9 @@ public class AccountImportServiceImpl implements AccountImportService {
 			throw new IllegalArgumentException("Student profile XML is null. Abort import.");
 		}
 		
-		// Validate the XML schema:
+		// Validate against the XML schema:
 		if (!schemaValidator.validateXml(xml)) {
-			throw new RuntimeException("The student profile XML schema is invalid");
+			throw new RuntimeException("The student profile XML is invalid");
 		}
 		
 		try {
@@ -92,9 +92,9 @@ public class AccountImportServiceImpl implements AccountImportService {
 			
 			// Invoke import:
 			importStudentProfile(profile);
+
 		} catch (Throwable t) {
 			logger.error("Error importing student profile.", t);
-			
 			throw new RuntimeException("Error importing student profile.", t);
 		}
 	}

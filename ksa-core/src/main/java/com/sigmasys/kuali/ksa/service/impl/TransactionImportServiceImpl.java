@@ -42,7 +42,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     private static final String IMPORT_SCHEMA_LOCATION = "classpath*:/xsd/transaction-import.xsd";
     private static final String XML_SCHEMA_LOCATION = "classpath*:/xsd/xml.xsd";
 
-    private final static XmlSchemaValidator schemaValidator =
+    private static final XmlSchemaValidator schemaValidator =
             new XmlSchemaValidator(XML_SCHEMA_LOCATION, IMPORT_SCHEMA_LOCATION);
 
 
@@ -60,7 +60,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
     @Autowired
     private GeneralLedgerService glService;
-    
+
     @Autowired
     private RefundService refundService;
 
@@ -89,14 +89,13 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     @Override
     @Transactional(readOnly = false)
     public String processTransactions(String xml) {
-        // validate against schema
+        // Validate XML against the schema
         if (schemaValidator.validateXml(xml)) {
             return parseTransactions(xml);
-        } else {
-            String errMsg = "XML content is invalid:\n" + xml;
-            logger.error(errMsg);
-            throw new RuntimeException(errMsg);
         }
+        String errMsg = "XML content is invalid:\n" + xml;
+        logger.error(errMsg);
+        throw new RuntimeException(errMsg);
     }
 
     /**

@@ -1040,7 +1040,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         // If GL mode is Individual then we prepare the GL transmission
         GeneralLedgerMode glMode = glService.getDefaultGeneralLedgerMode();
         if (glMode == GeneralLedgerMode.INDIVIDUAL) {
-            glService.prepareGlTransmission();
+            glService.prepareGlTransmissions();
         }
     }
 

@@ -92,7 +92,7 @@ public interface GeneralLedgerService {
      * @param toDate   End effective date
      */
     @WebMethod(exclude = true)
-    void prepareGlTransmissionForEffectiveDates(Date fromDate, Date toDate);
+    void prepareGlTransmissionsForEffectiveDates(Date fromDate, Date toDate);
 
     /**
      * Prepares a transmission to the general ledger for the given range of recognition dates.
@@ -103,7 +103,7 @@ public interface GeneralLedgerService {
      * @param toDate   End recognition date
      */
     @WebMethod(exclude = true)
-    void prepareGlTransmissionForRecognitionDates(Date fromDate, Date toDate);
+    void prepareGlTransmissionsForRecognitionDates(Date fromDate, Date toDate);
 
     /**
      * Prepares a transmission to the general ledger for the given GL recognition
@@ -111,7 +111,7 @@ public interface GeneralLedgerService {
      * @param recognitionPeriods an array of GL recognition period codes
      */
     @WebMethod(exclude = true)
-    void prepareGlTransmission(String... recognitionPeriods);
+    void prepareGlTransmissions(String... recognitionPeriods);
 
     /**
      * Prepares a transmission to the general ledger for all GL transactions in status Q.
@@ -119,6 +119,13 @@ public interface GeneralLedgerService {
      * the general ledger, including real-time, batch, and rollup modes.
      */
     @WebMethod(exclude = true)
-    void prepareGlTransmission();
+    void prepareGlTransmissions();
+
+    /**
+     * Retrieves all GL transmissions with the empty "result" field for export.
+     *
+     * @return list of GlTransmission instances
+     */
+    List<GlTransmission> getGlTransmissionsForExport();
 
 }

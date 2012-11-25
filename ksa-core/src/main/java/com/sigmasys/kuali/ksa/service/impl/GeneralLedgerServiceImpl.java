@@ -17,6 +17,8 @@ import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.util.*;
 
+import static com.sigmasys.kuali.ksa.model.Constants.*;
+
 /**
  * General Ledger service implementation.
  * <p/>
@@ -26,7 +28,7 @@ import java.util.*;
 @Service("generalLedgerService")
 @Transactional(readOnly = true)
 @WebService(serviceName = GeneralLedgerService.SERVICE_NAME, portName = GeneralLedgerService.PORT_NAME,
-        targetNamespace = Constants.WS_NAMESPACE)
+        targetNamespace = WS_NAMESPACE)
 @SuppressWarnings("unchecked")
 public class GeneralLedgerServiceImpl extends GenericPersistenceService implements GeneralLedgerService {
 
@@ -58,7 +60,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
 
         GlTransaction glTransaction = new GlTransaction();
         glTransaction.setDate(new Date());
-        glTransaction.setAmount(amount);
+        glTransaction.setAmount(amount != null ? amount : BigDecimal.ZERO);
         glTransaction.setGlAccountId(userId);
         glTransaction.setGlOperation(operationType);
         glTransaction.setDescription(operationType.toString());
@@ -242,7 +244,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public GeneralLedgerType getDefaultGeneralLedgerType() {
-        return getGeneralLedgerType(configService.getInitialParameter(Constants.DEFAULT_GL_TYPE_PARAM_NAME));
+        return getGeneralLedgerType(configService.getInitialParameter(DEFAULT_GL_TYPE_PARAM_NAME));
     }
 
     /**
@@ -252,7 +254,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public GeneralLedgerMode getDefaultGeneralLedgerMode() {
-        String glMode = configService.getInitialParameter(Constants.DEFAULT_GL_MODE_PARAM_NAME);
+        String glMode = configService.getInitialParameter(DEFAULT_GL_MODE_PARAM_NAME);
         if (glMode != null) {
             return EnumUtils.findById(GeneralLedgerMode.class, glMode);
         }
@@ -272,6 +274,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         transmission.setRecognitionPeriod(recognitionPeriod);
         transmission.setDate(new Date());
         transmission.setGlOperation(transaction.getGlOperation());
+        transmission.setAmount(transaction.getAmount());
 
         persistEntity(transmission);
 
@@ -292,8 +295,8 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         return (results != null && !results.isEmpty()) ? results.get(0) : null;
     }
 
-    private synchronized void prepareGlTransmission(Date fromDate, Date toDate, boolean isEffectiveDate,
-                                                    String... recognitionPeriods) {
+    private synchronized void prepareGlTransmissions(Date fromDate, Date toDate, boolean isEffectiveDate,
+                                                     String... recognitionPeriods) {
 
         if (fromDate != null && toDate != null && fromDate.after(toDate)) {
             String errMsg = "Start Date cannot be greater than End Date: fromDate = " + fromDate +
@@ -302,7 +305,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
             throw new IllegalStateException(errMsg);
         }
 
-        String glModeCode = configService.getInitialParameter(Constants.DEFAULT_GL_MODE_PARAM_NAME);
+        String glModeCode = configService.getInitialParameter(DEFAULT_GL_MODE_PARAM_NAME);
         GeneralLedgerMode glMode = EnumUtils.findById(GeneralLedgerMode.class, glModeCode);
         if (glMode == null) {
             String errMsg = "General Ledger mode must be specified";
@@ -450,8 +453,8 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @Override
     @WebMethod(exclude = true)
     @Transactional(readOnly = false)
-    public void prepareGlTransmissionForEffectiveDates(Date fromDate, Date toDate) {
-        prepareGlTransmission(fromDate, toDate, true);
+    public void prepareGlTransmissionsForEffectiveDates(Date fromDate, Date toDate) {
+        prepareGlTransmissions(fromDate, toDate, true);
     }
 
     /**
@@ -465,8 +468,8 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @Override
     @WebMethod(exclude = true)
     @Transactional(readOnly = false)
-    public void prepareGlTransmissionForRecognitionDates(Date fromDate, Date toDate) {
-        prepareGlTransmission(fromDate, toDate, false);
+    public void prepareGlTransmissionsForRecognitionDates(Date fromDate, Date toDate) {
+        prepareGlTransmissions(fromDate, toDate, false);
     }
 
     /**
@@ -477,8 +480,8 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @Override
     @WebMethod(exclude = true)
     @Transactional(readOnly = false)
-    public void prepareGlTransmission() {
-        prepareGlTransmission(null, null, true);
+    public void prepareGlTransmissions() {
+        prepareGlTransmissions(null, null, true);
     }
 
     /**
@@ -489,9 +492,22 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @Override
     @WebMethod(exclude = true)
     @Transactional(readOnly = false)
-    public void prepareGlTransmission(String... recognitionPeriods) {
-        prepareGlTransmission(null, null, true, recognitionPeriods);
+    public void prepareGlTransmissions(String... recognitionPeriods) {
+        prepareGlTransmissions(null, null, true, recognitionPeriods);
     }
 
+    /**
+     * Retrieves all GL transmissions with the empty "result" field for export.
+     *
+     * @return list of GlTransmission instances
+     */
+    @Override
+    public List<GlTransmission> getGlTransmissionsForExport() {
+        Query query = em.createQuery("select glt from GlTransmission glt " +
+                " inner join fetch t.recognitionPeriod rp " +
+                " inner join fetch t.glOperation glo " +
+                " where glt.result is null");
+        return query.getResultList();
+    }
 
 }

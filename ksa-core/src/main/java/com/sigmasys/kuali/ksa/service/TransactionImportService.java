@@ -7,7 +7,9 @@ import com.sigmasys.kuali.ksa.model.Constants;
 import javax.jws.WebService;
 
 /**
- * Created by: dmulderink on 6/29/12 at 10:35 AM
+ * Transaction Import Service.
+ *
+ * @author Michael Ivanov
  */
 @Url(TransactionImportService.SERVICE_URL)
 @WebService(serviceName = TransactionImportService.SERVICE_NAME, portName = TransactionImportService.PORT_NAME,
@@ -25,7 +27,7 @@ public interface TransactionImportService {
      * @param xml XML content
      * @return XML response
      */
-    public String processTransactions(String xml);
+    String processTransactions(String xml);
 
 
 }

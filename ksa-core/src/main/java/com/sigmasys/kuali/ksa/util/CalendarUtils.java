@@ -12,11 +12,11 @@ import java.util.GregorianCalendar;
 public class CalendarUtils {
 
     // DatatypeFactory creates new javax.xml.datatype Objects that map XML to/from Java Objects.
-    private static DatatypeFactory df = null;
+    private static DatatypeFactory datatypeFactory = null;
 
     static {
         try {
-            df = DatatypeFactory.newInstance();
+            datatypeFactory = DatatypeFactory.newInstance();
         } catch (DatatypeConfigurationException e) {
             throw new IllegalStateException(
                     "Error while trying to obtain a new instance of DatatypeFactory", e);
@@ -30,8 +30,8 @@ public class CalendarUtils {
     public static XMLGregorianCalendar toXmlGregorianCalendar(Date date) {
         if (date != null) {
             GregorianCalendar gc = new GregorianCalendar();
-            gc.setTimeInMillis(date.getTime());
-            return df.newXMLGregorianCalendar(gc);
+            gc.setTime(date);
+            return datatypeFactory.newXMLGregorianCalendar(gc);
         }
         return null;
     }
