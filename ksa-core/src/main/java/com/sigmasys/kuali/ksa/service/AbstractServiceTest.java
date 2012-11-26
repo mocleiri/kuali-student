@@ -20,6 +20,7 @@ import com.sigmasys.kuali.ksa.util.RequestUtils;
  *
  * @author IvanovM
  */
+@SuppressWarnings("unchecked")
 @Transactional
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = true)
 public abstract class AbstractServiceTest implements BeanFactoryAware {
@@ -50,8 +51,24 @@ public abstract class AbstractServiceTest implements BeanFactoryAware {
         sessionManager.createSession(RequestUtils.getThreadRequest(), RequestUtils.getThreadResponse(), TEST_USER_ID);
     }
 
+    protected MockHttpServletRequest getRequest() {
+        return (MockHttpServletRequest) RequestUtils.getThreadRequest();
+    }
+
+    protected MockHttpServletResponse getResponse() {
+        return (MockHttpServletResponse) RequestUtils.getThreadResponse();
+    }
+
+    protected MockHttpSession getSession() {
+        return (MockHttpSession) getRequest().getSession();
+    }
+
+    protected MockServletContext getContext() {
+        return (MockServletContext) RequestUtils.getServletContext();
+    }
+
     @Override
-    public void setBeanFactory(BeanFactory beanFactory)  {
-          init(beanFactory);
+    public void setBeanFactory(BeanFactory beanFactory) {
+        init(beanFactory);
     }
 }

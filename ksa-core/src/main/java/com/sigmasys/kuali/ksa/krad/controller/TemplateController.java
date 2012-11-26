@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping(value = "/templateView")
 public class TemplateController extends GenericSearchController {
 
-    private static final String FIRST_PAGE_ID = "Page1";
-    private static final String SECOND_PAGE_ID = "Page2";
-    private static final String DEFAULT_PAGE_ID = FIRST_PAGE_ID;
+    public static final String FIRST_PAGE_ID = "Page1";
+    public static final String SECOND_PAGE_ID = "Page2";
+    public static final String DEFAULT_PAGE_ID = FIRST_PAGE_ID;
 
 
     /**
@@ -28,7 +28,9 @@ public class TemplateController extends GenericSearchController {
      */
     @Override
     protected TemplateForm createInitialForm(HttpServletRequest request) {
-        return new TemplateForm();
+        TemplateForm templateForm = new TemplateForm();
+        templateForm.setPageId(DEFAULT_PAGE_ID);
+        return templateForm;
     }
 
     /**
@@ -59,6 +61,8 @@ public class TemplateController extends GenericSearchController {
     public ModelAndView submit(@ModelAttribute("KualiForm") TemplateForm form) {
 
         // TODO: add logic to process the form parameters and perform submit
+
+        form.setPageId(SECOND_PAGE_ID);
 
         return getUIFModelAndView(form);
 

@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.service;
 
+import com.sigmasys.kuali.ksa.krad.controller.TemplateControllerTest;
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import org.junit.runner.RunWith;
@@ -33,7 +34,8 @@ import org.junit.runners.Suite;
         GeneralLedgerServiceTest.class,
         FeeManagementServiceTest.class,
         PaymentServiceTest.class,
-        TransactionUtilsTest.class})
+        TransactionUtilsTest.class,
+        TemplateControllerTest.class})
 public class ServiceTestSuite extends AbstractServiceTest {
 
     public static final String TEST_KSA_CONTEXT = "/META-INF/test-context.xml";
