@@ -31,9 +31,9 @@
 
     <bean id="proSamDataSource" class="com.sigmasys.bsinas.service.jta.AtomikosDataSourceBean" parent="xaDataSource">
         <property name="uniqueResourceName" value="proSamDataSource"/>
-        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
-        <property name="user" value="ksa"/>
-        <property name="password" value="ksa123"/>
+        <property name="url" value="jdbc:oracle:thin:@10.0.2.14:1521:OraDev"/>
+        <property name="user" value="SIGMA"/>
+        <property name="password" value="ssiDevZ9"/>
     </bean>
 
 
