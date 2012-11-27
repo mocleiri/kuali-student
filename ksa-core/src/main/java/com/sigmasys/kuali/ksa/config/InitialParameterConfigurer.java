@@ -24,10 +24,10 @@ import java.util.*;
  * It is used in Spring context to set parameter values in ${...} variables and
  * also by ConfigService to populate reference data.
  * <p/>
- * User: IvanovM
- * Date: Nov 28, 2010
- * Time: 10:02:23 PM
+ *
+ * @author Michael Ivanov
  */
+@SuppressWarnings("unchecked")
 @Transactional
 public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
 
@@ -84,7 +84,9 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
             public void processRow(ResultSet rs) throws SQLException {
                 String name = rs.getString("name");
                 String value = rs.getString("value");
-                databaseProperties.setProperty(name, value);
+                if (name != null && value != null) {
+                    databaseProperties.setProperty(name, value);
+                }
             }
         });
     }

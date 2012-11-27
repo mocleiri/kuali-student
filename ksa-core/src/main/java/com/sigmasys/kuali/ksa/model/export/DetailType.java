@@ -9,10 +9,7 @@
 package com.sigmasys.kuali.ksa.model.export;
 
 import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.NormalizedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -20,9 +17,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * <p>Java class for detailType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="detailType">
  *   &lt;complexContent>
@@ -49,8 +46,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "detailType", propOrder = {
@@ -61,53 +56,67 @@ public class DetailType {
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String universityFiscalAccountingPeriod;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String universityFiscalYear;
+
     @XmlElement(required = true)
+    @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar createDate;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String chartOfAccountsCode;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String accountNumber;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String subAccountNumber;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String objectCode;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String subObjectCode;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String balanceTypeCode;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String objectTypeCode;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String collectorDetailSequenceNumber;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String originationCode;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String documentTypeCode;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String documentNumber;
+
     @XmlElement(required = true)
     protected BigDecimal amount;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String detailText;
 
     /**
      * Gets the value of the universityFiscalAccountingPeriod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUniversityFiscalAccountingPeriod() {
         return universityFiscalAccountingPeriod;
@@ -115,11 +124,9 @@ public class DetailType {
 
     /**
      * Sets the value of the universityFiscalAccountingPeriod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUniversityFiscalAccountingPeriod(String value) {
         this.universityFiscalAccountingPeriod = value;
@@ -127,11 +134,9 @@ public class DetailType {
 
     /**
      * Gets the value of the universityFiscalYear property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUniversityFiscalYear() {
         return universityFiscalYear;
@@ -139,11 +144,9 @@ public class DetailType {
 
     /**
      * Sets the value of the universityFiscalYear property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUniversityFiscalYear(String value) {
         this.universityFiscalYear = value;
@@ -151,11 +154,9 @@ public class DetailType {
 
     /**
      * Gets the value of the createDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getCreateDate() {
         return createDate;
@@ -163,11 +164,9 @@ public class DetailType {
 
     /**
      * Sets the value of the createDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setCreateDate(XMLGregorianCalendar value) {
         this.createDate = value;
@@ -175,11 +174,9 @@ public class DetailType {
 
     /**
      * Gets the value of the chartOfAccountsCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getChartOfAccountsCode() {
         return chartOfAccountsCode;
@@ -187,11 +184,9 @@ public class DetailType {
 
     /**
      * Sets the value of the chartOfAccountsCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setChartOfAccountsCode(String value) {
         this.chartOfAccountsCode = value;
@@ -199,11 +194,9 @@ public class DetailType {
 
     /**
      * Gets the value of the accountNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAccountNumber() {
         return accountNumber;
@@ -211,11 +204,9 @@ public class DetailType {
 
     /**
      * Sets the value of the accountNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAccountNumber(String value) {
         this.accountNumber = value;
@@ -223,11 +214,9 @@ public class DetailType {
 
     /**
      * Gets the value of the subAccountNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSubAccountNumber() {
         return subAccountNumber;
@@ -235,11 +224,9 @@ public class DetailType {
 
     /**
      * Sets the value of the subAccountNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSubAccountNumber(String value) {
         this.subAccountNumber = value;
@@ -247,11 +234,9 @@ public class DetailType {
 
     /**
      * Gets the value of the objectCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getObjectCode() {
         return objectCode;
@@ -259,11 +244,9 @@ public class DetailType {
 
     /**
      * Sets the value of the objectCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setObjectCode(String value) {
         this.objectCode = value;
@@ -271,11 +254,9 @@ public class DetailType {
 
     /**
      * Gets the value of the subObjectCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSubObjectCode() {
         return subObjectCode;
@@ -283,11 +264,9 @@ public class DetailType {
 
     /**
      * Sets the value of the subObjectCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSubObjectCode(String value) {
         this.subObjectCode = value;
@@ -295,11 +274,9 @@ public class DetailType {
 
     /**
      * Gets the value of the balanceTypeCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBalanceTypeCode() {
         return balanceTypeCode;
@@ -307,11 +284,9 @@ public class DetailType {
 
     /**
      * Sets the value of the balanceTypeCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setBalanceTypeCode(String value) {
         this.balanceTypeCode = value;
@@ -319,11 +294,9 @@ public class DetailType {
 
     /**
      * Gets the value of the objectTypeCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getObjectTypeCode() {
         return objectTypeCode;
@@ -331,11 +304,9 @@ public class DetailType {
 
     /**
      * Sets the value of the objectTypeCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setObjectTypeCode(String value) {
         this.objectTypeCode = value;
@@ -343,11 +314,9 @@ public class DetailType {
 
     /**
      * Gets the value of the collectorDetailSequenceNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCollectorDetailSequenceNumber() {
         return collectorDetailSequenceNumber;
@@ -355,11 +324,9 @@ public class DetailType {
 
     /**
      * Sets the value of the collectorDetailSequenceNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCollectorDetailSequenceNumber(String value) {
         this.collectorDetailSequenceNumber = value;
@@ -367,11 +334,9 @@ public class DetailType {
 
     /**
      * Gets the value of the originationCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOriginationCode() {
         return originationCode;
@@ -379,11 +344,9 @@ public class DetailType {
 
     /**
      * Sets the value of the originationCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOriginationCode(String value) {
         this.originationCode = value;
@@ -391,11 +354,9 @@ public class DetailType {
 
     /**
      * Gets the value of the documentTypeCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDocumentTypeCode() {
         return documentTypeCode;
@@ -403,11 +364,9 @@ public class DetailType {
 
     /**
      * Sets the value of the documentTypeCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDocumentTypeCode(String value) {
         this.documentTypeCode = value;
@@ -415,11 +374,9 @@ public class DetailType {
 
     /**
      * Gets the value of the documentNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDocumentNumber() {
         return documentNumber;
@@ -427,11 +384,9 @@ public class DetailType {
 
     /**
      * Sets the value of the documentNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDocumentNumber(String value) {
         this.documentNumber = value;
@@ -439,11 +394,9 @@ public class DetailType {
 
     /**
      * Gets the value of the amount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigDecimal }
      */
     public BigDecimal getAmount() {
         return amount;
@@ -451,11 +404,9 @@ public class DetailType {
 
     /**
      * Sets the value of the amount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigDecimal }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigDecimal }
      */
     public void setAmount(BigDecimal value) {
         this.amount = value;
@@ -463,11 +414,9 @@ public class DetailType {
 
     /**
      * Gets the value of the detailText property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDetailText() {
         return detailText;
@@ -475,11 +424,9 @@ public class DetailType {
 
     /**
      * Sets the value of the detailText property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDetailText(String value) {
         this.detailText = value;

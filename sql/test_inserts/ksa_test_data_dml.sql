@@ -766,8 +766,8 @@ Insert into KSSA_ELECTRONIC_CONTACT_ACNT (ELECTRONIC_CONTACT_ID_FK, ACNT_ID_FK) 
 --   FILTER = none used
 ---------------------------------------------------
 REM INSERTING into KSSA_GL_RECOGNITION_PERIOD
-Insert into KSSA_GL_RECOGNITION_PERIOD (ID, CODE, START_DATE, END_DATE, CREATION_DATE, CREATOR_ID) values (1, 'SR2012', to_date('01/01/2012', 'MM/dd/yyyy'), to_date('12/31/2012', 'MM/dd/yyyy'), to_date('11/11/2011', 'MM/dd/yyyy'), 'admin');
-Insert into KSSA_GL_RECOGNITION_PERIOD (ID, CODE, START_DATE, END_DATE, CREATION_DATE, CREATOR_ID) values (2, 'SR2013', to_date('01/01/2013', 'MM/dd/yyyy'), to_date('12/31/2013', 'MM/dd/yyyy'), to_date('12/22/2012', 'MM/dd/yyyy'), 'admin');
+Insert into KSSA_GL_RECOGNITION_PERIOD (ID, CODE, FISCAL_YEAR, START_DATE, END_DATE, CREATION_DATE, CREATOR_ID) values (1, 'SR', 2012, to_date('01/01/2012', 'MM/dd/yyyy'), to_date('12/31/2012', 'MM/dd/yyyy'), to_date('11/11/2011', 'MM/dd/yyyy'), 'admin');
+Insert into KSSA_GL_RECOGNITION_PERIOD (ID, CODE, FISCAL_YEAR, START_DATE, END_DATE, CREATION_DATE, CREATOR_ID) values (2, 'AB', 2013, to_date('01/01/2013', 'MM/dd/yyyy'), to_date('12/31/2013', 'MM/dd/yyyy'), to_date('12/22/2012', 'MM/dd/yyyy'), 'admin');
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_GL_RECOGNITION_PERIOD

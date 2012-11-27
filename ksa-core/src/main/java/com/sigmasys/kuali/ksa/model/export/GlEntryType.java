@@ -18,9 +18,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * <p>Java class for glEntryType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="glEntryType">
  *   &lt;complexContent>
@@ -56,8 +56,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "glEntryType", propOrder = {
@@ -67,72 +65,94 @@ public class GlEntryType {
 
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String universityFiscalYear;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String chartOfAccountsCode;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String accountNumber;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String subAccountNumber;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String objectCode;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String subObjectCode;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String balanceTypeCode;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String objectTypeCode;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String universityFiscalAccountingPeriod;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String documentTypeCode;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String originationCode;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String documentNumber;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String transactionEntrySequenceId;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String transactionLedgerEntryDescription;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String transactionLedgerEntryAmount;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String debitOrCreditCode;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String transactionDate;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String organizationDocumentNumber;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String projectCode;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String organizationReferenceId;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String referenceDocumentTypeCode;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String referenceOriginationCode;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String referenceDocumentNumber;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String documentReversalDate;
+
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String encumbranceUpdateCode;
 
     /**
      * Gets the value of the universityFiscalYear property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUniversityFiscalYear() {
         return universityFiscalYear;
@@ -140,11 +160,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the universityFiscalYear property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUniversityFiscalYear(String value) {
         this.universityFiscalYear = value;
@@ -152,11 +170,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the chartOfAccountsCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getChartOfAccountsCode() {
         return chartOfAccountsCode;
@@ -164,11 +180,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the chartOfAccountsCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setChartOfAccountsCode(String value) {
         this.chartOfAccountsCode = value;
@@ -176,11 +190,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the accountNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAccountNumber() {
         return accountNumber;
@@ -188,11 +200,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the accountNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAccountNumber(String value) {
         this.accountNumber = value;
@@ -200,11 +210,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the subAccountNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSubAccountNumber() {
         return subAccountNumber;
@@ -212,11 +220,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the subAccountNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSubAccountNumber(String value) {
         this.subAccountNumber = value;
@@ -224,11 +230,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the objectCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getObjectCode() {
         return objectCode;
@@ -236,11 +240,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the objectCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setObjectCode(String value) {
         this.objectCode = value;
@@ -248,11 +250,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the subObjectCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSubObjectCode() {
         return subObjectCode;
@@ -260,11 +260,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the subObjectCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSubObjectCode(String value) {
         this.subObjectCode = value;
@@ -272,11 +270,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the balanceTypeCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getBalanceTypeCode() {
         return balanceTypeCode;
@@ -284,11 +280,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the balanceTypeCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setBalanceTypeCode(String value) {
         this.balanceTypeCode = value;
@@ -296,11 +290,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the objectTypeCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getObjectTypeCode() {
         return objectTypeCode;
@@ -308,11 +300,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the objectTypeCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setObjectTypeCode(String value) {
         this.objectTypeCode = value;
@@ -320,11 +310,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the universityFiscalAccountingPeriod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getUniversityFiscalAccountingPeriod() {
         return universityFiscalAccountingPeriod;
@@ -332,11 +320,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the universityFiscalAccountingPeriod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setUniversityFiscalAccountingPeriod(String value) {
         this.universityFiscalAccountingPeriod = value;
@@ -344,11 +330,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the documentTypeCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDocumentTypeCode() {
         return documentTypeCode;
@@ -356,11 +340,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the documentTypeCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDocumentTypeCode(String value) {
         this.documentTypeCode = value;
@@ -368,11 +350,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the originationCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOriginationCode() {
         return originationCode;
@@ -380,11 +360,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the originationCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOriginationCode(String value) {
         this.originationCode = value;
@@ -392,11 +370,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the documentNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDocumentNumber() {
         return documentNumber;
@@ -404,11 +380,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the documentNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDocumentNumber(String value) {
         this.documentNumber = value;
@@ -416,11 +390,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the transactionEntrySequenceId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTransactionEntrySequenceId() {
         return transactionEntrySequenceId;
@@ -428,11 +400,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the transactionEntrySequenceId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTransactionEntrySequenceId(String value) {
         this.transactionEntrySequenceId = value;
@@ -440,11 +410,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the transactionLedgerEntryDescription property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTransactionLedgerEntryDescription() {
         return transactionLedgerEntryDescription;
@@ -452,11 +420,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the transactionLedgerEntryDescription property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTransactionLedgerEntryDescription(String value) {
         this.transactionLedgerEntryDescription = value;
@@ -464,11 +430,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the transactionLedgerEntryAmount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTransactionLedgerEntryAmount() {
         return transactionLedgerEntryAmount;
@@ -476,11 +440,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the transactionLedgerEntryAmount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTransactionLedgerEntryAmount(String value) {
         this.transactionLedgerEntryAmount = value;
@@ -488,11 +450,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the debitOrCreditCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDebitOrCreditCode() {
         return debitOrCreditCode;
@@ -500,11 +460,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the debitOrCreditCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDebitOrCreditCode(String value) {
         this.debitOrCreditCode = value;
@@ -512,11 +470,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the transactionDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTransactionDate() {
         return transactionDate;
@@ -524,11 +480,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the transactionDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTransactionDate(String value) {
         this.transactionDate = value;
@@ -536,11 +490,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the organizationDocumentNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOrganizationDocumentNumber() {
         return organizationDocumentNumber;
@@ -548,11 +500,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the organizationDocumentNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOrganizationDocumentNumber(String value) {
         this.organizationDocumentNumber = value;
@@ -560,11 +510,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the projectCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getProjectCode() {
         return projectCode;
@@ -572,11 +520,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the projectCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setProjectCode(String value) {
         this.projectCode = value;
@@ -584,11 +530,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the organizationReferenceId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOrganizationReferenceId() {
         return organizationReferenceId;
@@ -596,11 +540,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the organizationReferenceId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOrganizationReferenceId(String value) {
         this.organizationReferenceId = value;
@@ -608,11 +550,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the referenceDocumentTypeCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getReferenceDocumentTypeCode() {
         return referenceDocumentTypeCode;
@@ -620,11 +560,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the referenceDocumentTypeCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setReferenceDocumentTypeCode(String value) {
         this.referenceDocumentTypeCode = value;
@@ -632,11 +570,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the referenceOriginationCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getReferenceOriginationCode() {
         return referenceOriginationCode;
@@ -644,11 +580,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the referenceOriginationCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setReferenceOriginationCode(String value) {
         this.referenceOriginationCode = value;
@@ -656,11 +590,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the referenceDocumentNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getReferenceDocumentNumber() {
         return referenceDocumentNumber;
@@ -668,11 +600,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the referenceDocumentNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setReferenceDocumentNumber(String value) {
         this.referenceDocumentNumber = value;
@@ -680,11 +610,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the documentReversalDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDocumentReversalDate() {
         return documentReversalDate;
@@ -692,11 +620,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the documentReversalDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDocumentReversalDate(String value) {
         this.documentReversalDate = value;
@@ -704,11 +630,9 @@ public class GlEntryType {
 
     /**
      * Gets the value of the encumbranceUpdateCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEncumbranceUpdateCode() {
         return encumbranceUpdateCode;
@@ -716,11 +640,9 @@ public class GlEntryType {
 
     /**
      * Sets the value of the encumbranceUpdateCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEncumbranceUpdateCode(String value) {
         this.encumbranceUpdateCode = value;

@@ -15,11 +15,13 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.jws.WebService;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -88,13 +90,13 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
     @Override
     public List<String> parseGlAccount(String glAccount) {
 
-        if (!org.springframework.util.StringUtils.hasText(glAccount)) {
+        if (!StringUtils.hasText(glAccount)) {
             String errMsg = "GL Account cannot be empty";
             logger.error(errMsg);
             throw new InvalidGeneralLedgerAccountException(errMsg);
         }
 
-        glAccount = org.springframework.util.StringUtils.deleteAny(glAccount, " \n\t\r");
+        glAccount = StringUtils.deleteAny(glAccount, " \n\t\r-");
 
         if (glAccount.length() != 12) {
             String errMsg = "GL Account '" + glAccount + "' is invalid, the length must be 12";
@@ -120,7 +122,7 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
         final String currentUserId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
 
         final Date currentDate = new Date();
-
+        final String currentStringDate = new SimpleDateFormat(Constants.DATE_FORMAT_EXPORT).format(currentDate);
         final XMLGregorianCalendar currentXmlDate = CalendarUtils.toXmlGregorianCalendar(currentDate);
 
         // Creating BatchType instance
@@ -139,7 +141,7 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
         BigDecimal totalAmount = BigDecimal.ZERO;
         for (GlTransmission glTransmission : glTransmissions) {
 
-            if (org.springframework.util.StringUtils.hasLength(glTransmission.getResult())) {
+            if (StringUtils.hasLength(glTransmission.getResult())) {
                 String errMsg = "GL Transmission with ID = " + glTransmission.getId() +
                         " already has the result value = " + glTransmission.getResult();
                 logger.error(errMsg);
@@ -152,6 +154,8 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
             GlEntryType glEntryType = objectFactory.createGlEntryType();
 
             final String recognitionPeriodCode = glTransmission.getRecognitionPeriod().getCode();
+
+            final int fiscalYear = glTransmission.getRecognitionPeriod().getFiscalYear();
 
             final String documentNumber = documentNumberPrefix + glTransmission.getId();
 
@@ -187,15 +191,14 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
             //glEntryType.setSubAccountNumber();
             // TODO Mapping to what ?????
             //glEntryType.setSubObjectCode();
-            glEntryType.setTransactionDate(currentDate.toString()); // TODO ???? XML or just String value of Date??
+            glEntryType.setTransactionDate(currentStringDate);
             // TODO Mapping to what ?????
             //glEntryType.setTransactionEntrySequenceId();
             glEntryType.setTransactionLedgerEntryAmount(glTransmission.getAmount().toString());
             glEntryType.setTransactionLedgerEntryDescription(glEntryDesc);
 
-            // TODO: are these 2 using the same recognition period code?
             glEntryType.setUniversityFiscalAccountingPeriod(recognitionPeriodCode);
-            glEntryType.setUniversityFiscalYear(recognitionPeriodCode);
+            glEntryType.setUniversityFiscalYear(String.valueOf(fiscalYear));
 
             // Creating DetailType instance
             DetailType detailType = objectFactory.createDetailType();
@@ -220,13 +223,14 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
             //detailType.setSubAccountNumber();
             detailType.setOriginationCode(originationCode);
 
-            // TODO: are these 2 using the same recognition period code?
             detailType.setUniversityFiscalAccountingPeriod(recognitionPeriodCode);
-            detailType.setUniversityFiscalYear(recognitionPeriodCode);
+            detailType.setUniversityFiscalYear(String.valueOf(fiscalYear));
 
             // Adding GLEntryType and DetailType instances to "glEntryAndDetail" list of BatchType
             batchType.getGlEntryAndDetail().add(glEntryType);
-            batchType.getGlEntryAndDetail().add(detailType);
+
+            // TODO: figure out if we need DetailType here
+            //batchType.getGlEntryAndDetail().add(detailType);
 
         }
 

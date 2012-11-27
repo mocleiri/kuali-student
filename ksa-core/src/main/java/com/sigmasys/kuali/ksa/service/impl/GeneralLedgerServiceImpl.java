@@ -101,7 +101,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @Transactional(readOnly = false)
     public GlTransaction createGlTransaction(Long transactionId, String userId, BigDecimal amount,
                                              GlOperationType operationType) {
-        return createGlTransaction(transactionId, userId, amount, operationType, false);
+        return createGlTransaction(transactionId, userId, amount, operationType, true);
 
     }
 
@@ -504,8 +504,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @Override
     public List<GlTransmission> getGlTransmissionsForExport() {
         Query query = em.createQuery("select glt from GlTransmission glt " +
-                " inner join fetch t.recognitionPeriod rp " +
-                " inner join fetch t.glOperation glo " +
+                " inner join fetch glt.recognitionPeriod rp " +
                 " where glt.result is null");
         return query.getResultList();
     }

@@ -71,4 +71,21 @@ insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.memo.level', '2');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.account.status.type', 'N/A');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.account.credit.limit', '20000');
 
+-- KFS constants
+insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.coa.code', '01');
+insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.organization.code', 'KS');
+insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.document.number.prefix', 'KSAJV');
+insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.email.address', 'bursar@sigmauniversity.edu');
+insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.postal.address', '1000 Campus ave UMD 20009');
+insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.phone.number', '8882345678');
+insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.campus.code', '01');
+insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.department.name', 'Bursar');
+insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.balance.type.code', 'TR');
+insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.document.type.code', 'JV');
+insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.object.type.code', '');
+insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.origination.code', 'KS');
+insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.transaction.gl.entry.description', 'KSA General Ledger Transaction');
+
+
+
 

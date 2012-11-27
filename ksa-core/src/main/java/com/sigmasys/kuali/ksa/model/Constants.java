@@ -43,11 +43,12 @@ public interface Constants {
     // ---------------------------------------------------------------
     // DATE FORMATS
     // ---------------------------------------------------------------
-    String DATE_FORMAT_US = "MM/dd/yyyy"; // should actually be locale-based
+    String DATE_FORMAT_US = "MM/dd/yyyy";
+    String DATE_FORMAT_EXPORT = "yyyy-MM-dd";
 
     String TIMESTAMP_FORMAT = "MM/dd/yyyy HH:mm:ss.SSS";
     String TIMESTAMP_FORMAT_NO_MS = "MM/dd/yyyy HH:mm:ss";
-    String DB_TIMESTAMP_FORMAT_NO_MS = "mm/dd/yyyy hh24:mi:ss";
+    String DB_TIMESTAMP_FORMAT_NO_MS = "MM/dd/yyyy hh24:mi:ss";
 
     String TIME_FORMAT = "HH:mm:ss.SSS";
     String TIME_FORMAT_NO_MS = "HH:mm:ss";

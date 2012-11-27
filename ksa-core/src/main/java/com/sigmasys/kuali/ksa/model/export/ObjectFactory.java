@@ -20,18 +20,17 @@ import javax.xml.namespace.QName;
 
 
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the com.sigmasys.kuali.ksa.model.export package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
+ * This object contains factory methods for each
+ * Java content interface and Java element interface
+ * generated in the com.sigmasys.kuali.ksa.model.export package.
+ * <p>An ObjectFactory allows you to programatically
+ * construct new instances of the Java representation
+ * for XML content. The Java representation of XML
+ * content can consist of schema derived interfaces
+ * and classes representing the binding of schema
+ * type definitions, element declarations and model
+ * groups.  Factory methods for each of these are
  * provided in this class.
- * 
  */
 @XmlRegistry
 public class ObjectFactory {
@@ -80,14 +79,12 @@ public class ObjectFactory {
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.sigmasys.kuali.ksa.model.export
-     * 
      */
     public ObjectFactory() {
     }
 
     /**
      * Create an instance of {@link DetailType }
-     * 
      */
     public DetailType createDetailType() {
         return new DetailType();
@@ -95,7 +92,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GlEntryType }
-     * 
      */
     public GlEntryType createGlEntryType() {
         return new GlEntryType();
@@ -103,7 +99,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link HeaderType }
-     * 
      */
     public HeaderType createHeaderType() {
         return new HeaderType();
@@ -111,7 +106,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TrailerType }
-     * 
      */
     public TrailerType createTrailerType() {
         return new TrailerType();
@@ -119,7 +113,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link BatchType }
-     * 
      */
     public BatchType createBatchType() {
         return new BatchType();
@@ -127,7 +120,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link BigInteger }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "totalRecords")
     public JAXBElement<BigInteger> createTotalRecords(BigInteger value) {
@@ -136,7 +128,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "emailAddress")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -146,7 +137,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "debitOrCreditCode")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -156,7 +146,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "transactionDate")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -166,7 +155,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "encumbranceUpdateCode")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -176,7 +164,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "personUserId")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -186,7 +173,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "departmentName")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -196,7 +182,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "documentReversalDate")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -206,7 +191,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "subAccountNumber")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -216,7 +200,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "chartOfAccountsCode")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -226,7 +209,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "transactionLedgerEntryDescription")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -236,7 +218,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "referenceDocumentNumber")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -246,7 +227,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "balanceTypeCode")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -256,7 +236,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "organizationReferenceId")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -266,7 +245,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "campusCode")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -276,7 +254,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "detailText")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -286,7 +263,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "mailingAddress")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -296,7 +272,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "referenceOriginationCode")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -306,7 +281,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "transactionEntrySequenceId")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -316,7 +290,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "organizationCode")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -326,7 +299,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "collectorDetailSequenceNumber")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -336,7 +308,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "organizationDocumentNumber")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -346,7 +317,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link BatchType }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "batch")
     public JAXBElement<BatchType> createBatch(BatchType value) {
@@ -355,7 +325,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "objectTypeCode")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -365,7 +334,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "transactionLedgerEntryAmount")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -375,7 +343,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link BigInteger }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "batchSequenceNumber")
     public JAXBElement<BigInteger> createBatchSequenceNumber(BigInteger value) {
@@ -384,7 +351,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "projectCode")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -394,7 +360,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "documentTypeCode")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -404,7 +369,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "objectCode")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -414,7 +378,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "transmissionDate")
     public JAXBElement<XMLGregorianCalendar> createTransmissionDate(XMLGregorianCalendar value) {
@@ -423,7 +386,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "totalAmount")
     public JAXBElement<BigDecimal> createTotalAmount(BigDecimal value) {
@@ -432,7 +394,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "documentNumber")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -442,7 +403,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "subObjectCode")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -452,7 +412,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link XMLGregorianCalendar }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "createDate")
     public JAXBElement<XMLGregorianCalendar> createCreateDate(XMLGregorianCalendar value) {
@@ -461,7 +420,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "accountNumber")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -471,7 +429,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "originationCode")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -481,7 +438,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "amount")
     public JAXBElement<BigDecimal> createAmount(BigDecimal value) {
@@ -490,7 +446,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "universityFiscalAccountingPeriod")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -500,7 +455,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "phoneNumber")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -510,7 +464,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "referenceDocumentTypeCode")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
@@ -520,7 +473,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.kuali.org/kfs/gl/collector", name = "universityFiscalYear")
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)

@@ -14,7 +14,7 @@ public class GlRecognitionPeriod extends AuditableEntity {
 
 
     /**
-     * Starting date of the period.
+     * Start date of the period.
      */
     private Date startDate;
 
@@ -22,6 +22,11 @@ public class GlRecognitionPeriod extends AuditableEntity {
      * End date of the period.
      */
     private Date endDate;
+
+    /**
+     * Fiscal year
+     */
+    private Integer fiscalYear;
 
 
     @Id
@@ -46,16 +51,25 @@ public class GlRecognitionPeriod extends AuditableEntity {
         return startDate;
     }
 
+    public void setStartDate(Date startDate) {
+           this.startDate = startDate;
+    }
+
     @Column(name = "END_DATE", nullable = false)
     public Date getEndDate() {
         return endDate;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    @Column(name = "FISCAL_YEAR", nullable = false)
+    public Integer getFiscalYear() {
+        return fiscalYear;
+    }
+
+    public void setFiscalYear(Integer fiscalYear) {
+        this.fiscalYear = fiscalYear;
     }
 }

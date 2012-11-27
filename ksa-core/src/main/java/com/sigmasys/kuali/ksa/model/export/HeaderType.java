@@ -9,10 +9,7 @@
 package com.sigmasys.kuali.ksa.model.export;
 
 import java.math.BigInteger;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.NormalizedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -20,9 +17,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * <p>Java class for headerType complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="headerType">
  *   &lt;complexContent>
@@ -43,8 +40,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "headerType", propOrder = {
@@ -55,39 +50,47 @@ public class HeaderType {
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String chartOfAccountsCode;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String organizationCode;
+
     @XmlElement(required = true)
+    @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar transmissionDate;
+
     @XmlElement(required = true)
     protected BigInteger batchSequenceNumber;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String personUserId;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String emailAddress;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String campusCode;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String phoneNumber;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String mailingAddress;
+
     @XmlElement(required = true)
     @XmlJavaTypeAdapter(NormalizedStringAdapter.class)
     protected String departmentName;
 
     /**
      * Gets the value of the chartOfAccountsCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getChartOfAccountsCode() {
         return chartOfAccountsCode;
@@ -95,11 +98,9 @@ public class HeaderType {
 
     /**
      * Sets the value of the chartOfAccountsCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setChartOfAccountsCode(String value) {
         this.chartOfAccountsCode = value;
@@ -107,11 +108,9 @@ public class HeaderType {
 
     /**
      * Gets the value of the organizationCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getOrganizationCode() {
         return organizationCode;
@@ -119,11 +118,9 @@ public class HeaderType {
 
     /**
      * Sets the value of the organizationCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setOrganizationCode(String value) {
         this.organizationCode = value;
@@ -131,11 +128,9 @@ public class HeaderType {
 
     /**
      * Gets the value of the transmissionDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getTransmissionDate() {
         return transmissionDate;
@@ -143,11 +138,9 @@ public class HeaderType {
 
     /**
      * Sets the value of the transmissionDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setTransmissionDate(XMLGregorianCalendar value) {
         this.transmissionDate = value;
@@ -155,11 +148,9 @@ public class HeaderType {
 
     /**
      * Gets the value of the batchSequenceNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @return possible object is
+     *         {@link BigInteger }
      */
     public BigInteger getBatchSequenceNumber() {
         return batchSequenceNumber;
@@ -167,11 +158,9 @@ public class HeaderType {
 
     /**
      * Sets the value of the batchSequenceNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link BigInteger }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link BigInteger }
      */
     public void setBatchSequenceNumber(BigInteger value) {
         this.batchSequenceNumber = value;
@@ -179,11 +168,9 @@ public class HeaderType {
 
     /**
      * Gets the value of the personUserId property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPersonUserId() {
         return personUserId;
@@ -191,11 +178,9 @@ public class HeaderType {
 
     /**
      * Sets the value of the personUserId property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPersonUserId(String value) {
         this.personUserId = value;
@@ -203,11 +188,9 @@ public class HeaderType {
 
     /**
      * Gets the value of the emailAddress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getEmailAddress() {
         return emailAddress;
@@ -215,11 +198,9 @@ public class HeaderType {
 
     /**
      * Sets the value of the emailAddress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setEmailAddress(String value) {
         this.emailAddress = value;
@@ -227,11 +208,9 @@ public class HeaderType {
 
     /**
      * Gets the value of the campusCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getCampusCode() {
         return campusCode;
@@ -239,11 +218,9 @@ public class HeaderType {
 
     /**
      * Sets the value of the campusCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setCampusCode(String value) {
         this.campusCode = value;
@@ -251,11 +228,9 @@ public class HeaderType {
 
     /**
      * Gets the value of the phoneNumber property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getPhoneNumber() {
         return phoneNumber;
@@ -263,11 +238,9 @@ public class HeaderType {
 
     /**
      * Sets the value of the phoneNumber property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setPhoneNumber(String value) {
         this.phoneNumber = value;
@@ -275,11 +248,9 @@ public class HeaderType {
 
     /**
      * Gets the value of the mailingAddress property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getMailingAddress() {
         return mailingAddress;
@@ -287,11 +258,9 @@ public class HeaderType {
 
     /**
      * Sets the value of the mailingAddress property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setMailingAddress(String value) {
         this.mailingAddress = value;
@@ -299,11 +268,9 @@ public class HeaderType {
 
     /**
      * Gets the value of the departmentName property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getDepartmentName() {
         return departmentName;
@@ -311,11 +278,9 @@ public class HeaderType {
 
     /**
      * Sets the value of the departmentName property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setDepartmentName(String value) {
         this.departmentName = value;
