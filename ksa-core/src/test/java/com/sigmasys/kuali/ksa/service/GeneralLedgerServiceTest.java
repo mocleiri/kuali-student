@@ -107,67 +107,156 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
     @Test
     public void prepareGlTransmission2() throws Exception {
 
-            GlTransaction glTransaction1 = createGlTransaction(transaction2, "admin");
-            Assert.notNull(glTransaction1);
-            Assert.notNull(glTransaction1.getId());
-            Assert.notNull(glTransaction1.getStatus());
-            Assert.notNull(glTransaction1.getRecognitionPeriod());
+        GlTransaction glTransaction1 = createGlTransaction(transaction2, "admin");
+        Assert.notNull(glTransaction1);
+        Assert.notNull(glTransaction1.getId());
+        Assert.notNull(glTransaction1.getStatus());
+        Assert.notNull(glTransaction1.getRecognitionPeriod());
 
-            GlTransaction glTransaction2 = createGlTransaction(transaction3, "admin");
-            Assert.notNull(glTransaction2);
-            Assert.notNull(glTransaction2.getId());
-            Assert.notNull(glTransaction2.getStatus());
-            Assert.notNull(glTransaction2.getRecognitionPeriod());
+        GlTransaction glTransaction2 = createGlTransaction(transaction3, "admin");
+        Assert.notNull(glTransaction2);
+        Assert.notNull(glTransaction2.getId());
+        Assert.notNull(glTransaction2.getStatus());
+        Assert.notNull(glTransaction2.getRecognitionPeriod());
 
-            glService.prepareGlTransmissions("SR2012", "SR2013");
+        glService.prepareGlTransmissions("SR2012", "SR2013");
 
-     }
+    }
 
     @Test
     public void prepareGlTransmission3() throws Exception {
 
-               GlTransaction glTransaction1 = createGlTransaction(transaction2, "admin");
-               Assert.notNull(glTransaction1);
-               Assert.notNull(glTransaction1.getId());
-               Assert.notNull(glTransaction1.getStatus());
-               Assert.notNull(glTransaction1.getRecognitionPeriod());
+        GlTransaction glTransaction1 = createGlTransaction(transaction2, "admin");
+        Assert.notNull(glTransaction1);
+        Assert.notNull(glTransaction1.getId());
+        Assert.notNull(glTransaction1.getStatus());
+        Assert.notNull(glTransaction1.getRecognitionPeriod());
 
-               GlTransaction glTransaction2 = createGlTransaction(transaction3, "admin");
-               Assert.notNull(glTransaction2);
-               Assert.notNull(glTransaction2.getId());
-               Assert.notNull(glTransaction2.getStatus());
-               Assert.notNull(glTransaction2.getRecognitionPeriod());
+        GlTransaction glTransaction2 = createGlTransaction(transaction3, "admin");
+        Assert.notNull(glTransaction2);
+        Assert.notNull(glTransaction2.getId());
+        Assert.notNull(glTransaction2.getStatus());
+        Assert.notNull(glTransaction2.getRecognitionPeriod());
 
-               SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
 
-               Date startDate = dateFormat.parse("01/01/2001");
-               Date endDate = dateFormat.parse("01/01/2014");
+        Date startDate = dateFormat.parse("01/01/2001");
+        Date endDate = dateFormat.parse("01/01/2014");
 
-               glService.prepareGlTransmissionsForEffectiveDates(startDate, endDate);
+        glService.prepareGlTransmissionsForEffectiveDates(startDate, endDate);
 
     }
 
     @Test
     public void prepareGlTransmission4() throws Exception {
 
-                   GlTransaction glTransaction1 = createGlTransaction(transaction1, "admin");
-                   Assert.notNull(glTransaction1);
-                   Assert.notNull(glTransaction1.getId());
-                   Assert.notNull(glTransaction1.getStatus());
-                   Assert.notNull(glTransaction1.getRecognitionPeriod());
+        GlTransaction glTransaction1 = createGlTransaction(transaction1, "admin");
+        Assert.notNull(glTransaction1);
+        Assert.notNull(glTransaction1.getId());
+        Assert.notNull(glTransaction1.getStatus());
+        Assert.notNull(glTransaction1.getRecognitionPeriod());
 
-                   GlTransaction glTransaction2 = createGlTransaction(transaction3, "admin");
-                   Assert.notNull(glTransaction2);
-                   Assert.notNull(glTransaction2.getId());
-                   Assert.notNull(glTransaction2.getStatus());
-                   Assert.notNull(glTransaction2.getRecognitionPeriod());
+        GlTransaction glTransaction2 = createGlTransaction(transaction3, "admin");
+        Assert.notNull(glTransaction2);
+        Assert.notNull(glTransaction2.getId());
+        Assert.notNull(glTransaction2.getStatus());
+        Assert.notNull(glTransaction2.getRecognitionPeriod());
 
-                   SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
 
-                   Date startDate = dateFormat.parse("01/01/2012");
-                   Date endDate = dateFormat.parse("01/01/2015");
+        Date startDate = dateFormat.parse("01/01/2012");
+        Date endDate = dateFormat.parse("01/01/2015");
 
-                   glService.prepareGlTransmissionsForRecognitionDates(startDate, endDate);
+        glService.prepareGlTransmissionsForRecognitionDates(startDate, endDate);
+
+    }
+
+    @Test
+    public void createGeneralLedgerType() throws Exception {
+
+        GeneralLedgerType glType = glService.createGeneralLedgerType("GL_TYPE1", "Test GL type1",
+                "Test GL Description 1", "01-0-13112 1326", GlOperationType.CREDIT);
+
+        Assert.notNull(glType);
+        Assert.notNull(glType.getId());
+        Assert.notNull(glType.getCode());
+        Assert.notNull(glType.getName());
+        Assert.notNull(glType.getDescription());
+        Assert.notNull(glType.getGlAccountId());
+        Assert.notNull(glType.getGlOperationOnCharge());
+        Assert.notNull(glType.getCreationDate());
+        Assert.notNull(glType.getCreatorId());
+
+        Assert.isTrue(GlOperationType.CREDIT == glType.getGlOperationOnCharge());
+
+    }
+
+    @Test
+    public void persistGeneralLedgerType() throws Exception {
+
+        GeneralLedgerType glType = glService.createGeneralLedgerType("GL_TYPE1", "Test GL type1",
+                "Test GL Description 1", "01-0-13112 1326", GlOperationType.CREDIT);
+
+        Assert.notNull(glType);
+        Assert.notNull(glType.getId());
+        Assert.notNull(glType.getCode());
+        Assert.notNull(glType.getName());
+        Assert.notNull(glType.getDescription());
+        Assert.notNull(glType.getGlAccountId());
+        Assert.notNull(glType.getGlOperationOnCharge());
+        Assert.notNull(glType.getCreationDate());
+        Assert.notNull(glType.getCreatorId());
+
+        Assert.isTrue(GlOperationType.CREDIT == glType.getGlOperationOnCharge());
+
+        glType.setCode("GL_TYPE2");
+        glType.setGlOperationOnCharge(GlOperationType.DEBIT);
+
+        Long glTypeId = glService.persistGeneralLedgerType(glType);
+
+        Assert.notNull(glTypeId);
+        Assert.notNull(glType.getId());
+
+        Assert.isTrue(glTypeId.equals(glTypeId));
+        Assert.isTrue("GL_TYPE2".equals(glType.getCode()));
+        Assert.isTrue("Test GL type1".equals(glType.getName()));
+        Assert.isTrue(GlOperationType.DEBIT == glType.getGlOperationOnCharge());
+
+    }
+
+    @Test
+    public void getGeneralLedgerTypes() throws Exception {
+
+        GeneralLedgerType glType = glService.createGeneralLedgerType("GL_TYPE10000000", "Test GL type2",
+                "Test GL Description 2", "01-0-13112 3456", GlOperationType.DEBIT);
+
+        Assert.notNull(glType);
+        Assert.notNull(glType.getId());
+        Assert.notNull(glType.getCode());
+        Assert.notNull(glType.getName());
+        Assert.notNull(glType.getDescription());
+        Assert.notNull(glType.getGlAccountId());
+        Assert.notNull(glType.getGlOperationOnCharge());
+        Assert.notNull(glType.getCreationDate());
+        Assert.notNull(glType.getCreatorId());
+
+        Assert.isTrue(GlOperationType.DEBIT == glType.getGlOperationOnCharge());
+
+        List<GeneralLedgerType> glTypes = glService.getGeneralLedgerTypes();
+
+        Assert.notNull(glTypes);
+        Assert.notEmpty(glTypes);
+
+        for (GeneralLedgerType type : glTypes) {
+
+            logger.info("General Ledger Type = " + type);
+
+            Assert.notNull(type);
+            Assert.notNull(type.getId());
+            Assert.notNull(type.getCode());
+            Assert.notNull(type.getGlOperationOnCharge());
+            Assert.notNull(type.getGlAccountId());
+        }
 
     }
 

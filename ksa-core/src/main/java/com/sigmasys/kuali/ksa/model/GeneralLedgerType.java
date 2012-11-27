@@ -56,7 +56,7 @@ public class GeneralLedgerType extends AuditableEntity {
         return id;
     }
 
-    @Column(name = "GL_ASSET_ACCOUNT", length = 45)
+    @Column(name = "GL_ASSET_ACCOUNT", length = 45, nullable = false)
     public String getGlAccountId() {
         return glAccountId;
     }
@@ -65,7 +65,7 @@ public class GeneralLedgerType extends AuditableEntity {
         this.glAccountId = glAccountId;
     }
 
-    @Column(name = "GL_OPERATION_ON_CHARGE", length = 1)
+    @Column(name = "GL_OPERATION_ON_CHARGE", length = 1, nullable = false)
     protected String getGlOperationCode() {
         return glOperationCode;
     }
@@ -81,5 +81,14 @@ public class GeneralLedgerType extends AuditableEntity {
 
     public void setGlOperationOnCharge(GlOperationType glOperationOnCharge) {
         this.glOperationOnCharge = glOperationOnCharge;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "{" +
+                "glAccountId='" + glAccountId + '\'' +
+                ", glOperationOnCharge=" + glOperationOnCharge +
+                ", glOperationCode='" + glOperationCode + '\'' +
+                '}';
     }
 }

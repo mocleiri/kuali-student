@@ -26,6 +26,35 @@ public interface GeneralLedgerService {
 
 
     /**
+     * Creates a new general ledger type.
+     *
+     * @param code                GL type code
+     * @param name                GL type name
+     * @param description         GL type description
+     * @param glAccountId         GL Account ID
+     * @param glOperationOnCharge GL operation on charge
+     * @return GeneralLedgerType instance
+     */
+    GeneralLedgerType createGeneralLedgerType(String code, String name, String description, String glAccountId,
+                                              GlOperationType glOperationOnCharge);
+
+    /**
+     * Persists GeneralLedgerType instance in the persistence store.
+     *
+     * @param glType GL type
+     * @return GL type ID
+     */
+    Long persistGeneralLedgerType(GeneralLedgerType glType);
+
+    /**
+     * Returns all general ledger types existing in KSA in chronological order.
+     *
+     * @return list of GeneralLedgerType instances
+     */
+    List<GeneralLedgerType> getGeneralLedgerTypes();
+
+
+    /**
      * Creates a new general ledger transaction based on the given parameters
      *
      * @param transactionId ID of the corresponding transaction

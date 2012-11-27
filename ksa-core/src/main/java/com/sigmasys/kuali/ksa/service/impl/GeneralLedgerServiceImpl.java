@@ -36,6 +36,54 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
 
 
     /**
+     * Creates a new general ledger type.
+     *
+     * @param code                GL type code
+     * @param name                GL type name
+     * @param description         GL type description
+     * @param glAccountId         GL Account ID
+     * @param glOperationOnCharge GL operation on charge
+     * @return GeneralLedgerType instance
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public GeneralLedgerType createGeneralLedgerType(String code, String name, String description, String glAccountId,
+                                                     GlOperationType glOperationOnCharge) {
+        GeneralLedgerType glType = new GeneralLedgerType();
+        glType.setCode(code);
+        glType.setName(name);
+        glType.setDescription(description);
+        glType.setGlAccountId(glAccountId);
+        glType.setGlOperationOnCharge(glOperationOnCharge);
+
+        persistEntity(glType);
+
+        return glType;
+    }
+
+    /**
+     * Persists GeneralLedgerType instance in the persistence store.
+     *
+     * @param glType GL type
+     * @return GL type ID
+     */
+    @Override
+    public Long persistGeneralLedgerType(GeneralLedgerType glType) {
+        return persistEntity(glType);
+    }
+
+    /**
+     * Returns all general ledger types existing in KSA in chronological order.
+     *
+     * @return list of GeneralLedgerType instances
+     */
+    @Override
+    public List<GeneralLedgerType> getGeneralLedgerTypes() {
+        return getEntities(GeneralLedgerType.class, new Pair<String, SortOrder>("creationDate", SortOrder.ASC),
+                new Pair<String, SortOrder>("id", SortOrder.ASC));
+    }
+
+    /**
      * Creates a new general ledger transaction based on the given parameters
      *
      * @param transactionId ID of the corresponding transaction
