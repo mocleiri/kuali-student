@@ -64,6 +64,7 @@ public class GeneralLedgerTypeControllerTest extends AbstractServiceTest {
         // Passing request parameters needed to perform get() method
         MockHttpServletRequest request = getRequest();
         MockHttpServletResponse response = getResponse();
+
         Map map = new HashMap();
         BindingResult bindingResult = BindingResultUtils.getBindingResult(map, "form");
 

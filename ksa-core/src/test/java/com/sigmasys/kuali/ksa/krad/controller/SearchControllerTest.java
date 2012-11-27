@@ -56,7 +56,7 @@ public class SearchControllerTest extends AbstractServiceTest {
         request.setParameter("userId", userId);
 
         // Initializing the form
-        searchForm = (SearchForm)searchController.createInitialForm(request);
+        searchForm = searchController.createInitialForm(request);
     }
 
     @Test
