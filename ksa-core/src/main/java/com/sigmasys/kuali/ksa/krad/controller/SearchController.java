@@ -10,14 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -66,14 +64,11 @@ public class SearchController extends GenericSearchController {
 
     /**
      * @param form
-     * @param result
      * @param request
-     * @param response
      * @return
      */
     @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-    public ModelAndView get(@ModelAttribute("KualiForm") SearchForm form, BindingResult result,
-                            HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView get(@ModelAttribute("KualiForm") SearchForm form, HttpServletRequest request) {
 
         // do get stuff...
         String pageId = request.getParameter("pageId");
@@ -110,21 +105,21 @@ public class SearchController extends GenericSearchController {
                 if (tmRollup != null) {
                     // Check if this rollup is already in there.
                     boolean found = false;
-                    for(TransactionModel m : rollUpTransactionModelList){
+                    for (TransactionModel m : rollUpTransactionModelList) {
                         Rollup r = m.getRollup();
-                        if(r.getId().equals(tmRollup.getId())){
+                        if (r.getId().equals(tmRollup.getId())) {
                             m.setAmount(m.getAmount().add(transactionModel.getAmount()));
                             found = true;
                             break;
                         }
                     }
-                    if(!found){
+                    if (!found) {
                         rollUpTransactionModelList.add(transactionModel);
                     }
                     if (TransactionTypeValue.CHARGE.equals(t.getTransactionTypeValue())) {
-                       rollUpCredit = rollUpCredit.add(t.getAmount());
+                        rollUpCredit = rollUpCredit.add(t.getAmount());
                     } else {
-                       rollUpDebit = rollUpDebit.add(t.getAmount());
+                        rollUpDebit = rollUpDebit.add(t.getAmount());
                     }
                 }
             }
@@ -143,19 +138,19 @@ public class SearchController extends GenericSearchController {
             }
 
             Long rollupId;
-            try{
+            try {
                 rollupId = new Long(request.getParameter("rollupId"));
-            } catch(NumberFormatException e){
+            } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("'rollupId' request parameter is invalid");
             }
 
             List<Transaction> transactions = transactionService.getTransactions(userId);
             List<TransactionModel> rollups = new ArrayList<TransactionModel>();
 
-            for(Transaction t : transactions){
+            for (Transaction t : transactions) {
                 Rollup r = t.getRollup();
 
-                if(r != null && rollupId.equals(r.getId())){
+                if (r != null && rollupId.equals(r.getId())) {
                     logger.info("Retrieved transaction with description: " + t.getTransactionType().getDescription());
                     TransactionModel transactionModel = new TransactionModel(t);
                     rollups.add(transactionModel);
@@ -197,14 +192,14 @@ public class SearchController extends GenericSearchController {
                     // added to TransactionModel
                     transactionModel.setRollupTag(StringUtils.collectionToCommaDelimitedString(names));
                 }
-               transactionModel.setTransactionTypeId(tt.getId().getId());
-               transactionModel.setTransactionTypeDesc(tt.getDescription());
+                transactionModel.setTransactionTypeId(tt.getId().getId());
+                transactionModel.setTransactionTypeDesc(tt.getDescription());
 
             }
             // // added to TransactionModel
             if (tt instanceof DebitType) {
                 DebitType dt = (DebitType) tt;
-               transactionModel.setDebitPriority(dt.getPriority().toString());
+                transactionModel.setDebitPriority(dt.getPriority().toString());
             }
 
             transactionModel.setTransactionTypeSubCode(t.getTransactionType().getId().getSubCode().toString());
@@ -235,15 +230,11 @@ public class SearchController extends GenericSearchController {
 
     /**
      * @param form
-     * @param result
-     * @param request
-     * @param response
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
     @Transactional(readOnly = false)
-    public ModelAndView submit(@ModelAttribute("KualiForm") SearchForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView submit(@ModelAttribute("KualiForm") SearchForm form) {
         // do submit stuff...
 
 
@@ -252,15 +243,11 @@ public class SearchController extends GenericSearchController {
 
     /**
      * @param form
-     * @param result
-     * @param request
-     * @param response
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
     @Transactional(readOnly = false)
-    public ModelAndView save(@ModelAttribute("KualiForm") SearchForm form, BindingResult result,
-                             HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView save(@ModelAttribute("KualiForm") SearchForm form) {
 
         // do save stuff...
 
@@ -269,28 +256,10 @@ public class SearchController extends GenericSearchController {
 
     /**
      * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
-    public ModelAndView cancel(@ModelAttribute("KualiForm") SearchForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) {
-        // do cancel stuff...
-        return getUIFModelAndView(form);
-    }
-
-    /**
-     * @param form
-     * @param result
-     * @param request
-     * @param response
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-    public ModelAndView refresh(@ModelAttribute("KualiForm") SearchForm form, BindingResult result,
-                                HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView refresh(@ModelAttribute("KualiForm") SearchForm form) {
         // do refresh stuff...
         return getUIFModelAndView(form);
     }

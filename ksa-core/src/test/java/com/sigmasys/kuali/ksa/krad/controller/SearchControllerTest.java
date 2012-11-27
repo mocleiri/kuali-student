@@ -12,13 +12,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.BindingResultUtils;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
@@ -64,16 +61,13 @@ public class SearchControllerTest extends AbstractServiceTest {
 
         // Passing request parameters needed to perform get() method
         MockHttpServletRequest request = getRequest();
-        MockHttpServletResponse response = getResponse();
-        Map map = new HashMap();
-        BindingResult bindingResult = BindingResultUtils.getBindingResult(map, "form");
 
         request.setParameter("userId", userId);
         request.setParameter("pageId", "AccountOVTransactionsPage");
 
         List<Transaction> transactions = transactionService.getTransactions(userId);
 
-        ModelAndView modelAndView = searchController.get(searchForm, bindingResult, request, response);
+        ModelAndView modelAndView = searchController.get(searchForm, request);
 
         // Checking assertions
         Assert.notNull(modelAndView);
