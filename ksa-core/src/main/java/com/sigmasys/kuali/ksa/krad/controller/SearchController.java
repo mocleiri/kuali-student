@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
+import com.sigmasys.kuali.ksa.krad.form.AbstractViewModel;
 import com.sigmasys.kuali.ksa.krad.form.SearchForm;
 import com.sigmasys.kuali.ksa.krad.model.TransactionModel;
 import com.sigmasys.kuali.ksa.model.*;
@@ -37,7 +38,7 @@ public class SearchController extends GenericSearchController {
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
      */
     @Override
-    protected SearchForm createInitialForm(HttpServletRequest request) {
+    protected AbstractViewModel createInitialForm(HttpServletRequest request) {
 
         SearchForm form = new SearchForm();
         // page can be used for editing or viewing
