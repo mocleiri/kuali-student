@@ -1,14 +1,10 @@
 When /^I manage Registration Windows for a term and a period$/ do
   go_to_manage_reg_windows
-  on RegistrationWindowsTermLookup do |page|
-    page.term_type.select 'Spring Term'
-    page.year.set '2012'
-    page.search
-    #page.loading.wait_while_present
+  on RegistrationWindowsTermLookup do |page1|
+    page1.search_by_term_and_year
   end
-  on RegistrationWindowsPeriodLookup do |page|
-    page.period_id.select 'All Registration Periods for this Term'
-    page.show
+  on RegistrationWindowsPeriodLookup do |page2|
+    page2.show_windows_by_period
   end
 end
 
@@ -76,26 +72,30 @@ And /^I verify that the registration window is not created$/ do
 end
 
 And /^I verify that the Registration Window is created$/ do
+  puts "Verifying the registration window #{@registrationWindow.appointment_window_info_name} for priod #{@registrationWindow.period_key} is created."
   on RegistrationWindowsCreate do |page|
     page.is_window_created(@registrationWindow.appointment_window_info_name, period_key = @registrationWindow.period_key).should be_true
   end
 end
 
 Then /^I verify that no field is editable in Registration Window and the Window Name is a link to a popup$/ do
+  puts "Verifying that no field is editable in registration window #{@registrationWindow.appointment_window_info_name} for priod #{@registrationWindow.period_key}."
   on RegistrationWindowsCreate do |page|
     page.are_window_fields_editable(@registrationWindow.appointment_window_info_name, @registrationWindow.period_key).should be_false
-    page.is_anchor(window_name, period_key).should be_true
+    page.is_anchor(@registrationWindow.appointment_window_info_name, @registrationWindow.period_key).should be_true
   end
 end
 
 Then /^I verify that all editable fields in Registration Window are editable and Window Name is not a link$/ do
+  puts "Verifying that all editable fields in registration window #{@registrationWindow.appointment_window_info_name} for priod #{@registrationWindow.period_key} are editable and Window Name is not a link."
   on RegistrationWindowsCreate do |page|
     page.are_editable_window_fields_editable(@registrationWindow.appointment_window_info_name, @registrationWindow.period_key).should be_true
-    page.is_anchor(window_name, period_key).should be_false
+    page.is_anchor(@registrationWindow.appointment_window_info_name, @registrationWindow.period_key).should be_false
   end
 end
 
 Then /^I verify the new Registration Window's read-only and editable fields$/ do
+  puts "Verifying the registration window's read-only and editable fields for #{@registrationWindow.appointment_window_info_name} for priod #{@registrationWindow.period_key}."
   on RegistrationWindowsCreate do |page|
     page.are_editable_window_fields_editable(@registrationWindow.appointment_window_info_name, @registrationWindow.period_key).should be_true
     page.are_non_editable_window_fields_editable(@registrationWindow.appointment_window_info_name, @registrationWindow.period_key).should be_false
@@ -112,6 +112,14 @@ Then /^I verify each Registration Window is unique within each period/ do
   on RegistrationWindowsCreate do |page|
     page.is_window_name_unique(@registrationWindow.appointment_window_info_name, 'Spring Registration Period 1').should be_true
     page.is_window_name_unique(@registrationWindow.appointment_window_info_name, 'Spring Registration Period 2').should be_true
+    page.is_window_created(@registrationWindow.appointment_window_info_name, period_key = @registrationWindow.period_key).should be_true
+  end
+end
+
+Then /^I verify each Registration Window is created within each period/ do
+  on RegistrationWindowsCreate do |page|
+    page.is_window_created(@registrationWindow.appointment_window_info_name, 'Spring Registration Period 1').should be_true
+    page.is_window_created(@registrationWindow.appointment_window_info_name, 'Spring Registration Period 2').should be_true
   end
 end
 
@@ -122,7 +130,12 @@ Then /^verify error exists for the registration page/ do
 end
 
 Then /^I verify that the Registration Window is not modified$/ do
+  on RegistrationWindowsPeriodLookup do |page1|
+    puts "Refreshing the page ..."
+    page1.show_windows_by_period
+  end
   on RegistrationWindowsCreate do |page|
+    puts "Verifying the Registration Window #{@registrationWindow.appointment_window_info_name} for period #{@registrationWindow.period_key} is not modified."
     row_object = page.get_row_object(@registrationWindow.appointment_window_info_name, @registrationWindow.period_key)
     row_object[:start_date].should == @registrationWindow.start_date
     row_object[:start_time].should == @registrationWindow.start_time
@@ -233,5 +246,8 @@ end
 When /^I break Student Appointments in Registration Window$/ do
   on RegistrationWindowsCreate do |page|
     page.break_appointments(@registrationWindow.appointment_window_info_name, @registrationWindow.period_key)
+    page.loading.wait_while_present
+    sleep(5)
+    page.confirm_break_appointments
   end
 end

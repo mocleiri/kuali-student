@@ -15,11 +15,23 @@ class RegistrationWindowsTermLookup < RegistrationWindowsBase
 
   registration_window_lookup_elements
 
+  def search_by_term_and_year
+    term_type.select 'Spring Term'
+    year.set '2012'
+    search
+    #page.loading.wait_while_present
+  end
+
 end
 
 class RegistrationWindowsPeriodLookup < RegistrationWindowsBase
 
   registration_window_period_lookup_elements
+
+  def show_windows_by_period
+    period_id.select 'All Registration Periods for this Term'
+    show
+  end
 
 end
 
@@ -42,7 +54,7 @@ class RegistrationWindowsCreate < RegistrationWindowsBase
   COLUMN_RULE = 11
   COLUMN_ACTION = 12
   COLUMN_ASSIGN_STUDENTS = 12
-  COLUMN_BREAK_APPOINTMENTS = 13
+  COLUMN_BREAK_APPOINTMENTS = 12
 
   def get_target_row(window_name, period_key)
     window_collection_table.rows.each do |r|
@@ -78,9 +90,14 @@ class RegistrationWindowsCreate < RegistrationWindowsBase
 
 
   element(:yes_label) { |b| b.frm.span(text: "Yes") }
-  element(:delete_popup_div)  { |b| b.div(id: "KS-RegistrationWindowsManagement-ConfirmDelete-Dialog") }
-  action(:confirm_delete){ |b|b.delete_popup_div.checkbox(index: 0).click; b.loading.wait_while_present}
-  action(:cancel_delete){ |b|b.delete_popup_div.checkbox(index: 1).click; b.loading.wait_while_present}
+  element(:delete_popup_div) { |b| b.div(id: "KS-RegistrationWindowsManagement-ConfirmDelete-Dialog") }
+  action(:confirm_delete) { |b| b.delete_popup_div.checkbox(index: 0).click; b.loading.wait_while_present }
+  action(:cancel_delete) { |b| b.delete_popup_div.checkbox(index: 1).click; b.loading.wait_while_present }
+
+  element(:break_appointments_popup_div) { |b| b.div(id: "KS-RegistrationWindowsManagement-ConfirmBreakAppointments-Dialog") }
+  action(:confirm_break_appointments) { |b| b.break_appointments_popup_div.checkbox(index: 0).click; b.loading.wait_while_present }
+  action(:cancel_break_appointments) { |b| b.break_appointments_popup_div.checkbox(index: 1).click; b.loading.wait_while_present }
+
 
   def results_list_by_window_name()
     names = []
@@ -173,6 +190,14 @@ class RegistrationWindowsCreate < RegistrationWindowsBase
     # ToDo add period_key to the get_target_row
     row = get_target_row(window_name, period_key)
     row.cells[COLUMN_ASSIGN_STUDENTS].button(text: "Assign Students").click
+    loading.wait_while_present
+  end
+
+  def break_appointments(window_name, period_key)
+    puts "Breaking Appointments for #{window_name} in period #{period_key}"
+    # ToDo add period_key to the get_target_row
+    row = get_target_row(window_name, period_key)
+    row.cells[COLUMN_BREAK_APPOINTMENTS].button(text: "Break Appointments").click
     loading.wait_while_present
   end
 
@@ -286,7 +311,7 @@ class RegistrationWindowsCreate < RegistrationWindowsBase
     row_object[:start_time] = row.cells[COLUMN_START_TIME].text_field.value
     row_object[:start_time_am_pm] = row.cells[COLUMN_START_TIME_AM_PM].select.selected_options.first.text
     row_object[:end_date] = row.cells[COLUMN_END_DATE].text_field.value
-    row_object[:end_time_am_pm] = row.cells[COLUMN_END_TIME].text_field.value
+    row_object[:end_time] = row.cells[COLUMN_END_TIME].text_field.value
     row_object[:end_time_am_pm] = row.cells[COLUMN_END_TIME_AM_PM].select.selected_options.first.text
 
     if (row.cells[COLUMN_MAX].text_field.exists? && row.cells[COLUMN_MAX].text_field.type.eql?("text"))

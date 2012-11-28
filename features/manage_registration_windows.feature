@@ -63,7 +63,7 @@ Feature: Search for a registration window
   Scenario: Add two Registration Windows with the same name in two different Periods
     Given I manage Registration Windows for a term and a period
     And I add two Registration Windows with the same name in two different Periods
-    Then I verify each Registration Window is unique within each period
+    Then I verify each Registration Window is created within each period
 
   Scenario: Edit a Registration Window setting its Start Date outside the period dates
     Given I manage Registration Windows for a term and a period
@@ -116,5 +116,6 @@ Feature: Search for a registration window
   Scenario: Break Student Appointments in Registration Window
     Given I manage Registration Windows for a term and a period
     And Successfully add a Registration Window for the period
+    And I assign Student Appointments in Registration Window
     And I break Student Appointments in Registration Window
     Then I verify that all editable fields in Registration Window are editable and Window Name is not a link
