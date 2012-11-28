@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.service;
 
+import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.GlOperationType;
 import com.sigmasys.kuali.ksa.model.GlTransaction;
 import com.sigmasys.kuali.ksa.model.Transaction;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.springframework.util.Assert.notNull;
@@ -61,9 +63,7 @@ public class TransactionExportServiceTest extends AbstractServiceTest {
         transaction3 = transactionService.createTransaction("chip", null, userId, new Date(), new Date(), new BigDecimal(300.00));
     }
 
-    /**
-     * This is a single KsaTransaction import to be wrapped in a batch
-     */
+
     @Test
     public void exportTransactions() {
 
@@ -91,6 +91,53 @@ public class TransactionExportServiceTest extends AbstractServiceTest {
         glService.prepareGlTransmissions();
 
         String xml = transactionExportService.exportTransactions();
+
+        Assert.notNull(xml);
+        Assert.hasText(xml);
+
+        logger.info("XML = \n" + xml);
+
+    }
+
+    @Test
+    public void exportTransactionsForDates() throws Exception {
+
+        Date startDate = new SimpleDateFormat(Constants.DATE_FORMAT_US).parse("01/01/1990");
+        Date endDate = new SimpleDateFormat(Constants.DATE_FORMAT_US).parse("01/01/2015");
+
+        GlTransaction glTransaction1 =
+                glService.createGlTransaction(transaction1.getId(), GL_ACCOUNT_ID, new BigDecimal(10e4), GlOperationType.DEBIT);
+
+        Assert.notNull(glTransaction1);
+        Assert.notNull(glTransaction1.getId());
+        Assert.notNull(glTransaction1.getGlAccountId());
+
+        GlTransaction glTransaction2 =
+                glService.createGlTransaction(transaction2.getId(), GL_ACCOUNT_ID, new BigDecimal(399.3333), GlOperationType.CREDIT);
+
+        Assert.notNull(glTransaction2);
+        Assert.notNull(glTransaction2.getId());
+        Assert.notNull(glTransaction2.getGlAccountId());
+
+        GlTransaction glTransaction3 =
+                glService.createGlTransaction(transaction3.getId(), GL_ACCOUNT_ID, new BigDecimal(50.01), GlOperationType.DEBIT);
+
+        Assert.notNull(glTransaction3);
+        Assert.notNull(glTransaction3.getId());
+        Assert.notNull(glTransaction3.getGlAccountId());
+
+        glService.prepareGlTransmissions();
+
+        // Exporting transactions for effective dates
+        String xml = transactionExportService.exportTransactionsForDates(startDate, endDate, true);
+
+        Assert.notNull(xml);
+        Assert.hasText(xml);
+
+        logger.info("XML = \n" + xml);
+
+        // Exporting transactions for recognition dates
+        xml = transactionExportService.exportTransactionsForDates(startDate, endDate, false);
 
         Assert.notNull(xml);
         Assert.hasText(xml);

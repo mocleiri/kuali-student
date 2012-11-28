@@ -5,6 +5,7 @@ import com.sigmasys.kuali.ksa.annotation.Url;
 import com.sigmasys.kuali.ksa.model.Constants;
 
 import javax.jws.WebService;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,6 +29,18 @@ public interface TransactionExportService {
      * @return XML content that contains the transactions to be exported
      */
     String exportTransactions();
+
+    /**
+     * Gets GlTransmission objects for the given effective/recognition dates with a result that is blank and
+     * returns the completed XML file that will be uploaded to KFS or any other external system.
+     *
+     * @param startDate       Transaction effective or recognition start date
+     * @param endDate         Transaction effective or recognition end date
+     * @param isEffectiveDate if "true" this parameter indicates that transaction effective date should be used,
+     *                        if "false" - transaction recognition date
+     * @return XML content that contains the transactions to be exported
+     */
+    String exportTransactionsForDates(Date startDate, Date endDate, boolean isEffectiveDate);
 
     /**
      * Parses the GL account and returns the list of <code>java.util.String</code> values.

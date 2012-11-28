@@ -347,10 +347,10 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
                                                      String... recognitionPeriods) {
 
         if (fromDate != null && toDate != null && fromDate.after(toDate)) {
-            String errMsg = "Start Date cannot be greater than End Date: fromDate = " + fromDate +
-                    ", toDate = " + toDate;
+            String errMsg = "Start Date cannot be greater than End Date: Start Date = " + fromDate +
+                    ", End Date = " + toDate;
             logger.error(errMsg);
-            throw new IllegalStateException(errMsg);
+            throw new IllegalArgumentException(errMsg);
         }
 
         String glModeCode = configService.getInitialParameter(DEFAULT_GL_MODE_PARAM_NAME);
@@ -550,11 +550,62 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      * @return list of GlTransmission instances
      */
     @Override
+    @WebMethod(exclude = true)
     public List<GlTransmission> getGlTransmissionsForExport() {
         Query query = em.createQuery("select glt from GlTransmission glt " +
                 " inner join fetch glt.recognitionPeriod rp " +
-                " where glt.result is null");
+                " where glt.result is null" +
+                " order by glt.date asc");
         return query.getResultList();
+    }
+
+    /**
+     * Retrieves all GL transmissions with the empty "result" field
+     * for the given transaction effective start and end dates
+     *
+     * @param startDate       Transaction effective or recognition start date
+     * @param endDate         Transaction effective or recognition end date
+     * @param isEffectiveDate if "true" this parameter indicates that transaction effective date should be used,
+     *                        if "false" - transaction recognition date
+     * @return list of GlTransmission instances
+     */
+    @Override
+    public List<GlTransmission> getGlTransmissionsForExport(Date startDate, Date endDate, boolean isEffectiveDate) {
+
+        if (startDate == null || endDate == null) {
+            String errMsg = "Start Date and End Date cannot be null";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        if (startDate.after(endDate)) {
+            String errMsg = "Start Date cannot be greater than End Date: Start Date = " + startDate +
+                    ", End Date = " + endDate;
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        String dateField = isEffectiveDate ? "effectiveDate" : "recognitionDate";
+
+        Query query = em.createQuery("select distinct glt from GlTransaction glt " +
+                " inner join fetch glt.recognitionPeriod rp " +
+                " inner join fetch glt.transmission t " +
+                " left outer join glt.transactions ts " +
+                " where t.result is null and " +
+                " ts." + dateField + " <> null and ts." + dateField + " between :fromDate and :toDate " +
+                " order by glt.date asc");
+
+        query.setParameter("fromDate", startDate);
+        query.setParameter("toDate", endDate);
+
+        List<GlTransaction> glTransactions = query.getResultList();
+        List<GlTransmission> glTransmissions = new ArrayList<GlTransmission>(glTransactions.size());
+
+        for (GlTransaction glTransaction : glTransactions) {
+            glTransmissions.add(glTransaction.getTransmission());
+        }
+
+        return glTransmissions;
     }
 
 }

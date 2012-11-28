@@ -59,7 +59,6 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
     @Autowired
     private ConfigService configService;
 
-
     /**
      * Gets all the GlTransmission objects with a result that is blank and
      * returns the completed XML file that will be uploaded to KFS or any other external system.
@@ -68,16 +67,22 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
      */
     @Override
     public String exportTransactions() {
-        long batchId = RandomUtils.nextLong();
-        List<GlTransmission> glTransmissions = glService.getGlTransmissionsForExport();
-        String xml = convertGlTransmissionsToXml(glTransmissions, batchId);
-        // Validate XML against the schema
-        if (schemaValidator.validateXml(xml)) {
-            return xml;
-        }
-        String errMsg = "XML content is invalid:\n" + xml;
-        logger.error(errMsg);
-        throw new RuntimeException(errMsg);
+        return convertGlTransmissionsToXml(glService.getGlTransmissionsForExport());
+    }
+
+    /**
+     * Gets GlTransmission objects for the given effective/recognition dates with a result that is blank and
+     * returns the completed XML file that will be uploaded to KFS or any other external system.
+     *
+     * @param startDate       Transaction effective or recognition start date
+     * @param endDate         Transaction effective or recognition end date
+     * @param isEffectiveDate if "true" this parameter indicates that transaction effective date should be used,
+     *                        if "false" - transaction recognition date
+     * @return XML content that contains the transactions to be exported
+     */
+    @Override
+    public String exportTransactionsForDates(Date startDate, Date endDate, boolean isEffectiveDate) {
+        return convertGlTransmissionsToXml(glService.getGlTransmissionsForExport(startDate, endDate, isEffectiveDate));
     }
 
     /**
@@ -113,11 +118,11 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
         return accountParts;
     }
 
-    protected String convertGlTransmissionsToXml(List<GlTransmission> glTransmissions, long batchId) {
+    protected String convertGlTransmissionsToXml(List<GlTransmission> glTransmissions) {
 
-        final com.sigmasys.kuali.ksa.model.export.ObjectFactory objectFactory = new com.sigmasys.kuali.ksa.model.export.ObjectFactory();
+        final ObjectFactory objectFactory = new ObjectFactory();
 
-        final BigInteger batchNumber = BigInteger.valueOf(batchId);
+        final BigInteger batchNumber = BigInteger.valueOf(RandomUtils.nextLong());
 
         final String currentUserId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
 
@@ -255,7 +260,16 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
         batchType.setTrailer(trailerType);
 
         // Converting BatchType to XML
-        return JaxbUtils.toXml(batchType);
+        String xml = JaxbUtils.toXml(batchType);
+
+        // Validate XML against the schema
+        if (schemaValidator.validateXml(xml)) {
+            return xml;
+        }
+
+        String errMsg = "XML content is invalid:\n" + xml;
+        logger.error(errMsg);
+        throw new RuntimeException(errMsg);
 
     }
 

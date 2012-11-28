@@ -155,6 +155,19 @@ public interface GeneralLedgerService {
      *
      * @return list of GlTransmission instances
      */
+    @WebMethod(exclude = true)
     List<GlTransmission> getGlTransmissionsForExport();
+
+    /**
+     * Retrieves all GL transmissions with the empty "result" field
+     * for the given transaction effective start and end dates
+     *
+     * @param startDate       Transaction effective or recognition start date
+     * @param endDate         Transaction effective or recognition end date
+     * @param isEffectiveDate if "true" this parameter indicates that transaction effective date should be used,
+     *                        if "false" - transaction recognition date
+     * @return list of GlTransmission instances
+     */
+    List<GlTransmission> getGlTransmissionsForExport(Date startDate, Date endDate, boolean isEffectiveDate);
 
 }
