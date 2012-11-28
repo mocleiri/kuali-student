@@ -27,7 +27,7 @@ class PopulationsBase < BasePage
     end
 
     def population_view_elements
-      element(:name_label) {|b| b.frm.div(data_label: "Name").label }
+      element(:name_label) { |b| b.frm.div(data_label: "Name").label }
       value(:name) { |b| b.frm.div(data_label: "Name").span(index: 1).text }
       value(:description) { |b| b.frm.div(data_label: "Description").span(index: 1).text }
       value(:state) { |b| b.frm.div(data_label: "State").span(index: 1).text }
@@ -93,6 +93,7 @@ module PopulationsSearch
     names.delete_if { |name| name == "Name" }
     names
   end
+
   alias results_names results_list
 
   def results_descriptions
@@ -149,7 +150,7 @@ class HoldBase < BasePage
       element(:category_name) { |b| b.frm.select(name: "typeKey") }
       element(:phrase) { |b| b.frm.text_field(name: "descr") }
       element(:owning_organization) { |b| b.frm.text_field(name: "id") }
-      action(:lookup_owning_org) { |b| b.frm.button(title:"Search Field").click; b.loading.wait_while_present }
+      action(:lookup_owning_org) { |b| b.frm.button(title: "Search Field").click; b.loading.wait_while_present }
     end
   end
 end
@@ -341,7 +342,7 @@ class ActivityOfferingMaintenanceBase < BasePage
   element(:logistics_div_actual) { |b| b.frm.div(id: /^ActivityOffering-DeliveryLogistic.*-Actuals$/) }
   action(:revise_logistics) { |b| b.logistics_div_actual.link(text: "Revise").click; b.loading.wait_while_present }
 
-  element(:actual_logistics_table) { |b| b.logistics_div_actual.table()}
+  element(:actual_logistics_table) { |b| b.logistics_div_actual.table() }
 
   TBA_COLUMN = 0
   DAYS_COLUMN = 1
@@ -356,16 +357,17 @@ class ActivityOfferingMaintenanceBase < BasePage
       row.cells[column].text()
     end
   end
+
   adl_table_accessor_maker :get_actual_logistics_tba, TBA_COLUMN
   adl_table_accessor_maker :get_actual_logistics_days, DAYS_COLUMN
-  adl_table_accessor_maker :get_actual_logistics_start_time,ST_TIME_COLUMN
-  adl_table_accessor_maker :get_actual_logistics_end_time,END_TIME_COLUMN
-  adl_table_accessor_maker :get_actual_logistics_facility,FACILITY_COLUMN
-  adl_table_accessor_maker :get_actual_logistics_room,ROOM_COLUMN
-  adl_table_accessor_maker :get_actual_logistics_features,FEATURES_COLUMN
+  adl_table_accessor_maker :get_actual_logistics_start_time, ST_TIME_COLUMN
+  adl_table_accessor_maker :get_actual_logistics_end_time, END_TIME_COLUMN
+  adl_table_accessor_maker :get_actual_logistics_facility, FACILITY_COLUMN
+  adl_table_accessor_maker :get_actual_logistics_room, ROOM_COLUMN
+  adl_table_accessor_maker :get_actual_logistics_features, FEATURES_COLUMN
 
   element(:logistics_div_requested) { |b| b.frm.div(id: "ActivityOffering-DeliveryLogistic-SchedulePage-Requested") }
-  element(:requested_logistics_table) { |b| b.logistics_div_requested.table()}
+  element(:requested_logistics_table) { |b| b.logistics_div_requested.table() }
 
   def self.rdl_table_accessor_maker(method_name, column)
     define_method method_name.to_s do |row|
@@ -373,13 +375,13 @@ class ActivityOfferingMaintenanceBase < BasePage
     end
   end
 
-  rdl_table_accessor_maker :get_requested_logistics_tba,TBA_COLUMN
-  rdl_table_accessor_maker :get_requested_logistics_days,DAYS_COLUMN
-  rdl_table_accessor_maker :get_requested_logistics_start_time,ST_TIME_COLUMN
-  rdl_table_accessor_maker :get_requested_logistics_end_time,END_TIME_COLUMN
-  rdl_table_accessor_maker :get_requested_logistics_facility,FACILITY_COLUMN
-  rdl_table_accessor_maker :get_requested_logistics_room,ROOM_COLUMN
-  rdl_table_accessor_maker :get_requested_logistics_features,FEATURES_COLUMN
+  rdl_table_accessor_maker :get_requested_logistics_tba, TBA_COLUMN
+  rdl_table_accessor_maker :get_requested_logistics_days, DAYS_COLUMN
+  rdl_table_accessor_maker :get_requested_logistics_start_time, ST_TIME_COLUMN
+  rdl_table_accessor_maker :get_requested_logistics_end_time, END_TIME_COLUMN
+  rdl_table_accessor_maker :get_requested_logistics_facility, FACILITY_COLUMN
+  rdl_table_accessor_maker :get_requested_logistics_room, ROOM_COLUMN
+  rdl_table_accessor_maker :get_requested_logistics_features, FEATURES_COLUMN
 
   element(:personnel_table) { |b| b.frm.div(id: "ao-personnelgroup").table() }
   ID_COLUMN = 0
@@ -407,8 +409,8 @@ class ActivityOfferingMaintenanceBase < BasePage
   value(:seat_pool_count) { |b| b.frm.div(data_label: "Seat Pools").span(index: 2).text }
   value(:seats_remaining_span) { |b| b.frm.div(id: "seatsRemaining").span(index: 2) }
   value(:seats_remaining) { |b| b.seats_remaining_span.text }
-  value(:percent_seats_remaining) {  |b| b.seats_remaining_span.text[/\d+(?=%)/] }
-  value(:seat_count_remaining) {  |b| b.seats_remaining_span.text[/\d+(?=.S)/] }
+  value(:percent_seats_remaining) { |b| b.seats_remaining_span.text[/\d+(?=%)/] }
+  value(:seat_count_remaining) { |b| b.seats_remaining_span.text[/\d+(?=.S)/] }
   value(:max_enrollment_count) { |b| b.frm.div(id: "seatsRemaining").text[/\d+(?=\))/] }
 
   private
@@ -420,4 +422,43 @@ class ActivityOfferingMaintenanceBase < BasePage
   def target_pool_row(pop_name)
     seat_pools_table.row(text: /#{Regexp.escape(pop_name)}/)
   end
+end
+
+class RegistrationWindowsBase < BasePage
+
+  wrapper_elements
+  validation_elements
+  frame_element
+  #element(:child_populations_table) { |b| b.frm.div(id: "populations_table").table() }
+
+  class << self
+
+
+    def registration_window_lookup_elements
+      element(:term_type) { |b| b.frm.select(name: "termType") }
+      element(:year) { |b| b.frm.text_field(name: "termYear") }
+      action(:search) { |b| b.frm.button(text: "Search").click; b.loading.wait_while_present } # Persistent ID needed!
+    end
+
+    def registration_window_period_lookup_elements
+      element(:period_id) { |b| b.frm.select(name: "periodId") }
+      action(:show) { |b| b.frm.button(text: "Show").click; b.loading.wait_while_present }
+    end
+
+  end
+
+end
+
+module RegistrationWindowsConstants
+  START_DATES_MAP_NAME = 'start_dates_map'
+  END_DATES_MAP_NAME = 'end_dates_map'
+  DATE_WITHIN = "DATE_WITHIN"
+  DATE_WITHIN_REVERSE = "WITHIN_REVERSE"
+  DATE_BEFORE = "BEFORE"
+  DATE_AFTER = "AFTER"
+  DATE_BOUND_START = "START"
+  DATE_BOUND_END = "END"
+  METHOD_ONE_SLOT_PER_WINDOW = "One Slot per Window"
+  METHOD_MAX_SLOTTED_WINDOW = "Max Slotted Window"
+  METHOD_UNIFORM_SLOTTED_WINDOW = "Uniform Slotted Window"
 end
