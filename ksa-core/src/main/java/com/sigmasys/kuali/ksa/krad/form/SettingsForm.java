@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.model.AuditableEntity;
 import com.sigmasys.kuali.ksa.model.Currency;
 
 import java.util.List;
@@ -14,9 +15,9 @@ public class SettingsForm extends AbstractViewModel {
 
    private Account account;
 
-   private List<Currency> currencies;
+   private List<AuditableEntity> entities;
 
-   private Currency currency;
+   private AuditableEntity entity;
 
    private String statusMessage;
 
@@ -32,20 +33,36 @@ public class SettingsForm extends AbstractViewModel {
       this.account = account;
    }
 
-   public List<Currency> getCurrencies() {
-      return currencies;
+    public List<AuditableEntity> getAuditableEntities() {
+        return entities;
+    }
+
+    public void setAuditableEntities(List<AuditableEntity> entities) {
+        this.entities = entities;
+    }
+
+    public AuditableEntity getAuditableEntity() {
+        return entity;
+    }
+
+    public void setAuditableEntity(AuditableEntity entity) {
+        this.entity = entity;
+    }
+
+    public List<Currency> getCurrencies() {
+      return (List<Currency>)(List<?>)entities;
    }
 
    public void setCurrencies(List<Currency> currencies) {
-      this.currencies = currencies;
+      this.entities = (List<AuditableEntity>)(List<?>)currencies;
    }
 
    public Currency getCurrency() {
-      return currency;
+      return (Currency)entity;
    }
 
    public void setCurrency(Currency currency) {
-      this.currency = currency;
+      this.entity = currency;
    }
 
    public String getStatusMessage() {

@@ -1,0 +1,198 @@
+package com.sigmasys.kuali.ksa.krad.controller;
+
+
+import com.sigmasys.kuali.ksa.krad.form.GeneralLedgerTypeForm;
+import com.sigmasys.kuali.ksa.krad.form.SettingsForm;
+import com.sigmasys.kuali.ksa.model.Currency;
+import com.sigmasys.kuali.ksa.model.GeneralLedgerType;
+import com.sigmasys.kuali.ksa.model.Rollup;
+import com.sigmasys.kuali.ksa.service.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.BindingResultUtils;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
+@Transactional
+public class SettingsControllerTest extends AbstractServiceTest {
+
+
+    @Autowired
+    private SettingsController settingsController;
+
+    @Autowired
+    private AccountService accountService;
+
+    @Autowired
+    private PersistenceService persistenceService;
+
+    private SettingsForm form;
+
+    private String userId = "admin";
+
+
+    @Before
+    public void setUpWithinTransaction() {
+
+        // set up test data within the transaction
+        accountService.getOrCreateAccount(userId);
+
+        // Initializing request parameters
+        MockHttpServletRequest request = getRequest();
+
+        request.setParameter("userId", userId);
+
+        // Initializing the form
+        form = settingsController.createInitialForm(request);
+    }
+
+    @Test
+    public void getCurrencyList() throws Exception {
+
+        // Passing request parameters needed to perform get() method
+        MockHttpServletRequest request = getRequest();
+        MockHttpServletResponse response = getResponse();
+
+        Map map = new HashMap();
+        BindingResult bindingResult = BindingResultUtils.getBindingResult(map, "form");
+
+        request.setParameter("userId", userId);
+        request.setParameter("pageId", "CurrencyPage");
+
+        List<Currency> types = persistenceService.getEntities(Currency.class);
+
+        ModelAndView modelAndView = settingsController.get(form, request);
+
+        // Checking assertions
+        Assert.notNull(modelAndView);
+        Assert.notNull(form);
+
+        Assert.notNull(form.getAuditableEntities());
+        Assert.isTrue(form.getAuditableEntities().size() == types.size());
+        Assert.isTrue(form.getAuditableEntities().size() > 0);
+    }
+
+
+    @Test
+    public void getCurrencyDetail() throws Exception {
+
+        // Passing request parameters needed to perform get() method
+        MockHttpServletRequest request = getRequest();
+        MockHttpServletResponse response = getResponse();
+
+        Map map = new HashMap();
+
+        request.setParameter("userId", userId);
+        request.setParameter("pageId", "CurrencyDetailsPage");
+        request.setParameter("currencyId", "1");
+
+        Currency type = persistenceService.getEntity(new Long(1), Currency.class);
+
+        ModelAndView modelAndView = settingsController.get(form, request);
+
+        // Checking assertions
+        Assert.notNull(modelAndView);
+        Assert.notNull(form);
+
+        Assert.notNull(form.getAuditableEntity());
+        Assert.isTrue("USD".equals(form.getAuditableEntity().getCode()), form.getAuditableEntity().getCode() + " isn't USD");
+    }
+
+    @Test
+    public void insertCurrency() throws Exception {
+        Currency newCurr = new Currency();
+        newCurr.setCode("TEST");
+        newCurr.setDescription("Unit Test value");
+
+        form.setAuditableEntity(newCurr);
+        ModelAndView modelAndView = settingsController.insertCurrency(form);
+
+        Assert.notNull(modelAndView);
+        Assert.notNull(form);
+        Assert.notNull(form.getStatusMessage());
+        Assert.isTrue(form.getStatusMessage().startsWith("Success:"));
+    }
+
+    @Test
+    public void getRollupList() throws Exception {
+
+        // Passing request parameters needed to perform get() method
+        MockHttpServletRequest request = getRequest();
+        MockHttpServletResponse response = getResponse();
+
+        Map map = new HashMap();
+        BindingResult bindingResult = BindingResultUtils.getBindingResult(map, "form");
+
+        request.setParameter("userId", userId);
+        request.setParameter("pageId", "RollupPage");
+
+        List<Rollup> types = persistenceService.getEntities(Rollup.class);
+
+        ModelAndView modelAndView = settingsController.get(form, request);
+
+        // Checking assertions
+        Assert.notNull(modelAndView);
+        Assert.notNull(form);
+
+        Assert.notNull(form.getAuditableEntities());
+        Assert.isTrue(form.getAuditableEntities().size() == types.size());
+        Assert.isTrue(form.getAuditableEntities().size() > 0);
+    }
+
+    @Test
+    public void getRollupDetail() throws Exception {
+
+        // Passing request parameters needed to perform get() method
+        MockHttpServletRequest request = getRequest();
+        MockHttpServletResponse response = getResponse();
+
+        Map map = new HashMap();
+        BindingResult bindingResult = BindingResultUtils.getBindingResult(map, "form");
+
+        request.setParameter("userId", userId);
+        request.setParameter("pageId", "RollupDetailsPage");
+        request.setParameter("entityId", "1");
+
+        Rollup type = persistenceService.getEntity(new Long(1), Rollup.class);
+
+        ModelAndView modelAndView = settingsController.get(form, request);
+
+        // Checking assertions
+        Assert.notNull(modelAndView);
+        Assert.notNull(form);
+
+        Assert.notNull(form.getAuditableEntity());
+        Assert.isTrue("Bookstore Charges".equals(form.getAuditableEntity().getName()), "'" + form.getAuditableEntity().getName() + "' isn't what is expected");
+    }
+
+    @Test
+    public void insertRollup() throws Exception {
+        Rollup newCurr = new Rollup();
+        newCurr.setCode("TEST");
+        newCurr.setDescription("Unit Test value");
+
+        form.setAuditableEntity(newCurr);
+        ModelAndView modelAndView = settingsController.insertRollup(form);
+
+        Assert.notNull(modelAndView);
+        Assert.notNull(form);
+        Assert.notNull(form.getStatusMessage());
+        Assert.isTrue(form.getStatusMessage().startsWith("Success:"));
+    }
+
+}
