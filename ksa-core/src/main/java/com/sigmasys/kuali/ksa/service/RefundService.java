@@ -243,6 +243,12 @@ public interface RefundService {
 	 */
 	RefundType getOrCreateRefundType(String debitTypeId, String creditTypeId);
 	
+	/**
+	 * Deletes a <code>RefundType</code> from the persistent storage.
+	 * 
+	 * @param refundType A <code>RefundType</code> to delete from the storage.
+	 */
+	void deleteRefundType(RefundType refundType);
 	
 	/**
 	 * Performs a pay-off refund. 
