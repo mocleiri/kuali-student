@@ -1,10 +1,8 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 
-import com.sigmasys.kuali.ksa.krad.form.GeneralLedgerTypeForm;
 import com.sigmasys.kuali.ksa.krad.form.SettingsForm;
 import com.sigmasys.kuali.ksa.model.Currency;
-import com.sigmasys.kuali.ksa.model.GeneralLedgerType;
 import com.sigmasys.kuali.ksa.model.Rollup;
 import com.sigmasys.kuali.ksa.service.*;
 import org.junit.Before;
@@ -12,18 +10,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.BindingResultUtils;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -66,10 +59,6 @@ public class SettingsControllerTest extends AbstractServiceTest {
 
         // Passing request parameters needed to perform get() method
         MockHttpServletRequest request = getRequest();
-        MockHttpServletResponse response = getResponse();
-
-        Map map = new HashMap();
-        BindingResult bindingResult = BindingResultUtils.getBindingResult(map, "form");
 
         request.setParameter("userId", userId);
         request.setParameter("pageId", "CurrencyPage");
@@ -93,15 +82,10 @@ public class SettingsControllerTest extends AbstractServiceTest {
 
         // Passing request parameters needed to perform get() method
         MockHttpServletRequest request = getRequest();
-        MockHttpServletResponse response = getResponse();
-
-        Map map = new HashMap();
 
         request.setParameter("userId", userId);
         request.setParameter("pageId", "CurrencyDetailsPage");
         request.setParameter("currencyId", "1");
-
-        Currency type = persistenceService.getEntity(new Long(1), Currency.class);
 
         ModelAndView modelAndView = settingsController.get(form, request);
 
@@ -133,15 +117,11 @@ public class SettingsControllerTest extends AbstractServiceTest {
 
         // Passing request parameters needed to perform get() method
         MockHttpServletRequest request = getRequest();
-        MockHttpServletResponse response = getResponse();
-
-        Map map = new HashMap();
-        BindingResult bindingResult = BindingResultUtils.getBindingResult(map, "form");
 
         request.setParameter("userId", userId);
         request.setParameter("pageId", "RollupPage");
 
-        List<Rollup> types = persistenceService.getEntities(Rollup.class);
+        List<Rollup> rollups = persistenceService.getEntities(Rollup.class);
 
         ModelAndView modelAndView = settingsController.get(form, request);
 
@@ -150,8 +130,8 @@ public class SettingsControllerTest extends AbstractServiceTest {
         Assert.notNull(form);
 
         Assert.notNull(form.getAuditableEntities());
-        Assert.isTrue(form.getAuditableEntities().size() == types.size());
-        Assert.isTrue(form.getAuditableEntities().size() > 0);
+        Assert.isTrue(form.getAuditableEntities().size() == rollups.size());
+        Assert.notEmpty(form.getAuditableEntities());
     }
 
     @Test
@@ -159,16 +139,10 @@ public class SettingsControllerTest extends AbstractServiceTest {
 
         // Passing request parameters needed to perform get() method
         MockHttpServletRequest request = getRequest();
-        MockHttpServletResponse response = getResponse();
-
-        Map map = new HashMap();
-        BindingResult bindingResult = BindingResultUtils.getBindingResult(map, "form");
 
         request.setParameter("userId", userId);
         request.setParameter("pageId", "RollupDetailsPage");
         request.setParameter("entityId", "1");
-
-        Rollup type = persistenceService.getEntity(new Long(1), Rollup.class);
 
         ModelAndView modelAndView = settingsController.get(form, request);
 
@@ -182,6 +156,7 @@ public class SettingsControllerTest extends AbstractServiceTest {
 
     @Test
     public void insertRollup() throws Exception {
+
         Rollup newCurr = new Rollup();
         newCurr.setCode("TEST");
         newCurr.setDescription("Unit Test value");
