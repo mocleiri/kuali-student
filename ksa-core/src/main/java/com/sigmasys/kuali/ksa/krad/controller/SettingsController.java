@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.SettingsForm;
+import com.sigmasys.kuali.ksa.krad.model.AuditableEntityModel;
 import com.sigmasys.kuali.ksa.model.AuditableEntity;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.model.Rollup;
@@ -28,9 +29,6 @@ import java.util.List;
 public class SettingsController extends GenericSearchController {
 
     private static final Log logger = LogFactory.getLog(SponsorController.class);
-
-    @Autowired
-    private CurrencyService currencyService;
 
     @Autowired
     private AuditableEntityService auditableEntityService;
@@ -68,29 +66,20 @@ public class SettingsController extends GenericSearchController {
 
         // Currency type
         if ("CurrencyPage".equals(pageId)) {
-            // a currency instance for the view and model. User may add a currency in this page.
-            // this is not a persisted currency. currencyId should be null - table record index
-            form.setCurrency(new Currency());
-            // this is the existing currencies in the system
-            form.setCurrencies(currencyService.getCurrencies());
-
+            form.setAuditableEntity(new Currency());
+            form.setAuditableEntities(auditableEntityService.getAuditableEntities(Currency.class));
         } else if ("CurrencyDetailsPage".equals(pageId)) {
             if (currencyId == null || currencyId.trim().isEmpty()) {
                 throw new IllegalArgumentException("'currencyId' request parameter must be specified");
             }
-            // editing an existing currency
-            form.setCurrency(currencyService.getCurrency(Long.valueOf(currencyId)));
+            form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(currencyId), Currency.class));
         } else if ("RollupPage".equals(pageId)) {
             form.setAuditableEntity(new Rollup());
-            List<Rollup> rollups = auditableEntityService.getAuditableEntities(Rollup.class);
-            List<AuditableEntity> entities = new ArrayList<AuditableEntity>(rollups.size());
-            entities.addAll(rollups);
-            form.setAuditableEntities(entities);
+            form.setAuditableEntities(auditableEntityService.getAuditableEntities(Rollup.class));
         } else if ("RollupDetailsPage".equals(pageId)) {
             if (entityId == null || entityId.trim().isEmpty()) {
                 throw new IllegalArgumentException("'entityId' request parameter must be specified");
             }
-            // editing an existing currency
             form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), Rollup.class));
         }
 
@@ -101,7 +90,7 @@ public class SettingsController extends GenericSearchController {
      * @param form
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
+/*    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
     public ModelAndView refresh(@ModelAttribute("KualiForm") SettingsForm form) {
         // do refresh stuff...
 
@@ -117,37 +106,21 @@ public class SettingsController extends GenericSearchController {
 
         return getUIFModelAndView(form);
     }
-
+ */
     /**
      * @param form
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertCurrency")
     public ModelAndView insertCurrency(@ModelAttribute("KualiForm") SettingsForm form) {
-
-        // a record id is returned from persisting
-        // need to add a create method possibly to enforce business rules
-        Currency currency = form.getCurrency();
-
-        try {
-
-            currencyService.persistCurrency(currency);
-
-            // refresh the list of currencies. the form and view manage the refresh
-            form.setCurrencies(currencyService.getCurrencies());
-
-            // success in creating the currency.
-            String statusMsg = "Success: Currency " + currency.getCode() + " saved";
-            form.setStatusMessage(statusMsg);
-            logger.info(statusMsg);
-        } catch (Exception e) {
-            // failed to create the currency. Leave the currency information in the view
-            String statusMsg = "Failure: Currency " + currency.getCode() + " did not save. " + e.getMessage();
-            form.setStatusMessage(statusMsg);
-            logger.error(statusMsg);
+        AuditableEntityModel entity = form.getAuditableEntity();
+        if (!(entity.getParentEntity() instanceof Currency)) {
+            String errMsg = "Entity must be of Currency type";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
         }
 
-        return getUIFModelAndView(form);
+        return insertAuditableEntity(form);
     }
 
     /**
@@ -156,31 +129,37 @@ public class SettingsController extends GenericSearchController {
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertRollup")
     public ModelAndView insertRollup(@ModelAttribute("KualiForm") SettingsForm form) {
-
-        AuditableEntity entity = form.getAuditableEntity();
-        if (!(entity instanceof Rollup)) {
+        AuditableEntityModel entity = form.getAuditableEntity();
+        if (!(entity.getParentEntity() instanceof Rollup)) {
             String errMsg = "Entity must be of Rollup type";
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
         }
 
+        return insertAuditableEntity(form);
+    }
+
+    /**
+     * @param form
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertRollup")
+    public ModelAndView insertAuditableEntity(@ModelAttribute("KualiForm") SettingsForm form) {
+
+        AuditableEntityModel entity = form.getAuditableEntity();
+        AuditableEntity parentEntity = entity.getParentEntity();
         try {
+            auditableEntityService.persistAuditableEntity(parentEntity);
 
-            auditableEntityService.persistAuditableEntity(entity);
-
-            List<Rollup> rollups = auditableEntityService.getAuditableEntities(Rollup.class);
-            List<AuditableEntity> entities = new ArrayList<AuditableEntity>(rollups.size());
-            entities.addAll(rollups);
-
-            form.setAuditableEntities(entities);
+            form.setAuditableEntities(auditableEntityService.getAuditableEntities(parentEntity.getClass()));
 
             // success in creating the currency.
-            String statusMsg = "Success: " + entity.getClass().getName() + " saved, ID = " + entity.getId();
+            String statusMsg = "Success: " + parentEntity.getClass().getName() + " saved, ID = " + parentEntity.getId();
             form.setStatusMessage(statusMsg);
             logger.info(statusMsg);
         } catch (Exception e) {
             // failed to create the currency. Leave the currency information in the view
-            String statusMsg = "Failure: " + entity.getClass().getName() + "entity did not save, ID = " + entity.getId() +
+            String statusMsg = "Failure: " + parentEntity.getClass().getName() + "entity did not save, ID = " + parentEntity.getId() +
                     ". " + e.getMessage();
             form.setStatusMessage(statusMsg);
             logger.error(statusMsg);
@@ -197,24 +176,7 @@ public class SettingsController extends GenericSearchController {
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updateCurrency")
     public ModelAndView updateCurrency(@ModelAttribute("KualiForm") SettingsForm form, HttpServletRequest request) {
 
-        Currency currency = form.getCurrency();
-
-        // occurs in the detail page.
-        currencyService.persistCurrency(currency);
-
-        try {
-            // success in updating the currency.
-            String statusMsg = "Success: Currency with ID =  " + currency.getId() + " updated";
-            form.setStatusMessage(statusMsg);
-            logger.info(statusMsg);
-        } catch (Exception e) {
-            // failed to update the currency. Leave the currency information in the view
-            String statusMsg = "Failure: Currency with ID = " + currency.getId() + " did not update. " + e.getMessage();
-            form.setStatusMessage(statusMsg);
-            logger.error(statusMsg);
-        }
-
-        return getUIFModelAndView(form);
+        return updateAuditableEntity(form);
     }
 
     /**
@@ -224,16 +186,16 @@ public class SettingsController extends GenericSearchController {
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updateRollup")
     public ModelAndView updateRollup(@ModelAttribute("KualiForm") SettingsForm form) {
 
-        return updateAuditableEntity(form, Rollup.class);
+        return updateAuditableEntity(form);
     }
 
-    private <T extends AuditableEntity> ModelAndView updateAuditableEntity(@ModelAttribute("KualiForm")
-                                                                           SettingsForm form, Class<T> entityType) {
+    public <T extends AuditableEntity> ModelAndView updateAuditableEntity(@ModelAttribute("KualiForm")
+                                                                           SettingsForm form) {
 
         AuditableEntity entity = form.getAuditableEntity();
 
-        if (!(entity.getClass().equals(entityType))) {
-            String errMsg = "Entity must be of " + entityType.getName() + " type";
+        if (!(entity.getClass().equals(entity.getClass()))) {
+            String errMsg = "Entity must be of " + entity.getClass().getName() + " type";
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
         }
@@ -242,12 +204,12 @@ public class SettingsController extends GenericSearchController {
             // occurs in the detail page.
             auditableEntityService.persistAuditableEntity(entity);
             // success in updating the currency.
-            String statusMsg = "Success: " + entityType + " entity updated. Entity ID =  " + entity.getId();
+            String statusMsg = "Success: " + entity.getClass() + " entity updated. Entity ID =  " + entity.getId();
             form.setStatusMessage(statusMsg);
             logger.info(statusMsg);
         } catch (Exception e) {
             // failed to update the currency. Leave the currency information in the view
-            String statusMsg = "Failure: " + entityType + " entity did not update, Entity ID =  " + entity.getId() + ". " + e.getMessage();
+            String statusMsg = "Failure: " + entity.getClass() + " entity did not update, Entity ID =  " + entity.getId() + ". " + e.getMessage();
             form.setStatusMessage(statusMsg);
             logger.error(statusMsg);
         }

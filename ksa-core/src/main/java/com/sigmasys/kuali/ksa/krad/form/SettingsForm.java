@@ -1,9 +1,11 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
+import com.sigmasys.kuali.ksa.krad.model.AuditableEntityModel;
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.AuditableEntity;
 import com.sigmasys.kuali.ksa.model.Currency;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,9 +17,9 @@ public class SettingsForm extends AbstractViewModel {
 
    private Account account;
 
-   private List<AuditableEntity> entities;
+   private List<AuditableEntityModel> entities;
 
-   private AuditableEntity entity;
+   private AuditableEntityModel entity;
 
    private String statusMessage;
 
@@ -33,37 +35,38 @@ public class SettingsForm extends AbstractViewModel {
       this.account = account;
    }
 
-    public List<AuditableEntity> getAuditableEntities() {
+    public List<AuditableEntityModel> getAuditableEntities() {
         return entities;
     }
 
-    public void setAuditableEntities(List<AuditableEntity> entities) {
-        this.entities = entities;
+    public <T extends AuditableEntity> void setAuditableEntities(List<T> entities) {
+        List<AuditableEntityModel> list = new ArrayList<AuditableEntityModel>(entities.size());
+
+        for(AuditableEntity entity : entities){
+            AuditableEntityModel m;
+            if(entity instanceof AuditableEntityModel){
+                m = (AuditableEntityModel)entity;
+            } else {
+                m = new AuditableEntityModel(entity);
+            }
+            list.add(m);
+        }
+
+        this.entities = list;
     }
 
-    public AuditableEntity getAuditableEntity() {
+    public AuditableEntityModel getAuditableEntity() {
         return entity;
     }
 
-    public void setAuditableEntity(AuditableEntity entity) {
-        this.entity = entity;
+    public <T extends AuditableEntity> void setAuditableEntity(T entity) {
+        if(entity instanceof AuditableEntityModel){
+            this.entity = (AuditableEntityModel)entity;
+        } else {
+            this.entity = new AuditableEntityModel(entity);
+        }
+
     }
-
-    public List<Currency> getCurrencies() {
-      return (List<Currency>)(List<?>)entities;
-   }
-
-   public void setCurrencies(List<Currency> currencies) {
-      this.entities = (List<AuditableEntity>)(List<?>)currencies;
-   }
-
-   public Currency getCurrency() {
-      return (Currency)entity;
-   }
-
-   public void setCurrency(Currency currency) {
-      this.entity = currency;
-   }
 
    public String getStatusMessage() {
       return statusMessage;

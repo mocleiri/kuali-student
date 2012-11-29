@@ -158,11 +158,11 @@ public class SettingsControllerTest extends AbstractServiceTest {
     @Test
     public void insertRollup() throws Exception {
 
-        Rollup newCurr = new Rollup();
-        newCurr.setCode("TEST");
-        newCurr.setDescription("Unit Test value");
+        Rollup rollup = new Rollup();
+        rollup.setCode("TEST");
+        rollup.setDescription("Unit Test value");
 
-        form.setAuditableEntity(newCurr);
+        form.setAuditableEntity(rollup);
         ModelAndView modelAndView = settingsController.insertRollup(form);
 
         Assert.notNull(modelAndView);
