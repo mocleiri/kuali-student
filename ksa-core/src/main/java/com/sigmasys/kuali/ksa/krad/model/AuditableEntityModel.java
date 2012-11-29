@@ -13,37 +13,38 @@ import java.util.Date;
  * Time: 11:43 AM
  */
 public class AuditableEntityModel extends AuditableEntity {
+
     private AuditableEntity parentEntity;
 
-    public AuditableEntityModel(AuditableEntity entity){
+    public AuditableEntityModel(AuditableEntity entity) {
         setAuditableEntity(entity);
     }
 
-    public void setAuditableEntity(AuditableEntity entity){
+    public void setAuditableEntity(AuditableEntity entity) {
         parentEntity = entity;
     }
 
-    public AuditableEntity getParentEntity(){
+    public AuditableEntity getParentEntity() {
         return parentEntity;
     }
 
-    public Currency getCurrency(){
-        if(parentEntity instanceof Currency){
-            return (Currency)parentEntity;
+    public Currency getCurrency() {
+        if (parentEntity instanceof Currency) {
+            return (Currency) parentEntity;
         }
         return null;
     }
 
-    public GeneralLedgerType getGeneralLedgerType(){
-        if(parentEntity instanceof GeneralLedgerType){
-            return (GeneralLedgerType)parentEntity;
+    public GeneralLedgerType getGeneralLedgerType() {
+        if (parentEntity instanceof GeneralLedgerType) {
+            return (GeneralLedgerType) parentEntity;
         }
         return null;
     }
 
-    public Rollup getRollup(){
-        if(parentEntity instanceof Rollup){
-            return (Rollup)parentEntity;
+    public Rollup getRollup() {
+        if (parentEntity instanceof Rollup) {
+            return (Rollup) parentEntity;
         }
         return null;
     }

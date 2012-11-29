@@ -47,4 +47,38 @@ public interface AuditableEntityService {
      */
     Long persistAuditableEntity(AuditableEntity entity);
 
+    /**
+     * Removes AuditableEntity entity by ID
+     *
+     * @param id Entity ID
+     * @return AuditableEntity instance
+     */
+    <T extends AuditableEntity> boolean deleteAuditableEntity(Long id, Class<T> entityClass);
+
+    /**
+     * Creates AuditableEntity based on the given parameters.
+     *
+     * @param code        Entity code
+     * @param name        Entity name
+     * @param description Entity description
+     * @param entityType  Class instance of AuditableEntity subclass
+     * @return AuditableEntity instance
+     */
+    <T extends AuditableEntity> T createAuditableEntity(String code, String name, String description, Class<T> entityType);
+
+    /**
+     * Returns Currency by ISO symbol
+     *
+     * @param code ISO currency code
+     * @return Currency instance
+     */
+    Currency getCurrency(String code);
+
+    /**
+     * Returns all currencies sorted by ISO in the ascending order
+     *
+     * @return List of currencies
+     */
+    List<Currency> getCurrencies();
+
 }

@@ -5,7 +5,7 @@ import com.sigmasys.kuali.ksa.krad.form.QuickViewForm;
 import com.sigmasys.kuali.ksa.krad.model.MemoModel;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
-import com.sigmasys.kuali.ksa.service.CurrencyService;
+import com.sigmasys.kuali.ksa.service.AuditableEntityService;
 import com.sigmasys.kuali.ksa.service.FeeManagementService;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import org.apache.commons.logging.Log;
@@ -31,7 +31,7 @@ public class QuickViewController extends GenericSearchController {
     private static final Log logger = LogFactory.getLog(QuickViewController.class);
 
     @Autowired
-    private CurrencyService currencyService;
+    private AuditableEntityService auditableEntityService;
 
     @Autowired
     private InformationService informationService;
@@ -63,14 +63,14 @@ public class QuickViewController extends GenericSearchController {
                 throw new IllegalStateException(errMsg);
             }
 
-             form.setAccount(account);
+            form.setAccount(account);
         } /*else {
            String errMsg = "'userId' request parameter cannot be null";
            logger.error(errMsg);
            throw new IllegalStateException(errMsg);
         }*/
 
-       return form;
+        return form;
     }
 
     /**
@@ -95,24 +95,24 @@ public class QuickViewController extends GenericSearchController {
             if (pageId == null) {
                 populateForm(userId, form);
             } else if (pageId.equals("QuickViewAddMemoPage")) {
-               if (userId == null || userId.isEmpty()) {
-                  throw new IllegalArgumentException("'userId' request parameter must be specified");
-               }
+                if (userId == null || userId.isEmpty()) {
+                    throw new IllegalArgumentException("'userId' request parameter must be specified");
+                }
 
-               // create a Memo, set defaults for the view
-               Account account = accountService.getFullAccount(userId);
-               String accountId = account.getId();
-               // don't create a persistent memo when adding a memo, just initialize one for use
-               // rather persist when the user submits (button control) an insert on the memo
-               Memo memo = new Memo();
-               memo.setAccount(account);
-               memo.setAccountId(accountId);
-               memo.setEffectiveDate(new Date());
-               memo.setText("");
-               memo.setAccessLevel(0);
+                // create a Memo, set defaults for the view
+                Account account = accountService.getFullAccount(userId);
+                String accountId = account.getId();
+                // don't create a persistent memo when adding a memo, just initialize one for use
+                // rather persist when the user submits (button control) an insert on the memo
+                Memo memo = new Memo();
+                memo.setAccount(account);
+                memo.setAccountId(accountId);
+                memo.setEffectiveDate(new Date());
+                memo.setText("");
+                memo.setAccessLevel(0);
 
-               MemoModel memoModel = new MemoModel(memo);
-               form.setMemoModel(memoModel);
+                MemoModel memoModel = new MemoModel(memo);
+                form.setMemoModel(memoModel);
 
             }
         }
@@ -195,47 +195,47 @@ public class QuickViewController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertMemo")
-    public ModelAndView insertMemo(@ModelAttribute("KualiForm") QuickViewForm form,  HttpServletRequest request) {
+    public ModelAndView insertMemo(@ModelAttribute("KualiForm") QuickViewForm form, HttpServletRequest request) {
         // do insert stuff...
 
-       String viewId = request.getParameter("viewId");
-       // example user1
-       String userId = request.getParameter("actionParameters[userId]");
+        String viewId = request.getParameter("viewId");
+        // example user1
+        String userId = request.getParameter("actionParameters[userId]");
 
-       logger.info("View: " + viewId + " User: " + userId);
+        logger.info("View: " + viewId + " User: " + userId);
 
-       // TODO validate the field entries before inserting
+        // TODO validate the field entries before inserting
 
-       MemoModel memoModel = form.getMemoModel();
+        MemoModel memoModel = form.getMemoModel();
 
-       String accountId = memoModel.getAccountId();
-       String memoText = memoModel.getText();
-       String memoAccessLevel = memoModel.getInfoAccessLevel();
-       int accessLevel = Integer.parseInt(memoAccessLevel);
-       Date effectiveDate = memoModel.getEffectiveDate();
-       Date expirationDate = memoModel.getExpirationDate();
-       Memo previousMemo = memoModel.getPreviousMemo();
-       Long previousMemoId = previousMemo != null ? previousMemo.getId() : null;
+        String accountId = memoModel.getAccountId();
+        String memoText = memoModel.getText();
+        String memoAccessLevel = memoModel.getInfoAccessLevel();
+        int accessLevel = Integer.parseInt(memoAccessLevel);
+        Date effectiveDate = memoModel.getEffectiveDate();
+        Date expirationDate = memoModel.getExpirationDate();
+        Memo previousMemo = memoModel.getPreviousMemo();
+        Long previousMemoId = previousMemo != null ? previousMemo.getId() : null;
 
-       try {
+        try {
 
-          Memo memo = informationService.createMemo(accountId, memoText, accessLevel, effectiveDate, expirationDate, previousMemoId);
+            Memo memo = informationService.createMemo(accountId, memoText, accessLevel, effectiveDate, expirationDate, previousMemoId);
 
-          Long persistResult = informationService.persistInformation(memo);
+            Long persistResult = informationService.persistInformation(memo);
 
-          if (persistResult >= 0) {
-             form.setStatusMessage("Success");
-             logger.info("Successful insert of memo number " + memo.getId().toString());
-          } else {
-             String failedMsg = "Failed to add memo. result code: " + persistResult.toString();
-             form.setStatusMessage(failedMsg);
+            if (persistResult >= 0) {
+                form.setStatusMessage("Success");
+                logger.info("Successful insert of memo number " + memo.getId().toString());
+            } else {
+                String failedMsg = "Failed to add memo. result code: " + persistResult.toString();
+                form.setStatusMessage(failedMsg);
 
-             form.setStatusMessage(failedMsg);
-          }
-       } catch(Exception exp) {
-          String errMsg = "'Failed to add memo. " + exp.getMessage();
-          logger.error(errMsg);
-       }
+                form.setStatusMessage(failedMsg);
+            }
+        } catch (Exception exp) {
+            String errMsg = "'Failed to add memo. " + exp.getMessage();
+            logger.error(errMsg);
+        }
 
         return getUIFModelAndView(form);
     }
@@ -278,7 +278,7 @@ public class QuickViewController extends GenericSearchController {
         Date lastAgeDate = chargeableAccount.getLateLastUpdate();
         form.setLastAgeDate(lastAgeDate);
 
-        Currency currency = currencyService.getCurrency("USD");
+        Currency currency = auditableEntityService.getCurrency("USD");
         form.setCurrency(currency);
 
         LatePeriod latePeriod = chargeableAccount.getLatePeriod();
@@ -290,22 +290,22 @@ public class QuickViewController extends GenericSearchController {
         // getOutstandingBalance above always ignores deferment per Paul setting the pastDue to the ageTotal
         BigDecimal pastDue = BigDecimal.ZERO;
         if (chargeableAccount.getAmountLate1() != null) {
-           form.setAged30(chargeableAccount.getAmountLate1().toString());
-           pastDue = pastDue.add(chargeableAccount.getAmountLate1());
+            form.setAged30(chargeableAccount.getAmountLate1().toString());
+            pastDue = pastDue.add(chargeableAccount.getAmountLate1());
         } else {
-           form.setAged30(BigDecimal.ZERO.toString());
+            form.setAged30(BigDecimal.ZERO.toString());
         }
         if (chargeableAccount.getAmountLate2() != null) {
-          form.setAged60(chargeableAccount.getAmountLate2().toString());
-           pastDue = pastDue.add(chargeableAccount.getAmountLate2());
+            form.setAged60(chargeableAccount.getAmountLate2().toString());
+            pastDue = pastDue.add(chargeableAccount.getAmountLate2());
         } else {
-           form.setAged60(BigDecimal.ZERO.toString());
+            form.setAged60(BigDecimal.ZERO.toString());
         }
         if (chargeableAccount.getAmountLate3() != null) {
-          form.setAged90(chargeableAccount.getAmountLate3().toString());
-           pastDue = pastDue.add(chargeableAccount.getAmountLate3());
+            form.setAged90(chargeableAccount.getAmountLate3().toString());
+            pastDue = pastDue.add(chargeableAccount.getAmountLate3());
         } else {
-           form.setAged90(BigDecimal.ZERO.toString());
+            form.setAged90(BigDecimal.ZERO.toString());
         }
 
         BigDecimal agedTotal = BigDecimal.ZERO;
@@ -324,7 +324,7 @@ public class QuickViewController extends GenericSearchController {
         form.setBalanceAmount(balance.toString());
         form.setFutureAmount(future.toString());
         if (deferment != null) {
-           form.setDefermentAmount(deferment.toString());
+            form.setDefermentAmount(deferment.toString());
         }
 
         int itemsPerPage = Integer.valueOf(configService.getInitialParameter(Constants.QUICKVIEW_INFORMATION_COUNT));
@@ -335,7 +335,7 @@ public class QuickViewController extends GenericSearchController {
         //Collections.sort(alertsAll, comparitor1);
 
         List<Alert> alerts = new ArrayList<Alert>();
-        for (int i=0; i < itemsPerPage && i < alertsAll.size(); i++) {
+        for (int i = 0; i < itemsPerPage && i < alertsAll.size(); i++) {
             alerts.add(alertsAll.get(i));
         }
 
@@ -347,7 +347,7 @@ public class QuickViewController extends GenericSearchController {
         //Collections.sort(flagAll, comparitor2);
 
         List<Flag> flags = new ArrayList<Flag>();
-        for (int i=0; i < itemsPerPage && i < flagAll.size(); i++) {
+        for (int i = 0; i < itemsPerPage && i < flagAll.size(); i++) {
             flags.add(flagAll.get(i));
         }
 
@@ -360,47 +360,12 @@ public class QuickViewController extends GenericSearchController {
         //MemoDateComparatorAscending comparator3 = new MemoDateComparatorAscending();
         //Collections.sort(memoList, comparator3);
 
-        for (int i=0; i < itemsPerPage && i < memoList.size(); i++) {
-           Memo memo = memoList.get(i);
-           MemoModel memoModel = new MemoModel(memo);
-           memoModelList.add(memoModel);
+        for (int i = 0; i < itemsPerPage && i < memoList.size(); i++) {
+            Memo memo = memoList.get(i);
+            MemoModel memoModel = new MemoModel(memo);
+            memoModelList.add(memoModel);
         }
 
         form.setMemoModels(memoModelList);
-    }
-}
-
-class MemoDateComparatorAscending implements Comparator<Memo> {
-    @Override
-    public int compare(Memo m1, Memo m2) {
-        Date d1 = m1.getEffectiveDate();
-        Date d2 = m2.getEffectiveDate();
-        if(d1 == null && d2 == null){ return 0; }
-        if(d1 == null){ return 1; }
-        if(d2 == null){ return -1; }
-        return d1.compareTo(d2);
-    }
-}
-
-class AlertDateComparatorAscending implements Comparator<Alert> {
-    @Override
-    public int compare(Alert a1, Alert a2) {
-        Date d1 = a1.getEffectiveDate();
-        Date d2 = a2.getEffectiveDate();
-        if(d1 == null && d2 == null){ return 0; }
-        if(d1 == null){ return 1; }
-        if(d2 == null){ return -1; }
-        return d1.compareTo(d2);
-    }
-}
-class FlagDateComparatorAscending implements Comparator<Flag> {
-    @Override
-    public int compare(Flag f1, Flag f2) {
-        Date d1 = f1.getEffectiveDate();
-        Date d2 = f2.getEffectiveDate();
-        if(d1 == null && d2 == null){ return 0; }
-        if(d1 == null){ return 1; }
-        if(d2 == null){ return -1; }
-        return d1.compareTo(d2);
     }
 }

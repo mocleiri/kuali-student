@@ -75,4 +75,69 @@ public class AuditableEntityServiceImpl extends GenericPersistenceService implem
         return persistEntity(entity);
     }
 
+    /**
+     * Removes AuditableEntity entity by ID
+     *
+     * @param id Entity ID
+     * @return AuditableEntity instance
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public <T extends AuditableEntity> boolean deleteAuditableEntity(Long id, Class<T> entityClass) {
+        return deleteEntity(id, entityClass);
+    }
+
+    /**
+     * Creates AuditableEntity based on the given parameters.
+     *
+     * @param code        Entity code
+     * @param name        Entity name
+     * @param description Entity description
+     * @param entityType  Class instance of AuditableEntity subclass
+     * @return AuditableEntity instance
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public <T extends AuditableEntity> T createAuditableEntity(String code, String name, String description, Class<T> entityType) {
+        try {
+            T entity = entityType.newInstance();
+            entity.setCode(code);
+            entity.setName(name != null ? name : code);
+            entity.setDescription(description);
+            persistAuditableEntity(entity);
+            return entity;
+        } catch (Exception e) {
+            String errMsg = "Cannot create an instance of " + entityType.getName() + " class. " + e.getMessage();
+            logger.error(errMsg, e);
+            throw new RuntimeException(errMsg, e);
+        }
+    }
+
+    /**
+     * Returns Currency by ISO symbol
+     *
+     * @param code ISO currency code
+     * @return Currency instance
+     */
+    @Override
+    public Currency getCurrency(String code) {
+        Query query = em.createQuery("select c from Currency c where upper(c.code) = upper(:code)");
+        query.setParameter("code", code);
+        List<Currency> currencies = query.getResultList();
+        if (currencies != null && !currencies.isEmpty()) {
+            return currencies.get(0);
+        }
+        throw new IllegalArgumentException("Currency with ISO = '" + code + "' does not exist");
+    }
+
+    /**
+     * Returns all currencies sorted by ISO in the ascending order
+     *
+     * @return List of currencies
+     */
+    @Override
+    public List<Currency> getCurrencies() {
+        return getEntities(Currency.class, new Pair<String, SortOrder>("code", SortOrder.ASC));
+    }
+
 }

@@ -11,8 +11,7 @@ import static com.sigmasys.kuali.ksa.util.CommonUtils.nvl;
  * <p/>
  *
  * @author Michael Ivanov
- *         Date: 3/13/12
- *         Time: 3:56 PM
+ *
  */
 @Entity
 @Table(name = "KSSA_POSTAL_ADDRESS")
@@ -235,6 +234,7 @@ public class PostalAddress implements Identifiable {
             postalAddressBuilder.append(country);
             return postalAddressBuilder.toString();
         }
+
         return "";
     }
 

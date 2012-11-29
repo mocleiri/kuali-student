@@ -12,6 +12,7 @@ import javax.persistence.Query;
 
 import com.sigmasys.kuali.ksa.exception.*;
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.util.TransactionUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -21,13 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sigmasys.kuali.ksa.service.AccessControlService;
-import com.sigmasys.kuali.ksa.service.AccountService;
-import com.sigmasys.kuali.ksa.service.CalendarService;
-import com.sigmasys.kuali.ksa.service.CurrencyService;
-import com.sigmasys.kuali.ksa.service.GeneralLedgerService;
-import com.sigmasys.kuali.ksa.service.InformationService;
-import com.sigmasys.kuali.ksa.service.TransactionService;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 
@@ -58,7 +52,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     private AccountService accountService;
 
     @Autowired
-    private CurrencyService currencyService;
+    private AuditableEntityService auditableEntityService;
 
     @Autowired
     private CalendarService calendarService;
@@ -229,7 +223,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
 
         String currencyCode = java.util.Currency.getInstance(Locale.getDefault()).getCurrencyCode();
-        com.sigmasys.kuali.ksa.model.Currency currency = currencyService.getCurrency(currencyCode);
+        com.sigmasys.kuali.ksa.model.Currency currency = auditableEntityService.getCurrency(currencyCode);
         if (currency == null) {
             String errMsg = "Currency does not exist for the given ISO code = " + currencyCode;
             logger.error(errMsg);

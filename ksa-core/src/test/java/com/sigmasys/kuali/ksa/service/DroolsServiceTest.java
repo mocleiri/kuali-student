@@ -27,7 +27,7 @@ import java.util.Map;
 public class DroolsServiceTest extends AbstractServiceTest {
 
     @Autowired
-    private CurrencyService currencyService;
+    private AuditableEntityService auditableEntityService;
 
     @Autowired
     private DroolsService droolsService;
@@ -70,24 +70,24 @@ public class DroolsServiceTest extends AbstractServiceTest {
     @Test
     public void fireFeeAssessmentRules2() throws Exception {
 
-           DroolsContext droolsContext = new DroolsContext();
-           droolsContext.setAccount(accountService.getFullAccount("admin"));
+        DroolsContext droolsContext = new DroolsContext();
+        droolsContext.setAccount(accountService.getFullAccount("admin"));
 
-           Map<String, Object> globalParams = new HashMap<String, Object>();
-           globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
+        Map<String, Object> globalParams = new HashMap<String, Object>();
+        globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
 
-           droolsContext = droolsService.fireRules("fee_assessment.dslr", ResourceType.DSLR, droolsContext, globalParams);
+        droolsContext = droolsService.fireRules("fee_assessment.dslr", ResourceType.DSLR, droolsContext, globalParams);
 
-           Assert.notNull(droolsContext);
-           Assert.notNull(droolsContext.getAccount());
-           Assert.isTrue("admin".equals(droolsContext.getAccount().getId()));
+        Assert.notNull(droolsContext);
+        Assert.notNull(droolsContext.getAccount());
+        Assert.isTrue("admin".equals(droolsContext.getAccount().getId()));
 
-     }
+    }
 
     //@Test
     public void fireCurrencyRules() throws Exception {
 
-        Currency currency = currencyService.getCurrency("USD");
+        Currency currency = auditableEntityService.getCurrency("USD");
 
         Assert.notNull(currency);
         Assert.isTrue(currency.getCode().equals("USD"));

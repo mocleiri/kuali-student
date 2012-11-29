@@ -53,7 +53,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     private CalendarService calendarService;
 
     @Autowired
-    private CurrencyService currencyService;
+    private AuditableEntityService auditableEntityService;
 
     @Autowired
     private TransactionService transactionService;
@@ -440,7 +440,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
         transaction.setNativeAmount(ksaTransaction.getNativeAmount());
         transaction.setOriginationDate(CalendarUtils.toDate(ksaTransaction.getOriginationDate()));
-        transaction.setCurrency(currencyService.getCurrency(ksaTransaction.getCurrency()));
+        transaction.setCurrency(auditableEntityService.getCurrency(ksaTransaction.getCurrency()));
         transaction.setExternalId(ksaTransaction.getIncomingIdentifier());
 
         KsaTransaction.Override override = ksaTransaction.getOverride();

@@ -20,7 +20,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses(value = {
         DatabaseUtilsTest.class,
         TransactionServiceTest.class,
-        CurrencyServiceTest.class,
+        AuditableEntityServiceTest.class,
         AccountServiceTest.class,
         ActivityServiceTest.class,
         KimServiceTest.class,

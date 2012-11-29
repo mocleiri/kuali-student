@@ -4,7 +4,7 @@ import com.sigmasys.kuali.ksa.krad.form.TransactionForm;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.ActivityService;
-import com.sigmasys.kuali.ksa.service.CurrencyService;
+import com.sigmasys.kuali.ksa.service.AuditableEntityService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ public class TransactionController extends GenericSearchController {
     private ActivityService activityService;
 
     @Autowired
-    private CurrencyService currencyService;
+    private AuditableEntityService auditableEntityService;
 
 
     /**
@@ -44,7 +44,7 @@ public class TransactionController extends GenericSearchController {
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=save")
     public ModelAndView save(@ModelAttribute("KualiForm") TransactionForm form) {
-        currencyService.persistCurrency(form.getCurrency());
+        auditableEntityService.persistAuditableEntity(form.getCurrency());
         return getUIFModelAndView(form);
     }
 
@@ -142,10 +142,10 @@ public class TransactionController extends GenericSearchController {
                 }
 
                 // remove a currency record by ID
-                boolean rowsAffected = currencyService.deleteCurrency(Long.valueOf(id));
+                auditableEntityService.deleteAuditableEntity(Long.valueOf(id), Currency.class);
             }
 
-            form.setCurrencies(currencyService.getCurrencies());
+            form.setCurrencies(auditableEntityService.getCurrencies());
         }
 
         // Currency type edit
@@ -156,7 +156,7 @@ public class TransactionController extends GenericSearchController {
                 throw new IllegalArgumentException("'code' request parameter must be specified");
             }
 
-            Currency currency = currencyService.getCurrency(code);
+            Currency currency = auditableEntityService.getCurrency(code);
 
             form.setCurrency(currency);
         }
@@ -227,10 +227,10 @@ public class TransactionController extends GenericSearchController {
         currency.setDescription(form.getCurrencyDescription());
 
         // remove a currency record by ISO type
-        currencyService.persistCurrency(currency);
+        auditableEntityService.persistAuditableEntity(currency);
 
         // refresh the list of currencies. the form and view manage the refresh
-        form.setCurrencies(currencyService.getCurrencies());
+        form.setCurrencies(auditableEntityService.getCurrencies());
 
         return getUIFModelAndView(form);
     }
