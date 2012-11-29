@@ -2,9 +2,7 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.SettingsForm;
 import com.sigmasys.kuali.ksa.krad.model.AuditableEntityModel;
-import com.sigmasys.kuali.ksa.model.AuditableEntity;
-import com.sigmasys.kuali.ksa.model.Currency;
-import com.sigmasys.kuali.ksa.model.Rollup;
+import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AuditableEntityService;
 import com.sigmasys.kuali.ksa.service.CurrencyService;
 import org.apache.commons.logging.Log;
@@ -81,6 +79,54 @@ public class SettingsController extends GenericSearchController {
                 throw new IllegalArgumentException("'entityId' request parameter must be specified");
             }
             form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), Rollup.class));
+        } else if ("BankTypePage".equals(pageId)) {
+            form.setAuditableEntity(new BankType());
+            form.setAuditableEntities(auditableEntityService.getAuditableEntities(BankType.class));
+        } else if ("BankTypeDetailsPage".equals(pageId)) {
+            if (entityId == null || entityId.trim().isEmpty()) {
+                throw new IllegalArgumentException("'entityId' request parameter must be specified");
+            }
+            form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), BankType.class));
+        } else if ("TaxTypePage".equals(pageId)) {
+            form.setAuditableEntity(new TaxType());
+            form.setAuditableEntities(auditableEntityService.getAuditableEntities(TaxType.class));
+        } else if ("TaxTypeDetailsPage".equals(pageId)) {
+            if (entityId == null || entityId.trim().isEmpty()) {
+                throw new IllegalArgumentException("'entityId' request parameter must be specified");
+            }
+            form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), LatePeriod.class));
+        } else if ("LatePeriodPage".equals(pageId)) {
+            form.setAuditableEntity(new LatePeriod());
+            form.setAuditableEntities(auditableEntityService.getAuditableEntities(LatePeriod.class));
+        } else if ("LatePeriodDetailsPage".equals(pageId)) {
+            if (entityId == null || entityId.trim().isEmpty()) {
+                throw new IllegalArgumentException("'entityId' request parameter must be specified");
+            }
+            form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), LatePeriod.class));
+        } else if ("AccountStatusTypePage".equals(pageId)) {
+            form.setAuditableEntity(new AccountStatusType());
+            form.setAuditableEntities(auditableEntityService.getAuditableEntities(AccountStatusType.class));
+        } else if ("AccountStatusTypeDetailsPage".equals(pageId)) {
+            if (entityId == null || entityId.trim().isEmpty()) {
+                throw new IllegalArgumentException("'entityId' request parameter must be specified");
+            }
+            form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), AccountStatusType.class));
+        } else if ("FlagTypePage".equals(pageId)) {
+            form.setAuditableEntity(new FlagType());
+            form.setAuditableEntities(auditableEntityService.getAuditableEntities(FlagType.class));
+        } else if ("FlagTypeDetailsPage".equals(pageId)) {
+            if (entityId == null || entityId.trim().isEmpty()) {
+                throw new IllegalArgumentException("'entityId' request parameter must be specified");
+            }
+            form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), FlagType.class));
+        } else if ("ActivityTypePage".equals(pageId)) {
+            form.setAuditableEntity(new ActivityType());
+            form.setAuditableEntities(auditableEntityService.getAuditableEntities(ActivityType.class));
+        } else if ("ActivityTypeDetailsPage".equals(pageId)) {
+            if (entityId == null || entityId.trim().isEmpty()) {
+                throw new IllegalArgumentException("'entityId' request parameter must be specified");
+            }
+            form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), ActivityType.class));
         }
 
         return getUIFModelAndView(form);
@@ -111,7 +157,7 @@ public class SettingsController extends GenericSearchController {
      * @param form
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertCurrency")
+    /*@RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertCurrency")
     public ModelAndView insertCurrency(@ModelAttribute("KualiForm") SettingsForm form) {
         AuditableEntityModel entity = form.getAuditableEntity();
         if (!(entity.getParentEntity() instanceof Currency)) {
@@ -123,22 +169,7 @@ public class SettingsController extends GenericSearchController {
         return insertAuditableEntity(form);
     }
 
-    /**
-     * @param form
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertRollup")
-    public ModelAndView insertRollup(@ModelAttribute("KualiForm") SettingsForm form) {
-        AuditableEntityModel entity = form.getAuditableEntity();
-        if (!(entity.getParentEntity() instanceof Rollup)) {
-            String errMsg = "Entity must be of Rollup type";
-            logger.error(errMsg);
-            throw new IllegalStateException(errMsg);
-        }
-
-        return insertAuditableEntity(form);
-    }
-
+    */
     /**
      * @param form
      * @return
@@ -173,21 +204,12 @@ public class SettingsController extends GenericSearchController {
      * @param request
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updateCurrency")
+/*    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updateCurrency")
     public ModelAndView updateCurrency(@ModelAttribute("KualiForm") SettingsForm form, HttpServletRequest request) {
 
         return updateAuditableEntity(form);
     }
-
-    /**
-     * @param form
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updateRollup")
-    public ModelAndView updateRollup(@ModelAttribute("KualiForm") SettingsForm form) {
-
-        return updateAuditableEntity(form);
-    }
+  */
 
     public <T extends AuditableEntity> ModelAndView updateAuditableEntity(@ModelAttribute("KualiForm")
                                                                            SettingsForm form) {

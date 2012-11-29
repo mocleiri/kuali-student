@@ -340,7 +340,7 @@
                               p:watermarkText="Paste or key in the description here..."/>
                     </property>
                 </bean>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertCurrency" p:actionLabel="Add"/>
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insertAuditableEntity" p:actionLabel="Add"/>
                 <!--  Status message -->
                 <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
 
@@ -449,7 +449,7 @@
                               p:watermarkText="Key in the statement description here..."/>
                     </property>
                 </bean>
-                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="updateCurrency"
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="updateAuditableEntity"
                       p:actionLabel="Submit"
                       p:onClickScript="writeHiddenToForm(&quot;actionParameters[currencyId]&quot;, &quot;@{currency.id}&quot;);">
                     <!--<property name="actionImage">

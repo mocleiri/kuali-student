@@ -105,7 +105,7 @@ public class SettingsControllerTest extends AbstractServiceTest {
         newCurr.setDescription("Unit Test value");
 
         form.setAuditableEntity(newCurr);
-        ModelAndView modelAndView = settingsController.insertCurrency(form);
+        ModelAndView modelAndView = settingsController.insertAuditableEntity(form);
 
         Assert.notNull(modelAndView);
         Assert.notNull(form);
@@ -163,7 +163,7 @@ public class SettingsControllerTest extends AbstractServiceTest {
         rollup.setDescription("Unit Test value");
 
         form.setAuditableEntity(rollup);
-        ModelAndView modelAndView = settingsController.insertRollup(form);
+        ModelAndView modelAndView = settingsController.insertAuditableEntity(form);
 
         Assert.notNull(modelAndView);
         Assert.notNull(form);
