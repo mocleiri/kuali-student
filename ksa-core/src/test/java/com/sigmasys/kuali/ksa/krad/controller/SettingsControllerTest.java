@@ -99,6 +99,7 @@ public class SettingsControllerTest extends AbstractServiceTest {
 
     @Test
     public void insertCurrency() throws Exception {
+
         Currency newCurr = new Currency();
         newCurr.setCode("TEST");
         newCurr.setDescription("Unit Test value");
