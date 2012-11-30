@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.MemoForm;
-import com.sigmasys.kuali.ksa.krad.model.MemoModel;
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.Memo;
 import com.sigmasys.kuali.ksa.service.InformationService;
@@ -18,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -74,51 +72,44 @@ public class MemoController extends GenericSearchController {
                             HttpServletRequest request, HttpServletResponse response) {
         // do get stuff...
 
-       String viewId = request.getParameter("viewId");
-       String pageId = request.getParameter("pageId");
-       // example user1
-       String userId = request.getParameter("userId");
-       // a record index from a table selection or a known memoId
-       String memoId = request.getParameter("memoId");
+        String viewId = request.getParameter("viewId");
+        String pageId = request.getParameter("pageId");
+        // example user1
+        String userId = request.getParameter("userId");
+        // a record index from a table selection or a known memoId
+        String memoId = request.getParameter("memoId");
 
-       logger.info("View: " + viewId + " User: " + userId + " Memo ID: " + memoId);
+        logger.info("View: " + viewId + " User: " + userId + " Memo ID: " + memoId);
 
         if (pageId != null && pageId.equals("MemosPage")) {
             if (userId == null || userId.isEmpty()) {
                 throw new IllegalArgumentException("'userId' request parameter must be specified");
             }
 
-            List<Memo> memoList = informationService.getMemos(userId);
-            List<MemoModel> memoModelList = new ArrayList<MemoModel>();
+            List<Memo> memos = informationService.getMemos(userId);
 
-            for (Memo memo : memoList) {
-               MemoModel memoModel = new MemoModel(memo);
-               memoModelList.add(memoModel);
-            }
-
-            form.setMemoModels(memoModelList);
+            form.setMemoModels(memos);
 
         } else if (pageId != null && pageId.equals("AddMemoPage")) {
-           if (userId == null || userId.isEmpty()) {
-              throw new IllegalArgumentException("'userId' request parameter must be specified");
-           }
+            if (userId == null || userId.isEmpty()) {
+                throw new IllegalArgumentException("'userId' request parameter must be specified");
+            }
 
-           // create a Memo, set defaults for the view
-           Account account = accountService.getFullAccount(userId);
-           String accountId = account.getId();
-           // don't create a persistent memo when adding a memo, just initialize one for use
-           // rather persist when the user submits (button control) an insert on the memo
-           Memo memo = new Memo();
-           memo.setAccount(account);
-           memo.setAccountId(accountId);
-           memo.setEffectiveDate(new Date());
-           memo.setText("");
-           memo.setAccessLevel(0);
+            // create a Memo, set defaults for the view
+            Account account = accountService.getFullAccount(userId);
+            String accountId = account.getId();
+            // don't create a persistent memo when adding a memo, just initialize one for use
+            // rather persist when the user submits (button control) an insert on the memo
+            Memo memo = new Memo();
+            memo.setAccount(account);
+            memo.setAccountId(accountId);
+            memo.setEffectiveDate(new Date());
+            memo.setText("");
+            memo.setAccessLevel(0);
 
-           MemoModel memoModel = new MemoModel(memo);
-           form.setMemoModel(memoModel);
+            form.setMemoModel(memo);
 
-           form.setAefInstructionalText("Add a memo");
+            form.setAefInstructionalText("Add a memo");
 
         } else if (pageId != null && pageId.equals("ViewMemoPage")) {
             if (userId == null || userId.isEmpty()) {
@@ -126,13 +117,13 @@ public class MemoController extends GenericSearchController {
             }
 
             try {
-               Memo memo = informationService.getMemo(new Long(memoId));
-               if (memo != null) {
-                  form.setMemoModel(new MemoModel(memo));
-               }
+                Memo memo = informationService.getMemo(new Long(memoId));
+                if (memo != null) {
+                    form.setMemoModel(memo);
+                }
             } catch (Exception exp) {
-               String errMsg = "'memoId' request parameter cannot be null";
-               logger.error(errMsg);
+                String errMsg = "'memoId' request parameter cannot be null";
+                logger.error(errMsg);
             }
 
             form.setAefInstructionalText("View a memo");
@@ -143,13 +134,13 @@ public class MemoController extends GenericSearchController {
             }
 
             try {
-               Memo memo = informationService.getMemo(new Long(memoId));
-               if (memo != null) {
-                  form.setMemoModel(new MemoModel(memo));
-               }
+                Memo memo = informationService.getMemo(new Long(memoId));
+                if (memo != null) {
+                    form.setMemoModel(memo);
+                }
             } catch (Exception exp) {
-               String errMsg = "'memoId' request parameter cannot be null";
-               logger.error(errMsg);
+                String errMsg = "'memoId' request parameter cannot be null";
+                logger.error(errMsg);
             }
 
             form.setAefInstructionalText("Edit a memo");
@@ -159,17 +150,17 @@ public class MemoController extends GenericSearchController {
                 throw new IllegalArgumentException("'userId' request parameter must be specified");
             }
 
-           try {
-              Memo memo = informationService.getMemo(new Long(memoId));
-              if (memo != null) {
-                 form.setMemoModel(new MemoModel(memo));
-              }
-           } catch (Exception exp) {
-              String errMsg = "'memoId' request parameter cannot be null";
-              logger.error(errMsg);
-           }
+            try {
+                Memo memo = informationService.getMemo(new Long(memoId));
+                if (memo != null) {
+                    form.setMemoModel(memo);
+                }
+            } catch (Exception exp) {
+                String errMsg = "'memoId' request parameter cannot be null";
+                logger.error(errMsg);
+            }
 
-           form.setAefInstructionalText("Follow-up a memo");
+            form.setAefInstructionalText("Follow-up a memo");
         }
 
         return getUIFModelAndView(form);
@@ -248,21 +239,20 @@ public class MemoController extends GenericSearchController {
                                    HttpServletRequest request, HttpServletResponse response) {
         // do insert stuff...
 
-       String viewId = request.getParameter("viewId");
-       // example user1
-       String userId = request.getParameter("userId");
-       String userIdap = request.getParameter("actionParameters[userId]");
+        String viewId = request.getParameter("viewId");
+        // example user1
+        String userId = request.getParameter("userId");
+        String userIdap = request.getParameter("actionParameters[userId]");
 
-       logger.info("View: " + viewId + " User: " + userId);
+        logger.info("View: " + viewId + " User: " + userId);
 
         // TODO validate the field entries before inserting
 
-        MemoModel memoModel = form.getMemoModel();
+        Memo memoModel = form.getMemoModel();
 
         String accountId = memoModel.getAccountId();
         String memoText = memoModel.getText();
-        String memoAccessLevel = memoModel.getInfoAccessLevel();
-        int accessLevel = Integer.parseInt(memoAccessLevel);
+        Integer accessLevel = memoModel.getAccessLevel();
         Date effectiveDate = memoModel.getEffectiveDate();
         Date expirationDate = memoModel.getExpirationDate();
         Memo previousMemo = memoModel.getPreviousMemo();
@@ -270,25 +260,25 @@ public class MemoController extends GenericSearchController {
 
         try {
 
-          Memo memo = informationService.createMemo(accountId, memoText, accessLevel, effectiveDate, expirationDate, previousMemoId);
+            Memo memo = informationService.createMemo(accountId, memoText, accessLevel, effectiveDate, expirationDate, previousMemoId);
 
-           Long persistResult = informationService.persistInformation(memo);
+            Long persistResult = informationService.persistInformation(memo);
 
-           if (persistResult >= 0) {
-              form.setStatusMessage("Success");
-              logger.info("Successful insert of memo number " + memo.getId().toString());
-           } else {
-              String failedMsg = "Failed to add memo. result code: " + persistResult.toString();
-              form.setStatusMessage(failedMsg);
+            if (persistResult >= 0) {
+                form.setStatusMessage("Success");
+                logger.info("Successful insert of memo number " + memo.getId().toString());
+            } else {
+                String failedMsg = "Failed to add memo. result code: " + persistResult.toString();
+                form.setStatusMessage(failedMsg);
 
-              form.setStatusMessage(failedMsg);
-           }
-        } catch(Exception exp) {
-           String errMsg = "'Failed to add memo. " + exp.getLocalizedMessage();
-           logger.error(errMsg);
+                form.setStatusMessage(failedMsg);
+            }
+        } catch (Exception exp) {
+            String errMsg = "'Failed to add memo. " + exp.getLocalizedMessage();
+            logger.error(errMsg);
         }
 
-       return getUIFModelAndView(form);
+        return getUIFModelAndView(form);
     }
 
     /**
@@ -303,17 +293,17 @@ public class MemoController extends GenericSearchController {
                                    HttpServletRequest request, HttpServletResponse response) {
         // do updateMemo stuff...
 
-       String viewId = request.getParameter("viewId");
-       // example user1
-       String userId = request.getParameter("actionParameters[userId]");
-       // a record index from a table selection or a known memoId
-       String memoId = request.getParameter("actionParameters[memoId]");
+        String viewId = request.getParameter("viewId");
+        // example user1
+        String userId = request.getParameter("actionParameters[userId]");
+        // a record index from a table selection or a known memoId
+        String memoId = request.getParameter("actionParameters[memoId]");
 
-       logger.info("View: " + viewId + " User: " + userId + " Memo ID: " + memoId);
+        logger.info("View: " + viewId + " User: " + userId + " Memo ID: " + memoId);
 
-       this.updateMemo(form, memoId);
+        this.updateMemo(form, memoId);
 
-       return getUIFModelAndView(form);
+        return getUIFModelAndView(form);
     }
 
     /**
@@ -328,54 +318,56 @@ public class MemoController extends GenericSearchController {
                                      HttpServletRequest request, HttpServletResponse response) {
         // do follow-up stuff...
 
-       String viewId = request.getParameter("viewId");
-       // example user1
-       String userId = request.getParameter("actionParameters[userId]");
-       // a record index from a table selection or a known memoId
-       String memoId = request.getParameter("actionParameters[memoId]");
+        String viewId = request.getParameter("viewId");
+        // example user1
+        String userId = request.getParameter("actionParameters[userId]");
+        // a record index from a table selection or a known memoId
+        String memoId = request.getParameter("actionParameters[memoId]");
 
-       logger.info("View: " + viewId + " User: " + userId + " Memo ID: " + memoId);
+        logger.info("View: " + viewId + " User: " + userId + " Memo ID: " + memoId);
 
-       this.updateMemo(form, memoId);
+        this.updateMemo(form, memoId);
 
-       return getUIFModelAndView(form);
+        return getUIFModelAndView(form);
     }
 
-   private void updateMemo(MemoForm form, String memoId) {
+    private void updateMemo(MemoForm form, String memoId) {
 
-      Memo memo = null;
-      try {
-         memo = informationService.getMemo(new Long(memoId));
+        try {
 
-         if (memo != null) {
-            MemoModel memoModel = form.getMemoModel();
-            String memoAccessLevel = memoModel.getInfoAccessLevel();
-            int accessLevel = Integer.parseInt(memoAccessLevel);
-            memo.setEffectiveDate(memoModel.getEffectiveDate());
-            memo.setExpirationDate(memoModel.getExpirationDate());
-            memo.setText(memoModel.getText());
-            memo.setAccessLevel(accessLevel);
+            Memo memo = informationService.getMemo(new Long(memoId));
 
-            Long persistResult = informationService.persistInformation(memo);
+            if (memo != null) {
+                Memo memoModel = form.getMemoModel();
+                Integer accessLevel = memoModel.getAccessLevel();
+                memo.setEffectiveDate(memoModel.getEffectiveDate());
+                memo.setExpirationDate(memoModel.getExpirationDate());
+                memo.setText(memoModel.getText());
+                memo.setAccessLevel(accessLevel);
 
-            if (persistResult >= 0) {
-               form.setStatusMessage("Success");
-               logger.info("Successful update of memo number " + memoId);
-            } else {
-               String failedMsg = "Failed to update memo number " + memoId + " result code: " + persistResult.toString();
-               form.setStatusMessage(failedMsg);
-               logger.error(failedMsg);
+                Long persistResult = informationService.persistInformation(memo);
+
+                if (persistResult >= 0) {
+                    form.setStatusMessage("Success");
+                    logger.info("Successful update of memo number " + memoId);
+                } else {
+                    String failedMsg = "Failed to update memo number " + memoId + " result code: " + persistResult.toString();
+                    form.setStatusMessage(failedMsg);
+                    logger.error(failedMsg);
+                }
             }
-         }
-      } catch (Exception exp) {
-         String errMsg = "'memoId' request parameter cannot be null";
-         logger.error(errMsg);
-      }
 
-      // refresh the view page section
-      memo = informationService.getMemo(new Long(memoId));
-      if (memo != null) {
-         form.setMemoModel(new MemoModel(memo));
-      }
-   }
+            // refresh the view page section
+            memo = informationService.getMemo(new Long(memoId));
+            if (memo != null) {
+                form.setMemoModel(memo);
+            }
+
+        } catch (Exception exp) {
+            String errMsg = "'memoId' request parameter cannot be null";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+    }
 }

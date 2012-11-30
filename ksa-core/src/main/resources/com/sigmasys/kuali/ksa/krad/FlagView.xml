@@ -149,7 +149,7 @@
           p:instructionalText="The following is a list of flags for the selected account @{account.id}"
           p:width="85%">
         <property name="readOnly" value="true"/>
-        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.krad.model.FlagModel"/>
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Flag"/>
         <property name="propertyName" value="flagModels"/>
         <property name="layoutManager.sequencePropertyName" value="id"/>
         <property name="layoutManager.richTable.render" value="false"/>

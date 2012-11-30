@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.FlagForm;
-import com.sigmasys.kuali.ksa.krad.model.FlagModel;
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.Flag;
 import com.sigmasys.kuali.ksa.model.FlagType;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,146 +24,119 @@ import java.util.List;
 @RequestMapping(value = "/flagView")
 public class FlagController extends GenericSearchController {
 
-   private static final Log logger = LogFactory.getLog(FlagController.class);
+    private static final Log logger = LogFactory.getLog(FlagController.class);
 
-   @Autowired
-   private InformationService informationService;
+    @Autowired
+    private InformationService informationService;
 
-   /**
-    * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
-    */
-   @Override
-   protected FlagForm createInitialForm(HttpServletRequest request) {
-      FlagForm form = new FlagForm();
-      String userId = request.getParameter("userId");
+    /**
+     * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
+     */
+    @Override
+    protected FlagForm createInitialForm(HttpServletRequest request) {
+        FlagForm form = new FlagForm();
+        String userId = request.getParameter("userId");
 
-      if (userId != null) {
+        if (userId != null) {
 
-         Account account = accountService.getFullAccount(userId);
+            Account account = accountService.getFullAccount(userId);
 
-         if (account == null) {
-            String errMsg = "Cannot find Account by ID = " + userId;
-            logger.error(errMsg);
-            throw new IllegalStateException(errMsg);
-         }
+            if (account == null) {
+                String errMsg = "Cannot find Account by ID = " + userId;
+                logger.error(errMsg);
+                throw new IllegalStateException(errMsg);
+            }
 
-         form.setAccount(account);
-      } /*else {
+            form.setAccount(account);
+        } /*else {
            String errMsg = "'userId' request parameter cannot be null";
            logger.error(errMsg);
            throw new IllegalStateException(errMsg);
         }*/
 
-      return form;
-   }
+        return form;
+    }
 
-   /**
-    *
-    * @param form
-    * @param request
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-   public ModelAndView get(@ModelAttribute("KualiForm") FlagForm form, HttpServletRequest request) {
+    /**
+     * @param form
+     * @param request
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
+    public ModelAndView get(@ModelAttribute("KualiForm") FlagForm form, HttpServletRequest request) {
 
-      // do get stuff...
+        // do get stuff...
 
-      String pageId = request.getParameter("pageId");
-      // example user 1
-      String userId = request.getParameter("userId");
+        String pageId = request.getParameter("pageId");
+        // example user 1
+        String userId = request.getParameter("userId");
 
-      if (pageId != null && pageId.equals("FlagsPage")) {
+        if (pageId != null && pageId.equals("FlagsPage")) {
 
-         if (userId == null || userId.isEmpty()) {
-            throw new IllegalArgumentException("'userId' request parameter must be specified");
-         }
-         List<Flag> flags = informationService.getFlags(userId);
-         List<FlagModel> flagModels = new ArrayList<FlagModel>();
+            if (userId == null || userId.isEmpty()) {
+                throw new IllegalArgumentException("'userId' request parameter must be specified");
+            }
+            List<Flag> flags = informationService.getFlags(userId);
 
-         for (Flag flag : flags) {
-            FlagModel flagModel = new FlagModel(flag);
-            flagModels.add(flagModel);
-         }
+            form.setFlagModels(flags);
 
-         form.setFlagModels(flagModels);
+        } else if (pageId != null && pageId.equals("AddFlagPage")) {
+            if (userId == null || userId.isEmpty()) {
+                throw new IllegalArgumentException("'userId' request parameter must be specified");
+            }
+            form.setAeInstructionalText("Add a flag");
 
-      }else if (pageId != null && pageId.equals("AddFlagPage")) {
-         if (userId == null || userId.isEmpty()) {
-            throw new IllegalArgumentException("'userId' request parameter must be specified");
-         }
-         form.setAeInstructionalText("Add a flag");
+            Flag flag = new Flag();
+            // set default values
+            FlagType flagType = new FlagType();
+            flagType.setAccessLevel(0);
+            // Text is not saved if the type is not set
+            // we need a list of flags for the view so the user can make a choice
+            flag.setType(flagType);
+            flag.setAccount(accountService.getFullAccount(userId));
+            flag.setAccessLevel(0);
+            flag.setSeverity(0);
 
-         Flag flag = new Flag();
-         // set default values
-         FlagType flagType = new FlagType();
-         flagType.setAccessLevel(0);
-         // Text is not saved if the type is not set
-         // we need a list of flags for the view so the user can make a choice
-         flag.setType(flagType);
-         flag.setAccount(accountService.getFullAccount(userId));
-         flag.setAccessLevel(0);
-         flag.setSeverity(0);
+            form.setFlagModel(flag);
+            form.setAeInstructionalText("Add a flag");
 
-         form.setFlagModel(new FlagModel(flag));
-         form.setAeInstructionalText("Add a flag");
+        } else if (pageId != null && pageId.equals("ViewFlagPage")) {
+            if (userId == null || userId.isEmpty()) {
+                throw new IllegalArgumentException("'userId' request parameter must be specified");
+            }
 
-      } else if (pageId != null && pageId.equals("ViewFlagPage")) {
-         if (userId == null || userId.isEmpty()) {
-            throw new IllegalArgumentException("'userId' request parameter must be specified");
-         }
+            form.setAeInstructionalText("View a flag");
 
-         form.setAeInstructionalText("View a flag");
+        } else if (pageId != null && pageId.equals("EditFlagPage")) {
+            if (userId == null || userId.isEmpty()) {
+                throw new IllegalArgumentException("'userId' request parameter must be specified");
+            }
 
-      } else if (pageId != null && pageId.equals("EditFlagPage")) {
-         if (userId == null || userId.isEmpty()) {
-            throw new IllegalArgumentException("'userId' request parameter must be specified");
-         }
+            form.setAeInstructionalText("Edit a flag");
 
-         form.setAeInstructionalText("Edit a flag");
+        }
 
-      }
+        return getUIFModelAndView(form);
+    }
 
-      return getUIFModelAndView(form);
-   }
+    /**
+     * @param form
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertFlag")
+    public ModelAndView insertFlag(@ModelAttribute("KualiForm") FlagForm form) {
 
-   /**
-    * @param form
-    * @return
-    */
-   @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertFlag")
-   public ModelAndView insertFlag(@ModelAttribute("KualiForm") FlagForm form) {
+        Flag flag = form.getFlagModel();
 
-      // do insert stuff...
+        Long persistResult = informationService.persistInformation(flag);
 
-      // TODO validate the field entries before inserting
+        if (persistResult >= 0) {
+            form.setStatusMessage("Success");
+        } else {
+            form.setStatusMessage("Failed to add flag. result code: " + persistResult.toString());
+        }
 
-      // the account should be satisfied by the link that got us into this page
-      Account account = form.getAccount();
-
-      Flag flag = new Flag();
-      FlagModel flagModel = form.getFlagModel();
-      flag.setAccount(flagModel.getAccount());
-      flag.setAccountId(flagModel.getAccountId());
-      flag.setCreationDate(new Date());
-      flag.setLastUpdate(new Date());
-
-      // from the view input to the flagModel
-      flag.setEffectiveDate(flagModel.getEffectiveDate());
-      flag.setExpirationDate(flagModel.getExpirationDate());
-      flag.setType(flagModel.getType());
-      flag.setText(flagModel.getText());
-      flag.setAccessLevel(Integer.parseInt(flagModel.getInfoAccessLevel()));
-      flag.setSeverity(Integer.parseInt(flagModel.getInfoSeverity()));
-
-      Long persistResult = informationService.persistInformation(flag);
-
-      if (persistResult >= 0) {
-         form.setStatusMessage("Success");
-      } else {
-         form.setStatusMessage("Failed to add flag. result code: " + persistResult.toString());
-      }
-
-      return getUIFModelAndView(form);
-   }
+        return getUIFModelAndView(form);
+    }
 
 }

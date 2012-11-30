@@ -2,7 +2,6 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.krad.form.QuickViewForm;
-import com.sigmasys.kuali.ksa.krad.model.MemoModel;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.AuditableEntityService;
@@ -102,6 +101,7 @@ public class QuickViewController extends GenericSearchController {
                 // create a Memo, set defaults for the view
                 Account account = accountService.getFullAccount(userId);
                 String accountId = account.getId();
+
                 // don't create a persistent memo when adding a memo, just initialize one for use
                 // rather persist when the user submits (button control) an insert on the memo
                 Memo memo = new Memo();
@@ -111,8 +111,7 @@ public class QuickViewController extends GenericSearchController {
                 memo.setText("");
                 memo.setAccessLevel(0);
 
-                MemoModel memoModel = new MemoModel(memo);
-                form.setMemoModel(memoModel);
+                form.setMemoModel(memo);
 
             }
         }
@@ -206,12 +205,11 @@ public class QuickViewController extends GenericSearchController {
 
         // TODO validate the field entries before inserting
 
-        MemoModel memoModel = form.getMemoModel();
+        Memo memoModel = form.getMemoModel();
 
         String accountId = memoModel.getAccountId();
         String memoText = memoModel.getText();
-        String memoAccessLevel = memoModel.getInfoAccessLevel();
-        int accessLevel = Integer.parseInt(memoAccessLevel);
+        Integer accessLevel = memoModel.getAccessLevel();
         Date effectiveDate = memoModel.getEffectiveDate();
         Date expirationDate = memoModel.getExpirationDate();
         Memo previousMemo = memoModel.getPreviousMemo();
@@ -288,6 +286,7 @@ public class QuickViewController extends GenericSearchController {
         form.setDaysLate3(latePeriod.getDaysLate3() != null ? latePeriod.getDaysLate3().toString() : "90");
 
         // getOutstandingBalance above always ignores deferment per Paul setting the pastDue to the ageTotal
+
         BigDecimal pastDue = BigDecimal.ZERO;
         if (chargeableAccount.getAmountLate1() != null) {
             form.setAged30(chargeableAccount.getAmountLate1().toString());
@@ -295,12 +294,14 @@ public class QuickViewController extends GenericSearchController {
         } else {
             form.setAged30(BigDecimal.ZERO.toString());
         }
+
         if (chargeableAccount.getAmountLate2() != null) {
             form.setAged60(chargeableAccount.getAmountLate2().toString());
             pastDue = pastDue.add(chargeableAccount.getAmountLate2());
         } else {
             form.setAged60(BigDecimal.ZERO.toString());
         }
+
         if (chargeableAccount.getAmountLate3() != null) {
             form.setAged90(chargeableAccount.getAmountLate3().toString());
             pastDue = pastDue.add(chargeableAccount.getAmountLate3());
@@ -323,6 +324,7 @@ public class QuickViewController extends GenericSearchController {
         form.setPastDueAmount(pastDue.toString());
         form.setBalanceAmount(balance.toString());
         form.setFutureAmount(future.toString());
+
         if (deferment != null) {
             form.setDefermentAmount(deferment.toString());
         }
@@ -354,18 +356,8 @@ public class QuickViewController extends GenericSearchController {
         form.setFlags(flags);
 
 
-        List<Memo> memoList = informationService.getMemos(userId);
-        List<MemoModel> memoModelList = new ArrayList<MemoModel>();
+        List<Memo> memos = informationService.getMemos(userId);
 
-        //MemoDateComparatorAscending comparator3 = new MemoDateComparatorAscending();
-        //Collections.sort(memoList, comparator3);
-
-        for (int i = 0; i < itemsPerPage && i < memoList.size(); i++) {
-            Memo memo = memoList.get(i);
-            MemoModel memoModel = new MemoModel(memo);
-            memoModelList.add(memoModel);
-        }
-
-        form.setMemoModels(memoModelList);
+        form.setMemoModels(memos);
     }
 }
