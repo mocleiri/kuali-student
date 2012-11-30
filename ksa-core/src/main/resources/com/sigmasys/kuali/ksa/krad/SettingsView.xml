@@ -88,8 +88,8 @@
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="refresh"
-                                              p:actionLabel="Refresh">
+                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
+                                              p:actionParameters="pageId:CurrencyPage" p:actionLabel="Refresh">
                                         </bean>
                                     </list>
                                 </property>
