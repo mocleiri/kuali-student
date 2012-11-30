@@ -41,6 +41,7 @@
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="SystemRolesUsers" p:actionLabel="System Roles &amp; Users"/>
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="GeneralLedger" p:actionLabel="General Ledger"/>
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="Transactions" p:actionLabel="Transactions"/>
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="TransactionsExport" p:actionLabel="Transactions Export"/>
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="Refunds" p:actionLabel="Refunds"/>
                     </list>
                 </property>
@@ -165,6 +166,28 @@
                 </bean>
 
                 <!--End Transactions Page-->
+
+                <!--Begin Transactions Export Page-->
+
+                <bean parent="Uif-Page" p:id="TransactionsExport" p:title="Transactions Export">
+                    <property name="headerText" value="Transactions Export"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-MessageField" p:messageText="Export Transactions"/>
+										<bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submit"
+											p:actionLabel="Export"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <!--<ref bean="PageSection"/>-->
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Transactions Export Page-->
 
                 <!--Begin Refunds Page-->
 
