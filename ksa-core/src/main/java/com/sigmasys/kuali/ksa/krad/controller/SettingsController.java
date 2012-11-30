@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -133,13 +135,56 @@ public class SettingsController extends GenericSearchController {
      * @param form
      * @return
      */
+/*    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
+    public ModelAndView refresh(@ModelAttribute("KualiForm") SettingsForm form) {
+        // do refresh stuff...
+
+        // refresh the list of currencies. the form and view manage the refresh
+
+        // a currency instance for the view and model. User may add a currency in this page.
+        // this is not a persisted currency
+        form.setCurrency(new Currency());
+        // this is the existing currencies in the system
+        form.setCurrencies(currencyService.getCurrencies());
+        // clear the status message
+        form.setStatusMessage("");
+
+        return getUIFModelAndView(form);
+    }
+ */
+    /**
+     * @param form
+     * @return
+     */
+    /*@RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertCurrency")
+    public ModelAndView insertCurrency(@ModelAttribute("KualiForm") SettingsForm form) {
+        AuditableEntityModel entity = form.getAuditableEntity();
+        if (!(entity.getParentEntity() instanceof Currency)) {
+            String errMsg = "Entity must be of Currency type";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        return insertAuditableEntity(form);
+    }
+
+    */
+    /**
+     * @param form
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertRollup")
     public ModelAndView insertAuditableEntity(@ModelAttribute("KualiForm") SettingsForm form) {
 
         AuditableEntityModel entity = form.getAuditableEntity();
         AuditableEntity parentEntity = entity.getParentEntity();
         try {
-            auditableEntityService.persistAuditableEntity(parentEntity);
+
+            String code = parentEntity.getCode();
+            String name = parentEntity.getName();
+            String description = parentEntity.getDescription();
+
+            auditableEntityService.createAuditableEntity(code, name, description, parentEntity.getClass());
 
             form.setAuditableEntities(auditableEntityService.getAuditableEntities(parentEntity.getClass()));
 
@@ -158,15 +203,10 @@ public class SettingsController extends GenericSearchController {
         return getUIFModelAndView(form);
     }
 
-    public ModelAndView updateAuditableEntity(@ModelAttribute("KualiForm") SettingsForm form) {
+    public <T extends AuditableEntity> ModelAndView updateAuditableEntity(@ModelAttribute("KualiForm")
+                                                                           SettingsForm form) {
 
         AuditableEntity entity = form.getAuditableEntity();
-
-        if (!(entity.getClass().equals(entity.getClass()))) {
-            String errMsg = "Entity must be of " + entity.getClass().getName() + " type";
-            logger.error(errMsg);
-            throw new IllegalStateException(errMsg);
-        }
 
         try {
             // occurs in the detail page.
