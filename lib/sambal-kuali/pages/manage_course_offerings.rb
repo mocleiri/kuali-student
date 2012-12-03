@@ -21,6 +21,7 @@ class ManageCourseOfferings < BasePage
   element(:format) { |b| b.frm.select(name: "formatIdForNewAO") }
   element(:activity_type) { |b| b.frm.select(name: "activityIdForNewAO") }
   element(:quantity) { |b| b.frm.text_field(name: "noOfActivityOfferings") }
+
   
   action(:add) { |b| b.frm.button(text: "Add").click; b.loading.wait_while_present } # Persistent ID needed!
   
@@ -47,6 +48,10 @@ class ManageCourseOfferings < BasePage
     activity_offering_results_table.row(text: /\b#{Regexp.escape(code)}\b/)
   end
 
+  def ao_db_id(code)
+    target_row(code).cells[AO_CODE].link.attribute_value("href").scan(/aoInfo.id=(.*)&dataObjectClassName/)[0][0]
+  end
+
   def copy(code)
     target_row(code).link(text: "Copy").click
     loading.wait_while_present
@@ -54,12 +59,16 @@ class ManageCourseOfferings < BasePage
 
   def edit(code)
     target_row(code).link(text: "Edit").click
-    loading.wait_while_present
+    loading.wait_while_present(120)
   end
 
   def delete(code)
-    target_row(code).link(text: "Delete").click
-    loading.wait_while_present
+    if target_row(code).link(text: "Delete").exists?
+      target_row(code).link(text: "Delete").click
+      loading.wait_while_present
+    else
+      raise "delete not enabled for activity offering code: #{code}"
+    end
   end
 
   def codes_list

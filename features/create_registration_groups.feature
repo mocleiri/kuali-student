@@ -3,8 +3,8 @@ Feature: Create registration groups
 
 As an Administrator, I want to create registration groups for a Course Offering
 
- # Background:
- #   Given I am logged in as admin
+  Background:
+    Given I am logged in as admin
 
   Scenario: RG 2.1A: Successfully create a activity offering cluster (for a course offering with a single activity offering type) and assign activity offerings to the cluster
     Given I manage registration groups for a course offering

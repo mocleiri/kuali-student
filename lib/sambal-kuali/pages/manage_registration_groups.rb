@@ -5,21 +5,22 @@ class ManageRegistrationGroups < BasePage
 
   expected_element :subject_code
 
-  element(:subject_code) { |b| b.frm.div(id: "manageRegistrationGroupsPage").span() } # Persistent ID needed!
+  element(:subject_code) { |b| b.frm.div(id: "manageRegistrationGroupsView").h3.span() } # Persistent ID needed!
   element(:format_select) { |b| b.frm.div(data_label: "Select Format").select() }
 
-  element(:unassigned_ao_table) { |b| b.frm.div(id: "KS-ManageRegistrationGroupsPage-UnassignedActivityOfferingsPerFormatSection").table() }
+  element(:unassigned_ao_table) { |b| b.frm.div(id: "KS-ManageRegistrationGroups-UnassignedActivityOfferingsPerFormatSection").table() }
 
-  def target_ao_row(ao_code)
-    ao_table.row(text: /\b#{ao_code}\b/)
+  def target_unassigned_ao_row(ao_code)
+    unassigned_ao_table.row(text: /\b#{ao_code}\b/)
   end
 
-  def select_ao_row(ao_code)
-    target_ao_row(ao_code).cells[0].checkbox().set
+  def select_unassigned_ao_row(ao_code)
+    target_unassigned_ao_row(ao_code).cells[0].checkbox().set
   end
 
-  element(:ao_cluster_select) { |b| b.frm.div(id: "KS-ManageRegistrationGroupPage-ClusterForFormat").select() }
-  action(:ao_cluster_assign_button) { |b| b.frm.div(id: "KS-ManageRegistrationGroupPage-ClusterForFormat").button().click b.loading.wait_while_present}
+  action(:generate_unconstrained_reg_groups) { |b| b.frm.button(id: "generate_unconstrained_rgs_button").click b.loading.wait_while_present}
+  element(:ao_cluster_select) { |b| b.frm.select(id: "KS-ManageRegistrationGroups-ClusterForFormat_Dropdown_control") }
+  action(:ao_cluster_assign_button) { |b| b.frm.button(id: "move_ao_button").click b.loading.wait_while_present}
 
   action(:create_new_cluster){ |b|b.frm.button(id: /create_new_cluster_button/).click; b.loading.wait_while_present}
 
@@ -27,7 +28,7 @@ class ManageRegistrationGroups < BasePage
 
   action(:generate_reg_groups_button) { |b| b.frm.button(id: "generate_unconstrained_rgs_button").click; b.loading.wait_while_present }
 
-  element(:cluster_list_div)  { |b| b.frm.div(id: "KS-ManageRegistrationGroupPage-HasClusterCondition") }
+  element(:cluster_list_div)  { |b| b.frm.div(id: "KS-ManageRegistrationGroups-ClusterCollection") }
 
   #create cluster dialog
   element(:createNewClusterDialog_div)  { |b| b.frm.div(id: "createNewClusterDialog") }
@@ -38,33 +39,39 @@ class ManageRegistrationGroups < BasePage
   #end create cluster dialog
 
   def cluster_list_item_div_id(private_name)
-    img_id = cluster_list_div.span(text: /#{Regexp.escape("(#{private_name})")}/).image().id
+    img_id = cluster_list_div.span(text: /#{Regexp.escape("#{private_name}")}/).image().id
+    puts "img_id: #{img_id}"
+    #img_id = cluster_list_div.span(text: /^#{Regexp.escape("#{private_name}")}\s/).image().id
     img_id[0..-5]    #eg changes  u532_line0_exp to u532_line0
   end
 
-  def cluster_list_row_name_text(private_name)
+  def cluster_list_name_text(private_name)
    div_id = cluster_list_item_div_id(private_name)
    cluster_list_div.div(id: "#{div_id}").span().text()
   end
 
-  def cluster_list_row_generate_reg_groups(private_name)
+  def cluster_list_generate_reg_groups(private_name)
     div_id = cluster_list_item_div_id(private_name)
     cluster_list_div.div(id: "#{div_id}").link(text: "Generate Registration Groups").click
   end
 
   def cluster_list_row_rename_cluster(private_name)
     div_id = cluster_list_item_div_id(private_name)
-    cluster_list_div.div(id: "#{div_id}").link(text: "Rename Cluster").click
+    cluster_list_div.div(id: "#{div_id}").link(text: "Rename").click
   end
 
   def cluster_list_row_remove_cluster(private_name)
     div_id = cluster_list_item_div_id(private_name)
-    cluster_list_div.div(id: "#{div_id}").link(text: "Remove Cluster").click
+    cluster_list_div.div(id: "#{div_id}").link(text: "Delete").click
   end
 
+  def get_cluster_ao_row(private_name, ao_code)
+    div_id = cluster_list_item_div_id(private_name)
+    cluster_list_div.div(id: "#{div_id}").table.row(text: /\b#{Regexp.escape(ao_code)}\b/)
+  end
 
   #test script shell
-  #@course_offering = make CourseOffering
+  #@course_offering = make CourseOffering, :course=>"ENGL103"
   #@course_offering.manage
   #on ManageCourseOfferings do |page|
   #  page.manage_registration_groups

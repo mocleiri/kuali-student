@@ -1,21 +1,33 @@
 Given /^I manage registration groups for a course offering$/ do
-  pending # express the regexp above with the code you wish you had
+  @course_offering = make CourseOffering, :course=>"ENGL102",  :to_assign_ao_list=>["C"]
+  @course_offering.manage
+  @course_offering.manage_registration_groups
 end
 
 When /^I create an activity offering cluster$/ do
-  pending # express the regexp above with the code you wish you had
+  @ao_cluster = make ActivityOfferingCluster
+  @ao_cluster.create_cluster
+  @course_offering.add_ao_cluster(@ao_cluster)
 end
 
 When /^I assign an activity offering to the cluster$/ do
-  pending # express the regexp above with the code you wish you had
+  @course_offering.add_aos_to_clusters
 end
 
 Then /^the activity offering is shown as part of the cluster$/ do
-  pending # express the regexp above with the code you wish you had
+  #validate all ao_clusters
+  @course_offering.activity_offering_cluster_list.each do |cluster|
+    cluster.assigned_ao_list.each do |ao_code|
+      on ManageRegistrationGroups do |page|
+        page.get_cluster_ao_row(cluster.private_name, ao_code).table
+      end
+    end
+  end
+  #validate the unassigned list
 end
 
 Then /^the remaining activity offerings are shown as unassigned$/ do
-  pending # express the regexp above with the code you wish you had
+  puts @course_offering.expected_unassigned_ao_list
 end
 
 When /^I generate registration groups with no activity offering cluster$/ do
