@@ -317,7 +317,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-InputField" p:label="Symbol"
-                      p:propertyName="currency.code"
+                      p:propertyName="auditableEntity.code"
                       p:labelPlacement="TOP"
                       p:required="true">
                     <property name="control">
@@ -325,7 +325,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:label="Name"
-                      p:propertyName="currency.name"
+                      p:propertyName="auditableEntity.name"
                       p:labelPlacement="TOP"
                       p:required="true">
                     <property name="control">
@@ -333,7 +333,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-InputField" p:label="Description"
-                      p:propertyName="currency.description"
+                      p:propertyName="auditableEntity.description"
                       p:labelPlacement="TOP">
                     <property name="control">
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"
@@ -420,7 +420,7 @@
         <property name="items">
             <list>
                 <bean parent="Uif-InputField"
-                      p:propertyName="currency.code"
+                      p:propertyName="auditableEntity.code"
                       p:labelPlacement="TOP"
                       p:label="Symbol">
                     <property name="readOnly" value="true"/>
@@ -430,7 +430,7 @@
                     </property>
                 </bean>
                 <bean parent="Uif-InputField"
-                      p:propertyName="currency.name"
+                      p:propertyName="auditableEntity.name"
                       p:label="Name"
                       p:labelPlacement="TOP"
                       p:required="true">
@@ -441,7 +441,7 @@
                 </bean>
                 <bean parent="Uif-InputField"
                       p:label="Description"
-                      p:propertyName="currency.description"
+                      p:propertyName="auditableEntity.description"
                       p:labelPlacement="TOP">
                     <property name="control">
                         <bean parent="Uif-TextAreaControl"
