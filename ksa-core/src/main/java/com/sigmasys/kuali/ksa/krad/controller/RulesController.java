@@ -2,9 +2,9 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.exception.InvalidRulesException;
 import com.sigmasys.kuali.ksa.krad.form.RulesForm;
-import com.sigmasys.kuali.ksa.model.RuleSet;
-import com.sigmasys.kuali.ksa.service.drools.DroolsPersistenceService;
-import com.sigmasys.kuali.ksa.service.drools.DroolsService;
+import com.sigmasys.kuali.ksa.model.rule.RuleSet;
+import com.sigmasys.kuali.ksa.service.brm.BrmPersistenceService;
+import com.sigmasys.kuali.ksa.service.brm.BrmService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,14 +30,14 @@ public class RulesController extends GenericSearchController {
     private static final Log logger = LogFactory.getLog(RulesController.class);
 
     @Autowired
-    private DroolsService droolsService;
+    private BrmService brmService;
 
     @Autowired
-    private DroolsPersistenceService droolsPersistenceService;
+    private BrmPersistenceService brmPersistenceService;
 
 
-    private boolean ruleSetExists(String ruleSetId) {
-        return (ruleSetId != null) && droolsPersistenceService.getRules(ruleSetId) != null;
+    private boolean ruleSetExists(String ruleSetName) {
+        return (ruleSetName != null) && brmPersistenceService.getRuleSet(ruleSetName) != null;
     }
 
 
@@ -47,7 +47,8 @@ public class RulesController extends GenericSearchController {
     @Override
     protected RulesForm createInitialForm(HttpServletRequest request) {
         RulesForm rulesForm = new RulesForm();
-        rulesForm.initRuleSetNameFinder(droolsPersistenceService.getRuleIds());
+        // TODO
+        //rulesForm.initRuleSetNameFinder(brmPersistenceService.getRuleIds());
         rulesForm.setAddStatusMessage("");
         rulesForm.setEditStatusMessage("");
         return rulesForm;
@@ -72,14 +73,15 @@ public class RulesController extends GenericSearchController {
         String ruleSetId = form.getRuleSetId();
         String ruleSetBody = form.getRuleSetBody();
 
-        RuleSet ruleSet = new RuleSet(ruleSetId, ruleSetBody);
+        // TODO
+        RuleSet ruleSet = new RuleSet();
 
         // Validating the rule set content
-        ResourceType resourceType = ruleSetId.equals(droolsService.getDslId()) ? ResourceType.DSL : ResourceType.DSLR;
+        //ResourceType resourceType = ruleSetId.equals(brmService.getDslId()) ? ResourceType.DSL : ResourceType.DSLR;
 
         try {
-            droolsService.reloadRuleSet(ruleSetId, resourceType);
-            droolsPersistenceService.persistRules(ruleSet);
+            //brmService.reloadRuleSet(ruleSetId, resourceType);
+            brmPersistenceService.persistRuleSet(ruleSet);
             form.setEditStatusMessage("Rule Set has been updated");
         } catch (InvalidRulesException ire) {
             form.setEditStatusMessage(ire.getMessage());
@@ -104,7 +106,7 @@ public class RulesController extends GenericSearchController {
             throw new IllegalStateException(errMsg);
         }
 
-        RuleSet ruleSet = droolsPersistenceService.getRules(ruleSetId);
+        RuleSet ruleSet = brmPersistenceService.getRuleSet(ruleSetId);
         if (ruleSet == null) {
             String errMsg = "Rule Set specified by ID = " + ruleSetId + " does not exist";
             logger.error(errMsg);
@@ -112,7 +114,8 @@ public class RulesController extends GenericSearchController {
         }
 
         form.setRuleSetId(ruleSetId);
-        form.setRuleSetBody(ruleSet.getRules());
+        // TODO
+        //form.setRuleSetBody(ruleSet.getRules());
 
         logger.info("Selected Rule Set => \n" + ruleSet.getRules());
 
@@ -132,7 +135,7 @@ public class RulesController extends GenericSearchController {
             String errMsg = "Rule Set ID cannot be empty";
             logger.error(errMsg);
             form.setAddStatusMessage(errMsg);
-        } else if ( ruleSetExists(ruleSetId) ) {
+        } else if (ruleSetExists(ruleSetId)) {
             form.setAddStatusMessage("Rule with ID = '" + ruleSetId + "' already exists");
         }
 
@@ -160,11 +163,12 @@ public class RulesController extends GenericSearchController {
 
             String ruleSetBody = form.getNewRuleSetBody();
 
-            RuleSet ruleSet = new RuleSet(ruleSetId, ruleSetBody);
+            // TODO
+            RuleSet ruleSet = new RuleSet();
 
             try {
-                droolsService.validateRuleSet(ruleSet, ResourceType.DSLR);
-                droolsPersistenceService.persistRules(ruleSet);
+                brmService.validateRuleSet(ruleSet);
+                brmPersistenceService.persistRuleSet(ruleSet);
                 form.setAddStatusMessage("A new Rule Set has been created");
             } catch (InvalidRulesException ire) {
                 form.setAddStatusMessage(ire.getMessage());

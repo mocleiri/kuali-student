@@ -10,13 +10,12 @@ import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
-import com.sigmasys.kuali.ksa.service.drools.DroolsContext;
-import com.sigmasys.kuali.ksa.service.drools.DroolsService;
+import com.sigmasys.kuali.ksa.service.brm.BrmContext;
+import com.sigmasys.kuali.ksa.service.brm.BrmService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.drools.builder.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,7 +51,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     private TransactionService transactionService;
 
     @Autowired
-    private DroolsService droolsService;
+    private BrmService brmService;
 
     @Autowired
     private ConfigService configService;
@@ -77,13 +76,13 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
         // Getting the fee base for the user
         FeeBase feeBase = getFeeBase(accountId);
 
-        DroolsContext droolsContext = new DroolsContext();
-        droolsContext.setAccount(feeBase.getAccount());
+        BrmContext brmContext = new BrmContext();
+        brmContext.setAccount(feeBase.getAccount());
 
         Map<String, Object> globalParams = new HashMap<String, Object>();
         globalParams.put("feeBase", feeBase);
 
-        droolsService.fireRules(feeAssessmentRuleSetId, ResourceType.DSLR, droolsContext, globalParams);
+        brmService.fireRules(feeAssessmentRuleSetId, brmContext, globalParams);
     }
 
 

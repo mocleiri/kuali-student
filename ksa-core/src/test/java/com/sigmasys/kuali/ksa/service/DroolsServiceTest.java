@@ -1,13 +1,9 @@
 package com.sigmasys.kuali.ksa.service;
 
 
-import com.sigmasys.kuali.ksa.model.Currency;
-import com.sigmasys.kuali.ksa.model.RuleSet;
-import com.sigmasys.kuali.ksa.service.drools.DroolsContext;
-import com.sigmasys.kuali.ksa.service.drools.DroolsPersistenceService;
-import com.sigmasys.kuali.ksa.service.drools.DroolsService;
-import com.sigmasys.kuali.ksa.util.CommonUtils;
-import org.drools.builder.ResourceType;
+import com.sigmasys.kuali.ksa.service.brm.BrmContext;
+import com.sigmasys.kuali.ksa.service.brm.BrmPersistenceService;
+import com.sigmasys.kuali.ksa.service.brm.BrmService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,13 +23,10 @@ import java.util.Map;
 public class DroolsServiceTest extends AbstractServiceTest {
 
     @Autowired
-    private AuditableEntityService auditableEntityService;
+    private BrmService brmService;
 
     @Autowired
-    private DroolsService droolsService;
-
-    @Autowired
-    private DroolsPersistenceService droolsPersistenceService;
+    private BrmPersistenceService brmPersistenceService;
 
     @Autowired
     private AccountService accountService;
@@ -52,17 +45,17 @@ public class DroolsServiceTest extends AbstractServiceTest {
     //@Test
     public void fireFeeAssessmentRules1() throws Exception {
 
-        DroolsContext droolsContext = new DroolsContext();
-        droolsContext.setAccount(accountService.getFullAccount("admin"));
+        BrmContext brmContext = new BrmContext();
+        brmContext.setAccount(accountService.getFullAccount("admin"));
 
         Map<String, Object> globalParams = new HashMap<String, Object>();
         globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
 
-        droolsContext = droolsService.fireRules("fee1.dslr", ResourceType.DSLR, droolsContext, globalParams);
+        brmContext = brmService.fireRules(1L, brmContext, globalParams);
 
-        Assert.notNull(droolsContext);
-        Assert.notNull(droolsContext.getAccount());
-        Assert.isTrue("admin".equals(droolsContext.getAccount().getId()));
+        Assert.notNull(brmContext);
+        Assert.notNull(brmContext.getAccount());
+        Assert.isTrue("admin".equals(brmContext.getAccount().getId()));
 
     }
 
@@ -70,65 +63,25 @@ public class DroolsServiceTest extends AbstractServiceTest {
     @Test
     public void fireFeeAssessmentRules2() throws Exception {
 
-        DroolsContext droolsContext = new DroolsContext();
-        droolsContext.setAccount(accountService.getFullAccount("admin"));
+        BrmContext brmContext = new BrmContext();
+        brmContext.setAccount(accountService.getFullAccount("admin"));
 
         Map<String, Object> globalParams = new HashMap<String, Object>();
         globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
 
-        droolsContext = droolsService.fireRules("fee_assessment.dslr", ResourceType.DSLR, droolsContext, globalParams);
+        brmContext = brmService.fireRules(2L, brmContext, globalParams);
 
-        Assert.notNull(droolsContext);
-        Assert.notNull(droolsContext.getAccount());
-        Assert.isTrue("admin".equals(droolsContext.getAccount().getId()));
-
-    }
-
-    //@Test
-    public void fireCurrencyRules() throws Exception {
-
-        Currency currency = auditableEntityService.getCurrency("USD");
-
-        Assert.notNull(currency);
-        Assert.isTrue(currency.getCode().equals("USD"));
-
-        currency = droolsService.fireRules("currency.xdrl", ResourceType.XDRL, currency);
-
-        Assert.notNull(currency);
-        Assert.isTrue(currency.getEditorId().equals("admin"));
+        Assert.notNull(brmContext);
+        Assert.notNull(brmContext.getAccount());
+        Assert.isTrue("admin".equals(brmContext.getAccount().getId()));
 
     }
+
 
     @Test
     public void persistRules() throws Exception {
 
-        String ruleSetBody = CommonUtils.getResourceAsString("drools/ksa.dsl");
-
-        Assert.notNull(ruleSetBody);
-        Assert.hasLength(ruleSetBody);
-
-        RuleSet ruleSet = new RuleSet();
-        ruleSet.setId("ksa_test.dsl");
-        ruleSet.setRules(ruleSetBody);
-
-        String ruleSetId = droolsPersistenceService.persistRules(ruleSet);
-
-        Assert.notNull(ruleSetId);
-        Assert.isTrue(ruleSetId.equals("ksa_test.dsl"));
-
-        ruleSetBody = CommonUtils.getResourceAsString("drools/fee1.dslr");
-
-        Assert.notNull(ruleSetBody);
-        Assert.hasLength(ruleSetBody);
-
-        ruleSet = new RuleSet();
-        ruleSet.setId("fee_test.dslr");
-        ruleSet.setRules(ruleSetBody);
-
-        ruleSetId = droolsPersistenceService.persistRules(ruleSet);
-
-        Assert.notNull(ruleSetId);
-        Assert.isTrue(ruleSetId.equals("fee_test.dslr"));
+        // TODO!
 
     }
 

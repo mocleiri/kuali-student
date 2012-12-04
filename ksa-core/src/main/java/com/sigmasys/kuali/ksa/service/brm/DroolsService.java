@@ -1,9 +1,9 @@
-package com.sigmasys.kuali.ksa.service.drools;
+package com.sigmasys.kuali.ksa.service.brm;
 
 import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.exception.InvalidRulesException;
 import com.sigmasys.kuali.ksa.model.Constants;
-import com.sigmasys.kuali.ksa.model.RuleSet;
+import com.sigmasys.kuali.ksa.model.rule.RuleSet;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.drools.KnowledgeBase;
@@ -29,15 +29,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * DroolsService
+ * Drools-based implementation of BrmService
  *
  * @author Michael Ivanov
- *         Date: 5/21/12
  */
 @Service("droolsService")
 @Transactional
 @SuppressWarnings("unchecked")
-public class DroolsService {
+public class DroolsService implements BrmService {
 
     private static final Log logger = LogFactory.getLog(DroolsService.class);
 
@@ -57,7 +56,7 @@ public class DroolsService {
     private ConfigService configService;
 
     @Autowired
-    private DroolsPersistenceService droolsPersistenceService;
+    private BrmPersistenceService brmPersistenceService;
 
     private Resource dslResource;
 
@@ -65,7 +64,7 @@ public class DroolsService {
     private final Map<String, KnowledgeBase> knowledgeBases = new HashMap<String, KnowledgeBase>();
 
 
-    @PostConstruct
+    //@PostConstruct
     private void postConstruct() {
         String dslId = getDslId();
         logger.info("Initializing DSL resource '" + dslId + "'");
@@ -73,7 +72,7 @@ public class DroolsService {
         logger.info("DSL resource '" + dslId + "' has been initialized");
     }
 
-    private Collection<KnowledgePackage> buildKnowledgePackages(String ruleSetId, Resource rulesResource,
+    private Collection<KnowledgePackage> buildKnowledgePackages(String ruleSetName, Resource rulesResource,
                                                                 ResourceType resourceType) {
         KnowledgeBuilder builder = KnowledgeBuilderFactory.newKnowledgeBuilder();
         if (ResourceType.DSLR.equals(resourceType)) {
@@ -81,34 +80,35 @@ public class DroolsService {
             builder.add(dslResource, ResourceType.DSL);
         }
         builder.add(rulesResource, resourceType);
-        handleErrors(builder.getErrors(), ruleSetId);
+        handleErrors(builder.getErrors(), ruleSetName);
         return builder.getKnowledgePackages();
     }
 
-    private synchronized KnowledgeBase getKnowledgeBase(String ruleSetId, ResourceType resourceType) {
+    private synchronized KnowledgeBase getKnowledgeBase(String ruleSetName, ResourceType resourceType) {
         try {
-            KnowledgeBase knowledgeBase = knowledgeBases.get(ruleSetId);
+            KnowledgeBase knowledgeBase = knowledgeBases.get(ruleSetName);
             if (knowledgeBase == null) {
                 Collection<KnowledgePackage> knowledgePackages =
-                        buildKnowledgePackages(ruleSetId, getRuleSetResource(ruleSetId), resourceType);
+                        buildKnowledgePackages(ruleSetName, getRuleSetResource(ruleSetName), resourceType);
                 knowledgeBase = KnowledgeBaseFactory.newKnowledgeBase();
                 knowledgeBase.addKnowledgePackages(knowledgePackages);
-                knowledgeBases.put(ruleSetId, knowledgeBase);
+                knowledgeBases.put(ruleSetName, knowledgeBase);
             }
             return knowledgeBase;
         } catch (InvalidRulesException ire) {
+            logger.error(ire.getMessage(), ire);
             throw ire;
         } catch (Throwable t) {
-            String errMsg = "Cannot retrieve KnowledgeBase from '" + ruleSetId + "'";
+            String errMsg = "Cannot retrieve KnowledgeBase from '" + ruleSetName + "'";
             logger.error(errMsg, t);
             throw new RuntimeException(errMsg, t);
         }
     }
 
-    private void handleErrors(KnowledgeBuilderErrors errors, String ruleSetId) {
+    private void handleErrors(KnowledgeBuilderErrors errors, String ruleSetName) {
         if (errors != null && !errors.isEmpty()) {
             StringBuilder errorMessage = new StringBuilder();
-            errorMessage.append("There are problems in compiling the rules for '").append(ruleSetId).append("' \n");
+            errorMessage.append("There are problems in compiling the rules for '").append(ruleSetName).append("' \n");
             for (KnowledgeBuilderError error : errors) {
                 errorMessage.append(error).append("\n");
             }
@@ -136,23 +136,24 @@ public class DroolsService {
 
     /**
      * Returns a Drools resource using a rule set identifier either from the classpath (by a filename) or
-     * from the database (by a rule set ID column name).
+     * from the database (by a rule set name).
      *
-     * @param ruleSetId a rule set identifier
+     * @param ruleSetName a rule set identifier
      * @return <code>Resource</code> instance
      */
-    protected Resource getRuleSetResource(String ruleSetId) {
+    protected Resource getRuleSetResource(String ruleSetName) {
         switch (getPersistenceType()) {
             case CLASSPATH:
-                return ResourceFactory.newClassPathResource(Constants.DROOLS_CLASSPATH + "/" + ruleSetId);
+                return ResourceFactory.newClassPathResource(Constants.DROOLS_CLASSPATH + "/" + ruleSetName);
             case DATABASE:
-                RuleSet ruleSet = droolsPersistenceService.getRules(ruleSetId);
+                RuleSet ruleSet = brmPersistenceService.getRuleSet(ruleSetName);
                 if (ruleSet == null) {
-                    String errMsg = "Rule Set specified by ID = " + ruleSetId + " does not exist";
+                    String errMsg = "Rule Set specified by ID = " + ruleSetName + " does not exist";
                     logger.error(errMsg);
                     throw new IllegalStateException(errMsg);
                 }
-                return ResourceFactory.newByteArrayResource(ruleSet.getRules().getBytes());
+                String ruleSetContent = DroolsRuleBuilder.toString(ruleSet);
+                return ResourceFactory.newByteArrayResource(ruleSetContent.getBytes());
             default:
                 String errMsg = "Cannot find resource handlers for persistence type = " + getPersistenceType();
                 logger.error(errMsg);
@@ -162,19 +163,20 @@ public class DroolsService {
 
     // ------------------------   PUBLIC METHOD DEFINITIONS -----------------------------------------------------
 
-
-    public <T> T fireRules(String ruleSetId, ResourceType resourceType, T droolsContext,
+    public <T> T fireRules(String ruleSetName, ResourceType resourceType, T droolsContext,
                            Map<String, Object> globalParams) {
-        return fireRules(getKnowledgeBase(ruleSetId, resourceType), droolsContext, globalParams);
+        return fireRules(getKnowledgeBase(ruleSetName, resourceType), droolsContext, globalParams);
     }
 
-    public <T> T fireRules(String ruleSetId, ResourceType resourceType, T droolsContext) {
-        return fireRules(getKnowledgeBase(ruleSetId, resourceType), droolsContext, null);
+    public <T> T fireRules(String ruleSetName, ResourceType resourceType, T droolsContext) {
+        return fireRules(getKnowledgeBase(ruleSetName, resourceType), droolsContext, null);
     }
 
-    public void validateRuleSet(RuleSet ruleSet, ResourceType resourceType) {
-        Resource ruleSetResource = ResourceFactory.newReaderResource(new StringReader(ruleSet.getRules()));
-        buildKnowledgePackages(ruleSet.getId(), ruleSetResource, resourceType);
+    public void validateRuleSet(RuleSet ruleSet) {
+        String ruleSetContent = DroolsRuleBuilder.toString(ruleSet);
+        Resource ruleSetResource = ResourceFactory.newReaderResource(new StringReader(ruleSetContent));
+        ResourceType resourceType = ResourceType.getResourceType(ruleSet.getType().getName());
+        buildKnowledgePackages(ruleSet.getName(), ruleSetResource, resourceType);
     }
 
     public String getDslId() {
@@ -202,14 +204,38 @@ public class DroolsService {
         postConstruct();
     }
 
-    public void reloadRuleSet(String ruleSetId, ResourceType resourceType) {
-        if (ruleSetId.equals(getDslId())) {
+    public void reloadRuleSet(String ruleSetName, ResourceType resourceType) {
+        if (ruleSetName.equals(getDslId())) {
             postConstruct();
         } else {
-            knowledgeBases.remove(ruleSetId);
-            getKnowledgeBase(ruleSetId, resourceType);
+            knowledgeBases.remove(ruleSetName);
+            getKnowledgeBase(ruleSetName, resourceType);
         }
     }
 
 
+    @Override
+    public <T> T fireRules(Long ruleSetId, T brmContext, Map<String, Object> globalParams) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public <T> T fireRules(Long ruleSetId, T brmContext) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public <T> T fireRules(String ruleSetName, T brmContext, Map<String, Object> globalParams) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public <T> T fireRules(String ruleSetName, T brmContext) {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void reloadRuleSet(Long ruleSetId) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
 }

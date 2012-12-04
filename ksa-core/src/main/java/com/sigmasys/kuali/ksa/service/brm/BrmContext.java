@@ -1,4 +1,4 @@
-package com.sigmasys.kuali.ksa.service.drools;
+package com.sigmasys.kuali.ksa.service.brm;
 
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.service.AccountService;
@@ -9,11 +9,11 @@ import com.sigmasys.kuali.ksa.util.ContextUtils;
 import java.io.Serializable;
 
 /**
- * KSA Drools Context.
+ * BRM (Business Rules Management) Context.
  *
  * @author Michael Ivanov
  */
-public class DroolsContext implements Serializable {
+public class BrmContext implements Serializable {
 
     private Account account;
 

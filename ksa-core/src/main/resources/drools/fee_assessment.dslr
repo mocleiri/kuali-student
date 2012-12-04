@@ -1,7 +1,7 @@
 import java.util.*;
 import java.math.*;
 import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.service.drools.*;
+import com.sigmasys.kuali.ksa.service.brm.*;
 
 expander ksa.dsl
 
