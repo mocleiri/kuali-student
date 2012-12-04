@@ -1,9 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.krad.model.AuditableEntityModel;
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.AuditableEntity;
-import com.sigmasys.kuali.ksa.model.Currency;
+import com.sigmasys.kuali.ksa.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +81,20 @@ public class SettingsForm extends AbstractViewModel {
     public String getSimpleType(){
         if(entity == null){ return "null"; }
         return entity.getParentEntity().getClass().getSimpleName();
+    }
+
+    public String getHumanType(){
+        AuditableEntity parent = entity.getParentEntity();
+        if(parent instanceof AccountStatusType) { return "Account Status Type"; }
+        else if (parent instanceof ActivityType) { return "Activity Type"; }
+        else if(parent instanceof BankType) { return "Bank Type"; }
+        else if(parent instanceof Currency) { return "Currency Type"; }
+        else if(parent instanceof FlagType) { return "Flag Type"; }
+        else if(parent instanceof LatePeriod) { return "Late Period Type"; }
+        else if(parent instanceof Rollup){ return "Rollup Type"; }
+        else if(parent instanceof TaxType) { return "Tax Type"; }
+
+        return this.getSimpleType();
     }
 
     public String getStatusMessage() {

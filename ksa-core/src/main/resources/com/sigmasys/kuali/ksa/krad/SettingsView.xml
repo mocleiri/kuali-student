@@ -82,7 +82,7 @@
                 <!--Begin Currency Page-->
 
                 <bean parent="Uif-Page" p:id="CurrencyPage" p:title="Currency Types">
-                    <property name="headerText" value="@{simpleType} Types"/>
+                    <property name="headerText" value="@{humanType}"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
@@ -102,13 +102,13 @@
                 </bean>
 
                 <bean parent="Uif-Page" p:id="CurrencyDetailsPage" p:title="Currency Details">
-                    <property name="headerText" value="@{simpleType} Details"/>
+                    <property name="headerText" value="@{humanType} Details"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-Link" p:linkText="@{simpleType} Summary" p:target="_self"
+                                        <bean parent="Uif-Link" p:linkText="@{humanType} Summary" p:target="_self"
                                               p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=@{simpleType}Page"/>
                                     </list>
                                 </property>
@@ -123,7 +123,7 @@
                 <!--Begin Roll-Ups Page-->
 
                 <bean parent="Uif-Page" p:id="RollupPage" p:title="Roll-Ups">
-                    <property name="headerText" value="@{simpleType} Types"/>
+                    <property name="headerText" value="@{humanType}"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
@@ -143,13 +143,13 @@
                 </bean>
 
                 <bean parent="Uif-Page" p:id="RollupDetailsPage" p:title="Rollup Details">
-                    <property name="headerText" value="@{simpleType} Details"/>
+                    <property name="headerText" value="@{humanType} Details"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-Link" p:linkText="@{simpleType} Summary" p:target="_self"
+                                        <bean parent="Uif-Link" p:linkText="@{humanType} Summary" p:target="_self"
                                               p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=@{simpleType}Page"/>
                                     </list>
                                 </property>
@@ -169,7 +169,7 @@
                 <!--Begin Bank Types Page-->
 
                 <bean parent="Uif-Page" p:id="BankTypePage" p:title="Bank Types">
-                    <property name="headerText" value="@{simpleType} Types"/>
+                    <property name="headerText" value="@{humanType}"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
@@ -189,13 +189,13 @@
                 </bean>
 
                 <bean parent="Uif-Page" p:id="BankTypeDetailsPage" p:title="Bank Type Details">
-                    <property name="headerText" value="@{simpleType} Details"/>
+                    <property name="headerText" value="@{humanType} Details"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-Link" p:linkText="@{simpleType} Summary" p:target="_self"
+                                        <bean parent="Uif-Link" p:linkText="@{humanType} Summary" p:target="_self"
                                               p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=@{simpleType}Page"/>
                                     </list>
                                 </property>
@@ -210,7 +210,7 @@
                 <!--Begin Tax Types Page-->
 
                 <bean parent="Uif-Page" p:id="TaxTypePage" p:title="Tax Types">
-                    <property name="headerText" value="@{simpleType} Types"/>
+                    <property name="headerText" value="@{humanType}"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
@@ -230,13 +230,13 @@
                 </bean>
 
                 <bean parent="Uif-Page" p:id="TaxTypeDetailsPage" p:title="Tax Type Details">
-                    <property name="headerText" value="@{simpleType} Details"/>
+                    <property name="headerText" value="@{humanType} Details"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-Link" p:linkText="@{simpleType} Summary" p:target="_self"
+                                        <bean parent="Uif-Link" p:linkText="@{humanType} Summary" p:target="_self"
                                               p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=@{simpleType}Page"/>
                                     </list>
                                 </property>
@@ -251,7 +251,7 @@
                 <!--Begin Late Periods Page-->
 
                 <bean parent="Uif-Page" p:id="LatePeriodPage" p:title="Late Periods">
-                    <property name="headerText" value="@{simpleType} Types"/>
+                    <property name="headerText" value="@{humanType}"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
@@ -271,13 +271,13 @@
                 </bean>
 
                 <bean parent="Uif-Page" p:id="LatePeriodDetailsPage" p:title="Late Period Details">
-                    <property name="headerText" value="@{simpleType} Details"/>
+                    <property name="headerText" value="@{humanType} Details"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-Link" p:linkText="@{simpleType} Summary" p:target="_self"
+                                        <bean parent="Uif-Link" p:linkText="@{humanType} Summary" p:target="_self"
                                               p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=@{simpleType}Page"/>
                                     </list>
                                 </property>
@@ -292,7 +292,7 @@
                 <!--Begin Account Status Types Page-->
 
                 <bean parent="Uif-Page" p:id="AccountStatusTypePage" p:title="Account Status Types Page">
-                    <property name="headerText" value="@{simpleType} Types"/>
+                    <property name="headerText" value="@{humanType}"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
@@ -312,13 +312,13 @@
                 </bean>
 
                 <bean parent="Uif-Page" p:id="AccountStatusTypeDetailsPage" p:title="Account Status Type Details">
-                    <property name="headerText" value="@{simpleType} Details"/>
+                    <property name="headerText" value="@{humanType} Details"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-Link" p:linkText="@{simpleType} Summary" p:target="_self"
+                                        <bean parent="Uif-Link" p:linkText="@{humanType} Summary" p:target="_self"
                                               p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=@{simpleType}Page"/>
                                     </list>
                                 </property>
@@ -333,7 +333,7 @@
                 <!--Begin Flag Types Page-->
 
                 <bean parent="Uif-Page" p:id="FlagTypePage" p:title="Flag Types Page">
-                    <property name="headerText" value="@{simpleType} Types"/>
+                    <property name="headerText" value="@{humanType}"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
@@ -353,13 +353,13 @@
                 </bean>
 
                 <bean parent="Uif-Page" p:id="FlagTypeDetailsPage" p:title="Flag Type Details">
-                    <property name="headerText" value="@{simpleType} Details"/>
+                    <property name="headerText" value="@{humanType} Details"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-Link" p:linkText="@{simpleType} Summary" p:target="_self"
+                                        <bean parent="Uif-Link" p:linkText="@{humanType} Summary" p:target="_self"
                                               p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=@{simpleType}Page"/>
                                     </list>
                                 </property>
@@ -374,7 +374,7 @@
                 <!--Begin Activity Types Page-->
 
                 <bean parent="Uif-Page" p:id="ActivityTypePage" p:title="Activity Types Page">
-                    <property name="headerText" value="@{simpleType} Types"/>
+                    <property name="headerText" value="@{humanType}"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
@@ -394,13 +394,13 @@
                 </bean>
 
                 <bean parent="Uif-Page" p:id="ActivityTypeDetailsPage" p:title="Activity Type Details">
-                    <property name="headerText" value="@{simpleType} Details"/>
+                    <property name="headerText" value="@{humanType} Details"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-Link" p:linkText="@{simpleType} Summary" p:target="_self"
+                                        <bean parent="Uif-Link" p:linkText="@{humanType} Summary" p:target="_self"
                                               p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=@{simpleType}Page"/>
                                     </list>
                                 </property>
@@ -448,8 +448,8 @@
 
 
     <bean id="addSection" parent="Uif-HorizontalBoxSection">
-        <property name="title" value="Add @{simpleType} Type"/>
-        <property name="instructionalText" value="Input fields to add a @{simpleType} * denotes a required field"/>
+        <property name="title" value="Add @{humanType}"/>
+        <property name="instructionalText" value="Input fields to add a @{humanType} * denotes a required field"/>
         <property name="items">
             <list>
                 <bean parent="Uif-InputField" p:label="Symbol"
@@ -493,9 +493,10 @@
     <bean id="tableSection" parent="Uif-Disclosure-TableCollectionSection"
           p:layoutManager.numberOfColumns="4"
           p:width="85%">
-        <property name="title" value="View @{simpleType} Types"/>
-        <property name="instructionalText"
+        <property name="title" value="View @{humanType}"/>
+        <!--<property name="instructionalText"
                   value="The International Organization for Standardization publishes a list of standard currency codes referred to as the ISO 4217 code list. This is a list of ISO 4217 codes used in this application."/>
+          -->
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.krad.model.AuditableEntityModel"/>
         <property name="propertyName" value="auditableEntities"/>
@@ -551,7 +552,7 @@
     ********************************************************************************************************************
     -->
     <bean id="detailSection" parent="Uif-VerticalBoxSection">
-        <property name="title" value="@{simpleType} Details View"/>
+        <property name="title" value="@{humanType} Details View"/>
         <property name="items">
             <list>
                 <bean parent="Uif-InputField"
