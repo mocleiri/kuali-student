@@ -59,6 +59,13 @@ public class SettingsForm extends AbstractViewModel {
         return entity;
     }
 
+    public void setAuditableEntity(AuditableEntityModel entity) {
+        if(this.entity == null){
+            this.entity = entity;
+        }
+    }
+
+
     public <T extends AuditableEntity> void setAuditableEntity(T entity) {
         if(entity instanceof AuditableEntityModel){
             this.entity = (AuditableEntityModel)entity;
@@ -68,7 +75,17 @@ public class SettingsForm extends AbstractViewModel {
 
     }
 
-   public String getStatusMessage() {
+    public String getType(){
+        if(entity == null){ return "null"; }
+        return entity.getParentEntity().getClass().getName();
+    }
+
+    public String getSimpleType(){
+        if(entity == null){ return "null"; }
+        return entity.getParentEntity().getClass().getSimpleName();
+    }
+
+    public String getStatusMessage() {
       return statusMessage;
    }
 

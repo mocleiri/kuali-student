@@ -85,7 +85,7 @@ public class SettingsControllerTest extends AbstractServiceTest {
 
         request.setParameter("userId", userId);
         request.setParameter("pageId", "CurrencyDetailsPage");
-        request.setParameter("currencyId", "1");
+        request.setParameter("entityId", "1");
 
         ModelAndView modelAndView = settingsController.get(form, request);
 

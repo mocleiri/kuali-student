@@ -16,6 +16,11 @@ public class AuditableEntityModel extends AuditableEntity {
 
     private AuditableEntity parentEntity;
 
+    public AuditableEntityModel(){
+        // Default constructor must exist for krad
+        super();
+    }
+
     public AuditableEntityModel(AuditableEntity entity) {
         setAuditableEntity(entity);
     }
@@ -61,6 +66,7 @@ public class AuditableEntityModel extends AuditableEntity {
 
     @Override
     public String getCode() {
+        if(parentEntity == null || parentEntity.getCode() == null){ return "";}
         return parentEntity.getCode();
     }
 

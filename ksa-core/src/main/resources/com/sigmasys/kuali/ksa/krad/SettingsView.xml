@@ -34,24 +34,24 @@
                         <bean parent="Uif-HeaderTwo" p:headerText="Settings"/>
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="UserProfilePage"
                               p:actionLabel="User Profile"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="CurrencyPage"
-                              p:actionLabel="Currency Types"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="RollUpsPage"
-                              p:actionLabel="Roll-Ups"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="GeneralLedgerTypesPage"
-                              p:actionLabel="General Ledger Types"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="BankTypesPage"
-                              p:actionLabel="Bank Types"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="TaxTypesPage"
-                              p:actionLabel="Tax Types"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="LatePeriodsPage"
-                              p:actionLabel="Late Periods"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AccountStatusTypesPage"
-                              p:actionLabel="Account Status Types"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="FlagTypesPage"
-                              p:actionLabel="Flag Types"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="ActivityTypesPage"
-                              p:actionLabel="Activity Types"/>
+                        <bean parent="Uif-Link" p:linkText="Currency Types" p:target="_self"
+                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=CurrencyPage"/>
+                        <bean parent="Uif-Link" p:linkText="Roll-Ups" p:target="_self"
+                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=RollupPage"/>
+                        <bean parent="Uif-Link" p:linkText="General Ledger Types" p:target="_self"
+                              p:href="generalLedgerTypeView?methodToCall=get&amp;viewId=GeneralLedgerTypeView"/>
+                        <bean parent="Uif-Link" p:linkText="Bank Types" p:target="_self"
+                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=BankTypePage"/>
+                        <bean parent="Uif-Link" p:linkText="Tax Types" p:target="_self"
+                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=TaxTypePage"/>
+                        <bean parent="Uif-Link" p:linkText="Late Periods" p:target="_self"
+                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=LatePeriodPage"/>
+                        <bean parent="Uif-Link" p:linkText="Account Status Types" p:target="_self"
+                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=AccountStatusTypePage"/>
+                        <bean parent="Uif-Link" p:linkText="Flag Types" p:target="_self"
+                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=FlagTypePage"/>
+                        <bean parent="Uif-Link" p:linkText="Activity Types" p:target="_self"
+                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=ActivityTypePage"/>
                     </list>
                 </property>
             </bean>
@@ -82,36 +82,38 @@
                 <!--Begin Currency Page-->
 
                 <bean parent="Uif-Page" p:id="CurrencyPage" p:title="Currency Types">
-                    <property name="headerText" value="Currency Types"/>
+                    <property name="headerText" value="@{simpleType} Types"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
                                         <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
-                                              p:actionParameters="pageId:CurrencyPage" p:actionLabel="Refresh">
+                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
+                                              p:actionLabel="Refresh">
                                         </bean>
                                     </list>
                                 </property>
                             </bean>
-                            <ref bean="addCurrencySection"/>
-                            <ref bean="currencyTableSection"/>
+                            <ref bean="addSection"/>
+                            <ref bean="tableSection"/>
                         </list>
                     </property>
                 </bean>
+
                 <bean parent="Uif-Page" p:id="CurrencyDetailsPage" p:title="Currency Details">
-                    <property name="headerText" value="Currency Details"/>
+                    <property name="headerText" value="@{simpleType} Details"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-Link" p:linkText="Currencies" p:target="_self"
-                                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=CurrencyPage"/>
+                                        <bean parent="Uif-Link" p:linkText="@{simpleType} Summary" p:target="_self"
+                                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=@{simpleType}Page"/>
                                     </list>
                                 </property>
                             </bean>
-                            <ref bean="currencyDetailSection"/>
+                            <ref bean="detailSection"/>
                         </list>
                     </property>
                 </bean>
@@ -120,18 +122,22 @@
 
                 <!--Begin Roll-Ups Page-->
 
-                <bean parent="Uif-Page" p:id="RollUpsPage" p:title="Roll-Ups">
-                    <property name="headerText" value="Roll-Ups"/>
+                <bean parent="Uif-Page" p:id="RollupPage" p:title="Roll-Ups">
+                    <property name="headerText" value="@{simpleType} Types"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
+                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
+                                              p:actionLabel="Refresh">
+                                        </bean>
                                     </list>
                                 </property>
                             </bean>
-                            <ref bean="rollUpsTable"/>
+                            <ref bean="addSection"/>
+                            <ref bean="tableSection"/>
                         </list>
                     </property>
                 </bean>
@@ -141,17 +147,21 @@
                 <!--Begin General Ledger Types Page-->
 
                 <bean parent="Uif-Page" p:id="GeneralLedgerTypesPage" p:title="General Ledger Types">
-                    <property name="headerText" value="General Ledger Types"/>
+                    <property name="headerText" value="@{simpleType} Types"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
+                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
+                                              p:actionLabel="Refresh">
+                                        </bean>
                                     </list>
                                 </property>
                             </bean>
-                            <!--<ref bean="PageSection"/>-->
+                            <ref bean="addSection"/>
+                            <ref bean="tableSection"/>
                         </list>
                     </property>
                 </bean>
@@ -160,18 +170,22 @@
 
                 <!--Begin Bank Types Page-->
 
-                <bean parent="Uif-Page" p:id="BankTypesPage" p:title="Bank Types">
-                    <property name="headerText" value="Bank Types"/>
+                <bean parent="Uif-Page" p:id="BankTypePage" p:title="Bank Types">
+                    <property name="headerText" value="@{simpleType} Types"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
+                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
+                                              p:actionLabel="Refresh">
+                                        </bean>
                                     </list>
                                 </property>
                             </bean>
-                            <!--<ref bean="PageSection"/>-->
+                            <ref bean="addSection"/>
+                            <ref bean="tableSection"/>
                         </list>
                     </property>
                 </bean>
@@ -180,18 +194,22 @@
 
                 <!--Begin Tax Types Page-->
 
-                <bean parent="Uif-Page" p:id="TaxTypesPage" p:title="Tax Types">
-                    <property name="headerText" value="Tax Types"/>
+                <bean parent="Uif-Page" p:id="TaxTypePage" p:title="Tax Types">
+                    <property name="headerText" value="@{simpleType} Types"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
+                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
+                                              p:actionLabel="Refresh">
+                                        </bean>
                                     </list>
                                 </property>
                             </bean>
-                            <!--<ref bean="PageSection"/>-->
+                            <ref bean="addSection"/>
+                            <ref bean="tableSection"/>
                         </list>
                     </property>
                 </bean>
@@ -200,18 +218,22 @@
 
                 <!--Begin Late Periods Page-->
 
-                <bean parent="Uif-Page" p:id="LatePeriodsPage" p:title="Late Periods">
-                    <property name="headerText" value="Late Periods"/>
+                <bean parent="Uif-Page" p:id="LatePeriodPage" p:title="Late Periods">
+                    <property name="headerText" value="@{simpleType} Types"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
+                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
+                                              p:actionLabel="Refresh">
+                                        </bean>
                                     </list>
                                 </property>
                             </bean>
-                            <!--<ref bean="PageSection"/>-->
+                            <ref bean="addSection"/>
+                            <ref bean="tableSection"/>
                         </list>
                     </property>
                 </bean>
@@ -220,18 +242,22 @@
 
                 <!--Begin Account Status Types Page-->
 
-                <bean parent="Uif-Page" p:id="AccountStatusTypesPage" p:title="Account Status Types Page">
-                    <property name="headerText" value="Account Status Types"/>
+                <bean parent="Uif-Page" p:id="AccountStatusTypePage" p:title="Account Status Types Page">
+                    <property name="headerText" value="@{simpleType} Types"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
+                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
+                                              p:actionLabel="Refresh">
+                                        </bean>
                                     </list>
                                 </property>
                             </bean>
-                            <!--<ref bean="PageSection"/>-->
+                            <ref bean="addSection"/>
+                            <ref bean="tableSection"/>
                         </list>
                     </property>
                 </bean>
@@ -240,18 +266,22 @@
 
                 <!--Begin Flag Types Page-->
 
-                <bean parent="Uif-Page" p:id="FlagTypesPage" p:title="Flag Types Page">
-                    <property name="headerText" value="Flag Types"/>
+                <bean parent="Uif-Page" p:id="FlagTypePage" p:title="Flag Types Page">
+                    <property name="headerText" value="@{simpleType} Types"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
+                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
+                                              p:actionLabel="Refresh">
+                                        </bean>
                                     </list>
                                 </property>
                             </bean>
-                            <!--<ref bean="PageSection"/>-->
+                            <ref bean="addSection"/>
+                            <ref bean="tableSection"/>
                         </list>
                     </property>
                 </bean>
@@ -260,18 +290,22 @@
 
                 <!--Begin Activity Types Page-->
 
-                <bean parent="Uif-Page" p:id="ActivityTypesPage" p:title="Activity Types Page">
-                    <property name="headerText" value="Activity Types"/>
+                <bean parent="Uif-Page" p:id="ActivityTypePage" p:title="Activity Types Page">
+                    <property name="headerText" value="@{simpleType} Types"/>
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
+                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
+                                              p:actionLabel="Refresh">
+                                        </bean>
                                     </list>
                                 </property>
                             </bean>
-                            <!--<ref bean="PageSection"/>-->
+                            <ref bean="addSection"/>
+                            <ref bean="tableSection"/>
                         </list>
                     </property>
                 </bean>
@@ -282,12 +316,12 @@
 
             </list>
         </property>
-<!--
-        <property name="additionalCssFiles" ref=""/>
-        <property name="additionalJsFiles" ref=""/>
-        <property name="viewHelperServiceClassName" value=""/>
-        <property name="defaultBindingObjectPath" value=""/>
--->
+        <!--
+                <property name="additionalCssFiles" ref=""/>
+                <property name="additionalJsFiles" ref=""/>
+                <property name="viewHelperServiceClassName" value=""/>
+                <property name="defaultBindingObjectPath" value=""/>
+        -->
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.SettingsForm"/>
     </bean>
 
@@ -311,9 +345,11 @@
     A horizontal section for adding a currency
     ********************************************************************************************************************
     -->
-    <bean id="addCurrencySection" parent="Uif-HorizontalBoxSection">
-        <property name="title" value="Add Currency Type"/>
-        <property name="instructionalText" value="Input fields to add a currency * denotes a required field"/>
+
+
+    <bean id="addSection" parent="Uif-HorizontalBoxSection">
+        <property name="title" value="Add @{simpleType} Type"/>
+        <property name="instructionalText" value="Input fields to add a @{simpleType} * denotes a required field"/>
         <property name="items">
             <list>
                 <bean parent="Uif-InputField" p:label="Symbol"
@@ -348,21 +384,20 @@
         </property>
     </bean>
 
-    <!-- Collection list of currency types -->
     <!--
     ********************************************************************************************************************
-                                             Currency List section
-    A table containing a list of currencies used in the system
+					 AuditableEntity List section
+    A table containing a list of auditableEntities used in the system
     ********************************************************************************************************************
     -->
-    <bean id="currencyTableSection" parent="Uif-Disclosure-TableCollectionSection"
+    <bean id="tableSection" parent="Uif-Disclosure-TableCollectionSection"
           p:layoutManager.numberOfColumns="4"
           p:width="85%">
-        <property name="title" value="View Currency Types"/>
+        <property name="title" value="View @{simpleType} Types"/>
         <property name="instructionalText"
                   value="The International Organization for Standardization publishes a list of standard currency codes referred to as the ISO 4217 code list. This is a list of ISO 4217 codes used in this application."/>
         <property name="readOnly" value="true"/>
-        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Currency"/>
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.krad.model.AuditableEntityModel"/>
         <property name="propertyName" value="auditableEntities"/>
         <property name="layoutManager.sequencePropertyName" value="id"/>
         <property name="layoutManager.richTable.render" value="true"/>
@@ -404,19 +439,19 @@
                     </property>
                 </bean>
                 <bean parent="Uif-LinkField" p:label="Edit" p:linkText="Edit" p:target="_self" p:width="10%"
-                      p:href="settingsView?viewId=SettingsView&amp;pageId=CurrencyDetailsPage&amp;methodToCall=get&amp;currencyId=@{#line.id}" />
+                      p:href="settingsView?viewId=SettingsView&amp;pageId=@{simpleType}DetailsPage&amp;methodToCall=get&amp;entityId=@{#line.id}" />
             </list>
         </property>
     </bean>
 
     <!--
     ********************************************************************************************************************
-                                        Edit a Currency section
-    A section devoted to displaying the detail of a currency and allows editing
+                                        Edit a auditableEntity
+    A section devoted to displaying the detail of an auditableEntity and allows editing
     ********************************************************************************************************************
     -->
-    <bean id="currencyDetailSection" parent="Uif-VerticalBoxSection">
-        <property name="title" value="Currency Details View"/>
+    <bean id="detailSection" parent="Uif-VerticalBoxSection">
+        <property name="title" value="@{simpleType} Details View"/>
         <property name="items">
             <list>
                 <bean parent="Uif-InputField"
@@ -451,7 +486,7 @@
                 </bean>
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="updateAuditableEntity"
                       p:actionLabel="Submit"
-                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[currencyId]&quot;, &quot;@{currency.id}&quot;);">
+                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[entityId]&quot;, &quot;@{auditableEntity.id}&quot;);">
                     <!--<property name="actionImage">
                         <bean parent="Uif-ImageField"
                               p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
@@ -462,74 +497,5 @@
             </list>
         </property>
     </bean>
-
-    <!--
-    ********************************************************************************************************************
-                                             WIP !!!  Roll-up Table
-    A table containing a list of Roll-Ups used in the system
-    ********************************************************************************************************************
-    -->
-    <bean id="rollUpsTable" parent="Uif-HorizontalBoxSection">
-        <property name="items">
-            <list>
-                <bean parent="Uif-MessageField" p:messageText="Placeholder: Roll-Ups Table"/>
-            </list>
-        </property>
-    </bean>
-
-
-    <!--<bean id="rollUpsTable" parent="Uif-Disclosure-TableCollectionSection"
-          p:layoutManager.numberOfColumns="4"
-          p:width="85%">
-        <property name="title" value="View Roll-Ups"/>
-        <property name="instructionalText"
-                  value="Roll-Up table - instructional text"/>
-        <property name="readOnly" value="true"/>
-        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Currency"/>
-        <property name="propertyName" value="auditableEntities"/>
-        <property name="layoutManager.sequencePropertyName" value="id"/>
-        <property name="layoutManager.richTable.render" value="true"/>
-        <property name="layoutManager.renderSequenceField" value="false"/>
-        <property name="layoutManager.applyDefaultCellWidths" value="false"/>
-        <property name="layoutManager.richTable.disableTableSort" value="false"/>
-        <property name="layoutManager.richTable.templateOptions">
-            <map merge="true">
-                <entry key="bPaginate" value="true"/>
-                <entry key="iDisplayLength" value="20"/>
-            </map>
-        </property>
-
-        <property name="items">
-            <list>
-                <bean parent="Uif-InputField" p:label="Symbol"
-                      p:propertyName="code"
-                      p:width="10%">
-                    <property name="control">
-                        <bean parent="Uif-TextControl"
-                              p:size="11" p:maxLength="10"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:label="Name"
-                      p:propertyName="name"
-                      p:width="15%">
-                    <property name="control">
-                        <bean parent="Uif-TextControl"
-                              p:size="20" p:maxLength="100"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:label="Description"
-                      p:propertyName="description"
-                      p:width="55%">
-                    <property name="control">
-                        <bean parent="Uif-TextAreaControl"
-                              p:rows="5" p:cols="80"
-                              p:watermarkText="Statement description..."/>
-                    </property>
-                </bean>
-                <bean parent="Uif-LinkField" p:label="Edit" p:linkText="Edit" p:target="_self" p:width="10%"
-                      p:href="settingsView?viewId=SettingsView&amp;pageId=CurrencyDetailsPage&amp;methodToCall=get&amp;currencyId=@{#line.id}" />
-            </list>
-        </property>
-    </bean>-->
 
 </beans>

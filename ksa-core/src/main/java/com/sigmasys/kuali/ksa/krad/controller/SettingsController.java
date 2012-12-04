@@ -52,12 +52,7 @@ public class SettingsController extends GenericSearchController {
         String viewId = request.getParameter("viewId");
         String pageId = request.getParameter("pageId");
 
-        // a record index from a table selection or a known currencyId
-        String currencyId = request.getParameter("currencyId");
         String entityId = request.getParameter("entityId");
-        if (entityId == null) {
-            entityId = currencyId;
-        }
 
         logger.info("View: " + viewId + " Page: " + pageId + " Entity ID: " + entityId);
 
@@ -66,10 +61,10 @@ public class SettingsController extends GenericSearchController {
             form.setAuditableEntity(new Currency());
             form.setAuditableEntities(auditableEntityService.getAuditableEntities(Currency.class));
         } else if ("CurrencyDetailsPage".equals(pageId)) {
-            if (currencyId == null || currencyId.trim().isEmpty()) {
-                throw new IllegalArgumentException("'currencyId' request parameter must be specified");
+            if (entityId == null || entityId.trim().isEmpty()) {
+                throw new IllegalArgumentException("'entityId' request parameter must be specified");
             }
-            form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(currencyId), Currency.class));
+            form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), Currency.class));
         } else if ("RollupPage".equals(pageId)) {
             form.setAuditableEntity(new Rollup());
             form.setAuditableEntities(auditableEntityService.getAuditableEntities(Rollup.class));
