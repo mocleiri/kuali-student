@@ -1101,157 +1101,55 @@ Insert into KSSA_USER_PREF (ACNT_ID_FK, NAME, VALUE) values ('admin', 'ksa.local
 set sqlblanklines on
 set sqlterminator '!'
 
-Insert into KSSA_RULE_SET (ID, RULE_SET) values ('ksa.dsl',
-'# The KSA DSL definition
+Insert into KSSA_RULE (ID, NAME, RULE_TYPE_ID_FK, PRIORITY, HEADER, LHS, RHS) values (1, 'Rule 1', 3, 0, null,
+'(Major is "EMBA" and Section is "EM11" with status "")',
+'Use code "1179" to charge $31280.36
+ Use code "1121" to charge $386.36
+ Set status to "C", key pair "MAND_FEES" to "Y" where section is "EM11"')!
 
-[keyword][]and = &&
-[keyword][]equals = ==
+Insert into KSSA_RULE (ID, NAME, RULE_TYPE_ID_FK, PRIORITY, HEADER, LHS, RHS) values (2, 'Rule 2', 3, 1, null,
+'(Key pair "member-code" is "12,22,42")',
+'Use code "1060" to charge $199.38')!
 
-[when][]\({constraints}\) = context : DroolsContext({constraints})
-[when][]Student account ID is "{userId}" = account.id == "{userId}"
-[when][]Student is resident = feeManagementService.isResident(feeBase)
-[when][]Student is not resident = !feeManagementService.isResident(feeBase)
-[when][]Student is graduate = feeManagementService.isGraduate(feeBase)
-[when][]Student is not graduate = !feeManagementService.isGraduate(feeBase)
-[when][]LU code is "{luCodes}" with status "{statuses}" = feeManagementService.containsLearningUnitCode(feeBase, "{luCodes}", "{statuses}")
-[when][]Major is "{majorCodes}" = feeManagementService.containsMajorCode(feeBase, "{majorCodes}")
-[when][]Section is "{sectionCodes}" with status "{statuses}" = feeManagementService.containsSectionCode(feeBase, "{sectionCodes}", "{statuses}")
-[when][]Number of credits is {numberOfCredits} with status "{status}" = feeManagementService.getNumOfCredits(feeBase, "{status}") == {numberOfCredits}
-[when][]Number of credits > {numberOfCredits} with status "{status}" = feeManagementService.getNumOfCredits(feeBase, "{status}") > {numberOfCredits}
-[when][]Number of credits < {numberOfCredits} with status "{status}" = feeManagementService.getNumOfCredits(feeBase, "{status}") < {numberOfCredits}
-[when][]Key pair "{key}" is "{values}" = feeManagementService.containsKeyPair(feeBase, "{key}", "{values}")
+Insert into KSSA_RULE (ID, NAME, RULE_TYPE_ID_FK, PRIORITY, HEADER, LHS, RHS) values (3, 'Rule 3', 3, 20, null,
+'(LU code is "ENTS[0-9A-Z]{4}" with status "")',
+'Use code "1180" to charge $950
+ Set status to "C", key pair "MAND_FEES" to "Y" where code is "ENTS[0-9A-Z]{4}"')!
 
-[then][]Use code "{transactionTypeId}" to charge ${amount} = context.getTransactionService().createTransaction("{transactionTypeId}",context.getAccount().getId(), new Date(), new BigDecimal({amount}));
-[then][]Use code "{transactionTypeId}" to credit ${amount} = context.getTransactionService().createTransaction("{transactionTypeId}",context.getAccount().getId(), new Date(), new BigDecimal({amount}));
-[then][]Set status to "{status}", key pair "{key}" to "{value}" where code is "{luCodes}" = context.getFeeManagementService().setCourseStatusForLearningUnits(feeBase,"{luCodes}","{status}","{key}","{value}");
-[then][]Set status to "{status}", key pair "{key}" to "{value}" where section is "{sectionCodes}" = context.getFeeManagementService().setCourseStatusForSections(feeBase,"{sectionCodes}","{status}","{key}","{value}");
-[then][]Set status to "{newStatus}", key pair "{key}" to "{value}" where status is "{oldStatus}" = context.getFeeManagementService().setCourseStatusForStatus(feeBase,"{oldStatus}","{newStatus}","{key}","{value}");
-[then][]Number of credits for LU code "{luCodes}" with status "{statuses}" = context.getFeeManagementService().getNumOfCreditsByLearningUnitCodes(feeBase,"{luCodes}","{statuses}");
-[then][]Use "{transactionTypeId}" to charge ${amountPerCredit} per credit where section is "{sectionCodes}" with status "{statuses}" = context.getFeeManagementService().createTransactionForNumberOfCredits(feeBase,"{transactionTypeId}",new BigDecimal({amountPerCredit}),"{sectionCodes}","{statuses}");
-')!
+Insert into KSSA_RULE (ID, NAME, RULE_TYPE_ID_FK, PRIORITY, HEADER, LHS, RHS) values (4, 'Rule 4', 3, 0, null,
+ '(Section is "BR[0-9A-Z]{2}" with status "" and Student is resident)',
+ 'Use "1186" to charge $525 per credit where section is "BR[0-9A-Z]{2}" with status ""
+  Use code "1187" to charge $53
+  Set status to "C", key pair "MAND_FEES" to "Y" where section is "BR[0-9A-Z]{2}"')!
 
-Insert into KSSA_RULE_SET (ID, RULE_SET) values ('fee_assessment.dslr',
+Insert into KSSA_RULE (ID, NAME, RULE_TYPE_ID_FK, PRIORITY, HEADER, LHS, RHS) values (5, 'Rule 5', 3, 0, null,
+ '(Section is "BR[0-9A-Z]{2}" with status "" and Student is not resident)',
+ 'Use "1186" to charge $1131.00 per credit where section is "BR[0-9A-Z]{2}" with status ""
+  Use code "1187" to charge $53
+  Set status to "C", key pair "MAND_FEES" to "Y" where section is "BR[0-9A-Z]{2}"')!
+
+Insert into KSSA_RULE (ID, NAME, RULE_TYPE_ID_FK, PRIORITY, HEADER, LHS, RHS) values (6, 'Rule 6', 3, 0, null,
+ '(Key pair "member-code" is "10,11,12,13,14,15,16,17,18,19,20" and Student is resident and Number of credits > 9 with status "")',
+ 'Use code "1000" to charge $3483.00
+  Set status to "C", key pair "MAND_FEES" to "Y" where status is ""')!
+
+Insert into KSSA_RULE (ID, NAME, RULE_TYPE_ID_FK, PRIORITY, HEADER, LHS, RHS) values (7, 'Rule 7', 3, 0, null,
+ '(Key pair "member-code" is "10,11,12,13,14,15,16,17,18,19,20" and Student is not resident and Number of credits > 9 with status "")',
+ 'Use code "1020" to charge $12168.48
+  Set status to "C", key pair "MAND_FEES" to "Y" where status is ""')!
+
+
+Insert into KSSA_RULE_SET (ID, NAME, RULE_TYPE_ID_FK, HEADER) values (1, 'Fee Management', 3,
 'import java.util.*;
 import java.math.*;
 import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.service.drools.*;
+import com.sigmasys.kuali.ksa.model.rule.*;
+import com.sigmasys.kuali.ksa.service.brm.*;
 
 expander ksa.dsl
 
 global FeeBase feeBase;
 
-
-/////////////////////// Beginning of rule definitions ///////////////////////////
-
-rule "Rule 1"
-when
-    (Major is "EMBA" and Section is "EM11" with status "")
-then
-    Use code "1179" to charge $31280.36
-    Use code "1121" to charge $386.36
-    Set status to "C", key pair "MAND_FEES" to "Y" where section is "EM11"
-end
-
-rule "Rule 2"
-when
-    (Key pair "member-code" is "12,22,42")
-then
-    Use code "1060" to charge $199.38
-end
-
-rule "Rule 3"
-when
-    (LU code is "ENTS[0-9A-Z]{4}" with status "")
-then
-    Use code "1180" to charge $950
-    Set status to "C", key pair "MAND_FEES" to "Y" where code is "ENTS[0-9A-Z]{4}"
-end
-
-rule "Rule 4"
-when
-    (Section is "BR[0-9A-Z]{2}" with status "" and Student is resident)
-then
-    Use "1186" to charge $525 per credit where section is "BR[0-9A-Z]{2}" with status ""
-    Use code "1187" to charge $53
-    Set status to "C", key pair "MAND_FEES" to "Y" where section is "BR[0-9A-Z]{2}"
-end
-
-rule "Rule 5"
-when
-    (Section is "BR[0-9A-Z]{2}" with status "" and Student is not resident)
-then
-    Use "1186" to charge $1131.00 per credit where section is "BR[0-9A-Z]{2}" with status ""
-    Use code "1187" to charge $53
-    Set status to "C", key pair "MAND_FEES" to "Y" where section is "BR[0-9A-Z]{2}"
-end
-
-rule "Rule 6"
-when
-    (Key pair "member-code" is "10,11,12,13,14,15,16,17,18,19,20" and Student is resident and Number of credits > 9 with status "")
-then
-    Use code "1000" to charge $3483.00
-    Set status to "C", key pair "MAND_FEES" to "Y" where status is ""
-end
-
-rule "Rule 7"
-when
-    (Key pair "member-code" is "10,11,12,13,14,15,16,17,18,19,20" and Student is not resident and Number of credits > 9 with status "")
-then
-    Use code "1020" to charge $12168.48
-    Set status to "C", key pair "MAND_FEES" to "Y" where status is ""
-end
-')!
-
-Insert into KSSA_RULE_SET (ID, RULE_SET) values ('fee1.dslr',
-'import java.util.*;
-import java.math.*;
-import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.service.drools.*;
-
-expander ksa.dsl
-
-global FeeBase feeBase;
-
-
-/////////////////////// Beginning of rule definitions ///////////////////////////
-
-
-rule "Tuition 1"
-when
-    (Student account ID is "admin")
-then
-    Use code "1020" to charge $345.78
-    Use code "pp" to credit $50.0
-end
-
-rule "Tuition 2"
-when
-    (Major is "34444,2345,MAJ1")
-then
-    Use code "1020" to charge $345.78
-    Use code "1319" to credit $50.0
-end
-
-rule "Tuition 3"
-when
-    (LU code is "MFRO,MABO,GOOG" with status "")
-then
-    Use code "cash" to credit $50.50
-end
-
-rule "Tuition 4"
-when
-    ("a" equals "a" and LU code is "WARTY--" with status "C")
-then
-    Use code "cash" to credit $950.50
-end
-
-rule "Tuition 5"
-when
-    (LU code is "MFRO,MABO" with status "F" and Major is "34444,2345,MA34")
-then
-    Use code "cash" to credit $50.50
-end
 ')!
 
 set sqlterminator ';'

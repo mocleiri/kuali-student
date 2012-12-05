@@ -3,6 +3,7 @@
 [keyword][]and = &&
 [keyword][]equals = ==
 
+# LHS definitions
 [when][]\({constraints}\) = context : DroolsContext({constraints})
 [when][]Student account ID is "{userId}" = account.id == "{userId}"
 [when][]Student is resident = feeManagementService.isResident(feeBase)
@@ -17,6 +18,7 @@
 [when][]Number of credits < {numberOfCredits} with status "{status}" = feeManagementService.getNumOfCredits(feeBase, "{status}") < {numberOfCredits}
 [when][]Key pair "{key}" is "{values}" = feeManagementService.containsKeyPair(feeBase, "{key}", "{values}")
 
+# RHS definitions
 [then][]Use code "{transactionTypeId}" to charge ${amount} = context.getTransactionService().createTransaction("{transactionTypeId}",context.getAccount().getId(), new Date(), new BigDecimal({amount}));
 [then][]Use code "{transactionTypeId}" to credit ${amount} = context.getTransactionService().createTransaction("{transactionTypeId}",context.getAccount().getId(), new Date(), new BigDecimal({amount}));
 [then][]Set status to "{status}", key pair "{key}" to "{value}" where code is "{luCodes}" = context.getFeeManagementService().setCourseStatusForLearningUnits(feeBase,"{luCodes}","{status}","{key}","{value}");

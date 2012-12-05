@@ -1,7 +1,7 @@
 package com.sigmasys.kuali.ksa.model.rule;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Knowledge base (Rule Set) JPA entity.
@@ -14,9 +14,9 @@ import java.util.List;
 public class RuleSet extends AbstractRuleEntity {
 
     /**
-     * A set of rules in plain-text format
+     * A set of rules belonging to this RuleSet
      */
-    private List<Rule> rules;
+    private Set<Rule> rules;
 
 
     @Id
@@ -41,11 +41,11 @@ public class RuleSet extends AbstractRuleEntity {
                     @JoinColumn(name = "RULE_ID_FK")
             }
     )
-    public List<Rule> getRules() {
+    public Set<Rule> getRules() {
         return rules;
     }
 
-    public void setRules(List<Rule> rules) {
+    public void setRules(Set<Rule> rules) {
         this.rules = rules;
     }
 }

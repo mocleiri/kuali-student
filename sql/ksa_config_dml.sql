@@ -41,6 +41,9 @@ insert into KSSA_SEQUENCE_TABLE (SEQ_NAME, SEQ_VALUE) values ('KEYPAIR_SEQ', 100
 insert into KSSA_SEQUENCE_TABLE (SEQ_NAME, SEQ_VALUE) values ('LEARNING_UNIT_SEQ', 1001);
 insert into KSSA_SEQUENCE_TABLE (SEQ_NAME, SEQ_VALUE) values ('LEARNING_PERIOD_SEQ', 1001);
 insert into KSSA_SEQUENCE_TABLE (SEQ_NAME, SEQ_VALUE) values ('GL_RECOGNITION_PERIOD_SEQ', 1001);
+insert into KSSA_SEQUENCE_TABLE (SEQ_NAME, SEQ_VALUE) values ('RULE_SEQ', 1001);
+insert into KSSA_SEQUENCE_TABLE (SEQ_NAME, SEQ_VALUE) values ('RULE_TYPE_SEQ', 1001);
+insert into KSSA_SEQUENCE_TABLE (SEQ_NAME, SEQ_VALUE) values ('RULE_SET_SEQ', 1001);
 
 
 --  SYSTEM CONFIGURATION PARAMETERS --
@@ -85,6 +88,15 @@ insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.document.type.code', 'JV');
 insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.object.type.code', '');
 insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.origination.code', 'KS');
 insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.transaction.gl.entry.description', 'KSA General Ledger Transaction');
+
+-- BRM (Drools) rule types
+insert into KSSA_RULE_TYPE (ID, NAME, DESCRIPTION) values (1, 'DSL', 'Drools DSL');
+insert into KSSA_RULE_TYPE (ID, NAME, DESCRIPTION) values (2, 'DLR', 'Drools Rule Language');
+insert into KSSA_RULE_TYPE (ID, NAME, DESCRIPTION) values (3, 'DSLR', 'Drools DSL Rule');
+insert into KSSA_RULE_TYPE (ID, NAME, DESCRIPTION) values (4, 'XDRL', 'Drools XML Rule Language"');
+
+
+
 
 
 

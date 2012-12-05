@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 import javax.persistence.Query;
 
-import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
@@ -53,9 +52,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     @Autowired
     private BrmService brmService;
 
-    @Autowired
-    private ConfigService configService;
-
 
     /**
      * Performs all the necessary operations to calculate fees for the given account.
@@ -66,13 +62,6 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
     @Override
     public void assessFees(String accountId) {
 
-        String feeAssessmentRuleSetId = configService.getInitialParameter(Constants.DROOLS_FA_RULE_SET_PARAM_NAME);
-        if (feeAssessmentRuleSetId == null) {
-            String errMsg = "Fee Assessment Rule ID '" + Constants.DROOLS_FA_RULE_SET_PARAM_NAME + "' must be set";
-            logger.error(errMsg);
-            throw new IllegalStateException(errMsg);
-        }
-
         // Getting the fee base for the user
         FeeBase feeBase = getFeeBase(accountId);
 
@@ -82,7 +71,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
         Map<String, Object> globalParams = new HashMap<String, Object>();
         globalParams.put("feeBase", feeBase);
 
-        brmService.fireRules(feeAssessmentRuleSetId, brmContext, globalParams);
+        brmService.fireRules(Constants.DROOLS_FM_RULE_SET_NAME, brmContext, globalParams);
     }
 
 
@@ -499,8 +488,8 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
         Query query = em.createQuery("select lp from LearningPeriod lp where lp.startDate >= :dateFrom " +
                 " and lp.endDate <= :dateTo");
 
-                query.setParameter("dateFrom", dateFrom);
-                query.setParameter("dateTo", dateTo);
+        query.setParameter("dateFrom", dateFrom);
+        query.setParameter("dateTo", dateTo);
 
         return query.getResultList();
     }

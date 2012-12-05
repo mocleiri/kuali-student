@@ -118,7 +118,7 @@ public class BrmPersistenceServiceImpl extends GenericPersistenceService impleme
         Long ruleTypeId = ruleSet.getType().getId();
 
         if (ruleSet.getRules() == null) {
-            ruleSet.setRules(new ArrayList<Rule>());
+            ruleSet.setRules(new HashSet<Rule>());
         }
 
         for (Rule rule : rules) {
@@ -155,7 +155,7 @@ public class BrmPersistenceServiceImpl extends GenericPersistenceService impleme
 
         List<Long> idsToDelete = Arrays.asList(ruleIds);
 
-        List<Rule> rules = ruleSet.getRules();
+        Set<Rule> rules = ruleSet.getRules();
 
         if (rules != null) {
 

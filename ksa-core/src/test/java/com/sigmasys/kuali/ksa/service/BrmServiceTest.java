@@ -20,7 +20,7 @@ import java.util.Map;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
 @Transactional
-public class DroolsServiceTest extends AbstractServiceTest {
+public class BrmServiceTest extends AbstractServiceTest {
 
     @Autowired
     private BrmService brmService;
@@ -42,7 +42,7 @@ public class DroolsServiceTest extends AbstractServiceTest {
         accountService.getOrCreateAccount(userId);
     }
 
-    //@Test
+    @Test
     public void fireFeeAssessmentRules1() throws Exception {
 
         BrmContext brmContext = new BrmContext();
@@ -52,24 +52,6 @@ public class DroolsServiceTest extends AbstractServiceTest {
         globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
 
         brmContext = brmService.fireRules(1L, brmContext, globalParams);
-
-        Assert.notNull(brmContext);
-        Assert.notNull(brmContext.getAccount());
-        Assert.isTrue("admin".equals(brmContext.getAccount().getId()));
-
-    }
-
-
-    @Test
-    public void fireFeeAssessmentRules2() throws Exception {
-
-        BrmContext brmContext = new BrmContext();
-        brmContext.setAccount(accountService.getFullAccount("admin"));
-
-        Map<String, Object> globalParams = new HashMap<String, Object>();
-        globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
-
-        brmContext = brmService.fireRules(2L, brmContext, globalParams);
 
         Assert.notNull(brmContext);
         Assert.notNull(brmContext.getAccount());

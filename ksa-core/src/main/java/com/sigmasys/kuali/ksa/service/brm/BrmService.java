@@ -67,10 +67,10 @@ public interface BrmService {
     void refresh();
 
     /**
-     * Reloads a single rule set (knowledge base) specified by the given ID.
+     * Reloads a single rule set (knowledge base) specified by name
      *
-     * @param ruleSetId Rule Set ID
+     * @param ruleSetName Rule Set name
      */
-    void reloadRuleSet(Long ruleSetId);
+    void reloadRuleSet(String ruleSetName);
 
 }
