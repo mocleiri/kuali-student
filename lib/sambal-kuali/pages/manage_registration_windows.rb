@@ -79,9 +79,10 @@ class RegistrationWindowsCreate < RegistrationWindowsBase
   element(:max_appointments_per_slot) { |b| b.frm.text_field(name: "newCollectionLines['appointmentWindows'].appointmentWindowInfo.maxAppointmentsPerSlot") }
   element(:page_validation_header) { |b| b.h3(id: "pageValidationHeader") }
   #element(:date_ranges) { |b| b.div(id: "KS-RegistrationWindows-PeriodSection") }
-  element(:date_ranges) { |b| b.span(id: "u164_span") }
+  element(:date_ranges) { |b| b.span(id: "periodDetails_span") }
   #value(:date_ranges) { |b| b.div(id: "KS-RegistrationWindows-PeriodSection").span().text }
-  action(:add) { |b| b.frm.button(text: "add").click; b.loading.wait_while_present }
+  element(:add_button_element) { |b| b.frm.button(text: "add") }
+  action(:add) { |b| b.frm.button(text: "add").click; b.adding_line.wait_while_present }
   action(:delete) { |b| b.frm.button(text: "X").click; b.loading.wait_while_present }
   action(:assign_students) { |b| b.frm.button(text: "Assign Students").click; b.loading.wait_while_present }
   action(:break_appointments) { |b| b.frm.button(text: "Break Appointments").click; b.loading.wait_while_present }
@@ -97,7 +98,7 @@ class RegistrationWindowsCreate < RegistrationWindowsBase
   element(:break_appointments_popup_div) { |b| b.div(id: "KS-RegistrationWindowsManagement-ConfirmBreakAppointments-Dialog") }
   action(:confirm_break_appointments) { |b| b.break_appointments_popup_div.checkbox(index: 0).click; b.loading.wait_while_present }
   action(:cancel_break_appointments) { |b| b.break_appointments_popup_div.checkbox(index: 1).click; b.loading.wait_while_present }
-
+  element(:adding_line) { |b| b.frm.image(alt: "Adding Line...") }
 
   def results_list_by_window_name()
     names = []
@@ -191,6 +192,15 @@ class RegistrationWindowsCreate < RegistrationWindowsBase
     row = get_target_row(window_name, period_key)
     row.cells[COLUMN_ASSIGN_STUDENTS].button(text: "Assign Students").click
     loading.wait_while_present
+    while true
+      begin
+        sleep 1
+        wait_until { window_collection_table.exists? }
+        break
+      rescue Selenium::WebDriver::Error::StaleElementReferenceError
+        puts "rescued"
+      end
+    end
   end
 
   def break_appointments(window_name, period_key)
@@ -199,6 +209,15 @@ class RegistrationWindowsCreate < RegistrationWindowsBase
     row = get_target_row(window_name, period_key)
     row.cells[COLUMN_BREAK_APPOINTMENTS].button(text: "Break Appointments").click
     loading.wait_while_present
+    while true
+      begin
+        sleep 1
+        wait_until { window_collection_table.exists? }
+        break
+      rescue Selenium::WebDriver::Error::StaleElementReferenceError
+        puts "rescued"
+      end
+    end
   end
 
   def is_window_name_unique(window_name, period_key)
@@ -253,7 +272,7 @@ class RegistrationWindowsCreate < RegistrationWindowsBase
 
     form.button(text: "Save").click
     loading.wait_while_present
-    sleep(5)
+    #sleep(5)
 
   end
 

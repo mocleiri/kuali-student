@@ -1,4 +1,4 @@
-@draft
+@nightly
 Feature: Search for a registration window
 
   Background:

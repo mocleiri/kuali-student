@@ -61,11 +61,20 @@ class RegistrationWindow
         page.slot_rule_enum_type.select @slot_rule_enum_type
       end
       page.add
-      page.loading.wait_while_present
-      sleep(5)
+      while true
+        begin
+          sleep 1
+          wait_until { page.window_collection_table.exists? }
+          break
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          puts "rescued StaleElementReferenceError"
+        end
+      end
     end
 
   end
+
+
 
   def edit_registration_window opts={}
 
@@ -101,6 +110,42 @@ class RegistrationWindow
     end
 
   end
+
+  def assign_students
+    on RegistrationWindowsCreate do |page|
+      page.assign_students(@appointment_window_info_name, @period_key)
+    end
+  end
+
+  def break_appointments
+    on RegistrationWindowsCreate do |page|
+      page.break_appointments(@appointment_window_info_name, @period_key)
+      page.confirm_break_appointments
+    end
+  end
+
+  def delete_window(confirm_delete=true)
+    puts "Deleting Registration Window #{@appointment_window_info_name}"
+    on RegistrationWindowsCreate do |page|
+      page.remove(@appointment_window_info_name, @period_key)
+      page.loading.wait_while_present
+      while true
+        begin
+          sleep 1
+          wait_until { page.window_collection_table.exists? }
+          break
+        rescue Selenium::WebDriver::Error::StaleElementReferenceError
+          puts "rescued StaleElementReferenceError"
+        end
+      end
+      if confirm_delete
+        page.confirm_delete
+      else
+        page.cancel_delete
+      end
+    end
+  end
+
 
   def get_before_date(date)
     new_date = Date.strptime(date, '%m/%d/%Y')

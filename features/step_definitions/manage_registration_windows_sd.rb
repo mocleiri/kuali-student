@@ -1,4 +1,5 @@
 When /^I manage Registration Windows for a term and a period$/ do
+  #TODO: term and year are hard-coded in the page object - requires data object refactoring
   go_to_manage_reg_windows
   on RegistrationWindowsTermLookup do |page1|
     page1.search_by_term_and_year
@@ -14,10 +15,25 @@ Then /^I verify that all Registration Window fields are present$/ do
   end
 end
 
+#TODO: 3 step defs can be parameterized re Slot Allocation method - requires data object refactoring (wrappers for these)
+Then /^I select Uniform Slotted Window from Slot Allocation Method dropdown$/ do
+  on RegistrationWindowsCreate do |page|
+    page.window_type_key.select RegistrationWindowsConstants::METHOD_UNIFORM_SLOTTED_WINDOW
+    page.loading.wait_while_present
+  end
+end
+
 Then /^I select One Slot per Window from Slot Allocation Method dropdown$/ do
   on RegistrationWindowsCreate do |page|
     page.window_type_key.select RegistrationWindowsConstants::METHOD_ONE_SLOT_PER_WINDOW
-    sleep(5)
+    page.loading.wait_while_present
+  end
+end
+
+Then /^I select Max Slotted Window from Slot Allocation Method dropdown$/ do
+  on RegistrationWindowsCreate do |page|
+    page.window_type_key.select RegistrationWindowsConstants::METHOD_MAX_SLOTTED_WINDOW
+    page.loading.wait_while_present
   end
 end
 
@@ -27,23 +43,10 @@ Then /^I verify that no One Slot per Window field is present$/ do
   end
 end
 
-Then /^I select Max Slotted Window from Slot Allocation Method dropdown$/ do
-  on RegistrationWindowsCreate do |page|
-    page.window_type_key.select RegistrationWindowsConstants::METHOD_MAX_SLOTTED_WINDOW
-    sleep(5)
-  end
-end
 
 Then /^I verify that Max Slotted Window fields are visible$/ do
   on RegistrationWindowsCreate do |page|
     page.validate_dynamic_fields(RegistrationWindowsConstants::METHOD_MAX_SLOTTED_WINDOW).should be_true
-  end
-end
-
-Then /^I select Uniform Slotted Window from Slot Allocation Method dropdown$/ do
-  on RegistrationWindowsCreate do |page|
-    page.window_type_key.select RegistrationWindowsConstants::METHOD_UNIFORM_SLOTTED_WINDOW
-    sleep(5)
   end
 end
 
@@ -218,36 +221,18 @@ When /^I edit a Registration Window with the same Start Date and End Date settin
 end
 
 When /^I delete the Registration Window$/ do
-  puts "Deleting Registration Window #{@registrationWindow.appointment_window_info_name}"
-  on RegistrationWindowsCreate do |page|
-    page.remove(@registrationWindow.appointment_window_info_name, @registrationWindow.period_key)
-    page.loading.wait_while_present
-    sleep(5)
-    page.confirm_delete
-  end
+  @registrationWindow.delete_window
 end
 
 When /^I try deleting of the Registration Window but I cancel the delete$/ do
-  puts "Deleting Registration Window #{@registrationWindow.appointment_window_info_name}, #{@registrationWindow.period_key}"
-  on RegistrationWindowsCreate do |page|
-    page.remove(@registrationWindow.appointment_window_info_name, @registrationWindow.period_key)
-    page.loading.wait_while_present
-    sleep(5)
-    page.cancel_delete
-  end
+  @registrationWindow.delete_window(false)
 end
 
 When /^I assign Student Appointments in Registration Window$/ do
-  on RegistrationWindowsCreate do |page|
-    page.assign_students(@registrationWindow.appointment_window_info_name, @registrationWindow.period_key)
-  end
+  @registrationWindow.assign_students
 end
 
+
 When /^I break Student Appointments in Registration Window$/ do
-  on RegistrationWindowsCreate do |page|
-    page.break_appointments(@registrationWindow.appointment_window_info_name, @registrationWindow.period_key)
-    page.loading.wait_while_present
-    sleep(5)
-    page.confirm_break_appointments
-  end
+  @registrationWindow.break_appointments
 end
