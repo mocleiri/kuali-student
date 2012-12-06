@@ -101,7 +101,8 @@
                     <label>Username:&nbsp;</label>
                 </td>
                 <td class="rightTd" align="left">
-                    <input type="text" name="ksa_userId" value="" size="20"/>
+                    <%-- TODO Remove value="admin" after development/testing --%>
+                    <input type="text" name="ksa_userId" value="admin" size="20"/>
                 </td>
             </tr>
             <c:set var="invalidAuthMsg" value="Invalid username"/>
@@ -112,7 +113,8 @@
                         <label>Password:&nbsp;</label>
                     </td>
                     <td class="rightTd" align="left">
-                        <input type="password" name="ksa_password" value="" size="20"/></td>
+                        <%-- TODO Remove value="admin123" after development/testing --%>
+                        <input type="password" name="ksa_password" value="admin123" size="20"/></td>
                 </tr>
             </c:if>
             <c:if test="${requestScope.invalidLogin}">
