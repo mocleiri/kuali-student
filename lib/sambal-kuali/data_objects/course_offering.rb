@@ -39,12 +39,26 @@ class CourseOffering
     end
   end
 
-  def manage_registration_groups
+  def manage_registration_groups(cleanup=true)
     on ManageCourseOfferings do |page|
       page.manage_registration_groups
     end
     #init
+    if cleanup
+      on ManageRegistrationGroups do |page|
+        page.delete_all_clusters
+      end
+    end
 
+  end
+
+  def delete_ao(ao_code)
+    on ManageCourseOfferings do |page|
+      page.delete(ao_code)
+    end
+    on ActivityOfferingConfirmDelete do |page|
+      page.delete_activity_offering
+    end
   end
 
   def add_ao_cluster(ao_cluster)
@@ -62,7 +76,30 @@ class CourseOffering
     @activity_offering_cluster_list.each do |cluster|
       expected_unassigned = expected_unassigned - cluster.assigned_ao_list
     end
-    expected_unassigned
+    expected_unassigned.delete("")
+  end
+
+  def create_co_copy
+    pre_copy_co_list = []
+    post_copy_co_list = []
+
+    go_to_manage_course_offerings
+    on ManageCourseOfferings do |page|
+      page.term.set @term
+      page.input_code.set @course[0,4] #subject code
+      page.show
+    end
+    on ManageCourseOfferingList do |page|
+      pre_copy_co_list = page.co_list
+      page.copy @course
+    end
+    on CopyCourseOffering do |page|
+      page.create_copy
+    end
+    on ManageCourseOfferingList do |page|
+      post_copy_co_list = page.co_list
+    end
+    (post_copy_co_list - pre_copy_co_list).first
   end
 
 end

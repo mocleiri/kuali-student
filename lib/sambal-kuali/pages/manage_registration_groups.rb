@@ -8,6 +8,9 @@ class ManageRegistrationGroups < BasePage
   element(:subject_code) { |b| b.frm.div(id: "manageRegistrationGroupsView").h3.span() } # Persistent ID needed!
   element(:format_select) { |b| b.frm.div(data_label: "Select Format").select() }
 
+  element(:page_validation_error_list) { |b| b.frm.ul(id: "pageValidationList") }
+  value(:first_page_validation_error)  { |b| b.page_validation_error_list.li().text() }
+
   element(:unassigned_ao_table) { |b| b.frm.div(id: "KS-ManageRegistrationGroups-UnassignedActivityOfferingsPerFormatSection").table() }
 
   def target_unassigned_ao_row(ao_code)
@@ -18,9 +21,27 @@ class ManageRegistrationGroups < BasePage
     target_unassigned_ao_row(ao_code).cells[0].checkbox().set
   end
 
-  action(:generate_unconstrained_reg_groups) { |b| b.frm.button(id: "generate_unconstrained_rgs_button").click b.loading.wait_while_present}
+  def unassigned_ao_list
+    codes = []
+    if unassigned_ao_table.exists?
+      unassigned_ao_table.rows.each { |row| codes << row[get_unassigned_ao_code_column_index()].text }
+      codes.delete_if { |code| code == "CODE" }
+      codes.delete_if { |code| code.strip == "" }
+    end
+    codes
+  end
+
+  def get_unassigned_ao_code_column_index
+    column = 1
+    if unassigned_ao_table.rows[0].cells[0].text() == "CODE"
+      column = 0
+    end
+    return column
+  end
+
+  action(:generate_unconstrained_reg_groups) { |b| b.frm.button(id: "generate_unconstrained_rgs_button").click; b.loading.wait_while_present}
   element(:ao_cluster_select) { |b| b.frm.select(id: "KS-ManageRegistrationGroups-ClusterForFormat_Dropdown_control") }
-  action(:ao_cluster_assign_button) { |b| b.frm.button(id: "move_ao_button").click b.loading.wait_while_present}
+  action(:ao_cluster_assign_button) { |b| b.frm.button(id: "move_ao_button").click; b.loading.wait_while_present}
 
   action(:create_new_cluster){ |b|b.frm.button(id: /create_new_cluster_button/).click; b.loading.wait_while_present}
 
@@ -36,38 +57,68 @@ class ManageRegistrationGroups < BasePage
   element(:published_name) { |b| b.createNewClusterDialog_div.div(data_label: "Published Name").text_field() }
   action(:create_cluster){ |b|b.createNewClusterDialog_div.checkbox(index: 0).click; b.loading.wait_while_present}
   action(:cancel_create_cluster){ |b|b.createNewClusterDialog_div.checkbox(index: 1).click; b.loading.wait_while_present}
+  value(:create_cluster_first_error_msg)  { |b| b.div(id: /jquerybubblepopup/).ul.li.text() }
   #end create cluster dialog
 
-  def cluster_list_item_div_id(private_name)
+  #delete cluster dialog
+  element(:deleteClusterDialog_div)  { |b| b.frm.div(id: "confirmToDeleteClusterDialog") }
+  action(:confirm_delete_cluster){ |b|b.deleteClusterDialog_div.checkbox(index: 0).click; b.loading.wait_while_present}
+  action(:cancel_delete_cluster){ |b|b.deleteClusterDialog_div.checkbox(index: 1).click; b.loading.wait_while_present}
+  #end create cluster dialog
+
+  def cluster_div_list
+    div_list = []
+    if cluster_list_div.exists?
+      div_list = cluster_list_div.divs(class: "uif-group uif-boxGroup uif-horizontalBoxGroup uif-collectionItem uif-boxCollectionItem")
+    end
+    div_list
+  end
+
+  def delete_all_clusters
+    cluster_div_list.to_a.reverse.each do |div|
+      div.link(text: "Delete").click
+      loading.wait_while_present
+      confirm_delete_cluster
+    end
+  end
+
+  def cluster_list_item_div(private_name)
     img_id = cluster_list_div.span(text: /#{Regexp.escape("#{private_name}")}/).image().id
-    puts "img_id: #{img_id}"
-    #img_id = cluster_list_div.span(text: /^#{Regexp.escape("#{private_name}")}\s/).image().id
-    img_id[0..-5]    #eg changes  u532_line0_exp to u532_line0
+    div_id = img_id[0..-5]    #eg changes  u532_line0_exp to u532_line0
+    cluster_list_div.div(id: "#{div_id}")
   end
 
-  def cluster_list_name_text(private_name)
-   div_id = cluster_list_item_div_id(private_name)
-   cluster_list_div.div(id: "#{div_id}").span().text()
+  def cluster_name_text(private_name)
+   cluster_list_item_div(private_name).span().text()
   end
 
-  def cluster_list_generate_reg_groups(private_name)
-    div_id = cluster_list_item_div_id(private_name)
-    cluster_list_div.div(id: "#{div_id}").link(text: "Generate Registration Groups").click
+  def cluster_generate_reg_groups(private_name)
+    cluster_list_item_div(private_name).link(text: "Generate Registration Groups").click
+    loading.wait_while_present
   end
 
-  def cluster_list_row_rename_cluster(private_name)
-    div_id = cluster_list_item_div_id(private_name)
-    cluster_list_div.div(id: "#{div_id}").link(text: "Rename").click
+  def rename_cluster(private_name)
+    cluster_list_item_div(private_name).link(text: "Rename").click
   end
 
-  def cluster_list_row_remove_cluster(private_name)
-    div_id = cluster_list_item_div_id(private_name)
-    cluster_list_div.div(id: "#{div_id}").link(text: "Delete").click
+  def remove_cluster(private_name)
+    cluster_list_item_div(private_name).link(text: "Delete").click
+  end
+
+  def get_cluster_status_msg(private_name)
+    cluster_list_item_div(private_name).div(id: /KS-ManageRegistrationGroups-StateAndActionLinks_line/).span.text()
+  end
+
+  def get_cluster_first_error_msg(private_name)
+    cluster_list_item_div(private_name).li(class: "uif-errorMessageItem").text()
+  end
+
+  def get_cluster_first_warning_msg(private_name)
+    cluster_list_item_div(private_name).li(class: "uif-warningMessageItem").text()
   end
 
   def get_cluster_ao_row(private_name, ao_code)
-    div_id = cluster_list_item_div_id(private_name)
-    cluster_list_div.div(id: "#{div_id}").table.row(text: /\b#{Regexp.escape(ao_code)}\b/)
+    cluster_list_item_div(private_name).table.row(text: /\b#{Regexp.escape(ao_code)}\b/)
   end
 
   #test script shell

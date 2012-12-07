@@ -75,6 +75,7 @@ class ManageCourseOfferings < BasePage
     codes = []
     activity_offering_results_table.rows.each { |row| codes << row[AO_CODE].text }
     codes.delete_if { |code| code == "CODE" }
+    codes.delete_if { |code| code.strip == "" }
     codes
   end
 

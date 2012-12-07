@@ -6,14 +6,14 @@ As an Administrator, I want to create registration groups for a Course Offering
   Background:
     Given I am logged in as admin
 
-  Scenario: RG 2.1A: Successfully create a activity offering cluster (for a course offering with a single activity offering type) and assign activity offerings to the cluster
+  Scenario: RG 2.1A: Successfully create a activity offering cluster (for a course offering with a single activity offering type) and assign activity offerings to the cluster DONE
     Given I manage registration groups for a course offering
     When I create an activity offering cluster
     And I assign an activity offering to the cluster
     Then the activity offering is shown as part of the cluster
     And the remaining activity offerings are shown as unassigned
 
-  Scenario: RG 2.1B/2.4B: Successfully create a default activity offering cluster and reg groups?????? with all activity offerings assigned to the cluster
+  Scenario: RG 2.1B/2.4B: Successfully create a default activity offering cluster and reg groups?????? with all activity offerings assigned to the cluster DONE
     Given I manage registration groups for a course offering
     When I generate registration groups with no activity offering cluster
     Then a default activity offering cluster is created
@@ -21,45 +21,44 @@ As an Administrator, I want to create registration groups for a Course Offering
     And the registration groups are generated for the default cluster
     And there are no remaining unassigned activity offerings
 
-  Scenario: RG 2.1C: Error message is displayed if I attempt to create 2 activity offering clusters with the same private name
+  Scenario: RG 2.1C: Error message is displayed if I attempt to create 2 activity offering clusters with the same private name DONE
     Given I manage registration groups for a course offering
     When I create an activity offering cluster
     And I try to create a second activity offering cluster with the same private name
-    Then an error message appears stating "duplicate cluster name"
+    #KSENROLL-4230  Registration groups - error message is not displayed when creating a cluster with a duplicate private name
+    Then a create cluster dialog error message appears stating "duplicate cluster name"
     And only one activity offering cluster is created
 
   Scenario: RG 2.2A: Attempt to generate registration groups where the Activity Offering Cluster does not contain at least one Activity Offering for each Activity Offering Type which is part of the Format Offering definition.
   #CHEM242
-    Given I manage registration groups for a course offering with multiple activity types
+    Given I manage registration groups for a course offering with multiple activity types DONE
     When I create an activity offering cluster
-    And I assign 2 activity offerings of the same type to the cluster
+    And I assign two activity offerings of the same type to the cluster
     And I generate registration groups
-    Then an error message appears stating "cluster must contain at least one activity from each of those associated with this Format"
+    Then a cluster error message appears stating "This cluster must contain at least one activity from each of those associated with this Format"
     And no registration groups are generated
 
-  Scenario: RG 2.2B - Cannot generate default (unconstrained) AOC unless there is at least one AO for each AO Type specified by the FO
+  Scenario: RG 2.2B - Cannot generate default (unconstrained) AOC unless there is at least one AO for each AO Type specified by the FO DONE
   #CHEM347
     Given I manage registration groups for a course offering with multiple activity types but no activity offering for one of the activity types
     When I generate registration groups with no activity offering cluster
-    Then an error message appears stating "cluster must contain at least one activity from each of those associated with this Format"
+    Then a registration groups error message appears stating "unassigned activity offering list must contain at least one activity from each of those associated with this Format"
     And no activity offering cluster is created
-    And no registration groups are generated
+    #And no registration groups are generated
 
-  Scenario: RG 2.3A: Generate registration groups where the max enrolment is not equal for activity types within the constrained activity offering cluster
-  #CHEM317?
+  Scenario: RG 2.3A: Generate registration groups where the max enrolment is not equal for activity types within the constrained activity offering cluster DONE
     Given I manage registration groups for a course offering with 2 activity types
     When I create an activity offering cluster
     And I assign two activity offerings of different types and different max enrolment
     And I generate registration groups
-    Then a warning message appears stating "The sums of maximum enrollment seats for each activity offering type are not equal"
+    Then a cluster warning message appears stating "The sums of maximum enrollment seats for each activity offering type are not equal"
     And a registration group is generated
 
-  Scenario: RG 2.3B - Generate registration groups where the max enrolment is not equal for activity types within the DEFAULT activity offering cluster
-  #BIOL180
+  Scenario: RG 2.3B - Generate registration groups where the max enrolment is not equal for activity types within the DEFAULT activity offering cluster DONE
     Given I manage registration groups for a course offering with multiple activity types where the total max enrolment for each type is not equal
     When I generate registration groups with no activity offering cluster
-    Then a warning message appears stating "The sums of maximum enrollment seats for each activity offering type are not equal"
-    And the registration group is generated
+    Then a cluster warning message appears stating "The sums of maximum enrollment seats for each activity offering type are not equal"
+    And the registration groups are generated for the default cluster
 
   Scenario: RG 2.4A: Successfully generate registration groups for several constrained activity offering clusters with assigned activity offerings
   #CHEM317?
