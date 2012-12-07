@@ -30,6 +30,7 @@ import com.sigmasys.kuali.ksa.service.TransactionExportService;
  */
 @Controller
 @RequestMapping(value = "/exportTransactions")
+@Transactional
 public class TransactionExportController extends GenericSearchController {
 
     private static final Log logger = LogFactory.getLog(TransactionExportController.class);
@@ -52,8 +53,7 @@ public class TransactionExportController extends GenericSearchController {
      * @param form
      * @return
      */
-	@RequestMapping(method = RequestMethod.POST, params = "methodToCall=submit")
-    @Transactional(readOnly = true)
+	@RequestMapping(method = RequestMethod.GET, params = "methodToCall=download")
     public ModelAndView get(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     	// Prepare the General Ledger transactions:
     	generalLedgerService.prepareGlTransmissions();
@@ -67,6 +67,16 @@ public class TransactionExportController extends GenericSearchController {
         return null;
     }
     
+
+    /**
+     * @param form
+     * @return
+     */
+	@RequestMapping(method = RequestMethod.POST, params = "methodToCall=download")
+    public ModelAndView post(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		return get(req, resp);
+	}
+	
     /**
      *  Sends content as a String to the ServletResponse output stream.  Typically
      *  you want the browser to receive a different name than the
@@ -92,14 +102,16 @@ public class TransactionExportController extends GenericSearchController {
         byte[] bbuf = new byte[bufSize];
         ByteArrayInputStream in = new ByteArrayInputStream(content.getBytes());
 
-        while ((in != null) && ((length = in.read(bbuf)) != -1))
-        {
-            op.write(bbuf,0,length);
+        try {
+        	while ((length = in.read(bbuf)) != -1) {
+	            op.write(bbuf,0,length);
+	        }
+        } finally {
+        	// Close the streams:
+    		in.close();
+    		op.flush();
+    		op.close();
         }
-
-        in.close();
-        op.flush();
-        op.close();
     }
 
 }
