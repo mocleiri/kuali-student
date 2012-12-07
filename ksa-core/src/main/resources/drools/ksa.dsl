@@ -4,7 +4,7 @@
 [keyword][]equals = ==
 
 # LHS definitions
-[when][]\({constraints}\) = context : DroolsContext({constraints})
+[when][]\({constraints}\) = context : BrmContext({constraints})
 [when][]Student account ID is "{userId}" = account.id == "{userId}"
 [when][]Student is resident = feeManagementService.isResident(feeBase)
 [when][]Student is not resident = !feeManagementService.isResident(feeBase)

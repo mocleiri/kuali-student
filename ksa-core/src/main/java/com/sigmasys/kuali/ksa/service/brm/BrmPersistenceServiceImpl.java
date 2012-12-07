@@ -32,7 +32,7 @@ public class BrmPersistenceServiceImpl extends GenericPersistenceService impleme
      */
     @Override
     @Transactional(readOnly = false)
-    public String persistRuleSet(RuleSet ruleSet) {
+    public Long persistRuleSet(RuleSet ruleSet) {
         return persistEntity(ruleSet);
     }
 
@@ -44,7 +44,7 @@ public class BrmPersistenceServiceImpl extends GenericPersistenceService impleme
      */
     @Override
     @Transactional(readOnly = false)
-    public String persistRule(Rule rule) {
+    public Long persistRule(Rule rule) {
         return persistEntity(rule);
     }
 

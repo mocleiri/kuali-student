@@ -18,7 +18,7 @@ public interface BrmPersistenceService {
      * @param ruleSet RuleSet instance
      * @return RuleSet ID
      */
-    String persistRuleSet(RuleSet ruleSet);
+    Long persistRuleSet(RuleSet ruleSet);
 
     /**
      * Persists a rule specified by the given Rule instance
@@ -26,7 +26,7 @@ public interface BrmPersistenceService {
      * @param rule Rule instance
      * @return Rule ID
      */
-    String persistRule(Rule rule);
+    Long persistRule(Rule rule);
 
     /**
      * Retrieves a rule set (knowledge base) from the persistence store by ID

@@ -4,7 +4,7 @@ import com.sigmasys.kuali.ksa.model.rule.Rule;
 import com.sigmasys.kuali.ksa.model.rule.RuleSet;
 
 /**
- * This utility can be used to build a String representation of a Drools-specific rule or rule set content.
+ * This utility should be used to build a String representation of a Drools rule or rule set objects.
  */
 public class DroolsRuleBuilder {
 
@@ -33,9 +33,14 @@ public class DroolsRuleBuilder {
     }
 
     public static String toString(RuleSet ruleSet) {
-        // TODO:
-        return "";
+        StringBuilder builder = new StringBuilder(ruleSet.getHeader() != null ? ruleSet.getHeader() : "");
+        builder.append("\n");
+        if (ruleSet.getRules() != null) {
+            for (Rule rule : ruleSet.getRules()) {
+                builder.append("\n").append(toString(rule));
+            }
+        }
+        return builder.toString();
     }
-
 
 }

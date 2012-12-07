@@ -70,4 +70,6 @@ public class Rule extends AbstractRuleEntity {
         this.rhs = rhs;
     }
 
+
+
 }

@@ -67,7 +67,7 @@ public class AccountImportServiceTest extends AbstractServiceTest {
             accountImportService.importStudentProfile(content);
             isTrue(false); // should not be here
         } catch (Exception e) {
-            schemaInvalid = (e instanceof RuntimeException) && StringUtils.containsIgnoreCase(e.getMessage(), "XML schema is invalid");
+            schemaInvalid = StringUtils.containsIgnoreCase(e.getMessage(), "XML schema is invalid");
         }
 
         isTrue(schemaInvalid);

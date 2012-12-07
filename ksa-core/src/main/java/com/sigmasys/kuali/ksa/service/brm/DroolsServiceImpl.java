@@ -4,6 +4,7 @@ import com.sigmasys.kuali.ksa.exception.InvalidRulesException;
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.rule.Rule;
 import com.sigmasys.kuali.ksa.model.rule.RuleSet;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.drools.KnowledgeBase;
@@ -19,6 +20,7 @@ import org.drools.runtime.StatelessKnowledgeSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.StringReader;
@@ -64,12 +66,18 @@ public class DroolsServiceImpl implements BrmService {
 
     private Collection<KnowledgePackage> buildKnowledgePackages(RuleSet ruleSet) {
 
+        // Performing pre-validation
+        preValidateRuleSet(ruleSet);
+
+        // Getting rules in Drools String (DRL, DSLR, etc.) format
         String ruleSetContent = DroolsRuleBuilder.toString(ruleSet);
         logger.info("Building Drools knowledge base ->\n" + ruleSetContent);
 
+        // Initializing RuleSet resource and resource type
         Resource rulesResource = ResourceFactory.newReaderResource(new StringReader(ruleSetContent));
         ResourceType resourceType = ResourceType.getResourceType(ruleSet.getType().getName());
 
+        // Building the knowledge base
         KnowledgeBuilder builder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 
         if (ResourceType.DSLR == resourceType) {
@@ -77,7 +85,11 @@ public class DroolsServiceImpl implements BrmService {
         }
 
         builder.add(rulesResource, resourceType);
+
+        // Handling errors if there are any
         handleErrors(builder.getErrors(), ruleSet.getName());
+
+        // Returning the constructed knowledge base packages
         return builder.getKnowledgePackages();
     }
 
@@ -150,6 +162,28 @@ public class DroolsServiceImpl implements BrmService {
         return ruleSet;
     }
 
+    private void preValidateRuleSet(RuleSet ruleSet) {
+        if (!StringUtils.hasText(ruleSet.getHeader())) {
+            String errMsg = "Rule Set '" + ruleSet.getName() + "' must have a non-empty header";
+            logger.error(errMsg);
+            throw new InvalidRulesException(errMsg);
+        }
+        Set<Rule> rules = ruleSet.getRules();
+        if (CollectionUtils.isEmpty(rules)) {
+            String errMsg = "Rule Set '" + ruleSet.getName() + "' must have at least one rule";
+            logger.error(errMsg);
+            throw new InvalidRulesException(errMsg);
+        }
+        Long ruleTypeId = ruleSet.getType().getId();
+        for (Rule rule : ruleSet.getRules()) {
+            if (!ruleTypeId.equals(rule.getType().getId())) {
+                String errMsg = "Rule Set's type '" + ruleSet.getType().getName() +
+                        "' does not match Rule's type '" + rule.getType().getName() + "'";
+                logger.error(errMsg);
+                throw new InvalidRulesException(errMsg);
+            }
+        }
+    }
 
     // ------------------------   PUBLIC METHOD DEFINITIONS -----------------------------------------------------
 
@@ -175,18 +209,6 @@ public class DroolsServiceImpl implements BrmService {
 
     @Override
     public void validateRuleSet(RuleSet ruleSet) {
-        Long ruleTypeId = ruleSet.getType().getId();
-        Set<Rule> rules = ruleSet.getRules();
-        if (rules != null) {
-            for (Rule rule : ruleSet.getRules()) {
-                if (!ruleTypeId.equals(rule.getType().getId())) {
-                    String errMsg = "Rule Set's type '" + ruleSet.getType().getName() +
-                            "' does not match Rule's type '" + rule.getType().getName() + "'";
-                    logger.error(errMsg);
-                    throw new InvalidRulesException(errMsg);
-                }
-            }
-        }
         buildKnowledgePackages(ruleSet);
     }
 
