@@ -39,7 +39,7 @@
                         <bean parent="Uif-Link" p:linkText="Roll-Ups" p:target="_self"
                               p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=RollupPage"/>
                         <bean parent="Uif-Link" p:linkText="General Ledger Types" p:target="_self"
-                              p:href="generalLedgerTypeView?methodToCall=get&amp;viewId=GeneralLedgerTypeView"/>
+                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=GeneralLedgerTypePage"/>
                         <bean parent="Uif-Link" p:linkText="Bank Types" p:target="_self"
                               p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=BankTypePage"/>
                         <bean parent="Uif-Link" p:linkText="Tax Types" p:target="_self"
@@ -162,9 +162,42 @@
                 <!--End Roll-Ups Page-->
 
                 <!--Begin General Ledger Types Page-->
+                <bean parent="Uif-Page" p:id="GeneralLedgerTypePage" p:title="General Ledger Types">
+                    <property name="headerText" value="@{humanType}"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <!--<property name="items">
+                                    <list>
+                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
+                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
+                                              p:actionLabel="Refresh">
+                                        </bean>
+                                    </list>
+                                </property>-->
+                            </bean>
+                            <!--<ref bean="addSection"/>-->
+                            <ref bean="tableSection"/>
+                        </list>
+                    </property>
+                </bean>
 
-                <!-- General Ledger Types are handled by a different view-->
-                <!--End General Ledger Types Page-->
+                <bean parent="Uif-Page" p:id="GeneralLedgerTypeDetailsPage" p:title="General Ledger Details">
+                    <property name="headerText" value="@{humanType} Details"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-Link" p:linkText="@{humanType} Summary" p:target="_self"
+                                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=@{simpleType}Page"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <ref bean="detailSection"/>
+                        </list>
+                    </property>
+                </bean>
 
                 <!--Begin Bank Types Page-->
 

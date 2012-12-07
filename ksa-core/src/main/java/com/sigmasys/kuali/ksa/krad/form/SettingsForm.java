@@ -2,6 +2,8 @@ package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.krad.model.AuditableEntityModel;
 import com.sigmasys.kuali.ksa.model.*;
+import org.kuali.rice.krad.uif.component.BindingInfo;
+import org.kuali.rice.krad.uif.component.DataBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +86,9 @@ public class SettingsForm extends AbstractViewModel {
     }
 
     public String getHumanType(){
+        if(entity == null){ return "Unknown Entity Type"; }
         AuditableEntity parent = entity.getParentEntity();
+        if(parent == null){ return "Unknown Type"; }
         if(parent instanceof AccountStatusType) { return "Account Status Type"; }
         else if (parent instanceof ActivityType) { return "Activity Type"; }
         else if(parent instanceof BankType) { return "Bank Type"; }

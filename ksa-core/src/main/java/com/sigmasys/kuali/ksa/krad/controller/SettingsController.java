@@ -121,6 +121,14 @@ public class SettingsController extends GenericSearchController {
                 throw new IllegalArgumentException("'entityId' request parameter must be specified");
             }
             form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), ActivityType.class));
+        } else if ("GeneralLedgerTypePage".equals(pageId)) {
+            form.setAuditableEntity(new GeneralLedgerType());
+            form.setAuditableEntities(auditableEntityService.getAuditableEntities(GeneralLedgerType.class));
+        } else if ("GeneralLedgerTypeDetailsPage".equals(pageId)) {
+            if (entityId == null || entityId.trim().isEmpty()) {
+                throw new IllegalArgumentException("'entityId' request parameter must be specified");
+            }
+            form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), GeneralLedgerType.class));
         }
 
         return getUIFModelAndView(form);
