@@ -41,7 +41,7 @@ public class CoreFilter implements Filter {
     // Used for trusted URLs
     private static final String DEFAULT_USER_ID = "admin";
 
-    private static final String DEFAULT_LOGIN_PATH = "/WEB-INF/jsp/login.jsp";
+    private static final String DEFAULT_LOGIN_URL = "/WEB-INF/jsp/login.jsp";
 
     private final Set<String> trustedUrls = new HashSet<String>();
 
@@ -49,13 +49,13 @@ public class CoreFilter implements Filter {
 
     private boolean isInitialized;
 
-    private String loginPath;
+    private String loginUrl;
 
     @Override
     public void init(FilterConfig config) throws ServletException {
-        loginPath = config.getInitParameter("loginPath");
-        if (loginPath == null) {
-            loginPath = DEFAULT_LOGIN_PATH;
+        loginUrl = config.getInitParameter("loginUrl");
+        if (loginUrl == null) {
+            loginUrl = DEFAULT_LOGIN_URL;
         }
     }
 
@@ -206,7 +206,7 @@ public class CoreFilter implements Filter {
                 } else {
                     // No session has been established and this is not a login form submission,
                     // so forward to login page
-                    request.getRequestDispatcher(loginPath).forward(request, response);
+                    request.getRequestDispatcher(loginUrl).forward(request, response);
                     return;
                 }
             } else {
@@ -239,17 +239,17 @@ public class CoreFilter implements Filter {
      * @throws IOException      if unable to handle the invalid login
      */
     private void invalidateSession(HttpServletRequest request, HttpServletResponse response, boolean invalidLogin) throws ServletException, IOException {
-            final UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
-            if (sessionManager != null) {
-                sessionManager.destroySession(request);
-            }
-            request.setAttribute("invalidLogin", invalidLogin);
-            request.getRequestDispatcher(loginPath).forward(request, response);
+        final UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
+        if (sessionManager != null) {
+            sessionManager.destroySession(request);
+        }
+        request.setAttribute("invalidLogin", invalidLogin);
+        request.getRequestDispatcher(loginUrl).forward(request, response);
     }
 
     @Override
     public void destroy() {
-        loginPath = null;
+        loginUrl = null;
         trustedUrls.clear();
     }
 }

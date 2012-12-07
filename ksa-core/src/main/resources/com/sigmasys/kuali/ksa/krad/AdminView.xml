@@ -178,7 +178,7 @@
                                     <list>
 										<bean parent="Uif-LinkField" p:linkText="Export Transactions" p:target="_self"
 											p:href="javascript: void(0)"
-											p:onClickScript="downloadTransactionExport();" />
+											p:onClickScript="jQuery.download('/ksa/uif/exportTransactions', 'methodToCall=download');"/>
                                     </list>
                                 </property>
                             </bean>
