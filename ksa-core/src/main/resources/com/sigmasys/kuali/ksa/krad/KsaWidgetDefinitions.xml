@@ -82,6 +82,12 @@
                 <value>css/ksa.css?forceReload</value>
             </list>
         </property>
+		<property name="additionalScriptFiles">
+			<list>
+				<value>js/download.js</value>
+				<value>js/ksa.js</value>
+			</list>
+		</property>
         <property name="theme" ref="Uif-KsaTheme"/>
         <property name="breadcrumbs" ref="Uif-KsaBreadcrumbs"/>
         <property name="onLoadScript" value="window.onbeforeunload = null;"/>
