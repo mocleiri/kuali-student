@@ -43,12 +43,9 @@ public class BrmServiceTest extends AbstractServiceTest {
 
     @Before
     public void setUpWithinTransaction() {
-
         // set up test data within the transaction
         String userId = "admin";
         accountService.getOrCreateAccount(userId);
-
-
     }
 
     @Test
