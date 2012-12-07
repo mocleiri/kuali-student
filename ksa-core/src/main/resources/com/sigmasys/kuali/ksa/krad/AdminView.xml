@@ -176,9 +176,9 @@
                             <bean parent="Uif-HorizontalBoxSection">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-MessageField" p:messageText="Export Transactions"/>
-										<bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="submit"
-											p:actionLabel="Export"/>
+										<bean parent="Uif-LinkField" p:linkText="Export Transactions" p:target="_self"
+											p:href="javascript: void(0)"
+											p:onClickScript="downloadTransactionExport();" />
                                     </list>
                                 </property>
                             </bean>
