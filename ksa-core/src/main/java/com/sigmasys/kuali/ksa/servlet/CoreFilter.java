@@ -5,6 +5,7 @@ import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.UserSessionManager;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.core.api.exception.RiceIllegalArgumentException;
@@ -35,6 +36,10 @@ import java.util.Set;
 public class CoreFilter implements Filter {
 
     private static final Log logger = LogFactory.getLog(CoreFilter.class);
+
+    // Error messages
+    private static final String COMMON_ERROR_MSG = "Error occurred.";
+    private static final String INVALID_CREDENTIALS_MSG = "Invalid user name or password.";
 
     public static final String TRUSTED_URLS_PARAM_NAME = "trustedUrls";
 
@@ -104,130 +109,150 @@ public class CoreFilter implements Filter {
             // Expose thread local response to the entire application
             RequestUtils.setThreadResponse(response);
 
-            final UserSession kradSession = KRADUtils.getUserSessionFromRequest(request);
-
-            final UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
-
-            // Initializing services if necessary
-            synchronized (lock) {
-                if (!isInitialized) {
-                    initTrustedUrls();
-                    isInitialized = true;
-                }
+            if (initializeSession(request, response)) {
+                chain.doFilter(request, response);
             }
-
-            if (kradSession == null || !sessionManager.isSessionValid(request, response)) {
-
-                request.setAttribute("showPasswordField", true);
-
-                String queryString = request.getQueryString();
-
-                final String redirectUrl = request.getRequestURI() + (queryString != null ? "?" + queryString : "");
-                request.setAttribute("redirectUrl", redirectUrl);
-
-                final String userId = request.getParameter("ksa_userId");
-                final String password = request.getParameter("ksa_password");
-
-                if (userId != null) {
-
-                    // Very simple password checking. Nothing hashed or encrypted.
-                    final IdentityService identityService = KimApiServiceLocator.getIdentityService();
-                    if (identityService == null) {
-                        Exception e = new IllegalStateException("IdentityService is null");
-                        logger.error(e.getMessage(), e);
-                        throw e;
-                    }
-
-                    Principal principal;
-
-                    try {
-                        principal = isTrustedUrl(request) ?
-                                identityService.getPrincipalByPrincipalName(DEFAULT_USER_ID) :
-                                identityService.getPrincipalByPrincipalNameAndPassword(userId, password);
-                    } catch (RiceIllegalArgumentException re) {
-                        logger.error(re.getMessage(), re);
-                        invalidateSession(request, response, false);
-                        return;
-                    }
-
-                    if (principal != null) {
-
-                        // Creating HTTP session
-                        final HttpSession session = sessionManager.createSession(request, response, userId);
-
-                        // wrap the request with the remote user
-                        // UserLoginFilter and WebAuthenticationService will create the session
-                        request = new HttpServletRequestWrapper(request) {
-                            @Override
-                            public String getRemoteUser() {
-                                return userId;
-                            }
-                        };
-
-                        // Creating KRAD UserSession and put it as an attribute into HTTP session
-                        UserSession userSession = new UserSession(userId) {
-
-                            @Override
-                            public String getKualiSessionId() {
-                                return session.getId();
-                            }
-
-                            @Override
-                            protected void initPerson(String principalName) {
-                                try {
-                                    final PersonService personService = KimApiServiceLocator.getPersonService();
-                                    Field field = UserSession.class.getDeclaredField("person");
-                                    field.setAccessible(true);
-                                    field.set(this, personService.getPerson(userId));
-                                } catch (Exception e) {
-                                    logger.error(e);
-                                }
-                            }
-                        };
-
-                        request.getSession(false).setAttribute(KRADConstants.USER_SESSION_KEY, userSession);
-
-                        // If the KSA account does not exist the following method is supposed to create it
-                        // from the corresponding KIM Person object
-                        ContextUtils.getBean(AccountService.class).getOrCreateAccount(userId);
-
-                        // If the request has redirectUrl parameter ->
-                        // redirect to the location specified by redirectUrl
-                        String targetUrl = request.getParameter("redirectUrl");
-                        if (targetUrl != null && !targetUrl.trim().isEmpty()) {
-                            response.sendRedirect(targetUrl);
-                        }
-
-                    } else {
-                        invalidateSession(request, response, true);
-                        return;
-                    }
-
-                } else {
-                    // No session has been established and this is not a login form submission,
-                    // so forward to login page
-                    request.getRequestDispatcher(loginUrl).forward(request, response);
-                    return;
-                }
-            } else {
-                request = new HttpServletRequestWrapper(request) {
-                    @Override
-                    public String getRemoteUser() {
-                        return kradSession.getPrincipalName();
-                    }
-                };
-            }
-
-            logger.info("USER-REQUEST-INFO: user = '" + sessionManager.getUserId(request) +
-                    "' requested URI = '" + request.getRequestURI() + "'");
-
-            chain.doFilter(request, response);
 
         } catch (Throwable t) {
             logger.error("Error occurred while serving HTTP request: " + t.getMessage(), t);
         } finally {
             RequestUtils.setThreadResponse(null);
         }
+    }
+
+    /**
+     * Initializes HTTP KSA/KRAD session and related resources.
+     *
+     * @param request  HTTP request
+     * @param response HTTP response
+     * @return "true" if the filter chaining should proceed, "false" - otherwise
+     * @throws ServletException
+     * @throws IOException
+     */
+    private boolean initializeSession(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        final UserSession kradSession = KRADUtils.getUserSessionFromRequest(request);
+
+        final UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
+
+        // Initializing services if necessary
+        synchronized (lock) {
+            if (!isInitialized) {
+                initTrustedUrls();
+                isInitialized = true;
+            }
+        }
+
+        if (kradSession == null || !sessionManager.isSessionValid(request, response)) {
+
+            request.setAttribute("showPasswordField", true);
+
+            String queryString = request.getQueryString();
+
+            final String redirectUrl = request.getRequestURI() + (queryString != null ? "?" + queryString : "");
+            request.setAttribute("redirectUrl", redirectUrl);
+
+            final String userId = request.getParameter("ksa_userId");
+            final String password = request.getParameter("ksa_password");
+
+            if (userId != null) {
+
+                // Very simple password checking. Nothing hashed or encrypted.
+                final IdentityService identityService = KimApiServiceLocator.getIdentityService();
+                if (identityService == null) {
+                    String errMsg = "IdentityService cannot be null.";
+                    logger.error(errMsg);
+                    invalidateSession(request, response, errMsg);
+                    return false;
+                }
+
+                Principal principal;
+
+                try {
+                    principal = isTrustedUrl(request) ?
+                            identityService.getPrincipalByPrincipalName(DEFAULT_USER_ID) :
+                            identityService.getPrincipalByPrincipalNameAndPassword(userId, password);
+                } catch (RiceIllegalArgumentException re) {
+                    logger.error(re.getMessage(), re);
+                    invalidateSession(request, response, re.getMessage());
+                    return false;
+                }
+
+                if (principal != null) {
+
+                    // Creating HTTP session
+                    final HttpSession session = sessionManager.createSession(request, response, userId);
+
+                    // wrap the request with the remote user
+                    // UserLoginFilter and WebAuthenticationService will create the session
+                    request = new HttpServletRequestWrapper(request) {
+                        @Override
+                        public String getRemoteUser() {
+                            return userId;
+                        }
+                    };
+
+                    // Creating KRAD UserSession and put it as an attribute into HTTP session
+                    UserSession userSession = new UserSession(userId) {
+
+                        @Override
+                        public String getKualiSessionId() {
+                            return session.getId();
+                        }
+
+                        @Override
+                        protected void initPerson(String principalName) {
+                            try {
+                                final PersonService personService = KimApiServiceLocator.getPersonService();
+                                Field field = UserSession.class.getDeclaredField("person");
+                                field.setAccessible(true);
+                                field.set(this, personService.getPerson(userId));
+                            } catch (Exception e) {
+                                logger.error(e.getMessage(), e);
+                                throw new IllegalStateException(e.getMessage(), e);
+                            }
+                        }
+                    };
+
+                    request.getSession(false).setAttribute(KRADConstants.USER_SESSION_KEY, userSession);
+
+                    // If the KSA account does not exist the following method is supposed to create it
+                    // from the corresponding KIM Person object
+                    ContextUtils.getBean(AccountService.class).getOrCreateAccount(userId);
+
+                    // If the request has redirectUrl parameter ->
+                    // redirect to the location specified by redirectUrl
+                    String targetUrl = request.getParameter("redirectUrl");
+                    if (targetUrl != null && !targetUrl.trim().isEmpty()) {
+                        response.sendRedirect(targetUrl);
+                        return false;
+                    }
+
+                } else {
+                    if (isInitialized)
+                        invalidateSession(request, response, INVALID_CREDENTIALS_MSG);
+                    return false;
+                }
+
+            } else {
+                // No session has been established and this is not a login form submission,
+                // so forward to login page
+                request.getRequestDispatcher(loginUrl).forward(request, response);
+                return false;
+            }
+        } else {
+            request = new HttpServletRequestWrapper(request) {
+                @Override
+                public String getRemoteUser() {
+                    return kradSession.getPrincipalName();
+                }
+            };
+        }
+
+        logger.info("USER-REQUEST-INFO: user = '" + sessionManager.getUserId(request) +
+                "' requested URI = '" + request.getRequestURI() + "'");
+
+        return true;
     }
 
     /**
@@ -238,12 +263,20 @@ public class CoreFilter implements Filter {
      * @throws ServletException if unable to handle the invalid login
      * @throws IOException      if unable to handle the invalid login
      */
-    private void invalidateSession(HttpServletRequest request, HttpServletResponse response, boolean invalidLogin) throws ServletException, IOException {
+    private void invalidateSession(HttpServletRequest request, HttpServletResponse response, String errorMessage) throws ServletException, IOException {
         final UserSessionManager sessionManager = ContextUtils.getBean(UserSessionManager.class);
         if (sessionManager != null) {
             sessionManager.destroySession(request);
         }
-        request.setAttribute("invalidLogin", invalidLogin);
+        if (StringUtils.isNotBlank(errorMessage)) {
+            errorMessage = errorMessage.substring(0, 1).toUpperCase() + (errorMessage.length() > 1 ? errorMessage.substring(1) : "");
+        } else {
+            errorMessage = COMMON_ERROR_MSG;
+        }
+        if (!errorMessage.endsWith(".")) {
+            errorMessage += ".";
+        }
+        request.setAttribute("errorMessage", errorMessage);
         request.getRequestDispatcher(loginUrl).forward(request, response);
     }
 
