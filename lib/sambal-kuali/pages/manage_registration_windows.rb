@@ -15,6 +15,8 @@ class RegistrationWindowsTermLookup < RegistrationWindowsBase
 
   registration_window_lookup_elements
 
+  expected_element :term_type
+
   def search_by_term_and_year
     term_type.select 'Spring Term'
     year.set '2012'
@@ -28,6 +30,8 @@ class RegistrationWindowsPeriodLookup < RegistrationWindowsBase
 
   registration_window_period_lookup_elements
 
+  expected_element :period_id
+
   def show_windows_by_period
     period_id.select 'All Registration Periods for this Term'
     show
@@ -36,6 +40,8 @@ class RegistrationWindowsPeriodLookup < RegistrationWindowsBase
 end
 
 class RegistrationWindowsCreate < RegistrationWindowsBase
+
+  expected_element  :window_collection_table
 
   element(:window_collection_div) { |b| b.frm.div(id: "addRegistrationWindowCollection_disclosureContent") }
   element(:window_collection_table) { |b| b.window_collection_div.table() }
