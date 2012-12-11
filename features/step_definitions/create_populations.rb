@@ -34,7 +34,7 @@ end
 
 Then /^an error message appears stating "(.*?)"$/ do |errMsg|
   on CreatePopulation do |page|
-    page.first_error.should match /.*#{errMsg}.*/
+    page.first_error.should match /.*#{Regexp.escape(errMsg)}.*/
   end
 end
 
