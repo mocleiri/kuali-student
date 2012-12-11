@@ -152,11 +152,6 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
     private String statusCode;
 
 
-    @PrePersist
-    protected void populateDBFields() {
-        statusCode = (status != null) ? status.getId() : null;
-    }
-
     @PostLoad
     protected void populateTransientFields() {
         status = (statusCode != null) ? EnumUtils.findById(TransactionStatus.class, statusCode) : null;
@@ -393,6 +388,7 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
 
     protected void setStatusCode(String statusCode) {
         this.statusCode = statusCode;
+        status = EnumUtils.findById(TransactionStatus.class, statusCode);
     }
 
     @Transient
@@ -402,6 +398,7 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
 
     public void setStatus(TransactionStatus status) {
         this.status = status;
+        statusCode = status.getId();
     }
 
     @Transient

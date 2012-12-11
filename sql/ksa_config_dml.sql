@@ -59,7 +59,8 @@ insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.deferment.type.id', 'DEF');
 
 -- General Ledger settings
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.general.ledger.type', 'SAR');
-insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.general.ledger.mode', 'Individual');
+-- The GL mode can be Individual, Batch, BatchRollup
+insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.general.ledger.mode', 'Batch');
 
 -- Combined Cash Limit Tracking Settings
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.cash.tracking.system', 'On');

@@ -8,7 +8,7 @@ import java.util.Date;
 
 
 /**
- * General ledger transaction model.
+ * General Ledger transaction model.
  *
  * @author Michael Ivanov
  */
@@ -47,11 +47,7 @@ public abstract class AbstractGlEntity implements Identifiable {
 
     protected String glOperationCode;
 
-
-    @PrePersist
-    protected void populateDBFields() {
-        glOperationCode = (glOperation != null) ? glOperation.getId() : null;
-    }
+    protected String statusCode;
 
     @PostLoad
     protected void populateTransientFields() {
@@ -107,6 +103,16 @@ public abstract class AbstractGlEntity implements Identifiable {
 
     protected void setGlOperationCode(String glOperationCode) {
         this.glOperationCode = glOperationCode;
+        glOperation = EnumUtils.findById(GlOperationType.class, glOperationCode);
+    }
+
+    protected void setStatusCode(String statusCode) {
+        this.statusCode = statusCode;
+    }
+
+    @Column(name = "STATUS", length = 1)
+    protected String getStatusCode() {
+        return statusCode;
     }
 
     @Transient
@@ -116,6 +122,7 @@ public abstract class AbstractGlEntity implements Identifiable {
 
     public void setGlOperation(GlOperationType glOperation) {
         this.glOperation = glOperation;
+        glOperationCode = glOperation.getId();
     }
 
 }

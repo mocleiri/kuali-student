@@ -34,14 +34,6 @@ public class GlTransaction extends AbstractGlEntity {
 
     private GlTransactionStatus status;
 
-    private String statusCode;
-
-
-    @PrePersist
-    protected void populateDBFields() {
-        super.populateDBFields();
-        statusCode = (status != null) ? status.getId() : null;
-    }
 
     @PostLoad
     protected void populateTransientFields() {
@@ -109,13 +101,10 @@ public class GlTransaction extends AbstractGlEntity {
         this.description = description;
     }
 
+    @Override
     protected void setStatusCode(String statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    @Column(name = "STATUS", length = 1)
-    protected String getStatusCode() {
-        return statusCode;
+        super.setStatusCode(statusCode);
+        status = EnumUtils.findById(GlTransactionStatus.class, statusCode);
     }
 
     @Transient
@@ -125,6 +114,7 @@ public class GlTransaction extends AbstractGlEntity {
 
     public void setStatus(GlTransactionStatus status) {
         this.status = status;
+        statusCode = status.getId();
     }
 
 }

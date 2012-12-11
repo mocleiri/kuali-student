@@ -31,15 +31,9 @@ public class CreditType extends TransactionType {
     private String glOperationCode;
 
 
-    @PrePersist
-    protected void populateDBFields() {
-        glOperationCode = (unallocatedGlOperation != null) ? unallocatedGlOperation.getId() : null;
-    }
-
     @PostLoad
     protected void populateTransientFields() {
-        unallocatedGlOperation = (glOperationCode != null) ?
-                EnumUtils.findById(GlOperationType.class, glOperationCode) : null;
+        unallocatedGlOperation = (glOperationCode != null) ? EnumUtils.findById(GlOperationType.class, glOperationCode) : null;
     }
 
 
@@ -86,6 +80,7 @@ public class CreditType extends TransactionType {
 
     protected void setGlOperationCode(String glOperationCode) {
         this.glOperationCode = glOperationCode;
+        unallocatedGlOperation = EnumUtils.findById(GlOperationType.class, glOperationCode);
     }
 
     @Transient
@@ -95,5 +90,6 @@ public class CreditType extends TransactionType {
 
     public void setUnallocatedGlOperation(GlOperationType unallocatedGlOperation) {
         this.unallocatedGlOperation = unallocatedGlOperation;
+        glOperationCode = unallocatedGlOperation.getId();
     }
 }

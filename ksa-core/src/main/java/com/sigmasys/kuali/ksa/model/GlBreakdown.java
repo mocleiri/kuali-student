@@ -34,10 +34,6 @@ public class GlBreakdown extends AbstractGlBreakdown {
      */
     private GeneralLedgerType generalLedgerType;
 
-    @PrePersist
-    protected void populateDBFields() {
-        glOperationCode = (glOperation != null) ? glOperation.getId() : null;
-    }
 
     @PostLoad
     protected void populateTransientFields() {
@@ -88,6 +84,7 @@ public class GlBreakdown extends AbstractGlBreakdown {
 
     protected void setGlOperationCode(String glOperationCode) {
         this.glOperationCode = glOperationCode;
+        glOperation =  EnumUtils.findById(GlOperationType.class, glOperationCode);
     }
 
     @Transient
@@ -97,6 +94,7 @@ public class GlBreakdown extends AbstractGlBreakdown {
 
     public void setGlOperation(GlOperationType glOperation) {
         this.glOperation = glOperation;
+        glOperationCode = glOperation.getId();
     }
 }
 	

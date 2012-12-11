@@ -7,9 +7,8 @@ import javax.persistence.*;
 /**
  * General ledger type.
  * <p/>
- * User: mike
- * Date: 1/22/12
- * Time: 3:47 PM
+ *
+ * @author Michael Ivanov
  */
 @Entity
 @Table(name = "KSSA_GL_TYPE")
@@ -31,15 +30,9 @@ public class GeneralLedgerType extends AuditableEntity {
     private String glOperationCode;
 
 
-    @PrePersist
-    protected void populateDBFields() {
-        glOperationCode = (glOperationOnCharge != null) ? glOperationOnCharge.getId() : null;
-    }
-
     @PostLoad
     protected void populateTransientFields() {
-        glOperationOnCharge = (glOperationCode != null) ?
-                EnumUtils.findById(GlOperationType.class, glOperationCode) : null;
+        glOperationOnCharge = (glOperationCode != null) ? EnumUtils.findById(GlOperationType.class, glOperationCode) : null;
     }
 
 
@@ -72,6 +65,7 @@ public class GeneralLedgerType extends AuditableEntity {
 
     protected void setGlOperationCode(String glOperationCode) {
         this.glOperationCode = glOperationCode;
+        glOperationOnCharge = EnumUtils.findById(GlOperationType.class, glOperationCode);
     }
 
     @Transient
@@ -81,6 +75,7 @@ public class GeneralLedgerType extends AuditableEntity {
 
     public void setGlOperationOnCharge(GlOperationType glOperationOnCharge) {
         this.glOperationOnCharge = glOperationOnCharge;
+        glOperationCode = glOperationOnCharge.getId();
     }
 
     @Override

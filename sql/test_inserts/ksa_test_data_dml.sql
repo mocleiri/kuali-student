@@ -768,13 +768,36 @@ Insert into KSSA_ELECTRONIC_CONTACT_ACNT (ELECTRONIC_CONTACT_ID_FK, ACNT_ID_FK) 
 --   DATA FOR TABLE KSSA_GL_RECOGNITION_PERIOD
 --   FILTER = none used
 ---------------------------------------------------
-REM INSERTING into KSSA_GL_RECOGNITION_PERIOD
 Insert into KSSA_GL_RECOGNITION_PERIOD (ID, CODE, FISCAL_YEAR, START_DATE, END_DATE, CREATION_DATE, CREATOR_ID) values (1, 'SR', 2012, to_date('01/01/2012', 'MM/dd/yyyy'), to_date('12/31/2012', 'MM/dd/yyyy'), to_date('11/11/2011', 'MM/dd/yyyy'), 'admin');
 Insert into KSSA_GL_RECOGNITION_PERIOD (ID, CODE, FISCAL_YEAR, START_DATE, END_DATE, CREATION_DATE, CREATOR_ID) values (2, 'AB', 2013, to_date('01/01/2013', 'MM/dd/yyyy'), to_date('12/31/2013', 'MM/dd/yyyy'), to_date('12/22/2012', 'MM/dd/yyyy'), 'admin');
 
 ---------------------------------------------------
---   END DATA FOR TABLE KSSA_GL_RECOGNITION_PERIOD
+--   DATA FOR TABLE KSSA_GL_TRANSACTION
+--   Data here is as near to UMD standard as I can do. The recognition period is still unsure, and until I get an answer from Jen about accrual numbers, I cannot make the GL balance.
 ---------------------------------------------------
+
+Insert into KSSA_GL_TRANSACTION (ID, TRANSACTION_DATE, GL_ACCOUNT_ID, GL_RECOGNITION_PERIOD_ID_FK, GL_OPERATION, AMOUNT, STATUS, GL_TRANSMISSION_ID_FK, GENERATED_TEXT) values (1, to_date('04/12/2012', 'MM/dd/yyyy'), '01-1-01000 0102', 1, 'C', 10000, 'Q', null, 'KSA makeEffective() method 1');
+Insert into KSSA_GL_TRANSACTION (ID, TRANSACTION_DATE, GL_ACCOUNT_ID, GL_RECOGNITION_PERIOD_ID_FK, GL_OPERATION, AMOUNT, STATUS, GL_TRANSMISSION_ID_FK, GENERATED_TEXT) values (2, to_date('04/12/2012', 'MM/dd/yyyy'), '01-1-01000 0102', 1, 'C', 20000, 'Q', null, 'KSA makeEffective() method 2');
+Insert into KSSA_GL_TRANSACTION (ID, TRANSACTION_DATE, GL_ACCOUNT_ID, GL_RECOGNITION_PERIOD_ID_FK, GL_OPERATION, AMOUNT, STATUS, GL_TRANSMISSION_ID_FK, GENERATED_TEXT) values (3, to_date('04/12/2012', 'MM/dd/yyyy'), '01-1-01000 0102', 1, 'C', 30000, 'Q', null, 'KSA makeEffective() method 3');
+Insert into KSSA_GL_TRANSACTION (ID, TRANSACTION_DATE, GL_ACCOUNT_ID, GL_RECOGNITION_PERIOD_ID_FK, GL_OPERATION, AMOUNT, STATUS, GL_TRANSMISSION_ID_FK, GENERATED_TEXT) values (4, to_date('04/12/2012', 'MM/dd/yyyy'), '01-1-01000 0102', 1, 'C', 40000, 'Q', null, 'KSA makeEffective() method 4');
+Insert into KSSA_GL_TRANSACTION (ID, TRANSACTION_DATE, GL_ACCOUNT_ID, GL_RECOGNITION_PERIOD_ID_FK, GL_OPERATION, AMOUNT, STATUS, GL_TRANSMISSION_ID_FK, GENERATED_TEXT) values (5, to_date('04/12/2012', 'MM/dd/yyyy'), '01-8-88888 8888', 1, 'C', 55555, 'Q', null, 'KSA makeEffective() method 5');
+Insert into KSSA_GL_TRANSACTION (ID, TRANSACTION_DATE, GL_ACCOUNT_ID, GL_RECOGNITION_PERIOD_ID_FK, GL_OPERATION, AMOUNT, STATUS, GL_TRANSMISSION_ID_FK, GENERATED_TEXT) values (6, to_date('04/12/2012', 'MM/dd/yyyy'), '01-8-88888 8888', 1, 'C', 666, 'Q', null, 'KSA makeEffective() method 6');
+Insert into KSSA_GL_TRANSACTION (ID, TRANSACTION_DATE, GL_ACCOUNT_ID, GL_RECOGNITION_PERIOD_ID_FK, GL_OPERATION, AMOUNT, STATUS, GL_TRANSMISSION_ID_FK, GENERATED_TEXT) values (7, to_date('04/12/2012', 'MM/dd/yyyy'), '01-1-01000 0102', 1, 'C', 77.77, 'Q', null,'KSA makeEffective() method 7');
+Insert into KSSA_GL_TRANSACTION (ID, TRANSACTION_DATE, GL_ACCOUNT_ID, GL_RECOGNITION_PERIOD_ID_FK, GL_OPERATION, AMOUNT, STATUS, GL_TRANSMISSION_ID_FK, GENERATED_TEXT) values (8, to_date('04/12/2012', 'MM/dd/yyyy'), '01-1-01000 0102', 1, 'C', 88000, 'Q', null, 'KSA makeEffective() method 8');
+
+---------------------------------------------------
+--   DATA FOR TABLE KSSA_GL_TRANS_TRANSACTION
+--   Association of GL transactions to KSA transaction
+---------------------------------------------------
+Insert into KSSA_GL_TRANS_TRANSACTION (GL_TRANSACTION_ID_FK, TRANSACTION_ID_FK) values (1,1);
+Insert into KSSA_GL_TRANS_TRANSACTION (GL_TRANSACTION_ID_FK, TRANSACTION_ID_FK) values (2,1);
+Insert into KSSA_GL_TRANS_TRANSACTION (GL_TRANSACTION_ID_FK, TRANSACTION_ID_FK) values (3,2);
+Insert into KSSA_GL_TRANS_TRANSACTION (GL_TRANSACTION_ID_FK, TRANSACTION_ID_FK) values (4,2);
+Insert into KSSA_GL_TRANS_TRANSACTION (GL_TRANSACTION_ID_FK, TRANSACTION_ID_FK) values (5,4);
+Insert into KSSA_GL_TRANS_TRANSACTION (GL_TRANSACTION_ID_FK, TRANSACTION_ID_FK) values (6,4);
+Insert into KSSA_GL_TRANS_TRANSACTION (GL_TRANSACTION_ID_FK, TRANSACTION_ID_FK) values (7,3);
+Insert into KSSA_GL_TRANS_TRANSACTION (GL_TRANSACTION_ID_FK, TRANSACTION_ID_FK) values (8,3);
+
 
 ---------------------------------------------------
 --   DATA FOR TABLE KSSA_ACTIVITY

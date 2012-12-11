@@ -93,16 +93,10 @@ public class BatchReceipt extends AccountIdAware implements Identifiable {
     private String statusCode;
 
 
-    @PrePersist
-    protected void populateDBFields() {
-        statusCode = (status != null) ? status.getId() : null;
-    }
-
     @PostLoad
     protected void populateTransientFields() {
         status = (statusCode != null) ? EnumUtils.findById(BatchReceiptStatus.class, statusCode) : null;
     }
-
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -248,10 +242,12 @@ public class BatchReceipt extends AccountIdAware implements Identifiable {
 
     public void setStatus(BatchReceiptStatus status) {
         this.status = status;
+        statusCode = status.getId();
     }
 
     protected void setStatusCode(String statusCode) {
         this.statusCode = statusCode;
+        status = EnumUtils.findById(BatchReceiptStatus.class, statusCode);
     }
 
     @Column(name = "STATUS", length = 1)

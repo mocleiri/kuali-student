@@ -311,22 +311,31 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         throw new IllegalStateException(errMsg);
     }
 
-    private GlTransmission createGlTransmission(GlTransaction transaction, GlRecognitionPeriod recognitionPeriod,
-                                                String batchId) {
+    private GlTransmission createGlTransmission(String glAccountId, Date earliestDate, Date latestDate,
+                                                GlOperationType glOperation, BigDecimal amount,
+                                                GlRecognitionPeriod recognitionPeriod, String batchId) {
 
         GlTransmission transmission = new GlTransmission();
+        transmission.setStatus(GlTransmissionStatus.GENERATED);
         transmission.setBatchId(batchId);
-        transmission.setGlAccountId(transaction.getGlAccountId());
-        transmission.setEarliestDate(transaction.getDate());
-        transmission.setLatestDate(transaction.getDate());
+        transmission.setGlAccountId(glAccountId);
+        transmission.setEarliestDate(earliestDate);
+        transmission.setLatestDate(latestDate);
         transmission.setRecognitionPeriod(recognitionPeriod);
         transmission.setDate(new Date());
-        transmission.setGlOperation(transaction.getGlOperation());
-        transmission.setAmount(transaction.getAmount());
+        transmission.setGlOperation(glOperation);
+        transmission.setAmount(amount);
 
         persistEntity(transmission);
 
         return transmission;
+
+    }
+
+    private GlTransmission createGlTransmission(GlTransaction transaction, GlRecognitionPeriod recognitionPeriod,
+                                                String batchId) {
+        return createGlTransmission(transaction.getGlAccountId(), transaction.getDate(), transaction.getDate(),
+                transaction.getGlOperation(), transaction.getAmount(), recognitionPeriod, batchId);
 
     }
 
@@ -384,7 +393,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
             }
         }
 
-        query.setParameter("status", GlTransactionStatus.QUEUED.getId());
+        query.setParameter("status", GlTransactionStatus.QUEUED_CODE);
         if (glMode == GeneralLedgerMode.INDIVIDUAL) {
             query.setMaxResults(1);
         }
@@ -406,14 +415,14 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
             GlTransmission transmission = createGlTransmission(earliestGlTransaction, recognitionPeriod, "RT");
             earliestGlTransaction.setTransmission(transmission);
             earliestGlTransaction.setStatus(GlTransactionStatus.COMPLETED);
-            persistEntity(earliestGlTransaction);
+            //persistEntity(earliestGlTransaction);
         } else if (glMode == GeneralLedgerMode.BATCH) {
             for (GlTransaction transaction : glTransactions) {
                 GlRecognitionPeriod recognitionPeriod = transaction.getRecognitionPeriod();
                 GlTransmission transmission = createGlTransmission(transaction, recognitionPeriod, null);
                 transaction.setTransmission(transmission);
                 transaction.setStatus(GlTransactionStatus.COMPLETED);
-                persistEntity(transaction);
+                //persistEntity(transaction);
             }
 
         } else if (glMode == GeneralLedgerMode.BATCH_ROLLUP) {
@@ -440,6 +449,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
                     continue;
                 }
 
+                GlRecognitionPeriod recognitionPeriod = null;
                 GlOperationType groupOperation = null;
                 BigDecimal amount1 = BigDecimal.ZERO;
                 BigDecimal amount2 = BigDecimal.ZERO;
@@ -447,6 +457,9 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
                 Date maxDate = null;
 
                 for (GlTransaction transaction : glTransactionSet) {
+                    if ( recognitionPeriod == null) {
+                        recognitionPeriod = transaction.getRecognitionPeriod();
+                    }
                     if (groupOperation == null) {
                         groupOperation = transaction.getGlOperation();
                     }
@@ -466,20 +479,14 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
                     }
                 }
 
-                GlTransmission transmission = new GlTransmission();
-                transmission.setGlAccountId(accountId);
-                transmission.setEarliestDate(minDate);
-                transmission.setLatestDate(maxDate);
-                transmission.setDate(new Date());
-                transmission.setGlOperation(groupOperation);
-                transmission.setAmount(amount1.subtract(amount2));
-                persistEntity(transmission);
+                GlTransmission transmission = createGlTransmission(accountId, minDate, maxDate, groupOperation,
+                        amount1.subtract(amount2), recognitionPeriod, null);
 
                 // Updating GL transactions for the current account
                 for (GlTransaction transaction : glTransactionSet) {
                     transaction.setStatus(GlTransactionStatus.COMPLETED);
                     transaction.setTransmission(transmission);
-                    persistEntity(transaction);
+                    //persistEntity(transaction);
                 }
             }
         } else {
@@ -554,8 +561,9 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     public List<GlTransmission> getGlTransmissionsForExport() {
         Query query = em.createQuery("select glt from GlTransmission glt " +
                 " inner join fetch glt.recognitionPeriod rp " +
-                " where glt.result is null" +
+                " where glt.statusCode in (:statuses) " +
                 " order by glt.date asc");
+        query.setParameter("statuses", Arrays.asList(GlTransmissionStatus.GENERATED_CODE, GlTransmissionStatus.FAILED_CODE));
         return query.getResultList();
     }
 
@@ -591,10 +599,11 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
                 " inner join fetch glt.recognitionPeriod rp " +
                 " inner join fetch glt.transmission t " +
                 " left outer join glt.transactions ts " +
-                " where t.result is null and " +
+                " where t.statusCode in (:statuses) and " +
                 " ts." + dateField + " <> null and ts." + dateField + " between :fromDate and :toDate " +
                 " order by glt.date asc");
 
+        query.setParameter("statuses", Arrays.asList(GlTransmissionStatus.GENERATED_CODE, GlTransmissionStatus.FAILED_CODE));
         query.setParameter("fromDate", startDate);
         query.setParameter("toDate", endDate);
 

@@ -45,7 +45,7 @@ public class TransactionExportController extends GenericSearchController {
         return new EmptyForm();
     }
 
-    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=download")
+    @RequestMapping(method = RequestMethod.GET)
     public ModelAndView get(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         // Prepare the General Ledger transactions:
@@ -61,7 +61,7 @@ public class TransactionExportController extends GenericSearchController {
     }
 
 
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=download")
+    @RequestMapping(method = RequestMethod.POST)
     public ModelAndView post(HttpServletRequest request, HttpServletResponse response) throws IOException {
         return get(request, response);
     }

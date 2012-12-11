@@ -9,7 +9,6 @@ import com.sigmasys.kuali.ksa.util.CalendarUtils;
 import com.sigmasys.kuali.ksa.util.JaxbUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import com.sigmasys.kuali.ksa.util.XmlSchemaValidator;
-import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import static com.sigmasys.kuali.ksa.model.Constants.*;
 
@@ -66,6 +66,7 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
      * @return XML content that contains the transactions to be exported
      */
     @Override
+    @Transactional(readOnly = false)
     public String exportTransactions() {
         return convertGlTransmissionsToXml(glService.getGlTransmissionsForExport());
     }
@@ -81,6 +82,7 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
      * @return XML content that contains the transactions to be exported
      */
     @Override
+    @Transactional(readOnly = false)
     public String exportTransactionsForDates(Date startDate, Date endDate, boolean isEffectiveDate) {
         return convertGlTransmissionsToXml(glService.getGlTransmissionsForExport(startDate, endDate, isEffectiveDate));
     }
@@ -120,9 +122,16 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
 
     protected String convertGlTransmissionsToXml(List<GlTransmission> glTransmissions) {
 
-        final ObjectFactory objectFactory = new ObjectFactory();
+        // Generating the batch ID
+        final BigInteger batchId = BigInteger.valueOf(new Random(System.currentTimeMillis()).nextLong());
 
-        final BigInteger batchNumber = BigInteger.valueOf(RandomUtils.nextLong());
+        // Setting the result and batch ID for each GL transmission from the list
+        for ( GlTransmission glTransmission : glTransmissions) {
+            glTransmission.setBatchId(String.valueOf(batchId));
+            glTransmission.setStatus(GlTransmissionStatus.TRANSMITTED);
+        }
+
+        final ObjectFactory objectFactory = new ObjectFactory();
 
         final String currentUserId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
 
@@ -145,13 +154,6 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
 
         BigDecimal totalAmount = BigDecimal.ZERO;
         for (GlTransmission glTransmission : glTransmissions) {
-
-            if (StringUtils.hasLength(glTransmission.getResult())) {
-                String errMsg = "GL Transmission with ID = " + glTransmission.getId() +
-                        " already has the result value = " + glTransmission.getResult();
-                logger.error(errMsg);
-                throw new IllegalStateException(errMsg);
-            }
 
             totalAmount = totalAmount.add(glTransmission.getAmount());
 
@@ -241,7 +243,7 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
 
         // Creating HeaderType instance
         HeaderType headerType = objectFactory.createHeaderType();
-        headerType.setBatchSequenceNumber(batchNumber);
+        headerType.setBatchSequenceNumber(batchId);
         headerType.setCampusCode(configService.getInitialParameter(KFS_CAMPUS_CODE_PARAM_NAME));
         headerType.setChartOfAccountsCode(configService.getInitialParameter(KFS_CHART_OF_ACCOUNTS_CODE_PARAM_NAME));
         headerType.setDepartmentName(configService.getInitialParameter(KFS_DEPARTMENT_NAME_PARAM_NAME));

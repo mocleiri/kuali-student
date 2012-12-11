@@ -1,12 +1,14 @@
 package com.sigmasys.kuali.ksa.model;
 
 
+import com.sigmasys.kuali.ksa.util.EnumUtils;
+
 import javax.persistence.*;
 import java.util.Date;
 
 
 /**
- * General ledger transmission model.
+ * General Ledger transmission model.
  *
  * @author Michael Ivanov
  */
@@ -29,11 +31,14 @@ public class GlTransmission extends AbstractGlEntity {
      */
     private String batchId;
 
-    /**
-     * Optional GL result
-     */
-    private String result;
+    private GlTransmissionStatus status;
 
+
+    @PostLoad
+    protected void populateTransientFields() {
+        super.populateTransientFields();
+        status = (statusCode != null) ? EnumUtils.findById(GlTransmissionStatus.class, statusCode) : null;
+    }
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
@@ -76,15 +81,6 @@ public class GlTransmission extends AbstractGlEntity {
         this.latestDate = latestDate;
     }
 
-    @Column(name = "RESULT", length = 2048)
-    public String getResult() {
-        return result;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
-
     @Column(name = "BATCH_ID", length = 100)
     public String getBatchId() {
         return batchId;
@@ -94,6 +90,21 @@ public class GlTransmission extends AbstractGlEntity {
         this.batchId = batchId;
     }
 
+    @Override
+    protected void setStatusCode(String statusCode) {
+        super.setStatusCode(statusCode);
+        status = EnumUtils.findById(GlTransmissionStatus.class, statusCode);
+    }
+
+    @Transient
+    public GlTransmissionStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(GlTransmissionStatus status) {
+        this.status = status;
+        statusCode = status.getId();
+    }
 }
 	
 
