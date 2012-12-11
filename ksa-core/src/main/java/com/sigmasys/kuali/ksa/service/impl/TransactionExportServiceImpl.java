@@ -120,13 +120,18 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
         return accountParts;
     }
 
+    private BigInteger generateBatchId() {
+        long randomLong = Math.abs(new Random(System.currentTimeMillis()).nextLong());
+        return BigInteger.valueOf(randomLong);
+    }
+
     protected String convertGlTransmissionsToXml(List<GlTransmission> glTransmissions) {
 
         // Generating the batch ID
-        final BigInteger batchId = BigInteger.valueOf(new Random(System.currentTimeMillis()).nextLong());
+        final BigInteger batchId = generateBatchId();
 
         // Setting the result and batch ID for each GL transmission from the list
-        for ( GlTransmission glTransmission : glTransmissions) {
+        for (GlTransmission glTransmission : glTransmissions) {
             glTransmission.setBatchId(String.valueOf(batchId));
             glTransmission.setStatus(GlTransmissionStatus.TRANSMITTED);
         }
