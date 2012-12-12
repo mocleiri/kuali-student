@@ -290,7 +290,10 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         } else {
             DebitType debitType = (DebitType) transactionType;
             Charge charge = (Charge) transaction;
-            // TODO: Ask Paul about "cancellationRule"
+            String cancellationRule = debitType.getCancellationRule();
+            if (cancellationRule != null) {
+                charge.setCancellationRule(calculateCancellationRule(cancellationRule, effectiveDate));
+            }
         }
 
         persistTransaction(transaction);
@@ -1839,6 +1842,75 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     /**
+     * Takes the cancellationRule and using the baseDate calculates the
+     * appropriate dates to be stored in the actual transaction version of the cancellation rule.
+     *
+     * @param cancellationRule the cancellation rule
+     * @return the modified cancellation rule with the updated dates
+     */
+    //@Override
+    public Map<Date, List<Pair<CancellationRuleType, BigDecimal>>> parseCancellationRule(String cancellationRule) {
+
+        if (!isCancellationRuleValid(cancellationRule)) {
+            String errMsg = "Cancellation Rule '" + cancellationRule + "' is invalid";
+            logger.error(errMsg);
+            throw new InvalidCancellationRuleException(errMsg);
+        }
+
+        try {
+
+            String rule = cancellationRule.toUpperCase().trim();
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
+
+            Map<Date, List<Pair<CancellationRuleType, BigDecimal>>> parsedRules =
+                    new HashMap<Date, List<Pair<CancellationRuleType, BigDecimal>>>();
+
+            for (String clause : rule.split(";")) {
+
+                if (clause.startsWith("DATE(")) {
+
+                    int index = clause.indexOf(")");
+
+                    String dateValue = clause.substring(5, index);
+                    String ruleValue = clause.substring(index + 1);
+
+                    BigDecimal amount = null;
+                    CancellationRuleType ruleType = null;
+                    if (ruleValue.startsWith(CancellationRuleType.PERCENTAGE.name())) {
+                        int firstIndex = CancellationRuleType.PERCENTAGE.name().length() + 1;
+                        amount = new BigDecimal(ruleValue.substring(firstIndex, ruleValue.indexOf(")")));
+                        ruleType = CancellationRuleType.PERCENTAGE;
+                    } else if (ruleValue.startsWith(CancellationRuleType.AMOUNT.name())) {
+                        int firstIndex = CancellationRuleType.AMOUNT.name().length() + 1;
+                        amount = new BigDecimal(ruleValue.substring(firstIndex, ruleValue.indexOf(")")));
+                        ruleType = CancellationRuleType.AMOUNT;
+                    }
+
+                    Date date = dateFormat.parse(dateValue);
+
+                    List<Pair<CancellationRuleType, BigDecimal>> rules = parsedRules.get(date);
+                    if (rules == null) {
+                        rules = new LinkedList<Pair<CancellationRuleType, BigDecimal>>();
+                        parsedRules.put(date, rules);
+                    }
+
+                    rules.add(new Pair<CancellationRuleType, BigDecimal>(ruleType, amount));
+
+                }
+            }
+
+            return parsedRules;
+
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw new RuntimeException(e.getMessage(), e);
+        }
+
+    }
+
+
+    /**
      * Checks if the given cancellation rule is legal.
      *
      * @param cancellationRule the cancellation rule
@@ -1913,10 +1985,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                     return false;
                 }
                 rule = rule.substring(index + 1);
-                boolean startsWithAmount = rule.startsWith("AMOUNT(");
-                boolean startsWithPercentage = rule.startsWith("PERCENTAGE(");
+                boolean startsWithAmount = rule.startsWith(CancellationRuleType.AMOUNT.name());
+                boolean startsWithPercentage = rule.startsWith(CancellationRuleType.PERCENTAGE.name());
                 if (startsWithAmount || startsWithPercentage) {
-                    rule = rule.substring(startsWithAmount ? 7 : 11);
+                    int firstIndex = (startsWithAmount ? CancellationRuleType.AMOUNT.name().length() :
+                            CancellationRuleType.PERCENTAGE.name().length()) + 1;
+                    rule = rule.substring(firstIndex);
                     index = rule.indexOf(")");
                     if (index <= 0) {
                         return false;

@@ -19,5 +19,21 @@ import javax.persistence.*;
 @DiscriminatorValue(TransactionType.DEBIT_TYPE)
 public class DebitType extends TransactionType {
 
+    private String cancellationRule;
+
+
+    @Column(name = "CANCELLATION_RULE", length = 2000)
+    public String getCancellationRule() {
+        return cancellationRule;
+    }
+
+    public void setCancellationRule(String cancellationRule) {
+        this.cancellationRule = cancellationRule;
+    }
+
+    @Transient
+    public TransactionTypeValue getTransactionTypeValue() {
+        return TransactionTypeValue.CHARGE;
+    }
 
 }
