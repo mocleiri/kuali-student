@@ -287,6 +287,10 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         } else if (transaction instanceof Deferment) {
             Deferment deferment = (Deferment) transaction;
             deferment.setExpirationDate(expirationDate);
+        } else {
+            DebitType debitType = (DebitType) transactionType;
+            Charge charge = (Charge) transaction;
+            // TODO: Ask Paul about "cancellationRule"
         }
 
         persistTransaction(transaction);
@@ -1231,7 +1235,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             return reversedTransaction;
 
         } else {
-            // TODO: Check if the locked allocated amount comes from the deferment
+            // TODO: Check if the locked allocated amount comes from a deferment
             String errMsg = "Transaction with ID = " + transactionId + " has locked allocation";
             logger.error(errMsg);
             throw new LockedAllocationException(errMsg);
@@ -1955,5 +1959,106 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         return true;
     }
+
+    /**
+     * Using the cancellationRule, calculates the appropriate amount that can be cancelled from a charge.
+     *
+     * @param chargeId Charge ID
+     * @return Cancellation amount
+     */
+    @Override
+    public BigDecimal getCancellationAmount(Long chargeId) {
+
+        Charge charge = getCharge(chargeId);
+        if (charge == null) {
+            String errMsg = "Charge does not exist for the given ID = " + chargeId;
+            logger.error(errMsg);
+            throw new TransactionNotFoundException(errMsg);
+        }
+
+        if (TransactionStatus.CANCELLED.equals(charge.getStatus())) {
+            return BigDecimal.ZERO;
+        }
+
+        // TODO: implement cancellation rule parsing to retrieve dates and values
+
+        return null;
+
+    }
+
+    /**
+     * Cancels a charge by ID.
+     *
+     * @param chargeId Charge ID
+     * @param memoText Memo text
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public void cancelCharge(Long chargeId, String memoText) {
+
+        Charge charge = getCharge(chargeId);
+        if (charge == null) {
+            String errMsg = "Charge does not exist for the given ID = " + chargeId;
+            logger.error(errMsg);
+            throw new TransactionNotFoundException(errMsg);
+        }
+
+        if (!TransactionStatus.ACTIVE.equals(charge.getStatus())) {
+            String errMsg = "Charge must be active, ID = " + chargeId;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        BigDecimal cancellationAmount = getCancellationAmount(chargeId);
+
+        if (cancellationAmount != null && cancellationAmount.compareTo(BigDecimal.ZERO) != 0) {
+            reverseTransaction(chargeId, memoText, cancellationAmount, null);
+        }
+
+        charge.setStatus(TransactionStatus.CANCELLED);
+    }
+
+
+    /**
+     * Creates a deferment using createTransaction() and the default contest payment type as the transaction type.
+     * After that it creates a locked allocation between the deferment and charge.
+     *
+     * @param chargeId       Charge ID
+     * @param expirationDate Deferment expiration date
+     * @param memoText       Memo text
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public void contestCharge(Long chargeId, Date expirationDate, String memoText) {
+
+        Charge charge = getCharge(chargeId);
+        if (charge == null) {
+            String errMsg = "Charge does not exist for the given ID = " + chargeId;
+            logger.error(errMsg);
+            throw new TransactionNotFoundException(errMsg);
+        }
+
+        // Getting the default contest payment type ID
+        String contestPaymentTypeId = configService.getInitialParameter(Constants.CONTEST_PAYMENT_TYPE_PARAM_NAME);
+        if (contestPaymentTypeId == null) {
+            String errMsg = "The default contest payment type '" + Constants.CONTEST_PAYMENT_TYPE_PARAM_NAME +
+                    "' has not been set";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        // Creating a deferment
+        Transaction deferment = createTransaction(contestPaymentTypeId, charge.getExternalId(), charge.getAccountId(),
+                charge.getEffectiveDate(), expirationDate, charge.getAmount());
+
+        // Creating a locked allocation between the deferment and charge
+        createLockedAllocation(deferment.getId(), chargeId, charge.getAmount());
+
+        // Creating a memo
+        Integer memoLevel = informationService.getDefaultMemoLevel();
+        informationService.createMemo(deferment.getId(), memoText, memoLevel, new Date(), expirationDate, null);
+
+    }
+
 
 }

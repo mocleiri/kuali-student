@@ -56,6 +56,7 @@ insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.locale.country', 'US');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.import.single.batch.failure', 'false');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.logging.operation', 'true');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.deferment.type.id', 'DEF');
+insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.payment.contest.type.id', 'cash');
 
 -- General Ledger settings
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.general.ledger.type', 'SAR');

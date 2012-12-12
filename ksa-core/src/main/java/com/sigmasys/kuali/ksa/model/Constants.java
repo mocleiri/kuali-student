@@ -23,6 +23,7 @@ public interface Constants {
     String DEFAULT_GL_TYPE_PARAM_NAME = "ksa.general.ledger.type";
     String DEFAULT_GL_MODE_PARAM_NAME = "ksa.general.ledger.mode";
     String DEFAULT_DEFERMENT_TYPE_PARAM_NAME = "ksa.deferment.type.id";
+    String CONTEST_PAYMENT_TYPE_PARAM_NAME = "ksa.payment.contest.type.id";
     String LOGGING_OPERATION = "ksa.logging.operation";
 
     // Drools parameters

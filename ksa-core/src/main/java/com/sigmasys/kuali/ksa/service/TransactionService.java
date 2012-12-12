@@ -48,7 +48,7 @@ public interface TransactionService {
      * @param externalId        Transaction external ID
      * @param userId            Account ID
      * @param effectiveDate     Transaction effective Date
-     * @param expirationDate    used for deferments only
+     * @param expirationDate    Used for deferments only
      * @param amount            Transaction amount
      * @return new Transaction instance
      */
@@ -593,5 +593,33 @@ public interface TransactionService {
      * @return true if the rule is valid or null, false - otherwise
      */
     boolean isCancellationRuleValid(String cancellationRule);
+
+
+    /**
+     * Using the cancellationRule, calculates the appropriate amount that can be cancelled from a charge.
+     *
+     * @param chargeId Charge ID
+     * @return Cancellation amount
+     */
+    BigDecimal getCancellationAmount(Long chargeId);
+
+
+    /**
+     * Cancels a charge by ID.
+     *
+     * @param chargeId Charge ID
+     * @param memoText Memo text
+     */
+    void cancelCharge(Long chargeId, String memoText);
+
+    /**
+     * Creates a deferment using createTransaction() and the default contest payment type as the transaction type.
+     * After that it creates a locked allocation between the deferment and charge.
+     *
+     * @param chargeId       Charge ID
+     * @param expirationDate Deferment expiration date
+     * @param memoText       Memo text
+     */
+    void contestCharge(Long chargeId, Date expirationDate, String memoText);
 
 }
