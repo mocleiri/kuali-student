@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
@@ -834,7 +835,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         // Valid cases
 
-        String rule = "DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(0)";
+        String rule = "DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(1)";
 
         isTrue(transactionService.isCancellationRuleValid(rule));
 
@@ -850,7 +851,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         isTrue(transactionService.isCancellationRuleValid(rule));
 
-        rule = "DATE(10/11/1789)PERCENTAGE(50);DATE(12/12/2012)AMOUNT(4333.45);DATE(12/13/2012)PERCENTAGE(0)";
+        rule = "DATE(10/11/1789)PERCENTAGE(50);DATE(12/12/2012)AMOUNT(4333.45);DATE(12/13/2012)PERCENTAGE(2.9)";
 
         isTrue(transactionService.isCancellationRuleValid(rule));
 
@@ -881,11 +882,15 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         isTrue(!transactionService.isCancellationRuleValid(rule));
 
-        rule = "DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(0";
+        rule = "DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(10";
 
         isTrue(!transactionService.isCancellationRuleValid(rule));
 
-        rule = "!!!DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(0)";
+        rule = "!!!DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(1.1)";
+
+        isTrue(!transactionService.isCancellationRuleValid(rule));
+
+        rule = "DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(1.9);";
 
         isTrue(!transactionService.isCancellationRuleValid(rule));
 
@@ -893,7 +898,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         isTrue(!transactionService.isCancellationRuleValid(rule));
 
-        rule = "DAYS(10)PERCENTAGE(500);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(0)";
+        rule = "DAYS(10)PERCENTAGE(500);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(13)";
 
         isTrue(!transactionService.isCancellationRuleValid(rule));
 
@@ -977,16 +982,16 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         isTrue(!transactionService.isCancellationRuleValid(rule));
 
-        rule = "DATE(12/10/2001)PERCENTAGE(50);DATE(11/23/2009)AMOUNT(1800.99);DATE(null)AMOUNT(0)";
+        rule = "DATE(12/10/2001)PERCENTAGE(50);DATE(11/23/2009)AMOUNT(1800.99);DATE(null)AMOUNT(30)";
 
         isTrue(!transactionService.isCancellationRuleValid(rule));
 
     }
 
     @Test
-    public void calculateCancellationRule() throws Exception {
+    public void calculateCancellationRule1() throws Exception {
 
-        String rule = "DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(0)";
+        String rule = "DAYS(10)PERCENTAGE(50);DAYS(20)PERCENTAGE(20);DAYS(30)PERCENTAGE(5.8)";
 
         rule = transactionService.calculateCancellationRule(rule, new Date());
 
@@ -997,6 +1002,53 @@ public class TransactionServiceTest extends AbstractServiceTest {
         isTrue(rule.contains("DATE"));
 
         logger.info("Modified cancellation rule = " + rule);
+    }
+
+    @Test
+    public void calculateCancellationRule2() throws Exception {
+
+        String rule = "DATE(10/11/1789)PERCENTAGE(50);DATE(12/12/2012)AMOUNT(4333.45);DATE(12/12/2013)PERCENTAGE(10)";
+
+        rule = transactionService.calculateCancellationRule(rule, new Date());
+
+        notNull(rule);
+        isTrue(!rule.isEmpty());
+        isTrue(rule.split(";").length == 3);
+        isTrue(!rule.contains("DAYS"));
+        isTrue(rule.contains("DATE"));
+
+        logger.info("Modified cancellation rule = " + rule);
+    }
+
+    @Test
+    public void getCancellationAmount() throws Exception {
+
+        String userId = "admin";
+
+        String rule = "DATE(10/11/1789)PERCENTAGE(50);DATE(12/12/2012)AMOUNT(4333.45);DATE(12/12/2013)PERCENTAGE(10)";
+
+        TransactionType chargeType = transactionService.getTransactionType("1299", new Date());
+
+        Assert.notNull(chargeType);
+        Assert.notNull(chargeType.getId());
+        Assert.notNull(chargeType.getId().getId());
+        Assert.isTrue(chargeType instanceof DebitType);
+
+        ((DebitType)chargeType).setCancellationRule(rule);
+
+        transactionService.persistTransactionType(chargeType);
+
+        String typeId = chargeType.getId().getId();
+
+        Transaction charge = transactionService.createTransaction(typeId, userId, new Date(), new BigDecimal(1500.99));
+
+        Assert.notNull(charge);
+        Assert.notNull(charge.getId());
+
+        BigDecimal cancellationAmount = transactionService.getCancellationAmount(charge.getId());
+
+        Assert.notNull(cancellationAmount);
+        Assert.isTrue(cancellationAmount.compareTo(BigDecimal.ZERO) > 0);
 
     }
 

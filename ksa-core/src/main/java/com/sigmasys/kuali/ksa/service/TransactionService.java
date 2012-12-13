@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.service;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.TreeMap;
 
 import com.sigmasys.kuali.ksa.annotation.Url;
 import com.sigmasys.kuali.ksa.model.*;
@@ -196,6 +197,15 @@ public interface TransactionService {
      * @return Transaction ID
      */
     Long persistTransaction(Transaction transaction);
+
+    /**
+     * Persists the transaction type in the database.
+     * Creates a new entity when ID is null and updates the existing one otherwise.
+     *
+     * @param transactionType TransactionType instance
+     * @return Transaction Type ID
+     */
+    TransactionTypeId persistTransactionType(TransactionType transactionType);
 
     /**
      * Removes the transaction from the database.
@@ -575,6 +585,17 @@ public interface TransactionService {
      */
     @WebMethod(exclude = true)
     BigDecimal getUnallocatedAmount(List<Transaction> transactions, TransactionTypeValue transactionType, boolean restricted);
+
+    /**
+     * Parses the cancellationRule and returns a map of dates and pairs of cancellation rule types with
+     * the corresponding amount.
+     *
+     * @param cancellationRule The cancellation rule. The String value to be normalized:
+     *                         DAYS values have to be replaced with DATE.
+     * @return a map of dates and pairs of cancellation rule types and amount
+     */
+    @WebMethod(exclude = true)
+    TreeMap<Date, List<Pair<CancellationRuleType, BigDecimal>>> parseCancellationRule(String cancellationRule);
 
     /**
      * Takes the cancellationRule and using the baseDate calculates the

@@ -450,6 +450,19 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     /**
+     * Persists the transaction type in the database.
+     * Creates a new entity when ID is null and updates the existing one otherwise.
+     *
+     * @param transactionType TransactionType instance
+     * @return Transaction Type ID
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public TransactionTypeId persistTransactionType(TransactionType transactionType) {
+        return persistEntity(transactionType);
+    }
+
+    /**
      * Removes the transaction from the database.
      *
      * @param id Transaction ID
@@ -1831,10 +1844,13 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 builder.append(")");
                 builder.append(ruleValue);
 
-                if (i < clauses.length - 1) {
-                    builder.append(";");
-                }
+            } else {
+                // If it already starts with DATE simply add that clause to the builder
+                builder.append(clause);
+            }
 
+            if (i < clauses.length - 1) {
+                builder.append(";");
             }
         }
 
@@ -1842,14 +1858,16 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     /**
-     * Takes the cancellationRule and using the baseDate calculates the
-     * appropriate dates to be stored in the actual transaction version of the cancellation rule.
+     * Parses the cancellationRule and returns a sorted map of dates and pairs of cancellation rule types with
+     * the corresponding amount. The map is sorted by dates in ascending order.
      *
-     * @param cancellationRule the cancellation rule
-     * @return the modified cancellation rule with the updated dates
+     * @param cancellationRule The cancellation rule. The String value to be normalized:
+     *                         DAYS values have to be replaced with DATE.
+     * @return a sorted map of dates and pairs of cancellation rule types and amount
      */
-    //@Override
-    public Map<Date, List<Pair<CancellationRuleType, BigDecimal>>> parseCancellationRule(String cancellationRule) {
+    @Override
+    @WebMethod(exclude = true)
+    public TreeMap<Date, List<Pair<CancellationRuleType, BigDecimal>>> parseCancellationRule(String cancellationRule) {
 
         if (!isCancellationRuleValid(cancellationRule)) {
             String errMsg = "Cancellation Rule '" + cancellationRule + "' is invalid";
@@ -1863,8 +1881,8 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
             SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
 
-            Map<Date, List<Pair<CancellationRuleType, BigDecimal>>> parsedRules =
-                    new HashMap<Date, List<Pair<CancellationRuleType, BigDecimal>>>();
+            TreeMap<Date, List<Pair<CancellationRuleType, BigDecimal>>> parsedRules =
+                    new TreeMap<Date, List<Pair<CancellationRuleType, BigDecimal>>>();
 
             for (String clause : rule.split(";")) {
 
@@ -1896,7 +1914,6 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                     }
 
                     rules.add(new Pair<CancellationRuleType, BigDecimal>(ruleType, amount));
-
                 }
             }
 
@@ -2001,7 +2018,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                     }
                     try {
                         double amount = Double.parseDouble(amountValue);
-                        if (amount < 0) {
+                        if (amount <= 0) {
                             return false;
                         }
                         if (startsWithPercentage && amount > 100) {
@@ -2027,8 +2044,6 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             } else {
                 return false;
             }
-
-            logger.debug("Remaining Cancellation Rule = '" + rule + "'");
         }
 
         return true;
@@ -2050,14 +2065,53 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             throw new TransactionNotFoundException(errMsg);
         }
 
-        if (TransactionStatus.CANCELLED.equals(charge.getStatus())) {
+        String cancellationRule = charge.getCancellationRule();
+        if (TransactionStatus.CANCELLED.equals(charge.getStatus()) ||
+                StringUtils.isBlank(cancellationRule) ||
+                charge.getAmount() == null ||
+                charge.getAmount().compareTo(BigDecimal.ZERO) == 0) {
             return BigDecimal.ZERO;
         }
 
-        // TODO: implement cancellation rule parsing to retrieve dates and values
+        TreeMap<Date, List<Pair<CancellationRuleType, BigDecimal>>> parsedRules = parseCancellationRule(cancellationRule);
 
-        return null;
+        if (!parsedRules.isEmpty()) {
 
+            final Date currentDate = new Date();
+
+            Date paymentDate = parsedRules.firstKey();
+            if (paymentDate.before(currentDate)) {
+                return charge.getAmount();
+            }
+
+            for (Date date : parsedRules.keySet()) {
+                if (date.before(currentDate)) {
+                    return getCancellationAmount(parsedRules.get(paymentDate), charge.getAmount());
+                }
+                paymentDate = date;
+            }
+
+            return getCancellationAmount(parsedRules.get(paymentDate), charge.getAmount());
+        }
+
+        return BigDecimal.ZERO;
+    }
+
+    private BigDecimal getCancellationAmount(List<Pair<CancellationRuleType, BigDecimal>> rules, BigDecimal chargeAmount) {
+        if (CollectionUtils.isNotEmpty(rules)) {
+            BigDecimal totalAmount = BigDecimal.ZERO;
+            for (Pair<CancellationRuleType, BigDecimal> rule : rules) {
+                switch (rule.getA()) {
+                    case AMOUNT:
+                        totalAmount = totalAmount.add(rule.getB());
+                    case PERCENTAGE:
+                        BigDecimal amountPerPercent = chargeAmount.divide(new BigDecimal(100));
+                        totalAmount = totalAmount.add(amountPerPercent.multiply(rule.getB()));
+                }
+            }
+            return totalAmount;
+        }
+        return BigDecimal.ZERO;
     }
 
     /**
