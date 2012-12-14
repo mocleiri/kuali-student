@@ -113,6 +113,20 @@ module PopulationsSearch
     states
   end
 
+  def search_for_random_pop(pops_used_list=[]) #checks to make sure pop not already used
+    names = []
+    on ActivePopulationLookup do |page|
+      page.keyword.wait_until_present
+      page.search
+      no_of_full_pages =  [(page.no_of_entries.to_i/10).to_i,5].min
+      page.change_results_page(1+rand(no_of_full_pages))
+      names = page.results_list
+    end
+    #next line ensures population is not used twice
+    names = names - pops_used_list
+    names[1+rand(names.length-1)]
+  end
+
   private
 
   def target_row(name)
