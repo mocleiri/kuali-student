@@ -170,4 +170,12 @@ public interface GeneralLedgerService {
      */
     List<GlTransmission> getGlTransmissionsForExport(Date startDate, Date endDate, boolean isEffectiveDate);
 
+    /**
+     * Validates the GL account number.
+     *
+     * @param glAccount GL account number
+     * @return true if the GL account is valid, false - otherwise.
+     */
+    boolean isGlAccountValid(String glAccount);
+
 }

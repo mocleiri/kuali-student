@@ -971,7 +971,26 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 " = :id order by g.breakdown desc");
         query.setParameter("id", transaction.isGlOverridden() ?
                 transaction.getId() : transaction.getGeneralLedgerType().getId());
-        return query.getResultList();
+        List<AbstractGlBreakdown> breakdowns = query.getResultList();
+        if (!transaction.isGlOverridden() && CollectionUtils.isEmpty(breakdowns)) {
+            GeneralLedgerType defaultGlType = glService.getDefaultGeneralLedgerType();
+            query.setParameter("id", defaultGlType.getId());
+            breakdowns = query.getResultList();
+        }
+        return breakdowns;
+    }
+
+    public boolean isGeneralLedgerBreakdownValid(AbstractGlBreakdown breakdown) {
+
+        if (!glService.isGlAccountValid(breakdown.getGlAccount())) {
+            logger.warn("GL account '" + breakdown.getGlAccount() + "' is invalid");
+            return false;
+        }
+
+        // A map of GL type IDs and boolean values indicating the presence of 0% in the breakdown
+        // TODO:
+
+        return false;
     }
 
     /**

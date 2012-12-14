@@ -14,7 +14,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import javax.jws.WebService;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -97,16 +96,8 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
     @Override
     public List<String> parseGlAccount(String glAccount) {
 
-        if (!StringUtils.hasText(glAccount)) {
-            String errMsg = "GL Account cannot be empty";
-            logger.error(errMsg);
-            throw new InvalidGeneralLedgerAccountException(errMsg);
-        }
-
-        glAccount = StringUtils.deleteAny(glAccount, " \n\t\r-");
-
-        if (glAccount.length() != 12) {
-            String errMsg = "GL Account '" + glAccount + "' is invalid, the length must be 12";
+        if (!glService.isGlAccountValid(glAccount)) {
+            String errMsg = "GL Account '" + glAccount + "' is invalid";
             logger.error(errMsg);
             throw new InvalidGeneralLedgerAccountException(errMsg);
         }

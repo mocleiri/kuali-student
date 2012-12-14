@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
+import com.sigmasys.kuali.ksa.exception.InvalidGeneralLedgerAccountException;
 import com.sigmasys.kuali.ksa.exception.InvalidGeneralLedgerTypeException;
 import com.sigmasys.kuali.ksa.exception.TransactionNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
@@ -10,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -457,7 +459,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
                 Date maxDate = null;
 
                 for (GlTransaction transaction : glTransactionSet) {
-                    if ( recognitionPeriod == null) {
+                    if (recognitionPeriod == null) {
                         recognitionPeriod = transaction.getRecognitionPeriod();
                     }
                     if (groupOperation == null) {
@@ -615,6 +617,31 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         }
 
         return glTransmissions;
+    }
+
+
+    /**
+     * Validates the GL account number.
+     *
+     * @param glAccount GL account number
+     * @return true if the GL account is valid, false - otherwise.
+     */
+    @Override
+    public boolean isGlAccountValid(String glAccount) {
+
+        if (!StringUtils.hasText(glAccount)) {
+            logger.warn("GL Account cannot be empty");
+            return false;
+        }
+
+        glAccount = StringUtils.deleteAny(glAccount, " \n\t\r-");
+
+        if (glAccount.length() != 12) {
+            logger.warn("GL Account '" + glAccount + "' is invalid, the length must be 12");
+            return false;
+        }
+
+        return true;
     }
 
 }
