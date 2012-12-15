@@ -91,12 +91,21 @@ public interface GeneralLedgerService {
     List<GlTransaction> summarizeGlTransactions(List<GlTransaction> transactions);
 
     /**
-     * Returns the general ledger type instance for the given code.
+     * Returns the general ledger type instance by code.
      *
      * @param glTypeCode General Ledger type code
      * @return GeneralLedgerType instance
      */
     GeneralLedgerType getGeneralLedgerType(String glTypeCode);
+
+    /**
+     * Returns the general ledger type instance by ID.
+     *
+     * @param glTypeId General Ledger type ID
+     * @return GeneralLedgerType instance
+     */
+    @WebMethod(exclude = true)
+    GeneralLedgerType getGeneralLedgerType(Long glTypeId);
 
     /**
      * Returns the default general ledger mode.

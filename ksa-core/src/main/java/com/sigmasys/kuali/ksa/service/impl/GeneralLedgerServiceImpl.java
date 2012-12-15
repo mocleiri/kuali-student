@@ -1,6 +1,5 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
-import com.sigmasys.kuali.ksa.exception.InvalidGeneralLedgerAccountException;
 import com.sigmasys.kuali.ksa.exception.InvalidGeneralLedgerTypeException;
 import com.sigmasys.kuali.ksa.exception.TransactionNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
@@ -269,7 +268,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     }
 
     /**
-     * Returns the general ledger type instance for the given code.
+     * Returns the general ledger type instance by code.
      *
      * @param glTypeCode General Ledger type code
      * @return GeneralLedgerType instance
@@ -285,6 +284,18 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         String errMsg = "Cannot find GeneralLedgerType for the code = " + glTypeCode;
         logger.error(errMsg);
         throw new InvalidGeneralLedgerTypeException(errMsg);
+    }
+
+    /**
+     * Returns the general ledger type instance by ID.
+     *
+     * @param glTypeId General Ledger type ID
+     * @return GeneralLedgerType instance
+     */
+    @Override
+    @WebMethod(exclude = true)
+    public GeneralLedgerType getGeneralLedgerType(Long glTypeId) {
+        return getEntity(glTypeId, GeneralLedgerType.class);
     }
 
     /**

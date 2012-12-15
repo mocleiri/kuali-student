@@ -980,17 +980,74 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         return breakdowns;
     }
 
-    public boolean isGeneralLedgerBreakdownValid(AbstractGlBreakdown breakdown) {
+    /**
+     * This method persists new GL breakdowns and associates them with the given GL and transaction types.
+     * It also provides validation of the breakdowns.
+     *
+     * @param glTypeId          GL type ID
+     * @param transactionTypeId Transaction type ID
+     * @param breakdowns        a list of GL breakdowns
+     * @return a list of GL breakdown IDs
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public List<Long> createGlBreakdowns(Long glTypeId, TransactionTypeId transactionTypeId, List<GlBreakdown> breakdowns) {
 
-        if (!glService.isGlAccountValid(breakdown.getGlAccount())) {
-            logger.warn("GL account '" + breakdown.getGlAccount() + "' is invalid");
-            return false;
+        List<Long> breakdownIds = new ArrayList<Long>(breakdowns.size());
+
+        GeneralLedgerType glType = glService.getGeneralLedgerType(glTypeId);
+        if (glType == null) {
+            String errMsg = "General Ledger Type with ID = " + glTypeId + " does nto exist";
+            logger.error(errMsg);
+            throw new InvalidGeneralLedgerTypeException(errMsg);
         }
 
-        // A map of GL type IDs and boolean values indicating the presence of 0% in the breakdown
-        // TODO:
+        TransactionType debitType = getTransactionType(transactionTypeId);
+        if (!(debitType instanceof DebitType)) {
+            String errMsg = "Transaction Type with ID = " + glTypeId + " must be DebitType";
+            logger.error(errMsg);
+            throw new InvalidTransactionTypeException(errMsg);
+        }
 
-        return false;
+        boolean hasZeroPercent = false;
+        BigDecimal totalPercentage = BigDecimal.ZERO;
+
+        for (GlBreakdown breakdown : breakdowns) {
+
+            if (!glService.isGlAccountValid(breakdown.getGlAccount())) {
+                String errMsg = "GL account '" + breakdown.getGlAccount() + "' is invalid";
+                logger.error(errMsg);
+                throw new InvalidGeneralLedgerAccountException(errMsg);
+            }
+            if (breakdown.getBreakdown() == null) {
+                String errMsg = "GL breakdown does not have any percentage value";
+                logger.error(errMsg);
+                throw new IllegalStateException(errMsg);
+            } else if (breakdown.getBreakdown().compareTo(BigDecimal.ZERO) == 0) {
+                if (hasZeroPercent) {
+                    String errMsg = "One and only one breakdown must have 0 percentage value for the given GL type";
+                    logger.error(errMsg);
+                    throw new IllegalStateException(errMsg);
+                }
+                hasZeroPercent = true;
+            }
+
+            totalPercentage = totalPercentage.add(breakdown.getBreakdown());
+
+            breakdown.setDebitType((DebitType) debitType);
+            breakdown.setGeneralLedgerType(glType);
+
+            Long breakdownId = persistEntity(breakdown);
+            breakdownIds.add(breakdownId);
+        }
+
+        if (totalPercentage.compareTo(new BigDecimal(100)) >= 0) {
+            String errMsg = "The total percentage value of all breakdowns cannot be equal to and greater than 100";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        return breakdownIds;
     }
 
     /**

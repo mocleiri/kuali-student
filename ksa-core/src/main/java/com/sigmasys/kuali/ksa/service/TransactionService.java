@@ -643,4 +643,15 @@ public interface TransactionService {
      */
     void contestCharge(Long chargeId, Date expirationDate, String memoText);
 
+    /**
+     * This method persists new GL breakdowns and associates them with the given GL and transaction types.
+     * It also provides validation of the breakdowns.
+     *
+     * @param glTypeId          GL type ID
+     * @param transactionTypeId Transaction type ID
+     * @param breakdowns        a list of GL breakdowns
+     * @return a list of GL breakdown IDs
+     */
+    List<Long> createGlBreakdowns(Long glTypeId, TransactionTypeId transactionTypeId, List<GlBreakdown> breakdowns);
+
 }

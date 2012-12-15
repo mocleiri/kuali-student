@@ -9,6 +9,7 @@ import static org.springframework.util.Assert.notNull;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -33,6 +34,9 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private GeneralLedgerService glService;
 
     @Autowired
     private AccountService accountService;
@@ -1034,7 +1038,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
         Assert.notNull(chargeType.getId().getId());
         Assert.isTrue(chargeType instanceof DebitType);
 
-        ((DebitType)chargeType).setCancellationRule(rule);
+        ((DebitType) chargeType).setCancellationRule(rule);
 
         transactionService.persistTransactionType(chargeType);
 
@@ -1049,6 +1053,52 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         Assert.notNull(cancellationAmount);
         Assert.isTrue(cancellationAmount.compareTo(BigDecimal.ZERO) > 0);
+
+    }
+
+    @Test
+    public void createGlBreakdowns() throws Exception {
+
+        final String glAccount = "01-0-13112 1326";
+
+        TransactionType chargeType = transactionService.getTransactionType("1299", new Date());
+
+        Assert.notNull(chargeType);
+
+        GeneralLedgerType glType = glService.getDefaultGeneralLedgerType();
+
+        Assert.notNull(glType);
+
+        List<GlBreakdown> breakdowns = new LinkedList<GlBreakdown>();
+
+        GlBreakdown breakdown = new GlBreakdown();
+        breakdown.setGlAccount(glAccount);
+        breakdown.setGlOperation(GlOperationType.CREDIT);
+        breakdown.setBreakdown(new BigDecimal(20.5));
+        breakdowns.add(breakdown);
+
+        breakdown = new GlBreakdown();
+        breakdown.setGlAccount(glAccount);
+        breakdown.setGlOperation(GlOperationType.DEBIT);
+        breakdown.setBreakdown(new BigDecimal(50));
+        breakdowns.add(breakdown);
+
+        breakdown = new GlBreakdown();
+        breakdown.setGlAccount(glAccount);
+        breakdown.setGlOperation(GlOperationType.CREDIT);
+        breakdown.setBreakdown(new BigDecimal(0));
+        breakdowns.add(breakdown);
+
+        List<Long> breakdownIds = transactionService.createGlBreakdowns(glType.getId(), chargeType.getId(), breakdowns);
+
+        Assert.notNull(breakdownIds);
+        Assert.notEmpty(breakdownIds);
+        Assert.isTrue(breakdownIds.size() == breakdowns.size());
+
+        for (GlBreakdown b : breakdowns) {
+            Assert.notNull(b.getId());
+            Assert.isTrue(glAccount.equals(b.getGlAccount()));
+        }
 
     }
 
