@@ -93,6 +93,36 @@ public interface TransactionService {
     @WebMethod(exclude = true)
     TransactionType getTransactionType(TransactionTypeId transactionTypeId);
 
+    /**
+     * Creates a new debit type based on the given parameters.
+     *
+     * @param creditTypeId Transaction Type ID
+     * @param startDate    Transaction type start date
+     * @param priority     Priority integer value
+     * @param description  Default statement text
+     * @return a new DebitType instance
+     */
+    DebitType createDebitType(String creditTypeId, Date startDate, int priority, String description);
+
+    /**
+     * Creates a new credit type based on the given parameters.
+     *
+     * @param creditTypeId Transaction Type ID
+     * @param startDate    Transaction type start date
+     * @param priority     Priority integer value
+     * @param description  Default statement text
+     * @return a new CreditType instance
+     */
+    CreditType createCreditType(String creditTypeId, Date startDate, int priority, String description);
+
+    /**
+     * Checks if the transaction type exists.
+     *
+     * @param transactionTypeId Transaction Type ID
+     * @return "true" if the transaction type exists, false - otherwise
+     */
+    boolean transactionTypeExists(String transactionTypeId);
+
 
     /**
      * Returns Transaction by ID

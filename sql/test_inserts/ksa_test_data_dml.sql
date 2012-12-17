@@ -95,7 +95,7 @@ Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACC
 --   FILTER = none used
 ---------------------------------------------------
 REM INSERTING into KSSA_TAX_TYPE
-Insert into KSSA_TAX_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME) values (1,'pheald','US Social Security Nuber',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'US Social SecurityNumber');
+Insert into KSSA_TAX_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME) values (1,'pheald','US Social Security Number',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'US Social SecurityNumber');
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_TAX_TYPE

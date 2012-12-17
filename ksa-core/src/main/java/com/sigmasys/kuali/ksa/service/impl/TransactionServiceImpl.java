@@ -191,6 +191,74 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         throw new InvalidTransactionTypeException(errMsg);
     }
 
+    /**
+     * Creates a new debit type based on the given parameters.
+     *
+     * @param debitTypeId Transaction Type ID
+     * @param startDate   Transaction type start date
+     * @param priority    Priority integer value
+     * @param description Default statement text
+     * @return a new DebitType instance
+     */
+    @Override
+    @WebMethod(exclude = true)
+    public DebitType createDebitType(String debitTypeId, Date startDate, int priority, String description) {
+        return createTransactionType(debitTypeId, startDate, priority, description, TransactionType.DEBIT_TYPE);
+    }
+
+    /**
+     * Creates a new credit type based on the given parameters.
+     *
+     * @param creditTypeId Transaction Type ID
+     * @param startDate    Transaction type start date
+     * @param priority     Priority integer value
+     * @param description  Default statement text
+     * @return a new CreditType instance
+     */
+    @Override
+    @WebMethod(exclude = true)
+    public CreditType createCreditType(String creditTypeId, Date startDate, int priority, String description) {
+        return createTransactionType(creditTypeId, startDate, priority, description, TransactionType.CREDIT_TYPE);
+    }
+
+    private <T extends TransactionType> T createTransactionType(String transactionTypeId, Date startDate, int priority,
+                                                                String description, String typeValue) {
+
+        if (transactionTypeExists(transactionTypeId)) {
+            String errMsg = "Transaction type with ID = " + transactionTypeId + " already exists";
+            logger.error(errMsg);
+            throw new InvalidTransactionTypeException(errMsg);
+        }
+
+        TransactionType transactionType = (TransactionType.CREDIT_TYPE.equals(typeValue)) ?
+                new CreditType() : new DebitType();
+
+        TransactionTypeId typeId = new TransactionTypeId(transactionTypeId, 0);
+
+        transactionType.setId(typeId);
+        transactionType.setCreatorId(userSessionManager.getUserId(RequestUtils.getThreadRequest()));
+        transactionType.setLastUpdate(new Date());
+        transactionType.setStartDate(startDate);
+        transactionType.setPriority(priority);
+        transactionType.setDescription(description);
+
+        return (T) transactionType;
+    }
+
+    /**
+     * Checks if the transaction type exists.
+     *
+     * @param transactionTypeId Transaction Tyoe ID
+     * @return "true" if the transaction type exists, false - otherwise
+     */
+    @Override
+    public boolean transactionTypeExists(String transactionTypeId) {
+        Query query = em.createQuery("select 1 from TransactionType where id.id = :id");
+        query.setParameter("id", transactionTypeId);
+        query.setMaxResults(1);
+        return CollectionUtils.isNotEmpty(query.getResultList());
+    }
+
 
     /**
      * Creates a new transaction based on the given parameters
