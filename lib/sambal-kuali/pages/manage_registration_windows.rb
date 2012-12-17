@@ -197,7 +197,7 @@ class RegistrationWindowsCreate < RegistrationWindowsBase
     # ToDo add period_key to the get_target_row
     row = get_target_row(window_name, period_key)
     row.cells[COLUMN_ASSIGN_STUDENTS].button(text: "Assign Students").click
-    loading.wait_while_present
+    loading.wait_while_present(60)
     while true
       begin
         sleep 1
@@ -214,7 +214,7 @@ class RegistrationWindowsCreate < RegistrationWindowsBase
     # ToDo add period_key to the get_target_row
     row = get_target_row(window_name, period_key)
     row.cells[COLUMN_BREAK_APPOINTMENTS].button(text: "Break Appointments").click
-    loading.wait_while_present
+    loading.wait_while_present(60)
     while true
       begin
         sleep 1
