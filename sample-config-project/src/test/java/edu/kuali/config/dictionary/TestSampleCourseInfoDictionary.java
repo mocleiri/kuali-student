@@ -4,13 +4,13 @@
  */
 package edu.kuali.config.dictionary;
 
-import org.kuali.student.common.dictionary.service.impl.DictionaryTesterHelper;
-import org.kuali.student.lum.course.dto.CourseInfo;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.kuali.student.r1.common.dictionary.service.impl.DictionaryTesterHelper;
+import org.kuali.student.r2.lum.course.dto.CourseInfo;
 
 public class TestSampleCourseInfoDictionary
 {
