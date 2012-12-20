@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "KSSA_LATE_PERIOD")
-public class LatePeriod extends AuditableEntity {
+public class LatePeriod extends AuditableEntity<Long> {
 
     private Boolean isDefault;
 

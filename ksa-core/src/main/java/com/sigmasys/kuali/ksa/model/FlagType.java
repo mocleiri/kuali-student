@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "KSSA_FLAG_TYPE")
-public class FlagType extends AuditableEntity {
+public class FlagType extends AuditableEntity<Long> {
 
     /**
      * Access Level

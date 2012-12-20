@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "KSSA_TAX_TYPE")
-public class TaxType extends AuditableEntity {
+public class TaxType extends AuditableEntity<Long> {
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)

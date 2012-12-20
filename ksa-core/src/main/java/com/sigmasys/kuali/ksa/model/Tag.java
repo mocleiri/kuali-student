@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "KSSA_TAG")
-public class Tag extends AuditableEntity {
+public class Tag extends AuditableEntity<Long> {
 
     /**
      * Access level

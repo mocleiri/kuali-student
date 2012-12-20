@@ -16,20 +16,16 @@ import javax.persistence.*;
 @Table(name = "KSSA_TRANSACTION_TYPE")
 @DiscriminatorColumn(name = "TYPE")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public abstract class TransactionType implements Identifiable {
+public abstract class TransactionType extends AuditableEntity<TransactionTypeId> {
 
     // Discriminator type value constants
     public static final String DEBIT_TYPE = "D";
     public static final String CREDIT_TYPE = "C";
 
 
-    protected TransactionTypeId id;
-
     protected Date startDate;
 
     protected Date endDate;
-
-    protected String description;
 
     protected List<Tag> tags;
 
@@ -44,30 +40,11 @@ public abstract class TransactionType implements Identifiable {
      */
     protected Rollup rollup;
 
-    /**
-     * Creator user ID
-     */
-    private String creatorId;
-
-    /**
-     * Editor user ID
-     */
-    private String editorId;
-
-    /**
-     * Timestamp
-     */
-    private Date lastUpdate;
-
 
     @Override
     @EmbeddedId
     public TransactionTypeId getId() {
         return id;
-    }
-
-    public void setId(TransactionTypeId id) {
-        this.id = id;
     }
 
     @Column(name = "START_DATE")
@@ -86,15 +63,6 @@ public abstract class TransactionType implements Identifiable {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    @Column(name = "DEF_TRN_TXT", length = 100)
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Column(name = "PRIORITY")
@@ -137,33 +105,6 @@ public abstract class TransactionType implements Identifiable {
 
     public void setRollup(Rollup rollup) {
         this.rollup = rollup;
-    }
-
-    @Column(name = "CREATOR_ID", length = 45)
-    public String getCreatorId() {
-        return creatorId;
-    }
-
-    public void setCreatorId(String creatorId) {
-        this.creatorId = creatorId;
-    }
-
-    @Column(name = "EDITOR_ID", length = 45)
-    public String getEditorId() {
-        return editorId;
-    }
-
-    public void setEditorId(String editorId) {
-        this.editorId = editorId;
-    }
-
-    @Column(name = "LAST_UPDATE")
-    public Date getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
     }
 
 }

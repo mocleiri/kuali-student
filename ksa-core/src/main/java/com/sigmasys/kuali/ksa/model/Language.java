@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "KSSA_LANGUAGE")
-public class Language extends AuditableEntity {
+public class Language extends AuditableEntity<Long> {
 
     private String locale;
 

@@ -12,7 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "KSSA_GL_TYPE")
-public class GeneralLedgerType extends AuditableEntity {
+public class GeneralLedgerType extends AuditableEntity<Long> {
 
     /**
      * General Ledger Account ID

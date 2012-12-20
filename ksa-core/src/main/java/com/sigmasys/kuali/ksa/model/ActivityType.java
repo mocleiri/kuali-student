@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "KSSA_ACTIVITY_TYPE")
-public class ActivityType extends AuditableEntity {
+public class ActivityType extends AuditableEntity<Long> {
 
 
     @Id

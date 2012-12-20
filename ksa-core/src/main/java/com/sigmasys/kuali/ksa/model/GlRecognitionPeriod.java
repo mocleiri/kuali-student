@@ -10,7 +10,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "KSSA_GL_RECOGNITION_PERIOD")
-public class GlRecognitionPeriod extends AuditableEntity {
+public class GlRecognitionPeriod extends AuditableEntity<Long> {
 
 
     /**
@@ -42,17 +42,13 @@ public class GlRecognitionPeriod extends AuditableEntity {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     @Column(name = "START_DATE", nullable = false)
     public Date getStartDate() {
         return startDate;
     }
 
     public void setStartDate(Date startDate) {
-           this.startDate = startDate;
+        this.startDate = startDate;
     }
 
     @Column(name = "END_DATE", nullable = false)

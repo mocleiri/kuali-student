@@ -12,7 +12,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "KSSA_CURRENCY")
-public class Currency extends AuditableEntity {
+public class Currency extends AuditableEntity<Long> {
 
 
     @Id

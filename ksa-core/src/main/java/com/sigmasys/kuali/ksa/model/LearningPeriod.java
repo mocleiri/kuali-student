@@ -23,7 +23,7 @@ import javax.persistence.TableGenerator;
 
 @Entity
 @Table(name = "KSSA_LEARNING_PERIOD")
-public class LearningPeriod extends AuditableEntity {
+public class LearningPeriod extends AuditableEntity<Long> {
 
     /**
      * Starting date of the period.

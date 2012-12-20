@@ -3,6 +3,8 @@ package com.sigmasys.kuali.ksa.model;
 import com.sigmasys.kuali.ksa.annotation.Auditable;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,12 +16,12 @@ import java.util.Date;
  */
 @Auditable
 @MappedSuperclass
-public abstract class AuditableEntity implements Identifiable {
+public abstract class AuditableEntity<T extends Serializable> implements Identifiable {
 
     /**
      * Entity ID
      */
-    protected Long id;
+    protected T id;
 
     /**
      * Entity code
@@ -29,12 +31,12 @@ public abstract class AuditableEntity implements Identifiable {
     /**
      * Entity name
      */
-    private String name;
+    protected String name;
 
     /**
      * Entity description
      */
-    private String description;
+    protected String description;
 
     /**
      * Creator user ID
@@ -58,9 +60,10 @@ public abstract class AuditableEntity implements Identifiable {
 
 
     @Transient
-    public abstract Long getId();
+    @XmlTransient
+    public abstract T getId();
 
-    public void setId(Long id) {
+    public void setId(T id) {
         this.id = id;
     }
 

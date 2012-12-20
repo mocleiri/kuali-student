@@ -12,20 +12,18 @@ import java.util.Date;
  * Date: 11/29/12
  * Time: 11:43 AM
  */
-public class AuditableEntityModel extends AuditableEntity {
+public class AuditableEntityModel extends AuditableEntity<Long> {
 
-    private AuditableEntity parentEntity;
+    private AuditableEntity<Long> parentEntity;
 
-    public AuditableEntityModel(){
-        // Default constructor must exist for krad
-        super();
+    public AuditableEntityModel() {
     }
 
-    public AuditableEntityModel(AuditableEntity entity) {
+    public AuditableEntityModel(AuditableEntity<Long> entity) {
         setAuditableEntity(entity);
     }
 
-    public void setAuditableEntity(AuditableEntity entity) {
+    public void setAuditableEntity(AuditableEntity<Long> entity) {
         parentEntity = entity;
     }
 
@@ -66,7 +64,9 @@ public class AuditableEntityModel extends AuditableEntity {
 
     @Override
     public String getCode() {
-        if(parentEntity == null || parentEntity.getCode() == null){ return "";}
+        if (parentEntity == null || parentEntity.getCode() == null) {
+            return "";
+        }
         return parentEntity.getCode();
     }
 

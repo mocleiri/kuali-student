@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "KSSA_TRANSACTION_MASK_ROLE")
-public class TransactionMaskRole extends AuditableEntity {
+public class TransactionMaskRole extends AuditableEntity<Long> {
 
     private String typeMask;
 
