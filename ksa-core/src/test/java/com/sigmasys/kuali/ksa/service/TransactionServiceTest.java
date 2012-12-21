@@ -429,6 +429,69 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
     }
 
+    @Test
+    public void setGeneralLedgerType1() throws Exception {
+
+        String id = "1020";
+
+        Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e3));
+
+        notNull(transaction);
+        notNull(transaction.getId());
+        notNull(transaction.getTransactionType());
+        notNull(transaction.getTransactionType().getId());
+
+        isTrue(!transaction.isGlEntryGenerated());
+
+        GeneralLedgerType glType = glService.getDefaultGeneralLedgerType();
+
+        notNull(glType);
+        notNull(glType.getId());
+
+        transactionService.setGeneralLedgerType(transaction.getId(), glType.getId());
+
+        transaction = transactionService.getTransaction(transaction.getId());
+
+        notNull(transaction);
+        notNull(transaction.getId());
+        notNull(transaction.getGeneralLedgerType());
+        isTrue(glType.getId().equals(transaction.getGeneralLedgerType().getId()));
+        isTrue(!transaction.isGlEntryGenerated());
+
+    }
+
+    @Test
+    public void setGeneralLedgerType2() throws Exception {
+
+        String id = "1020";
+
+        Transaction transaction = transactionService.createTransaction(id, "admin", new Date(), new BigDecimal(10e3));
+
+        notNull(transaction);
+        notNull(transaction.getId());
+        notNull(transaction.getTransactionType());
+        notNull(transaction.getTransactionType().getId());
+
+        isTrue(!transaction.isGlEntryGenerated());
+
+        transactionService.makeEffective(transaction.getId(), false);
+
+        GeneralLedgerType glType = glService.getDefaultGeneralLedgerType();
+
+        notNull(glType);
+        notNull(glType.getId());
+
+        boolean isException = false;
+        try {
+            transactionService.setGeneralLedgerType(transaction.getId(), glType.getId());
+        } catch (IllegalStateException e) {
+            notNull(e.getMessage());
+            isException = true;
+        }
+
+        isTrue(isException);
+    }
+
 
     @Test
     public void allocateReversals() throws Exception {

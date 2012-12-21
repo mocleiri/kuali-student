@@ -186,7 +186,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         if (transactionTypes != null && !transactionTypes.isEmpty()) {
             return transactionTypes.get(0);
         }
-        String errMsg = "Cannot find TransactionType for ID = " + transactionTypeId;
+        String errMsg = "Cannot find TransactionType with ID = " + transactionTypeId;
         logger.error(errMsg);
         throw new InvalidTransactionTypeException(errMsg);
     }
@@ -314,6 +314,40 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     /**
+     * Assigns the general ledger type to the transaction specified by IDs.
+     *
+     * @param transactionId Transaction ID
+     * @param glTypeId      GL Type ID
+     */
+    public void setGeneralLedgerType(Long transactionId, Long glTypeId) {
+
+        Transaction transaction = getTransaction(transactionId);
+        if (transaction == null) {
+            String errMsg = "Transaction does not exist for the given ID = " + transactionId;
+            logger.error(errMsg);
+            throw new TransactionNotFoundException(errMsg);
+        }
+
+        Boolean isGlEntryGenerated = transaction.isGlEntryGenerated();
+        if (isGlEntryGenerated != null && isGlEntryGenerated) {
+            String errMsg = "GL entry has already been generated for Transaction with ID = " + transactionId;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        GeneralLedgerType generalLedgerType = glService.getGeneralLedgerType(glTypeId);
+        if (generalLedgerType == null) {
+            String errMsg = "General Ledger Type does not exist for the given ID = " + glTypeId;
+            logger.error(errMsg);
+            throw new GeneralLedgerTypeNotFoundException(errMsg);
+        }
+
+        transaction.setGeneralLedgerType(generalLedgerType);
+
+    }
+
+
+    /**
      * Creates a new transaction based on the given parameters
      *
      * @param id             Transaction type ID
@@ -329,11 +363,11 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                                             Date effectiveDate, Date expirationDate,
                                             BigDecimal amount, boolean overrideBlocks) {
 
-        TransactionType transactionType = em.find(TransactionType.class, id);
+        TransactionType transactionType = getTransactionType(id);
         if (transactionType == null) {
             String errMsg = "Transaction type does not exist for the given ID = " + id;
             logger.error(errMsg);
-            throw new TransactionNotFoundException(errMsg);
+            throw new TransactionTypeNotFoundException(errMsg);
         }
 
         Account account = em.find(Account.class, userId);
@@ -1246,7 +1280,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         transaction.setGlEntryGenerated(true);
 
-        persistTransaction(transaction);
+        //persistTransaction(transaction);
 
         // If GL mode is Individual then we prepare the GL transmission
         GeneralLedgerMode glMode = glService.getDefaultGeneralLedgerMode();

@@ -145,6 +145,13 @@ public interface TransactionService {
      */
     boolean transactionTypeExists(String transactionTypeId);
 
+    /**
+     * Assigns the general ledger type to the transaction specified by IDs.
+     *
+     * @param transactionId Transaction ID
+     * @param glTypeId      GL Type ID
+     */
+    void setGeneralLedgerType(Long transactionId, Long glTypeId);
 
     /**
      * Returns Transaction by ID

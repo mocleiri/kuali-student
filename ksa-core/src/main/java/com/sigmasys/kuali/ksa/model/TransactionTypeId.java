@@ -89,4 +89,8 @@ public class TransactionTypeId implements Serializable {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "TransactionTypeId{id='" + id + '\'' + ", subCode=" + subCode + '}';
+    }
 }
