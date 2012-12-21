@@ -97,23 +97,45 @@ public interface TransactionService {
      * Creates a new debit type based on the given parameters.
      *
      * @param creditTypeId Transaction Type ID
+     * @param name         Transaction Type name
      * @param startDate    Transaction type start date
      * @param priority     Priority integer value
      * @param description  Default statement text
      * @return a new DebitType instance
      */
-    DebitType createDebitType(String creditTypeId, Date startDate, int priority, String description);
+    DebitType createDebitType(String creditTypeId, String name, Date startDate, int priority, String description);
 
     /**
      * Creates a new credit type based on the given parameters.
      *
      * @param creditTypeId Transaction Type ID
+     * @param name         Transaction Type name
      * @param startDate    Transaction type start date
      * @param priority     Priority integer value
      * @param description  Default statement text
      * @return a new CreditType instance
      */
-    CreditType createCreditType(String creditTypeId, Date startDate, int priority, String description);
+    CreditType createCreditType(String creditTypeId, String name, Date startDate, int priority, String description);
+
+    /**
+     * Creates a new debit sub-type based on the given parameters.
+     * The original debit type must exist prior to its sub-type creation.
+     *
+     * @param debitTypeId ID of the existing Debit Type
+     * @param startDate   Debit Type start date
+     * @return a new DebitType instance
+     */
+    DebitType createDebitSubType(String debitTypeId, Date startDate);
+
+    /**
+     * Creates a new credit sub-type based on the given parameters.
+     * The original credit type must exist prior to its sub-type creation.
+     *
+     * @param creditTypeId ID of the existing Credit Type
+     * @param startDate    Credit Type start date
+     * @return a new CreditType instance
+     */
+    CreditType createCreditSubType(String creditTypeId, Date startDate);
 
     /**
      * Checks if the transaction type exists.

@@ -195,55 +195,109 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      * Creates a new debit type based on the given parameters.
      *
      * @param debitTypeId Transaction Type ID
+     * @param name        Transaction Type name
      * @param startDate   Transaction type start date
      * @param priority    Priority integer value
      * @param description Default statement text
      * @return a new DebitType instance
      */
     @Override
-    @WebMethod(exclude = true)
-    public DebitType createDebitType(String debitTypeId, Date startDate, int priority, String description) {
-        return createTransactionType(debitTypeId, startDate, priority, description, TransactionType.DEBIT_TYPE);
+    public DebitType createDebitType(String debitTypeId, String name, Date startDate, int priority, String description) {
+        return createTransactionType(debitTypeId, 0, name, startDate, priority, description, DebitType.class, true);
     }
 
     /**
      * Creates a new credit type based on the given parameters.
      *
      * @param creditTypeId Transaction Type ID
+     * @param name         Transaction Type name
      * @param startDate    Transaction type start date
      * @param priority     Priority integer value
      * @param description  Default statement text
      * @return a new CreditType instance
      */
     @Override
-    @WebMethod(exclude = true)
-    public CreditType createCreditType(String creditTypeId, Date startDate, int priority, String description) {
-        return createTransactionType(creditTypeId, startDate, priority, description, TransactionType.CREDIT_TYPE);
+    public CreditType createCreditType(String creditTypeId, String name, Date startDate, int priority, String description) {
+        return createTransactionType(creditTypeId, 0, name, startDate, priority, description, CreditType.class, true);
     }
 
-    private <T extends TransactionType> T createTransactionType(String transactionTypeId, Date startDate, int priority,
-                                                                String description, String typeValue) {
+    /**
+     * Creates a new debit sub-type based on the given parameters.
+     * The original debit type must exist prior to its sub-type creation.
+     *
+     * @param debitTypeId ID of the existing Debit Type
+     * @param startDate   Debit Type start date
+     * @return a new DebitType instance
+     */
+    @Override
+    public DebitType createDebitSubType(String debitTypeId, Date startDate) {
+        return createTransactionType(debitTypeId, startDate, DebitType.class);
+    }
 
-        if (transactionTypeExists(transactionTypeId)) {
+    /**
+     * Creates a new credit sub-type based on the given parameters.
+     * The original credit type must exist prior to its sub-type creation.
+     *
+     * @param creditTypeId ID of the existing Credit Type
+     * @param startDate    Credit Type start date
+     * @return a new CreditType instance
+     */
+    @Override
+    public CreditType createCreditSubType(String creditTypeId, Date startDate) {
+        return createTransactionType(creditTypeId, startDate, CreditType.class);
+    }
+
+    private synchronized <T extends TransactionType> T createTransactionType(String transactionTypeId, Date startDate,
+                                                                             Class<T> entityType) {
+
+        T transactionType = getActiveTransactionType(transactionTypeId, entityType);
+        if (transactionType == null) {
+            String errMsg = "Transaction type with ID = " + transactionTypeId + " does not exist";
+            logger.error(errMsg);
+            throw new InvalidTransactionTypeException(errMsg);
+        }
+
+        int nextSubCode = transactionType.getId().getSubCode() + 1;
+
+        return createTransactionType(transactionTypeId, nextSubCode, transactionType.getName(), startDate,
+                transactionType.getPriority(), transactionType.getDescription(), entityType, false);
+
+    }
+
+    private <T extends TransactionType> T createTransactionType(String transactionTypeId, int subCode, String name,
+                                                                Date startDate, int priority, String description,
+                                                                Class<T> entityType, boolean createNewType) {
+
+        if (subCode >= 0 && createNewType) {
             String errMsg = "Transaction type with ID = " + transactionTypeId + " already exists";
             logger.error(errMsg);
             throw new InvalidTransactionTypeException(errMsg);
         }
 
-        TransactionType transactionType = (TransactionType.CREDIT_TYPE.equals(typeValue)) ?
-                new CreditType() : new DebitType();
+        T transactionType = (T) (CreditType.class.equals(entityType) ? new CreditType() : new DebitType());
 
-        TransactionTypeId typeId = new TransactionTypeId(transactionTypeId, 0);
+        TransactionTypeId typeId = new TransactionTypeId(transactionTypeId, subCode);
 
         transactionType.setId(typeId);
-        transactionType.setCreatorId(userSessionManager.getUserId(RequestUtils.getThreadRequest()));
-        transactionType.setLastUpdate(new Date());
+        transactionType.setCode(transactionTypeId);
+        transactionType.setName(name);
         transactionType.setStartDate(startDate);
         transactionType.setPriority(priority);
         transactionType.setDescription(description);
 
-        return (T) transactionType;
+        persistTransactionType(transactionType);
+
+        return transactionType;
     }
+
+    private <T extends TransactionType> T getActiveTransactionType(String transactionTypeId, Class<T> entityType) {
+        Query query = em.createQuery("select t from " + entityType.getName() + " t where t.endDate is null and t.id.id = :id");
+        query.setParameter("id", transactionTypeId);
+        query.setMaxResults(1);
+        List<T> results = query.getResultList();
+        return CollectionUtils.isNotEmpty(results) ? results.get(0) : null;
+    }
+
 
     /**
      * Checks if the transaction type exists.
@@ -258,7 +312,6 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         query.setMaxResults(1);
         return CollectionUtils.isNotEmpty(query.getResultList());
     }
-
 
     /**
      * Creates a new transaction based on the given parameters
