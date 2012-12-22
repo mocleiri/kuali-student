@@ -63,8 +63,6 @@ class ActivityOfferingCluster
   def add_unassigned_aos(ao_list=[])
     @to_assign_ao_list = ao_list unless ao_list == []
 
-    puts "@to_assign_ao_list: #{@to_assign_ao_list}"
-
     on ManageRegistrationGroups do |page|
       @to_assign_ao_list.each do |ao_code|
         page.select_unassigned_ao_row(ao_code)
@@ -112,17 +110,30 @@ class ActivityOfferingCluster
     end
   end
 
+  def move_ao_to_another_cluster(ao_code, target_cluster)
+    on ManageRegistrationGroups do |page|
+      row = page.get_cluster_ao_row(@private_name,ao_code)
+      row.cells[0].checkbox.set
+      page.select_cluster_for_ao_move(@private_name,target_cluster.private_name)
+      page.move_ao_from_cluster_submit(@private_name)
+      assigned_ao_list.delete!(ao_code)
+      target_cluster.assigned_ao_list << ao_code
+    end
+  end
+
+  def remove_ao(ao_code)
+    on ManageRegistrationGroups do |page|
+      row = page.get_cluster_ao_row(@private_name,ao_code)
+      row.link(text: "Remove").click
+      loading.wait_while_present
+      assigned_ao_list.delete!(ao_code)
+    end
+  end
+
+  def generate_all_reg_groups
+    on ManageRegistrationGroups do |page|
+      page.generate_all_reg_groups
+    end
+  end
+
 end
-
-
-=begin
-puts page.ao_table.rows.count
-puts page.cluster_list_row_name_text("test1pri")
-page.ao_cluster_select.select("test1")
-page.cluster_list_row_generate_reg_groups("test1")
-puts page.target_ao_row("A").cells[1].text
-puts page.target_ao_row("A").cells[2].text
-page.select_ao_row("A")
-page.ao_cluster_select.select("test1pub")
-page.ao_cluster_assign_button
-=end

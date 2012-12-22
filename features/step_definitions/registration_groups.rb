@@ -1,10 +1,15 @@
-Given /^I manage registration groups for a course offering$/ do
+Given /^I manage registration groups for (?:a|the) course offering$/ do
   @course_offering = make CourseOffering, :course=>"ENGL105"
   @course_offering.manage
   @course_offering.manage_registration_groups
 end
 
-When /^I create an activity offering cluster$/ do
+Given /^I manage registration groups for the existing course offering$/ do
+  @course_offering.manage
+  @course_offering.manage_registration_groups(false)
+end
+
+When /^I create a(?:n| new) activity offering cluster$/ do
   @ao_cluster = make ActivityOfferingCluster
   @ao_cluster.create_cluster
   @course_offering.add_ao_cluster(@ao_cluster)
@@ -17,9 +22,7 @@ end
 Then /^the activity offering is shown as part of the cluster$/ do
   #validate all ao_clusters
   @course_offering.activity_offering_cluster_list.each do |cluster|
-    puts "cluster: #{cluster}"
     cluster.assigned_ao_list.each do |ao_code|
-      puts "ao_code: #{ao_code}"
       on ManageRegistrationGroups do |page|
         puts "row name: #{page.get_cluster_ao_row(cluster.private_name, ao_code)}"
       end
@@ -28,7 +31,9 @@ Then /^the activity offering is shown as part of the cluster$/ do
 end
 
 Then /^the remaining activity offerings are shown as unassigned$/ do
-  puts @course_offering.expected_unassigned_ao_list        #TODO: add loop/assertion here
+  on ManageRegistrationGroups do |page|
+    @course_offering.expected_unassigned_ao_list.sort.should ==  page.unassigned_ao_list.sort
+  end
 end
 
 When /^I generate registration groups with no activity offering cluster$/ do
@@ -79,7 +84,6 @@ end
 Then /^only one activity offering cluster is created$/ do
   #TODO: validation based on length?
   on ManageRegistrationGroups do |page|
-    puts "length: #{page.cluster_div_list.length}"
     page.cluster_div_list.each do |div|
       puts div.span().text()
     end
@@ -122,11 +126,11 @@ end
 
 Then /^a cluster warning message appears stating "(.*?)"$/ do |errMsg|
   on ManageRegistrationGroups do |page|
-    page.get_cluster_first_warning_msg(@ao_cluster.private_name).should match /.*#{Regexp.escape(errMsg)}.*/
+    page.get_cluster_warning_msgs(@ao_cluster.private_name).should match /.*#{Regexp.escape(errMsg)}.*/
   end
 end
 
-Then /^no registration groups are generated$/ do
+Then /^registration groups are not generated$/ do
   on ManageRegistrationGroups do |page|
     page.get_cluster_status_msg(@ao_cluster.private_name).strip.should == "No Registration Groups Generated"
   end
@@ -161,7 +165,7 @@ When /^I assign two activity offerings of different types and different max enro
 end
 
 
-Then /^a registration group is generated$/ do
+Then /registration groups? (?:are|is) generated$/ do
   on ManageRegistrationGroups do |page|
     page.get_cluster_status_msg(@ao_cluster.private_name).strip.should == "All Registration Groups Generated"
   end
@@ -179,132 +183,210 @@ Then /^the registration group is generated$/ do
 end
 
 When /^I create (\d+) activity offering clusters$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+  @ao_cluster = make ActivityOfferingCluster
+  @ao_cluster.create_cluster
+  @course_offering.add_ao_cluster(@ao_cluster)
+
+  @ao_cluster2 = make ActivityOfferingCluster
+  @ao_cluster2.create_cluster
+  @course_offering.add_ao_cluster(@ao_cluster2)
 end
 
-When /^I assign (\d+) activity offerings to each cluster$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+When /^I assign two activity offerings to each cluster$/ do
+  @ao_cluster.add_unassigned_aos(["A","AA"])
+  @ao_cluster2.add_unassigned_aos(["B","BB"])
 end
 
 When /^I generate all registration groups$/ do
-  pending # express the regexp above with the code you wish you had
+  @ao_cluster.generate_all_reg_groups
 end
 
 Given /^I manage registration groups for a course offering with multiple activity types where there are activity offering scheduling conflicts$/ do
-  pending # express the regexp above with the code you wish you had
+  @course_offering = make CourseOffering, :course=>"CHEM317"
+  @course_offering.manage
+  @course_offering.manage_registration_groups
 end
 
 When /^I assign two activity offerings to each cluster with scheduling conflicts$/ do
-  pending # express the regexp above with the code you wish you had
+  @ao_cluster.add_unassigned_aos(["B","AA"])
+  @ao_cluster2.add_unassigned_aos(["A","BB"])
 end
 
 Then /^registration groups with time conflicts are marked as invalid$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-
-Then /^registration group with time conflicts is marked as invalid$/ do
-  pending # express the regexp above with the code you wish you had
+  on ManageRegistrationGroups do |page|
+    page.view_cluster_reg_groups(@ao_cluster.private_name)
+  end
+  on ViewRegistrationGroups do |page|
+    page.invalid_reg_groups?.should == true
+  end
 end
 
 Given /^I have generated a registration group for a course offering with lecture and quiz activity types leaving some activity offerings unassigned$/ do
-  pending # express the regexp above with the code you wish you had
+  @course_offering = make CourseOffering, :course=>"CHEM221"
+  @course_offering.manage
+  @course_offering.manage_registration_groups
+  @ao_cluster = make ActivityOfferingCluster
+  @ao_cluster.create_cluster
+  @course_offering.add_ao_cluster(@ao_cluster)
+  @ao_cluster.add_unassigned_aos(["A","AA"])
+  @ao_cluster.generate_reg_groups
 end
-
 
 When /^I assign a quiz activity offering to the existing activity offering cluster$/ do
-  pending # express the regexp above with the code you wish you had
+  @ao_cluster.add_unassigned_aos(["AB"])
 end
 
-When /^I confirm a warning message appears stating "(.*?)"$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-When /^I generate the registration group for that cluster$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-Then /^additional registration groups are generated for the new quiz \#reg group ids don't change$/ do
-  pending # express the regexp above with the code you wish you had
+Then /^additional registration groups are generated for the new quiz$/ do
+  on ManageRegistrationGroups do |page|
+    page.view_cluster_reg_groups(@ao_cluster.private_name)
+  end
+  on ViewRegistrationGroups do |page|
+    page.reg_group_list.length.should == 2
+    page.close
+  end
+  #TODO - reg group ids don't change
 end
 
 Then /^the quiz is not listed as an unassigned activity offering$/ do
-  pending # express the regexp above with the code you wish you had
+  on ManageRegistrationGroups do |page|
+    @course_offering.expected_unassigned_ao_list.sort.should ==  page.unassigned_ao_list.sort
+  end
 end
 
 Given /^I have created the default registration group for a course offering$/ do
-  pending # express the regexp above with the code you wish you had
+  @course_offering = make CourseOffering, :course=>"CHEM347"
+  new_course = @course_offering.create_co_copy
+  @course_offering = make CourseOffering, :course=>new_course
+  @course_offering.manage
+  @course_offering.manage_registration_groups
+
+  @ao_cluster = make ActivityOfferingCluster,  :is_constrained=>false
+  @ao_cluster.create_cluster
+  @course_offering.add_ao_cluster(@ao_cluster)
+  @ao_cluster.generate_unconstrained_reg_groups
+  @ao_cluster.assigned_ao_list = @course_offering.ao_list #TODO - should ao_cluster have ref to parent?
+
+  @course_offering.manage
 end
 
-Given /^I add (\d+) activity offerings to the course offering$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Given /^I add two activity offerings to the course offering$/ do
+  @activity_offering = make ActivityOffering
+  @activity_offering.create :requested_delivery_logistics_list => {},
+                            :personnel_list => [],
+                            :seat_pool_list => {},
+                            :format => "Lecture/Lab"
+  @activity_offering.save
+
+  @course_offering.manage
+  @activity_offering1 = make ActivityOffering
+  @activity_offering1.create :requested_delivery_logistics_list => {},
+                            :personnel_list => [],
+                            :seat_pool_list => {},
+                            :format => "Lecture/Lab"
+  @activity_offering1.save
+
 end
 
-When /^I manage registration groups for the course offering$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-When /^I confirm that the (\d+) activity offerings are listed as unassigned$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+When /^I confirm that the activity offerings are listed as unassigned$/ do
+  on ManageRegistrationGroups do |page|
+    @course_offering.expected_unassigned_ao_list.sort.should ==  page.unassigned_ao_list.sort
+  end
 end
 
 When /^I assign the new activity offerings to the default activity offering cluster$/ do
-  pending # express the regexp above with the code you wish you had
+  @ao_cluster.add_unassigned_aos( %w{@activity_offering.code @activity_offering2.code})
 end
 
-Then /^additional registration groups are generated for the (\d+) new activity offerings$/ do
-  pending # express the regexp above with the code you wish you had
+Then /^additional registration groups are generated for the new activity offerings$/ do
+  on ManageRegistrationGroups do |page|
+    page.view_cluster_reg_groups(@ao_cluster.private_name)
+  end
+  on ViewRegistrationGroups do |page|
+    page.reg_group_list.length.should == 3
+    page.close
+  end
 end
 
-Then /^the (\d+) new activity offerings are not listed as an unassigned activity offerings$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then /^the new activity offerings are not listed as an unassigned activity offerings$/ do
+  on ManageRegistrationGroups do |page|
+    @course_offering.expected_unassigned_ao_list.sort.should ==  page.unassigned_ao_list.sort
+  end
 end
 
 Then /^the registration group is updated$/ do
-  pending # express the regexp above with the code you wish you had
+  #TODO - reg groups checking
 end
 
-Given /^I have generated (\d+) registration groups for a course offering with lecture and quiz activity types$/ do |arg1|
-  pending # express the regexp above with the code you wish you had
+Given /^I have generated two registration groups for a course offering with lecture and quiz activity types$/ do
+  @course_offering = make CourseOffering, :course=>"CHEM317"
+  @course_offering.manage
+  @course_offering.manage_registration_groups
+  @ao_cluster = make ActivityOfferingCluster
+  @ao_cluster.create_cluster
+  @course_offering.add_ao_cluster(@ao_cluster)
+  @ao_cluster.add_unassigned_aos(["A","AA"])
+  @ao_cluster.generate_reg_groups
+  @ao_cluster2 = make ActivityOfferingCluster
+  @ao_cluster2.create_cluster
+  @course_offering.add_ao_cluster(@ao_cluster2)
+  @ao_cluster2.add_unassigned_aos(["B","BB","AB"])
+  @ao_cluster2.generate_reg_groups
 end
 
 When /^I move a quiz activity offering from the first activity offering cluster to the second activity offering cluster$/ do
-  pending # express the regexp above with the code you wish you had
+  @ao_cluster2.move_ao_to_another_cluster("AB",@ao_cluster)
 end
 
-Then /^the registration groups sets are updated$/ do
-  pending # express the regexp above with the code you wish you had
+Then /^the registration groups? sets (?:is|are) updated$/ do
+  on ManageRegistrationGroups do |page|
+    @course_offering.activity_offering_cluster_list.each do |cluster|
+      page.get_cluster_status_msg(cluster.private_name).strip.should == "All Registration Groups Generated"
+    end
+  end
+  #TODO: implement reg groups validation
 end
 
-Given /^I have created the default cluster and related registration groups for a course offering with lecture and quiz activity types$/ do
-  pending # express the regexp above with the code you wish you had
+Given /^I have created the default cluster and related registration groups for a course offering with lecture and lab activity types$/ do
+  @course_offering = make CourseOffering, :course=>"CHEM317"
+  @course_offering.manage
+  @course_offering.manage_registration_groups
+  @ao_cluster = make ActivityOfferingCluster,  :is_constrained=>false
+  @ao_cluster.create_cluster
+  @course_offering.add_ao_cluster(@ao_cluster)
+  @ao_cluster.generate_unconstrained_reg_groups
+  @ao_cluster.assigned_ao_list = @course_offering.ao_list
 end
 
-When /^I create a new activity offering cluster$/ do
-  pending # express the regexp above with the code you wish you had
-end
-
-When /^I move a quiz activity offering from the default activity offering cluster to the new activity offering cluster$/ do
-  pending # express the regexp above with the code you wish you had
+When /^I move a lab activity offering from the default activity offering cluster to the new activity offering cluster$/ do
+  @course_offering.activity_offering_cluster_list[0].move_ao_to_another_cluster("AA",@course_offering.activity_offering_cluster_list[1])
 end
 
 When /^I move a lecture activity offering from the default activity offering cluster to the new activity offering cluster$/ do
-  pending # express the regexp above with the code you wish you had
+  @course_offering.activity_offering_cluster_list[0].move_ao_to_another_cluster("A",@course_offering.activity_offering_cluster_list[1])
 end
 
 Given /^I have generated a registration group for a course offering with lecture and quiz activity types$/ do
-  pending # express the regexp above with the code you wish you had
+  @course_offering = make CourseOffering, :course=>"CHEM317"
+  @course_offering.manage
+  @course_offering.manage_registration_groups
+  @ao_cluster = make ActivityOfferingCluster
+  @ao_cluster.create_cluster
+  @course_offering.add_ao_cluster(@ao_cluster)
+  @ao_cluster.add_unassigned_aos(@course_offering.ao_list)
+  @ao_cluster.generate_unconstrained_reg_groups
+  @ao_cluster.assigned_ao_list = @course_offering.ao_list
+
 end
 
-When /^I remove a quiz activity offering to the existing activity offering cluster$/ do
-  pending # express the regexp above with the code you wish you had
+When /^I remove a lab activity offering to the existing activity offering cluster$/ do
+  @ao_cluster.remove_ao("AA")
 end
 
 Then /^the registration group set is updated$/ do
   pending # express the regexp above with the code you wish you had
 end
 
-Then /^the quiz is now listed as an unassigned activity offering$/ do
+Then /^the lab is now listed as an unassigned activity offering$/ do
   pending # express the regexp above with the code you wish you had
 end
 
@@ -424,3 +506,8 @@ Then /^registration groups are generated for each possible combination of activi
   pending # express the regexp above with the code you wish you had
 end
 
+Then /^a cluster status message appears stating "([^"]*)"$/ do |status_msg|
+  on ManageRegistrationGroups do |page|
+    page.get_cluster_status_msg(@ao_cluster.private_name).strip.should  match /.*#{Regexp.escape(status_msg)}.*/
+  end
+end

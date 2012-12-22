@@ -45,9 +45,7 @@ class CourseOffering
     end
     #init
     if cleanup
-      on ManageRegistrationGroups do |page|
-        page.delete_all_clusters
-      end
+      cleanup_all_ao_clusters
     end
 
   end
@@ -65,18 +63,18 @@ class CourseOffering
     @activity_offering_cluster_list << ao_cluster
   end
 
-  def add_aos_to_clusters
-    @activity_offering_cluster_list.each do |cluster|
-      cluster.add_unassigned_aos
-    end
-  end
+#  def add_aos_to_clusters
+#    @activity_offering_cluster_list.each do |cluster|
+#      cluster.add_unassigned_aos
+#    end
+#  end                                                                                                                                                                                            c
 
   def expected_unassigned_ao_list
     expected_unassigned = @ao_list
     @activity_offering_cluster_list.each do |cluster|
       expected_unassigned = expected_unassigned - cluster.assigned_ao_list
     end
-    expected_unassigned.delete("")
+    expected_unassigned.delete_if { |id| id.strip == "" }
   end
 
   def create_co_copy
@@ -101,5 +99,36 @@ class CourseOffering
     end
     (post_copy_co_list - pre_copy_co_list).first
   end
+
+  def cleanup_all_ao_clusters
+    existing_cluster_list = []
+    on ManageRegistrationGroups do |page|
+      page.cluster_div_list.each do |cluster_div|
+        puts "cluster_div.span().text(): #{cluster_div.span().text()}"
+        existing_cluster_list << cluster_div.span().text()
+      end
+    end
+
+
+    existing_cluster_list.each do |cluster|
+      on ManageRegistrationGroups do |page|
+        while true
+          begin
+            sleep 1
+            wait_until(10) {page.cluster_list_div.exists? }
+            break
+          rescue Watir::Wait::TimeoutError #in case generation fails
+            break
+          rescue Selenium::WebDriver::Error::StaleElementReferenceError
+            puts "rescued - generate_unconstrained_reg_groups"
+          end
+        end
+        page.remove_cluster(cluster)
+        page.confirm_delete_cluster
+      end
+    end
+  end
+
+
 
 end

@@ -11,7 +11,7 @@ class ManageCourseOfferings < BasePage
   element(:input_code) { |b| b.frm.text_field(name: "inputCode") }
 
   element(:manage_offering_links_div) { |b| b.frm.div(id: "KS-CourseOfferingManagement-CourseOfferingLinks")}
-  action(:manage_registration_groups) { |b| b.manage_offering_links_div.link(text: "Manage Registration Groups").click; b.loading.wait_while_present } # Persistent ID needed!
+  action(:manage_registration_groups) { |b| b.manage_offering_links_div.link(text: "Manage Registration Groups").click; b.loading.wait_while_present }
 
   action(:show) { |b| b.frm.button(text: "Show").click; sleep 2; b.loading.wait_while_present } # Persistent ID needed!
 
@@ -63,12 +63,15 @@ class ManageCourseOfferings < BasePage
   end
 
   def delete(code)
+    retVal = false
     if target_row(code).link(text: "Delete").exists?
       target_row(code).link(text: "Delete").click
       loading.wait_while_present
+      retVal = true
     else
-      raise "delete not enabled for activity offering code: #{code}"
+      puts "delete not enabled for activity offering code: #{code}"
     end
+    retVal
   end
 
   def codes_list

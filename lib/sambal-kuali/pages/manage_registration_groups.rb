@@ -5,7 +5,7 @@ class ManageRegistrationGroups < BasePage
 
   expected_element :subject_code
 
-  element(:subject_code) { |b| b.frm.div(id: "manageRegistrationGroupsView").h3.span() } # Persistent ID needed!
+  element(:subject_code) { |b| b.frm.div(id: "manageRegistrationGroupsView").h3.span() }
   element(:format_select) { |b| b.frm.div(data_label: "Select Format").select() }
 
   element(:page_validation_error_list) { |b| b.frm.ul(id: "pageValidationList") }
@@ -66,20 +66,15 @@ class ManageRegistrationGroups < BasePage
   action(:cancel_delete_cluster){ |b|b.deleteClusterDialog_div.checkbox(index: 1).click; b.loading.wait_while_present}
   #end create cluster dialog
 
+
+  action(:generate_all_reg_groups){ |b|b.frm.button(id: "generate_all_button").click; b.loading.wait_while_present}
+
   def cluster_div_list
     div_list = []
     if cluster_list_div.exists?
       div_list = cluster_list_div.divs(class: "uif-group uif-boxGroup uif-horizontalBoxGroup uif-collectionItem uif-boxCollectionItem")
     end
     div_list
-  end
-
-  def delete_all_clusters
-    cluster_div_list.to_a.reverse.each do |div|
-      div.link(text: "Delete").click
-      loading.wait_while_present
-      confirm_delete_cluster
-    end
   end
 
   def cluster_list_item_div(private_name)
@@ -101,8 +96,14 @@ class ManageRegistrationGroups < BasePage
     cluster_list_item_div(private_name).link(text: "Rename").click
   end
 
+  def view_cluster_reg_groups(private_name)
+    cluster_list_item_div(private_name).link(text: "View Registration Groups").click
+    loading.wait_while_present
+  end
+
   def remove_cluster(private_name)
     cluster_list_item_div(private_name).link(text: "Delete").click
+    loading.wait_while_present
   end
 
   def get_cluster_status_msg(private_name)
@@ -113,35 +114,38 @@ class ManageRegistrationGroups < BasePage
     cluster_list_item_div(private_name).li(class: "uif-errorMessageItem").text()
   end
 
+  def get_cluster_error_msgs(private_name)
+    msg_list = []
+    cluster_list_item_div(private_name).ul(class: "uif-validationMessagesList").lis(class:  "uif-errorMessageItem").each do |li|
+      msg_list <<  li.text()
+    end
+    msg_list.to_s
+  end
+
   def get_cluster_first_warning_msg(private_name)
     cluster_list_item_div(private_name).li(class: "uif-warningMessageItem").text()
+  end
+
+  def get_cluster_warning_msgs(private_name)
+    msg_list = []
+    cluster_list_item_div(private_name).uls(class: "uif-validationMessagesList").each do |ul|
+      ul.lis(class:  "uif-warningMessageItem").each do |li|
+        msg_list <<  li.text()
+      end
+    end
+    msg_list.to_s
   end
 
   def get_cluster_ao_row(private_name, ao_code)
     cluster_list_item_div(private_name).table.row(text: /\b#{Regexp.escape(ao_code)}\b/)
   end
 
-  #test script shell
-  #@course_offering = make CourseOffering, :course=>"ENGL103"
-  #@course_offering.manage
-  #on ManageCourseOfferings do |page|
-  #  page.manage_registration_groups
-  #end
-  #on ManageRegistrationGroups do |page|
-  #  puts page.subject_code.text()
-  #  #page.private_name.set "test1pri"
-  #  #page.published_name.set "test1pub"
-  #  #
-  #  #puts page.ao_table.rows.count
-  #  puts page.cluster_list_row_name_text("test1pri")
-  #  # page.ao_cluster_select.select("test1")
-  #  #page.cluster_list_row_generate_reg_groups("test1")
-  #  puts page.target_ao_row("A").cells[1].text
-  #  puts page.target_ao_row("A").cells[2].text
-  #  page.select_ao_row("A")
-  #  page.ao_cluster_select.select("test1pub")
-  #  page.ao_cluster_assign_button
-  #end
+  def select_cluster_for_ao_move(source_private_name,target_private_name)
+    cluster_list_item_div(source_private_name).select().select(target_private_name)
+  end
 
-
+  def move_ao_from_cluster_submit(private_name)
+    cluster_list_item_div(private_name).button(id: /move_ao_button_line/).click
+    loading.wait_while_present
+  end
 end
