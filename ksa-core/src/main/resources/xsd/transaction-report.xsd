@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:ksa="http://www.kuali.org/ksa/type"
            elementFormDefault="qualified"
            attributeFormDefault="unqualified">
 
-    <xs:import namespace="http://www.kuali.org/ksa/type" schemaLocation="ksa-types.xsd"/>
+    <xs:include schemaLocation="ksa-types.xsd"/>
 
     <xs:element name="irs-1098-t">
         <xs:complexType>
@@ -24,7 +23,7 @@
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="name" type="xs:string"/>
-                            <xs:element ref="ksa:postal-address"/>
+                            <xs:element ref="postal-address"/>
                             <xs:element name="telephone-number" type="xs:string"/>
                             <xs:element name="federal-identification-number"/>
                         </xs:sequence>
@@ -34,7 +33,7 @@
                     <xs:complexType>
                         <xs:sequence>
                             <xs:element name="name" type="xs:string"/>
-                            <xs:element ref="ksa:postal-address"/>
+                            <xs:element ref="postal-address"/>
                             <xs:element name="social-security-number"/>
                             <xs:element name="account-number"/>
                             <xs:element name="half-time" type="xs:boolean"/>
@@ -108,7 +107,7 @@
                             <xs:element name="failed">
                                 <xs:complexType>
                                     <xs:sequence minOccurs="0" maxOccurs="unbounded">
-                                        <xs:element ref="ksa:ksa-transaction"/>
+                                        <xs:element ref="ksa-transaction"/>
                                         <xs:element name="reason" type="xs:string"/>
                                     </xs:sequence>
                                 </xs:complexType>
@@ -116,7 +115,7 @@
                             <xs:element name="batch-rejection" minOccurs="0">
                                 <xs:complexType>
                                     <xs:sequence maxOccurs="unbounded">
-                                        <xs:element ref="ksa:ksa-transaction"/>
+                                        <xs:element ref="ksa-transaction"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
@@ -142,7 +141,7 @@
                 <xs:element name="name">
                     <xs:complexType>
                         <xs:choice>
-                            <xs:element ref="ksa:person-name"/>
+                            <xs:element ref="person-name"/>
                             <xs:element name="company-name" type="xs:string"/>
                         </xs:choice>
                     </xs:complexType>
@@ -171,7 +170,7 @@
                 <xs:element name="transaction-detail" minOccurs="0">
                     <xs:complexType>
                         <xs:sequence maxOccurs="unbounded">
-                            <xs:element ref="ksa:list-transaction"/>
+                            <xs:element ref="list-transaction"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>

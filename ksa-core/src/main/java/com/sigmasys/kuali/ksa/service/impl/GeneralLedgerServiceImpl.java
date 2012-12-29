@@ -655,4 +655,46 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         return true;
     }
 
+    /**
+     * Retrieves all GL transactions for the given GL transaction date range and GL account ID
+     * sorted by dates in ascending order.
+     *
+     * @param startDate   GL Transaction start date
+     * @param endDate     GL Transaction end date
+     * @param glAccountId GL Account ID
+     * @return list of GlTransaction instances
+     */
+    @Override
+    public List<GlTransaction> getGlTransactions(Date startDate, Date endDate, String glAccountId) {
+
+        if (startDate == null || endDate == null) {
+            String errMsg = "Start Date and End Date cannot be null";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        if (startDate.after(endDate)) {
+            String errMsg = "Start Date cannot be greater than End Date: Start Date = " + startDate +
+                    ", End Date = " + endDate;
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        Query query = em.createQuery("select glt from GlTransaction glt " +
+                " left outer join fetch glt.recognitionPeriod rp " +
+                " left outer join fetch glt.transmission t " +
+                " where glt.date between :startDate and :endDate " +
+                (glAccountId != null ? " and glt.glAccountId = :glAccountId " : "") +
+                " order by glt.date asc");
+
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+
+        if (glAccountId != null) {
+            query.setParameter("glAccountId", glAccountId);
+        }
+
+        return query.getResultList();
+    }
+
 }

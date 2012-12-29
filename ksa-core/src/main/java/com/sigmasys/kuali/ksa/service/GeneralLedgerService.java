@@ -187,4 +187,15 @@ public interface GeneralLedgerService {
      */
     boolean isGlAccountValid(String glAccount);
 
+    /**
+     * Retrieves all GL transactions for the given GL transaction date range and GL account ID
+     * sorted by dates in ascending order.
+     *
+     * @param startDate   GL Transaction start date
+     * @param endDate     GL Transaction end date
+     * @param glAccountId GL Account ID
+     * @return list of GlTransaction instances
+     */
+    List<GlTransaction> getGlTransactions(Date startDate, Date endDate, String glAccountId);
+
 }

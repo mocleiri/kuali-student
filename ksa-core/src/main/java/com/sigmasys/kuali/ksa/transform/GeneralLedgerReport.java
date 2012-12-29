@@ -22,9 +22,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -49,6 +49,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *                 &lt;sequence>
  *                   &lt;element name="general-ledger-account" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *                   &lt;element name="date" type="{http://www.w3.org/2001/XMLSchema}date"/>
+ *                   &lt;element name="general-ledger-operation">
+ *                     &lt;simpleType>
+ *                       &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+ *                         &lt;enumeration value="credit"/>
+ *                         &lt;enumeration value="debit"/>
+ *                       &lt;/restriction>
+ *                     &lt;/simpleType>
+ *                   &lt;/element>
  *                   &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
  *                   &lt;element name="system" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *                   &lt;element name="transaction-identifier" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded"/>
@@ -69,13 +77,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "reportingPeriod",
-    "generalLedgerReportEntry"
+        "reportingPeriod",
+        "generalLedgerReportEntry"
 })
 @XmlRootElement(name = "general-ledger-report")
 public class GeneralLedgerReport {
@@ -87,11 +93,9 @@ public class GeneralLedgerReport {
 
     /**
      * Gets the value of the reportingPeriod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GeneralLedgerReport.ReportingPeriod }
-     *     
+     *
+     * @return possible object is
+     *         {@link GeneralLedgerReport.ReportingPeriod }
      */
     public GeneralLedgerReport.ReportingPeriod getReportingPeriod() {
         return reportingPeriod;
@@ -99,11 +103,9 @@ public class GeneralLedgerReport {
 
     /**
      * Sets the value of the reportingPeriod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GeneralLedgerReport.ReportingPeriod }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GeneralLedgerReport.ReportingPeriod }
      */
     public void setReportingPeriod(GeneralLedgerReport.ReportingPeriod value) {
         this.reportingPeriod = value;
@@ -111,11 +113,9 @@ public class GeneralLedgerReport {
 
     /**
      * Gets the value of the generalLedgerReportEntry property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link GeneralLedgerReport.GeneralLedgerReportEntry }
-     *     
+     *
+     * @return possible object is
+     *         {@link GeneralLedgerReport.GeneralLedgerReportEntry }
      */
     public GeneralLedgerReport.GeneralLedgerReportEntry getGeneralLedgerReportEntry() {
         return generalLedgerReportEntry;
@@ -123,11 +123,9 @@ public class GeneralLedgerReport {
 
     /**
      * Sets the value of the generalLedgerReportEntry property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link GeneralLedgerReport.GeneralLedgerReportEntry }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link GeneralLedgerReport.GeneralLedgerReportEntry }
      */
     public void setGeneralLedgerReportEntry(GeneralLedgerReport.GeneralLedgerReportEntry value) {
         this.generalLedgerReportEntry = value;
@@ -136,9 +134,9 @@ public class GeneralLedgerReport {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     * <p/>
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -146,6 +144,14 @@ public class GeneralLedgerReport {
      *       &lt;sequence>
      *         &lt;element name="general-ledger-account" type="{http://www.w3.org/2001/XMLSchema}string"/>
      *         &lt;element name="date" type="{http://www.w3.org/2001/XMLSchema}date"/>
+     *         &lt;element name="general-ledger-operation">
+     *           &lt;simpleType>
+     *             &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
+     *               &lt;enumeration value="credit"/>
+     *               &lt;enumeration value="debit"/>
+     *             &lt;/restriction>
+     *           &lt;/simpleType>
+     *         &lt;/element>
      *         &lt;element name="amount" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
      *         &lt;element name="system" type="{http://www.w3.org/2001/XMLSchema}string"/>
      *         &lt;element name="transaction-identifier" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded"/>
@@ -161,23 +167,22 @@ public class GeneralLedgerReport {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "generalLedgerAccount",
-        "date",
-        "amount",
-        "system",
-        "transactionIdentifier",
-        "transactionStatus",
-        "transmissionIdentifier",
-        "transmissionDate",
-        "transmissionTime",
-        "batch",
-        "transmissionResult",
-        "transmissionPeriod"
+            "generalLedgerAccount",
+            "date",
+            "generalLedgerOperation",
+            "amount",
+            "system",
+            "transactionIdentifier",
+            "transactionStatus",
+            "transmissionIdentifier",
+            "transmissionDate",
+            "transmissionTime",
+            "batch",
+            "transmissionResult",
+            "transmissionPeriod"
     })
     public static class GeneralLedgerReportEntry {
 
@@ -186,6 +191,8 @@ public class GeneralLedgerReport {
         @XmlElement(required = true)
         @XmlSchemaType(name = "date")
         protected XMLGregorianCalendar date;
+        @XmlElement(name = "general-ledger-operation", required = true)
+        protected String generalLedgerOperation;
         @XmlElement(required = true)
         protected BigDecimal amount;
         @XmlElement(required = true)
@@ -210,11 +217,9 @@ public class GeneralLedgerReport {
 
         /**
          * Gets the value of the generalLedgerAccount property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getGeneralLedgerAccount() {
             return generalLedgerAccount;
@@ -222,11 +227,9 @@ public class GeneralLedgerReport {
 
         /**
          * Sets the value of the generalLedgerAccount property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setGeneralLedgerAccount(String value) {
             this.generalLedgerAccount = value;
@@ -234,11 +237,9 @@ public class GeneralLedgerReport {
 
         /**
          * Gets the value of the date property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link XMLGregorianCalendar }
-         *     
+         *
+         * @return possible object is
+         *         {@link XMLGregorianCalendar }
          */
         public XMLGregorianCalendar getDate() {
             return date;
@@ -246,23 +247,39 @@ public class GeneralLedgerReport {
 
         /**
          * Sets the value of the date property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link XMLGregorianCalendar }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link XMLGregorianCalendar }
          */
         public void setDate(XMLGregorianCalendar value) {
             this.date = value;
         }
 
         /**
+         * Gets the value of the generalLedgerOperation property.
+         *
+         * @return possible object is
+         *         {@link String }
+         */
+        public String getGeneralLedgerOperation() {
+            return generalLedgerOperation;
+        }
+
+        /**
+         * Sets the value of the generalLedgerOperation property.
+         *
+         * @param value allowed object is
+         *              {@link String }
+         */
+        public void setGeneralLedgerOperation(String value) {
+            this.generalLedgerOperation = value;
+        }
+
+        /**
          * Gets the value of the amount property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getAmount() {
             return amount;
@@ -270,11 +287,9 @@ public class GeneralLedgerReport {
 
         /**
          * Sets the value of the amount property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setAmount(BigDecimal value) {
             this.amount = value;
@@ -282,11 +297,9 @@ public class GeneralLedgerReport {
 
         /**
          * Gets the value of the system property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getSystem() {
             return system;
@@ -294,11 +307,9 @@ public class GeneralLedgerReport {
 
         /**
          * Sets the value of the system property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setSystem(String value) {
             this.system = value;
@@ -306,25 +317,23 @@ public class GeneralLedgerReport {
 
         /**
          * Gets the value of the transactionIdentifier property.
-         * 
-         * <p>
+         * <p/>
+         * <p/>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the transactionIdentifier property.
-         * 
-         * <p>
+         * <p/>
+         * <p/>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getTransactionIdentifier().add(newItem);
          * </pre>
-         * 
-         * 
-         * <p>
+         * <p/>
+         * <p/>
+         * <p/>
          * Objects of the following type(s) are allowed in the list
          * {@link String }
-         * 
-         * 
          */
         public List<String> getTransactionIdentifier() {
             if (transactionIdentifier == null) {
@@ -335,11 +344,9 @@ public class GeneralLedgerReport {
 
         /**
          * Gets the value of the transactionStatus property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getTransactionStatus() {
             return transactionStatus;
@@ -347,11 +354,9 @@ public class GeneralLedgerReport {
 
         /**
          * Sets the value of the transactionStatus property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setTransactionStatus(String value) {
             this.transactionStatus = value;
@@ -359,11 +364,9 @@ public class GeneralLedgerReport {
 
         /**
          * Gets the value of the transmissionIdentifier property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getTransmissionIdentifier() {
             return transmissionIdentifier;
@@ -371,11 +374,9 @@ public class GeneralLedgerReport {
 
         /**
          * Sets the value of the transmissionIdentifier property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setTransmissionIdentifier(String value) {
             this.transmissionIdentifier = value;
@@ -383,11 +384,9 @@ public class GeneralLedgerReport {
 
         /**
          * Gets the value of the transmissionDate property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link XMLGregorianCalendar }
-         *     
+         *
+         * @return possible object is
+         *         {@link XMLGregorianCalendar }
          */
         public XMLGregorianCalendar getTransmissionDate() {
             return transmissionDate;
@@ -395,11 +394,9 @@ public class GeneralLedgerReport {
 
         /**
          * Sets the value of the transmissionDate property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link XMLGregorianCalendar }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link XMLGregorianCalendar }
          */
         public void setTransmissionDate(XMLGregorianCalendar value) {
             this.transmissionDate = value;
@@ -407,11 +404,9 @@ public class GeneralLedgerReport {
 
         /**
          * Gets the value of the transmissionTime property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link XMLGregorianCalendar }
-         *     
+         *
+         * @return possible object is
+         *         {@link XMLGregorianCalendar }
          */
         public XMLGregorianCalendar getTransmissionTime() {
             return transmissionTime;
@@ -419,11 +414,9 @@ public class GeneralLedgerReport {
 
         /**
          * Sets the value of the transmissionTime property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link XMLGregorianCalendar }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link XMLGregorianCalendar }
          */
         public void setTransmissionTime(XMLGregorianCalendar value) {
             this.transmissionTime = value;
@@ -431,11 +424,9 @@ public class GeneralLedgerReport {
 
         /**
          * Gets the value of the batch property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getBatch() {
             return batch;
@@ -443,11 +434,9 @@ public class GeneralLedgerReport {
 
         /**
          * Sets the value of the batch property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setBatch(String value) {
             this.batch = value;
@@ -455,11 +444,9 @@ public class GeneralLedgerReport {
 
         /**
          * Gets the value of the transmissionResult property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getTransmissionResult() {
             return transmissionResult;
@@ -467,11 +454,9 @@ public class GeneralLedgerReport {
 
         /**
          * Sets the value of the transmissionResult property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setTransmissionResult(String value) {
             this.transmissionResult = value;
@@ -479,11 +464,9 @@ public class GeneralLedgerReport {
 
         /**
          * Gets the value of the transmissionPeriod property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getTransmissionPeriod() {
             return transmissionPeriod;
@@ -491,11 +474,9 @@ public class GeneralLedgerReport {
 
         /**
          * Sets the value of the transmissionPeriod property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setTransmissionPeriod(String value) {
             this.transmissionPeriod = value;
@@ -506,9 +487,9 @@ public class GeneralLedgerReport {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     * <p/>
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -521,13 +502,11 @@ public class GeneralLedgerReport {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "startDate",
-        "endDate"
+            "startDate",
+            "endDate"
     })
     public static class ReportingPeriod {
 
@@ -540,11 +519,9 @@ public class GeneralLedgerReport {
 
         /**
          * Gets the value of the startDate property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link XMLGregorianCalendar }
-         *     
+         *
+         * @return possible object is
+         *         {@link XMLGregorianCalendar }
          */
         public XMLGregorianCalendar getStartDate() {
             return startDate;
@@ -552,11 +529,9 @@ public class GeneralLedgerReport {
 
         /**
          * Sets the value of the startDate property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link XMLGregorianCalendar }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link XMLGregorianCalendar }
          */
         public void setStartDate(XMLGregorianCalendar value) {
             this.startDate = value;
@@ -564,11 +539,9 @@ public class GeneralLedgerReport {
 
         /**
          * Gets the value of the endDate property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link XMLGregorianCalendar }
-         *     
+         *
+         * @return possible object is
+         *         {@link XMLGregorianCalendar }
          */
         public XMLGregorianCalendar getEndDate() {
             return endDate;
@@ -576,11 +549,9 @@ public class GeneralLedgerReport {
 
         /**
          * Sets the value of the endDate property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link XMLGregorianCalendar }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link XMLGregorianCalendar }
          */
         public void setEndDate(XMLGregorianCalendar value) {
             this.endDate = value;
