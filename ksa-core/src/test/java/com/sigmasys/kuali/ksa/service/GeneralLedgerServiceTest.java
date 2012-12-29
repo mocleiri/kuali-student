@@ -30,9 +30,9 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
     @Autowired
     private GeneralLedgerService glService;
 
-    private Transaction transaction1;
-    private Transaction transaction2;
-    private Transaction transaction3;
+    protected Transaction transaction1;
+    protected Transaction transaction2;
+    protected Transaction transaction3;
 
     @Before
     public void setUpWithinTransaction() {
@@ -44,8 +44,8 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
         transaction3 = transactionService.createTransaction("chip", userId, new Date(), new BigDecimal(77777.980));
     }
 
-    private GlTransaction createGlTransaction(Transaction transaction, String userId) {
-        return glService.createGlTransaction(transaction.getId(), userId, new BigDecimal(10e4), GlOperationType.DEBIT);
+    protected GlTransaction createGlTransaction(Transaction transaction, String glAccountId) {
+        return glService.createGlTransaction(transaction.getId(), glAccountId, new BigDecimal(10e4), GlOperationType.DEBIT);
     }
 
     @Test
@@ -256,6 +256,60 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
             Assert.notNull(type.getCode());
             Assert.notNull(type.getGlOperationOnCharge());
             Assert.notNull(type.getGlAccountId());
+        }
+
+    }
+
+    @Test
+    public void getGeneralLedgerTransactions() throws Exception {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
+
+        Date startDate = dateFormat.parse("01/01/1970");
+        Date endDate = dateFormat.parse("01/01/2020");
+
+        List<GlTransaction> glTransactions = glService.getGlTransactions(startDate, endDate);
+
+        Assert.notNull(glTransactions);
+        Assert.notEmpty(glTransactions);
+
+        for (GlTransaction glTransaction : glTransactions) {
+            Assert.notNull(glTransaction);
+            Assert.notNull(glTransaction.getId());
+            Assert.notNull(glTransaction.getDate());
+            Assert.notNull(glTransaction.getAmount());
+            Assert.isTrue(glTransaction.getDate().compareTo(startDate) >= 0);
+            Assert.isTrue(glTransaction.getDate().compareTo(endDate) <= 0);
+        }
+
+    }
+
+    @Test
+    public void getGeneralLedgerTransactions2() throws Exception {
+
+        GlTransaction glTransaction1 = createGlTransaction(transaction1, "01-0-13112 3456");
+        Assert.notNull(glTransaction1);
+        Assert.notNull(glTransaction1.getId());
+        Assert.notNull(glTransaction1.getStatus());
+        Assert.notNull(glTransaction1.getRecognitionPeriod());
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
+
+        Date startDate = dateFormat.parse("01/01/1970");
+        Date endDate = dateFormat.parse("01/01/2020");
+
+        List<GlTransaction> glTransactions = glService.getGlTransactions(startDate, endDate, "01-0-13112 3456");
+
+        Assert.notNull(glTransactions);
+        Assert.notEmpty(glTransactions);
+
+        for (GlTransaction glTransaction : glTransactions) {
+            Assert.notNull(glTransaction);
+            Assert.notNull(glTransaction.getId());
+            Assert.notNull(glTransaction.getDate());
+            Assert.notNull(glTransaction.getAmount());
+            Assert.isTrue(glTransaction.getDate().compareTo(startDate) >= 0);
+            Assert.isTrue(glTransaction.getDate().compareTo(endDate) <= 0);
         }
 
     }

@@ -16,9 +16,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import javax.jws.WebMethod;
 import javax.jws.WebService;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static com.sigmasys.kuali.ksa.transform.GeneralLedgerReport.*;
 
@@ -59,6 +59,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      * @param transmittedOnly indicates whether only transmitted GL transactions should be retrieved or not
      * @return The generated report in XML
      */
+    @Override
     public String generateGeneralLedgerReport(Date startDate, Date endDate, String glAccountId, boolean transmittedOnly) {
 
         List<GlTransaction> glTransactions = glService.getGlTransactions(startDate, endDate, glAccountId);
@@ -70,32 +71,51 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         if (CollectionUtils.isNotEmpty(glTransactions)) {
             for (GlTransaction glTransaction : glTransactions) {
                 if (!transmittedOnly || GlTransactionStatus.COMPLETED.equals(glTransaction.getStatus())) {
+
                     GeneralLedgerReportEntry glReportEntry = new GeneralLedgerReportEntry();
+
+                    Set<Transaction> transactions = glTransaction.getTransactions();
+                    if (CollectionUtils.isNotEmpty(transactions)) {
+                        List<String> transactionIds = new ArrayList<String>(transactions.size());
+                        for (Transaction transaction : transactions) {
+                            transactionIds.add(String.valueOf(transaction.getId()));
+                        }
+                        Collections.sort(transactionIds);
+                        glReportEntry.getTransactionIdentifier().addAll(transactionIds);
+                    }
+
                     glReportEntry.setGeneralLedgerAccount(glAccountId);
                     glReportEntry.setAmount(glTransaction.getAmount());
                     glReportEntry.setDate(CalendarUtils.toXmlGregorianCalendar(glTransaction.getDate()));
                     glReportEntry.setSystem(glTransaction.getDescription());
+
                     if (glTransaction.getStatus() != null) {
                         glReportEntry.setTransactionStatus(glTransaction.getStatus().getId());
                     }
+
                     if (glTransaction.getGlOperation() != null) {
-                        glReportEntry.setGeneralLedgerOperation(glTransaction.getGlOperation().getId());
+                        glReportEntry.setGeneralLedgerOperation(glTransaction.getGlOperation().toString().toLowerCase());
                     }
+
                     GlTransmission glTransmission = glTransaction.getTransmission();
                     if (glTransmission != null) {
+
                         glReportEntry.setTransmissionIdentifier(String.valueOf(glTransmission.getId()));
                         glReportEntry.setBatch(glTransmission.getBatchId());
                         Date transmissionDate = glTransmission.getDate();
                         glReportEntry.setTransmissionDate(CalendarUtils.toXmlGregorianCalendar(transmissionDate, true));
                         glReportEntry.setTransmissionTime(CalendarUtils.toXmlGregorianCalendar(transmissionDate));
                         GlRecognitionPeriod recognitionPeriod = glTransmission.getRecognitionPeriod();
+
                         if (recognitionPeriod != null) {
                             glReportEntry.setTransmissionPeriod(recognitionPeriod.getCode());
                         }
+
                         if (glTransmission.getStatus() != null) {
                             glReportEntry.setTransmissionResult(glTransmission.getStatus().toString());
                         }
                     }
+
                     glReport.setGeneralLedgerReportEntry(glReportEntry);
                 }
             }
@@ -118,6 +138,19 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         }
 
         return reportXml;
+    }
+
+    /**
+     * Generates a reconciliation report in XML for KSA transactions to the general ledger.
+     *
+     * @param startDate   Start date
+     * @param endDate     End date
+     * @param glAccountId GL Account ID
+     * @return The generated report in XML
+     */
+    @WebMethod(exclude = true)
+    public String generateGeneralLedgerReport(Date startDate, Date endDate, String glAccountId) {
+        return generateGeneralLedgerReport(startDate, endDate, glAccountId, false);
     }
 
 

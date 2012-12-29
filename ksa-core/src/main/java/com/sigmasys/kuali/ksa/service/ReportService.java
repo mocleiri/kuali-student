@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.service;
 import com.sigmasys.kuali.ksa.annotation.Url;
 import com.sigmasys.kuali.ksa.model.Constants;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 import java.util.Date;
 
@@ -31,6 +32,17 @@ public interface ReportService {
      * @return The generated report in XML
      */
     String generateGeneralLedgerReport(Date startDate, Date endDate, String glAccountId, boolean transmittedOnly);
+
+    /**
+     * Generates a reconciliation report in XML for KSA transactions to the general ledger.
+     *
+     * @param startDate   Start date
+     * @param endDate     End date
+     * @param glAccountId GL Account ID
+     * @return The generated report in XML
+     */
+    @WebMethod(exclude = true)
+    String generateGeneralLedgerReport(Date startDate, Date endDate, String glAccountId);
 
 
 }

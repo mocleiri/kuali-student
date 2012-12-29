@@ -14,16 +14,16 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
+import javax.annotation.PostConstruct;
 import javax.jws.WebService;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static com.sigmasys.kuali.ksa.model.Constants.*;
 
@@ -46,17 +46,23 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
     private static final String EXPORT_DD_TYPES_LOCATION = "classpath*:/xsd/export/ddTypes.xsd";
     private static final String XML_SCHEMA_LOCATION = "classpath*:/xsd/xml.xsd";
 
-    private static final XmlSchemaValidator schemaValidator = new XmlSchemaValidator(
-            XML_SCHEMA_LOCATION,
-            EXPORT_TYPES_LOCATION,
-            EXPORT_DD_TYPES_LOCATION,
-            EXPORT_SCHEMA_LOCATION);
-
     @Autowired
     private GeneralLedgerService glService;
 
     @Autowired
     private ConfigService configService;
+
+    private XmlSchemaValidator schemaValidator;
+
+
+    @PostConstruct
+    private void postConstruct() {
+        schemaValidator = new XmlSchemaValidator(
+                XML_SCHEMA_LOCATION,
+                EXPORT_TYPES_LOCATION,
+                EXPORT_DD_TYPES_LOCATION,
+                EXPORT_SCHEMA_LOCATION);
+    }
 
     /**
      * Gets all the GlTransmission objects with a result that is blank and
@@ -102,6 +108,8 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
             throw new InvalidGeneralLedgerAccountException(errMsg);
         }
 
+        glAccount = StringUtils.deleteAny(glAccount, " \n\t\r-");
+
         List<String> accountParts = new ArrayList<String>(3);
 
         accountParts.add(glAccount.substring(0, 2));
@@ -117,6 +125,10 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
     }
 
     protected String convertGlTransmissionsToXml(List<GlTransmission> glTransmissions) {
+
+        final NumberFormat moneyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
+        moneyFormat.setMinimumFractionDigits(0);
+        moneyFormat.setMaximumFractionDigits(2);
 
         // Generating the batch ID
         final BigInteger batchId = generateBatchId();
@@ -197,7 +209,7 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
             glEntryType.setTransactionDate(currentStringDate);
             // TODO Mapping to what ?????
             //glEntryType.setTransactionEntrySequenceId();
-            glEntryType.setTransactionLedgerEntryAmount(glTransmission.getAmount().toString());
+            glEntryType.setTransactionLedgerEntryAmount(moneyFormat.format(glTransmission.getAmount()));
             glEntryType.setTransactionLedgerEntryDescription(glEntryDesc);
 
             glEntryType.setUniversityFiscalAccountingPeriod(recognitionPeriodCode);

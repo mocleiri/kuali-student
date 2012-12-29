@@ -58,27 +58,27 @@ public interface GeneralLedgerService {
      * Creates a new general ledger transaction based on the given parameters
      *
      * @param transactionId ID of the corresponding transaction
-     * @param userId        General ledger account ID
+     * @param glAccountId        General ledger account ID
      * @param amount        Transaction amount
      * @param operationType GL operation type
      * @param isQueued      Set status to Q unless isQueued is passed and is false, in which case, set status to W
      * @return new GL Transaction instance
      */
     @WebMethod(exclude = true)
-    GlTransaction createGlTransaction(Long transactionId, String userId, BigDecimal amount, GlOperationType operationType,
+    GlTransaction createGlTransaction(Long transactionId, String glAccountId, BigDecimal amount, GlOperationType operationType,
                                       boolean isQueued);
 
     /**
      * Creates a new general ledger transaction based on the given parameters
      *
      * @param transactionId ID of the corresponding transaction
-     * @param userId        General ledger account ID
+     * @param glAccountId        General ledger account ID
      * @param amount        Transaction amount
      * @param operationType GL operation type
      * @return new GL Transaction instance
      */
     @WebMethod(exclude = true)
-    GlTransaction createGlTransaction(Long transactionId, String userId, BigDecimal amount, GlOperationType operationType);
+    GlTransaction createGlTransaction(Long transactionId, String glAccountId, BigDecimal amount, GlOperationType operationType);
 
 
     /**
@@ -197,5 +197,15 @@ public interface GeneralLedgerService {
      * @return list of GlTransaction instances
      */
     List<GlTransaction> getGlTransactions(Date startDate, Date endDate, String glAccountId);
+
+    /**
+     * Retrieves all GL transactions for the given GL transaction date range sorted by dates in ascending order.
+     *
+     * @param startDate GL Transaction start date
+     * @param endDate   GL Transaction end date
+     * @return list of GlTransaction instances
+     */
+    @WebMethod(exclude = true)
+    List<GlTransaction> getGlTransactions(Date startDate, Date endDate);
 
 }

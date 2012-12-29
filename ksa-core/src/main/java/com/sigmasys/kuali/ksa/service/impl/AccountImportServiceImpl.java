@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.service.impl;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.annotation.PostConstruct;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
@@ -33,71 +34,78 @@ import com.sigmasys.kuali.ksa.util.XmlSchemaValidator;
 @WebService(serviceName = AccountImportService.SERVICE_NAME, portName = AccountImportService.PORT_NAME, targetNamespace = Constants.WS_NAMESPACE)
 public class AccountImportServiceImpl implements AccountImportService {
 
-	/**
-	 * XMLSchema for the Student Profile.
-	 */
-	private static final String IMPORT_SCHEMA_LOCATION = "classpath*:/xsd/student-profile.xsd";
-	
-	/**
-	 * XML schema file.
-	 */
-	private static final String XML_SCHEMA_LOCATION = "classpath*:/xsd/xml.xsd";
-	
-	/**
-	 * Static XML schema validator.
-	 */
-	private final static XmlSchemaValidator schemaValidator =
-			new XmlSchemaValidator(XML_SCHEMA_LOCATION, IMPORT_SCHEMA_LOCATION);
-	
-	/**
-	 * The logger.
-	 */
-	private static final Log logger = LogFactory.getLog(AccountImportServiceImpl.class);
-	
+    /**
+     * XMLSchema for the Student Profile.
+     */
+    private static final String STUDENT_PROFILE_SCHEMA_LOCATION = "classpath*:/xsd/student-profile.xsd";
+
+    /**
+     * XML schema file.
+     */
+    private static final String XML_SCHEMA_LOCATION = "classpath*:/xsd/xml.xsd";
+
+    /**
+     * XML schema validator.
+     */
+    private XmlSchemaValidator schemaValidator;
+
+
+    /**
+     * The logger.
+     */
+    private static final Log logger = LogFactory.getLog(AccountImportServiceImpl.class);
+
 
     @Autowired
     private AccountService accountService;
 
     @Autowired
     private FeeManagementService feeManagementService;
-    
 
-	/**
-	 * Performs import of a student profile from the specified XML content of the profile.
-	 * Refer to the "Process Diagrams" design document for a detailed depiction of the process and logic.
-	 * This method validates the XML schema, unmarshalls the XML text into a <code>StudentProfile</code> object
-	 * and invokes the overloaded "importStudentProfile" method for import.
-	 * 
-	 * @param xml XML content of a Student profile.
-	 * @throws IllegalArgumentException If the argument is <code>null</code>.
-	 * @throws RuntimeException If any error is encountered during XML schema validation or unmarshalling. 
-	 * The original exception (if it exists) is wrapped in a <code>RuntimeException</code>.
-	 */
-	@Override
-	public void importStudentProfile(String xml) {
 
-		// Validate the input:
-		if (StringUtils.isBlank(xml)) {
-			throw new IllegalArgumentException("Student profile XML is null. Abort import.");
-		}
-		
-		// Validate against the XML schema:
-		if (!schemaValidator.validateXml(xml)) {
-			throw new RuntimeException("The student profile XML is invalid");
-		}
-		
-		try {
+
+    @PostConstruct
+    private void postConstruct() {
+        schemaValidator = new XmlSchemaValidator(XML_SCHEMA_LOCATION, STUDENT_PROFILE_SCHEMA_LOCATION);
+    }
+
+
+    /**
+     * Performs import of a student profile from the specified XML content of the profile.
+     * Refer to the "Process Diagrams" design document for a detailed depiction of the process and logic.
+     * This method validates the XML schema, unmarshalls the XML text into a <code>StudentProfile</code> object
+     * and invokes the overloaded "importStudentProfile" method for import.
+     *
+     * @param xml XML content of a Student profile.
+     * @throws IllegalArgumentException If the argument is <code>null</code>.
+     * @throws RuntimeException         If any error is encountered during XML schema validation or unmarshalling.
+     *                                  The original exception (if it exists) is wrapped in a <code>RuntimeException</code>.
+     */
+    @Override
+    public void importStudentProfile(String xml) {
+
+        // Validate the input:
+        if (StringUtils.isBlank(xml)) {
+            throw new IllegalArgumentException("Student profile XML is null. Abort import.");
+        }
+
+        // Validate against the XML schema:
+        if (!schemaValidator.validateXml(xml)) {
+            throw new RuntimeException("The student profile XML is invalid");
+        }
+
+        try {
 
             StudentProfile profile = JaxbUtils.fromXml(xml, StudentProfile.class);
-			
-			// Invoke import:
-			importStudentProfile(profile);
 
-		} catch (Throwable t) {
-			logger.error("Error importing student profile.", t);
-			throw new RuntimeException("Error importing student profile.", t);
-		}
-	}
+            // Invoke import:
+            importStudentProfile(profile);
+
+        } catch (Throwable t) {
+            logger.error("Error importing student profile.", t);
+            throw new RuntimeException("Error importing student profile.", t);
+        }
+    }
 
     /**
      * Performs import of a student profile.
@@ -108,17 +116,17 @@ public class AccountImportServiceImpl implements AccountImportService {
      *
      * @param studentProfile A student's profile object.
      * @throws IllegalArgumentException If "studentProfile" is invalid.
-     * @throws UserNotFoundException	If an account does not exist in the system.
+     * @throws UserNotFoundException    If an account does not exist in the system.
      * @throws RuntimeException         If student profile import encountered an error.
      */
     @Override
-    @WebMethod(exclude=true)
+    @WebMethod(exclude = true)
     public void importStudentProfile(StudentProfile studentProfile) {
         // Step 1: Validating the XML schema is done prior to invoking this method by the JAX-WS framework
-    	// Validate the argument object instead:
-    	if (studentProfile == null) {
-    		throw new IllegalArgumentException("Student profile is null. Abort import.");
-    	}
+        // Validate the argument object instead:
+        if (studentProfile == null) {
+            throw new IllegalArgumentException("Student profile is null. Abort import.");
+        }
 
         // Step 2: Validating the account
         String accountId = studentProfile.getAccountIdentifier();

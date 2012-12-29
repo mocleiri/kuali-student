@@ -1,11 +1,6 @@
 package com.sigmasys.kuali.ksa.service;
 
 
-import static org.springframework.util.Assert.isNull;
-import static org.springframework.util.Assert.isTrue;
-import static org.springframework.util.Assert.notEmpty;
-import static org.springframework.util.Assert.notNull;
-
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,7 +17,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.util.Assert;
+
+import static org.springframework.util.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
@@ -1096,10 +1092,10 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         TransactionType chargeType = transactionService.getTransactionType("1299", new Date());
 
-        Assert.notNull(chargeType);
-        Assert.notNull(chargeType.getId());
-        Assert.notNull(chargeType.getId().getId());
-        Assert.isTrue(chargeType instanceof DebitType);
+        notNull(chargeType);
+        notNull(chargeType.getId());
+        notNull(chargeType.getId().getId());
+        isTrue(chargeType instanceof DebitType);
 
         ((DebitType) chargeType).setCancellationRule(rule);
 
@@ -1109,13 +1105,13 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         Transaction charge = transactionService.createTransaction(typeId, userId, new Date(), new BigDecimal(1500.99));
 
-        Assert.notNull(charge);
-        Assert.notNull(charge.getId());
+        notNull(charge);
+        notNull(charge.getId());
 
         BigDecimal cancellationAmount = transactionService.getCancellationAmount(charge.getId());
 
-        Assert.notNull(cancellationAmount);
-        Assert.isTrue(cancellationAmount.compareTo(BigDecimal.ZERO) > 0);
+        notNull(cancellationAmount);
+        isTrue(cancellationAmount.compareTo(BigDecimal.ZERO) > 0);
 
     }
 
@@ -1126,11 +1122,11 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         TransactionType chargeType = transactionService.getTransactionType("1299", new Date());
 
-        Assert.notNull(chargeType);
+        notNull(chargeType);
 
         GeneralLedgerType glType = glService.getDefaultGeneralLedgerType();
 
-        Assert.notNull(glType);
+        notNull(glType);
 
         List<GlBreakdown> breakdowns = new LinkedList<GlBreakdown>();
 
@@ -1154,14 +1150,50 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         List<Long> breakdownIds = transactionService.createGlBreakdowns(glType.getId(), chargeType.getId(), breakdowns);
 
-        Assert.notNull(breakdownIds);
-        Assert.notEmpty(breakdownIds);
-        Assert.isTrue(breakdownIds.size() == breakdowns.size());
+        notNull(breakdownIds);
+        notEmpty(breakdownIds);
+        isTrue(breakdownIds.size() == breakdowns.size());
 
         for (GlBreakdown b : breakdowns) {
-            Assert.notNull(b.getId());
-            Assert.isTrue(glAccount.equals(b.getGlAccount()));
+            notNull(b.getId());
+            isTrue(glAccount.equals(b.getGlAccount()));
         }
+
+    }
+
+
+    @Test
+    public void setGeneralLedgerType() throws Exception {
+
+        GeneralLedgerType glType = glService.createGeneralLedgerType("GL_TYPE10000000", "Test GL type2",
+                "Test GL Description 2", "01-0-13112 3456", GlOperationType.DEBIT);
+
+        notNull(glType);
+        notNull(glType.getId());
+        notNull(glType.getCode());
+        notNull(glType.getName());
+        notNull(glType.getDescription());
+        notNull(glType.getGlAccountId());
+        notNull(glType.getGlOperationOnCharge());
+        notNull(glType.getCreationDate());
+        notNull(glType.getCreatorId());
+
+        isTrue(GlOperationType.DEBIT == glType.getGlOperationOnCharge());
+
+        Transaction transaction = transactionService.createTransaction("chip", "admin", new Date(), new BigDecimal(1.1));
+
+        notNull(transaction);
+        notNull(transaction.getId());
+
+        transactionService.setGeneralLedgerType(transaction.getId(), glType.getId());
+
+        transaction = transactionService.getTransaction(transaction.getId());
+
+        notNull(transaction);
+        notNull(transaction.getId());
+        notNull(transaction.getGeneralLedgerType());
+        notNull(transaction.getGeneralLedgerType().getId());
+        isTrue(glType.getId().equals(transaction.getGeneralLedgerType().getId()));
 
     }
 

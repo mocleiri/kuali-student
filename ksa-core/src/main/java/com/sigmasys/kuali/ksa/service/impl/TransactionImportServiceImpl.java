@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.PostConstruct;
 import javax.jws.WebService;
 import javax.persistence.Query;
 import javax.xml.bind.*;
@@ -28,7 +29,9 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Created by: dmulderink on 6/29/12 at 11:07 AM
+ * TransactionImportService implementation
+ *
+ * @author Michael Ivanov
  */
 @Service("transactionImportService")
 @Transactional(readOnly = true)
@@ -41,9 +44,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
 
     private static final String IMPORT_SCHEMA_LOCATION = "classpath*:/xsd/transaction-import.xsd";
     private static final String XML_SCHEMA_LOCATION = "classpath*:/xsd/xml.xsd";
-
-    private static final XmlSchemaValidator schemaValidator =
-            new XmlSchemaValidator(XML_SCHEMA_LOCATION, IMPORT_SCHEMA_LOCATION);
 
 
     @Autowired
@@ -64,6 +64,13 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     @Autowired
     private RefundService refundService;
 
+    private XmlSchemaValidator schemaValidator;
+
+
+    @PostConstruct
+    private void postConstruct() {
+        schemaValidator = new XmlSchemaValidator(XML_SCHEMA_LOCATION, IMPORT_SCHEMA_LOCATION);
+    }
 
     /**
      * Returns BatchReceipt by the given ID

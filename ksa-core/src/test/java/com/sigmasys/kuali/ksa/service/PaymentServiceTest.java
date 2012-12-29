@@ -10,8 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.LinkedList;
@@ -23,8 +21,6 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class PaymentServiceTest extends AbstractServiceTest {
 
-    @PersistenceContext(unitName = Constants.KSA_PERSISTENCE_UNIT)
-    protected EntityManager em;
 
     @Autowired
     private TransactionService transactionService;

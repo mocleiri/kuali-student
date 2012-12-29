@@ -88,7 +88,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      * Creates a new general ledger transaction based on the given parameters
      *
      * @param transactionId ID of the corresponding transaction
-     * @param userId        General ledger account ID
+     * @param glAccountId        General ledger account ID
      * @param amount        Transaction amount
      * @param operationType GL operation type
      * @param isQueued      Set status to Q unless isQueued is passed and is false, in which case, set status to W
@@ -97,7 +97,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @Override
     @WebMethod(exclude = true)
     @Transactional(readOnly = false)
-    public GlTransaction createGlTransaction(Long transactionId, String userId, BigDecimal amount,
+    public GlTransaction createGlTransaction(Long transactionId, String glAccountId, BigDecimal amount,
                                              GlOperationType operationType, boolean isQueued) {
 
         Transaction transaction = em.find(Transaction.class, transactionId);
@@ -110,7 +110,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         GlTransaction glTransaction = new GlTransaction();
         glTransaction.setDate(new Date());
         glTransaction.setAmount(amount != null ? amount : BigDecimal.ZERO);
-        glTransaction.setGlAccountId(userId);
+        glTransaction.setGlAccountId(glAccountId);
         glTransaction.setGlOperation(operationType);
         glTransaction.setDescription(operationType.toString());
         glTransaction.setTransactions(new HashSet<Transaction>(Arrays.asList(transaction)));
@@ -140,7 +140,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      * Creates a new general ledger transaction based on the given parameters
      *
      * @param transactionId ID of the corresponding transaction
-     * @param userId        General ledger account ID
+     * @param glAccountId        General ledger account ID
      * @param amount        Transaction amount
      * @param operationType GL operation type
      * @return new GL Transaction instance
@@ -148,9 +148,9 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @Override
     @WebMethod(exclude = true)
     @Transactional(readOnly = false)
-    public GlTransaction createGlTransaction(Long transactionId, String userId, BigDecimal amount,
+    public GlTransaction createGlTransaction(Long transactionId, String glAccountId, BigDecimal amount,
                                              GlOperationType operationType) {
-        return createGlTransaction(transactionId, userId, amount, operationType, true);
+        return createGlTransaction(transactionId, glAccountId, amount, operationType, true);
 
     }
 
@@ -683,6 +683,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         Query query = em.createQuery("select glt from GlTransaction glt " +
                 " left outer join fetch glt.recognitionPeriod rp " +
                 " left outer join fetch glt.transmission t " +
+                " left outer join fetch glt.transactions ts " +
                 " where glt.date between :startDate and :endDate " +
                 (glAccountId != null ? " and glt.glAccountId = :glAccountId " : "") +
                 " order by glt.date asc");
@@ -695,6 +696,19 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         }
 
         return query.getResultList();
+    }
+
+    /**
+     * Retrieves all GL transactions for the given GL transaction date range sorted by dates in ascending order.
+     *
+     * @param startDate GL Transaction start date
+     * @param endDate   GL Transaction end date
+     * @return list of GlTransaction instances
+     */
+    @Override
+    @WebMethod(exclude = true)
+    public List<GlTransaction> getGlTransactions(Date startDate, Date endDate) {
+        return getGlTransactions(startDate, endDate, null);
     }
 
 }
