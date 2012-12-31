@@ -21,7 +21,7 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class KradViewIntegrityTest extends AbstractServiceTest {
 
-    public static final String KSA_VIEW_FOLDER = "com/sigmasys/kuali/ksa/krad";
+    public static final String SETTINGS_VIEW_NAME = "SettingsView.xml";
 
     @Autowired
     private KsaConfigurer ksaConfigurer;
@@ -52,19 +52,21 @@ public class KradViewIntegrityTest extends AbstractServiceTest {
 
         List<String> configFileLocations = dataDictionary.getConfigFileLocations();
 
+        Assert.notNull(configFileLocations);
+        Assert.notEmpty(configFileLocations);
+
         logger.debug("Config File Locations: \n" + configFileLocations);
 
-        boolean viewsExist = false;
+        boolean viewExists = false;
         for (String location : configFileLocations) {
-            if (location.contains(KSA_VIEW_FOLDER)) {
-                viewsExist = true;
+            if (location.contains(SETTINGS_VIEW_NAME)) {
+                viewExists = true;
                 break;
             }
         }
 
-        if (!viewsExist) {
-            throw new AssertionError("KSA KRAD view definitions located in '" + KSA_VIEW_FOLDER +
-                    "' folder have not been loaded ");
+        if (!viewExists) {
+            throw new AssertionError("KSA KRAD views have not been loaded");
         }
 
         dataDictionary.parseDataDictionaryConfigurationFiles(false);

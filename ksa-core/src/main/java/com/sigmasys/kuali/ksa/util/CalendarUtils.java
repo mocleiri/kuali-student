@@ -64,15 +64,13 @@ public class CalendarUtils {
     }
 
     public static Date removeTime(Date date) {
-        // Get an instance of the Calendar.
-        GregorianCalendar calendar = new GregorianCalendar();
-        // Make sure the calendar will not perform automatic correction.
-        calendar.setLenient(false);
-        // Set the time of the calendar to the given date.
-        calendar.setTime(date);
-        calendar = removeTime(calendar);
-        // Return the date again.
-        return calendar.getTime();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
     }
 
 }

@@ -4,6 +4,7 @@ import com.sigmasys.kuali.ksa.exception.InvalidGeneralLedgerTypeException;
 import com.sigmasys.kuali.ksa.exception.TransactionNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
+import com.sigmasys.kuali.ksa.util.CalendarUtils;
 import com.sigmasys.kuali.ksa.util.EnumUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -359,6 +360,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      * @return GlRecognitionPeriod instance or null if not found
      */
     private GlRecognitionPeriod getGlRecognitionPeriod(Date date) {
+        date = CalendarUtils.removeTime(date);
         Query query = em.createQuery("select rp from GlRecognitionPeriod rp where rp.startDate <= :date and rp.endDate >= :date");
         query.setParameter("date", date);
         List<GlRecognitionPeriod> results = (List<GlRecognitionPeriod>) query.getResultList();
