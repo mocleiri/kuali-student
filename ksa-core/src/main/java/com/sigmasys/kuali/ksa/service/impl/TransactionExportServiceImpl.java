@@ -21,6 +21,7 @@ import javax.jws.WebService;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -126,9 +127,7 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
 
     protected String convertGlTransmissionsToXml(List<GlTransmission> glTransmissions) {
 
-        final NumberFormat moneyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
-        moneyFormat.setMinimumFractionDigits(0);
-        moneyFormat.setMaximumFractionDigits(2);
+        final NumberFormat moneyFormat = new DecimalFormat("#.##");
 
         // Generating the batch ID
         final BigInteger batchId = generateBatchId();

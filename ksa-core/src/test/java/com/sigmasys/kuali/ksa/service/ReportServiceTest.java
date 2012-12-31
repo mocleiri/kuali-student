@@ -100,6 +100,8 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
 
         String xml = transactionExportService.exportTransactions();
 
+        logger.debug("Transaction export: \n" + xml);
+
         Assert.notNull(xml);
         Assert.hasText(xml);
 
