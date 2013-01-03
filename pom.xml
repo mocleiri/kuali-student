@@ -30,6 +30,7 @@
         <gwt-log.version>3.1.7</gwt-log.version>
         <kuali.rice.version>2.2.0</kuali.rice.version>
         <kuali.student.version>1.2.1</kuali.student.version>
+        <kuali.student.enrollment.version>1.0.0-SNAPSHOT</kuali.student.enrollment.version>
         <slf4j.version>1.6.4</slf4j.version>
         <jax-ws.version>2.2.6</jax-ws.version>
         <stax-ex.version>1.4</stax-ex.version>
@@ -42,6 +43,12 @@
 
 
     <repositories>
+
+        <repository>
+            <id>Kuali</id>
+            <name>Kuali</name>
+            <url>http://maven.kuali.org</url>
+        </repository>
 
         <repository>
             <id>Nexus</id>
@@ -65,7 +72,8 @@
             <id>google-maven-snapshot-repository</id>
             <name>Google Maven Snapshot Repository</name>
             <url>
-                https://oss.sonatype.org/content/repositories/google-snapshots/</url>
+                https://oss.sonatype.org/content/repositories/google-snapshots/
+            </url>
         </repository>
 
         <repository>
@@ -86,9 +94,11 @@
 
     <scm>
         <connection>scm:svn:
-            https://test.kuali.org/svn/student/contrib/ksa/trunk</connection>
+            https://test.kuali.org/svn/student/contrib/ksa/trunk
+        </connection>
         <developerConnection>scm:svn:
-            https://test.kuali.org/svn/student/contrib/ksa/trunk</developerConnection>
+            https://test.kuali.org/svn/student/contrib/ksa/trunk
+        </developerConnection>
         <url>https://test.kuali.org/svn/student/contrib/ksa/trunk</url>
     </scm>
 
@@ -125,10 +135,10 @@
 
     <dependencies>
 
-        <dependency>
-           <groupId>org.apache.ws.security</groupId>
-           <artifactId>wss4j</artifactId>
-           <version>1.6.4</version>
+        <!--dependency>
+            <groupId>org.apache.ws.security</groupId>
+            <artifactId>wss4j</artifactId>
+            <version>1.6.4</version>
             <exclusions>
                 <exclusion>
                     <artifactId>commons-logging</artifactId>
@@ -161,21 +171,13 @@
                     <groupId>commons-pool</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency-->
 
         <dependency>
-            <groupId>org.kuali.student.api</groupId>
-            <artifactId>ks-enroll-api</artifactId>
-            <version>2.0.0-M6-SNAPSHOT</version>
+            <groupId>org.kuali.student.enroll</groupId>
+            <artifactId>ks-enroll-impl</artifactId>
+            <version>${kuali.student.enrollment.version}</version>
             <exclusions>
-                <exclusion>
-                    <artifactId>rice-kim-api</artifactId>
-                    <groupId>org.kuali.rice</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>freemarker</artifactId>
-                    <groupId>org.freemarker</groupId>
-                </exclusion>
                 <exclusion>
                     <artifactId>spring-core</artifactId>
                     <groupId>org.springframework</groupId>
@@ -199,7 +201,7 @@
             </exclusions>
         </dependency>
 
-        <dependency>
+        <!--dependency>
             <groupId>org.kuali.student.core</groupId>
             <artifactId>ks-core-impl</artifactId>
             <version>2.0.0-M6-SNAPSHOT</version>
@@ -233,7 +235,7 @@
                     <groupId>org.kuali.rice</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency-->
 
         <!-- Joda tags-->
         <dependency>

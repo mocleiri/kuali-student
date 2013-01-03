@@ -36,6 +36,13 @@
         <property name="password" value="ksa123"/>
     </bean>
 
+    <bean id="ksDataSource" class="com.sigmasys.kuali.ksa.service.jta.AtomikosDataSourceBean" parent="xaDataSource">
+        <property name="uniqueResourceName" value="ksDataSource"/>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+        <property name="user" value="ks"/>
+        <property name="password" value="ks123"/>
+    </bean>
+
     <bean id="riceDataSource" class="com.sigmasys.kuali.ksa.service.jta.AtomikosDataSourceBean" parent="xaDataSource">
         <property name="uniqueResourceName" value="riceDataSource"/>
         <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
