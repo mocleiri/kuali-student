@@ -5,102 +5,10 @@
     <bookmark url="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/util/CalendarUtils.java" line="36" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="afe2ac17-7cf3-401d-90dc-64da56fa2ac8" name="Default" comment="Upgraded KSA to Rice 2.2.0 release: provided new Maven dependencies in pom.xml, modified KsaConfigurer, KraViewIntegrityTest classes and krad-servlet.xml due to the Rice API changes, updated fullView.ftl and uifRender.ftl Freemarker templates, changed a couple of jUnit tests, changed the project configuration files.">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/blank.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/copy.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/copy_cvs_xls_pdf.swf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/copy_hover.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/csv.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/csv_hover.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/fancybox_loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/fancybox_sprite.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/helpers/fancybox_buttons.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/helpers" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/back_disabled.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/back_enabled.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/background.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/collection.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/collection_hover.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/d.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/d.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/dots.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/down.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/exclamation-diamond-frame.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/exclamation-red.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/forward_disabled.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/forward_enabled.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/information-frame.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/normal.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/pdf.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/pdf_hover.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/print.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/print_hover.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/sort_asc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/sort_asc_disabled.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/sort_asc_kns.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/sort_both.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/sort_both_kns.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/sort_desc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/sort_desc_disabled.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/sort_desc_disabled_kns.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/sort_desc_kns.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/throbber.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_diagonals-thick_75_f3d8d8_40x40.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_dots-small_65_a6a6a6_2x2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_flat_0_333333_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_flat_0_aaaaaa_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_flat_55_fbec88_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_flat_65_ffffff_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_flat_75_67bf57_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_flat_75_ffffff_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_glass_55_fbf8ee_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_glass_55_fbf9ee_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_glass_65_ffffff_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_glass_75_d0e5f5_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_glass_75_dadada_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_glass_75_e6e6e6_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_glass_85_dfeffc_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_glass_95_fef1ec_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_gloss-wave_75_67bf57_500x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_highlight-hard_100_990000_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_highlight-hard_100_f6f6f6_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_highlight-hard_60_67bf57_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_highlight-soft_15_990000_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_highlight-soft_75_cccccc_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_inset-hard_100_f5f8f9_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_inset-hard_100_fcfdfd_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-bg_inset-soft_95_fef1ec_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-icons_004b2a_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-icons_217bc0_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-icons_222222_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-icons_2e83ff_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-icons_469bdd_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-icons_6da8d5_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-icons_760075_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-icons_888888_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-icons_cd0a0a_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-icons_d8e7f3_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-icons_f9bd01_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/ui-icons_ffffff_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images/up.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/images" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/xls.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/xls_hover.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/scripts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/krad_2.2.0.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/scripts/krad_2.2.0.min.js" />
+    <list default="true" readonly="true" id="afe2ac17-7cf3-401d-90dc-64da56fa2ac8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/ksa_core_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/ksa_core_war_exploded.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/ksa-core.iml" afterPath="$PROJECT_DIR$/ksa-core/ksa-core.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/config/KsaConfigurer.java" afterPath="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/config/KsaConfigurer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/krad-servlet.xml" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/krad-servlet.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/WEB-INF/ftl/fullView.ftl" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/WEB-INF/ftl/fullView.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/WEB-INF/ftl/uifRender.ftl" afterPath="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/WEB-INF/ftl/uifRender.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/KradViewIntegrityTest.java" afterPath="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/KradViewIntegrityTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="ksa.iws" />
@@ -192,10 +100,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="krad_2.2.0.min.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="krad_2.2.0.min.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/krad_2.2.0.min.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2653" column="43" selection-start="55040" selection-end="55040" vertical-scroll-proportion="81.26306">
+            <state line="2" column="54" selection-start="50" selection-end="50" vertical-scroll-proportion="0.0">
               <folding>
                 <marker date="1357174873160" expanded="true" signature="46526:46790" placeholder="{...}" />
                 <marker date="1357174873160" expanded="true" signature="46813:46942" placeholder="{...}" />
@@ -212,29 +120,51 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fullView.ftl" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/krad/WEB-INF/ftl/fullView.ftl">
+      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ksa-core/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="110" selection-start="709" selection-end="709" vertical-scroll-proportion="0.0">
+            <state line="22" column="51" selection-start="1211" selection-end="1211" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="html.ftl" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/krad/WEB-INF/ftl/lib/html.ftl">
+      <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="59" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0">
+            <state line="167" column="35" selection-start="5810" selection-end="5823" vertical-scroll-proportion="0.106516294">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UifHandlerExceptionResolver.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-krad-web-framework/2.2.0/rice-krad-web-framework-2.2.0-sources.jar!/org/kuali/rice/krad/web/controller/UifHandlerExceptionResolver.java">
+      <file leaf-file-name="AtpServiceImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/student/core/ks-core-impl/2.0.0-M6-SNAPSHOT/ks-core-impl-2.0.0-M6-SNAPSHOT-sources.jar!/org/kuali/student/r2/core/class1/atp/service/impl/AtpServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="39" selection-start="630" selection-end="664" vertical-scroll-proportion="0.0">
+            <state line="46" column="43" selection-start="2623" selection-end="2623" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AtpService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/student/api/ks-core-api/2.0.0-M6-SNAPSHOT/ks-core-api-2.0.0-M6-SNAPSHOT-sources.jar!/org/kuali/student/r2/core/atp/service/AtpService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="53" column="42" selection-start="2629" selection-end="2629" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SearchService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/student/api/ks-core-api/2.0.0-M6-SNAPSHOT/ks-core-api-2.0.0-M6-SNAPSHOT-sources.jar!/org/kuali/student/r2/core/search/service/SearchService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="133" column="45" selection-start="6979" selection-end="6979" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -246,33 +176,6 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Constants.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/model/Constants.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="11" selection-start="174" selection-end="174" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AbstractAutowireCapableBeanFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/3.1.2.RELEASE/spring-beans-3.1.2.RELEASE-sources.jar!/org/springframework/beans/factory/support/AbstractAutowireCapableBeanFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1466" column="88" selection-start="59221" selection-end="59221" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataDictionary.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-krad-web-framework/2.2.0/rice-krad-web-framework-2.2.0-sources.jar!/org/kuali/rice/krad/datadictionary/DataDictionary.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="309" column="0" selection-start="13299" selection-end="13299" vertical-scroll-proportion="0.0">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -294,7 +197,6 @@
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/transform/ObjectFactory.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/service/impl/GeneralLedgerServiceImpl.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/util/CalendarUtils.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$MAVEN_REPOSITORY$/org/kuali/rice/rice-krad-web-framework/2.2.0/rice-krad-web-framework-2.2.0-sources.jar!/org/kuali/rice/krad/datadictionary/DataDictionary.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/java/com/sigmasys/kuali/ksa/config/KsaConfigurer.java" />
         <option value="$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/KradViewIntegrityTest.java" />
@@ -303,6 +205,7 @@
         <option value="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/WEB-INF/ftl/uifRender.ftl" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/scripts/krad_2.2.0.min.js" />
         <option value="$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/krad_2.2.0.min.css" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -2430,7 +2333,11 @@
       <created>1356981348127</created>
       <updated>1356981348128</updated>
     </task>
-    <option name="localTasksCounter" value="151" />
+    <task id="LOCAL-00151" summary="Upgraded KSA to Rice 2.2.0 release: provided new Maven dependencies in pom.xml, modified KsaConfigurer, KraViewIntegrityTest classes and krad-servlet.xml due to the Rice API changes, updated fullView.ftl and uifRender.ftl Freemarker templates, changed a couple of jUnit tests, changed the project configuration files, added new KRAD web resources to webapp/krad folder including krad_2.2.0.min.js, krad_2.2.0.min.css and images.">
+      <created>1357176235111</created>
+      <updated>1357176235112</updated>
+    </task>
+    <option name="localTasksCounter" value="152" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -2455,7 +2362,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1698" height="1020" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277559" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2467,14 +2374,14 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18327974" sideWeight="0.43307087" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37544274" sideWeight="0.0" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5938607" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3482881" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297244" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1615667" sideWeight="0.76033056" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1615667" sideWeight="0.33293977" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.29192168" sideWeight="0.76033056" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23966943" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15911873" sideWeight="0.33293977" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6670602" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Phing Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="SVN Repositories" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44285715" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2525,7 +2432,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed KradViewIntegrityTest class, refactored CalendarUtils and GeneralLedgerServiceImpl class, removed time from the date instance in getGlRecognitionPeriod() method." />
+    <option name="LAST_COMMIT_MESSAGE" value="Upgraded KSA to Rice 2.2.0 release: provided new Maven dependencies in pom.xml, modified KsaConfigurer, KraViewIntegrityTest classes and krad-servlet.xml due to the Rice API changes, updated fullView.ftl and uifRender.ftl Freemarker templates, changed a couple of jUnit tests, changed the project configuration files, added new KRAD web resources to webapp/krad folder including krad_2.2.0.min.js, krad_2.2.0.min.css and images." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -2538,7 +2445,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6986667" />
-    <MESSAGE value="Set onLoadScript property of the KSA form view to &quot;window.onbeforeunload = null;&quot; to prevent &quot;Are you sure you want to leave this page?&quot; dialog" />
     <MESSAGE value="Implemented RuleSet and DroolsPersistenceService" />
     <MESSAGE value="Added getDisplayValue() methods to PostalAddress and PersonName, refactored Account to use them as well." />
     <MESSAGE value="Switched to creatorId for passing it to isTransactionTypeAllowed()" />
@@ -2563,6 +2469,7 @@
     <MESSAGE value="Implemented GeneralLedgerTypeNotFoundException, TransactionTypeNotFoundException classes, setGeneralLedgerType() in TransactionService class, developed 2 jUnit tests for setGLType testing." />
     <MESSAGE value="Added ReportService and ReportServiceImpl classes, implemented getGlTransactions(Date startDate, Date endDate, String glAccountId) method in GeneralLedgerService, generatedGeneralLedgerReport() in ReportService, fixed transaction-report.xsd, added creational methods to ObjectFactory class, re-generated GeneralLedgerReport and dependent classes from the XML schema." />
     <MESSAGE value="Fixed KradViewIntegrityTest class, refactored CalendarUtils and GeneralLedgerServiceImpl class, removed time from the date instance in getGlRecognitionPeriod() method." />
+    <MESSAGE value="Upgraded KSA to Rice 2.2.0 release: provided new Maven dependencies in pom.xml, modified KsaConfigurer, KraViewIntegrityTest classes and krad-servlet.xml due to the Rice API changes, updated fullView.ftl and uifRender.ftl Freemarker templates, changed a couple of jUnit tests, changed the project configuration files, added new KRAD web resources to webapp/krad folder including krad_2.2.0.min.js, krad_2.2.0.min.css and images." />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -2606,39 +2513,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-krad-web-framework/2.2.0/rice-krad-web-framework-2.2.0-sources.jar!/org/kuali/rice/krad/service/KRADServiceLocatorWeb.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="163" column="0" selection-start="7205" selection-end="7205" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-krad-web-framework/2.2.0/rice-krad-web-framework-2.2.0-sources.jar!/org/kuali/rice/krad/service/DataDictionaryService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="34" selection-start="3144" selection-end="3144" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-impl/2.2.0/rice-impl-2.2.0-sources.jar!/org/kuali/rice/krad/service/impl/DataDictionaryServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="0" selection-start="4519" selection-end="4519" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/rice/rice-krad-web-framework/2.2.0/rice-krad-web-framework-2.2.0-sources.jar!/org/kuali/rice/krad/bo/ModuleConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="167" column="0" selection-start="6176" selection-end="6176" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/test/java/com/sigmasys/kuali/ksa/service/KradViewIntegrityTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="90" selection-start="2132" selection-end="2132" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/WEB-INF/krad-servlet.xml">
-      <provider editor-type-id="com.intellij.spring.perspectives.SpringBeansStructureEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="71" selection-start="4811" selection-end="4811" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/krad/WEB-INF/ftl/fullView.ftl">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="110" selection-start="709" selection-end="709" vertical-scroll-proportion="0.0" />
@@ -2694,7 +2568,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ksa-core/src/main/webapp/krad/min/css/krad_2.2.0.min.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2653" column="43" selection-start="55040" selection-end="55040" vertical-scroll-proportion="81.26306">
+        <state line="2" column="54" selection-start="50" selection-end="50" vertical-scroll-proportion="0.0">
           <folding>
             <marker date="1357174873160" expanded="true" signature="46526:46790" placeholder="{...}" />
             <marker date="1357174873160" expanded="true" signature="46813:46942" placeholder="{...}" />
@@ -2707,6 +2581,52 @@
             <marker date="1357174873160" expanded="true" signature="48387:48520" placeholder="{...}" />
             <marker date="1357174873160" expanded="true" signature="48543:48672" placeholder="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksa-core/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="51" selection-start="1211" selection-end="1211" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/student/core/ks-core-impl/2.0.0-M6-SNAPSHOT/ks-core-impl-2.0.0-M6-SNAPSHOT-sources.jar!/org/kuali/student/r2/core/class1/atp/service/impl/AtpServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="43" selection-start="2623" selection-end="2623" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/student/api/ks-core-api/2.0.0-M6-SNAPSHOT/ks-core-api-2.0.0-M6-SNAPSHOT-sources.jar!/org/kuali/student/r2/core/atp/service/AtpService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="42" selection-start="2629" selection-end="2629" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/student/api/ks-core-api/2.0.0-M6-SNAPSHOT/ks-core-api-2.0.0-M6-SNAPSHOT-sources.jar!/org/kuali/student/r2/core/search/dto/SearchRequestInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="13" selection-start="1381" selection-end="1381" vertical-scroll-proportion="0.25987262">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/kuali/student/api/ks-core-api/2.0.0-M6-SNAPSHOT/ks-core-api-2.0.0-M6-SNAPSHOT-sources.jar!/org/kuali/student/r2/core/search/service/SearchService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="133" column="45" selection-start="6979" selection-end="6979" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="167" column="35" selection-start="5810" selection-end="5823" vertical-scroll-proportion="0.106516294">
+          <folding />
         </state>
       </provider>
     </entry>
