@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service;
 
 
 import com.sigmasys.kuali.ksa.config.KsaConfigurer;
+import com.sigmasys.kuali.ksa.model.Constants;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.kuali.rice.krad.datadictionary.DataDictionary;
@@ -38,7 +39,7 @@ public class KradViewIntegrityTest extends AbstractServiceTest {
 
         Assert.notNull(dataDictionaryService);
 
-        dataDictionaryService.addDataDictionaryLocations(locations);
+        dataDictionaryService.addDataDictionaryLocations(Constants.MODULE_NAME, locations);
 
         ViewServiceImpl viewService = (ViewServiceImpl) KRADServiceLocatorWeb.getViewService();
 
@@ -50,7 +51,7 @@ public class KradViewIntegrityTest extends AbstractServiceTest {
 
         Assert.notNull(dataDictionary);
 
-        List<String> configFileLocations = dataDictionary.getConfigFileLocations();
+        List<String> configFileLocations = dataDictionary.getModuleDictionaryFiles().get(Constants.MODULE_NAME);
 
         Assert.notNull(configFileLocations);
         Assert.notEmpty(configFileLocations);

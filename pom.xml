@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!-- Copyright 2009 The Kuali Foundation Licensed under the Educational Community 
-	License, Version 2.0 (the "License"); you may not use this file except in 
-	compliance with the License. You may obtain a copy of the License at http://www.osedu.org/licenses/ECL-2.0 
-	Unless required by applicable law or agreed to in writing, software distributed 
-	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
-	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
-	the specific language governing permissions and limitations under the License. -->
+<!-- Copyright 2008-2009 The Kuali Foundation Licensed under the Educational
+	Community License, Version 2.0 (the "License"); you may not use this file
+	except in compliance with the License. You may obtain a copy of the License
+	at http://www.opensource.org/licenses/ecl2.php Unless required by applicable
+	law or agreed to in writing, software distributed under the License is distributed
+	on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+	express or implied. See the License for the specific language governing permissions
+	and limitations under the License. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.sigmasys.kuali.ksa</groupId>
     <artifactId>ksa-common</artifactId>
     <version>1.0.0-SNAPSHOT</version>
@@ -27,7 +28,7 @@
         <gwt.version>2.4.0</gwt.version>
         <gxt.version>2.2.5-gwt22</gxt.version>
         <gwt-log.version>3.1.7</gwt-log.version>
-        <kuali.rice.version>2.2.0-M3</kuali.rice.version>
+        <kuali.rice.version>2.2.0</kuali.rice.version>
         <kuali.student.version>1.2.1</kuali.student.version>
         <slf4j.version>1.6.4</slf4j.version>
         <jax-ws.version>2.2.6</jax-ws.version>
@@ -63,7 +64,8 @@
         <repository>
             <id>google-maven-snapshot-repository</id>
             <name>Google Maven Snapshot Repository</name>
-            <url>https://oss.sonatype.org/content/repositories/google-snapshots/</url>
+            <url>
+                https://oss.sonatype.org/content/repositories/google-snapshots/</url>
         </repository>
 
         <repository>
@@ -83,8 +85,10 @@
     </profiles>
 
     <scm>
-        <connection>scm:svn:https://test.kuali.org/svn/student/contrib/ksa/trunk</connection>
-        <developerConnection>scm:svn:https://test.kuali.org/svn/student/contrib/ksa/trunk</developerConnection>
+        <connection>scm:svn:
+            https://test.kuali.org/svn/student/contrib/ksa/trunk</connection>
+        <developerConnection>scm:svn:
+            https://test.kuali.org/svn/student/contrib/ksa/trunk</developerConnection>
         <url>https://test.kuali.org/svn/student/contrib/ksa/trunk</url>
     </scm>
 
@@ -121,18 +125,128 @@
 
     <dependencies>
 
+        <!--dependency>
+           <groupId>org.apache.ws.security</groupId>
+           <artifactId>wss4j</artifactId>
+           <version>1.6.4</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>joda-time</artifactId>
+                    <groupId>joda-time</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.4</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-pool</artifactId>
+                    <groupId>commons-pool</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kuali.student.api</groupId>
+            <artifactId>ks-enroll-api</artifactId>
+            <version>2.0.0-M6-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>rice-kim-api</artifactId>
+                    <groupId>org.kuali.rice</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>freemarker</artifactId>
+                    <groupId>org.freemarker</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-core</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-beans</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-aop</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-context</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-context-support</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.kuali.student.core</groupId>
+            <artifactId>ks-core-impl</artifactId>
+            <version>2.0.0-M6-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-api</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-core</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-aop</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-logging</artifactId>
+                    <groupId>commons-logging</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>antlr-runtime</artifactId>
+                    <groupId>org.antlr</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>rice-krms-impl</artifactId>
+                    <groupId>org.kuali.rice</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency-->
+
         <!-- Joda tags-->
         <dependency>
-           <groupId>joda-time</groupId>
-           <artifactId>joda-time-jsptags</artifactId>
-           <version>1.1.1</version>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time-jsptags</artifactId>
+            <version>1.1.1</version>
         </dependency>
 
         <!-- Freemarker -->
         <dependency>
-        	<groupId>org.freemarker</groupId>
-        	<artifactId>freemarker</artifactId>
-        	<version>${freemarker.version}</version>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${freemarker.version}</version>
         </dependency>
 
         <!-- Apache Tiles -->
@@ -176,6 +290,12 @@
             <groupId>org.drools</groupId>
             <artifactId>drools-decisiontables</artifactId>
             <version>${drools.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j</artifactId>
+                    <groupId>log4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.drools</groupId>
@@ -643,6 +763,10 @@
                     <artifactId>commons-beanutils</artifactId>
                     <groupId>org.kuali.commons</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>commons-codec</artifactId>
+                    <groupId>commons-codec</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -927,6 +1051,10 @@
                     <artifactId>commons-beanutils</artifactId>
                     <groupId>org.kuali.commons</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>freemarker</artifactId>
+                    <groupId>org.freemarker</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -1036,6 +1164,18 @@
                 <exclusion>
                     <artifactId>commons-beanutils</artifactId>
                     <groupId>org.kuali.commons</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>wss4j</artifactId>
+                    <groupId>org.apache.ws.security</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-lang</artifactId>
+                    <groupId>commons-lang</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -1356,4 +1496,3 @@
 
     </dependencies>
 </project>
-

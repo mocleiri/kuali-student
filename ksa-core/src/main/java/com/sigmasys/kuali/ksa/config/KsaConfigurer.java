@@ -93,7 +93,7 @@ public class KsaConfigurer extends ModuleConfigurer implements ApplicationContex
             if (locations != null && !locations.isEmpty()) {
                 DataDictionaryService dataDictionaryService = KRADServiceLocatorWeb.getDataDictionaryService();
                 try {
-                    dataDictionaryService.addDataDictionaryLocations(locations);
+                    dataDictionaryService.addDataDictionaryLocations(Constants.MODULE_NAME, locations);
                     ((ViewServiceImpl) KRADServiceLocatorWeb.getViewService()).setDataDictionaryService(dataDictionaryService);
                     //dataDictionaryService.getDataDictionary().parseDataDictionaryConfigurationFiles(false);
                 } catch (Exception e) {
