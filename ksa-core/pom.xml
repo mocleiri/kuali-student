@@ -28,7 +28,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <jvm.args>-Xmx768m -Xms512m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m</jvm.args>
+        <jvm.args>-Xmx1024m -Xms512m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256m</jvm.args>
     </properties>
 
 
