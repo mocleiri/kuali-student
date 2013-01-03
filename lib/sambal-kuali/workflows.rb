@@ -109,6 +109,15 @@ module Workflows
   end
   # Helper methods...
 
+  def go_to_manage_soc
+    visit MainMenu do |page|
+      page.enrollment_home
+    end
+    on Enrollment do |page|
+      page.manage_soc
+    end
+  end
+
   def logged_in_user
     user = ""
     on Header do |page|
