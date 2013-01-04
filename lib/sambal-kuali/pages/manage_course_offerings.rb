@@ -74,6 +74,14 @@ class ManageCourseOfferings < BasePage
     retVal
   end
 
+  def select_aos(code_list)
+    for code in code_list
+      if target_row(code).link(text: "Delete").exists?
+        target_row(code).checkbox.set
+      end
+    end
+  end
+
   def codes_list
     codes = []
     activity_offering_results_table.rows.each { |row| codes << row[AO_CODE].text }

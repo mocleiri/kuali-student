@@ -51,8 +51,21 @@ class CourseOffering
   end
 
   def delete_ao(ao_code)
+    aoCode = ao_code[:ao_code]
     on ManageCourseOfferings do |page|
-      page.delete(ao_code)
+      page.delete(aoCode)
+    end
+    on ActivityOfferingConfirmDelete do |page|
+      page.delete_activity_offering
+    end
+  end
+
+  def delete_ao_list(ao_code_list)
+    @aoCode = ao_code_list[:code_list]
+    on ManageCourseOfferings do |page|
+      page.select_aos(@aoCode)
+      page.selected_offering_actions.select("Delete")
+      page.go
     end
     on ActivityOfferingConfirmDelete do |page|
       page.delete_activity_offering
