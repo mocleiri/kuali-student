@@ -26,24 +26,6 @@ class ManageSoc
     end
   end
 
-  def check_valid_state(currentState)
-    on ManageSocPage do |page|
-      case(currentState)
-        when 'Open'
-          raise "SOC is not Open" unless page.lock_button.exists? and page.lock_button.enabled?
-        when 'Lock'
-          raise "SOC is not in final edit state" unless page.final_edit_button.exists? and page.final_edit_button.enabled?
-        when 'FinalEdit'
-          raise "SOC is not in final edit state" unless page.final_edit_button.exists? and page.final_edit_button.enabled?
-        when 'Schedule'
-          raise "Send to Scheduler action not available" unless page.send_to_scheduler_button.exists? and page.send_to_scheduler_button.enabled?
-          raise "Final edit button not exists or disabled" unless page.final_edit_button.exists? and page.final_edit_button.disabled?
-        else
-          raise "Your Soc State value must be one of the following:\n'Open', 'FinalEdit'.\nPlease update your script"
-      end
-    end
-  end
-
   def check_state_change_button_exists(currentState)
     on ManageSocPage do |page|
     case(currentState)
@@ -88,7 +70,7 @@ class ManageSoc
         when 'Publish'
           publish_soc page,confirmStateChange
         else
-          raise "Your Soc State value must be one of the following:\n'Lock', 'FinalEdit'.\nPlease update your script"
+          raise "Your Soc State value must be one of the following:\n'Lock', \n'FinalEdit', \n'Schedule', \n'Publish'.\nPlease update your script"
       end
     end
   end
@@ -132,7 +114,7 @@ class ManageSoc
       when 'Yes'
       when 'No'
       else
-        raise "Invalid confirm dialog option. It should be either 'Yes' or 'No'"
+        raise "Invalid confirm dialog option. It should be either 'Yes' or 'No'. Invalid option - #{confirmStateChange}"
     end
   end
 
