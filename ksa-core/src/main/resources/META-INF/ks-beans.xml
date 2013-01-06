@@ -10,7 +10,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
        default-lazy-init="true">
 
     <bean id="ksEntityManager" class="org.springframework.orm.jpa.support.SharedEntityManagerBean">
-        <property name="entityManagerFactory" ref="ksEntityManagerFactory"/>
+        <property name="persistenceUnitName" value="ks"/>
     </bean>
 
     <!-- Atp Service Config -->
@@ -28,11 +28,11 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
                     <list merge="false">
                         <bean parent="keyword2LikeTransform">
                             <property name="likeAttributes">
-                                <list merge="true">
+                                <set merge="true">
                                     <value>code</value>
                                     <value>typeKey</value>
                                     <value>stateKey</value>
-                                </list>
+                                </set>
                             </property>
                         </bean>
                         <bean class="org.kuali.student.r2.common.criteria.transform.RenameTransform">
@@ -58,10 +58,10 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
                     <list merge="false">
                         <bean parent="keyword2LikeTransform">
                             <property name="likeAttributes">
-                                <list merge="false">
+                                <set merge="false">
                                     <value>typeKey</value>
                                     <value>stateKey</value>
-                                </list>
+                                </set>
                             </property>
                         </bean>
                         <bean class="org.kuali.student.r2.common.criteria.transform.RenameTransform">
@@ -86,10 +86,10 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
                     <list merge="false">
                         <bean parent="keyword2LikeTransform">
                             <property name="likeAttributes">
-                                <list merge="true">
+                                <set merge="true">
                                     <value>typeKey</value>
                                     <value>stateKey</value>
-                                </list>
+                                </set>
                             </property>
                         </bean>
                         <bean class="org.kuali.student.r2.common.criteria.transform.RenameTransform">

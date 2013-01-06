@@ -20,7 +20,11 @@ import org.hibernate.persister.collection.CollectionPersister;
 import org.hibernate.type.EmbeddedComponentType;
 import org.hibernate.type.Type;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.BeanFactoryUtils;
+import org.springframework.beans.factory.ListableBeanFactory;
+import org.springframework.orm.jpa.EntityManagerFactoryInfo;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -47,11 +51,31 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
 
     private static final int MAX_VALUE_LENGTH = 4000;
 
-    private static final String ENTITY_MANAGER_FACTORY_BEAN_NAME = "ksaEntityManagerFactory";
-
     private static final AtomicLong idGenerator = new AtomicLong(System.currentTimeMillis() * 100000);
 
     private EntityManager entityManager;
+
+    protected EntityManagerFactory findEntityManagerFactory(String unitName) {
+        ListableBeanFactory beanFactory = (ListableBeanFactory) ContextUtils.getBeanFactory();
+        if (StringUtils.hasLength(unitName)) {
+            // See whether we can find an EntityManagerFactory with matching persistence unit name.
+            String[] candidateNames =
+                    BeanFactoryUtils.beanNamesForTypeIncludingAncestors(beanFactory, EntityManagerFactory.class);
+            for (String candidateName : candidateNames) {
+                EntityManagerFactory emf = (EntityManagerFactory) beanFactory.getBean(candidateName);
+                if (emf instanceof EntityManagerFactoryInfo) {
+                    if (unitName.equals(((EntityManagerFactoryInfo) emf).getPersistenceUnitName())) {
+                        return emf;
+                    }
+                }
+            }
+            // No matching persistence unit found - simply take the EntityManagerFactory
+            // with the persistence unit name as bean name (by convention).
+            return beanFactory.getBean(unitName, EntityManagerFactory.class);
+        } else {
+            return BeanFactoryUtils.beanOfType(beanFactory, EntityManagerFactory.class);
+        }
+    }
 
     /**
      * This method can be overridden by subclasses to return a different instance of
@@ -60,7 +84,7 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
      * @return EntityManagerFactory instance
      */
     protected EntityManagerFactory getEntityManagerFactory() {
-        return ContextUtils.getBean(ENTITY_MANAGER_FACTORY_BEAN_NAME);
+        return findEntityManagerFactory(Constants.KSA_PERSISTENCE_UNIT);
     }
 
     /**
