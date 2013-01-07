@@ -523,7 +523,7 @@
     A table containing a list of auditableEntities used in the system
     ********************************************************************************************************************
     -->
-    <!--<bean id="tableSection" parent="Uif-Disclosure-TableCollectionSection"
+    <bean id="tableSection" parent="Uif-Disclosure-TableCollectionSection"
           p:layoutManager.numberOfColumns="4"
           p:width="85%">
         <property name="title" value="View @{humanType}"/>
@@ -573,96 +573,7 @@
                       p:href="settingsView?viewId=SettingsView&amp;pageId=@{simpleType}DetailsPage&amp;methodToCall=get&amp;entityId=@{#line.id}" />
             </list>
         </property>
-    </bean>-->
-
-    <bean id="tableSection" parent="Uif-TableCollectionSection">
-        <property name="layoutManager.numberOfColumns" value="4"/>
-        <property name="width" value="98%"/>
-        <property name="title" value="View @{humanType}"/>
-        <property name="renderAddBlankLineButton" value="true" />
-        <property name="addViaLightBox" value="true" />
-        <property name="addLinePlacement" value="TOP" />
-        <property name="readOnly" value="false"/>
-        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.krad.model.AuditableEntityModel"/>
-        <property name="propertyName" value="auditableEntities"/>
-        <property name="layoutManager.sequencePropertyName" value="id"/>
-        <property name="layoutManager.richTable.render" value="true"/>
-        <property name="layoutManager.renderSequenceField" value="false"/>
-        <property name="layoutManager.applyDefaultCellWidths" value="false"/>
-        <property name="layoutManager.richTable.disableTableSort" value="false"/>
-        <property name="layoutManager.richTable.templateOptions">
-            <map merge="true">
-                <entry key="bPaginate" value="true"/>
-                <entry key="iDisplayLength" value="20"/>
-            </map>
-        </property>
-        <property name="lineActions">
-            <list>
-                <bean parent="Uif-SecondaryActionButton-Small">
-                    <property name="actionLabel" value=""/>
-                    <property name="actionImage">
-                        <bean parent="Uif-Image" p:source="@{getContext()}/images/detailsIcon.png"/>
-                    </property>
-                    <property name="title" value="Details"/>
-                    <property name="actionScript" value="alert('Details clicked');return false;"/>
-                </bean>
-                <bean parent="Uif-SecondaryActionButton-Small">
-                    <property name="actionLabel" value=""/>
-                    <property name="actionImage">
-                        <bean parent="Uif-Image" p:source="@{getContext()}/images/editIcon.png"/>
-                    </property>
-                    <property name="title" value="Edit"/>
-                    <property name="actionScript" value="alert('Edit clicked');return false;"/>
-                </bean>
-                <bean parent="Uif-SecondaryActionButton-Small">
-                    <property name="actionLabel" value=""/>
-                    <property name="actionImage">
-                        <bean parent="Uif-Image" p:source="@{getContext()}/images/deleteIcon.png"/>
-                    </property>
-                    <!--<property name="imageSourceOnHover" value="../ks-enroll-ksink/images/delete2_16x16.png"/>-->
-                    <property name="title" value="Delete"/>
-                    <property name="actionScript" value="alert('Delete clicked');return false;"/>
-                </bean>
-                <!--<bean parent="Uif-KsKrad-Button-ImageOnly">
-                    <property name="imageSource" value="@{getContext()}/images/deleteIcon.png"/>
-                    &lt;!&ndash;<property name="imageSourceOnHover" value="../ks-enroll-ksink/images/delete2_16x16.png"/>&ndash;&gt;
-                    <property name="title" value="Delete"/>
-                    <property name="actionScript" value="alert('Delete clicked');return false;"/>
-                </bean>-->
-            </list>
-        </property>
-        <property name="items">
-            <list>
-                <bean parent="Uif-InputField" p:label="Symbol"
-                      p:propertyName="code"
-                      p:width="10%">
-                    <property name="control">
-                        <bean parent="Uif-TextControl"
-                              p:size="11" p:maxLength="10"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:label="Name"
-                      p:propertyName="name"
-                      p:width="25%">
-                    <property name="control">
-                        <bean parent="Uif-TextControl"
-                              p:size="20" p:maxLength="100"/>
-                    </property>
-                </bean>
-                <bean parent="Uif-InputField" p:label="Description"
-                      p:propertyName="description"
-                      p:width="65%">
-                    <property name="control">
-                        <bean parent="Uif-TextControl"
-                              p:size="60"/>
-                    </property>
-                </bean>
-                <!--<bean parent="Uif-LinkField" p:label="Edit" p:linkText="Edit" p:target="_self" p:width="10%"
-                      p:href="settingsView?viewId=SettingsView&amp;pageId=@{simpleType}DetailsPage&amp;methodToCall=get&amp;entityId=@{#line.id}" />-->
-            </list>
-        </property>
     </bean>
-
 
     <!--
     ********************************************************************************************************************
