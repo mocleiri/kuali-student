@@ -14,7 +14,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     </bean>
 
     <!-- Atp Service Config -->
-    <bean id="atpService" class="org.kuali.student.r2.core.class1.atp.service.impl.AtpServiceImpl">
+    <bean id="atpService" class="com.sigmasys.kuali.ksa.service.atp.KsaAtpServiceImpl">
         <property name="atpDao" ref="atpEnrDao"/>
         <property name="atpRelDao" ref="atpAtpRelationDao"/>
         <!-- <property name="atpRelTypeDao" ref="atpAtpRelationTypeDao"/> -->

@@ -11,6 +11,7 @@ public interface Constants {
     String MODULE_NAME = "KSA";
 
     // Persistence units
+    String KS_PERSISTENCE_UNIT = "ks";
     String KSA_PERSISTENCE_UNIT = "ksa";
     String RICE_PERSISTENCE_UNIT = "rice";
 

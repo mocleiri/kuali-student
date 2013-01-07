@@ -9,9 +9,9 @@ import org.springframework.transaction.jta.JtaTransactionObject;
 import org.springframework.transaction.support.DefaultTransactionStatus;
 
 /**
- * TransactionManagerHelper. 
- * Contains helper methods to manage JDBC and JTA transactions.
- * 
+ * TransactionManagerHelper.
+ * Contains helper methods to manage JTA transactions.
+ *
  * @author Michael Ivanov
  */
 public class TransactionManagerHelper {
@@ -27,34 +27,36 @@ public class TransactionManagerHelper {
     }
 
     public static void doCommit(DefaultTransactionStatus status) {
-        try {
-            if (isCommit(status)) {
+        if (isCommit(status)) {
+            try {
                 JtaTransactionObject txObject = (JtaTransactionObject) status.getTransaction();
                 UserTransaction userTransaction = txObject.getUserTransaction();
                 if (userTransaction.getStatus() != Status.STATUS_NO_TRANSACTION) {
                     userTransaction.commit();
                     logger.debug("JTA transaction [" + userTransaction + "] is commited");
                 }
+            } catch (Throwable t) {
+                String errMsg = "Cannot commit JTA transaction: " + t.getMessage();
+                logger.error(errMsg, t);
+                throw new RuntimeException(errMsg, t);
             }
-        } catch (Throwable t) {
-            logger.error("Cannot commit transaction: " + t.getMessage(), t);
-            throw new RuntimeException("Cannot commit transaction: " + t.getMessage(), t);
         }
     }
 
     public static void doRollback(DefaultTransactionStatus status) {
-        try {
-            if (!status.isCompleted()) {
+        if (!status.isCompleted()) {
+            try {
                 JtaTransactionObject txObject = (JtaTransactionObject) status.getTransaction();
                 UserTransaction userTransaction = txObject.getUserTransaction();
                 if (userTransaction.getStatus() != Status.STATUS_NO_TRANSACTION) {
                     userTransaction.rollback();
                     logger.debug("JTA transaction [" + userTransaction + "] is rolled back");
                 }
+            } catch (Throwable t) {
+                String errMsg = "Cannot rollback JTA transaction: " + t.getMessage();
+                logger.error(errMsg, t);
+                throw new RuntimeException(errMsg, t);
             }
-        } catch (Throwable t) {
-            logger.error("Cannot rollback transaction: " + t.getMessage(), t);
-            throw new RuntimeException("Cannot rollback transaction: " + t.getMessage(), t);
         }
     }
 
