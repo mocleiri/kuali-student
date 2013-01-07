@@ -42,7 +42,17 @@ class CourseOffering
       page.term.set @term
       page.input_code.set @course
       page.show
+
     end
+
+    begin
+      page.link(text: @course).wait_until_present(5)
+      page.target_row(@course).link(text: "Manage").click
+      page.loading.wait_while_present
+    rescue Watir::Wait::TimeoutError
+      #means was single CO returned, AO list is already displayed
+    end
+
     on ManageCourseOfferings do |page|
       @ao_list = page.codes_list
     end
@@ -52,14 +62,14 @@ class CourseOffering
     on CourseOfferingEdit do |page|
       case final_option
         when "Standard final Exam"
-         page.final_exam_option_standard == "STANDARD"
+          page.final_exam_option_standard == "STANDARD"
           @final_exam_type = "STANDARD"
-       when "Alternate final assessment"
-         page.final_exam_option_alternate
+        when "Alternate final assessment"
+          page.final_exam_option_alternate
           @final_exam_type = "ALTERNATE"
         when "No final exam or assessment"
           page.final_exam_option_none
-         @final_exam_type = "NONE"
+          @final_exam_type = "NONE"
       end
     end
   end
@@ -79,7 +89,7 @@ class CourseOffering
   end
 
   def search_by_subjectcode
-  go_to_manage_course_offerings
+    go_to_manage_course_offerings
     on ManageCourseOfferings do |page|
       page.term.set @term
       page.input_code.set @course[0,4]
