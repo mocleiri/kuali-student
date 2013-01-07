@@ -43,14 +43,13 @@ class CourseOffering
       page.input_code.set @course
       page.show
 
-    end
-
-    begin
-      page.link(text: @course).wait_until_present(5)
-      page.target_row(@course).link(text: "Manage").click
-      page.loading.wait_while_present
-    rescue Watir::Wait::TimeoutError
-      #means was single CO returned, AO list is already displayed
+      begin
+        page.link(text: @course).wait_until_present(5)
+        page.target_row(@course).link(text: "Manage").click
+        page.loading.wait_while_present
+      rescue Watir::Wait::TimeoutError
+        #means was single CO returned, AO list is already displayed
+      end
     end
 
     on ManageCourseOfferings do |page|
