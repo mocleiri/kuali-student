@@ -10,7 +10,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
     <parent>
         <groupId>org.kuali.student</groupId>
         <artifactId>student</artifactId>
@@ -19,7 +18,7 @@
 
     <groupId>org.kuali.student.ap</groupId>
     <artifactId>ks-ap</artifactId>
-    <version>${ks.ap.version}</version>
+    <version>0.2.1-KSAP-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>KSAP</name>
     <description>Kuali Student Academic Planning Module</description>
