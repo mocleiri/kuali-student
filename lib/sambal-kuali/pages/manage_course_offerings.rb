@@ -82,6 +82,21 @@ class ManageCourseOfferings < BasePage
     end
   end
 
+  def ao_status(code, status)
+    retVal = false
+    row_text = target_row(code).text
+
+    if row_text.include? status
+      retVal = true
+    end
+    retVal
+  end
+
+  def ao_schedule_data(aoCode)
+     retVal = nil
+     retVal = target_row(aoCode).text
+  end
+
   def codes_list
     codes = []
     activity_offering_results_table.rows.each { |row| codes << row[AO_CODE].text }
