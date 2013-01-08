@@ -4,7 +4,7 @@ When /^I manage an existing Course Offering in Course Offering Code view$/ do
 end
 
 When /^I manage an existing Course Offering in Subject Code view$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM317", :search_by_subj => true
+  @course_offering = make CourseOffering, :course=>"CHEM142", :search_by_subj => true
   @course_offering.manage
 end
 
