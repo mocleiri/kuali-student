@@ -14,7 +14,8 @@ class CourseOffering
                 :final_exam_type,
                 :wait_list,
                 :honors_flag,
-                :affiliated_person
+                :affiliated_person,
+                :search_by_subj
 
 
 
@@ -30,7 +31,8 @@ class CourseOffering
         :final_exam_type => "NONE",
         :wait_list => "NO",
         :honors_flag => "NO",
-        :affiliated_person => nil
+        :affiliated_person => nil,
+        :search_by_subj => false
     }
     options = defaults.merge(opts)
     set_options(options)
