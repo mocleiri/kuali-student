@@ -15,7 +15,8 @@ end
 Then /^I am able to add an Activity Offering$/ do
   on ManageCourseOfferings do |page|
     $total_number = page.codes_list.count
-    page.add_ao
+    format = page.format.options[1].text
+    page.add_ao format, 1
   end
 end
 
