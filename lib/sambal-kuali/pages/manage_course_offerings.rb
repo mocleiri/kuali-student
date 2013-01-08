@@ -90,4 +90,11 @@ class ManageCourseOfferings < BasePage
     codes
   end
 
+  def add_ao
+    format.select(format.options[1].text)
+    loading.wait_while_present(120)
+    activity_type.select(activity_type.options[1].text)
+    quantity.set("1")
+    add
+  end
 end
