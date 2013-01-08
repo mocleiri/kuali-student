@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
+import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.InformationService;
@@ -231,7 +232,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
         if (account == null) {
             String errMsg = "Account with ID = " + accountId + " does not exist";
             logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+            throw new UserNotFoundException(errMsg);
         }
 
         Memo newMemo = new Memo();
@@ -326,7 +327,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
         if (account == null) {
             String errMsg = "Account with ID = " + accountId + " does not exist";
             logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+            throw new UserNotFoundException(errMsg);
         }
 
         FlagType flagType = getEntity(flagTypeId, FlagType.class);
@@ -413,7 +414,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
         if (account == null) {
             String errMsg = "Account with ID = " + accountId + " does not exist";
             logger.error(errMsg);
-            throw new IllegalArgumentException(errMsg);
+            throw new UserNotFoundException(errMsg);
         }
 
         Alert alert = new Alert();

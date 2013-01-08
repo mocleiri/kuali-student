@@ -27,18 +27,45 @@ import javax.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
+    private static final ObjectFactory objectFactory = new ObjectFactory();
+
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.sigmasys.kuali.ksa.transform
      */
-    public ObjectFactory() {
+    private ObjectFactory() {
+    }
+
+    public static ObjectFactory getInstance() {
+        return objectFactory;
     }
 
     /**
-     * Create an instance of {@link GeneralLedgerReport.ReportingPeriod }
+     * Create an instance of {@link AccountReport.Balances }
      */
-    public GeneralLedgerReport.ReportingPeriod createGeneralLedgerReportReportingPeriod() {
-        return new GeneralLedgerReport.ReportingPeriod();
+    public AccountReport.Balances createAccountReportBalances() {
+        return new AccountReport.Balances();
+    }
+
+    /**
+     * Create an instance of {@link AccountReport.Balances.AgedBalance }
+     */
+    public AccountReport.Balances.AgedBalance createAccountReportBalancesAgedBalance() {
+        return new AccountReport.Balances.AgedBalance();
+    }
+
+    /**
+     * Create an instance of {@link AccountReport }
+     */
+    public AccountReport createAccountReport() {
+        return new AccountReport();
+    }
+
+    /**
+     * Create an instance of {@link ReportingPeriod }
+     */
+    public ReportingPeriod createReportingPeriod() {
+        return new ReportingPeriod();
     }
 
     /**

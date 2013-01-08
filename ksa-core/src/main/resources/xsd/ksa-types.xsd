@@ -381,4 +381,13 @@
         </xs:complexType>
     </xs:element>
 
+    <xs:element name="reporting-period">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="start-date" type="xs:date"/>
+                <xs:element name="end-date" type="xs:date"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
 </xs:schema>

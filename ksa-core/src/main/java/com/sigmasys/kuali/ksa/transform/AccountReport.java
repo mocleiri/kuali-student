@@ -16,16 +16,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -101,38 +99,38 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "accountIdentifier",
-    "reportingPeriod",
-    "name",
-    "balances",
-    "transactionDetail"
+        "accountIdentifier",
+        "reportingPeriod",
+        "name",
+        "balances",
+        "transactionDetail"
 })
 @XmlRootElement(name = "account-report")
 public class AccountReport {
 
     @XmlElement(name = "account-identifier", required = true)
     protected String accountIdentifier;
+
     @XmlElement(name = "reporting-period", required = true)
-    protected AccountReport.ReportingPeriod reportingPeriod;
+    protected ReportingPeriod reportingPeriod;
+
     @XmlElement(required = true)
     protected AccountReport.Name name;
+
     @XmlElement(required = true)
     protected AccountReport.Balances balances;
+
     @XmlElement(name = "transaction-detail")
     protected AccountReport.TransactionDetail transactionDetail;
 
     /**
      * Gets the value of the accountIdentifier property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getAccountIdentifier() {
         return accountIdentifier;
@@ -140,11 +138,9 @@ public class AccountReport {
 
     /**
      * Sets the value of the accountIdentifier property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setAccountIdentifier(String value) {
         this.accountIdentifier = value;
@@ -152,35 +148,29 @@ public class AccountReport {
 
     /**
      * Gets the value of the reportingPeriod property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AccountReport.ReportingPeriod }
-     *     
+     *
+     * @return possible object is
+     *         {@link ReportingPeriod }
      */
-    public AccountReport.ReportingPeriod getReportingPeriod() {
+    public ReportingPeriod getReportingPeriod() {
         return reportingPeriod;
     }
 
     /**
      * Sets the value of the reportingPeriod property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AccountReport.ReportingPeriod }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link ReportingPeriod }
      */
-    public void setReportingPeriod(AccountReport.ReportingPeriod value) {
+    public void setReportingPeriod(ReportingPeriod value) {
         this.reportingPeriod = value;
     }
 
     /**
      * Gets the value of the name property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AccountReport.Name }
-     *     
+     *
+     * @return possible object is
+     *         {@link AccountReport.Name }
      */
     public AccountReport.Name getName() {
         return name;
@@ -188,11 +178,9 @@ public class AccountReport {
 
     /**
      * Sets the value of the name property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AccountReport.Name }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AccountReport.Name }
      */
     public void setName(AccountReport.Name value) {
         this.name = value;
@@ -200,11 +188,9 @@ public class AccountReport {
 
     /**
      * Gets the value of the balances property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AccountReport.Balances }
-     *     
+     *
+     * @return possible object is
+     *         {@link AccountReport.Balances }
      */
     public AccountReport.Balances getBalances() {
         return balances;
@@ -212,11 +198,9 @@ public class AccountReport {
 
     /**
      * Sets the value of the balances property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AccountReport.Balances }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AccountReport.Balances }
      */
     public void setBalances(AccountReport.Balances value) {
         this.balances = value;
@@ -224,11 +208,9 @@ public class AccountReport {
 
     /**
      * Gets the value of the transactionDetail property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AccountReport.TransactionDetail }
-     *     
+     *
+     * @return possible object is
+     *         {@link AccountReport.TransactionDetail }
      */
     public AccountReport.TransactionDetail getTransactionDetail() {
         return transactionDetail;
@@ -236,11 +218,9 @@ public class AccountReport {
 
     /**
      * Sets the value of the transactionDetail property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AccountReport.TransactionDetail }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link AccountReport.TransactionDetail }
      */
     public void setTransactionDetail(AccountReport.TransactionDetail value) {
         this.transactionDetail = value;
@@ -249,9 +229,9 @@ public class AccountReport {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     * <p/>
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -281,46 +261,52 @@ public class AccountReport {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "agedBalance",
-        "priorBalance",
-        "totalCharges",
-        "totalPayments",
-        "netBalance",
-        "writtenOff",
-        "unallocatedBalance",
-        "futureBalance"
+            "agedBalance",
+            "priorBalance",
+            "totalCharges",
+            "totalPayments",
+            "netBalance",
+            "writtenOff",
+            "unallocatedBalance",
+            "futureBalance"
     })
     public static class Balances {
 
         @XmlElement(name = "aged-balance")
         protected AccountReport.Balances.AgedBalance agedBalance;
+
         @XmlElement(name = "prior-balance", required = true)
         protected BigDecimal priorBalance;
+
         @XmlElement(name = "total-charges", required = true)
         protected BigDecimal totalCharges;
+
         @XmlElement(name = "total-payments", required = true)
         protected BigDecimal totalPayments;
+
+        @XmlElement(name = "total-deferments", required = true)
+        protected BigDecimal totalDeferments;
+
         @XmlElement(name = "net-balance", required = true)
         protected BigDecimal netBalance;
+
         @XmlElement(name = "written-off", required = true)
         protected BigDecimal writtenOff;
+
         @XmlElement(name = "unallocated-balance", required = true)
         protected BigDecimal unallocatedBalance;
+
         @XmlElement(name = "future-balance", required = true)
         protected BigDecimal futureBalance;
 
         /**
          * Gets the value of the agedBalance property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link AccountReport.Balances.AgedBalance }
-         *     
+         *
+         * @return possible object is
+         *         {@link AccountReport.Balances.AgedBalance }
          */
         public AccountReport.Balances.AgedBalance getAgedBalance() {
             return agedBalance;
@@ -328,11 +314,9 @@ public class AccountReport {
 
         /**
          * Sets the value of the agedBalance property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link AccountReport.Balances.AgedBalance }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link AccountReport.Balances.AgedBalance }
          */
         public void setAgedBalance(AccountReport.Balances.AgedBalance value) {
             this.agedBalance = value;
@@ -340,11 +324,9 @@ public class AccountReport {
 
         /**
          * Gets the value of the priorBalance property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getPriorBalance() {
             return priorBalance;
@@ -352,11 +334,9 @@ public class AccountReport {
 
         /**
          * Sets the value of the priorBalance property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setPriorBalance(BigDecimal value) {
             this.priorBalance = value;
@@ -364,11 +344,9 @@ public class AccountReport {
 
         /**
          * Gets the value of the totalCharges property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getTotalCharges() {
             return totalCharges;
@@ -376,11 +354,9 @@ public class AccountReport {
 
         /**
          * Sets the value of the totalCharges property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setTotalCharges(BigDecimal value) {
             this.totalCharges = value;
@@ -388,11 +364,9 @@ public class AccountReport {
 
         /**
          * Gets the value of the totalPayments property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getTotalPayments() {
             return totalPayments;
@@ -400,23 +374,27 @@ public class AccountReport {
 
         /**
          * Sets the value of the totalPayments property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setTotalPayments(BigDecimal value) {
             this.totalPayments = value;
         }
 
+        public BigDecimal getTotalDeferments() {
+            return totalDeferments;
+        }
+
+        public void setTotalDeferments(BigDecimal totalDeferments) {
+            this.totalDeferments = totalDeferments;
+        }
+
         /**
          * Gets the value of the netBalance property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getNetBalance() {
             return netBalance;
@@ -424,11 +402,9 @@ public class AccountReport {
 
         /**
          * Sets the value of the netBalance property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setNetBalance(BigDecimal value) {
             this.netBalance = value;
@@ -436,11 +412,9 @@ public class AccountReport {
 
         /**
          * Gets the value of the writtenOff property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getWrittenOff() {
             return writtenOff;
@@ -448,11 +422,9 @@ public class AccountReport {
 
         /**
          * Sets the value of the writtenOff property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setWrittenOff(BigDecimal value) {
             this.writtenOff = value;
@@ -460,11 +432,9 @@ public class AccountReport {
 
         /**
          * Gets the value of the unallocatedBalance property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getUnallocatedBalance() {
             return unallocatedBalance;
@@ -472,11 +442,9 @@ public class AccountReport {
 
         /**
          * Sets the value of the unallocatedBalance property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setUnallocatedBalance(BigDecimal value) {
             this.unallocatedBalance = value;
@@ -484,11 +452,9 @@ public class AccountReport {
 
         /**
          * Gets the value of the futureBalance property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getFutureBalance() {
             return futureBalance;
@@ -496,11 +462,9 @@ public class AccountReport {
 
         /**
          * Sets the value of the futureBalance property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setFutureBalance(BigDecimal value) {
             this.futureBalance = value;
@@ -509,9 +473,9 @@ public class AccountReport {
 
         /**
          * <p>Java class for anonymous complex type.
-         * 
+         * <p/>
          * <p>The following schema fragment specifies the expected content contained within this class.
-         * 
+         * <p/>
          * <pre>
          * &lt;complexType>
          *   &lt;complexContent>
@@ -524,43 +488,39 @@ public class AccountReport {
          *   &lt;/complexContent>
          * &lt;/complexType>
          * </pre>
-         * 
-         * 
          */
         @XmlAccessorType(XmlAccessType.FIELD)
         @XmlType(name = "", propOrder = {
-            "periodLengthAndPeriodBalance"
+                "periodLengthAndPeriodBalance"
         })
         public static class AgedBalance {
 
             @XmlElements({
-                @XmlElement(name = "period-length", required = true, type = Integer.class),
-                @XmlElement(name = "period-balance", required = true, type = BigDecimal.class)
+                    @XmlElement(name = "period-length", required = true, type = Integer.class),
+                    @XmlElement(name = "period-balance", required = true, type = BigDecimal.class)
             })
             protected List<Comparable> periodLengthAndPeriodBalance;
 
             /**
              * Gets the value of the periodLengthAndPeriodBalance property.
-             * 
-             * <p>
+             * <p/>
+             * <p/>
              * This accessor method returns a reference to the live list,
              * not a snapshot. Therefore any modification you make to the
              * returned list will be present inside the JAXB object.
              * This is why there is not a <CODE>set</CODE> method for the periodLengthAndPeriodBalance property.
-             * 
-             * <p>
+             * <p/>
+             * <p/>
              * For example, to add a new item, do as follows:
              * <pre>
              *    getPeriodLengthAndPeriodBalance().add(newItem);
              * </pre>
-             * 
-             * 
-             * <p>
+             * <p/>
+             * <p/>
+             * <p/>
              * Objects of the following type(s) are allowed in the list
              * {@link Integer }
              * {@link BigDecimal }
-             * 
-             * 
              */
             public List<Comparable> getPeriodLengthAndPeriodBalance() {
                 if (periodLengthAndPeriodBalance == null) {
@@ -576,9 +536,9 @@ public class AccountReport {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     * <p/>
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -591,13 +551,11 @@ public class AccountReport {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "personName",
-        "companyName"
+            "personName",
+            "companyName"
     })
     public static class Name {
 
@@ -608,11 +566,9 @@ public class AccountReport {
 
         /**
          * Gets the value of the personName property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link PersonName }
-         *     
+         *
+         * @return possible object is
+         *         {@link PersonName }
          */
         public PersonName getPersonName() {
             return personName;
@@ -620,11 +576,9 @@ public class AccountReport {
 
         /**
          * Sets the value of the personName property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link PersonName }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link PersonName }
          */
         public void setPersonName(PersonName value) {
             this.personName = value;
@@ -632,11 +586,9 @@ public class AccountReport {
 
         /**
          * Gets the value of the companyName property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getCompanyName() {
             return companyName;
@@ -644,11 +596,9 @@ public class AccountReport {
 
         /**
          * Sets the value of the companyName property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setCompanyName(String value) {
             this.companyName = value;
@@ -659,94 +609,9 @@ public class AccountReport {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     * <p/>
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
-     * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       &lt;sequence>
-     *         &lt;element name="start-date" type="{http://www.w3.org/2001/XMLSchema}date"/>
-     *         &lt;element name="end-date" type="{http://www.w3.org/2001/XMLSchema}date"/>
-     *       &lt;/sequence>
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
-     * </pre>
-     * 
-     * 
-     */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = {
-        "startDate",
-        "endDate"
-    })
-    public static class ReportingPeriod {
-
-        @XmlElement(name = "start-date", required = true)
-        @XmlSchemaType(name = "date")
-        protected XMLGregorianCalendar startDate;
-        @XmlElement(name = "end-date", required = true)
-        @XmlSchemaType(name = "date")
-        protected XMLGregorianCalendar endDate;
-
-        /**
-         * Gets the value of the startDate property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link XMLGregorianCalendar }
-         *     
-         */
-        public XMLGregorianCalendar getStartDate() {
-            return startDate;
-        }
-
-        /**
-         * Sets the value of the startDate property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link XMLGregorianCalendar }
-         *     
-         */
-        public void setStartDate(XMLGregorianCalendar value) {
-            this.startDate = value;
-        }
-
-        /**
-         * Gets the value of the endDate property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link XMLGregorianCalendar }
-         *     
-         */
-        public XMLGregorianCalendar getEndDate() {
-            return endDate;
-        }
-
-        /**
-         * Sets the value of the endDate property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link XMLGregorianCalendar }
-         *     
-         */
-        public void setEndDate(XMLGregorianCalendar value) {
-            this.endDate = value;
-        }
-
-    }
-
-
-    /**
-     * <p>Java class for anonymous complex type.
-     * 
-     * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -758,12 +623,10 @@ public class AccountReport {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "listTransaction"
+            "listTransaction"
     })
     public static class TransactionDetail {
 
@@ -772,25 +635,23 @@ public class AccountReport {
 
         /**
          * Gets the value of the listTransaction property.
-         * 
-         * <p>
+         * <p/>
+         * <p/>
          * This accessor method returns a reference to the live list,
          * not a snapshot. Therefore any modification you make to the
          * returned list will be present inside the JAXB object.
          * This is why there is not a <CODE>set</CODE> method for the listTransaction property.
-         * 
-         * <p>
+         * <p/>
+         * <p/>
          * For example, to add a new item, do as follows:
          * <pre>
          *    getListTransaction().add(newItem);
          * </pre>
-         * 
-         * 
-         * <p>
+         * <p/>
+         * <p/>
+         * <p/>
          * Objects of the following type(s) are allowed in the list
          * {@link ListTransaction }
-         * 
-         * 
          */
         public List<ListTransaction> getListTransaction() {
             if (listTransaction == null) {

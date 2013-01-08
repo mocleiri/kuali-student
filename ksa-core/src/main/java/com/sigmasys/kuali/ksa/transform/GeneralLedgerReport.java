@@ -87,7 +87,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 public class GeneralLedgerReport {
 
     @XmlElement(name = "reporting-period", required = true)
-    protected GeneralLedgerReport.ReportingPeriod reportingPeriod;
+    protected ReportingPeriod reportingPeriod;
     @XmlElement(name = "general-ledger-report-entry", required = true)
     protected GeneralLedgerReport.GeneralLedgerReportEntry generalLedgerReportEntry;
 
@@ -95,9 +95,9 @@ public class GeneralLedgerReport {
      * Gets the value of the reportingPeriod property.
      *
      * @return possible object is
-     *         {@link GeneralLedgerReport.ReportingPeriod }
+     *         {@link ReportingPeriod }
      */
-    public GeneralLedgerReport.ReportingPeriod getReportingPeriod() {
+    public ReportingPeriod getReportingPeriod() {
         return reportingPeriod;
     }
 
@@ -105,9 +105,9 @@ public class GeneralLedgerReport {
      * Sets the value of the reportingPeriod property.
      *
      * @param value allowed object is
-     *              {@link GeneralLedgerReport.ReportingPeriod }
+     *              {@link ReportingPeriod }
      */
-    public void setReportingPeriod(GeneralLedgerReport.ReportingPeriod value) {
+    public void setReportingPeriod(ReportingPeriod value) {
         this.reportingPeriod = value;
     }
 
@@ -480,81 +480,6 @@ public class GeneralLedgerReport {
          */
         public void setTransmissionPeriod(String value) {
             this.transmissionPeriod = value;
-        }
-
-    }
-
-
-    /**
-     * <p>Java class for anonymous complex type.
-     * <p/>
-     * <p>The following schema fragment specifies the expected content contained within this class.
-     * <p/>
-     * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       &lt;sequence>
-     *         &lt;element name="start-date" type="{http://www.w3.org/2001/XMLSchema}date"/>
-     *         &lt;element name="end-date" type="{http://www.w3.org/2001/XMLSchema}date"/>
-     *       &lt;/sequence>
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
-     * </pre>
-     */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = {
-            "startDate",
-            "endDate"
-    })
-    public static class ReportingPeriod {
-
-        @XmlElement(name = "start-date", required = true)
-        @XmlSchemaType(name = "date")
-        protected XMLGregorianCalendar startDate;
-        @XmlElement(name = "end-date", required = true)
-        @XmlSchemaType(name = "date")
-        protected XMLGregorianCalendar endDate;
-
-        /**
-         * Gets the value of the startDate property.
-         *
-         * @return possible object is
-         *         {@link XMLGregorianCalendar }
-         */
-        public XMLGregorianCalendar getStartDate() {
-            return startDate;
-        }
-
-        /**
-         * Sets the value of the startDate property.
-         *
-         * @param value allowed object is
-         *              {@link XMLGregorianCalendar }
-         */
-        public void setStartDate(XMLGregorianCalendar value) {
-            this.startDate = value;
-        }
-
-        /**
-         * Gets the value of the endDate property.
-         *
-         * @return possible object is
-         *         {@link XMLGregorianCalendar }
-         */
-        public XMLGregorianCalendar getEndDate() {
-            return endDate;
-        }
-
-        /**
-         * Sets the value of the endDate property.
-         *
-         * @param value allowed object is
-         *              {@link XMLGregorianCalendar }
-         */
-        public void setEndDate(XMLGregorianCalendar value) {
-            this.endDate = value;
         }
 
     }

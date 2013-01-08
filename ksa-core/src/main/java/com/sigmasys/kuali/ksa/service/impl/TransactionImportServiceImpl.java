@@ -129,7 +129,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         XMLGregorianCalendar creationDate;
         com.sigmasys.kuali.ksa.model.Account firstAccount = null;
 
-        ObjectFactory objectFactory = new ObjectFactory();
+        ObjectFactory objectFactory = ObjectFactory.getInstance();
         KsaBatchTransactionResponse.Accepted accepted = objectFactory.createKsaBatchTransactionResponseAccepted();
         KsaBatchTransactionResponse.Failed failed = objectFactory.createKsaBatchTransactionResponseFailed();
         KsaBatchTransactionResponse.BatchSummary batchSummary = objectFactory.createKsaBatchTransactionResponseBatchSummary();

@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import javax.persistence.Query;
 
+import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
@@ -123,6 +124,12 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
 
         // Retrieve the Account and other data:
         Account account = accountService.getFullAccount(accountId);
+        if (account == null) {
+            String errMsg = "Account with ID = " + accountId + " does not exist";
+            logger.error(errMsg);
+            throw new UserNotFoundException(errMsg);
+        }
+
         List<KeyPair> studentData = getStudentData(accountId);
         List<PeriodKeyPair> periodData = getLearningPeriodData(accountId);
         List<LearningUnit> study = getLearningUnits(accountId);

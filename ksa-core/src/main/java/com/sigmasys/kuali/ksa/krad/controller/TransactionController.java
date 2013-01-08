@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
+import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.krad.form.TransactionForm;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Currency;
@@ -240,6 +241,6 @@ public class TransactionController extends GenericSearchController {
         if (account != null) {
             return account;
         }
-        throw new IllegalStateException("Cannot find Account by ID = " + accountId);
+        throw new UserNotFoundException("Cannot find Account by ID = " + accountId);
     }
 }

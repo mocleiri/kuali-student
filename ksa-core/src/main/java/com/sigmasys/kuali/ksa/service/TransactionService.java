@@ -198,7 +198,18 @@ public interface TransactionService {
      *
      * @return List of transactions
      */
+    @WebMethod(exclude = true)
     List<Transaction> getTransactions(String userId);
+
+    /**
+     * Returns all transactions by account ID and date range
+     *
+     * @param userId   Account ID
+     * @param fromDate Start date
+     * @param toDate   End date
+     * @return List of transactions
+     */
+    List<Transaction> getTransactions(String userId, Date fromDate, Date toDate);
 
     /**
      * Returns all charges by account ID

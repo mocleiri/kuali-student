@@ -69,13 +69,26 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
 
-    private <T extends Transaction> List<T> getTransactions(Class<T> entityType, String... userIds) {
+    private <T extends Transaction> List<T> getTransactions(Class<T> entityType, Date fromDate, Date toDate,
+                                                            String... userIds) {
         Query query = em.createQuery("select t from " + entityType.getName() + " t " + GET_TRANSACTION_JOIN +
                 ((userIds != null && userIds.length > 0) ? " where t.account.id in (:userIds) " : "") +
+                (fromDate != null ? " and t.effectiveDate >= :fromDate " : "") +
+                (toDate != null ? " and t.effectiveDate <= :toDate " : "") +
                 " order by t.id desc");
+
+        if (fromDate != null) {
+            query.setParameter("fromDate", fromDate);
+        }
+
+        if (toDate != null) {
+            query.setParameter("toDate", toDate);
+        }
+
         if (userIds != null && userIds.length > 0) {
             query.setParameter("userIds", Arrays.asList(userIds));
         }
+
         return (List<T>) query.getResultList();
     }
 
@@ -510,7 +523,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Override
     @WebMethod(exclude = true)
     public List<Transaction> getTransactions() {
-        return getTransactions(Transaction.class);
+        return getTransactions(Transaction.class, null, null);
     }
 
     /**
@@ -521,7 +534,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Override
     @WebMethod(exclude = true)
     public List<Charge> getCharges() {
-        return getTransactions(Charge.class);
+        return getTransactions(Charge.class, null, null);
     }
 
     /**
@@ -532,7 +545,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Charge> getCharges(String userId) {
-        return getTransactions(Charge.class, userId);
+        return getTransactions(Charge.class, null, null, userId);
     }
 
     /**
@@ -543,7 +556,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Override
     @WebMethod(exclude = true)
     public List<Payment> getPayments() {
-        return getTransactions(Payment.class);
+        return getTransactions(Payment.class, null, null);
     }
 
     /**
@@ -554,7 +567,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Payment> getPayments(String userId) {
-        return getTransactions(Payment.class, userId);
+        return getTransactions(Payment.class, null, null, userId);
     }
 
 
@@ -566,7 +579,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Override
     @WebMethod(exclude = true)
     public List<Deferment> getDeferments() {
-        return getTransactions(Deferment.class);
+        return getTransactions(Deferment.class, null, null);
     }
 
     /**
@@ -577,19 +590,34 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Deferment> getDeferments(String userId) {
-        return getTransactions(Deferment.class, userId);
+        return getTransactions(Deferment.class, null, null, userId);
     }
 
     /**
-     * Returns all transactions sorted by ID
+     * Returns all transactions by account ID
      *
      * @param userId Account ID
      * @return List of transactions
      */
     @Override
+    @WebMethod(exclude = true)
     public List<Transaction> getTransactions(String userId) {
-        return getTransactions(Transaction.class, userId);
+        return getTransactions(Transaction.class, null, null, userId);
     }
+
+    /**
+     * Returns all transactions by account ID and date range
+     *
+     * @param userId   Account ID
+     * @param fromDate Start date
+     * @param toDate   End date
+     * @return List of transactions
+     */
+    @Override
+    public List<Transaction> getTransactions(String userId, Date fromDate, Date toDate) {
+        return getTransactions(Transaction.class, fromDate, toDate, userId);
+    }
+
 
     /**
      * Persists the transaction in the database.

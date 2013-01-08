@@ -130,14 +130,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="account-identifier" type="xs:string"/>
-                <xs:element name="reporting-period">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="start-date" type="xs:date"/>
-                            <xs:element name="end-date" type="xs:date"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
+                <xs:element ref="reporting-period"/>
                 <xs:element name="name">
                     <xs:complexType>
                         <xs:choice>
@@ -160,6 +153,7 @@
                             <xs:element name="prior-balance" type="xs:decimal"/>
                             <xs:element name="total-charges" type="xs:decimal"/>
                             <xs:element name="total-payments" type="xs:decimal"/>
+                            <xs:element name="total-deferments" type="xs:decimal"/>
                             <xs:element name="net-balance" type="xs:decimal"/>
                             <xs:element name="written-off" type="xs:decimal"/>
                             <xs:element name="unallocated-balance" type="xs:decimal"/>
@@ -181,14 +175,7 @@
     <xs:element name="general-ledger-report">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="reporting-period">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="start-date" type="xs:date"/>
-                            <xs:element name="end-date" type="xs:date"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
+                <xs:element ref="reporting-period"/>
                 <xs:element name="general-ledger-report-entry">
                     <xs:complexType>
                         <xs:sequence>

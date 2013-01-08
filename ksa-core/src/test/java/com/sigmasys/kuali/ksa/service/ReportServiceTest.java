@@ -67,7 +67,7 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
         Date startDate = dateFormat.parse("01/01/1970");
         Date endDate = dateFormat.parse("01/01/2020");
 
-        String xml = reportService.generateGeneralLedgerReport(startDate, endDate, glAccountId);
+        String xml = reportService.generateGeneralLedgerReport(glAccountId, startDate, endDate);
 
         logger.debug("GL Report: \n" + xml);
 
@@ -110,7 +110,7 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
         Date startDate = dateFormat.parse("12/01/2010");
         Date endDate = dateFormat.parse("12/01/2015");
 
-        xml = reportService.generateGeneralLedgerReport(startDate, endDate, glAccountId, true);
+        xml = reportService.generateGeneralLedgerReport(glAccountId, startDate, endDate, true);
 
         logger.debug("GL Report: \n" + xml);
 
