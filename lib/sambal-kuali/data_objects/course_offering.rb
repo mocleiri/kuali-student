@@ -130,6 +130,13 @@ class CourseOffering
     end
   end
 
+  def copy_ao(ao_code)
+    aoCode = ao_code[:ao_code]
+    on ManageCourseOfferings do |page|
+      page.copy(aoCode)
+    end
+  end
+
   def delete_ao_list(ao_code_list)
     @aoCode = ao_code_list[:code_list]
     on ManageCourseOfferings do |page|
@@ -140,6 +147,28 @@ class CourseOffering
     on ActivityOfferingConfirmDelete do |page|
       page.delete_activity_offering
     end
+  end
+
+  def ao_status(inputOrg)
+    retVal = nil
+    aoCode = inputOrg[:inputs][0]
+    aoState = inputOrg[:inputs][1]
+    on ManageCourseOfferings do |page|
+      if page.ao_status(aoCode, aoState)
+        retVal = aoState
+      end
+    end
+    retVal
+  end
+
+  def ao_schedule_data(ao_code)
+    retVal = nil
+    aoCode = ao_code[:ao_code]
+    on ManageCourseOfferings do |page|
+       retVal = page.ao_schedule_data(aoCode)
+    end
+
+    retVal
   end
 
   def add_ao_cluster(ao_cluster)

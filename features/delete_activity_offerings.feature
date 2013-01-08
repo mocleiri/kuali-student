@@ -8,7 +8,13 @@ Feature: delete activity offerings
 
   Background:
     Given I am logged in as admin
-    Given I am managing a course offering
+    Given I am managing a course offering that has Offered AOs
+
+
+
+  Scenario: Create four AOs with Draft state to be deleted after
+    When I copy four AOs
+    Then Four AOs are Successfully created
 
   Scenario: Delete three AOs
     When I delete the selected three AOs
