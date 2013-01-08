@@ -4,12 +4,8 @@ When /^I manage an existing Course Offering in Course Offering Code view$/ do
 end
 
 When /^I manage an existing Course Offering in Subject Code view$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM"
+  @course_offering = make CourseOffering, :course=>"CHEM317", :search_by_subj => true
   @course_offering.manage
-  on ManageCourseOfferingList do |page|
-    co_code = page.co_list[0]
-    page.manage(co_code)
-  end
 end
 
 Then /^I am able to add an Activity Offering$/ do

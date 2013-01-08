@@ -40,7 +40,13 @@ class CourseOffering
     go_to_manage_course_offerings
     on ManageCourseOfferings do |page|
       page.term.set @term
-      page.input_code.set @course
+
+      if @search_by_subj
+        page.input_code.set @course[0,4]
+      else
+        page.input_code.set @course
+      end
+
       page.show
 
       begin
