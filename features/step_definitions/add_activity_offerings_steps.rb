@@ -19,8 +19,12 @@ end
 Then /^I am able to copy an Activity Offering$/ do
   on ManageCourseOfferings do |page|
     $total_number = page.codes_list.count
-    ao_code = page.codes_list[0]
-    page.copy(ao_code)
+
+    if $total_number > 0
+      ao_code = page.codes_list[0]
+      page.copy(ao_code)
+    end
+
   end
 end
 
