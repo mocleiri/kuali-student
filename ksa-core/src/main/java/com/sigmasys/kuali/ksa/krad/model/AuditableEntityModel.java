@@ -1,9 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.model;
 
-import com.sigmasys.kuali.ksa.model.AuditableEntity;
-import com.sigmasys.kuali.ksa.model.Currency;
-import com.sigmasys.kuali.ksa.model.GeneralLedgerType;
-import com.sigmasys.kuali.ksa.model.Rollup;
+import com.sigmasys.kuali.ksa.model.*;
 
 import java.util.Date;
 

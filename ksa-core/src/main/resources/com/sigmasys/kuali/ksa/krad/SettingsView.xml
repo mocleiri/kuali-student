@@ -28,35 +28,7 @@
         <property name="headerText" value="Settings"/>
         <property name="entryPageId" value="CurrencyPage"/>
         <property name="navigation">
-            <bean parent="Uif-KsaPageNavigation">
-                <property name="items">
-                    <list>
-                        <bean parent="Uif-HeaderTwo" p:headerText="Settings"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="UserProfilePage"
-                              p:actionLabel="User Profile"/>
-                        <bean parent="Uif-Link" p:linkText="Currency Types" p:target="_self"
-                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=CurrencyPage"/>
-                        <bean parent="Uif-Link" p:linkText="Roll-Ups" p:target="_self"
-                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=RollupPage"/>
-                        <bean parent="Uif-Link" p:linkText="Tags" p:target="_self"
-                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=TagPage"/>
-                        <bean parent="Uif-Link" p:linkText="General Ledger Types" p:target="_self"
-                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=GeneralLedgerTypePage"/>
-                        <bean parent="Uif-Link" p:linkText="Bank Types" p:target="_self"
-                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=BankTypePage"/>
-                        <bean parent="Uif-Link" p:linkText="Tax Types" p:target="_self"
-                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=TaxTypePage"/>
-                        <bean parent="Uif-Link" p:linkText="Late Periods" p:target="_self"
-                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=LatePeriodPage"/>
-                        <bean parent="Uif-Link" p:linkText="Account Status Types" p:target="_self"
-                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=AccountStatusTypePage"/>
-                        <bean parent="Uif-Link" p:linkText="Flag Types" p:target="_self"
-                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=FlagTypePage"/>
-                        <bean parent="Uif-Link" p:linkText="Activity Types" p:target="_self"
-                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=ActivityTypePage"/>
-                    </list>
-                </property>
-            </bean>
+            <ref bean="settingsNavigation"/>
         </property>
         <property name="items">
             <list merge="true">
@@ -499,6 +471,36 @@
                 <property name="defaultBindingObjectPath" value=""/>
         -->
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.SettingsForm"/>
+    </bean>
+
+    <bean name="settingsNavigation" parent="Uif-KsaPageNavigation">
+        <property name="items">
+            <list>
+                <bean parent="Uif-HeaderTwo" p:headerText="Settings"/>
+                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="UserProfilePage"
+                      p:actionLabel="User Profile"/>
+                <bean parent="Uif-Link" p:linkText="Currency Types" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=CurrencyPage"/>
+                <bean parent="Uif-Link" p:linkText="Roll-Ups" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=RollupPage"/>
+                <bean parent="Uif-Link" p:linkText="Tags" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=TagPage"/>
+                <bean parent="Uif-Link" p:linkText="Transaction Types" p:target="_self"
+                      p:href="transactionTypeView?methodToCall=get&amp;viewId=TransactionTypeView&amp;pageId=TransactionTypePage"/>
+                <bean parent="Uif-Link" p:linkText="Bank Types" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=BankTypePage"/>
+                <bean parent="Uif-Link" p:linkText="Tax Types" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=TaxTypePage"/>
+                <bean parent="Uif-Link" p:linkText="Late Periods" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=LatePeriodPage"/>
+                <bean parent="Uif-Link" p:linkText="Account Status Types" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=AccountStatusTypePage"/>
+                <bean parent="Uif-Link" p:linkText="Flag Types" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=FlagTypePage"/>
+                <bean parent="Uif-Link" p:linkText="Activity Types" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=ActivityTypePage"/>
+            </list>
+        </property>
     </bean>
 
     <!--
