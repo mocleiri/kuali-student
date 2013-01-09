@@ -217,7 +217,31 @@ class CourseOffering
     on ManageCourseOfferingList do |page|
       post_copy_co_list = page.co_list
     end
+
     @course = (post_copy_co_list - pre_copy_co_list).first
+  end
+
+  def delete_co(args={})
+
+    should_confirm_delete = false
+    case args[:should_confirm_delete]
+      when true
+        should_confirm_delete = true
+    end
+
+    manage
+    on ManageCourseOfferings do |page|
+      page.delete_offering
+    end
+
+    on DeleteCourseOffering do |page|
+      if should_confirm_delete
+        page.confirm_delete
+      else
+        page.cancel_delete
+      end
+    end
+
   end
 
   def cleanup_all_ao_clusters
