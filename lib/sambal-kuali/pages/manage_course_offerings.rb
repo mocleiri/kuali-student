@@ -52,6 +52,10 @@ class ManageCourseOfferings < BasePage
     target_row(code).cells[AO_CODE].link.attribute_value("href").scan(/aoInfo.id=(.*)&dataObjectClassName/)[0][0]
   end
 
+  def ao_status(code)
+    target_row(code).cells[AO_STATUS].text
+  end
+
   def copy(code)
     target_row(code).link(text: "Copy").click
     loading.wait_while_present
