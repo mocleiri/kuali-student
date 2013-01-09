@@ -1,4 +1,4 @@
-@wip
+@pending
 Feature: delete activity offerings
 
   CO 10.1: As a Departmental Administrator, I want to delete one or more Activity Offerings associated
