@@ -16,5 +16,8 @@ class CreateCourseOffering < BasePage
   action(:create_from_existing_offering)  { |b| b.create_offering_from_div.link(text: /Existing Offering/).click }
   element(:suffix) { |b| b.frm.div(data_label: "Add Suffix").text_field() }
 
+  element(:create_from_existing_offering_tab) { |b| b.frm.link(text: /Create from Existing Offering/) }
+
+  element(:create_from_existing_offering_copy_button) { |b| b.frm.link(text: /Copy/) }
 
 end

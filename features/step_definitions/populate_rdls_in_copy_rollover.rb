@@ -110,29 +110,6 @@ And /^The RDL is Successfully copied to RDL in the new AO$/ do
   puts(@cur_schedule)
 end
 
-When /^I copy an CO with AOs that have ADLs to a new CO in the different term with RDLs in its AOs$/ do
-#  pending # express the regexp above with the code you wish you had
-end
-
-Then /^The new CO and AOs are Successfully created$/ do
-#  pending # express the regexp above with the code you wish you had
-end
-
-And /^The ADLs are Successfully copied to RDLs in the new AOs of the newly created CO$/ do
-#  pending # express the regexp above with the code you wish you had
-end
-
-When /^I roll over an term to a new target term$/ do
-#  pending # express the regexp above with the code you wish you had
-end
-
-Then /^The COs and AOs in the previous term are Successfully rolled over to the target term$/ do
-#  pending # express the regexp above with the code you wish you had
-end
-
-And /^The ADLs are Successfully copied as RDLs to the rolled over AOs$/ do
-#  pending # express the regexp above with the code you wish you had
-end
 
 Given /^I am managing a course offering that has Offered AOs$/ do
   @course_offering = make CourseOffering
