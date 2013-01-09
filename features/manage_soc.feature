@@ -1,4 +1,4 @@
-@wip
+@pending
 Feature: Manage SOC
 
 As Central Administrator, I want to process delivery logistics requests for all Activity Offerings within a selected Term
