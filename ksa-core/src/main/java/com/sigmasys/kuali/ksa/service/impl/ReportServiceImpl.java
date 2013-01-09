@@ -73,6 +73,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      * Adds AOP advice to the current instance.
      */
     @Override
+    @WebMethod(exclude = true)
     public List<Advice> getAdvices(BeanFactory beanFactory) {
         List<Advice> advices = super.getAdvices(beanFactory);
         if (advices == null) {
