@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 
 import com.sigmasys.kuali.ksa.krad.form.SettingsForm;
+import com.sigmasys.kuali.ksa.krad.form.TransactionTypeForm;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.model.Rollup;
 import com.sigmasys.kuali.ksa.model.TransactionType;
@@ -38,7 +39,7 @@ public class TransactionTypeControllerTest extends AbstractServiceTest {
     @Autowired
     private PersistenceService persistenceService;
 
-    private SettingsForm form;
+    private TransactionTypeForm form;
 
     private String userId = "admin";
 
@@ -75,9 +76,9 @@ public class TransactionTypeControllerTest extends AbstractServiceTest {
         Assert.notNull(modelAndView);
         Assert.notNull(form);
 
-        Assert.notNull(form.getAuditableEntities());
-        Assert.isTrue(form.getAuditableEntities().size() == types.size());
-        Assert.isTrue(form.getAuditableEntities().size() > 0);
+        Assert.notNull(form.getTransactionTypes());
+        Assert.isTrue(form.getTransactionTypes().size() == types.size());
+        Assert.isTrue(form.getTransactionTypes().size() > 0);
     }
 
 /*

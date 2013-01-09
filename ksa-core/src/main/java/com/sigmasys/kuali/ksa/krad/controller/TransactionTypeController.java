@@ -33,8 +33,8 @@ public class TransactionTypeController extends GenericSearchController {
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
      */
     @Override
-    protected SettingsForm createInitialForm(HttpServletRequest request) {
-        SettingsForm form = new SettingsForm();
+    protected TransactionTypeForm createInitialForm(HttpServletRequest request) {
+        TransactionTypeForm form = new TransactionTypeForm();
         form.setStatusMessage("");
         return form;
     }
@@ -45,7 +45,7 @@ public class TransactionTypeController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.GET, params = "methodToCall=get")
-    public ModelAndView get(@ModelAttribute("KualiForm") SettingsForm form, HttpServletRequest request) {
+    public ModelAndView get(@ModelAttribute("KualiForm") TransactionTypeForm form, HttpServletRequest request) {
 
         // do get stuff...
         String viewId = request.getParameter("viewId");
@@ -59,12 +59,12 @@ public class TransactionTypeController extends GenericSearchController {
             //form.setTransactionType(new TransactionType());
             List<TransactionType> entities = auditableEntityService.getAuditableEntities(TransactionType.class);
             logger.info("Transaction Type Count: " + entities.size());
-            form.setAuditableEntities(entities);
+            form.setTransactionTypes(entities);
         } else if ("TransactionTypeDetailsPage".equals(pageId)) {
             if (entityId == null || entityId.trim().isEmpty()) {
                 throw new IllegalArgumentException("'entityId' request parameter must be specified");
             }
-            form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), TransactionType.class));
+            form.setTransactionType(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), TransactionType.class));
         }
 
         return getUIFModelAndView(form);
@@ -95,7 +95,7 @@ public class TransactionTypeController extends GenericSearchController {
 
             auditableEntityService.createAuditableEntity(code, name, description, entity.getClass());
 
-            form.setAuditableEntities((List<TransactionType>)auditableEntityService.getAuditableEntities(entity.getClass()));
+            form.setAuditableEntities((List<TransactionType>) auditableEntityService.getAuditableEntities(entity.getClass()));
 
             // success in creating the currency.
             String statusMsg = "Success: Transaction Type saved, ID = " + entity.getId();
