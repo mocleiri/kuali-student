@@ -1,5 +1,4 @@
-#$test_site = "http://env2.ks.kuali.org" # TODO: This needs some serious re-thinking. Should come from a yaml config file instead of being explicitly declared here.
-$test_site = "http://localhost:8081/ks-with-rice-bundled-dev"
+$test_site = "http://env2.ks.kuali.org" # TODO: This needs some serious re-thinking. Should come from a yaml config file instead of being explicitly declared here.
 
 $: << File.dirname(__FILE__)+'/../../lib'
 
