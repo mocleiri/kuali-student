@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -25,7 +23,7 @@ import java.util.List;
 @RequestMapping(value = "/settingsView")
 public class SettingsController extends GenericSearchController {
 
-    private static final Log logger = LogFactory.getLog(SponsorController.class);
+    private static final Log logger = LogFactory.getLog(SettingsController.class);
 
     @Autowired
     private AuditableEntityService auditableEntityService;
@@ -58,7 +56,9 @@ public class SettingsController extends GenericSearchController {
 
         // Currency type
         if ("CurrencyPage".equals(pageId)) {
-            form.setAuditableEntity(new Currency());
+            Currency c = new Currency();
+            form.setAuditableEntity(c);
+
             form.setAuditableEntities(auditableEntityService.getAuditableEntities(Currency.class));
         } else if ("CurrencyDetailsPage".equals(pageId)) {
             if (entityId == null || entityId.trim().isEmpty()) {
@@ -73,6 +73,14 @@ public class SettingsController extends GenericSearchController {
                 throw new IllegalArgumentException("'entityId' request parameter must be specified");
             }
             form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), Rollup.class));
+        } else if ("TagPage".equals(pageId)) {
+            form.setAuditableEntity(new Tag());
+            form.setAuditableEntities(auditableEntityService.getAuditableEntities(Tag.class));
+        } else if ("TagDetailsPage".equals(pageId)) {
+            if (entityId == null || entityId.trim().isEmpty()) {
+                throw new IllegalArgumentException("'entityId' request parameter must be specified");
+            }
+            form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), Tag.class));
         } else if ("BankTypePage".equals(pageId)) {
             form.setAuditableEntity(new BankType());
             form.setAuditableEntities(auditableEntityService.getAuditableEntities(BankType.class));
@@ -176,11 +184,26 @@ public class SettingsController extends GenericSearchController {
      * @param form
      * @return
      */
-    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertRollup")
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertAuditableEntity")
     public ModelAndView insertAuditableEntity(@ModelAttribute("KualiForm") SettingsForm form) {
 
         AuditableEntityModel entity = form.getAuditableEntity();
         AuditableEntity parentEntity = entity.getParentEntity();
+
+        if(entity == null){
+            logger.info("Entity is null");
+        } else {
+            logger.info("Entity is of type : " + entity.getClass().getName());
+            logger.info("Entity code: " + entity.getCode());
+        }
+
+        if(parentEntity == null){
+            logger.info("Parent entity is null");
+        } else {
+            logger.info("Parent entity is of type : " + parentEntity.getClass().getName());
+        }
+
+
         try {
 
             String code = parentEntity.getCode();
@@ -191,6 +214,7 @@ public class SettingsController extends GenericSearchController {
 
             form.setAuditableEntities(auditableEntityService.getAuditableEntities(parentEntity.getClass()));
 
+            form.setAuditableEntity(parentEntity.getClass().newInstance());
             // success in creating the currency.
             String statusMsg = "Success: " + parentEntity.getClass().getName() + " saved, ID = " + parentEntity.getId();
             form.setStatusMessage(statusMsg);
@@ -206,6 +230,7 @@ public class SettingsController extends GenericSearchController {
         return getUIFModelAndView(form);
     }
 
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updateAuditableEntity")
     public <T extends AuditableEntity> ModelAndView updateAuditableEntity(@ModelAttribute("KualiForm")
                                                                            SettingsForm form) {
 

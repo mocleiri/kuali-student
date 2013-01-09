@@ -38,6 +38,8 @@
                               p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=CurrencyPage"/>
                         <bean parent="Uif-Link" p:linkText="Roll-Ups" p:target="_self"
                               p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=RollupPage"/>
+                        <bean parent="Uif-Link" p:linkText="Tags" p:target="_self"
+                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=TagPage"/>
                         <bean parent="Uif-Link" p:linkText="General Ledger Types" p:target="_self"
                               p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=GeneralLedgerTypePage"/>
                         <bean parent="Uif-Link" p:linkText="Bank Types" p:target="_self"
@@ -95,7 +97,7 @@
                                     </list>
                                 </property>-->
                             </bean>
-                            <!--<ref bean="addSection"/>-->
+                            <ref bean="addSection"/>
                             <ref bean="tableSection"/>
                             </list>
                     </property>
@@ -161,6 +163,47 @@
 
                 <!--End Roll-Ups Page-->
 
+                <!--Begin Tag Page-->
+
+                <bean parent="Uif-Page" p:id="TagPage" p:title="Tags">
+                    <property name="headerText" value="@{humanType}"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
+                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
+                                              p:actionLabel="Refresh">
+                                        </bean>
+                                    </list>
+                                </property>
+                            </bean>
+                            <ref bean="addSection"/>
+                            <ref bean="tableSection"/>
+                        </list>
+                    </property>
+                </bean>
+
+                <bean parent="Uif-Page" p:id="RollupDetailsPage" p:title="Rollup Details">
+                    <property name="headerText" value="@{humanType} Details"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-Link" p:linkText="@{humanType} Summary" p:target="_self"
+                                              p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=@{simpleType}Page"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <ref bean="detailSection"/>
+                        </list>
+                    </property>
+                </bean>
+
+                <!--End Tag Page-->
+
                 <!--Begin General Ledger Types Page-->
                 <bean parent="Uif-Page" p:id="GeneralLedgerTypePage" p:title="General Ledger Types">
                     <property name="headerText" value="@{humanType}"/>
@@ -176,7 +219,7 @@
                                     </list>
                                 </property>-->
                             </bean>
-                            <!--<ref bean="addSection"/>-->
+                            <ref bean="addSection"/>
                             <ref bean="tableSection"/>
                         </list>
                     </property>

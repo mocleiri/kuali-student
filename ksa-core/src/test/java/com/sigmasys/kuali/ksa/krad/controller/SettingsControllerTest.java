@@ -111,6 +111,7 @@ public class SettingsControllerTest extends AbstractServiceTest {
         Assert.notNull(form);
         Assert.notNull(form.getStatusMessage());
         Assert.isTrue(form.getStatusMessage().startsWith("Success:"));
+
     }
 
     @Test

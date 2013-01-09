@@ -8,9 +8,6 @@ import org.kuali.rice.krad.uif.component.DataBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by: dmulderink on 10/10/12 at 8:07 PM
- */
 public class SettingsForm extends AbstractViewModel {
 
    // Currency stuff
@@ -19,7 +16,7 @@ public class SettingsForm extends AbstractViewModel {
 
    private List<AuditableEntityModel> entities;
 
-   private AuditableEntityModel entity;
+   private AuditableEntityModel auditableEntity;
 
    private String statusMessage;
 
@@ -56,38 +53,38 @@ public class SettingsForm extends AbstractViewModel {
     }
 
     public AuditableEntityModel getAuditableEntity() {
-        return entity;
+        return auditableEntity;
     }
 
-    public void setAuditableEntity(AuditableEntityModel entity) {
-        if(this.entity == null){
-            this.entity = entity;
+    public void setAuditableEntity(AuditableEntityModel auditableEntity) {
+        if(this.auditableEntity == null){
+            this.auditableEntity = auditableEntity;
         }
     }
 
 
-    public <T extends AuditableEntity> void setAuditableEntity(T entity) {
-        if(entity instanceof AuditableEntityModel){
-            this.entity = (AuditableEntityModel)entity;
+    public <T extends AuditableEntity> void setAuditableEntity(T auditableEntity) {
+        if(auditableEntity instanceof AuditableEntityModel){
+            this.auditableEntity = (AuditableEntityModel)auditableEntity;
         } else {
-            this.entity = new AuditableEntityModel(entity);
+            this.auditableEntity = new AuditableEntityModel(auditableEntity);
         }
 
     }
 
     public String getType(){
-        if(entity == null){ return "null"; }
-        return entity.getParentEntity().getClass().getName();
+        if(auditableEntity == null){ return "null"; }
+        return auditableEntity.getParentEntity().getClass().getName();
     }
 
     public String getSimpleType(){
-        if(entity == null){ return "null"; }
-        return entity.getParentEntity().getClass().getSimpleName();
+        if(auditableEntity == null){ return "null"; }
+        return auditableEntity.getParentEntity().getClass().getSimpleName();
     }
 
     public String getHumanType(){
-        if(entity == null){ return "Unknown Entity Type"; }
-        AuditableEntity parent = entity.getParentEntity();
+            if(auditableEntity == null){ return "Unknown Entity Type"; }
+        AuditableEntity parent = auditableEntity.getParentEntity();
         if(parent == null){ return "Unknown Type"; }
         if(parent instanceof AccountStatusType) { return "Account Status Type"; }
         else if (parent instanceof ActivityType) { return "Activity Type"; }

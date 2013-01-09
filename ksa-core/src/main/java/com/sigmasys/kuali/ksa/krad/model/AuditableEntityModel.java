@@ -137,6 +137,11 @@ public class AuditableEntityModel extends AuditableEntity<Long> {
 
     @Override
     public String toString() {
-        return parentEntity.toString();
+        String str = "Auditable Entity Model parent: ";
+        if(parentEntity == null){
+            return str + null;
+        } else {
+            return str + parentEntity.toString();
+        }
     }
 }
