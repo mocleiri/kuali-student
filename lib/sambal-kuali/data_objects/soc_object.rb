@@ -7,14 +7,12 @@ class ManageSoc
   include Workflows
 
   attr_accessor :term_code
-  attr_accessor :confirm_state_change
 
   def initialize(browser, opts={})
     @browser = browser
 
     defaults = {
         :term_code=>"20122" ,
-        :confirm_state_change=>"Yes"
     }
     options = defaults.merge(opts)
     set_options(options)
@@ -49,27 +47,28 @@ class ManageSoc
     end
   end
 
-  def change_action(new_state)
+  def change_action(new_state,confirm_state_change)
+    validate_confirm_option(confirm_state_change)
     on ManageSocPage do |page|
       case(new_state)
         when 'Lock'
           page.lock_action
-          if @confirm_state_change == 'Yes'
+          if confirm_state_change == 'Yes'
             page.lock_confirm_action
           else
             page.lock_cancel_action
           end
         when 'Schedule'
-          schedule_soc page
+          schedule_soc page,confirm_state_change
         when 'FinalEdit'
           page.final_edit_action
-          if @confirm_state_change == 'Yes'
+          if confirm_state_change == 'Yes'
             page.final_edit_confirm_action
           else
             page.final_edit_cancel_action
           end
         when 'Publish'
-          publish_soc page
+          publish_soc page,confirm_state_change
         else
           raise "Your Soc State value must be one of the following:\n'Lock', \n'FinalEdit', \n'Schedule', \n'Publish'.\nPlease update your script"
       end
@@ -77,9 +76,9 @@ class ManageSoc
   end
 
 
-  def schedule_soc(page)
+  def schedule_soc(page,confirm_state_change)
     page.send_to_scheduler_action
-    if @confirm_state_change == 'Yes'
+    if confirm_state_change == 'Yes'
       page.schedule_confirm_action
       tries = 0
       until page.final_edit_button.enabled? or tries == 6 do
@@ -93,9 +92,9 @@ class ManageSoc
   end
 
 
-  def publish_soc(page)
+  def publish_soc(page,confirm_state_change)
     page.publish_action
-    if @confirm_state_change == 'Yes'
+    if confirm_state_change == 'Yes'
       page.publish_confirm_action
       raise "SOC status doesnt change to Publishing In Progress" unless page.soc_status == 'Publishing In Progress'
       raise "Close button not displayed" unless page.close_button.exists?
@@ -107,6 +106,15 @@ class ManageSoc
       end
     else
       page.publish_cancel_action
+    end
+  end
+
+  def validate_confirm_option(confirm_state_change)
+    case confirm_state_change
+      when 'Yes'
+      when 'No'
+      else
+        raise "Invalid confirm dialog option. It should be either 'Yes' or 'No'. Invalid option - #{confirmStateChange}"
     end
   end
 
