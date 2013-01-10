@@ -11,3 +11,13 @@ end
 Then /^I verify that "(.*?)" button is there for next action$/ do |nextState|
   @manageSoc.check_state_change_button_exists nextState
 end
+
+And /^I verify the related object state changes for "(.*?)"$/ do |state|
+  if state == 'Schedule'
+    @manageSoc.verify_schedule_state_changes
+  elsif state == 'Publish'
+    @manageSoc.verify_publish_state_changes
+  else
+    raise 'Invalid state. Allowed values \'Schedule\' and \'Publish\''
+  end
+end

@@ -29,6 +29,7 @@ Feature: Manage SOC
     Given the SOC is valid for "Schedule"
     When I "Schedule" the SOC and press "Yes" on the confirm dialog
     Then I verify that "FinalEdit" button is there for next action
+    And I verify the related object state changes for "Schedule"
 
 
   Scenario: Process the SOC for Final Edit but cancel the process
@@ -53,5 +54,6 @@ Feature: Manage SOC
     Given the SOC is valid for "Publish"
     When I "Publish" the SOC and press "Yes" on the confirm dialog
     Then I verify that "Close" button is there for next action
+    And I verify the related object state changes for "Publish"
 
 

@@ -7,12 +7,14 @@ class ManageSoc
   include Workflows
 
   attr_accessor :term_code
+  attr_accessor :co_code
 
   def initialize(browser, opts={})
     @browser = browser
 
     defaults = {
         :term_code=>"20122" ,
+        :co_code=>"ENGL103"
     }
     options = defaults.merge(opts)
     set_options(options)
@@ -118,4 +120,28 @@ class ManageSoc
     end
   end
 
+  def verify_schedule_state_changes
+    @browser.goto "#{test_site}/kr-krad/statusview/#{term_code}/#{co_code}"
+    on StatusViewPage do |page|
+      page.soc_state.should == 'Locked'
+      page.soc_scheduling_state.should == 'Completed'
+      (page.co_state =~ /Planned$/).should_not == nil
+      page.approved_aos.each do |row|
+        page.fo_state(row).should == 'Planned'
+      end
+    end
+  end
+
+  def verify_publish_state_changes
+    @browser.goto "#{test_site}/kr-krad/statusview/#{term_code}/#{co_code}"
+    on StatusViewPage do |page|
+      page.soc_state.should == 'Published'
+      page.soc_scheduling_state.should == 'Completed'
+      (page.co_state =~ /Offered/).should_not == nil
+      page.offered_aos.each do |row|
+        page.ao_state(row).should == 'Offered'
+        page.fo_state(row).should == 'Offered'
+      end
+    end
+  end
 end
