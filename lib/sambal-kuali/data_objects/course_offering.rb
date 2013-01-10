@@ -229,16 +229,28 @@ class CourseOffering
         should_confirm_delete = true
     end
 
-    manage
-    on ManageCourseOfferings do |page|
-      page.delete_offering
+    should_delete_from_subj_code_view = false
+    case args[:should_delete_from_subj_code_view]
+      when true
+        should_delete_from_subj_code_view = true
     end
 
+    on ManageCourseOfferings do |page|
+      case should_delete_from_subj_code_view
+        when true
+          search_by_subjectcode
+          page.target_row(@course).link(text: "Delete").click
+        else
+          manage
+          page.delete_offering
+      end
+    end
     on DeleteCourseOffering do |page|
-      if should_confirm_delete
-        page.confirm_delete
-      else
-        page.cancel_delete
+      case should_confirm_delete
+        when true
+          page.confirm_delete
+        else
+          page.cancel_delete
       end
     end
 
@@ -272,7 +284,5 @@ class CourseOffering
       end
     end
   end
-
-
 
 end
