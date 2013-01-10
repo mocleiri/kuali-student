@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service.impl;
 
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -60,6 +61,7 @@ import com.sigmasys.kuali.ksa.transform.Receipt;
 import com.sigmasys.kuali.ksa.transform.ReportingPeriod;
 import com.sigmasys.kuali.ksa.util.CalendarUtils;
 import com.sigmasys.kuali.ksa.util.JaxbUtils;
+import com.sigmasys.kuali.ksa.util.RequestUtils;
 import com.sigmasys.kuali.ksa.util.XmlSchemaValidator;
 
 /**
@@ -545,8 +547,39 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      */
     @Override
     public String generateReceipt(Long transactionId) {
-        // TODO Auto-generated method stub
-        return null;
+    	// Load the transaction:
+    	Transaction transaction = transactionService.getTransaction(transactionId);
+    	
+    	// Verify transaction exists or throw an exception:
+    	if (transaction == null) {
+    		throw new IllegalArgumentException("Transaction with ID " + transactionId + " does not exist!");
+    	}
+    	
+		// Create a new Receipt object:
+		Receipt receipt = new Receipt();
+		String currentUserId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
+		Date receiptDate = new Date();
+		DateFormat dateFormat = DateFormat.getDateInstance();
+		DateFormat timeFormat = DateFormat.getTimeInstance();
+		
+		receipt.setAmount(transaction.getAmount());
+		receipt.setAuthorization(transaction.getExternalId());
+		receipt.setPostedToAccountIdentifier(transaction.getAccountId());
+		receipt.setPostingUserIdentifier(currentUserId);
+		receipt.setReceiptDate(dateFormat.format(receiptDate));
+		receipt.setReceiptTime(timeFormat.format(receiptDate));
+		receipt.setTransactionIdentifier(transactionId);
+		
+		// Create a new TransactionType object:
+		Receipt.TransactionType transactionType = new Receipt.TransactionType();
+		
+		transactionType.setTransactionTypeIdentifier(transaction.getTransactionType().getId().getId());
+		transactionType.setTransactionTypeName(transaction.getTransactionType().getDescription());
+		receipt.setTransactionType(transactionType);
+		
+		// TODO: figure out what to do with ForeignTransactions.
+		
+		return JaxbUtils.toXml(receipt);
     }
 
 
