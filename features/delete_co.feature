@@ -20,14 +20,14 @@ it will no longer be offered for the term.
     When I cancel the deletion of a Course Offering in Subject Code view
     Then the Course Offering is not deleted
 
-  @draft
+  @wip
   @bjg
   Scenario: Delete CO - COC view
     When I delete a Course Offering with Draft Activity Offerings in Course Offering Code view
-    Then the deleted course offering does not appear on the list of available Course Offerings.
+    Then the deleted course offering does not appear on the list of available Course Offerings
 
   @draft
   @bjg
   Scenario: Delete CO - Subject Code view
     When I delete a Course Offering with Draft Activity Offerings in Subject Code view
-    Then the deleted course offering does not appear on the list of available Course Offerings.
+    Then the deleted course offering does not appear on the list of available Course Offerings
