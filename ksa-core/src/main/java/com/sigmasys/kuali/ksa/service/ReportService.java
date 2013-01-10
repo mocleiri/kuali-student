@@ -126,14 +126,14 @@ public interface ReportService {
      * failedOnly is true, all transactions that were not accepted, even those which were inherently "valid" will
      * be reported.
      *
-     * @param batchId    Batch transaction ID.
+     * @param entityId   External ID.
      * @param startDate  Start date of transaction period tracking.
      * @param endDate    End date of transaction period tracking.
      * @param failedOnly Include only transactions that failed on their own.
      * @return String representation of an XML report.
      * @see FailedTransactionsReport
      */
-    String generateRejectedTransactionsReport(String batchId, Date startDate, Date endDate, boolean failedOnly);
+    String generateRejectedTransactionsReport(String entityId, Date startDate, Date endDate, boolean failedOnly);
 
     /**
      * Return an XML account report for the account id, between the dates listed.

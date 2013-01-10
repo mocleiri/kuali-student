@@ -2,22 +2,24 @@ package com.sigmasys.kuali.ksa.service.impl;
 
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
+import javax.persistence.Query;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
-import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.service.TransactionService;
-import com.sigmasys.kuali.ksa.transform.*;
 import org.aopalliance.aop.Advice;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.BeanFactory;
@@ -25,15 +27,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
+import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.model.BatchReceipt;
+import com.sigmasys.kuali.ksa.model.BatchReceiptStatus;
+import com.sigmasys.kuali.ksa.model.ChargeableAccount;
+import com.sigmasys.kuali.ksa.model.Constants;
+import com.sigmasys.kuali.ksa.model.GlRecognitionPeriod;
+import com.sigmasys.kuali.ksa.model.GlTransaction;
+import com.sigmasys.kuali.ksa.model.GlTransactionStatus;
+import com.sigmasys.kuali.ksa.model.GlTransmission;
+import com.sigmasys.kuali.ksa.model.LatePeriod;
+import com.sigmasys.kuali.ksa.model.Transaction;
+import com.sigmasys.kuali.ksa.model.TransactionStatus;
+import com.sigmasys.kuali.ksa.model.TransactionTypeValue;
+import com.sigmasys.kuali.ksa.model.XmlDocument;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.GeneralLedgerService;
 import com.sigmasys.kuali.ksa.service.ReportService;
+import com.sigmasys.kuali.ksa.service.TransactionService;
+import com.sigmasys.kuali.ksa.transform.AccountReport;
+import com.sigmasys.kuali.ksa.transform.AgedBalanceReport;
+import com.sigmasys.kuali.ksa.transform.AgedBalanceReport.AgedAccountDetail;
+import com.sigmasys.kuali.ksa.transform.FailedTransactionsReport;
+import com.sigmasys.kuali.ksa.transform.GeneralLedgerReport;
 import com.sigmasys.kuali.ksa.transform.GeneralLedgerReport.GeneralLedgerReportEntry;
+import com.sigmasys.kuali.ksa.transform.Irs1098T;
+import com.sigmasys.kuali.ksa.transform.KsaBatchTransactionResponse;
+import com.sigmasys.kuali.ksa.transform.KsaTransaction;
+import com.sigmasys.kuali.ksa.transform.ObjectFactory;
+import com.sigmasys.kuali.ksa.transform.Receipt;
+import com.sigmasys.kuali.ksa.transform.ReportingPeriod;
 import com.sigmasys.kuali.ksa.util.CalendarUtils;
 import com.sigmasys.kuali.ksa.util.JaxbUtils;
 import com.sigmasys.kuali.ksa.util.XmlSchemaValidator;
-
-import static com.sigmasys.kuali.ksa.transform.AgedBalanceReport.AgedAccountDetail;
 
 /**
  * Report Service implementation.
@@ -331,8 +358,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
     @Override
     @WebMethod(exclude = true)
     public String generateRejectedTransactionsReport(Date startDate, Date endDate, boolean failedOnly) {
-        // TODO Auto-generated method stub
-        return null;
+        return generateRejectedTransactionsReport(null, startDate, endDate, failedOnly);
     }
 
 
@@ -344,7 +370,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      * failedOnly is true, all transactions that were not accepted, even those which were inherently "valid" will
      * be reported.
      *
-     * @param batchId    Batch transaction ID.
+     * @param entityId   External ID.
      * @param startDate  Start date of transaction period tracking.
      * @param endDate    End date of transaction period tracking.
      * @param failedOnly Include only transactions that failed on their own.
@@ -352,9 +378,56 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      * @see FailedTransactionsReport
      */
     @Override
-    public String generateRejectedTransactionsReport(String batchId, Date startDate, Date endDate, boolean failedOnly) {
-        // TODO Auto-generated method stub
-        return null;
+    public String generateRejectedTransactionsReport(String entityId, Date startDate, Date endDate, boolean failedOnly) {
+    	// Create a new report object:
+    	FailedTransactionsReport report = new FailedTransactionsReport();
+        XMLGregorianCalendar reportDate = CalendarUtils.toXmlGregorianCalendar(new Date());
+
+        // Set the report date to current date:
+        report.setDateOfReport(reportDate);
+    	
+    	// Get all matching Failed or Partial BatchReceipts:
+    	List<BatchReceipt> batchReceipts = findFailedAndPartialBatchReceipts(startDate, endDate, entityId);
+    	
+    	// Iterate through the list of matching BatchReceipts:
+    	for (BatchReceipt batchReceipt : batchReceipts) {
+    		// Create a new FailureGroup:
+    		FailedTransactionsReport.FailureGroup failureGroup = new FailedTransactionsReport.FailureGroup();
+    		
+    		// Get the Batch transaction response object:
+    		KsaBatchTransactionResponse batchResponse = getBatchTransactionResponse(batchReceipt);
+    		
+    		// Copy the "Failed" element from the response to the FailureGroup:
+    		if (batchResponse != null) {
+    			// Get the "Failed" element from the batchResponse:
+    			KsaBatchTransactionResponse.Failed responseFailed = batchResponse.getFailed();
+    			
+    			// Copy "Failed" from the response to the report:
+    			if (responseFailed != null) {
+    				// Create a new Failed object:
+    				FailedTransactionsReport.FailureGroup.Failed failed = new FailedTransactionsReport.FailureGroup.Failed();
+    			
+    				failed.getKsaTransactionAndReason().addAll(responseFailed.getKsaTransactionAndReason());
+    				failureGroup.setFailed(failed);
+    			}
+    			
+    			// If "onlyFailed" is set to false, copy "Accepted" from receipt to the "BatchRejection" of report:
+    			if (!failedOnly && (batchReceipt.getStatus() == BatchReceiptStatus.FAILED)) {
+    				// Create a new "BatchRejection" element:
+    				FailedTransactionsReport.FailureGroup.BatchRejection batchRejection = new FailedTransactionsReport.FailureGroup.BatchRejection();
+    				List<KsaTransaction> ksaTransactions = extractKsaTransactions(batchResponse.getAccepted());
+    				
+    				batchRejection.getKsaTransaction().addAll(ksaTransactions);
+    				failureGroup.setBatchRejection(batchRejection);
+    			}
+    		}
+    		
+    		// Add the new FailureGroup to the report:
+    		report.getFailureGroup().add(failureGroup);
+    		failureGroup.setPostingEntity(entityId);
+    	}
+    	
+        return JaxbUtils.toXml(report);
     }
 
 
@@ -526,6 +599,80 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      */
     private int safeCompare(int i, Integer ii) {
         return (ii != null) ? ii.compareTo(i) : 1;
+    }
+    
+    /**
+     * Finds all <code>BatchReceipt</code> objects that fall into the specified date range, 
+     * have the status of "Failed" or "Partial" and have the specified entity ID (optionally).
+     * 
+     * @param dateFrom	Beginning of the search date range.
+     * @param dateTo	End of the search date range.
+     * @param entityId	External identifier (optional).
+     * @return	List of matching <code>BatchReceipt</code> objects.
+     */
+    private List<BatchReceipt> findFailedAndPartialBatchReceipts(Date dateFrom, Date dateTo, String entityId) {
+    	// Build a query for BatchReceipts:
+        String queryStr = "select br from BatchReceipt br where br.batchDate between :dateFrom and :dateTo and (br.status = :statusFailed or br.status = :statusPartial)";
+        
+        // Add "externalId" condition if exists:
+        if (StringUtils.isNotBlank(entityId)) {
+        	queryStr += " and br.externalId = :externalId";
+        }
+        
+        // Create a new Query object:
+        Query query = em.createQuery(queryStr)
+        		.setParameter("dateFrom", dateFrom)
+        		.setParameter("dateTo", dateTo)
+        		.setParameter("statusFailed", BatchReceiptStatus.FAILED)
+        		.setParameter("statusPartial", BatchReceiptStatus.PARTIALLY_ACCEPTED);
+        
+        // Set the "externalId" parameter if exists:
+        if (StringUtils.isNotBlank(entityId)) {
+        	query.setParameter("externalId", entityId);
+        }
+        
+        // Execute the query:
+        return query.getResultList();
+    }
+    
+    /**
+     * Extracts the XML from a BatchReceipt and marshals to a <code>KsaBatchTransactionResponse</code> object.
+     * 
+     * @param batchReceipt	A BatchReceipt to extract its receipt XML from.
+     * @return Marshaled <code>KsaBatchTransactionResponse</code> object from the given BatchReceipt.
+     */
+    private KsaBatchTransactionResponse getBatchTransactionResponse(BatchReceipt batchReceipt) {
+    	// Get the response XML, which is the "outgoingXml" attribute:
+    	XmlDocument receiptXml = batchReceipt.getOutgoingXml();
+    	
+    	if (receiptXml != null) {
+    		return JaxbUtils.fromXml(receiptXml.getXml(), KsaBatchTransactionResponse.class);
+    	}
+    	
+    	return null;
+    }
+
+    /**
+     * Extracts only <code>KsaTransaction</code> objects from the specified <code>Accepted</code> object.
+     * 
+     * @param accepted	KsaBatchTransactionResponse.Accepted object.
+     * @return A List of only <code>KsaTransaction</code> objects from the given <code>Accepted</code> object.
+     */
+    private List<KsaTransaction> extractKsaTransactions(KsaBatchTransactionResponse.Accepted accepted) {
+    	// Create an empty List:
+    	List<KsaTransaction> result = new ArrayList<KsaTransaction>();
+    	
+    	if (accepted != null) {
+    		// Iterate through the List of KsaTransactions and TransactionDetails objects:
+    		for (Object o : accepted.getKsaTransactionAndTransactionDetails()) {
+    			// Pick only KsaTransaction objects:
+    			if (o instanceof KsaTransaction) {
+    				result.add((KsaTransaction)o);
+    			}
+    		}
+    	}
+    	
+    	return result;
     }
 
     private ReportingPeriod createReportingPeriod(Date startDate, Date endDate) {
