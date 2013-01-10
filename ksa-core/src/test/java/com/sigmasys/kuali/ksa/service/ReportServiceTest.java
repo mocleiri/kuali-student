@@ -118,5 +118,24 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
         Assert.hasText(xml);
 
     }
+    
+    @Test
+    public void testGenerateAgedBalanceReport() throws Exception {
+    	
+    }
 
+    @Test 
+    public void testGenerateRejectedTransactionReport() throws Exception {
+    	
+    }
+    
+    @Test
+    public void testGenerateRejectedTransactionReportNoEntityId() throws Exception {
+    	
+    }
+    
+    @Test
+    public void testGenerateReceipt() throws Exception {
+    	
+    }
 }
