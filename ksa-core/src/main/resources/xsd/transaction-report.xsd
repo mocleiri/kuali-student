@@ -156,7 +156,8 @@
                             <xs:element name="total-deferments" type="xs:decimal"/>
                             <xs:element name="net-balance" type="xs:decimal"/>
                             <xs:element name="written-off" type="xs:decimal"/>
-                            <xs:element name="unallocated-balance" type="xs:decimal"/>
+                            <xs:element name="unallocated-payments" type="xs:decimal"/>
+                            <xs:element name="unallocated-charges" type="xs:decimal"/>
                             <xs:element name="future-balance" type="xs:decimal"/>
                         </xs:sequence>
                     </xs:complexType>

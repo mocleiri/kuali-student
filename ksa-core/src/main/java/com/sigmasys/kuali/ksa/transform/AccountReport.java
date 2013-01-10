@@ -254,7 +254,8 @@ public class AccountReport {
      *         &lt;element name="total-payments" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
      *         &lt;element name="net-balance" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
      *         &lt;element name="written-off" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
-     *         &lt;element name="unallocated-balance" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
+     *         &lt;element name="unallocated-payments" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
+     *         &lt;element name="unallocated-charges" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
      *         &lt;element name="future-balance" type="{http://www.w3.org/2001/XMLSchema}decimal"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
@@ -270,7 +271,8 @@ public class AccountReport {
             "totalPayments",
             "netBalance",
             "writtenOff",
-            "unallocatedBalance",
+            "unallocatedPayments",
+            "unallocatedCharges",
             "futureBalance"
     })
     public static class Balances {
@@ -296,8 +298,11 @@ public class AccountReport {
         @XmlElement(name = "written-off", required = true)
         protected BigDecimal writtenOff;
 
-        @XmlElement(name = "unallocated-balance", required = true)
-        protected BigDecimal unallocatedBalance;
+        @XmlElement(name = "unallocated-payments", required = true)
+        protected BigDecimal unallocatedPayments;
+
+        @XmlElement(name = "unallocated-charges", required = true)
+        protected BigDecimal unallocatedCharges;
 
         @XmlElement(name = "future-balance", required = true)
         protected BigDecimal futureBalance;
@@ -430,24 +435,20 @@ public class AccountReport {
             this.writtenOff = value;
         }
 
-        /**
-         * Gets the value of the unallocatedBalance property.
-         *
-         * @return possible object is
-         *         {@link BigDecimal }
-         */
-        public BigDecimal getUnallocatedBalance() {
-            return unallocatedBalance;
+        public BigDecimal getUnallocatedPayments() {
+            return unallocatedPayments;
         }
 
-        /**
-         * Sets the value of the unallocatedBalance property.
-         *
-         * @param value allowed object is
-         *              {@link BigDecimal }
-         */
-        public void setUnallocatedBalance(BigDecimal value) {
-            this.unallocatedBalance = value;
+        public void setUnallocatedPayments(BigDecimal unallocatedPayments) {
+            this.unallocatedPayments = unallocatedPayments;
+        }
+
+        public BigDecimal getUnallocatedCharges() {
+            return unallocatedCharges;
+        }
+
+        public void setUnallocatedCharges(BigDecimal unallocatedCharges) {
+            this.unallocatedCharges = unallocatedCharges;
         }
 
         /**
