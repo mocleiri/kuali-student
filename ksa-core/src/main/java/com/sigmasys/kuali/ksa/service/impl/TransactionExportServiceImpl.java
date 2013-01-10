@@ -263,7 +263,7 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
 
         batchType.setHeader(headerType);
 
-        trailerType.setTotalAmount(totalAmount);
+        trailerType.setTotalAmount(new BigDecimal(moneyFormat.format(totalAmount)));
         trailerType.setTotalRecords(BigInteger.valueOf(glTransmissions.size()));
 
         batchType.setTrailer(trailerType);
