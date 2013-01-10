@@ -1,5 +1,8 @@
-@wip
+@pending
 Feature: Add Activity Offerings to existing Course Offerings
+
+  As a Departmental administrator, I want to be able to add additional Activity Offerings by creating new Activity Offerings
+  so that the Course Offering will have additional associated Activity Offerings for the term.
 
   Background:
     Given I am logged in as admin
