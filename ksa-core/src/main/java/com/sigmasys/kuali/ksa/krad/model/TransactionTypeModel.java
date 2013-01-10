@@ -2,14 +2,12 @@ package com.sigmasys.kuali.ksa.krad.model;
 
 import com.sigmasys.kuali.ksa.model.*;
 
-import java.util.Date;
-
 /**
  * User: timb
  * Date: 11/29/12
  * Time: 11:43 AM
  */
-public class TransactionTypeModel extends AuditableEntity<TransactionTypeId> {
+public class TransactionTypeModel extends TransactionType {
 
     private TransactionType parentEntity;
 
@@ -25,7 +23,6 @@ public class TransactionTypeModel extends AuditableEntity<TransactionTypeId> {
     }
 
     public TransactionType getTransactionType() {
-
         return parentEntity;
     }
 /*

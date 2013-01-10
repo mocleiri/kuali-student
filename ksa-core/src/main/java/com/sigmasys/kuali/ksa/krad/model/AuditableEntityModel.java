@@ -29,24 +29,15 @@ public class AuditableEntityModel extends AuditableEntity<Long> {
     }
 
     public Currency getCurrency() {
-        if (parentEntity instanceof Currency) {
-            return (Currency) parentEntity;
-        }
-        return null;
+        return (parentEntity instanceof Currency) ? (Currency) parentEntity : null;
     }
 
     public GeneralLedgerType getGeneralLedgerType() {
-        if (parentEntity instanceof GeneralLedgerType) {
-            return (GeneralLedgerType) parentEntity;
-        }
-        return null;
+        return (parentEntity instanceof GeneralLedgerType) ? (GeneralLedgerType) parentEntity : null;
     }
 
     public Rollup getRollup() {
-        if (parentEntity instanceof Rollup) {
-            return (Rollup) parentEntity;
-        }
-        return null;
+        return (parentEntity instanceof Rollup) ? (Rollup) parentEntity : null;
     }
 
     @Override
@@ -134,11 +125,6 @@ public class AuditableEntityModel extends AuditableEntity<Long> {
 
     @Override
     public String toString() {
-        String str = "Auditable Entity Model parent: ";
-        if(parentEntity == null){
-            return str + null;
-        } else {
-            return str + parentEntity.toString();
-        }
+        return "Auditable Entity Model parent: " + parentEntity;
     }
 }

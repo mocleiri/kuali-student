@@ -1,7 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.krad.form.SettingsForm;
 import com.sigmasys.kuali.ksa.krad.form.TransactionTypeForm;
+import com.sigmasys.kuali.ksa.krad.model.TransactionTypeModel;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AuditableEntityService;
 import org.apache.commons.logging.Log;
@@ -56,7 +56,6 @@ public class TransactionTypeController extends GenericSearchController {
         logger.info("View: " + viewId + " Page: " + pageId + " Entity ID: " + entityId);
 
         if ("TransactionTypePage".equals(pageId)) {
-            //form.setTransactionType(new TransactionType());
             List<TransactionType> entities = auditableEntityService.getAuditableEntities(TransactionType.class);
             logger.info("Transaction Type Count: " + entities.size());
             form.setTransactionTypes(entities);
@@ -76,16 +75,17 @@ public class TransactionTypeController extends GenericSearchController {
      * @return
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insert")
-    public ModelAndView insert(@ModelAttribute("KualiForm") SettingsForm form) {
+    public ModelAndView insert(@ModelAttribute("KualiForm") TransactionTypeForm form) {
 
-        AuditableEntity entity = form.getAuditableEntity();
+        TransactionTypeModel entity = form.getTransactionType();
 
-        if(entity == null){
-            logger.info("Entity is null");
-        } else {
-            logger.info("Entity is of type : " + entity.getClass().getName());
-            logger.info("Entity code: " + entity.getCode());
+        if (entity == null) {
+            String errMsg = "TransactionType cannot be null";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
         }
+
+        logger.debug("Entity code: " + entity.getCode());
 
         try {
 
@@ -93,9 +93,11 @@ public class TransactionTypeController extends GenericSearchController {
             String name = entity.getName();
             String description = entity.getDescription();
 
-            auditableEntityService.createAuditableEntity(code, name, description, entity.getClass());
+            auditableEntityService.createAuditableEntity(code, name, description, TransactionType.class);
 
-            form.setAuditableEntities((List<TransactionType>) auditableEntityService.getAuditableEntities(entity.getClass()));
+            List<TransactionType> entities = auditableEntityService.getAuditableEntities(TransactionType.class);
+
+            form.setTransactionTypes(entities);
 
             // success in creating the currency.
             String statusMsg = "Success: Transaction Type saved, ID = " + entity.getId();
@@ -113,10 +115,17 @@ public class TransactionTypeController extends GenericSearchController {
     }
 
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=update")
-    public <T extends AuditableEntity> ModelAndView update(@ModelAttribute("KualiForm")
-                                                               SettingsForm form) {
+    public <T extends AuditableEntity> ModelAndView update(@ModelAttribute("KualiForm") TransactionTypeForm form) {
 
-        AuditableEntity entity = form.getAuditableEntity();
+        TransactionTypeModel entity = form.getTransactionType();
+
+        if (entity == null) {
+            String errMsg = "TransactionType cannot be null";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        logger.debug("Entity code: " + entity.getCode());
 
         try {
             // occurs in the detail page.
