@@ -27,6 +27,8 @@ Then /^The new CO and AOs are Successfully created$/ do
   if @new_schedule_set.length < 7
     raise "AO has no schedule copied: ao_code: @course_offering.ao_list[0]"
   end
+  #cleanup the newly copied CO
+  @course_offering.delete_co :should_confirm_delete => true
 end
 
 And /^The ADLs are Successfully copied to RDLs in the new AOs of the newly created CO$/ do
@@ -66,7 +68,7 @@ end
 When /^I roll over an term to a new target term$/ do
   # Verify if the term was rolled over already
   @source_term="20122"
-  @target_term = "20132"
+  @target_term = "20152"
   @catalogue_course_code = "ENGL110"
   go_to_rollover_details
   on RolloverDetails do |page|
