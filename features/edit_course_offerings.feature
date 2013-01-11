@@ -20,6 +20,7 @@ Feature: Edit Course Offerings
   #KSENROLL-1503.2
   Scenario: Edit an existing course offering activating final examinations and update the grade roster level
     When I edit a course offering with multiple format types
+    #And I add a delivery format
     And I select a final exam type of "Standard final Exam"
     And a grade roster level of "Quiz"
     And a final exam driver of "Quiz"
@@ -28,7 +29,7 @@ Feature: Edit Course Offerings
   #KSENROLL-1504
   Scenario: Edit an existing course offering's wait list options
     When I edit a course offering
-    And I activate a wait list with a level of "Course Offering" and type of "Automatic"
+    And I activate a wait list with a level of "Course Offering" and type of "Manual"
     Then I can submit and the course offering is updated
 
   #KSENROLL-1505
@@ -40,9 +41,5 @@ Feature: Edit Course Offerings
   #KSENROLL- 1506
   Scenario: Edit an existing course offering's administering organizations and honors flag
     When I edit a course offering
-    And I add an administering organization
-    And activate the honors flag
+    And I add an administering organization and activate the honors flag
     Then I can submit and the course offering is updated
-
-  #KSENROLL-1498 - redundant, same as KSENROLL-1499
-  #KSENROLL-1497 - Confirms the two ways to enter edit CO, redundant for the above scenarios
