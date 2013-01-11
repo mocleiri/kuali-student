@@ -4,6 +4,7 @@ import com.sigmasys.kuali.ksa.krad.form.TransactionTypeForm;
 import com.sigmasys.kuali.ksa.krad.model.TransactionTypeModel;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AuditableEntityService;
+import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class TransactionTypeController extends GenericSearchController {
     @Autowired
     private AuditableEntityService auditableEntityService;
 
+    @Autowired
+    private TransactionService transactionService;
+
     /**
      * @see org.kuali.rice.krad.web.controller.UifControllerBase#createInitialForm(javax.servlet.http.HttpServletRequest)
      */
@@ -51,19 +55,28 @@ public class TransactionTypeController extends GenericSearchController {
         String viewId = request.getParameter("viewId");
         String pageId = request.getParameter("pageId");
 
-        String entityId = request.getParameter("entityId");
-
-        logger.info("View: " + viewId + " Page: " + pageId + " Entity ID: " + entityId);
+        logger.info("View: " + viewId + " Page: " + pageId);
 
         if ("TransactionTypePage".equals(pageId)) {
             List<TransactionType> entities = auditableEntityService.getAuditableEntities(TransactionType.class);
             logger.info("Transaction Type Count: " + entities.size());
             form.setTransactionTypes(entities);
         } else if ("TransactionTypeDetailsPage".equals(pageId)) {
+            String entityId = request.getParameter("entityId");
+            String subCode = request.getParameter("subCode");
+
             if (entityId == null || entityId.trim().isEmpty()) {
                 throw new IllegalArgumentException("'entityId' request parameter must be specified");
             }
-            form.setTransactionType(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), TransactionType.class));
+
+            if(subCode == null){ subCode = "1"; }
+
+            TransactionTypeId ttId = new TransactionTypeId(entityId, Integer.parseInt(subCode));
+
+            TransactionType tt = transactionService.getTransactionType(ttId);
+            logger.info("Retrieved Transaction Type: " + tt.getDescription());
+
+            form.setTransactionType(tt);
         }
 
         return getUIFModelAndView(form);

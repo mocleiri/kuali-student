@@ -6,10 +6,8 @@ import com.sigmasys.kuali.ksa.krad.form.TransactionTypeForm;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.model.Rollup;
 import com.sigmasys.kuali.ksa.model.TransactionType;
-import com.sigmasys.kuali.ksa.service.AbstractServiceTest;
-import com.sigmasys.kuali.ksa.service.AccountService;
-import com.sigmasys.kuali.ksa.service.PersistenceService;
-import com.sigmasys.kuali.ksa.service.ServiceTestSuite;
+import com.sigmasys.kuali.ksa.model.TransactionTypeId;
+import com.sigmasys.kuali.ksa.service.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +36,9 @@ public class TransactionTypeControllerTest extends AbstractServiceTest {
 
     @Autowired
     private PersistenceService persistenceService;
+
+    @Autowired
+    private TransactionService transactionService;
 
     private TransactionTypeForm form;
 
@@ -81,6 +82,34 @@ public class TransactionTypeControllerTest extends AbstractServiceTest {
         Assert.isTrue(form.getTransactionTypes().size() > 0);
     }
 
+    @Test
+    public void getDetail() throws Exception {
+// Passing request parameters needed to perform get() method
+        MockHttpServletRequest request = getRequest();
+
+        String id = "1001";
+        String subCode = "1";
+
+        request.setParameter("userId", userId);
+        request.setParameter("pageId", "TransactionTypeDetailsPage");
+        request.setParameter("entityId", id);
+        request.setParameter("subCode", subCode);
+
+        TransactionTypeId typeId = new TransactionTypeId(id, Integer.parseInt(subCode));
+
+        TransactionType type = transactionService.getTransactionType(typeId);
+
+        ModelAndView modelAndView = transactionTypeController.get(form, request);
+
+        // Checking assertions
+        Assert.notNull(modelAndView);
+        Assert.notNull(form);
+
+        Assert.notNull(form.getTransactionType());
+        Assert.isTrue(form.getTransactionType().getTransactionType().getDescription().equals(type.getDescription()));
+        Assert.notNull(form.getTransactionType().getTransactionType().getStartDate());
+        Assert.isTrue(form.getTransactionType().getTransactionType().getStartDate().equals(type.getStartDate()));
+    }
 /*
     @Test
     public void getCurrencyDetail() throws Exception {
