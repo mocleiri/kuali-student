@@ -19,8 +19,7 @@ end
 And /^I add Activity Offerings to the Course Offering$/ do
   on ManageCourseOfferings do |page|
     format = page.format.options[1].text
-    page.add_ao format, 1
-    #page.add_ao format, 2
+    page.add_ao format, 2
     @updated_ao_list = page.codes_list
   end
 end
