@@ -33,16 +33,27 @@ class ManageSoc
     case(current_state)
         when 'Lock'
           raise "SOC is not enabled for Lock" unless page.lock_button.enabled? and page.soc_status == 'Open'
+          raise "Draft Date doesnt exists" unless page.is_date_exists('Draft')
+          raise "Open Date doesnt exists" unless page.is_date_exists('Open')
         when 'FinalEdit'
           raise "SOC is not in final edit state" unless page.final_edit_button.enabled? and page.soc_status == 'Locked' and page.soc_scheduling_status == 'Completed'
+          raise "Schedule Initiated Date is blank" unless page.schedule_initiated_date != nil
+          raise "Schedule completed Date is blank" unless page.schedule_completed_date != nil
+          raise "Schedule duration is blank" unless page.schedule_duration != nil
         when 'Schedule'
           raise "Send to Scheduler action not available" unless page.send_to_scheduler_button.enabled?
           raise "Final edit button not exists or disabled" unless page.final_edit_button.disabled?
           raise "SOC is not in Lock state or scheduling state is not completed" unless page.soc_status == 'Locked'
+          raise "Locked Date doesnt exists" unless page.is_date_exists('Locked')
         when 'Publish'
           raise "SOC is not in publish state" unless page.publish_button.enabled? and page.soc_status == 'Final Edits' and page.soc_scheduling_status == 'Completed'
+          raise "Final Edits date doesnt exists" unless page.is_date_exists('Final Edits')
         when 'Close'
           raise "SOC is not in close state" unless page.close_button.exists? and page.soc_status == 'Published' and page.soc_publishing_status == 'Published'
+          raise "Publish Initiated Date is blank" unless page.publish_initiated_date != nil
+          raise "Publish completed Date is blank" unless page.publish_completed_date != nil
+          raise "Publish duration is blank" unless page.publish_duration != nil
+          raise "Published Date doesnt exists" unless page.is_date_exists('Published')
         else
           raise "Your Soc State value must be one of the following:\n'Open', \n'Lock', \n'FinalEdit', \n'Schedule', \n'Publish', 'Close'.\nPlease update your script"
         end
@@ -83,6 +94,10 @@ class ManageSoc
     if confirm_state_change == 'Yes'
       page.schedule_confirm_action
       tries = 0
+      raise "Schedule Initiated Date is blank" unless page.schedule_initiated_date != nil
+      raise "Once schedule started, schedule completed date should say 'Scheduling in progress'" unless page.schedule_completed_date == 'Scheduling in progress'
+      raise "Schedule duration should have the '(in progress)' text at the end" unless page.schedule_duration.should =~ /(in progress)/
+
       until page.final_edit_button.enabled? or tries == 6 do
         sleep 20
         tries += 1
@@ -100,6 +115,10 @@ class ManageSoc
       page.publish_confirm_action
       raise "SOC status doesnt change to Publishing In Progress" unless page.soc_status == 'Publishing In Progress'
       raise "Close button not displayed" unless page.close_button.exists?
+      raise "Publish Initiated Date is blank" unless page.schedule_initiated_date != nil
+      raise "Once publish started, schedule completed date should say 'Publishing in progress'" unless page.publish_completed_date == 'Publishing in progress'
+      raise "Publish duration should have the '(in progress)' text at the end" unless page.publish_duration.should =~ /(in progress)/
+      raise "Publishing In Progress Date is blank" unless page.is_date_exists('Publishing In Progress')
       tries = 0
       until page.soc_status == 'Published' or tries == 6 do
         sleep 20
