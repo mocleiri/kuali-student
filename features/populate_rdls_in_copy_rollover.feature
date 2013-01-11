@@ -1,4 +1,4 @@
-@wip
+@pending
 Feature: populate RDLs in various copying processes and rollover process
 
   MSR 1.4: As Central Administrator, I want actual delivery logistics from a source AO to be copied to requested
