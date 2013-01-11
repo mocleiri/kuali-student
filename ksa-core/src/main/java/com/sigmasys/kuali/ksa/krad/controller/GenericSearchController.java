@@ -6,14 +6,11 @@ import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.kuali.rice.krad.web.controller.UifControllerBase;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * GenericSearchController
@@ -30,7 +27,7 @@ public abstract class GenericSearchController extends UifControllerBase {
 
 
     @Autowired
-    protected  AccountService accountService;
+    protected AccountService accountService;
 
     @Autowired
     protected TransactionService transactionService;
@@ -39,15 +36,11 @@ public abstract class GenericSearchController extends UifControllerBase {
     /**
      * This method can search for entities of different types specified by "searchType" and "searchValue" parameters
      *
-     * @param form     KSA form
-     * @param result   binding result
-     * @param request  HTTP request
-     * @param response HTTP response
+     * @param form KSA form
      * @return ModelAndView instance
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=searchByType")
-    public ModelAndView searchByType(@ModelAttribute("KualiForm") AbstractViewModel form, BindingResult result,
-                                     HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView searchByType(@ModelAttribute("KualiForm") AbstractViewModel form) {
 
         String searchType = form.getSearchType();
         if (searchType == null || searchType.isEmpty()) {
