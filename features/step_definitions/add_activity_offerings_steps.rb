@@ -1,16 +1,17 @@
 When /^I manage an existing Course Offering in Course Offering Code view$/ do
   @course_offering = make CourseOffering, :course=>"CHEM317"
   @course_offering.manage
+  $total_number = @course_offering.ao_list.count
 end
 
 When /^I manage an existing Course Offering in Subject Code view$/ do
   @course_offering = make CourseOffering, :course=>"CHEM142", :search_by_subj => true
   @course_offering.manage
+  $total_number = @course_offering.ao_list.count
 end
 
 Then /^I am able to add an Activity Offering$/ do
   on ManageCourseOfferings do |page|
-    $total_number = page.codes_list.count
     format = page.format.options[1].text
     page.add_ao format, 1
   end
@@ -18,13 +19,10 @@ end
 
 Then /^I am able to copy an Activity Offering$/ do
   on ManageCourseOfferings do |page|
-    $total_number = page.codes_list.count
-
     if $total_number > 0
       ao_code = page.codes_list[0]
       page.copy(ao_code)
     end
-
   end
 end
 
