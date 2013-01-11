@@ -13,14 +13,12 @@ end
 When /^I manage a Course Offering$/ do
   @course_offering = make CourseOffering, :course=>"CHEM317"
   @course_offering.manage
-  @orig_ao_list = @course_offering.ao_list
 end
 
 And /^I add Activity Offerings to the Course Offering$/ do
   on ManageCourseOfferings do |page|
     format = page.format.options[1].text
     page.add_ao format, 2
-    @updated_ao_list = page.codes_list
   end
 end
 
@@ -29,9 +27,8 @@ And /^I approve the Course Offering for scheduling$/ do
 end
 
 And /^I approve selected Activity Offerings for scheduling$/ do
-  #@new_ao_list = @orig_ao_list ^ @updated_ao_list
   on ManageCourseOfferings do |page|
-    @new_ao_list = [@updated_ao_list[0],@updated_ao_list[1],@updated_ao_list[2]]
+    @new_ao_list = @course_offering.ao_list.to_set ^ page.codes_list.to_set
     page.select_aos(@new_ao_list)
     page.selected_offering_actions.select("Approve for Scheduling")
     page.go
@@ -41,7 +38,7 @@ end
 Then /^the Activity Offerings should be in Approved state$/ do
   on ManageCourseOfferings do |page|
     for code in @new_ao_list
-      page.ao_status("code", "Approved").should == true
+      page.ao_status(code, "Approved").should == true
     end
   end
 end
