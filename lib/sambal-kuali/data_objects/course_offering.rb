@@ -52,28 +52,26 @@ class CourseOffering
     set_options(options)
   end
 
-  def edit_offering opts={}
+  def edit_offering options={}
+    # defaults = {
+    #     :suffix=>@suffix,
+    #     :final_exam_type => @final_exam_type,
+    #     :wait_list => @wait_list,
+    #     :honors_flag => @honors_flag,
+    #     :affiliated_person_list => @affiliated_person_list,
+    #     :affiliated_org_list => @affiliated_org_list,
+    #     :wait_list_level => @wait_list_level,
+    #     :grade_format => @grade_format,
+    #     :final_exam_driver => @final_exam_driver,
+    #     :wait_list_type => @wait_list_type
+    # }
 
-    defaults = {
-        :suffix=>@suffix,
-        :final_exam_type => @final_exam_type,
-        :wait_list => @wait_list,
-        :honors_flag => @honors_flag,
-        :affiliated_person_list => @affiliated_person_list,
-        :affiliated_org_list => @affiliated_org_list,
-        :wait_list_level => @wait_list_level,
-        :grade_format => @grade_format,
-        :final_exam_driver => @final_exam_driver,
-        :wait_list_type => @wait_list_type,
-    }
-
-    options=defaults.merge(opts)
-
+    #options=defaults.merge(opts)
     if options[:suffix] != @suffix
      #TODO:Add Suffix to edit method Course Offerings
     end
 
-    if options[:wait_list] != @wait_list
+    if options[:wait_list] != nil
       on CourseOfferingEdit do |page|
         if options[:wait_list] == "NO"
          page.waitlist_off
@@ -84,7 +82,7 @@ class CourseOffering
       end
     end
 
-    if options[:wait_list_level] != @wait_list_level
+    if options[:wait_list_level] != nil
       on CourseOfferingEdit do |page|
       if options[:wait_list_level] == "Activity Offering"
        page.waitlist_option_activity_offering
@@ -95,14 +93,14 @@ class CourseOffering
       end
     end
 
-    if options[:wait_list_type] != @wait_list_type
+    if options[:wait_list_type] != nil
       on CourseOfferingEdit do |page|
         @wait_list_type = options[:wait_list_type]
         page.waitlist_select.select(@wait_list_type)
       end
     end
 
-    if options[:honors_flag] != @honors_flag
+    if options[:honors_flag] != nil
       on CourseOfferingEdit do |page|
        if options[:honors_flag] == "YES"
         page.honors_flag.set
@@ -113,7 +111,7 @@ class CourseOffering
       end
     end
 
-    if options[:final_exam_type] != @final_exam_type
+    if options[:final_exam_type] != nil
       on CourseOfferingEdit do |page|
         case options[:final_exam_type]
           when "Standard final Exam"
@@ -129,21 +127,21 @@ class CourseOffering
       end
     end
 
-    if options[:grade_format] != @grade_format
+    if options[:grade_format] != nil
      on CourseOfferingEdit do |page|
        page.select_grade_roster_level(options[:grade_format])
      end
       @grade_format = options[:grade_format]
     end
 
-    if options[:final_exam_driver] != @final_exam_driver
+    if options[:final_exam_driver] != nil
       on CourseOfferingEdit do |page|
         page.select_final_exam_driver(options[:final_exam_driver])
       end
       @final_exam_driver = options[:final_exam_driver]
     end
 
-    if options[:affiliated_person_list] != @affiliated_person_list
+    if options[:affiliated_person_list] != nil
       options[:affiliated_person_list].values.each do |person|
         on CourseOfferingEdit do |page|
           page.lookup_person
@@ -160,7 +158,7 @@ class CourseOffering
       end
     end
 
-    if options[:affiliated_org_list] != @affiliated_org_list
+    if options[:affiliated_org_list] != nil
       options[:affiliated_org_list].values.each do |org|
         on CourseOfferingEdit do |page|
           page.lookup_org
