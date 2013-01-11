@@ -1,13 +1,13 @@
 @wip
 Feature: Approve COs and their AOs for scheduling
 
-  As a Departmental Administrator, I want to indicate that I have finished creating and editing all of the Course Offerings in my department
+  CO12.1: As a Departmental Administrator, I want to indicate that I have finished creating and editing all of the Course Offerings in my department
   so that the departmental set of Course Offerings and their Activity Offerings will be available for Scheduling
 
-  As a Departmental Administrator, I want to indicate that I have finished editing specific Course Offerings
+  CO12.2: As a Departmental Administrator, I want to indicate that I have finished editing specific Course Offerings
   so that these Course Offerings and their Activity Offerings will be available for scheduling.
 
-  As a Departmental Administrator, I want to indicate that I have finished editing specific Activity Offerings
+  CO12.3: As a Departmental Administrator, I want to indicate that I have finished editing specific Activity Offerings
   so that these Activity Offerings will be available for scheduling.
 
   Background:
