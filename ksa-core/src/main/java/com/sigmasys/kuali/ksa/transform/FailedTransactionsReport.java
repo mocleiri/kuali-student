@@ -22,9 +22,9 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -70,13 +70,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "dateOfReport",
-    "failureGroup"
+        "dateOfReport",
+        "failureGroup"
 })
 @XmlRootElement(name = "failed-transactions-report")
 public class FailedTransactionsReport {
@@ -84,16 +82,15 @@ public class FailedTransactionsReport {
     @XmlElement(name = "date-of-report", required = true)
     @XmlSchemaType(name = "date")
     protected XMLGregorianCalendar dateOfReport;
-    @XmlElement(name = "failure-group", required = true)
+
+    @XmlElement(name = "failure-group")
     protected List<FailedTransactionsReport.FailureGroup> failureGroup;
 
     /**
      * Gets the value of the dateOfReport property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @return possible object is
+     *         {@link XMLGregorianCalendar }
      */
     public XMLGregorianCalendar getDateOfReport() {
         return dateOfReport;
@@ -101,11 +98,9 @@ public class FailedTransactionsReport {
 
     /**
      * Sets the value of the dateOfReport property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link XMLGregorianCalendar }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link XMLGregorianCalendar }
      */
     public void setDateOfReport(XMLGregorianCalendar value) {
         this.dateOfReport = value;
@@ -113,25 +108,23 @@ public class FailedTransactionsReport {
 
     /**
      * Gets the value of the failureGroup property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
      * This is why there is not a <CODE>set</CODE> method for the failureGroup property.
-     * 
-     * <p>
+     * <p/>
+     * <p/>
      * For example, to add a new item, do as follows:
      * <pre>
      *    getFailureGroup().add(newItem);
      * </pre>
-     * 
-     * 
-     * <p>
+     * <p/>
+     * <p/>
+     * <p/>
      * Objects of the following type(s) are allowed in the list
      * {@link FailedTransactionsReport.FailureGroup }
-     * 
-     * 
      */
     public List<FailedTransactionsReport.FailureGroup> getFailureGroup() {
         if (failureGroup == null) {
@@ -143,9 +136,9 @@ public class FailedTransactionsReport {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     * <p/>
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -180,31 +173,29 @@ public class FailedTransactionsReport {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "postingEntity",
-        "failed",
-        "batchRejection"
+            "postingEntity",
+            "failed",
+            "batchRejection"
     })
     public static class FailureGroup {
 
         @XmlElement(name = "posting-entity", required = true)
         protected String postingEntity;
+
         @XmlElement(required = true)
         protected FailedTransactionsReport.FailureGroup.Failed failed;
+
         @XmlElement(name = "batch-rejection")
         protected FailedTransactionsReport.FailureGroup.BatchRejection batchRejection;
 
         /**
          * Gets the value of the postingEntity property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getPostingEntity() {
             return postingEntity;
@@ -212,11 +203,9 @@ public class FailedTransactionsReport {
 
         /**
          * Sets the value of the postingEntity property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setPostingEntity(String value) {
             this.postingEntity = value;
@@ -224,11 +213,9 @@ public class FailedTransactionsReport {
 
         /**
          * Gets the value of the failed property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link FailedTransactionsReport.FailureGroup.Failed }
-         *     
+         *
+         * @return possible object is
+         *         {@link FailedTransactionsReport.FailureGroup.Failed }
          */
         public FailedTransactionsReport.FailureGroup.Failed getFailed() {
             return failed;
@@ -236,11 +223,9 @@ public class FailedTransactionsReport {
 
         /**
          * Sets the value of the failed property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link FailedTransactionsReport.FailureGroup.Failed }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link FailedTransactionsReport.FailureGroup.Failed }
          */
         public void setFailed(FailedTransactionsReport.FailureGroup.Failed value) {
             this.failed = value;
@@ -248,11 +233,9 @@ public class FailedTransactionsReport {
 
         /**
          * Gets the value of the batchRejection property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link FailedTransactionsReport.FailureGroup.BatchRejection }
-         *     
+         *
+         * @return possible object is
+         *         {@link FailedTransactionsReport.FailureGroup.BatchRejection }
          */
         public FailedTransactionsReport.FailureGroup.BatchRejection getBatchRejection() {
             return batchRejection;
@@ -260,11 +243,9 @@ public class FailedTransactionsReport {
 
         /**
          * Sets the value of the batchRejection property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link FailedTransactionsReport.FailureGroup.BatchRejection }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link FailedTransactionsReport.FailureGroup.BatchRejection }
          */
         public void setBatchRejection(FailedTransactionsReport.FailureGroup.BatchRejection value) {
             this.batchRejection = value;
@@ -273,9 +254,9 @@ public class FailedTransactionsReport {
 
         /**
          * <p>Java class for anonymous complex type.
-         * 
+         * <p/>
          * <p>The following schema fragment specifies the expected content contained within this class.
-         * 
+         * <p/>
          * <pre>
          * &lt;complexType>
          *   &lt;complexContent>
@@ -287,12 +268,10 @@ public class FailedTransactionsReport {
          *   &lt;/complexContent>
          * &lt;/complexType>
          * </pre>
-         * 
-         * 
          */
         @XmlAccessorType(XmlAccessType.FIELD)
         @XmlType(name = "", propOrder = {
-            "ksaTransaction"
+                "ksaTransaction"
         })
         public static class BatchRejection {
 
@@ -301,25 +280,23 @@ public class FailedTransactionsReport {
 
             /**
              * Gets the value of the ksaTransaction property.
-             * 
-             * <p>
+             * <p/>
+             * <p/>
              * This accessor method returns a reference to the live list,
              * not a snapshot. Therefore any modification you make to the
              * returned list will be present inside the JAXB object.
              * This is why there is not a <CODE>set</CODE> method for the ksaTransaction property.
-             * 
-             * <p>
+             * <p/>
+             * <p/>
              * For example, to add a new item, do as follows:
              * <pre>
              *    getKsaTransaction().add(newItem);
              * </pre>
-             * 
-             * 
-             * <p>
+             * <p/>
+             * <p/>
+             * <p/>
              * Objects of the following type(s) are allowed in the list
              * {@link KsaTransaction }
-             * 
-             * 
              */
             public List<KsaTransaction> getKsaTransaction() {
                 if (ksaTransaction == null) {
@@ -333,9 +310,9 @@ public class FailedTransactionsReport {
 
         /**
          * <p>Java class for anonymous complex type.
-         * 
+         * <p/>
          * <p>The following schema fragment specifies the expected content contained within this class.
-         * 
+         * <p/>
          * <pre>
          * &lt;complexType>
          *   &lt;complexContent>
@@ -348,43 +325,39 @@ public class FailedTransactionsReport {
          *   &lt;/complexContent>
          * &lt;/complexType>
          * </pre>
-         * 
-         * 
          */
         @XmlAccessorType(XmlAccessType.FIELD)
         @XmlType(name = "", propOrder = {
-            "ksaTransactionAndReason"
+                "ksaTransactionAndReason"
         })
         public static class Failed {
 
             @XmlElements({
-                @XmlElement(name = "ksa-transaction", type = KsaTransaction.class),
-                @XmlElement(name = "reason", type = String.class)
+                    @XmlElement(name = "ksa-transaction", type = KsaTransaction.class),
+                    @XmlElement(name = "reason", type = String.class)
             })
             protected List<Object> ksaTransactionAndReason;
 
             /**
              * Gets the value of the ksaTransactionAndReason property.
-             * 
-             * <p>
+             * <p/>
+             * <p/>
              * This accessor method returns a reference to the live list,
              * not a snapshot. Therefore any modification you make to the
              * returned list will be present inside the JAXB object.
              * This is why there is not a <CODE>set</CODE> method for the ksaTransactionAndReason property.
-             * 
-             * <p>
+             * <p/>
+             * <p/>
              * For example, to add a new item, do as follows:
              * <pre>
              *    getKsaTransactionAndReason().add(newItem);
              * </pre>
-             * 
-             * 
-             * <p>
+             * <p/>
+             * <p/>
+             * <p/>
              * Objects of the following type(s) are allowed in the list
              * {@link KsaTransaction }
              * {@link String }
-             * 
-             * 
              */
             public List<Object> getKsaTransactionAndReason() {
                 if (ksaTransactionAndReason == null) {

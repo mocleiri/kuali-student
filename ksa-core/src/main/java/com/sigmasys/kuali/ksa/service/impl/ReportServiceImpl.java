@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
+import static com.sigmasys.kuali.ksa.transform.FailedTransactionsReport.*;
 import static com.sigmasys.kuali.ksa.util.TransactionUtils.getFormattedAmount;
 
 import java.lang.reflect.Method;
@@ -64,7 +65,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
     @Autowired
     private TransactionService transactionService;
-    
+
     @Autowired
     private AuditableEntityService auditableEntityService;
 
@@ -346,7 +347,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      * failedOnly is true, all transactions that were not accepted, even those which were inherently "valid" will
      * be reported.
      *
-     * @param entityId   External ID.
+     * @param externalId External ID.
      * @param startDate  Start date of transaction period tracking.
      * @param endDate    End date of transaction period tracking.
      * @param failedOnly Include only transactions that failed on their own.
@@ -354,7 +355,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      * @see FailedTransactionsReport
      */
     @Override
-    public String generateRejectedTransactionsReport(String entityId, Date startDate, Date endDate, boolean failedOnly) {
+    public String generateRejectedTransactionsReport(String externalId, Date startDate, Date endDate, boolean failedOnly) {
 
         // Create a new report object:
         FailedTransactionsReport report = new FailedTransactionsReport();
@@ -363,37 +364,36 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         report.setDateOfReport(CalendarUtils.toXmlGregorianCalendar(new Date()));
 
         // Get all matching Failed or Partial BatchReceipts:
-        List<BatchReceipt> batchReceipts = findFailedAndPartialBatchReceipts(startDate, endDate, entityId);
+        List<BatchReceipt> batchReceipts = findFailedAndPartialBatchReceipts(startDate, endDate, externalId);
 
         // Iterate through the list of matching BatchReceipts:
         for (BatchReceipt batchReceipt : batchReceipts) {
 
             // Create a new FailureGroup:
-            FailedTransactionsReport.FailureGroup failureGroup = new FailedTransactionsReport.FailureGroup();
+            FailureGroup failureGroup = new FailureGroup();
 
             // Get the Batch transaction response object:
             KsaBatchTransactionResponse batchResponse = getBatchTransactionResponse(batchReceipt);
 
             // Copy the "Failed" element from the response to the FailureGroup:
             if (batchResponse != null) {
+
                 // Get the "Failed" element from the batchResponse:
                 KsaBatchTransactionResponse.Failed responseFailed = batchResponse.getFailed();
 
                 // Copy "Failed" from the response to the report:
                 if (responseFailed != null) {
                     // Create a new Failed object:
-                    FailedTransactionsReport.FailureGroup.Failed failed = new FailedTransactionsReport.FailureGroup.Failed();
-
+                    FailureGroup.Failed failed = new FailureGroup.Failed();
                     failed.getKsaTransactionAndReason().addAll(responseFailed.getKsaTransactionAndReason());
                     failureGroup.setFailed(failed);
                 }
 
                 // If "onlyFailed" is set to false, copy "Accepted" from receipt to the "BatchRejection" of report:
-                if (!failedOnly && (batchReceipt.getStatus() == BatchReceiptStatus.FAILED)) {
+                if (!failedOnly && BatchReceiptStatus.FAILED.equals(batchReceipt.getStatus())) {
                     // Create a new "BatchRejection" element:
-                    FailedTransactionsReport.FailureGroup.BatchRejection batchRejection = new FailedTransactionsReport.FailureGroup.BatchRejection();
+                    FailureGroup.BatchRejection batchRejection = new FailureGroup.BatchRejection();
                     List<KsaTransaction> ksaTransactions = extractKsaTransactions(batchResponse.getAccepted());
-
                     batchRejection.getKsaTransaction().addAll(ksaTransactions);
                     failureGroup.setBatchRejection(batchRejection);
                 }
@@ -401,7 +401,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
             // Add the new FailureGroup to the report:
             report.getFailureGroup().add(failureGroup);
-            failureGroup.setPostingEntity(entityId);
+            failureGroup.setPostingEntity(externalId);
         }
 
         return JaxbUtils.toXml(report);
@@ -619,25 +619,27 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      *
      * @param transactionId ID of a transaction for which to produce a receipt.
      * @return String representation of a transaction XML receipt.
-     * @see Receipt
+     * @see com.sigmasys.kuali.ksa.transform.TransactionReceipt
      */
     @Override
-    public String generateReceipt(Long transactionId) {
+    public String generateTransactionReceipt(Long transactionId) {
         // Load the transaction:
         Transaction transaction = transactionService.getTransaction(transactionId);
 
         // Verify transaction exists or throw an exception:
         if (transaction == null) {
             throw new TransactionNotFoundException("Transaction with ID " + transactionId + " does not exist!");
-        } 
-        
+        }
+
         // Verify the Transaction is a Payment:
-        if (!(transaction instanceof Payment)) {
-        	throw new TransactionTypeNotAllowedException("Cannot generate a receipt for a non-Payment transaction with ID " + transactionId);
+        if (transaction.getTransactionTypeValue() != TransactionTypeValue.PAYMENT) {
+            String errMsg = "Cannot generate receipt for a non-payment transaction with ID = " + transactionId;
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
         }
 
         // Create a new Receipt object:
-        Receipt receipt = new Receipt();
+        TransactionReceipt transactionReceipt = new TransactionReceipt();
         String currentUserId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
 
         Date transactionCreationDate = transaction.getCreationDate();
@@ -646,41 +648,41 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         DateFormat dateFormat = DateFormat.getDateInstance();
         DateFormat timeFormat = DateFormat.getTimeInstance();
 
-        receipt.setAmount(getFormattedAmount(transaction.getAmount()));
-        receipt.setAuthorization(transaction.getExternalId());
-        receipt.setPostedToAccountIdentifier(transaction.getAccountId());
-        receipt.setPostingUserIdentifier(currentUserId);
-        receipt.setReceiptDate(dateFormat.format(receiptDate));
-        receipt.setReceiptTime(timeFormat.format(receiptDate));
-        receipt.setTransactionIdentifier(transactionId);
+        transactionReceipt.setAmount(getFormattedAmount(transaction.getAmount()));
+        transactionReceipt.setAuthorization(transaction.getExternalId());
+        transactionReceipt.setPostedToAccountIdentifier(transaction.getAccountId());
+        transactionReceipt.setPostingUserIdentifier(currentUserId);
+        transactionReceipt.setReceiptDate(dateFormat.format(receiptDate));
+        transactionReceipt.setReceiptTime(timeFormat.format(receiptDate));
+        transactionReceipt.setTransactionIdentifier(transactionId);
 
         // Create a new TransactionType object:
-        Receipt.TransactionType transactionType = new Receipt.TransactionType();
+        TransactionReceipt.TransactionType transactionType = new TransactionReceipt.TransactionType();
 
         transactionType.setTransactionTypeIdentifier(transaction.getTransactionType().getId().getId());
         transactionType.setTransactionTypeName(transaction.getStatementText());
-        receipt.setTransactionType(transactionType);
+        transactionReceipt.setTransactionType(transactionType);
 
         // Get the system currency:
         String systemCurrencyCode = configService.getInitialParameter(Constants.SYSTEM_CURRENCY);
-        
+
         if (StringUtils.isBlank(systemCurrencyCode)) {
-        	systemCurrencyCode = java.util.Currency.getInstance(Locale.getDefault()).getCurrencyCode();
+            systemCurrencyCode = java.util.Currency.getInstance(Locale.getDefault()).getCurrencyCode();
         }
-        
+
         // Compare system currency to the transaction currency:
         Currency transactionCurrency = transaction.getCurrency();
 
         if ((transactionCurrency != null) && !StringUtils.equalsIgnoreCase(transactionCurrency.getCode(), systemCurrencyCode)) {
-        	// Create a ForeignTransactionNode:
-        	Receipt.ForeignTransaction foreignTransaction = new Receipt.ForeignTransaction();
-        	
-        	foreignTransaction.setCurrency(transactionCurrency.getCode());
-        	foreignTransaction.setNativeAmount(getFormattedAmount(transaction.getNativeAmount()));
-        	receipt.setForeignTransaction(foreignTransaction);
+            // Create a ForeignTransactionNode:
+            TransactionReceipt.ForeignTransaction foreignTransaction = new TransactionReceipt.ForeignTransaction();
+
+            foreignTransaction.setCurrency(transactionCurrency.getCode());
+            foreignTransaction.setNativeAmount(getFormattedAmount(transaction.getNativeAmount()));
+            transactionReceipt.setForeignTransaction(foreignTransaction);
         }
 
-        return JaxbUtils.toXml(receipt);
+        return JaxbUtils.toXml(transactionReceipt);
     }
 
 
@@ -739,19 +741,19 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      * Finds all <code>BatchReceipt</code> objects that fall into the specified date range,
      * have the status of "Failed" or "Partial" and have the specified entity ID (optionally).
      *
-     * @param fromDate Beginning of the search date range.
-     * @param toDate   End of the search date range.
-     * @param entityId External identifier (optional).
+     * @param fromDate   Beginning of the search date range.
+     * @param toDate     End of the search date range.
+     * @param externalId External identifier (optional).
      * @return List of matching <code>BatchReceipt</code> objects.
      */
-    private List<BatchReceipt> findFailedAndPartialBatchReceipts(Date fromDate, Date toDate, String entityId) {
+    private List<BatchReceipt> findFailedAndPartialBatchReceipts(Date fromDate, Date toDate, String externalId) {
 
         // Build a query for BatchReceipts:
         String queryStr = "select br from BatchReceipt br " +
                 " where br.batchDate between :fromDate and :toDate and br.statusCode in (:statuses)";
 
         // Add "externalId" condition if exists:
-        if (StringUtils.isNotBlank(entityId)) {
+        if (StringUtils.isNotBlank(externalId)) {
             queryStr += " and br.externalId = :externalId";
         }
 
@@ -765,8 +767,8 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         query.setParameter("statuses", statuses);
 
         // Set the "externalId" parameter if exists:
-        if (StringUtils.isNotBlank(entityId)) {
-            query.setParameter("externalId", entityId);
+        if (StringUtils.isNotBlank(externalId)) {
+            query.setParameter("externalId", externalId);
         }
 
         // Execute the query:

@@ -77,8 +77,8 @@ import javax.xml.bind.annotation.XmlType;
     "postingUserIdentifier",
     "transactionType"
 })
-@XmlRootElement(name = "receipt")
-public class Receipt {
+@XmlRootElement(name = "transaction-receipt")
+public class TransactionReceipt {
 
     @XmlElement(name = "receipt-date", required = true)
     protected Object receiptDate;
@@ -91,13 +91,13 @@ public class Receipt {
     @XmlElement(required = true)
     protected Object amount;
     @XmlElement(name = "foreign-transaction")
-    protected Receipt.ForeignTransaction foreignTransaction;
+    protected TransactionReceipt.ForeignTransaction foreignTransaction;
     @XmlElement(name = "posted-to-account-identifier", required = true)
     protected Object postedToAccountIdentifier;
     @XmlElement(name = "posting-user-identifier", required = true)
     protected Object postingUserIdentifier;
     @XmlElement(name = "transaction-type", required = true)
-    protected Receipt.TransactionType transactionType;
+    protected TransactionReceipt.TransactionType transactionType;
 
     /**
      * Gets the value of the receiptDate property.
@@ -224,10 +224,10 @@ public class Receipt {
      * 
      * @return
      *     possible object is
-     *     {@link Receipt.ForeignTransaction }
+     *     {@link TransactionReceipt.ForeignTransaction }
      *     
      */
-    public Receipt.ForeignTransaction getForeignTransaction() {
+    public TransactionReceipt.ForeignTransaction getForeignTransaction() {
         return foreignTransaction;
     }
 
@@ -236,10 +236,10 @@ public class Receipt {
      * 
      * @param value
      *     allowed object is
-     *     {@link Receipt.ForeignTransaction }
+     *     {@link TransactionReceipt.ForeignTransaction }
      *     
      */
-    public void setForeignTransaction(Receipt.ForeignTransaction value) {
+    public void setForeignTransaction(TransactionReceipt.ForeignTransaction value) {
         this.foreignTransaction = value;
     }
 
@@ -296,10 +296,10 @@ public class Receipt {
      * 
      * @return
      *     possible object is
-     *     {@link Receipt.TransactionType }
+     *     {@link TransactionReceipt.TransactionType }
      *     
      */
-    public Receipt.TransactionType getTransactionType() {
+    public TransactionReceipt.TransactionType getTransactionType() {
         return transactionType;
     }
 
@@ -308,10 +308,10 @@ public class Receipt {
      * 
      * @param value
      *     allowed object is
-     *     {@link Receipt.TransactionType }
+     *     {@link TransactionReceipt.TransactionType }
      *     
      */
-    public void setTransactionType(Receipt.TransactionType value) {
+    public void setTransactionType(TransactionReceipt.TransactionType value) {
         this.transactionType = value;
     }
 

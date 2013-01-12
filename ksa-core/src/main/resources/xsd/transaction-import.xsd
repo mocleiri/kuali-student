@@ -124,36 +124,6 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="receipt">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="receipt-date"/>
-                <xs:element name="receipt-time"/>
-                <xs:element name="transaction-identifier"/>
-                <xs:element name="authorization"/>
-                <xs:element name="amount"/>
-                <xs:element name="foreign-transaction" minOccurs="0">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="native-amount" type="xs:decimal"/>
-                            <xs:element name="currency" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="posted-to-account-identifier"/>
-                <xs:element name="posting-user-identifier"/>
-                <xs:element name="transaction-type">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element name="transaction-type-identifier"/>
-                            <xs:element name="transaction-type-name"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
     <xs:element name="external-statement">
         <xs:complexType>
             <xs:sequence>

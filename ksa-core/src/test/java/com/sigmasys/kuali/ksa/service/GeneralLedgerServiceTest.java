@@ -22,13 +22,13 @@ import java.util.List;
 public class GeneralLedgerServiceTest extends AbstractServiceTest {
 
     @Autowired
-    private AccountService accountService;
+    protected AccountService accountService;
 
     @Autowired
-    private TransactionService transactionService;
+    protected TransactionService transactionService;
 
     @Autowired
-    private GeneralLedgerService glService;
+    protected GeneralLedgerService glService;
 
     protected Transaction transaction1;
     protected Transaction transaction2;

@@ -12,7 +12,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,18 +26,19 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
     private ReportService reportService;
 
     @Autowired
-    private TransactionService transactionService;
-
-    @Autowired
     private TransactionExportService transactionExportService;
 
     @Autowired
     private GeneralLedgerService glService;
 
+    private SimpleDateFormat dateFormat;
+
 
     @Before
     public void setUpWithinTransaction() {
         super.setUpWithinTransaction();
+        accountService.getOrCreateAccount("user1");
+        dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
     }
 
     @Test
@@ -60,9 +63,6 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
         Assert.notNull(glTransaction3.getId());
         Assert.notNull(glTransaction3.getStatus());
         Assert.notNull(glTransaction3.getRecognitionPeriod());
-
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
 
         Date startDate = dateFormat.parse("01/01/1970");
         Date endDate = dateFormat.parse("01/01/2020");
@@ -105,8 +105,6 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
         Assert.notNull(xml);
         Assert.hasText(xml);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
-
         Date startDate = dateFormat.parse("12/01/2010");
         Date endDate = dateFormat.parse("12/01/2015");
 
@@ -122,8 +120,6 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
     @Test
     public void generateAccountReport() throws Exception {
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
-
         Date startDate = dateFormat.parse("12/01/2010");
         Date endDate = dateFormat.parse("12/01/2015");
 
@@ -138,20 +134,40 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
     @Test
     public void generateAgedBalanceReport() throws Exception {
 
+        List<String> userIds = Arrays.asList("admin", "user1");
+
+        String xml = reportService.generateAgedBalanceReport(userIds, false, true);
+
+        logger.debug("Aged Balance Report: \n" + xml);
+
+        Assert.notNull(xml);
+        Assert.hasText(xml);
     }
 
     @Test
-    public void generateRejectedTransactionReport() throws Exception {
+    public void generateRejectedTransactionsReport() throws Exception {
+
+        Date startDate = dateFormat.parse("12/01/1987");
+        Date endDate = dateFormat.parse("12/01/2020");
+
+        String xml = reportService.generateRejectedTransactionsReport(startDate, endDate, false);
+
+        logger.debug("Rejected Transactions Report: \n" + xml);
+
+        Assert.notNull(xml);
+        Assert.hasText(xml);
 
     }
 
-    @Test
-    public void generateRejectedTransactionReportNoEntityId() throws Exception {
-
-    }
-
-    @Test
+    /*@Test
     public void generateReceipt() throws Exception {
 
-    }
+        String xml = reportService.generateTransactionReceipt(transaction2.getId());
+
+        logger.debug("Transaction Receipt: \n" + xml);
+
+        Assert.notNull(xml);
+        Assert.hasText(xml);
+
+    }*/
 }

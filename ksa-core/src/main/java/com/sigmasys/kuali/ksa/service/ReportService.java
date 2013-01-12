@@ -12,7 +12,6 @@ import com.sigmasys.kuali.ksa.transform.AccountReport;
 import com.sigmasys.kuali.ksa.transform.AgedBalanceReport;
 import com.sigmasys.kuali.ksa.transform.FailedTransactionsReport;
 import com.sigmasys.kuali.ksa.transform.Irs1098T;
-import com.sigmasys.kuali.ksa.transform.Receipt;
 
 /**
  * This interface represents a collection of useful KSA reporting methods to
@@ -157,9 +156,10 @@ public interface ReportService {
     /**
      * Produces a receipt for a transaction with the specified ID.
      *
+     *
      * @param transactionId ID of a transaction for which to produce a receipt.
      * @return String representation of a transaction receipt.
-     * @see Receipt
+     * @see com.sigmasys.kuali.ksa.transform.TransactionReceipt
      */
-    String generateReceipt(Long transactionId);
+    String generateTransactionReceipt(Long transactionId);
 }
