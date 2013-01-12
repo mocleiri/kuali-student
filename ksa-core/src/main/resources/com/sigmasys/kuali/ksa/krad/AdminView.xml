@@ -56,10 +56,28 @@
                     <property name="headerText" value="Account Management"/>
                     <property name="items">
                         <list>
-                            <bean parent="Uif-HorizontalBoxSection">
+                            <bean parent="Uif-VerticalBoxSection" p:layoutManager.orientation="VERTICAL">
                                 <property name="items">
                                     <list>
-                                        <bean parent="Uif-MessageField" p:messageText="Placeholder: Text"/>
+                                        <bean parent="Uif-MessageField" p:messageText="Using the links below, accounts can be added manually or a search can be initiated to locate an account which needs to be updated.&lt;br&gt;&lt;br&gt;"/>
+										<bean parent="Uif-VerticalBoxSection" p:layoutManager.orientation="VERTICAL">
+											<property name="items">
+												<list>
+													<bean parent="Uif-LinkField" p:linkText="Create a New Account for a Person" p:target="_self"
+														p:href="javascript: void(0)" p:style="text-decoration:underline"
+														p:onClickScript="javascript:alert('This will create a new account for a person some day...Maybe.')"/>
+													<bean parent="Uif-LinkField" p:linkText="Create a New Account for an Organization" p:target="_self"
+														p:href="javascript: void(0)" p:style="text-decoration:underline"
+														p:onClickScript="javascript:alert('This will create a new account for an organization some day...Maybe.')"/>
+													<bean parent="Uif-LinkField" p:linkText="Update a Person&apos;s Account" p:target="_self"
+														p:href="javascript: void(0)" p:style="text-decoration:underline"
+														p:onClickScript="javascript:alert('This will a personal account some day...Maybe.')"/>
+													<bean parent="Uif-LinkField" p:linkText="Update an Organization&apos;s Account" p:target="_self"
+														p:href="javascript: void(0)" p:style="text-decoration:underline"
+														p:onClickScript="javascript:alert('This will update an organization account some day...Maybe.')"/>
+												</list>
+											</property>
+										</bean>
                                     </list>
                                 </property>
                             </bean>
