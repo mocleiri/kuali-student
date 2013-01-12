@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
+import static com.sigmasys.kuali.ksa.util.TransactionUtils.getFormattedAmount;
+
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -11,11 +13,6 @@ import javax.jws.WebService;
 import javax.persistence.Query;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.transform.*;
-import com.sigmasys.kuali.ksa.transform.PersonName;
-import com.sigmasys.kuali.ksa.util.*;
 import org.aopalliance.aop.Advice;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -28,15 +25,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
-import com.sigmasys.kuali.ksa.service.AccountService;
-import com.sigmasys.kuali.ksa.service.GeneralLedgerService;
-import com.sigmasys.kuali.ksa.service.ReportService;
-import com.sigmasys.kuali.ksa.service.TransactionService;
+import com.sigmasys.kuali.ksa.exception.*;
+import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.model.Currency;
+import com.sigmasys.kuali.ksa.service.*;
+import com.sigmasys.kuali.ksa.transform.*;
 import com.sigmasys.kuali.ksa.transform.AgedBalanceReport.AgedAccountDetail;
 import com.sigmasys.kuali.ksa.transform.GeneralLedgerReport.GeneralLedgerReportEntry;
-
-import static com.sigmasys.kuali.ksa.util.TransactionUtils.*;
+import com.sigmasys.kuali.ksa.transform.PersonName;
+import com.sigmasys.kuali.ksa.util.*;
 
 /**
  * Report Service implementation.
@@ -66,6 +64,9 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
     @Autowired
     private TransactionService transactionService;
+    
+    @Autowired
+    private AuditableEntityService auditableEntityService;
 
     @PostConstruct
     private void postConstruct() {
@@ -627,14 +628,20 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
         // Verify transaction exists or throw an exception:
         if (transaction == null) {
-            throw new IllegalArgumentException("Transaction with ID " + transactionId + " does not exist!");
+            throw new TransactionNotFoundException("Transaction with ID " + transactionId + " does not exist!");
+        } 
+        
+        // Verify the Transaction is a Payment:
+        if (!(transaction instanceof Payment)) {
+        	throw new TransactionTypeNotAllowedException("Cannot generate a receipt for a non-Payment transaction with ID " + transactionId);
         }
 
         // Create a new Receipt object:
         Receipt receipt = new Receipt();
         String currentUserId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
 
-        Date receiptDate = new Date();
+        Date transactionCreationDate = transaction.getCreationDate();
+        Date receiptDate = (transactionCreationDate != null) ? transactionCreationDate : new Date();
 
         DateFormat dateFormat = DateFormat.getDateInstance();
         DateFormat timeFormat = DateFormat.getTimeInstance();
@@ -651,10 +658,27 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         Receipt.TransactionType transactionType = new Receipt.TransactionType();
 
         transactionType.setTransactionTypeIdentifier(transaction.getTransactionType().getId().getId());
-        transactionType.setTransactionTypeName(transaction.getTransactionType().getDescription());
+        transactionType.setTransactionTypeName(transaction.getStatementText());
         receipt.setTransactionType(transactionType);
 
-        // TODO: figure out what to do with ForeignTransactions.
+        // Get the system currency:
+        String systemCurrencyCode = configService.getInitialParameter(Constants.SYSTEM_CURRENCY);
+        
+        if (StringUtils.isBlank(systemCurrencyCode)) {
+        	systemCurrencyCode = java.util.Currency.getInstance(Locale.getDefault()).getCurrencyCode();
+        }
+        
+        // Compare system currency to the transaction currency:
+        Currency transactionCurrency = transaction.getCurrency();
+
+        if ((transactionCurrency != null) && !StringUtils.equalsIgnoreCase(transactionCurrency.getCode(), systemCurrencyCode)) {
+        	// Create a ForeignTransactionNode:
+        	Receipt.ForeignTransaction foreignTransaction = new Receipt.ForeignTransaction();
+        	
+        	foreignTransaction.setCurrency(transactionCurrency.getCode());
+        	foreignTransaction.setNativeAmount(getFormattedAmount(transaction.getNativeAmount()));
+        	receipt.setForeignTransaction(foreignTransaction);
+        }
 
         return JaxbUtils.toXml(receipt);
     }

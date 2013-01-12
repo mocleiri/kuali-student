@@ -26,6 +26,7 @@ public interface Constants {
     String DEFAULT_DEFERMENT_TYPE_PARAM_NAME = "ksa.deferment.type.id";
     String CONTEST_PAYMENT_TYPE_PARAM_NAME = "ksa.payment.contest.type.id";
     String LOGGING_OPERATION = "ksa.logging.operation";
+    String SYSTEM_CURRENCY = "ksa.system.currency";
 
     // Drools parameters
     String DROOLS_CLASSPATH = "drools";
