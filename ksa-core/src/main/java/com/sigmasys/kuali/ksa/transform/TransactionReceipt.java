@@ -9,18 +9,15 @@
 package com.sigmasys.kuali.ksa.transform;
 
 import java.math.BigDecimal;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -62,170 +59,56 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "receiptDate",
-    "receiptTime",
-    "transactionIdentifier",
-    "authorization",
-    "amount",
-    "foreignTransaction",
-    "postedToAccountIdentifier",
-    "postingUserIdentifier",
-    "transactionType"
+        "receiptDate",
+        "receiptTime",
+        "transactionIdentifier",
+        "authorization",
+        "amount",
+        "foreignTransaction",
+        "postedToAccountIdentifier",
+        "postingUserIdentifier",
+        "transactionType"
 })
 @XmlRootElement(name = "transaction-receipt")
 public class TransactionReceipt {
 
     @XmlElement(name = "receipt-date", required = true)
-    protected Object receiptDate;
+    @XmlSchemaType(name = "date")
+    protected XMLGregorianCalendar receiptDate;
+
     @XmlElement(name = "receipt-time", required = true)
-    protected Object receiptTime;
+    @XmlSchemaType(name = "time")
+    protected XMLGregorianCalendar receiptTime;
+
     @XmlElement(name = "transaction-identifier", required = true)
-    protected Object transactionIdentifier;
+    protected String transactionIdentifier;
+
+    @XmlElement
+    protected String authorization;
+
     @XmlElement(required = true)
-    protected Object authorization;
-    @XmlElement(required = true)
-    protected Object amount;
+    protected BigDecimal amount;
+
     @XmlElement(name = "foreign-transaction")
     protected TransactionReceipt.ForeignTransaction foreignTransaction;
+
     @XmlElement(name = "posted-to-account-identifier", required = true)
-    protected Object postedToAccountIdentifier;
+    protected String postedToAccountIdentifier;
+
     @XmlElement(name = "posting-user-identifier", required = true)
-    protected Object postingUserIdentifier;
+    protected String postingUserIdentifier;
+
     @XmlElement(name = "transaction-type", required = true)
     protected TransactionReceipt.TransactionType transactionType;
 
     /**
-     * Gets the value of the receiptDate property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
-     */
-    public Object getReceiptDate() {
-        return receiptDate;
-    }
-
-    /**
-     * Sets the value of the receiptDate property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
-     */
-    public void setReceiptDate(Object value) {
-        this.receiptDate = value;
-    }
-
-    /**
-     * Gets the value of the receiptTime property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
-     */
-    public Object getReceiptTime() {
-        return receiptTime;
-    }
-
-    /**
-     * Sets the value of the receiptTime property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
-     */
-    public void setReceiptTime(Object value) {
-        this.receiptTime = value;
-    }
-
-    /**
-     * Gets the value of the transactionIdentifier property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
-     */
-    public Object getTransactionIdentifier() {
-        return transactionIdentifier;
-    }
-
-    /**
-     * Sets the value of the transactionIdentifier property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
-     */
-    public void setTransactionIdentifier(Object value) {
-        this.transactionIdentifier = value;
-    }
-
-    /**
-     * Gets the value of the authorization property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
-     */
-    public Object getAuthorization() {
-        return authorization;
-    }
-
-    /**
-     * Sets the value of the authorization property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
-     */
-    public void setAuthorization(Object value) {
-        this.authorization = value;
-    }
-
-    /**
-     * Gets the value of the amount property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
-     */
-    public Object getAmount() {
-        return amount;
-    }
-
-    /**
-     * Sets the value of the amount property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
-     */
-    public void setAmount(Object value) {
-        this.amount = value;
-    }
-
-    /**
      * Gets the value of the foreignTransaction property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TransactionReceipt.ForeignTransaction }
-     *     
+     *
+     * @return possible object is
+     *         {@link TransactionReceipt.ForeignTransaction }
      */
     public TransactionReceipt.ForeignTransaction getForeignTransaction() {
         return foreignTransaction;
@@ -233,71 +116,19 @@ public class TransactionReceipt {
 
     /**
      * Sets the value of the foreignTransaction property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TransactionReceipt.ForeignTransaction }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TransactionReceipt.ForeignTransaction }
      */
     public void setForeignTransaction(TransactionReceipt.ForeignTransaction value) {
         this.foreignTransaction = value;
     }
 
     /**
-     * Gets the value of the postedToAccountIdentifier property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
-     */
-    public Object getPostedToAccountIdentifier() {
-        return postedToAccountIdentifier;
-    }
-
-    /**
-     * Sets the value of the postedToAccountIdentifier property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
-     */
-    public void setPostedToAccountIdentifier(Object value) {
-        this.postedToAccountIdentifier = value;
-    }
-
-    /**
-     * Gets the value of the postingUserIdentifier property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
-     */
-    public Object getPostingUserIdentifier() {
-        return postingUserIdentifier;
-    }
-
-    /**
-     * Sets the value of the postingUserIdentifier property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
-     */
-    public void setPostingUserIdentifier(Object value) {
-        this.postingUserIdentifier = value;
-    }
-
-    /**
      * Gets the value of the transactionType property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link TransactionReceipt.TransactionType }
-     *     
+     *
+     * @return possible object is
+     *         {@link TransactionReceipt.TransactionType }
      */
     public TransactionReceipt.TransactionType getTransactionType() {
         return transactionType;
@@ -305,22 +136,75 @@ public class TransactionReceipt {
 
     /**
      * Sets the value of the transactionType property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link TransactionReceipt.TransactionType }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link TransactionReceipt.TransactionType }
      */
     public void setTransactionType(TransactionReceipt.TransactionType value) {
         this.transactionType = value;
     }
 
+    public XMLGregorianCalendar getReceiptDate() {
+        return receiptDate;
+    }
+
+    public void setReceiptDate(XMLGregorianCalendar receiptDate) {
+        this.receiptDate = receiptDate;
+    }
+
+    public XMLGregorianCalendar getReceiptTime() {
+        return receiptTime;
+    }
+
+    public void setReceiptTime(XMLGregorianCalendar receiptTime) {
+        this.receiptTime = receiptTime;
+    }
+
+    public String getTransactionIdentifier() {
+        return transactionIdentifier;
+    }
+
+    public void setTransactionIdentifier(String transactionIdentifier) {
+        this.transactionIdentifier = transactionIdentifier;
+    }
+
+    public String getAuthorization() {
+        return authorization;
+    }
+
+    public void setAuthorization(String authorization) {
+        this.authorization = authorization;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public String getPostedToAccountIdentifier() {
+        return postedToAccountIdentifier;
+    }
+
+    public void setPostedToAccountIdentifier(String postedToAccountIdentifier) {
+        this.postedToAccountIdentifier = postedToAccountIdentifier;
+    }
+
+    public String getPostingUserIdentifier() {
+        return postingUserIdentifier;
+    }
+
+    public void setPostingUserIdentifier(String postingUserIdentifier) {
+        this.postingUserIdentifier = postingUserIdentifier;
+    }
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     * <p/>
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -333,13 +217,11 @@ public class TransactionReceipt {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "nativeAmount",
-        "currency"
+            "nativeAmount",
+            "currency"
     })
     public static class ForeignTransaction {
 
@@ -350,11 +232,9 @@ public class TransactionReceipt {
 
         /**
          * Gets the value of the nativeAmount property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getNativeAmount() {
             return nativeAmount;
@@ -362,11 +242,9 @@ public class TransactionReceipt {
 
         /**
          * Sets the value of the nativeAmount property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setNativeAmount(BigDecimal value) {
             this.nativeAmount = value;
@@ -374,11 +252,9 @@ public class TransactionReceipt {
 
         /**
          * Gets the value of the currency property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getCurrency() {
             return currency;
@@ -386,11 +262,9 @@ public class TransactionReceipt {
 
         /**
          * Sets the value of the currency property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setCurrency(String value) {
             this.currency = value;
@@ -401,9 +275,9 @@ public class TransactionReceipt {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     * <p/>
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -416,66 +290,57 @@ public class TransactionReceipt {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "transactionTypeIdentifier",
-        "transactionTypeName"
+            "transactionTypeIdentifier",
+            "transactionTypeName"
     })
     public static class TransactionType {
 
         @XmlElement(name = "transaction-type-identifier", required = true)
-        protected Object transactionTypeIdentifier;
+        protected String transactionTypeIdentifier;
+
         @XmlElement(name = "transaction-type-name", required = true)
-        protected Object transactionTypeName;
+        protected String transactionTypeName;
 
         /**
          * Gets the value of the transactionTypeIdentifier property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link Object }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
-        public Object getTransactionTypeIdentifier() {
+        public String getTransactionTypeIdentifier() {
             return transactionTypeIdentifier;
         }
 
         /**
          * Sets the value of the transactionTypeIdentifier property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link Object }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
-        public void setTransactionTypeIdentifier(Object value) {
+        public void setTransactionTypeIdentifier(String value) {
             this.transactionTypeIdentifier = value;
         }
 
         /**
          * Gets the value of the transactionTypeName property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link Object }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
-        public Object getTransactionTypeName() {
+        public String getTransactionTypeName() {
             return transactionTypeName;
         }
 
         /**
          * Sets the value of the transactionTypeName property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link Object }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
-        public void setTransactionTypeName(Object value) {
+        public void setTransactionTypeName(String value) {
             this.transactionTypeName = value;
         }
 

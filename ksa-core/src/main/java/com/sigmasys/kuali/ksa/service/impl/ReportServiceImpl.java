@@ -5,7 +5,6 @@ import static com.sigmasys.kuali.ksa.util.TransactionUtils.getFormattedAmount;
 
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.text.DateFormat;
 import java.util.*;
 
 import javax.annotation.PostConstruct;
@@ -623,12 +622,15 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      */
     @Override
     public String generateTransactionReceipt(Long transactionId) {
+
         // Load the transaction:
         Transaction transaction = transactionService.getTransaction(transactionId);
 
         // Verify transaction exists or throw an exception:
         if (transaction == null) {
-            throw new TransactionNotFoundException("Transaction with ID " + transactionId + " does not exist!");
+            String errMsg = "Transaction does not exist for the given ID = " + transactionId;
+            logger.error(errMsg);
+            throw new TransactionNotFoundException(errMsg);
         }
 
         // Verify the Transaction is a Payment:
@@ -645,16 +647,13 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         Date transactionCreationDate = transaction.getCreationDate();
         Date receiptDate = (transactionCreationDate != null) ? transactionCreationDate : new Date();
 
-        DateFormat dateFormat = DateFormat.getDateInstance();
-        DateFormat timeFormat = DateFormat.getTimeInstance();
-
         transactionReceipt.setAmount(getFormattedAmount(transaction.getAmount()));
         transactionReceipt.setAuthorization(transaction.getExternalId());
         transactionReceipt.setPostedToAccountIdentifier(transaction.getAccountId());
         transactionReceipt.setPostingUserIdentifier(currentUserId);
-        transactionReceipt.setReceiptDate(dateFormat.format(receiptDate));
-        transactionReceipt.setReceiptTime(timeFormat.format(receiptDate));
-        transactionReceipt.setTransactionIdentifier(transactionId);
+        transactionReceipt.setReceiptDate(CalendarUtils.toXmlGregorianCalendar(receiptDate, true));
+        transactionReceipt.setReceiptTime(CalendarUtils.toXmlGregorianCalendar(receiptDate, false));
+        transactionReceipt.setTransactionIdentifier(String.valueOf(transactionId));
 
         // Create a new TransactionType object:
         TransactionReceipt.TransactionType transactionType = new TransactionReceipt.TransactionType();

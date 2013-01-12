@@ -210,11 +210,11 @@
     <xs:element name="transaction-receipt">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="receipt-date"/>
-                <xs:element name="receipt-time"/>
-                <xs:element name="transaction-identifier"/>
-                <xs:element name="authorization"/>
-                <xs:element name="amount"/>
+                <xs:element name="receipt-date" type="xs:date"/>
+                <xs:element name="receipt-time" type="xs:time"/>
+                <xs:element name="transaction-identifier" type="xs:string"/>
+                <xs:element name="authorization" type="xs:string" minOccurs="0"/>
+                <xs:element name="amount" type="xs:decimal"/>
                 <xs:element name="foreign-transaction" minOccurs="0">
                     <xs:complexType>
                         <xs:sequence>
@@ -223,13 +223,13 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
-                <xs:element name="posted-to-account-identifier"/>
-                <xs:element name="posting-user-identifier"/>
+                <xs:element name="posted-to-account-identifier" type="xs:string"/>
+                <xs:element name="posting-user-identifier" type="xs:string"/>
                 <xs:element name="transaction-type">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element name="transaction-type-identifier"/>
-                            <xs:element name="transaction-type-name"/>
+                            <xs:element name="transaction-type-identifier" type="xs:string"/>
+                            <xs:element name="transaction-type-name" type="xs:string"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>

@@ -159,8 +159,8 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
 
     }
 
-    /*@Test
-    public void generateReceipt() throws Exception {
+    @Test
+    public void generateTransactionReceipt() throws Exception {
 
         String xml = reportService.generateTransactionReceipt(transaction2.getId());
 
@@ -169,5 +169,5 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
         Assert.notNull(xml);
         Assert.hasText(xml);
 
-    }*/
+    }
 }
