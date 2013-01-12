@@ -14,6 +14,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.transform.*;
+import com.sigmasys.kuali.ksa.transform.PersonName;
+import com.sigmasys.kuali.ksa.util.*;
 import org.aopalliance.aop.Advice;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -33,10 +35,8 @@ import com.sigmasys.kuali.ksa.service.ReportService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import com.sigmasys.kuali.ksa.transform.AgedBalanceReport.AgedAccountDetail;
 import com.sigmasys.kuali.ksa.transform.GeneralLedgerReport.GeneralLedgerReportEntry;
-import com.sigmasys.kuali.ksa.util.CalendarUtils;
-import com.sigmasys.kuali.ksa.util.JaxbUtils;
-import com.sigmasys.kuali.ksa.util.RequestUtils;
-import com.sigmasys.kuali.ksa.util.XmlSchemaValidator;
+
+import static com.sigmasys.kuali.ksa.util.TransactionUtils.*;
 
 /**
  * Report Service implementation.
@@ -139,7 +139,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
                     }
 
                     glReportEntry.setGeneralLedgerAccount(glAccountId);
-                    glReportEntry.setAmount(glTransaction.getAmount());
+                    glReportEntry.setAmount(getFormattedAmount(glTransaction.getAmount()));
                     glReportEntry.setDate(CalendarUtils.toXmlGregorianCalendar(glTransaction.getDate()));
                     glReportEntry.setSystem(glTransaction.getDescription());
 
@@ -266,8 +266,9 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
         // Iterate through the account IDs:
         for (String accountId : accountIds) {
+
             // Get the account:
-            Account account = accountService.getOrCreateAccount(accountId);
+            Account account = accountService.getFullAccount(accountId);
 
             // Optionally age the account's debt:
             if (ageAccount) {
@@ -283,7 +284,6 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
                 if (latePeriod != null) {
                     AgedBalanceReport.AgeBreakdown ageBreakdown = new AgedBalanceReport.AgeBreakdown();
-
                     ageBreakdown.setPeriod1(latePeriod.getDaysLate1());
                     ageBreakdown.setPeriod2(latePeriod.getDaysLate2());
                     ageBreakdown.setPeriod3(latePeriod.getDaysLate3());
@@ -299,12 +299,11 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
             // Set amounts late:
             if (account instanceof ChargeableAccount) {
-
+                ChargeableAccount chargeableAccount = (ChargeableAccount) account;
                 AgedAccountDetail.AccountBalances accountBalances = new AgedAccountDetail.AccountBalances();
-
-                accountBalances.setPeriod1Balance(((ChargeableAccount) account).getAmountLate1());
-                accountBalances.setPeriod2Balance(((ChargeableAccount) account).getAmountLate2());
-                accountBalances.setPeriod3Balance(((ChargeableAccount) account).getAmountLate3());
+                accountBalances.setPeriod1Balance(getFormattedAmount(chargeableAccount.getAmountLate1()));
+                accountBalances.setPeriod2Balance(getFormattedAmount(chargeableAccount.getAmountLate2()));
+                accountBalances.setPeriod3Balance(getFormattedAmount(chargeableAccount.getAmountLate3()));
                 agedAccountDetail.setAccountBalances(accountBalances);
             }
 
@@ -355,18 +354,19 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      */
     @Override
     public String generateRejectedTransactionsReport(String entityId, Date startDate, Date endDate, boolean failedOnly) {
+
         // Create a new report object:
         FailedTransactionsReport report = new FailedTransactionsReport();
-        XMLGregorianCalendar reportDate = CalendarUtils.toXmlGregorianCalendar(new Date());
 
         // Set the report date to current date:
-        report.setDateOfReport(reportDate);
+        report.setDateOfReport(CalendarUtils.toXmlGregorianCalendar(new Date()));
 
         // Get all matching Failed or Partial BatchReceipts:
         List<BatchReceipt> batchReceipts = findFailedAndPartialBatchReceipts(startDate, endDate, entityId);
 
         // Iterate through the list of matching BatchReceipts:
         for (BatchReceipt batchReceipt : batchReceipts) {
+
             // Create a new FailureGroup:
             FailedTransactionsReport.FailureGroup failureGroup = new FailedTransactionsReport.FailureGroup();
 
@@ -538,8 +538,8 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
                 }
 
                 ListTransaction listTransaction = new ListTransaction();
-                listTransaction.setAmount(transaction.getAmount());
-                listTransaction.setNativeAmount(transaction.getNativeAmount());
+                listTransaction.setAmount(getFormattedAmount(transaction.getAmount()));
+                listTransaction.setNativeAmount(getFormattedAmount(transaction.getNativeAmount()));
 
                 if (transaction.getCurrency() != null) {
                     listTransaction.setCurrency(transaction.getCurrency().getCode());
@@ -553,6 +553,29 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         }
 
         accountReport.setAccountIdentifier(accountId);
+
+        // TODO: set the correct company name
+        String companyName = null;
+
+        AccountReport.Name name = new AccountReport.Name();
+        com.sigmasys.kuali.ksa.model.PersonName defaultPersonName = account.getDefaultPersonName();
+        if (companyName == null && defaultPersonName != null) {
+            logger.debug("Default person name = " + defaultPersonName);
+            PersonName personName = new PersonName();
+            personName.setTitle(defaultPersonName.getTitle());
+            personName.setSuffix(defaultPersonName.getSuffix());
+            personName.setFirstName(defaultPersonName.getFirstName());
+            personName.setLastName(defaultPersonName.getLastName());
+            personName.setMiddleName(defaultPersonName.getMiddleName());
+            personName.setKimType(defaultPersonName.getKimNameType());
+            personName.setDefault(true);
+            name.setPersonName(personName);
+        } else {
+            name.setCompanyName("");
+        }
+
+        accountReport.setName(name);
+
         accountReport.setReportingPeriod(createReportingPeriod(startDate, endDate));
 
         AccountReport.Balances balances = objectFactory.createAccountReportBalances();
@@ -563,25 +586,25 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
             if (latePeriod != null) {
                 AccountReport.Balances.AgedBalance agedBalance = objectFactory.createAccountReportBalancesAgedBalance();
                 agedBalance.getPeriodLengthAndPeriodBalance().add(latePeriod.getDaysLate1());
-                agedBalance.getPeriodLengthAndPeriodBalance().add(chargeableAccount.getAmountLate1());
+                agedBalance.getPeriodLengthAndPeriodBalance().add(getFormattedAmount(chargeableAccount.getAmountLate1()));
                 agedBalance.getPeriodLengthAndPeriodBalance().add(latePeriod.getDaysLate2());
-                agedBalance.getPeriodLengthAndPeriodBalance().add(chargeableAccount.getAmountLate2());
+                agedBalance.getPeriodLengthAndPeriodBalance().add(getFormattedAmount(chargeableAccount.getAmountLate2()));
                 agedBalance.getPeriodLengthAndPeriodBalance().add(latePeriod.getDaysLate3());
-                agedBalance.getPeriodLengthAndPeriodBalance().add(chargeableAccount.getAmountLate3());
+                agedBalance.getPeriodLengthAndPeriodBalance().add(getFormattedAmount(chargeableAccount.getAmountLate3()));
                 balances.setAgedBalance(agedBalance);
             }
         }
 
-        balances.setNetBalance(netBalance);
-        balances.setTotalCharges(chargeAmount);
-        balances.setTotalPayments(paymentAmount);
-        balances.setTotalPayments(defermentAmount);
-        balances.setWrittenOff(writtenOffAmount);
-        balances.setUnallocatedCharges(unallocatedChargeAmount);
-        balances.setUnallocatedPayments(unallocatedPaymentAmount);
+        balances.setNetBalance(getFormattedAmount(netBalance));
+        balances.setTotalCharges(getFormattedAmount(chargeAmount));
+        balances.setTotalPayments(getFormattedAmount(paymentAmount));
+        balances.setTotalDeferments(getFormattedAmount(defermentAmount));
+        balances.setWrittenOff(getFormattedAmount(writtenOffAmount));
+        balances.setUnallocatedCharges(getFormattedAmount(unallocatedChargeAmount));
+        balances.setUnallocatedPayments(getFormattedAmount(unallocatedPaymentAmount));
 
-        balances.setPriorBalance(priorBalance);
-        balances.setFutureBalance(futureBalance);
+        balances.setPriorBalance(getFormattedAmount(priorBalance));
+        balances.setFutureBalance(getFormattedAmount(futureBalance));
 
         accountReport.setBalances(balances);
 
@@ -610,11 +633,13 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         // Create a new Receipt object:
         Receipt receipt = new Receipt();
         String currentUserId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
+
         Date receiptDate = new Date();
+
         DateFormat dateFormat = DateFormat.getDateInstance();
         DateFormat timeFormat = DateFormat.getTimeInstance();
 
-        receipt.setAmount(transaction.getAmount());
+        receipt.setAmount(getFormattedAmount(transaction.getAmount()));
         receipt.setAuthorization(transaction.getExternalId());
         receipt.setPostedToAccountIdentifier(transaction.getAccountId());
         receipt.setPostingUserIdentifier(currentUserId);
@@ -699,7 +724,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
         // Build a query for BatchReceipts:
         String queryStr = "select br from BatchReceipt br " +
-                " where br.batchDate between :fromDate and :toDate and br.status in (:statuses)";
+                " where br.batchDate between :fromDate and :toDate and br.statusCode in (:statuses)";
 
         // Add "externalId" condition if exists:
         if (StringUtils.isNotBlank(entityId)) {

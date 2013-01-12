@@ -269,6 +269,7 @@ public class AccountReport {
             "priorBalance",
             "totalCharges",
             "totalPayments",
+            "totalDeferments",
             "netBalance",
             "writtenOff",
             "unallocatedPayments",
@@ -562,6 +563,7 @@ public class AccountReport {
 
         @XmlElement(name = "person-name")
         protected PersonName personName;
+
         @XmlElement(name = "company-name")
         protected String companyName;
 

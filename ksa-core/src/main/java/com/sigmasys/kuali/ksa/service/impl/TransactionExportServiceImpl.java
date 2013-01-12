@@ -5,10 +5,7 @@ import com.sigmasys.kuali.ksa.exception.InvalidGeneralLedgerAccountException;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.export.*;
 import com.sigmasys.kuali.ksa.service.*;
-import com.sigmasys.kuali.ksa.util.CalendarUtils;
-import com.sigmasys.kuali.ksa.util.JaxbUtils;
-import com.sigmasys.kuali.ksa.util.RequestUtils;
-import com.sigmasys.kuali.ksa.util.XmlSchemaValidator;
+import com.sigmasys.kuali.ksa.util.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +18,11 @@ import javax.jws.WebService;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static com.sigmasys.kuali.ksa.model.Constants.*;
+import static com.sigmasys.kuali.ksa.util.TransactionUtils.*;
 
 /**
  * Transaction Export Service implementation.
@@ -127,8 +123,6 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
 
     protected String convertGlTransmissionsToXml(List<GlTransmission> glTransmissions) {
 
-        final NumberFormat moneyFormat = new DecimalFormat("#.##");
-
         // Generating the batch ID
         final BigInteger batchId = generateBatchId();
 
@@ -208,7 +202,7 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
             glEntryType.setTransactionDate(currentStringDate);
             // TODO Mapping to what ?????
             //glEntryType.setTransactionEntrySequenceId();
-            glEntryType.setTransactionLedgerEntryAmount(moneyFormat.format(glTransmission.getAmount()));
+            glEntryType.setTransactionLedgerEntryAmount(formatAmount(glTransmission.getAmount()));
             glEntryType.setTransactionLedgerEntryDescription(glEntryDesc);
 
             glEntryType.setUniversityFiscalAccountingPeriod(recognitionPeriodCode);
@@ -263,7 +257,7 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
 
         batchType.setHeader(headerType);
 
-        trailerType.setTotalAmount(new BigDecimal(moneyFormat.format(totalAmount)));
+        trailerType.setTotalAmount(getFormattedAmount(totalAmount));
         trailerType.setTotalRecords(BigInteger.valueOf(glTransmissions.size()));
 
         batchType.setTrailer(trailerType);

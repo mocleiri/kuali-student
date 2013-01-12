@@ -5,6 +5,7 @@ import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.apache.commons.collections.CollectionUtils;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.*;
 
 import static com.sigmasys.kuali.ksa.util.TransactionUtils.*;
@@ -27,6 +28,17 @@ public class TransactionUtils {
             transactionService = ContextUtils.getBean(TransactionService.class);
         }
         return transactionService;
+    }
+
+    public static String formatAmount(BigDecimal amount) {
+        if (amount == null) {
+            amount = BigDecimal.ZERO;
+        }
+        return new DecimalFormat("#.##").format(amount);
+    }
+
+    public static BigDecimal getFormattedAmount(BigDecimal amount) {
+        return new BigDecimal(formatAmount(amount));
     }
 
     public static BigDecimal getUnallocatedAmount(Transaction transaction) {

@@ -194,4 +194,20 @@ public class PersonName implements Identifiable {
         return personNameBuilder.toString();
     }
 
+    @Override
+    public String toString() {
+        return "PersonName{" +
+                "id=" + id +
+                ", kimNameType='" + kimNameType + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", suffix='" + suffix + '\'' +
+                ", title='" + title + '\'' +
+                ", creatorId='" + creatorId + '\'' +
+                ", editorId='" + editorId + '\'' +
+                ", lastUpdate=" + lastUpdate +
+                ", isDefault=" + isDefault +
+                '}';
+    }
 }

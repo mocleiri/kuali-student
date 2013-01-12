@@ -118,24 +118,40 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
         Assert.hasText(xml);
 
     }
-    
+
     @Test
-    public void testGenerateAgedBalanceReport() throws Exception {
-    	
+    public void generateAccountReport() throws Exception {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
+
+        Date startDate = dateFormat.parse("12/01/2010");
+        Date endDate = dateFormat.parse("12/01/2015");
+
+        String xml = reportService.generateAccountReport("admin", startDate, endDate, true, true, true, false);
+
+        logger.debug("Account Report: \n" + xml);
+
+        Assert.notNull(xml);
+        Assert.hasText(xml);
     }
 
-    @Test 
-    public void testGenerateRejectedTransactionReport() throws Exception {
-    	
-    }
-    
     @Test
-    public void testGenerateRejectedTransactionReportNoEntityId() throws Exception {
-    	
+    public void generateAgedBalanceReport() throws Exception {
+
     }
-    
+
     @Test
-    public void testGenerateReceipt() throws Exception {
-    	
+    public void generateRejectedTransactionReport() throws Exception {
+
+    }
+
+    @Test
+    public void generateRejectedTransactionReportNoEntityId() throws Exception {
+
+    }
+
+    @Test
+    public void generateReceipt() throws Exception {
+
     }
 }

@@ -17,9 +17,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -35,35 +35,55 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "title",
-    "firstname",
-    "middlename",
-    "lastname",
-    "suffix"
+        "kimType",
+        "title",
+        "firstName",
+        "middleName",
+        "lastName",
+        "suffix",
+        "isDefault"
 })
 @XmlRootElement(name = "person-name")
 public class PersonName {
 
+    @XmlElement(name = "kim-type")
+    protected String kimType;
+
+    @XmlElement(name = "title")
     protected String title;
-    @XmlElement(required = true)
-    protected String firstname;
-    protected String middlename;
-    @XmlElement(required = true)
-    protected String lastname;
+
+    @XmlElement(name = "firstname", required = true)
+    protected String firstName;
+
+    @XmlElement(name = "middlename")
+    protected String middleName;
+
+    @XmlElement(name = "lastname", required = true)
+    protected String lastName;
+
+    @XmlElement(name = "suffix")
     protected String suffix;
+
+    @XmlElement(name = "is-default")
+    protected boolean isDefault;
+
+
+    public String getKimType() {
+        return kimType;
+    }
+
+    public void setKimType(String kimType) {
+        this.kimType = kimType;
+    }
 
     /**
      * Gets the value of the title property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getTitle() {
         return title;
@@ -71,11 +91,9 @@ public class PersonName {
 
     /**
      * Sets the value of the title property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setTitle(String value) {
         this.title = value;
@@ -83,83 +101,69 @@ public class PersonName {
 
     /**
      * Gets the value of the firstname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
     /**
      * Sets the value of the firstname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
-    public void setFirstname(String value) {
-        this.firstname = value;
+    public void setFirstName(String value) {
+        this.firstName = value;
     }
 
     /**
      * Gets the value of the middlename property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
-    public String getMiddlename() {
-        return middlename;
+    public String getMiddleName() {
+        return middleName;
     }
 
     /**
      * Sets the value of the middlename property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
-    public void setMiddlename(String value) {
-        this.middlename = value;
+    public void setMiddleName(String value) {
+        this.middleName = value;
     }
 
     /**
      * Gets the value of the lastname property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
     /**
      * Sets the value of the lastname property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
-    public void setLastname(String value) {
-        this.lastname = value;
+    public void setLastName(String value) {
+        this.lastName = value;
     }
 
     /**
      * Gets the value of the suffix property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getSuffix() {
         return suffix;
@@ -167,14 +171,19 @@ public class PersonName {
 
     /**
      * Sets the value of the suffix property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setSuffix(String value) {
         this.suffix = value;
     }
 
+    public boolean isDefault() {
+        return isDefault;
+    }
+
+    public void setDefault(boolean aDefault) {
+        isDefault = aDefault;
+    }
 }

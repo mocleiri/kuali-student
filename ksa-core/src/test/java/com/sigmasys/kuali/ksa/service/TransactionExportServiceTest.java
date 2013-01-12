@@ -146,5 +146,19 @@ public class TransactionExportServiceTest extends AbstractServiceTest {
 
     }
 
+    @Test
+    public void exportExistingTransactions() {
+
+        glService.prepareGlTransmissions();
+
+        String xml = transactionExportService.exportTransactions();
+
+        Assert.notNull(xml);
+        Assert.hasText(xml);
+
+        logger.info("XML = \n" + xml);
+
+    }
+
 
 }

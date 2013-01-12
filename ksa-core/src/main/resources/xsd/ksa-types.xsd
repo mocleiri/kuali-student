@@ -117,7 +117,7 @@
     <xs:element name="electronic-contact">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="kim-type" minOccurs="0"/>
+                <xs:element name="kim-type" type="xs:string" minOccurs="0"/>
                 <xs:element name="email-address" type="xs:string" minOccurs="0"/>
                 <xs:element name="telephone-number" minOccurs="0">
                     <xs:complexType>
@@ -136,7 +136,7 @@
     <xs:element name="postal-address">
         <xs:complexType>
             <xs:sequence minOccurs="0">
-                <xs:element name="kim-type" minOccurs="0"/>
+                <xs:element name="kim-type" type="xs:string" minOccurs="0"/>
                 <xs:element name="address-line-1" type="xs:string"/>
                 <xs:element name="address-line-2" type="xs:string" minOccurs="0"/>
                 <xs:element name="address-line-3" type="xs:string" minOccurs="0"/>
@@ -152,7 +152,7 @@
     <xs:element name="person-name">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="kim-type" minOccurs="0"/>
+                <xs:element name="kim-type" type="xs:string" minOccurs="0"/>
                 <xs:element name="title" type="xs:string" minOccurs="0"/>
                 <xs:element name="firstname" type="xs:string"/>
                 <xs:element name="middlename" type="xs:string" minOccurs="0"/>
