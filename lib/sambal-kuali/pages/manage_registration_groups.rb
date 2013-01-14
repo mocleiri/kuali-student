@@ -3,7 +3,7 @@ class ManageRegistrationGroups < BasePage
   wrapper_elements
   frame_element
 
-  expected_element :subject_code
+  expected_element :subject_code, 120
 
   element(:subject_code) { |b| b.frm.div(id: "manageRegistrationGroupsView").h3.span() }
   element(:format_select) { |b| b.frm.div(data_label: "Select Format").select() }

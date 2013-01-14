@@ -1,5 +1,7 @@
 Given /^I manage registration groups for (?:a|the) course offering$/ do
   @course_offering = make CourseOffering, :course=>"ENGL105"
+  new_course = @course_offering.create_co_copy
+  @course_offering = make CourseOffering, :course=>new_course
   @course_offering.manage
   @course_offering.manage_registration_groups
 end
@@ -110,6 +112,8 @@ end
 
 Given /^I manage registration groups for a course offering with multiple activity types$/ do
   @course_offering = make CourseOffering, :course=>"CHEM317"
+  new_course = @course_offering.create_co_copy
+  @course_offering = make CourseOffering, :course=>new_course
   @course_offering.manage
   @course_offering.manage_registration_groups
 end
@@ -158,6 +162,8 @@ end
 
 Given /^I manage registration groups for a course offering with 2 activity types?$/ do
   @course_offering = make CourseOffering, :course=>"CHEM317"
+  new_course = @course_offering.create_co_copy
+  @course_offering = make CourseOffering, :course=>new_course
   @course_offering.manage
   @course_offering.manage_registration_groups
 end
@@ -175,6 +181,8 @@ end
 
 Given /^I manage registration groups for a course offering with multiple activity types where the total max enrolment for each type is not equal$/ do
   @course_offering = make CourseOffering, :course=>"CHEM317"
+  new_course = @course_offering.create_co_copy
+  @course_offering = make CourseOffering, :course=>new_course
   @course_offering.manage
   @course_offering.manage_registration_groups
 end
@@ -200,6 +208,8 @@ end
 
 Given /^I manage registration groups for a course offering with multiple activity types where there are activity offering scheduling conflicts$/ do
   @course_offering = make CourseOffering, :course=>"CHEM317"
+  new_course = @course_offering.create_co_copy
+  @course_offering = make CourseOffering, :course=>new_course
   @course_offering.manage
   @course_offering.manage_registration_groups
 end
@@ -221,6 +231,8 @@ end
 
 Given /^I have generated a registration group for a course offering with lecture and quiz activity types leaving some activity offerings unassigned$/ do
   @course_offering = make CourseOffering, :course=>"CHEM221"
+  new_course = @course_offering.create_co_copy
+  @course_offering = make CourseOffering, :course=>new_course
   @course_offering.manage
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
@@ -316,6 +328,8 @@ end
 
 Given /^I have generated two registration groups for a course offering with lecture and lab activity types$/ do
   @course_offering = make CourseOffering, :course=>"CHEM317"
+  new_course = @course_offering.create_co_copy
+  @course_offering = make CourseOffering, :course=>new_course
   @course_offering.manage
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
@@ -345,6 +359,8 @@ end
 
 Given /^I have created the default cluster and related registration groups for a course offering with lecture and lab activity types$/ do
   @course_offering = make CourseOffering, :course=>"CHEM317"
+  new_course = @course_offering.create_co_copy
+  @course_offering = make CourseOffering, :course=>new_course
   @course_offering.manage
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster,  :is_constrained=>false
@@ -364,6 +380,8 @@ end
 
 Given /^I have generated a registration group for a course offering with lecture and lab activity types$/ do
   @course_offering = make CourseOffering, :course=>"CHEM426"
+  new_course = @course_offering.create_co_copy
+  @course_offering = make CourseOffering, :course=>new_course
   @course_offering.manage
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
@@ -397,6 +415,8 @@ end
 
 Given /^I have created two activity offering clusters for a course offering$/ do
   @course_offering = make CourseOffering, :course=>"CHEM152"
+  new_course = @course_offering.create_co_copy
+  @course_offering = make CourseOffering, :course=>new_course
   @course_offering.manage
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
