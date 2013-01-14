@@ -232,27 +232,27 @@ class CourseOffering
 
   end
 
-  def delete_ao(ao_code)
-    aoCode = ao_code[:ao_code]
+  def delete_ao(opts)
+    ao_code = opts[:ao_code]
     on ManageCourseOfferings do |page|
-      page.delete(aoCode)
+      page.delete(ao_code)
     end
     on ActivityOfferingConfirmDelete do |page|
       page.delete_activity_offering
     end
   end
 
-  def copy_ao(ao_code)
-    aoCode = ao_code[:ao_code]
+  def copy_ao(opts)
+    ao_code = opts[:ao_code]
     on ManageCourseOfferings do |page|
-      page.copy(aoCode)
+      page.copy(ao_code)
     end
   end
 
-  def delete_ao_list(ao_code_list)
-    @aoCode = ao_code_list[:code_list]
+  def delete_ao_list(opts)
+    ao_code_list = opts[:code_list]
     on ManageCourseOfferings do |page|
-      page.select_aos(@aoCode)
+      page.select_aos(ao_code_list)
       page.selected_offering_actions.select("Delete")
       page.go
     end
@@ -287,18 +287,13 @@ class CourseOffering
     @activity_offering_cluster_list << ao_cluster
   end
 
-#  def add_aos_to_clusters
-#    @activity_offering_cluster_list.each do |cluster|
-#      cluster.add_unassigned_aos
-#    end
-#  end                                                                                                                                                                                            c
-
   def expected_unassigned_ao_list
     expected_unassigned = @ao_list
     @activity_offering_cluster_list.each do |cluster|
       expected_unassigned = expected_unassigned - cluster.assigned_ao_list
     end
     expected_unassigned.delete_if { |id| id.strip == "" }
+    expected_unassigned
   end
 
   def create_co_copy
@@ -364,11 +359,9 @@ class CourseOffering
     existing_cluster_list = []
     on ManageRegistrationGroups do |page|
       page.cluster_div_list.each do |cluster_div|
-        puts "cluster_div.span().text(): #{cluster_div.span().text()}"
         existing_cluster_list << cluster_div.span().text()
       end
     end
-
 
     existing_cluster_list.each do |cluster|
       on ManageRegistrationGroups do |page|
@@ -385,6 +378,11 @@ class CourseOffering
         end
         page.remove_cluster(cluster)
         page.confirm_delete_cluster
+        begin
+          page.cluster_list_item_div(cluster).wait_while_present(60)
+        rescue Watir::Exception::UnknownObjectException
+          #ignore
+        end
       end
     end
   end
