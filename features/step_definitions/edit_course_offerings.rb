@@ -82,6 +82,6 @@ When /^I add an administering organization and activate the honors flag$/ do
  organization_list = {}
  organization_list[0] = make AffiliatedOrg
 
- @course_offering.edit_offering :affiliated_org_list=> organization_list, :honors_flag => "YES"
+ @course_offering.edit_offering  :honors_flag => "YES", :affiliated_org_list=> organization_list
 
 end

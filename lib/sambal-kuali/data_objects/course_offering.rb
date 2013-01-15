@@ -403,8 +403,8 @@ class AffiliatedOrg
       @browser = browser
 
        defaults = {
-                 :org_id => "68",
-                 :org_name => "Chemistry"
+                 :org_id => "65",
+                 :org_name => "Biology"
                   }
         options = defaults.merge(opts)
         set_options(options)
