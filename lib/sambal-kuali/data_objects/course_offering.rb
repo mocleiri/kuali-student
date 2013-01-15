@@ -193,7 +193,7 @@ class CourseOffering
       page.show
 
       begin
-        page.link(text: @course).wait_until_present(5)
+        page.create_co_button.wait_until_present(5)
         page.target_row(@course).link(text: "Manage").click
         page.loading.wait_while_present
       rescue Watir::Wait::TimeoutError

@@ -24,8 +24,8 @@ class ManageCourseOfferings < BasePage
   element(:format) { |b| b.frm.select(name: "formatIdForNewAO") }
   element(:activity_type) { |b| b.frm.select(name: "activityIdForNewAO") }
   element(:quantity) { |b| b.frm.text_field(name: "noOfActivityOfferings") }
+  element(:create_co_button)   { |b| b.frm.div(id: "KS-CourseOfferingManagement-CourseOfferingResultSection").button(text: "Create Course Offering") }
 
-  
   action(:add) { |b| b.frm.button(text: "Add").click; b.loading.wait_while_present } # Persistent ID needed!
   
   action(:select_all) { |b| b.frm.link(id: "KS-CourseOfferingManagement-SelectAll").click; b.loading.wait_while_present }
