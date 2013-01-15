@@ -37,6 +37,7 @@
         <cglib.version>2.2.2</cglib.version>
         <tiles.version>2.2.2</tiles.version>
         <freemarker.version>2.3.19</freemarker.version>
+        <quartz.version>1.8.6</quartz.version>
         <joda.time.version>1.1.1</joda.time.version>
         <junit.version>4.10</junit.version>
     </properties>
@@ -174,6 +175,12 @@
         </dependency-->
 
         <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+            <version>${quartz.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.kuali.student.enroll</groupId>
             <artifactId>ks-enroll-impl</artifactId>
             <version>${kuali.student.enrollment.version}</version>
@@ -197,6 +204,38 @@
                 <exclusion>
                     <artifactId>spring-context-support</artifactId>
                     <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>rice-kim-api</artifactId>
+                    <groupId>org.kuali.rice</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>rice-core-api</artifactId>
+                    <groupId>org.kuali.rice</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>rice-krms-impl</artifactId>
+                    <groupId>org.kuali.rice</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>rice-krad-web-framework</artifactId>
+                    <groupId>org.kuali.rice</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>rice-impl</artifactId>
+                    <groupId>org.kuali.rice</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-orm</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-webmvc</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>rice-kim-impl</artifactId>
+                    <groupId>org.kuali.rice</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -1057,6 +1096,10 @@
                     <artifactId>freemarker</artifactId>
                     <groupId>org.freemarker</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>quartz</artifactId>
+                    <groupId>org.quartz-scheduler</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -1178,6 +1221,10 @@
                 <exclusion>
                     <artifactId>commons-lang</artifactId>
                     <groupId>commons-lang</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>quartz</artifactId>
+                    <groupId>org.quartz-scheduler</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -1462,6 +1509,10 @@
                 <exclusion>
                     <artifactId>commons-beanutils</artifactId>
                     <groupId>org.kuali.commons</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>quartz</artifactId>
+                    <groupId>org.quartz-scheduler</groupId>
                 </exclusion>
             </exclusions>
         </dependency>

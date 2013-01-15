@@ -37,7 +37,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
         <property name="platform" value="Oracle"/>
     </bean>
 
-    <bean id="ksbConfigurer" class="org.kuali.rice.ksb.messaging.config.KSBConfigurer" depends-on="coreConfigurer">
+    <bean id="ksbConfigurer" class="com.sigmasys.kuali.ksa.config.KsbConfigurer" depends-on="coreConfigurer">
         <property name="services">
             <list>
                 <bean class="com.sigmasys.kuali.ksa.service.KsaServiceDefinition"
@@ -53,11 +53,11 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
                       p:busSecurity="false"
                       p:service-ref="localizationService"/>
                 <bean class="com.sigmasys.kuali.ksa.service.KsaServiceDefinition"
-                                      p:serviceNameSpaceURI="http://sigmasys.com/ksa"
-                                      p:localServiceName="transactionService"
-                                      p:jaxWsService="true"
-                                      p:busSecurity="false"
-                                      p:service-ref="transactionService"/>
+                      p:serviceNameSpaceURI="http://sigmasys.com/ksa"
+                      p:localServiceName="transactionService"
+                      p:jaxWsService="true"
+                      p:busSecurity="false"
+                      p:service-ref="transactionService"/>
                 <bean class="com.sigmasys.kuali.ksa.service.KsaServiceDefinition"
                       p:serviceNameSpaceURI="http://sigmasys.com/ksa"
                       p:localServiceName="transactionImportService"
