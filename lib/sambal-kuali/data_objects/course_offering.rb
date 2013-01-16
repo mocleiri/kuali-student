@@ -215,6 +215,15 @@ class CourseOffering
     end
   end
 
+  def search_by_coursecode
+    go_to_manage_course_offerings
+    on ManageCourseOfferings do |page|
+      page.term.set @term
+      page.input_code.set @course
+      page.show
+    end
+  end
+
   def view_course_details
     on ManageCourseOfferingList do |page|
       page.view_course_offering @course

@@ -1,14 +1,26 @@
 When /^I create two new Course Offerings$/ do
   @course_code="CHEM142"
-  go_to_create_course_offerings
+  @course_offering = make CourseOffering, :course=>@course_code
+  @course_offering.search_by_coursecode
+  on ManageCourseOfferings do |page|
+    @orig_co_list = []
+    page.codes_list.each { |code| @orig_co_list << code }
+  end
 
+  go_to_create_course_offerings
   on(CreateCourseOffering).create_co_from_existing "20122", @course_code
+
+  @course_offering = make CourseOffering, :course=>@course_code
+  @course_offering.search_by_coursecode
+  on ManageCourseOfferings do |page|
+    @new_co_list =  @orig_co_list.to_set ^ page.codes_list.to_set
+  end
 end
 
 And /^I add Activity Offerings to the new Course Offerings$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM142A"
-  @course_offering.manage
-
+  @course_code=@new_co_list.to_a[0]
+  @course_offering = make CourseOffering, :course=>@course_code
+  @course_offering.search_by_coursecode
   on ManageCourseOfferings do |page|
     format = page.format.options[1].text
     page.add_ao format, 2
