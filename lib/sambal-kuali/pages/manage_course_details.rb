@@ -3,6 +3,8 @@ class ManageCourseDetails < BasePage
   wrapper_elements
   frame_element
 
+  expected_element :close_button_element
+
   def frm
     self.frame(class: "fancybox-iframe")
   end
@@ -16,6 +18,7 @@ class ManageCourseDetails < BasePage
   value(:final_exam_type) { |b| b.frm.div(data_label: "Final Exam Type").span(index: 0).text }
   value(:waited_list) { |b| b.frm.div(data_label: "Waited Listed").span(index: 0).text }
   value(:honors_flag) { |b| b.frm.div(data_label: "Honors Flag").span(index: 0).text }
-  action(:close) { |b| b.frm.button(text: "Close").click;b.loading.wait_while_present}
+  element(:close_button_element) { |b| b.frm.button(text: "Close")}
+  action(:close) { |b| b.close_button_element.click;b.loading.wait_while_present}
 
 end

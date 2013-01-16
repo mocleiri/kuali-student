@@ -121,7 +121,8 @@ class ScheduleOfClasses
         raise "error expanding course details for #{course_code}"  unless page.course_ao_information_table(course_code).exists?
         instructor_list = page.get_instructor_list(course_code)
         raise "data validation issues: instructor #{@instructor_long_name} not found for course: #{course_code}" unless  instructor_list.include?(@instructor_long_name)
-        page.course_expand(course_code) #closes details
+        #page.course_expand(course_code) #closes details
+        #page.course_ao_information_table(course_code).wait_while_present
       end
     end
   end
