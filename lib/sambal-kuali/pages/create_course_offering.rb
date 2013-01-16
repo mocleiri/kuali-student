@@ -13,7 +13,7 @@ class CreateCourseOffering < BasePage
   action(:search) { |b| b.frm.link(text: "Search").click; b.loading.wait_while_present } # Persistent ID needed!
 
   element(:create_offering_from_div)  { |b| b.frm.div(id: "KS-CourseOffering-LinkSection").text_field() }
-  action(:create_from_existing_offering)  { |b| b.create_offering_from_div.link(text: /Existing Offering/).click }
+  #action(:create_from_existing_offering)  { |b| b.create_offering_from_div.link(text: /Existing Offering/).click }
   element(:suffix) { |b| b.frm.div(data_label: "Add Suffix").text_field() }
 
   element(:create_from_existing_offering_tab) { |b| b.frm.link(text: /Create from Existing Offering/) }
@@ -26,6 +26,12 @@ class CreateCourseOffering < BasePage
   GRADE_ROSTER_LEVEL_COLUMN = 1
   FINAL_EXAM_COLUMN = 2
   ACTIONS_COLUMN = 3
+
+  action(:create_from_existing_offering)  { |b| b.frm.link(id: "KS-CourseOffering-LinkSection_CreateFromExistingOffering").click }
+  element(:course_offering_existing_table) { |b| b.frm.div(id: "KS-ExistingOffering-ListCOs").table() }
+  element(:course_offering_copy_element) {|b| b.frm.course_offering_existing_table.rows[1].cells[ACTIONS_COLUMN_CO].link(text: "Copy")  }
+  action(:course_offering_copy) {|b| b.course_offering_copy_element.click; b.loading.wait_while_present   }
+  ACTIONS_COLUMN_CO = 5
 
   def select_delivery_format  format
     delivery_format_row(format).cells[FORMAT_COLUMN].select().select(format)
@@ -43,4 +49,15 @@ class CreateCourseOffering < BasePage
     delivery_formats_table.row(text: /#{Regexp.escape(format)}/)
   end
 
+  def create_co_from_existing(term, course)
+    target_term.set(term)
+    catalogue_course_code.set(course)
+    show
+    loading.wait_while_present
+
+    create_from_existing_offering
+    loading.wait_while_present
+
+    course_offering_copy
+  end
 end

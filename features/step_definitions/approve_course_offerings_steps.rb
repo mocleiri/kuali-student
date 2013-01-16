@@ -1,13 +1,24 @@
 When /^I create two new Course Offerings$/ do
-  pending # express the regexp above with the code you wish you had
+  go_to_create_course_offerings
+
+  on(CreateCourseOffering).create_co_from_existing "20122", "CHEM142"
 end
 
 And /^I add Activity Offerings to the new Course Offerings$/ do
-  pending # express the regexp above with the code you wish you had
+  @course_offering = make CourseOffering, :course=>"CHEM142A"
+  @course_offering.manage
+
+  on ManageCourseOfferings do |page|
+    format = page.format.options[1].text
+    page.add_ao format, 2
+  end
 end
 
 And /^I approve the subject code for scheduling$/ do
-  pending # express the regexp above with the code you wish you had
+  @course_offering = make CourseOffering, :course=>"CHEM142", :search_by_subj => true
+  @course_offering.manage
+
+  on(ManageCourseOfferingList).approve_subject_code_for_scheduling
 end
 
 When /^I manage a Course Offering$/ do
