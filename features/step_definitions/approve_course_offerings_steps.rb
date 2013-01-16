@@ -1,7 +1,8 @@
 When /^I create two new Course Offerings$/ do
+  @course_code="CHEM142"
   go_to_create_course_offerings
 
-  on(CreateCourseOffering).create_co_from_existing "20122", "CHEM142"
+  on(CreateCourseOffering).create_co_from_existing "20122", @course_code
 end
 
 And /^I add Activity Offerings to the new Course Offerings$/ do
@@ -15,14 +16,15 @@ And /^I add Activity Offerings to the new Course Offerings$/ do
 end
 
 And /^I approve the subject code for scheduling$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM142", :search_by_subj => true
-  @course_offering.manage
+  @course_offering = make CourseOffering, :course=>@course_code
+  @course_offering.search_by_subjectcode
 
   on(ManageCourseOfferingList).approve_subject_code_for_scheduling
 end
 
 When /^I manage a Course Offering$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM317"
+  @course_code="CHEM317"
+  @course_offering = make CourseOffering, :course=>@course_code
   @course_offering.manage
 end
 
@@ -34,7 +36,13 @@ And /^I add Activity Offerings to the Course Offering$/ do
 end
 
 And /^I approve the Course Offering for scheduling$/ do
-  pending # express the regexp above with the code you wish you had
+  @course_offering = make CourseOffering, :course=>@course_code
+  @course_offering.search_by_subjectcode
+  on ManageCourseOfferingList do |page|
+    page.select_cos([@course_code])
+    page.selected_offering_actions.select("Approve for Scheduling")
+    page.go
+  end
 end
 
 And /^I approve selected Activity Offerings for scheduling$/ do
@@ -47,8 +55,11 @@ And /^I approve selected Activity Offerings for scheduling$/ do
 end
 
 Then /^the Activity Offerings should be in Approved state$/ do
+  @course_offering = make CourseOffering, :course=>@course_code
+  @course_offering.manage
+
   on ManageCourseOfferings do |page|
-    for code in @new_ao_list
+    for code in page.codes_list
       page.ao_status(code, "Approved").should == true
     end
   end

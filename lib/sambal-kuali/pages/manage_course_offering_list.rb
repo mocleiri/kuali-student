@@ -21,6 +21,9 @@ class ManageCourseOfferingList < BasePage
 
   element(:course_offering_results_table) { |b| b.frm.div(id: "KS-CourseOfferingManagement-CourseOfferingListSection").table() }
 
+  element(:selected_offering_actions) { |b| b.frm.select(name: "selectedOfferingAction") }
+
+  action(:go) { |b| b.frm.button(text: "Go").click; b.loading.wait_while_present }
 
   def view_course_offering(co_code)
     course_offering_results_table.link(text: co_code).click
@@ -62,4 +65,9 @@ class ManageCourseOfferingList < BasePage
     co_codes
   end
 
+  def select_cos(code_list)
+    for code in code_list
+      target_row(code).checkbox.set
+    end
+  end
 end
