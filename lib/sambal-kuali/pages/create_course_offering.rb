@@ -1,5 +1,7 @@
 class CreateCourseOffering < BasePage
 
+  expected_title /Kuali :: Create Course Offering/
+
   wrapper_elements
   frame_element
 
@@ -10,13 +12,20 @@ class CreateCourseOffering < BasePage
 
   action(:show) { |b| b.frm.button(text: "Show").click; b.loading.wait_while_present } # Persistent ID needed!
   action(:create_offering) { |b| b.frm.button(id: "createOfferingButton").click; b.loading.wait_while_present }
+  action(:cancel) { |b| b.frm.link(text: "cancel").click; b.loading.wait_while_present }
   action(:search) { |b| b.frm.link(text: "Search").click; b.loading.wait_while_present } # Persistent ID needed!
 
   element(:create_offering_from_div)  { |b| b.frm.div(id: "KS-CourseOffering-LinkSection").text_field() }
   #action(:create_from_existing_offering)  { |b| b.create_offering_from_div.link(text: /Existing Offering/).click }
   element(:suffix) { |b| b.frm.div(data_label: "Add Suffix").text_field() }
 
-  element(:create_from_existing_offering_tab) { |b| b.frm.link(text: /Create from Existing Offering/) }
+  action(:create_from_existing_offering_tab) { |b| b.frm.link(text: /Create from Existing Offering/).click; b.loading.wait_while_present }
+  action(:configure_course_offering_copy_toggle) { |b| b.frm.link(id: "KS-ExistingOffering-ConfigureCopySubSection_toggle").click }
+  element(:exclude_instructor_checkbox) { |b| b.frm.label(text: /Exclude instructor information/) }
+  action(:select_exclude_instructor_checkbox) { |b| b.exclude_instructor_checkbox.wait_until_present; b.exclude_instructor_checkbox.click }
+  action(:create_from_existing_offering_copy_submit) { |b| b.create_from_existing_offering_copy_button.click; b.loading.wait_while_present }
+  element(:growl_message) { |b| b.div(text: /Course offering .* has been successfully created/) }
+
 
   element(:create_from_existing_offering_copy_button) { |b| b.frm.link(text: /Copy/) }
   element(:delivery_format_add_element) {|b| b.frm.delivery_formats_table.rows[1].cells[ACTIONS_COLUMN].button(text: "add")  }
