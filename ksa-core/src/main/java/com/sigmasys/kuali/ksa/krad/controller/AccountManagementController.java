@@ -1,12 +1,10 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.kuali.rice.kim.api.identity.Person;
-import org.kuali.rice.kim.api.identity.PersonService;
-import org.kuali.rice.kim.api.services.KimApiServiceLocator;
 import org.kuali.rice.krad.web.form.UifFormBase;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,11 +47,11 @@ public class AccountManagementController extends GenericSearchController {
 		ElectronicContact electronicContact = new ElectronicContact();
 		BankType bankType = new BankType();
 		TaxType taxType = new TaxType();
+		IdType idType = new IdType();
 		String accountType = "CA";
-		PersonService personService = KimApiServiceLocator.getPersonService();
-        Person person = personService.getPersonByPrincipalName("admin1");
         AccountStatusType statusType = new AccountStatusType();
         LatePeriod latePeriod = new LatePeriod();
+        BigDecimal creditLimit = new BigDecimal(0);
 		
 		accountInfo.setName(name);
 		accountInfo.setAddress(address);
@@ -61,14 +59,46 @@ public class AccountManagementController extends GenericSearchController {
 		accountInfo.setDateOfBirth(new Date());
 		accountInfo.setBankType(bankType);
 		accountInfo.setTaxType(taxType);
+		accountInfo.setIdType(idType);
 		accountInfo.setAccountType(accountType);
-		accountInfo.setPerson(person);
 		statusType.setName("A");
 		latePeriod.setName("30");
 		accountInfo.setStatusType(statusType);
 		accountInfo.setLatePeriod(latePeriod);
 		accountInfo.setAbleToAuthenticate(Boolean.TRUE);
+		accountInfo.setCreditLimit(creditLimit);
 		form.setAccountInfo(accountInfo);
+		
+		return getUIFModelAndView(form);
+	}
+	
+	/**
+	 * Cancels creation of a new personal account.
+	 * @param form
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancelNewPersonAccount")
+	public ModelAndView cancelNewPersonAccount(@ModelAttribute("KualiForm") AdminForm form, HttpServletRequest request) {
+		// Nullify the Account and Account info:
+		form.setAccount(null);
+		form.setAccountInfo(null);
+		form.setAccountUserPreferences(null);
+		form.setPageId("AccountManagement");
+		form.setViewId("AdminView");
+		
+		return getUIFModelAndView(form);
+	}
+	
+	/**
+	 * Handles saving of a new account.
+	 * @param form
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.POST, params = "methodToCall=saveNewPersonAccount")
+	public ModelAndView saveNewPersonAccount(@ModelAttribute("KualiForm") AdminForm form, HttpServletRequest request) {
+		// Save an Account:
 		
 		return getUIFModelAndView(form);
 	}

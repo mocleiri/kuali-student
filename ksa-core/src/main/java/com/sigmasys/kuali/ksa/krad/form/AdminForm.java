@@ -1,8 +1,8 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
 
 import org.kuali.rice.kim.api.identity.Person;
 
@@ -27,7 +27,7 @@ public class AdminForm extends AbstractViewModel {
 	/**
 	 * Account's user preferences.
 	 */
-	private List<UserPreference> accountUserPreferences;
+	private List<UserPreference> accountUserPreferences = new ArrayList<UserPreference>();
 	
    /*
      Activities
@@ -80,7 +80,6 @@ public class AdminForm extends AbstractViewModel {
 	 *
 	 */
 	public static class AccountInformation implements Serializable {
-		private Person person;
 		private PersonName name;
 		private PostalAddress address;
 		private ElectronicContact electronicContact;
@@ -88,10 +87,31 @@ public class AdminForm extends AbstractViewModel {
 		private Date dateOfBirth;
 		private BankType bankType;
 		private TaxType taxType;
+		private IdType idType;
 		private AccountStatusType statusType;
 		private LatePeriod latePeriod;
 		private Boolean ableToAuthenticate;
+		private AccountProtectedInfo accountProtectedInfo;
+		private BigDecimal creditLimit;
 		
+		public IdType getIdType() {
+			return idType;
+		}
+		public void setIdType(IdType idType) {
+			this.idType = idType;
+		}
+		public AccountProtectedInfo getAccountProtectedInfo() {
+			return accountProtectedInfo;
+		}
+		public void setAccountProtectedInfo(AccountProtectedInfo accountProtectedInfo) {
+			this.accountProtectedInfo = accountProtectedInfo;
+		}
+		public BigDecimal getCreditLimit() {
+			return creditLimit;
+		}
+		public void setCreditLimit(BigDecimal creditLimit) {
+			this.creditLimit = creditLimit;
+		}
 		public AccountStatusType getStatusType() {
 			return statusType;
 		}
@@ -151,12 +171,6 @@ public class AdminForm extends AbstractViewModel {
 		}
 		public void setTaxType(TaxType taxType) {
 			this.taxType = taxType;
-		}
-		public Person getPerson() {
-			return person;
-		}
-		public void setPerson(Person person) {
-			this.person = person;
 		}
 	}
 
