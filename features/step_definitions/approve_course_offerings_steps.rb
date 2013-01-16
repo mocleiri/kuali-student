@@ -37,7 +37,7 @@ end
 When /^I manage a Course Offering$/ do
   @course_code="CHEM317"
   @course_offering = make CourseOffering, :course=>@course_code
-  @course_offering.manage
+  @course_offering.search_by_coursecode
 end
 
 And /^I add Activity Offerings to the Course Offering$/ do
