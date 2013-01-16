@@ -37,6 +37,7 @@
         <cglib.version>2.2.2</cglib.version>
         <tiles.version>2.2.2</tiles.version>
         <freemarker.version>2.3.19</freemarker.version>
+        <cxf.version>2.5.6</cxf.version>
         <quartz.version>1.8.6</quartz.version>
         <joda.time.version>1.1.1</joda.time.version>
         <junit.version>4.10</junit.version>
@@ -173,6 +174,48 @@
                 </exclusion>
             </exclusions>
         </dependency-->
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-simple</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-ws-security</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-bindings-soap</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-core</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-api</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.quartz-scheduler</groupId>

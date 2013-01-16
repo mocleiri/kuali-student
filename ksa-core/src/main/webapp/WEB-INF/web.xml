@@ -72,11 +72,11 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <!--servlet>
+    <servlet>
         <servlet-name>ksbDispatcher</servlet-name>
         <servlet-class>org.kuali.rice.ksb.messaging.servlet.KSBDispatcherServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
-    </servlet-->
+    </servlet>
 
     <!-- KualiActionServlet is needed by Rice UI -->
     <servlet>
@@ -107,10 +107,10 @@
         <url-pattern>*.webservice</url-pattern>
     </servlet-mapping>
 
-    <!--servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ksbDispatcher</servlet-name>
         <url-pattern>/remoting/*</url-pattern>
-    </servlet-mapping-->
+    </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>krad</servlet-name>
