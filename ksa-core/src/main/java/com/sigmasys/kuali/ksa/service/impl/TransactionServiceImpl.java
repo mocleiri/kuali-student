@@ -216,7 +216,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public DebitType createDebitType(String debitTypeId, String name, Date startDate, int priority, String description) {
-        return createTransactionType(debitTypeId, 0, name, startDate, priority, description, DebitType.class, true);
+        return createTransactionType(debitTypeId, -1, name, startDate, priority, description, DebitType.class, true);
     }
 
     /**
@@ -231,7 +231,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public CreditType createCreditType(String creditTypeId, String name, Date startDate, int priority, String description) {
-        return createTransactionType(creditTypeId, 0, name, startDate, priority, description, CreditType.class, true);
+        return createTransactionType(creditTypeId, -1, name, startDate, priority, description, CreditType.class, true);
     }
 
     /**
