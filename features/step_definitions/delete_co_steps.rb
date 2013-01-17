@@ -16,9 +16,6 @@ Then /^the Course Offering is not deleted$/ do
   on ManageCourseOfferings do |page|
     page.error_message_course_not_found.should_not be_present
   end
-
-  #cleanup
-  @course_offering.delete_co :should_delete_from_subj_code_view=>true, :should_confirm_delete=>true
 end
 
 When /^I delete a Course Offering with Draft Activity Offerings in Course Offering Code view$/ do
@@ -28,7 +25,6 @@ When /^I delete a Course Offering with Draft Activity Offerings in Course Offeri
   on ManageCourseOfferings do |page|
     page.target_row(@course_offering.course).link(text: "Manage").click
     page.ao_status("A", "Draft").should == true
-    #page.delete_offering
   end
 
   #delete
