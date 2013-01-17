@@ -42,20 +42,35 @@ class CreateCourseOffering < BasePage
   action(:course_offering_copy) {|b| b.course_offering_copy_element.click; b.loading.wait_while_present   }
   ACTIONS_COLUMN_CO = 5
 
-  def select_delivery_format  format
-    delivery_format_row(format).cells[FORMAT_COLUMN].select().select(format)
+  def add_delivery_format
+    select_random_option(delivery_formats_table[1].cells[FORMAT_COLUMN])
+    select_random_option(delivery_formats_table[1].cells[GRADE_ROSTER_LEVEL_COLUMN])
+    select_random_option(delivery_formats_table[1].cells[FINAL_EXAM_COLUMN])
+    delivery_format_add
+
+    selected_options = Hash[:del_format => delivery_formats_table[2].cells[FORMAT_COLUMN].text, :grade_format => delivery_formats_table[2].cells[GRADE_ROSTER_LEVEL_COLUMN].text, :final_exam_driver => delivery_formats_table[2].cells[FINAL_EXAM_COLUMN].text]
+
+    return selected_options
   end
 
-  def select_grade_roster_level  format
+  def select_grade_roster_level(format)
     delivery_format_row(format).cells[GRADE_ROSTER_LEVEL_COLUMN].select().select(format)
   end
 
-  def select_final_exam_driver  format
-    delivery_format_row(format).cells[GRADE_ROSTER_LEVEL_COLUMN].select().select(format)
+  def select_final_exam_driver(format)
+    delivery_format_row(format).cells[FINAL_EXAM_COLUMN].select().select(format)
   end
 
   def delivery_format_row(format)
     delivery_formats_table.row(text: /#{Regexp.escape(format)}/)
+  end
+
+  def select_random_option(sel_list)
+    options = sel_list.options.map{|option| option.text}
+    options.delete_if{|a| a.index("Select") != nil or  a == "" }
+    sel_opt = rand(options.length)
+    puts sel_opt
+    sel_list.select().select(options[sel_opt])
   end
 
   def create_co_from_existing(term, course)

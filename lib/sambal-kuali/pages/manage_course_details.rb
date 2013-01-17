@@ -20,5 +20,26 @@ class ManageCourseDetails < BasePage
   value(:honors_flag) { |b| b.frm.div(data_label: "Honors Flag").span(index: 0).text }
   element(:close_button_element) { |b| b.frm.button(text: "Close")}
   action(:close) { |b| b.close_button_element.click;b.loading.wait_while_present}
+  element(:delivery_formats_table) { |b| b.frm.div(id: "u152").table() }
+
+  FORMAT_COLUMN = 0
+  GRADE_ROSTER_LEVEL_COLUMN = 1
+  FINAL_EXAM_COLUMN = 2
+
+  def get_delivery_format  format
+    delivery_format_row(format).cells[FORMAT_COLUMN].text
+  end
+
+  def get_grade_roster_level  format
+    delivery_format_row(format).cells[GRADE_ROSTER_LEVEL_COLUMN].text
+  end
+
+  def get_final_exam_driver  format
+    delivery_format_row(format).cells[FINAL_EXAM_COLUMN].text
+  end
+
+  def delivery_format_row(format)
+    delivery_formats_table.row(text: /#{Regexp.escape(format)}/)
+  end
 
 end

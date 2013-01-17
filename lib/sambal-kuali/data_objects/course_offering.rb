@@ -16,6 +16,7 @@ class CourseOffering
                 :wait_list_level,
                 :wait_list_type,
                 :grade_format,
+                :delivery_format_list,
                 :final_exam_driver,
                 :honors_flag,
                 :affiliated_person_list,
@@ -30,8 +31,8 @@ class CourseOffering
     @browser = browser
 
     defaults = {
-        :term=>"20122",
-        :course=>"ENGL103",
+        :term=>"201201",
+        :course=>"ENGL101",
         :suffix=>"",
         :activity_offering_cluster_list=>[],
         :ao_list => [],
@@ -40,6 +41,7 @@ class CourseOffering
         :wait_list_level => "Course Offering",
         :wait_list_type => "Automatic",
         :grade_format => "",
+        :delivery_format_list => {},
         :final_exam_driver => "",
         :honors_flag => "NO",
         :affiliated_person_list => {},
@@ -52,21 +54,19 @@ class CourseOffering
     set_options(options)
   end
 
-  def edit_offering options={}
-    # defaults = {
-    #     :suffix=>@suffix,
-    #     :final_exam_type => @final_exam_type,
-    #     :wait_list => @wait_list,
-    #     :honors_flag => @honors_flag,
-    #     :affiliated_person_list => @affiliated_person_list,
-    #     :affiliated_org_list => @affiliated_org_list,
-    #     :wait_list_level => @wait_list_level,
-    #     :grade_format => @grade_format,
-    #     :final_exam_driver => @final_exam_driver,
-    #     :wait_list_type => @wait_list_type
-    # }
+  def create_offering
+    on CreateCourseOffering do  |page|
+      @suffix = random_alphanums.strip
+      page.suffix.set @suffix
+      @course = "#{@course}#{@suffix}"
+      #page.add_delivery_format
+      delivery_obj = make DeliveryFormat
+      @delivery_format_list = delivery_obj.select_delivery_format
+      page.create_offering
+    end
+  end
 
-    #options=defaults.merge(opts)
+  def edit_offering options={}
     if options[:suffix] != @suffix
      #TODO:Add Suffix to edit method Course Offerings
     end
@@ -220,6 +220,15 @@ class CourseOffering
     on ManageCourseOfferings do |page|
       page.term.set @term
       page.input_code.set @course
+      page.show
+    end
+  end
+
+  def create_by_search
+    go_to_create_course_offerings
+    on CreateCourseOffering do  |page|
+      page.target_term.set @term
+      page.catalogue_course_code.set @course
       page.show
     end
   end
@@ -418,5 +427,39 @@ class AffiliatedOrg
         options = defaults.merge(opts)
         set_options(options)
    end
+
+end
+
+class DeliveryFormat
+  include Foundry
+  include DataFactory
+  include DateFactory
+  include StringFactory
+  include Workflows
+
+  attr_accessor :del_format,
+                :grade_format,
+                :final_exam_driver
+
+  def initialize(browser, opts={})
+    @browser = browser
+
+    defaults = {
+      :format => "Lecture/Quiz",
+      :grade_format => "Course",
+      :final_exam_driver => "Lecture"
+    }
+    options = defaults.merge(opts)
+    set_options(options)
+  end
+
+  def select_delivery_format
+    on CreateCourseOffering do  |page|
+      selected_options = page.add_delivery_format
+      puts selected_options.inspect
+      return selected_options
+    end
+
+  end
 
 end
