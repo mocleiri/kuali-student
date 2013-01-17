@@ -19,7 +19,7 @@ class RegistrationWindowsTermLookup < RegistrationWindowsBase
 
   def search_by_term_and_year
     term_type.select 'Spring Term'
-    year.set '2012'
+    year.set '2013'
     search
     #page.loading.wait_while_present
   end
