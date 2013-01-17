@@ -41,6 +41,8 @@
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
                             </bean>
+                            <bean parent="Uif-Link" p:linkText="Insert" p:target="_self"
+                                  p:href="transactionTypeView?methodToCall=create&amp;viewId=TransactionTypeView&amp;pageId=TransactionTypeCreatePage"/>
                             <!--<ref bean="addSection"/>-->
                             <ref bean="tableTransactionTypeSection"/>
                         </list>
@@ -64,6 +66,22 @@
                     </property>
                 </bean>
 
+                <bean parent="Uif-Page" p:id="TransactionTypeCreatePage" p:title="Create Transaction Type">
+                    <property name="headerText" value="Create Transaction Type"/>
+                    <property name="items">
+                        <list>
+                            <bean parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                    <list>
+                                        <bean parent="Uif-Link" p:linkText="Transaction Type Summary" p:target="_self"
+                                              p:href="transactionTypeView?methodToCall=get&amp;viewId=TransactionTypeView&amp;pageId=TransactionTypePage"/>
+                                    </list>
+                                </property>
+                            </bean>
+                            <ref bean="createTransactionTypeSection"/>
+                        </list>
+                    </property>
+                </bean>
                 <!--End TransactionType Page-->
 
             </list>
@@ -108,18 +126,11 @@
                 <bean parent="Uif-InputField" p:label="Sub Code" p:propertyName="transactionType.id.subCode" p:width="5%"/>
                 <bean parent="Uif-InputField" p:label="Description" p:propertyName="transactionType.description" p:width="60%"/>
                 <bean parent="Uif-InputField" p:label="Start Date" p:propertyName="transactionType.startDate" p:width="15%"/>
-                <bean parent="Uif-LinkField" p:label="Edit" p:linkText="Edit" p:target="_self" p:width="10%"
-                      p:href="transactionTypeView?viewId=TransactionTypeView&amp;pageId=TransactionTypeDetailsPage&amp;methodToCall=get&amp;entityId=@{#line.id.id}&amp;subCode=@{#line.id.subCode}" />
             </list>
         </property>
     </bean>
 
-    <!--
-    ********************************************************************************************************************
-                                        Edit a auditableEntity
-    A section devoted to displaying the detail of an auditableEntity and allows editing
-    ********************************************************************************************************************
-    -->
+
     <bean id="detailTransactionTypeSection" parent="Uif-VerticalBoxSection">
         <property name="title" value="Transaction Type Details View"/>
         <property name="items">
@@ -188,5 +199,74 @@
             </list>
         </property>
     </bean>
+
+    <bean id="createTransactionTypeSection" parent="Uif-VerticalBoxSection">
+        <property name="title" value="Transaction Type Details View"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:propertyName="type" p:labelPlacement="TOP"
+                      p:label="Transaction Type">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="code"
+                      p:label="Code" p:labelPlacement="TOP" p:required="true">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="20" p:maxLength="100"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:label="Description"
+                      p:propertyName="description" p:labelPlacement="TOP">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="20" p:maxLength="100"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="startDate"
+                      p:label="Start Date"
+                      p:instructionalText="Start date of the Transaction Type"
+                      p:fieldLabel.renderColon="true"
+                      p:labelPlacement="TOP"
+                      p:maxLength="10"
+                      p:required="true">
+                    <property name="bindingInfo.bindToForm" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-DateControl" p:size="11"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="priority" p:label="Priority" p:labelPlacement="TOP">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="clearPeriod" p:label="Clear Period" p:labelPlacement="TOP">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="authorizationText" p:label="Authorization Text" p:labelPlacement="TOP">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="40" p:maxLength="100"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="unallocatedGLAccount" p:label="Unallocated GL Account" p:labelPlacement="TOP">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="40" p:maxLength="100"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="unallocatedGLOperation" p:label="Unallocated GL Operation" p:labelPlacement="TOP">
+                    <property name="control">
+                        <bean parent="Uif-TextControl" p:size="1" p:maxLength="1"/>
+                    </property>
+                </bean>
+
+                <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="insert" p:actionLabel="Submit">
+                </bean>
+                <!--  Status message -->
+                <bean parent="Uif-MessageField" p:messageText="@{statusMessage}"/>
+            </list>
+        </property>
+    </bean>
+
 
 </beans>

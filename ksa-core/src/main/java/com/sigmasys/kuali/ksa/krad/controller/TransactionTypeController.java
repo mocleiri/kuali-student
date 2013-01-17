@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 
@@ -87,16 +88,63 @@ public class TransactionTypeController extends GenericSearchController {
      * @param form
      * @return
      */
+    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=create")
+    public ModelAndView create(@ModelAttribute("KualiForm") TransactionTypeForm form) {
+
+        form.reset();
+        return getUIFModelAndView(form);
+    }
+
+        /**
+        * @param form
+        * @return
+        */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insert")
     public ModelAndView insert(@ModelAttribute("KualiForm") TransactionTypeForm form) {
 
-        TransactionTypeModel entity = form.getTransactionType();
+        TransactionType transType = null;
 
-        if (entity == null) {
-            String errMsg = "TransactionType cannot be null";
+
+
+        String type = form.getType();
+        String code = form.getCode();
+        Date startDate = form.getStartDate();
+        Integer priority = form.getPriority();
+        String description = form.getDescription();
+
+        boolean typeExists = transactionService.transactionTypeExists(type);
+
+        TransactionType tt = null;
+
+        if("C".equalsIgnoreCase(type)){
+            if(!typeExists){
+                tt = transactionService.createCreditType(code, null, startDate, priority, description);
+            } else {
+                tt = transactionService.createCreditSubType(code, startDate);
+            }
+
+        } else if("D".equalsIgnoreCase(type)){
+            if(!typeExists){
+                tt = transactionService.createDebitType(code, null, startDate, priority, description);
+            } else {
+                tt = transactionService.createDebitSubType(code, startDate);
+            }
+
+        } else {
+            String errMsg = "Invalid transaction type '" + type + "'";
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
         }
+
+        logger.info("Transaction Type saved: " + tt.getId());
+
+        /*
+        // Common fields
+        String code = form.getCode();
+
+
+
+
 
         logger.debug("Entity code: " + entity.getCode());
 
@@ -123,7 +171,7 @@ public class TransactionTypeController extends GenericSearchController {
             form.setStatusMessage(statusMsg);
             logger.error(statusMsg);
         }
-
+          */
         return getUIFModelAndView(form);
     }
 
