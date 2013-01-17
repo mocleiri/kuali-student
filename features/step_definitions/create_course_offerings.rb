@@ -11,7 +11,7 @@ Then /^the new Course Offering should contain only the selected delivery formats
   @course_offering.search_by_subjectcode
   @course_offering.view_course_details
   on ManageCourseDetails do  |page|
-    @course_offering.delivery_format_list.values.each do |del_option|
+    @course_offering.delivery_format_list.each do |del_option|
       page.get_delivery_format(del_option.format).should == del_option.format
       page.get_grade_roster_level(del_option.format).should == del_option.grade_format
     end

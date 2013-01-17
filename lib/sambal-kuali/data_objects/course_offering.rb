@@ -41,7 +41,7 @@ class CourseOffering
         :wait_list_level => "Course Offering",
         :wait_list_type => "Automatic",
         :grade_format => "",
-        :delivery_format_list => {},
+        :delivery_format_list => [],
         :final_exam_driver => "",
         :honors_flag => "NO",
         :affiliated_person_list => {},
@@ -59,9 +59,9 @@ class CourseOffering
       @suffix = random_alphanums.strip
       page.suffix.set @suffix
       @course = "#{@course}#{@suffix}"
-      #page.add_delivery_format
       delivery_obj = make DeliveryFormat
-      @delivery_format_list = delivery_obj.select_delivery_format
+      delivery_obj.select_delivery_format
+      @delivery_format_list << delivery_obj
       page.create_offering
     end
   end
@@ -437,7 +437,7 @@ class DeliveryFormat
   include StringFactory
   include Workflows
 
-  attr_accessor :del_format,
+  attr_accessor :format,
                 :grade_format,
                 :final_exam_driver
 
@@ -456,7 +456,9 @@ class DeliveryFormat
   def select_delivery_format
     on CreateCourseOffering do  |page|
       selected_options = page.add_delivery_format
-      puts selected_options.inspect
+      @format = selected_options[:del_format]
+      @grade_format = selected_options[:grade_format]
+      @final_exam_driver = selected_options[:final_exam_driver]
       return selected_options
     end
 

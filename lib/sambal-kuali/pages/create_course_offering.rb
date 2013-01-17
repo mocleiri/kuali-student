@@ -48,7 +48,7 @@ class CreateCourseOffering < BasePage
     select_random_option(delivery_formats_table[1].cells[FINAL_EXAM_COLUMN])
     delivery_format_add
 
-    selected_options = Hash[:del_format => delivery_formats_table[2].cells[FORMAT_COLUMN].text, :grade_format => delivery_formats_table[2].cells[GRADE_ROSTER_LEVEL_COLUMN].text, :final_exam_driver => delivery_formats_table[2].cells[FINAL_EXAM_COLUMN].text]
+    selected_options = {:del_format => delivery_formats_table[2].cells[FORMAT_COLUMN].text, :grade_format => delivery_formats_table[2].cells[GRADE_ROSTER_LEVEL_COLUMN].text, :final_exam_driver => delivery_formats_table[2].cells[FINAL_EXAM_COLUMN].text}
 
     return selected_options
   end
