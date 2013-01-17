@@ -60,7 +60,7 @@ class CourseOffering
       page.suffix.set @suffix
       @course = "#{@course}#{@suffix}"
       delivery_obj = make DeliveryFormat
-      delivery_obj.select_delivery_format
+      delivery_obj.select_random_delivery_formats
       @delivery_format_list << delivery_obj
       page.create_offering
     end
@@ -453,9 +453,9 @@ class DeliveryFormat
     set_options(options)
   end
 
-  def select_delivery_format
+  def select_random_delivery_formats
     on CreateCourseOffering do  |page|
-      selected_options = page.add_delivery_format
+      selected_options = page.add_random_delivery_format
       @format = selected_options[:del_format]
       @grade_format = selected_options[:grade_format]
       @final_exam_driver = selected_options[:final_exam_driver]

@@ -42,14 +42,9 @@ class CreateCourseOffering < BasePage
   action(:course_offering_copy) {|b| b.course_offering_copy_element.click; b.loading.wait_while_present   }
   ACTIONS_COLUMN_CO = 5
 
-  def add_delivery_format
-    select_random_option(delivery_formats_table[1].cells[FORMAT_COLUMN])
-    select_random_option(delivery_formats_table[1].cells[GRADE_ROSTER_LEVEL_COLUMN])
-    select_random_option(delivery_formats_table[1].cells[FINAL_EXAM_COLUMN])
+  def add_random_delivery_format
+    selected_options = {:del_format => select_random_option(delivery_formats_table[1].cells[FORMAT_COLUMN]), :grade_format => select_random_option(delivery_formats_table[1].cells[GRADE_ROSTER_LEVEL_COLUMN]), :final_exam_driver => select_random_option(delivery_formats_table[1].cells[FINAL_EXAM_COLUMN])}
     delivery_format_add
-
-    selected_options = {:del_format => delivery_formats_table[2].cells[FORMAT_COLUMN].text, :grade_format => delivery_formats_table[2].cells[GRADE_ROSTER_LEVEL_COLUMN].text, :final_exam_driver => delivery_formats_table[2].cells[FINAL_EXAM_COLUMN].text}
-
     return selected_options
   end
 
@@ -69,8 +64,8 @@ class CreateCourseOffering < BasePage
     options = sel_list.options.map{|option| option.text}
     options.delete_if{|a| a.index("Select") != nil or  a == "" }
     sel_opt = rand(options.length)
-    puts sel_opt
     sel_list.select().select(options[sel_opt])
+    return options[sel_opt]
   end
 
   def create_co_from_existing(term, course)
