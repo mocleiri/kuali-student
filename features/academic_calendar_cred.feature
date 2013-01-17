@@ -38,3 +38,22 @@ Feature: Academic Calendar CRED
   Scenario: Search for Academic Calendar using partial name
     When I search for the Academic Calendar using partial name
     Then the calendar should appear in search results
+
+  @pending
+  Scenario: Add a term to the academic calendar
+    When I add a spring term and save
+    Then I verify that the term added to the calendar
+    And Make Official button for the term is enabled
+
+  @pending
+  Scenario: Make Academic Term Official
+    When I add a winter term and save
+    And I make the term official
+    Then the term should be set to Official on edit
+
+  @pending
+  Scenario: Delete Academic Term
+    When I add a summer term and save
+    And I delete the Academic Term draft
+    Then the term should not appear in search results
+

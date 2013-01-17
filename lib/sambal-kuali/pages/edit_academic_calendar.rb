@@ -5,6 +5,10 @@ class EditAcademicCalendar < BasePage
   wrapper_elements
   frame_element
 
+  element(:page_validation_list_exists) { |b| b.frm.ul(id: "pageValidationList").exists?}
+  element(:page_error_message_exists) { |b| b.frm.ul(id: "pageValidationList").li(class: "uif-errorMessageItem").exists?}
+  element(:page_info_message) { |b| b.frm.ul(id: "pageValidationList").exists? and b.frm.ul(id: "pageValidationList").li(class: "uif-infoMessageItem").exists?}
+  value(:page_info_message_text) { |b| b.frm.ul(id: "pageValidationList").li(class: "uif-infoMessageItem").text}
   action(:information_tab) { |b| b.frm.link(text: "Information").click }
   action(:terms_tab) { |b| b.frm.link(text: "Terms").click }
   
