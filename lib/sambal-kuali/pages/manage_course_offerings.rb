@@ -1,5 +1,7 @@
 class ManageCourseOfferings < BasePage
 
+  expected_title /Kuali :: Manage Course Offering/
+
   wrapper_elements
   frame_element
 
