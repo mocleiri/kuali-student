@@ -49,9 +49,24 @@ public class Account implements Identifiable {
     protected String entityId;
 
     /**
+     * Creator ID
+     */
+    protected String creatorId;
+
+    /**
+     * Editor ID
+     */
+    protected String editorId;
+
+    /**
      * Creation date
      */
     protected Date creationDate;
+
+    /**
+     * Update timestamp
+     */
+    protected Date lastUpdate;
 
     /**
      * Last KIM update date
@@ -123,6 +138,24 @@ public class Account implements Identifiable {
         this.entityId = entityId;
     }
 
+    @Column(name = "CREATOR_ID", length = 45)
+    public String getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(String creatorId) {
+        this.creatorId = creatorId;
+    }
+
+    @Column(name = "EDITOR_ID", length = 45)
+    public String getEditorId() {
+        return editorId;
+    }
+
+    public void setEditorId(String editorId) {
+        this.editorId = editorId;
+    }
+
     @Column(name = "CREATION_DATE")
     public Date getCreationDate() {
         return creationDate;
@@ -130,6 +163,15 @@ public class Account implements Identifiable {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+    @Column(name = "LAST_UPDATE")
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
     @Column(name = "LAST_KIM_UPDATE")

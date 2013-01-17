@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 import javax.persistence.Query;
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.regex.Matcher;
@@ -138,7 +139,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         List<Account> accounts = getFullAccounts();
         for (Account account : accounts) {
             if (account instanceof ChargeableAccount) {
-                ageDebt((ChargeableAccount)account, ignoreDeferment);
+                ageDebt((ChargeableAccount) account, ignoreDeferment);
             }
         }
     }
@@ -206,7 +207,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
             throw new IllegalStateException(errMsg);
         }
 
-        return ageDebt((ChargeableAccount)account, ignoreDeferment);
+        return ageDebt((ChargeableAccount) account, ignoreDeferment);
     }
 
     /**
@@ -418,12 +419,26 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
             // TODO - populate the missing fields
             // TODO: figure out how to distinguish Delegate and DirectCharge account types
 
-            final String creatorId = "system";
+            String creatorId = null;
+
+            HttpServletRequest request = RequestUtils.getThreadRequest();
+            if (request != null) {
+                creatorId = userSessionManager.getUserId(request);
+            }
+
+            if (creatorId == null) {
+                creatorId = "system";
+            }
+
             final Date creationDate = new Date();
 
             Account account = new DirectChargeAccount();
+
             account.setId(person.getPrincipalName());
+
+            account.setCreatorId(creatorId);
             account.setCreationDate(creationDate);
+
             account.setAbleToAuthenticate(true);
             account.setEntityId(person.getEntityId());
             account.setKimAccount(true);
@@ -638,7 +653,8 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      */
     @Override
     public Ach getAch(String userId) throws AccountTypeNotFoundException {
-        // @TODO - is it correct to hard code "US ACH." as the type?
+
+        // TODO - is it correct to hard code "US ACH." as the type?
         String errMsg = "ACH Account with ID = " + userId + " does not exist";
 
         AccountProtectedInfo account = getAccountProtectedInfo(userId, "US ACH.");
@@ -675,6 +691,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         ach.setAccountType(type);
         ach.setAccountNumber(act);
         ach.setRoutingNumber(routingNumber);
+
         return ach;
     }
 
@@ -693,7 +710,6 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         query.setParameter("name", type);
         List<AccountProtectedInfo> accounts = query.getResultList();
         return (accounts != null && !accounts.isEmpty()) ? accounts.get(0) : null;
-
     }
 
     /**
@@ -723,8 +739,6 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         }
 
         return query.getResultList();
-
-
     }
 
 }
