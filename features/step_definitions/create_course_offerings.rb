@@ -1,25 +1,21 @@
 When /^I designate a valid term and Catalog Course Code$/ do
-  go_to_create_course_offerings
-  on CreateCourseOffering do  |page|
-    page.target_term.set "20122"
-    page.catalogue_course_code.set "CHEM142"
-    page.show
-  end
+  @course_offering = make CourseOffering, :course => "CHEM132", :grade_format => "Quiz", :delivery_format => "Lecture/Quiz"
+  @course_offering.create_by_search
 end
 
 And /^I create a Course Offering with selected Delivery Formats$/ do
-  on CreateCourseOffering do |page|
-    page.suffix.set "G"
-    page.select_delivery_format("Lecture/Quiz")
-    page.select_grade_roster_level("Quiz")
-    page.select_final_exam_driver("Quiz")
-    page.delivery_format_add
-    page.create_offering
-  end
+  @course_offering.create_offering
 end
 
 Then /^the new Course Offering should contain only the selected delivery formats$/ do
-  pending # this step has not yet been implemented
+  @course_offering.search_by_subjectcode
+  @course_offering.view_course_details
+  on ManageCourseDetails do  |page|
+    @course_offering.delivery_format_list.values.each do |del_option|
+      page.get_delivery_format(del_option.format).should == del_option.format
+      page.get_grade_roster_level(del_option.format).should == del_option.grade_format
+    end
+  end
 end
 
 And /^I configure a course offering copy from an existing offering to exclude instructor information$/ do
@@ -27,7 +23,6 @@ And /^I configure a course offering copy from an existing offering to exclude in
     page.create_from_existing_offering_tab
     page.configure_course_offering_copy_toggle
     page.select_exclude_instructor_checkbox
-  end
 end
 
 And /^I press Copy$/ do
@@ -45,4 +40,5 @@ Then /^the new Course Offering should be displayed in the list of available offe
     page.error_message_course_not_found.should_not be_present
   end
   @course_offering.delete_co :should_delete_from_subj_code_view=>false, :should_confirm_delete=>true
+end
 end
