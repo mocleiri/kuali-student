@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -92,6 +94,20 @@ public class TransactionTypeController extends GenericSearchController {
     public ModelAndView create(@ModelAttribute("KualiForm") TransactionTypeForm form) {
 
         form.reset();
+        List<GeneralLedgerType> gltypes = auditableEntityService.getAuditableEntities(GeneralLedgerType.class);
+
+        List<GlBreakdown> breakdowns = new ArrayList<GlBreakdown>(gltypes.size());
+
+        for(GeneralLedgerType type : gltypes){
+            GlBreakdown b = new GlBreakdown();
+            b.setGeneralLedgerType(type);
+            b.setGlOperation(type.getGlOperationOnCharge());
+            b.setBreakdown(new BigDecimal(0.0));
+            breakdowns.add(b);
+        }
+
+        form.setGlBreakdowns(breakdowns);
+
         return getUIFModelAndView(form);
     }
 
@@ -137,6 +153,9 @@ public class TransactionTypeController extends GenericSearchController {
         }
 
         logger.info("Transaction Type saved: " + tt.getId());
+
+
+
 
         /*
         // Common fields

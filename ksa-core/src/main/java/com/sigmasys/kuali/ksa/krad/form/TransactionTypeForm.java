@@ -34,6 +34,7 @@ public class TransactionTypeForm extends AbstractViewModel {
     private String authorizationText;
     private String unallocatedGLAccount;
     private String unallocatedGLOperation;
+    private List<GlBreakdown> glBreakdowns;
 
     // Debit types only
 
@@ -173,5 +174,13 @@ public class TransactionTypeForm extends AbstractViewModel {
 
     public void setUnallocatedGLOperation(String unallocatedGLOperation) {
         this.unallocatedGLOperation = unallocatedGLOperation;
+    }
+
+    public List<GlBreakdown> getGlBreakdowns() {
+        return glBreakdowns;
+    }
+
+    public void setGlBreakdowns(List<GlBreakdown> glBreakdowns) {
+        this.glBreakdowns = glBreakdowns;
     }
 }

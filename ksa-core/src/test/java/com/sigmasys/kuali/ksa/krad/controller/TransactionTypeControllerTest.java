@@ -3,10 +3,7 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.SettingsForm;
 import com.sigmasys.kuali.ksa.krad.form.TransactionTypeForm;
-import com.sigmasys.kuali.ksa.model.Currency;
-import com.sigmasys.kuali.ksa.model.Rollup;
-import com.sigmasys.kuali.ksa.model.TransactionType;
-import com.sigmasys.kuali.ksa.model.TransactionTypeId;
+import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +36,9 @@ public class TransactionTypeControllerTest extends AbstractServiceTest {
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private AuditableEntityService auditableEntityService;
 
     private TransactionTypeForm form;
 
@@ -109,6 +109,25 @@ public class TransactionTypeControllerTest extends AbstractServiceTest {
         Assert.isTrue(form.getTransactionType().getTransactionType().getDescription().equals(type.getDescription()));
         Assert.notNull(form.getTransactionType().getTransactionType().getStartDate());
         Assert.isTrue(form.getTransactionType().getTransactionType().getStartDate().equals(type.getStartDate()));
+    }
+
+    @Test
+    public void setupCreate() throws Exception {
+        MockHttpServletRequest request = getRequest();
+
+        request.setParameter("userId", userId);
+        request.setParameter("pageId", "TransactionTypeCreatePage");
+
+        List<GeneralLedgerType> gltypes = auditableEntityService.getAuditableEntities(GeneralLedgerType.class);
+
+        ModelAndView modelAndView = transactionTypeController.create(form);
+
+        // Checking assertions
+        Assert.notNull(modelAndView);
+        Assert.notNull(form);
+
+        Assert.notNull(form.getGlBreakdowns());
+        Assert.isTrue(form.getGlBreakdowns().size() == gltypes.size());
     }
 /*
     @Test

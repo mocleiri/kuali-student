@@ -79,6 +79,7 @@
                                 </property>
                             </bean>
                             <ref bean="createTransactionTypeSection"/>
+                            <ref bean="glBreakdownList"/>
                         </list>
                     </property>
                 </bean>
@@ -268,5 +269,48 @@
         </property>
     </bean>
 
+    <bean id="glBreakdownList" parent="Uif-Disclosure-TableCollectionSection"
+          p:layoutManager.numberOfColumns="4"
+          p:title=""
+          p:instructionalText=""
+          p:disclosure.render="false"
+          p:progressiveRenderViaAJAX="true"
+          p:width="85%">
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.GlBreakdown"/>
+        <property name="propertyName" value="glBreakdowns"/>
+        <property name="readOnly" value="true"/>
+        <property name="layoutManager.sequencePropertyName" value="id"/>
+        <property name="layoutManager.richTable.render" value="false"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="GL Type" p:propertyName="generalLedgerType.glAccountId"/>
+                <bean parent="Uif-InputField" p:label="GL Type" p:propertyName="generalLedgerType.description"/>
+                <bean parent="Uif-InputField" p:propertyName="glOperation"
+                      p:label="Operation"
+                      p:maxLength="21"
+                      p:labelPlacement="TOP"
+                      p:fieldLabel.renderColon="true"
+                      p:align="right">
+                    <property name="readOnly" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="breakdown"
+                      p:label="Breakdown"
+                      p:maxLength="21"
+                      p:labelPlacement="TOP"
+                      p:fieldLabel.renderColon="true"
+                      p:align="right">
+                    <property name="readOnly" value="true"/>
+                    <property name="control">
+                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
+                    </property>
+                </bean>
+
+            </list>
+        </property>
+    </bean>
 
 </beans>
