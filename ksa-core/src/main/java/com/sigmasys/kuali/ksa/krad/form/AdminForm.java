@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.*;
 
 import org.kuali.rice.kim.api.identity.Person;
+import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
 
 import com.sigmasys.kuali.ksa.model.*;
 
@@ -29,6 +30,16 @@ public class AdminForm extends AbstractViewModel {
 	 */
 	private List<UserPreference> accountUserPreferences = new ArrayList<UserPreference>();
 	
+	/*
+	 * Option KeyValueFinders.
+	 */
+	private KeyValuesFinder accountStatusTypeOptionsFinder;
+	private KeyValuesFinder latePeriodOptionsFinder;
+	private KeyValuesFinder bankTypeOptionsFinder;
+	private KeyValuesFinder taxTypeOptionsFinder;
+	private KeyValuesFinder idTypeKeyValuesFinder;
+	
+	
    /*
      Activities
    */
@@ -40,7 +51,48 @@ public class AdminForm extends AbstractViewModel {
      Get / Set methods
    */
 
-   	public List<UserPreference> getAccountUserPreferences() {
+   	public KeyValuesFinder getAccountStatusTypeOptionsFinder() {
+		return accountStatusTypeOptionsFinder;
+	}
+	
+	public void setAccountStatusTypeOptionsFinder(
+			KeyValuesFinder accountStatusTypeOptionsFinder) {
+		this.accountStatusTypeOptionsFinder = accountStatusTypeOptionsFinder;
+	}
+
+	public KeyValuesFinder getLatePeriodOptionsFinder() {
+   		return latePeriodOptionsFinder;
+	}
+	
+	public void setLatePeriodOptionsFinder(KeyValuesFinder latePeriodOptionsFinder) {
+		this.latePeriodOptionsFinder = latePeriodOptionsFinder;
+	}
+	
+	public KeyValuesFinder getBankTypeOptionsFinder() {
+		return bankTypeOptionsFinder;
+	}
+	
+	public void setBankTypeOptionsFinder(KeyValuesFinder bankTypeOptionsFinder) {
+		this.bankTypeOptionsFinder = bankTypeOptionsFinder;
+	}
+	
+	public KeyValuesFinder getTaxTypeOptionsFinder() {
+		return taxTypeOptionsFinder;
+	}
+	
+	public void setTaxTypeOptionsFinder(KeyValuesFinder taxTypeOptionsFinder) {
+		this.taxTypeOptionsFinder = taxTypeOptionsFinder;
+	}
+	
+	public KeyValuesFinder getIdTypeKeyValuesFinder() {
+		return idTypeKeyValuesFinder;
+	}
+	
+	public void setIdTypeKeyValuesFinder(KeyValuesFinder idTypeKeyValuesFinder) {
+		this.idTypeKeyValuesFinder = idTypeKeyValuesFinder;
+	}
+
+	public List<UserPreference> getAccountUserPreferences() {
    		return accountUserPreferences;
    	}
 

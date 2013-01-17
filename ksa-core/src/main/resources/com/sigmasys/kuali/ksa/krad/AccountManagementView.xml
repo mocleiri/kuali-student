@@ -217,28 +217,18 @@
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.statusType.name" p:labelPlacement="TOP" p:label="Status" 
 						p:fieldLabel.renderColon="false">
 					<property name="control">
-						<bean parent="Uif-DropdownControl" p:width="100%">
-							<property name="options">
-								<list>
-									<bean parent="Uif-KeyLabelPair" p:key="A" p:value="Good"/>
-									<bean parent="Uif-KeyLabelPair" p:key="B" p:value="Bad"/>
-								</list>
-							</property>
-						</bean>
+						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
+					<property name="optionsFinder" value="@{getAccountStatusTypeOptionsFinder()}"/>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.accountType" p:labelPlacement="TOP" p:label="Account Type" 
 						p:fieldLabel.renderColon="false">
 					<property name="control">
-						<bean parent="Uif-DropdownControl" p:width="100%">
-							<property name="options">
-								<list>
-									<bean parent="Uif-KeyLabelPair" p:key="CA" p:value="Chargeable Account"/>
-									<bean parent="Uif-KeyLabelPair" p:key="DCA" p:value="Direct Charge Account"/>
-								</list>
-							</property>
-						</bean>
+						<bean parent="Uif-DropdownControl" p:width="100%"/>
+					</property>
+					<property name="optionsFinder">
+						<bean class="com.sigmasys.kuali.ksa.krad.util.AccountTypeKeyValuesFinder"/>
 					</property>
 				</bean>
 				
@@ -258,15 +248,9 @@
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.latePeriod.name" p:labelPlacement="TOP" p:label="Late Period" 
 						p:fieldLabel.renderColon="false">
 					<property name="control">
-						<bean parent="Uif-DropdownControl" p:width="100%">
-							<property name="options">
-								<list>
-									<bean parent="Uif-KeyLabelPair" p:key="30" p:value="30 days"/>
-									<bean parent="Uif-KeyLabelPair" p:key="60" p:value="60 days"/>
-								</list>
-							</property>
-						</bean>
+						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
+					<property name="optionsFinder" value="@{getLatePeriodOptionsFinder()}"/>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.ableToAuthenticate">
@@ -286,15 +270,9 @@
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.bankType.name" p:labelPlacement="TOP" p:label="Bank Type" 
 						p:fieldLabel.renderColon="false">
 					<property name="control">
-						<bean parent="Uif-DropdownControl" p:width="100%">
-							<property name="options">
-								<list>
-									<bean parent="Uif-KeyLabelPair" p:key="A" p:value="Good Bank"/>
-									<bean parent="Uif-KeyLabelPair" p:key="B" p:value="Bad Bank"/>
-								</list>
-							</property>
-						</bean>
+						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
+					<property name="optionsFinder" value="@{getBankTypeOptionsFinder()}"/>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.bankType.description" p:labelPlacement="TOP" p:label="Bank Detail"
@@ -307,15 +285,9 @@
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.taxType.name" p:labelPlacement="TOP" p:label="Tax Type" 
 						p:fieldLabel.renderColon="false">
 					<property name="control">
-						<bean parent="Uif-DropdownControl" p:width="100%">
-							<property name="options">
-								<list>
-									<bean parent="Uif-KeyLabelPair" p:key="A" p:value="Low Tax"/>
-									<bean parent="Uif-KeyLabelPair" p:key="B" p:value="High Tax"/>
-								</list>
-							</property>
-						</bean>
+						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
+					<property name="optionsFinder" value="@{getTaxTypeOptionsFinder()}"/>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.taxType.description" p:labelPlacement="TOP" p:label="Tax Detail"
@@ -336,15 +308,9 @@
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.idType.name" p:labelPlacement="TOP" p:label="Identity Type" 
 						p:fieldLabel.renderColon="false">
 					<property name="control">
-						<bean parent="Uif-DropdownControl" p:width="100%">
-							<property name="options">
-								<list>
-									<bean parent="Uif-KeyLabelPair" p:key="A" p:value="Open"/>
-									<bean parent="Uif-KeyLabelPair" p:key="B" p:value="Hidden"/>
-								</list>
-							</property>
-						</bean>
+						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
+					<property name="optionsFinder" value="@{getIdTypeKeyValuesFinder()}"/>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.idType.description" p:labelPlacement="TOP" p:label="Identity Serial"
