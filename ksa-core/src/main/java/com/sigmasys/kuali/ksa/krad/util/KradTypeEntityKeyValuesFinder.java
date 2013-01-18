@@ -10,12 +10,12 @@ import org.kuali.rice.krad.service.BusinessObjectService;
 import org.kuali.rice.krad.service.KRADServiceLocator;
 
 @SuppressWarnings("all")
-public class KRADTypeEntityKeyValuesFinder<T extends BusinessObject> extends GenericKeyValuesFinder {
+public class KradTypeEntityKeyValuesFinder<T extends BusinessObject> extends GenericKeyValuesFinder {
 
 	private Class<T> type;
 	
 	
-	public KRADTypeEntityKeyValuesFinder(Class<T> type) {
+	public KradTypeEntityKeyValuesFinder(Class<T> type) {
 		this.type = type;
 	}
 	

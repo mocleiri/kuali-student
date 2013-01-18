@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import java.util.List;
 
+import com.sigmasys.kuali.ksa.krad.util.KradTypeEntityKeyValuesFinder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.kuali.rice.core.api.util.KeyValue;
@@ -14,7 +15,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sigmasys.kuali.ksa.krad.util.KRADTypeEntityKeyValuesFinder;
 import com.sigmasys.kuali.ksa.service.ServiceTestSuite;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,19 +26,19 @@ public class AccountManagementControllerTest {
 	@Test
 	public void testCreateKRADOptionFinders() throws Exception {
 		// NameType option finder:
-		KeyValuesFinder finder = new KRADTypeEntityKeyValuesFinder<EntityNameTypeBo>(EntityNameTypeBo.class);
+		KeyValuesFinder finder = new KradTypeEntityKeyValuesFinder<EntityNameTypeBo>(EntityNameTypeBo.class);
 		List<KeyValue> options = finder.getKeyValues();
 		
 		// AddressType option finder:
-		finder = new KRADTypeEntityKeyValuesFinder<EntityAddressTypeBo>(EntityAddressTypeBo.class);
+		finder = new KradTypeEntityKeyValuesFinder<EntityAddressTypeBo>(EntityAddressTypeBo.class);
 		options = finder.getKeyValues();
 		
 		// EmailType option finder:
-		finder = new KRADTypeEntityKeyValuesFinder<EntityEmailTypeBo>(EntityEmailTypeBo.class);
+		finder = new KradTypeEntityKeyValuesFinder<EntityEmailTypeBo>(EntityEmailTypeBo.class);
 		options = finder.getKeyValues();
 		
 		// PhoneType option finder:
-		finder = new KRADTypeEntityKeyValuesFinder<EntityPhoneTypeBo>(EntityPhoneTypeBo.class);
+		finder = new KradTypeEntityKeyValuesFinder<EntityPhoneTypeBo>(EntityPhoneTypeBo.class);
 		options = finder.getKeyValues();
 		
 		finder = finder;

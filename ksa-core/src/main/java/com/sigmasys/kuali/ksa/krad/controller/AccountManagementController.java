@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sigmasys.kuali.ksa.krad.form.AdminForm;
 import com.sigmasys.kuali.ksa.krad.util.AuditableEntityKeyValuesFinder;
-import com.sigmasys.kuali.ksa.krad.util.KRADTypeEntityKeyValuesFinder;
+import com.sigmasys.kuali.ksa.krad.util.KradTypeEntityKeyValuesFinder;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AuditableEntityService;
 
@@ -141,7 +141,7 @@ public class AccountManagementController extends GenericSearchController {
 		if (nameTypeOptionsFinder == null) {
 			synchronized(this) {
 				if (nameTypeOptionsFinder == null) {
-					nameTypeOptionsFinder = new KRADTypeEntityKeyValuesFinder<EntityNameTypeBo>(EntityNameTypeBo.class);
+					nameTypeOptionsFinder = new KradTypeEntityKeyValuesFinder<EntityNameTypeBo>(EntityNameTypeBo.class);
 				}
 			}
 		}
@@ -156,7 +156,7 @@ public class AccountManagementController extends GenericSearchController {
 		if (addressTypeOptionsFinder == null) {
 			synchronized(this) {
 				if (addressTypeOptionsFinder == null) {
-					addressTypeOptionsFinder = new KRADTypeEntityKeyValuesFinder<EntityAddressTypeBo>(EntityAddressTypeBo.class);
+					addressTypeOptionsFinder = new KradTypeEntityKeyValuesFinder<EntityAddressTypeBo>(EntityAddressTypeBo.class);
 				}
 			}
 		}
@@ -171,7 +171,7 @@ public class AccountManagementController extends GenericSearchController {
 		if (emailTypeOptionsFinder == null) {
 			synchronized(this) {
 				if (emailTypeOptionsFinder == null) {
-					emailTypeOptionsFinder = new KRADTypeEntityKeyValuesFinder<EntityEmailTypeBo>(EntityEmailTypeBo.class);
+					emailTypeOptionsFinder = new KradTypeEntityKeyValuesFinder<EntityEmailTypeBo>(EntityEmailTypeBo.class);
 				}
 			}
 		}
@@ -186,7 +186,7 @@ public class AccountManagementController extends GenericSearchController {
 		if (phoneTypeOptionsFinder == null) {
 			synchronized(this) {
 				if (phoneTypeOptionsFinder == null) {
-					phoneTypeOptionsFinder = new KRADTypeEntityKeyValuesFinder<EntityPhoneTypeBo>(EntityPhoneTypeBo.class);
+					phoneTypeOptionsFinder = new KradTypeEntityKeyValuesFinder<EntityPhoneTypeBo>(EntityPhoneTypeBo.class);
 				}
 			}
 		}
