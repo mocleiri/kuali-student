@@ -33,6 +33,10 @@ public class AdminForm extends AbstractViewModel {
 	/*
 	 * Option KeyValueFinders.
 	 */
+	private KeyValuesFinder nameTypeOptionsFinder;
+	private KeyValuesFinder addressTypeOptionsFinder;
+	private KeyValuesFinder emailTypeOptionsFinder;
+	private KeyValuesFinder phoneTypeOptionsFinder;
 	private KeyValuesFinder accountStatusTypeOptionsFinder;
 	private KeyValuesFinder latePeriodOptionsFinder;
 	private KeyValuesFinder bankTypeOptionsFinder;
@@ -51,7 +55,39 @@ public class AdminForm extends AbstractViewModel {
      Get / Set methods
    */
 
-   	public KeyValuesFinder getAccountStatusTypeOptionsFinder() {
+   	public KeyValuesFinder getNameTypeOptionsFinder() {
+		return nameTypeOptionsFinder;
+	}
+	
+	public void setNameTypeOptionsFinder(KeyValuesFinder nameTypeOptionsFinder) {
+		this.nameTypeOptionsFinder = nameTypeOptionsFinder;
+	}
+	
+	public KeyValuesFinder getAddressTypeOptionsFinder() {
+		return addressTypeOptionsFinder;
+	}
+	
+	public void setAddressTypeOptionsFinder(KeyValuesFinder addressTypeOptionsFinder) {
+		this.addressTypeOptionsFinder = addressTypeOptionsFinder;
+	}
+	
+	public KeyValuesFinder getEmailTypeOptionsFinder() {
+		return emailTypeOptionsFinder;
+	}
+	
+	public void setEmailTypeOptionsFinder(KeyValuesFinder emailTypeOptionsFinder) {
+		this.emailTypeOptionsFinder = emailTypeOptionsFinder;
+	}
+	
+	public KeyValuesFinder getPhoneTypeOptionsFinder() {
+		return phoneTypeOptionsFinder;
+	}
+	
+	public void setPhoneTypeOptionsFinder(KeyValuesFinder phoneTypeOptionsFinder) {
+		this.phoneTypeOptionsFinder = phoneTypeOptionsFinder;
+	}
+
+	public KeyValuesFinder getAccountStatusTypeOptionsFinder() {
 		return accountStatusTypeOptionsFinder;
 	}
 	

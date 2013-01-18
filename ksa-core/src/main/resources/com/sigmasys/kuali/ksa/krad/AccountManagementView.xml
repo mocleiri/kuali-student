@@ -81,6 +81,14 @@
 		<property name="headerText" value="NAME"/>
 		<property name="items">
 			<list>
+				<bean parent="Uif-InputField" p:propertyName="accountInfo.name.kimNameType" p:labelPlacement="TOP" p:label="Name Type" 
+						p:fieldLabel.renderColon="false">
+					<property name="control">
+						<bean parent="Uif-DropdownControl" p:width="100%"/>
+					</property>
+					<property name="optionsFinder" value="@{getNameTypeOptionsFinder()}"/>
+				</bean>
+				
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.name.firstName" p:labelPlacement="TOP" p:label="First Name" p:required="true" p:fieldLabel.renderColon="false">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="100"/>
@@ -120,10 +128,12 @@
 		<property name="headerText" value="ADDRESS"/>
 		<property name="items">
 			<list>
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.address.kimAddressType" p:labelPlacement="TOP" p:label="Address Type" p:required="false">
+				<bean parent="Uif-InputField" p:propertyName="accountInfo.address.kimAddressType" p:labelPlacement="TOP" p:label="Address Type" 
+						p:fieldLabel.renderColon="false">
 					<property name="control">
-						<bean parent="Uif-TextControl" p:size="11" p:maxLength="45"/>
+						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
+					<property name="optionsFinder" value="@{getAddressTypeOptionsFinder()}"/>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.address.streetAddress1" p:labelPlacement="TOP" p:label="Line 1" p:required="true">
@@ -177,16 +187,26 @@
 		<property name="headerText" value="ELECTRONIC CONTACT"/>
 		<property name="items">
 			<list>
+				<bean parent="Uif-InputField" p:propertyName="accountInfo.electronicContact.kimEmailAddressType" p:labelPlacement="TOP" p:label="Email Address Type" 
+						p:fieldLabel.renderColon="false">
+					<property name="control">
+						<bean parent="Uif-DropdownControl" p:width="100%"/>
+					</property>
+					<property name="optionsFinder" value="@{getEmailTypeOptionsFinder()}"/>
+				</bean>
+			
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.electronicContact.emailAddress" p:labelPlacement="TOP" p:label="Email">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="255"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.electronicContact.kimPhoneType" p:labelPlacement="TOP" p:label="Phone Type">
+				<bean parent="Uif-InputField" p:propertyName="accountInfo.electronicContact.kimPhoneType" p:labelPlacement="TOP" p:label="Phone Type" 
+						p:fieldLabel.renderColon="false">
 					<property name="control">
-						<bean parent="Uif-TextControl" p:size="11" p:maxLength="45"/>
+						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
+					<property name="optionsFinder" value="@{getPhoneTypeOptionsFinder()}"/>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.electronicContact.phoneCountry" p:labelPlacement="TOP" p:label="Phone Country">

@@ -5,6 +5,10 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.kuali.rice.kim.impl.identity.address.EntityAddressTypeBo;
+import org.kuali.rice.kim.impl.identity.email.EntityEmailTypeBo;
+import org.kuali.rice.kim.impl.identity.name.EntityNameTypeBo;
+import org.kuali.rice.kim.impl.identity.phone.EntityPhoneTypeBo;
 import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
 import org.kuali.rice.krad.web.form.UifFormBase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sigmasys.kuali.ksa.krad.form.AdminForm;
 import com.sigmasys.kuali.ksa.krad.util.AuditableEntityKeyValuesFinder;
+import com.sigmasys.kuali.ksa.krad.util.KRADTypeEntityKeyValuesFinder;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AuditableEntityService;
 
@@ -29,6 +34,10 @@ public class AccountManagementController extends GenericSearchController {
 	/*
 	 * Option KeyValueFinders.
 	 */
+	private volatile KeyValuesFinder nameTypeOptionsFinder;
+	private volatile KeyValuesFinder addressTypeOptionsFinder;
+	private volatile KeyValuesFinder emailTypeOptionsFinder;
+	private volatile KeyValuesFinder phoneTypeOptionsFinder;
 	private volatile KeyValuesFinder accountStatusTypeOptionsFinder;
 	private volatile KeyValuesFinder latePeriodOptionsFinder;
 	private volatile KeyValuesFinder bankTypeOptionsFinder;
@@ -62,31 +71,21 @@ public class AccountManagementController extends GenericSearchController {
 		PersonName name = new PersonName();
 		PostalAddress address = new PostalAddress();
 		ElectronicContact electronicContact = new ElectronicContact();
-		BankType bankType = new BankType();
-		TaxType taxType = new TaxType();
-		IdType idType = new IdType();
-		String accountType = "CA";
-        AccountStatusType statusType = new AccountStatusType();
-        LatePeriod latePeriod = new LatePeriod();
         BigDecimal creditLimit = new BigDecimal(0);
 		
 		accountInfo.setName(name);
 		accountInfo.setAddress(address);
 		accountInfo.setElectronicContact(electronicContact);
 		accountInfo.setDateOfBirth(new Date());
-		accountInfo.setBankType(bankType);
-		accountInfo.setTaxType(taxType);
-		accountInfo.setIdType(idType);
-		accountInfo.setAccountType(accountType);
-		statusType.setName("A");
-		latePeriod.setName("30");
-		accountInfo.setStatusType(statusType);
-		accountInfo.setLatePeriod(latePeriod);
 		accountInfo.setAbleToAuthenticate(Boolean.TRUE);
 		accountInfo.setCreditLimit(creditLimit);
 		form.setAccountInfo(accountInfo);
 		
 		// Set option finders:
+		form.setNameTypeOptionsFinder(getNameTypeOptionsFinder());
+		form.setAddressTypeOptionsFinder(getAddressTypeOptionsFinder());
+		form.setEmailTypeOptionsFinder(getEmailTypeOptionsFinder());
+		form.setPhoneTypeOptionsFinder(getPhoneTypeOptionsFinder());
 		form.setLatePeriodOptionsFinder(getLatePeriodOptionsFinder());
 		form.setBankTypeOptionsFinder(getBankTypeOptionsFinder());
 		form.setTaxTypeOptionsFinder(getTaxTypeOptionsFinder());
@@ -126,8 +125,78 @@ public class AccountManagementController extends GenericSearchController {
 		
 		return getUIFModelAndView(form);
 	}
-
 	
+	
+	
+	/* ========================================================================================
+	 * 
+	 * Select control option finders.
+	 * 
+	 * ========================================================================================*/
+
+	/*
+	 * Returns KIM Name type option finder.
+	 */
+	public KeyValuesFinder getNameTypeOptionsFinder() {
+		if (nameTypeOptionsFinder == null) {
+			synchronized(this) {
+				if (nameTypeOptionsFinder == null) {
+					nameTypeOptionsFinder = new KRADTypeEntityKeyValuesFinder<EntityNameTypeBo>(EntityNameTypeBo.class);
+				}
+			}
+		}
+		
+		return nameTypeOptionsFinder;
+	}
+
+	/*
+	 * Returns KIM Address type option finder.
+	 */
+	public KeyValuesFinder getAddressTypeOptionsFinder() {
+		if (addressTypeOptionsFinder == null) {
+			synchronized(this) {
+				if (addressTypeOptionsFinder == null) {
+					addressTypeOptionsFinder = new KRADTypeEntityKeyValuesFinder<EntityAddressTypeBo>(EntityAddressTypeBo.class);
+				}
+			}
+		}
+		
+		return addressTypeOptionsFinder;
+	}
+
+	/*
+	 * Returns KIM Email type options finder.
+	 */
+	public KeyValuesFinder getEmailTypeOptionsFinder() {
+		if (emailTypeOptionsFinder == null) {
+			synchronized(this) {
+				if (emailTypeOptionsFinder == null) {
+					emailTypeOptionsFinder = new KRADTypeEntityKeyValuesFinder<EntityEmailTypeBo>(EntityEmailTypeBo.class);
+				}
+			}
+		}
+		
+		return emailTypeOptionsFinder;
+	}
+
+	/*
+	 * Returns KIM Phone type options finder. 
+	 */
+	public KeyValuesFinder getPhoneTypeOptionsFinder() {
+		if (phoneTypeOptionsFinder == null) {
+			synchronized(this) {
+				if (phoneTypeOptionsFinder == null) {
+					phoneTypeOptionsFinder = new KRADTypeEntityKeyValuesFinder<EntityPhoneTypeBo>(EntityPhoneTypeBo.class);
+				}
+			}
+		}
+		
+		return phoneTypeOptionsFinder;
+	}
+
+	/*
+	 * Returns Account status option finder. 
+	 */
 	public KeyValuesFinder getAccountStatusTypeOptionsFinder() {
 		if (accountStatusTypeOptionsFinder == null) {
 			synchronized(this) {
@@ -140,6 +209,9 @@ public class AccountManagementController extends GenericSearchController {
 		return accountStatusTypeOptionsFinder;
 	}
 
+	/*
+	 * Returns LatePeriod type option finder. 
+	 */
 	public KeyValuesFinder getLatePeriodOptionsFinder() {
 		if (latePeriodOptionsFinder == null) {
 			synchronized(this) {
@@ -152,6 +224,9 @@ public class AccountManagementController extends GenericSearchController {
 		return latePeriodOptionsFinder;
 	}
 
+	/*
+	 * Returns BankType option finder. 
+	 */
 	public KeyValuesFinder getBankTypeOptionsFinder() {
 		if (bankTypeOptionsFinder == null) {
 			synchronized(this) {
@@ -164,6 +239,9 @@ public class AccountManagementController extends GenericSearchController {
 		return bankTypeOptionsFinder;
 	}
 
+	/*
+	 * Returns TaxType option finder.
+	 */
 	public KeyValuesFinder getTaxTypeOptionsFinder() {
 		if (taxTypeOptionsFinder == null) {
 			synchronized(this) {
@@ -176,6 +254,9 @@ public class AccountManagementController extends GenericSearchController {
 		return taxTypeOptionsFinder;
 	}
 
+	/*
+	 * Returns IdType option finder.
+	 */
 	public KeyValuesFinder getIdTypeKeyValuesFinder() {
 		if (idTypeKeyValuesFinder == null) {
 			synchronized(this) {
