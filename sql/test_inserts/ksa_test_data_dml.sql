@@ -33,11 +33,29 @@ Insert into KSSA_ACNT (TYPE,ID,CAN_AUTHENTICATE,CREATION_DATE,CREDIT_LIMIT,ENTIT
 --   FILTER = none used
 ---------------------------------------------------
 REM INSERTING into KSSA_BANK_TYPE
-Insert into KSSA_BANK_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME) values (1,'pheald','This type of field is used to record automated clearing house transactions for payments to accounts within the United States of America. The required information for this type of transaction is the routing number, the account number, and the account type.',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'US ACH.');
+Insert into KSSA_BANK_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,CODE) values (1,'pheald','This type of field is used to record automated clearing house transactions for payments to accounts within the United States of America. The required information for this type of transaction is the routing number, the account number, and the account type.',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'US ACH.','ACH');
+Insert into KSSA_BANK_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,CODE) values (2,'pheald','This type of field is used to record UK banking information in order to send money directly to a UK bank account using BACS. The format of the number requires a valid six-digit sort code, and a valid eight-digit account number.',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'UK BACS','BACS');
+
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_BANK_TYPE
 ---------------------------------------------------
+
+---------------------------------------------------
+--   DATA FOR TABLE KSSA_ID_TYPE
+--   FILTER = none used
+---------------------------------------------------
+REM INSERTING into KSSA_ID_TYPE
+Insert into KSSA_ID_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,CODE) values (1,'pheald','Any country\'s passport may be used as identification. Please store the country code as listed in the passport (three letters, on identification page, ex. GBR, USA, FRA) as the issuing authority,  and the passport number as the serial.',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Passport.','PAS');
+Insert into KSSA_ID_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,CODE) values (2,'pheald','Please store the driver\'s license number as the serial and the state or country of issue as the issuing authority.',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Driver\'s License.','DL');
+Insert into KSSA_ID_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,CODE) values (3,'pheald','Please store the serial of the identificaition card as the serial, and the country or state of issue as the issuing authority.',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Identification card.','DL');
+Insert into KSSA_ID_TYPE (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,CODE) values (4,'pheald','Only U.S. military identification. Please store the serial of the document and under issuing authority, the branch of the military (i.e. ARMY, NAVY, etc.)',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'U.S. Military Identification.','MID');
+
+---------------------------------------------------
+--   END DATA FOR TABLE KSSA_ID_TYPE
+---------------------------------------------------
+
+
 
 ---------------------------------------------------
 --   DATA FOR TABLE KSSA_ACNT_STATUS_TYPE
@@ -1187,3 +1205,6 @@ Insert into KSSA_RULE_SET_RULE ( RULE_SET_ID_FK, RULE_ID_FK ) values (1, 6)!
 Insert into KSSA_RULE_SET_RULE ( RULE_SET_ID_FK, RULE_ID_FK ) values (1, 7)!
 
 set sqlterminator ';'
+
+;
+REM added to allow me to commit.
