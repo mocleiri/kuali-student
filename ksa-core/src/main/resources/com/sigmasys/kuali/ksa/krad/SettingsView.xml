@@ -133,7 +133,7 @@
                     </property>
                 </bean>
 
-                <bean parent="Uif-Page" p:id="RollupDetailsPage" p:title="Rollup Details">
+                <bean parent="Uif-Page" p:id="TagDetailsPage" p:title="Rollup Details">
                     <property name="headerText" value="@{humanType} Details"/>
                     <property name="items">
                         <list>
