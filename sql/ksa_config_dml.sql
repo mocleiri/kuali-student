@@ -121,3 +121,4 @@ insert into KSSA_RULE_TYPE (ID, NAME, DESCRIPTION) values (4, 'XDRL', 'Drools XM
 
 
 
+

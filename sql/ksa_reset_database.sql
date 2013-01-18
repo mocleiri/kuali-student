@@ -1,3 +1,6 @@
+set echo on
+whenever sqlerror exit failure
+
 @ksa_drop_ddl.sql
 @ksa_create_ddl.sql
 @ksa_config_dml.sql
