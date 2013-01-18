@@ -113,8 +113,8 @@ end
 
 Given /^I am managing a course offering that has Offered AOs$/ do
   @course_offering = make CourseOffering
-  @course_offering.term="20122"
-  @course_offering.course="ENGL105"
+  @course_offering.term="201201"
+  @course_offering.course="ENGL222"
   @course_offering.suffix=""
   @course_offering.manage
 end

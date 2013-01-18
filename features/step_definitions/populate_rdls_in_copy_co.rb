@@ -67,9 +67,10 @@ end
 
 When /^I roll over an term to a new target term$/ do
   # Verify if the term was rolled over already
-  @source_term="20122"
-  @target_term = "20152"
-  @catalogue_course_code = "ENGL110"
+  @source_term = "201201"
+  @target_term = "201401"
+  @catalogue_course_code = "ENGL222"
+
   go_to_rollover_details
   on RolloverDetails do |page|
     page.term.set @target_term
@@ -160,9 +161,9 @@ And /^The ADLs are Successfully copied as RDLs to the rolled over AOs$/ do
 end
 
 Given /^I am creating a new course offering$/ do
-  @source_term = "20122"
-  @target_term = "20142"
-  @catalogue_course_code = "ENGL110"
+  @source_term = "201201"
+  @target_term = "201401"
+  @catalogue_course_code = "ENGL222"
 #  set target term and course code
   go_to_create_course_offerings
   on CreateCourseOffering do |page|
