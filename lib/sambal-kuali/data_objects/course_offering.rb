@@ -32,7 +32,7 @@ class CourseOffering
 
     defaults = {
         :term=>"201201",
-        :course=>"ENGL101",
+        :course=>"ENGL211",
         :suffix=>"",
         :activity_offering_cluster_list=>[],
         :ao_list => [],

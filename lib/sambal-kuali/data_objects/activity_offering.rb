@@ -32,7 +32,7 @@
       default_rdl_hash = {"default"=> (make DeliveryLogistics)}
 
       defaults = {
-          :format => "Lecture",
+          :format => "Lecture Only",
           :activity_type => "Lecture",
           :max_enrollment => 100,
           :actual_delivery_logistics_list => {},
