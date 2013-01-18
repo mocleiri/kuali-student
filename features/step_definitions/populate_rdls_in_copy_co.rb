@@ -15,10 +15,10 @@ Then /^The new CO and AOs are Successfully created$/ do
   @course_offering.suffix=""
   @course_offering.manage
 
-  $new_total  = @course_offering.ao_list.count
+  @new_total  = @course_offering.ao_list.count
   @inputVals = [@course_offering.ao_list[0], "Draft"]
-  $curState = @course_offering.ao_status :inputs =>  @inputVals
-  if $curState != "Draft"
+  @curState = @course_offering.ao_status :inputs =>  @inputVals
+  if @curState != "Draft"
     raise "AO status is not Draft: ao_code: @course_offering.ao_list[0]"
   end
   @new_schedule = @course_offering.ao_schedule_data :ao_code =>  @course_offering.ao_list[0]
@@ -37,8 +37,8 @@ And /^The ADLs are Successfully copied to RDLs in the new AOs of the newly creat
   @course_offering.suffix=""
   @course_offering.manage
 
-  $orig_total  = @course_offering.ao_list.count
-  $orig_total.should == $new_total
+  @orig_total  = @course_offering.ao_list.count
+  @orig_total.should == @new_total
   @inputVals = [@course_offering.ao_list[0], "Offered"]
   @origState = @course_offering.ao_status :inputs =>  @inputVals
   if @origState != "Offered"
@@ -57,7 +57,7 @@ And /^The ADLs are Successfully copied to RDLs in the new AOs of the newly creat
   if @result_set.length != 3
     raise "AO has no schedule copied: ao_code: @course_offering.ao_list[0]"
   end
-  @result_set.delete? $curState
+  @result_set.delete? @curState
   @result_set.delete? @origState
   @result_set.delete? "Delete"
   if @result_set.length != 0
@@ -81,7 +81,7 @@ When /^I roll over an term to a new target term$/ do
       poll_ctr = 0
       while page.status != "Finished" and poll_ctr < 40 #will wait 20 mins
         poll_ctr = poll_ctr + 1
-        sleep 30
+#        sleep 30
         page.go
       end
 
@@ -105,7 +105,7 @@ Then /^The COs and AOs in the previous term are Successfully rolled over to the 
   @course_offering.suffix=""
   @course_offering.manage
 
-  $orig_total  = @course_offering.ao_list.count
+  @orig_total  = @course_offering.ao_list.count
 
   @inputVals = [@course_offering.ao_list[0], "Offered"]
   @origState = @course_offering.ao_status :inputs =>  @inputVals
@@ -126,10 +126,10 @@ Then /^The COs and AOs in the previous term are Successfully rolled over to the 
   @course_offering.suffix=""
   @course_offering.manage
 
-  $new_total  = @course_offering.ao_list.count
+  @new_total  = @course_offering.ao_list.count
   @inputVals = [@course_offering.ao_list[0], "Draft"]
-  $curState = @course_offering.ao_status :inputs =>  @inputVals
-  if $curState != "Draft"
+  @curState = @course_offering.ao_status :inputs =>  @inputVals
+  if @curState != "Draft"
     raise "AO status is not Draft: ao_code: @course_offering.ao_list[0]"
   end
   @new_schedule = @course_offering.ao_schedule_data :ao_code =>  @course_offering.ao_list[0]
@@ -141,7 +141,7 @@ Then /^The COs and AOs in the previous term are Successfully rolled over to the 
 end
 
 And /^The ADLs are Successfully copied as RDLs to the rolled over AOs$/ do
-  $orig_total.should == $new_total
+  @orig_total.should == @new_total
   @new_schedule_set = @new_schedule.split(' ').to_set
   @orig_schedule_set = @orig_schedule.split(' ').to_set
 
@@ -150,7 +150,7 @@ And /^The ADLs are Successfully copied as RDLs to the rolled over AOs$/ do
     raise "AO has no schedule copied: ao_code: @course_offering.ao_list[0]"
   end
 
-  @result_set.delete? $curState
+  @result_set.delete? @curState
   @result_set.delete? @origState
   @result_set.delete? "Delete"
   if @result_set.length != 0

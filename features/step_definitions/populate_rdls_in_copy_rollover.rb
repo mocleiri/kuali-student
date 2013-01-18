@@ -1,28 +1,28 @@
 When /^I copy an AO with ADL to a new AO in the same term$/ do
-  $total_number = @course_offering.ao_list.count
-  $orig_ao_code = @course_offering.ao_list[$total_number-1]
-  @inputVals = [@course_offering.ao_list[$total_number-1], "Offered"]
+  @total_number = @course_offering.ao_list.count
+  @orig_ao_code = @course_offering.ao_list[@total_number-1]
+  @inputVals = [@course_offering.ao_list[@total_number-1], "Offered"]
   @origState = @course_offering.ao_status :inputs =>  @inputVals
   if @origState != "Offered"
-    raise "AO status is not Offered: ao_code: @course_offering.ao_list[$total_number-1]"
+    raise "AO status is not Offered: ao_code: @course_offering.ao_list[@total_number-1]"
   end
-  @orig_schedule = @course_offering.ao_schedule_data :ao_code =>  @course_offering.ao_list[$total_number-1]
+  @orig_schedule = @course_offering.ao_schedule_data :ao_code =>  @course_offering.ao_list[@total_number-1]
   @orig_schedule_set = @orig_schedule.split(' ').to_set
   if @orig_schedule_set.length < 7
     raise "AO has no schedule copied: ao_code: @course_offering.ao_list[0]"
   end
 
-  @course_offering.copy_ao :ao_code =>  @course_offering.ao_list[$total_number-1]
+  @course_offering.copy_ao :ao_code =>  @course_offering.ao_list[@total_number-1]
 end
 
 Then /^The new AO is Successfully created$/ do
   @course_offering.manage
-  $new_total = @course_offering.ao_list.count
-  $new_total.should == $total_number + 1
+  @new_total = @course_offering.ao_list.count
+  @new_total.should == @total_number + 1
 end
 
 And /^The ADL is Successfully copied to the new AO$/ do
-  $new_total  = @course_offering.ao_list.count
+  @new_total  = @course_offering.ao_list.count
   @inputVals = [@course_offering.ao_list[0], "Draft"]
   curState = @course_offering.ao_status :inputs =>  @inputVals
   if curState != "Draft"
@@ -41,7 +41,7 @@ And /^The ADL is Successfully copied to the new AO$/ do
   end
   # Only Offered, Draft, and Delete left
   @result_set.delete? @course_offering.ao_list[0]
-  @result_set.delete? $orig_ao_code
+  @result_set.delete? @orig_ao_code
   @result_set.delete? curState
   @result_set.delete? @origState
   @result_set.delete? "Delete"
@@ -54,8 +54,8 @@ And /^The ADL is Successfully copied to the new AO$/ do
 end
 
 When /^I copy an AO with RDL to a new AO in the same term$/ do
-  $total_number = @course_offering.ao_list.count
-  $orig_ao_code = @course_offering.ao_list[0]
+  @total_number = @course_offering.ao_list.count
+  @orig_ao_code = @course_offering.ao_list[0]
 
   @inputVals = [@course_offering.ao_list[0], "Draft"]
   curState = @course_offering.ao_status :inputs =>  @inputVals
@@ -66,7 +66,7 @@ When /^I copy an AO with RDL to a new AO in the same term$/ do
   @new_schedule_set = @new_schedule.split(' ').to_set
 
   if @new_schedule_set.length < 7
-    raise "AO has no schedule copied: ao_code: $orig_ao_code"
+    raise "AO has no schedule copied: ao_code: @orig_ao_code"
   end
 
   @course_offering.copy_ao :ao_code =>  @course_offering.ao_list[0]
@@ -75,7 +75,7 @@ end
 Then /^The new AO with RDL is Successfully created$/ do
   @course_offering.manage
   new_total = @course_offering.ao_list.count
-  new_total.should == $total_number + 1
+  new_total.should == @total_number + 1
 end
 
 And /^The RDL is Successfully copied to RDL in the new AO$/ do
@@ -91,7 +91,7 @@ And /^The RDL is Successfully copied to RDL in the new AO$/ do
   @result_set = @cur_schedule_set ^ @new_schedule_set
 
   if @cur_schedule_set.length < 7
-    raise "AO has no schedule copied: ao_code: $orig_ao_code"
+    raise "AO has no schedule copied: ao_code: @orig_ao_code"
   end
 
   if @result_set.length != 2
@@ -99,7 +99,7 @@ And /^The RDL is Successfully copied to RDL in the new AO$/ do
   end
   # Only Offered, Draft, and Delete left
   @result_set.delete? @course_offering.ao_list[0]
-  @result_set.delete? $orig_ao_code
+  @result_set.delete? @orig_ao_code
 
   if @result_set.length != 0
     raise "AO schedule is wrong: ao_code: @course_offering.ao_list[0]"
