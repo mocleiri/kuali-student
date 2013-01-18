@@ -60,14 +60,6 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
-                                <!--<property name="items">
-                                    <list>
-                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
-                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
-                                              p:actionLabel="Refresh">
-                                        </bean>
-                                    </list>
-                                </property>-->
                             </bean>
                             <ref bean="addSection"/>
                             <ref bean="tableSection"/>
@@ -101,14 +93,6 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
-                                <property name="items">
-                                    <list>
-                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
-                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
-                                              p:actionLabel="Refresh">
-                                        </bean>
-                                    </list>
-                                </property>
                             </bean>
                             <ref bean="addSection"/>
                             <ref bean="tableSection"/>
@@ -142,14 +126,6 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
-                                <property name="items">
-                                    <list>
-                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
-                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
-                                              p:actionLabel="Refresh">
-                                        </bean>
-                                    </list>
-                                </property>
                             </bean>
                             <ref bean="addSection"/>
                             <ref bean="tableSection"/>
@@ -182,14 +158,6 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
-                                <!--<property name="items">
-                                    <list>
-                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
-                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
-                                              p:actionLabel="Refresh">
-                                        </bean>
-                                    </list>
-                                </property>-->
                             </bean>
                             <ref bean="addSection"/>
                             <ref bean="tableSection"/>
@@ -221,14 +189,6 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
-                                <property name="items">
-                                    <list>
-                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
-                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
-                                              p:actionLabel="Refresh">
-                                        </bean>
-                                    </list>
-                                </property>
                             </bean>
                             <ref bean="addSection"/>
                             <ref bean="tableSection"/>
@@ -262,14 +222,6 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
-                                <property name="items">
-                                    <list>
-                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
-                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
-                                              p:actionLabel="Refresh">
-                                        </bean>
-                                    </list>
-                                </property>
                             </bean>
                             <ref bean="addSection"/>
                             <ref bean="tableSection"/>
@@ -303,14 +255,6 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
-                                <property name="items">
-                                    <list>
-                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
-                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
-                                              p:actionLabel="Refresh">
-                                        </bean>
-                                    </list>
-                                </property>
                             </bean>
                             <ref bean="addSection"/>
                             <ref bean="tableSection"/>
@@ -344,14 +288,6 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
-                                <property name="items">
-                                    <list>
-                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
-                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
-                                              p:actionLabel="Refresh">
-                                        </bean>
-                                    </list>
-                                </property>
                             </bean>
                             <ref bean="addSection"/>
                             <ref bean="tableSection"/>
@@ -385,14 +321,6 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
-                                <property name="items">
-                                    <list>
-                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
-                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
-                                              p:actionLabel="Refresh">
-                                        </bean>
-                                    </list>
-                                </property>
                             </bean>
                             <ref bean="addSection"/>
                             <ref bean="tableSection"/>
@@ -426,14 +354,6 @@
                     <property name="items">
                         <list>
                             <bean parent="Uif-HorizontalBoxSection">
-                                <property name="items">
-                                    <list>
-                                        <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="get"
-                                              p:onClickScript="writeHiddenToForm(&quot;actionParameters[pageId]&quot;, &quot;@{simpleType}Page&quot;);"
-                                              p:actionLabel="Refresh">
-                                        </bean>
-                                    </list>
-                                </property>
                             </bean>
                             <ref bean="addSection"/>
                             <ref bean="tableSection"/>
