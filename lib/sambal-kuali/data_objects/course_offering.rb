@@ -267,6 +267,13 @@ class CourseOffering
     end
   end
 
+  def edit_ao(opts)
+    ao_code = opts[:ao_code]
+    on ManageCourseOfferings do |page|
+      page.edit(ao_code)
+    end
+  end
+
   def delete_ao_list(opts)
     ao_code_list = opts[:code_list]
     on ManageCourseOfferings do |page|
