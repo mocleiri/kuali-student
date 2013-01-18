@@ -18,17 +18,14 @@ class DeliveryLogisticsEdit < ActivityOfferingMaintenanceBase
   action(:add) { |b| b.frm.div(id: "ActivityOffering-DeliveryLogistic-SchedulePage-New").button(text: "Add").click; b.loading.wait_while_present }
   action(:update_request) { |b| b.frm.div(id: "ActivityOffering-DeliveryLogistic-SchedulePage-New").button(text: "Update Request").click; b.loading.wait_while_present }
 
-  #element(:requested_logistics_item_table) { |b| b.frm.table(class: "uif-tableCollectionLayout") }
-  element(:requested_logistics_item_table) { |b| b.frm.table(id: "u398") }
-
   ACTIONS_COLUMN = 7
   def edit_requested_logistics_features(row)
-    requested_logistics_item_table.rows[row].link(text: "Edit").click
+    requested_logistics_table.rows[row].link(text: "Edit").click
     loading.wait_while_present
   end
 
   def delete_requested_logistics_features(row)
-    requested_logistics_item_table.rows[row].link(text: "Delete").click
+    requested_logistics_table.rows[row].link(text: "Delete").click
     loading.wait_while_present
   end
 
@@ -37,7 +34,7 @@ class DeliveryLogisticsEdit < ActivityOfferingMaintenanceBase
   action(:cancel) { |b| b.frm.div(class: "uif-footer").link(text: "Cancel").click; b.loading.wait_while_present }
 
   def rdl_table_row_nums
-    requested_logistics_item_table.rows.count
+    requested_logistics_table.rows.count
   end
 
 end
