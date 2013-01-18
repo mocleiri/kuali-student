@@ -582,7 +582,7 @@
                 </bean>
                 <bean parent="Uif-SecondaryActionButton-Small" p:methodToCall="updateAuditableEntity"
                       p:actionLabel="Submit"
-                      p:onClickScript="writeHidden ToForm(&quot;actionParameters[entityId]&quot;, &quot;@{auditableEntity.id}&quot;);">
+                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[entityId]&quot;, &quot;@{auditableEntity.id}&quot;);">
                     <!--<property name="actionImage">
                         <bean parent="Uif-ImageField"
                               p:source="@{#ConfigProperties['krad.externalizable.images.url']}ks/icon_btn_add.png"/>
