@@ -84,7 +84,6 @@ When /^I change Personnel attributes$/ do
   @teaching_assistant.inst_effort = @effort_num
 
   @teaching_assistant.add_personnel :id=> @added_person_id, :affiliation => "Teaching Assistant", :inst_effort => 30
-
 end
 
 And /^verify that the changes of the Personnel attributes have persisted$/ do
@@ -128,7 +127,7 @@ And /^verify that the changes of Miscellaneous have persisted$/ do
 end
 
 Given /^I manage a given Course Offering$/ do
-  @course_offering = make CourseOffering, :course=>"ENGL105"
+  @course_offering = make CourseOffering, :course=>"ENGL222"
   @course_offering.manage
 end
 
