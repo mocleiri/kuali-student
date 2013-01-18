@@ -40,6 +40,14 @@ public class AuditableEntityModel extends AuditableEntity<Long> {
         return (parentEntity instanceof Rollup) ? (Rollup) parentEntity : null;
     }
 
+    public LatePeriod getLatePeriod() {
+        return (parentEntity instanceof LatePeriod) ? (LatePeriod) parentEntity : null;
+    }
+
+    public void setLatePeriod(LatePeriod entity){
+        this.parentEntity = entity;
+    }
+
     @Override
     public Long getId() {
         return parentEntity.getId();

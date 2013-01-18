@@ -1,9 +1,11 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.krad.model.TransactionTypeModel;
+import com.sigmasys.kuali.ksa.krad.util.CreditDebitKeyValuesFinder;
 import com.sigmasys.kuali.ksa.model.*;
 import org.kuali.rice.core.api.util.ConcreteKeyValue;
 import org.kuali.rice.core.api.util.KeyValue;
+import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +23,7 @@ public class TransactionTypeForm extends AbstractViewModel {
 
    private String statusMessage;
 
+    private KeyValuesFinder creditDebitKeyValuesFinder;
 
     // Fields used for creating a new transaction type
     private String type;
@@ -182,5 +185,13 @@ public class TransactionTypeForm extends AbstractViewModel {
 
     public void setGlBreakdowns(List<GlBreakdown> glBreakdowns) {
         this.glBreakdowns = glBreakdowns;
+    }
+
+    public KeyValuesFinder getCreditDebitKeyValuesFinder() {
+        return creditDebitKeyValuesFinder;
+    }
+
+    public void setCreditDebitKeyValuesFinder(KeyValuesFinder creditDebitKeyValuesFinder) {
+        this.creditDebitKeyValuesFinder = creditDebitKeyValuesFinder;
     }
 }

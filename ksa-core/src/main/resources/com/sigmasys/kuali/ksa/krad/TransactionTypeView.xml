@@ -278,7 +278,7 @@
           p:width="85%">
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.GlBreakdown"/>
         <property name="propertyName" value="glBreakdowns"/>
-        <property name="readOnly" value="true"/>
+        <property name="readOnly" value="false"/>
         <property name="layoutManager.sequencePropertyName" value="id"/>
         <property name="layoutManager.richTable.render" value="false"/>
         <property name="layoutManager.renderSequenceField" value="false"/>
@@ -286,16 +286,12 @@
             <list>
                 <bean parent="Uif-InputField" p:label="GL Type" p:propertyName="generalLedgerType.glAccountId"/>
                 <bean parent="Uif-InputField" p:label="GL Type" p:propertyName="generalLedgerType.description"/>
-                <bean parent="Uif-InputField" p:propertyName="glOperation"
-                      p:label="Operation"
-                      p:maxLength="21"
-                      p:labelPlacement="TOP"
-                      p:fieldLabel.renderColon="true"
-                      p:align="right">
-                    <property name="readOnly" value="true"/>
+                <bean parent="Uif-InputField" p:propertyName="glOperation" p:labelPlacement="TOP" p:label="Operation"
+                      p:fieldLabel.renderColon="false">
                     <property name="control">
-                        <bean parent="Uif-CurrencyTextControl" p:size="22"/>
+                        <bean parent="Uif-DropdownControl" p:width="100%"/>
                     </property>
+                    <property name="optionsFinder" value="@{getCreditDebitKeyValuesFinder()}"/>
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="breakdown"
                       p:label="Breakdown"

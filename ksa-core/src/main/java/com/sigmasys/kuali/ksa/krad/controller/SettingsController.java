@@ -146,44 +146,6 @@ public class SettingsController extends GenericSearchController {
      * @param form
      * @return
      */
-/*    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=refresh")
-    public ModelAndView refresh(@ModelAttribute("KualiForm") SettingsForm form) {
-        // do refresh stuff...
-
-        // refresh the list of currencies. the form and view manage the refresh
-
-        // a currency instance for the view and model. User may add a currency in this page.
-        // this is not a persisted currency
-        form.setCurrency(new Currency());
-        // this is the existing currencies in the system
-        form.setCurrencies(currencyService.getCurrencies());
-        // clear the status message
-        form.setStatusMessage("");
-
-        return getUIFModelAndView(form);
-    }
- */
-    /**
-     * @param form
-     * @return
-     */
-    /*@RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertCurrency")
-    public ModelAndView insertCurrency(@ModelAttribute("KualiForm") SettingsForm form) {
-        AuditableEntityModel entity = form.getAuditableEntity();
-        if (!(entity.getParentEntity() instanceof Currency)) {
-            String errMsg = "Entity must be of Currency type";
-            logger.error(errMsg);
-            throw new IllegalStateException(errMsg);
-        }
-
-        return insertAuditableEntity(form);
-    }
-
-    */
-    /**
-     * @param form
-     * @return
-     */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertAuditableEntity")
     public ModelAndView insertAuditableEntity(@ModelAttribute("KualiForm") SettingsForm form) {
 
@@ -230,11 +192,60 @@ public class SettingsController extends GenericSearchController {
         return getUIFModelAndView(form);
     }
 
+    /**
+     * @param form
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insertLatePeriod")
+    public ModelAndView insertLatePeriod(@ModelAttribute("KualiForm") SettingsForm form) {
+
+        AuditableEntityModel entity = form.getAuditableEntity();
+        LatePeriod parentEntity = entity.getLatePeriod();
+
+        if(entity == null){
+            logger.info("Entity is null");
+        } else {
+            logger.info("Entity is of type : " + entity.getClass().getName());
+            logger.info("Entity code: " + entity.getCode());
+        }
+
+        if(parentEntity == null){
+            logger.info("Parent entity is null");
+        } else {
+            logger.info("Parent entity is of type : " + parentEntity.getClass().getName());
+        }
+
+
+        try {
+
+            auditableEntityService.persistAuditableEntity(parentEntity);
+
+            form.setAuditableEntities(auditableEntityService.getAuditableEntities(parentEntity.getClass()));
+
+            form.setAuditableEntity(parentEntity.getClass().newInstance());
+            // success in creating the currency.
+            String statusMsg = "Success: " + parentEntity.getClass().getName() + " saved, ID = " + parentEntity.getId();
+            form.setStatusMessage(statusMsg);
+            logger.info(statusMsg);
+        } catch (Exception e) {
+            // failed to create the currency. Leave the currency information in the view
+            String statusMsg = "Failure: " + parentEntity.getClass().getName() + "entity did not save, ID = " + parentEntity.getId() +
+                    ". " + e.getMessage();
+            form.setStatusMessage(statusMsg);
+            logger.error(statusMsg);
+        }
+
+        return getUIFModelAndView(form);
+    }
+
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=updateAuditableEntity")
     public <T extends AuditableEntity> ModelAndView updateAuditableEntity(@ModelAttribute("KualiForm")
                                                                            SettingsForm form) {
 
         AuditableEntity entity = form.getAuditableEntity();
+        if(entity instanceof AuditableEntityModel){
+            entity = ((AuditableEntityModel)entity).getParentEntity();
+        }
 
         try {
             // occurs in the detail page.

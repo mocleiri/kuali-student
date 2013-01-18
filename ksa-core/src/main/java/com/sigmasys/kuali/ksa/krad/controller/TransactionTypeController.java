@@ -2,11 +2,15 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.TransactionTypeForm;
 import com.sigmasys.kuali.ksa.krad.model.TransactionTypeModel;
+import com.sigmasys.kuali.ksa.krad.util.CreditDebitKeyValuesFinder;
+import com.sigmasys.kuali.ksa.krad.util.KradTypeEntityKeyValuesFinder;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AuditableEntityService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.kuali.rice.kim.impl.identity.name.EntityNameTypeBo;
+import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,6 +33,7 @@ import java.util.List;
 public class TransactionTypeController extends GenericSearchController {
 
     private static final Log logger = LogFactory.getLog(TransactionTypeController.class);
+    private volatile KeyValuesFinder creditDebitTypeOptionsFinder;
 
     @Autowired
     private AuditableEntityService auditableEntityService;
@@ -107,6 +112,8 @@ public class TransactionTypeController extends GenericSearchController {
         }
 
         form.setGlBreakdowns(breakdowns);
+
+        form.setCreditDebitKeyValuesFinder(this.getCreditDebitTypeOptionsFinder());
 
         return getUIFModelAndView(form);
     }
@@ -223,5 +230,19 @@ public class TransactionTypeController extends GenericSearchController {
 
         return getUIFModelAndView(form);
     }
+
+
+    public KeyValuesFinder getCreditDebitTypeOptionsFinder() {
+        if (creditDebitTypeOptionsFinder == null) {
+            synchronized(this) {
+                if (creditDebitTypeOptionsFinder == null) {
+                    creditDebitTypeOptionsFinder = new CreditDebitKeyValuesFinder();
+                }
+            }
+        }
+
+        return creditDebitTypeOptionsFinder;
+    }
+
 
 }
