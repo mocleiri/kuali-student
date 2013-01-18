@@ -37,9 +37,9 @@ public class ConfigServiceImpl implements ConfigService, InitializingBean {
     @Override
     public void afterPropertiesSet() {
         // Setting up locale if "locale" initial parameters exist
-        String localeLang = getInitialParameter(Constants.LOCALE_LANG_PARAM_NAME);
+        String localeLang = getInitialParameter(Constants.LOCALE_LANG);
         if (localeLang != null && !localeLang.trim().isEmpty()) {
-            String localeCountry = getInitialParameter(Constants.LOCALE_COUNTRY_PARAM_NAME);
+            String localeCountry = getInitialParameter(Constants.LOCALE_COUNTRY);
             Locale locale = (localeCountry != null && !localeCountry.trim().isEmpty()) ?
                     new Locale(localeLang, localeCountry) : new Locale(localeLang);
             Locale.setDefault(locale);

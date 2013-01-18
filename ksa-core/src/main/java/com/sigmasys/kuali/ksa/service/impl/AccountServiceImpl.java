@@ -4,10 +4,12 @@ import com.sigmasys.kuali.ksa.exception.AccountTypeNotFoundException;
 import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
+import com.sigmasys.kuali.ksa.service.ActivityService;
 import com.sigmasys.kuali.ksa.service.CalendarService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import com.sigmasys.kuali.ksa.transform.Ach;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -60,6 +62,10 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private ActivityService activityService;
+
 
     private PlatformTransactionManager transactionManager;
     private DefaultTransactionDefinition transactionDefinition;
@@ -649,7 +655,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      * the ACH information for the user
      *
      * @param userId Account ID
-     * @return new ElectronicContact instance with ID
+     * @return Ach instance
      */
     @Override
     public Ach getAch(String userId) throws AccountTypeNotFoundException {
@@ -657,9 +663,15 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         // TODO - is it correct to hard code "US ACH." as the type?
         String errMsg = "ACH Account with ID = " + userId + " does not exist";
 
-        AccountProtectedInfo account = getAccountProtectedInfo(userId, "US ACH.");
+        AccountProtectedInfo account = getAccountProtectedInfo(userId);
         if (account == null) {
             logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        String achBankType = configService.getInitialParameter(Constants.REFUND_ACH_BANK_TYPE);
+        if (achBankType == null) {
+            errMsg = "Refund ACH Bank Type '" + achBankType + "' does not exist";
             throw new IllegalArgumentException(errMsg);
         }
 
@@ -696,20 +708,34 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
     }
 
     /**
+     * Returns the account protected information by user ID.
+     *
      * @param userId Account ID
-     * @param type   Bank Type Name
-     * @return new AccountProtectedInfo instance with ID
-     * @TODO This needs to trigger a system event
+     * @return AccountProtectedInfo instance
      */
-    private AccountProtectedInfo getAccountProtectedInfo(String userId, String type) {
+    @Override
+    public AccountProtectedInfo getAccountProtectedInfo(String userId) {
         Query query = em.createQuery("select a from AccountProtectedInfo a " +
-                "left outer join fetch a.bankType bt " +
-                "where a.id = :id " +
-                "and bt.name = :name ");
+                " left outer join fetch a.bankType" +
+                " left outer join fetch a.taxType" +
+                " left outer join fetch a.idType" +
+                " where a.id = :id");
         query.setParameter("id", userId);
-        query.setParameter("name", type);
-        List<AccountProtectedInfo> accounts = query.getResultList();
-        return (accounts != null && !accounts.isEmpty()) ? accounts.get(0) : null;
+        List<AccountProtectedInfo> protectedInfoList = query.getResultList();
+        if (CollectionUtils.isNotEmpty(protectedInfoList)) {
+            AccountProtectedInfo accountInfo = protectedInfoList.get(0);
+            if (accountInfo != null) {
+                Activity activity = new Activity();
+                activity.setAccountId(userId);
+                activity.setEntityId(accountInfo.getId());
+                activity.setEntityType(AccountProtectedInfo.class.getSimpleName());
+                activity.setIpAddress(RequestUtils.getClientIpAddress());
+                activity.setLogDetail("Account Protected Info access [" + userId + "]");
+                activityService.persistActivity(activity);
+            }
+            return accountInfo;
+        }
+        return null;
     }
 
     /**

@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.util.JaxbUtils;
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.ObjectUtils;
@@ -44,10 +45,6 @@ import com.sigmasys.kuali.ksa.model.RefundStatus;
 import com.sigmasys.kuali.ksa.model.RefundType;
 import com.sigmasys.kuali.ksa.model.Rollup;
 import com.sigmasys.kuali.ksa.model.Transaction;
-import com.sigmasys.kuali.ksa.service.AccountService;
-import com.sigmasys.kuali.ksa.service.RefundService;
-import com.sigmasys.kuali.ksa.service.TransactionService;
-import com.sigmasys.kuali.ksa.service.UserPreferenceService;
 import com.sigmasys.kuali.ksa.transform.Ach;
 import com.sigmasys.kuali.ksa.transform.BatchAch;
 import com.sigmasys.kuali.ksa.transform.BatchCheck;
@@ -93,6 +90,9 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
     @Autowired
     private UserPreferenceService userPreferenceService;
 
+    @Autowired
+    private ActivityService activityService;
+
 
     /**
      * Creates a list of unverified Refunds in the specified date range.
@@ -110,7 +110,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @return List of unverified refunds.
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public List<Refund> checkForRefund(String accountId, Date dateFrom, Date dateTo) {
         // Get all payment transactions on account accountId, where effectiveDate > dateFrom and < dateTo:
         boolean isRefundable = true;
@@ -184,7 +184,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @return List of unverified refunds for all specified accounts.
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public List<Refund> checkForRefund(List<String> accountIds, Date dateFrom, Date dateTo) {
         List<Refund> allRefunds = new ArrayList<Refund>();
 
@@ -205,7 +205,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @return List of unverified refunds for all accounts in the given date range.
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public List<Refund> checkForRefunds(Date dateFrom, Date dateTo) {
         // Get all Accounts and IDs:
         Query query = em.createQuery("select a from Account a");
@@ -226,7 +226,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @return List of all Refunds for all accounts in the system for the entire life.
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public List<Refund> checkForRefunds() {
         return checkForRefunds(new Date(0), new Date(Long.MAX_VALUE));
     }
@@ -286,7 +286,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @return The <code>Refund</code> object that was generated during this process.
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public Refund doAccountRefund(Long refundId) {
         return doAccountRefund(refundId, null);
     }
@@ -299,7 +299,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @return The <code>Refund</code> object that was generated during this process.
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public Refund doAccountRefund(Long refundId, String batch) {
         // Get the Refund object and check that it's in the VERIFIED status:
         Refund refund = getRefund(refundId, true);
@@ -369,7 +369,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @return A <code>List</code> of <code>Refund</code> objects created as a result of this operation.
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public List<Refund> doAccountRefunds(String batch) {
         // Find all Refund object with the given value of "batch":
         String sql = "select r from Refund r where r.batchId = :batchId and r.status = :status and r.refundType.debitTypeId = :refundTypeId";
@@ -397,7 +397,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @return String An XML form of the issued check.
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public String doCheckRefund(Long refundId, Date checkDate, String checkMemo) {
         return doCheckRefund(refundId, null, checkDate, checkMemo);
     }
@@ -413,7 +413,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @see RefundService#produceXMLCheck(String, String, PostalAddress, BigDecimal, Date, String)
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public String doCheckRefund(Long refundId, String batch, Date checkDate, String checkMemo) {
         // Check the flag to consolidate same account checks:
         boolean consolidateSameAccountRefunds = BooleanUtils.toBoolean(configService.getInitialParameter(Constants.REFUND_CHECK_GROUP));
@@ -432,7 +432,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @see RefundService#produceXMLCheck(String, String, PostalAddress, BigDecimal, Date, String)
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public String doCheckRefunds(String batch, Date checkDate, String checkMemo) {
         // Find all VERIFIED Check Refunds in the batch:
         String sql = "select r from Refund r where r.batchId = :batchId and r.status = :status and r.refundType.debitTypeId = :refundTypeId";
@@ -480,7 +480,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @see RefundService#produceXMLCheck(String, String, PostalAddress, BigDecimal, Date, String)
      */
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public String produceXMLCheck(String identifier, String payee, PostalAddress postalAddress, BigDecimal amount, Date checkDate, String memo) {
         // Create a new Check object:
         Check check = produceCheckInternal(identifier, payee, postalAddress, amount, checkDate, memo);
@@ -497,7 +497,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @see RefundService#produceAchTransmission(Ach, BigDecimal, String)
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public String doAchRefund(Long refundId) {
         return doAchRefund(refundId, null);
     }
@@ -511,7 +511,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @see RefundService#produceAchTransmission(Ach, BigDecimal, String)
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public String doAchRefund(Long refundId, String batch) {
         // Check the flag to consolidate same account checks:
         boolean consolidateSameAccountRefunds = BooleanUtils.toBoolean(configService.getInitialParameter(Constants.REFUND_ACH_GROUP));
@@ -530,7 +530,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @see RefundService#produceAchTransmission(Ach, BigDecimal, String)
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public String doAchRefunds(String batch) {
         // Find all VERIFIED Ach Refunds in the batch:
         String sql = "select r from Refund r where r.batchId = :batchId and r.status = :status and r.refundType.debitTypeId = :refundTypeId";
@@ -574,7 +574,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @return Bank account transmission as an XML document.
      */
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public String produceAchTransmission(Ach ach, BigDecimal amount, String reference) {
         // Create a new Ach:
         Ach achTransmission = produceAchTransmissionInternal(amount, reference, ach);
@@ -590,7 +590,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @return boolean Whether the specified refund rule is valid.
      */
     @Override
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     public boolean isRefundRuleValid(String refundRule) {
         if (StringUtils.isBlank(refundRule)) {
             return true;
@@ -647,7 +647,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @return <code>Refund</code> that was cancelled.
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public Refund cancelRefund(Long refundId, String memo) {
         // Get the Refund object:
         Refund refund = getRefund(refundId, false);
@@ -699,13 +699,13 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @return An existing <code>RefundType</code> or a newly created one if there is no existing one.
      */
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public RefundType getOrCreateRefundType(String debitTypeId, String creditTypeId) {
-    	// Validate the parameters:
-    	if (StringUtils.isBlank(debitTypeId) || StringUtils.isBlank(creditTypeId)) {
-    		throw new IllegalArgumentException("Debit and Credit types cannot be null when requesting RefundTypes.");
-    	}
-    	
+        // Validate the parameters:
+        if (StringUtils.isBlank(debitTypeId) || StringUtils.isBlank(creditTypeId)) {
+            throw new IllegalArgumentException("Debit and Credit types cannot be null when requesting RefundTypes.");
+        }
+
         // Create a query:
         String sql = "select rt from RefundType rt where rt.debitTypeId = :debitTypeId and rt.creditTypeId = :creditTypeId";
         Query query = em.createQuery(sql)
@@ -729,41 +729,41 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 
         return refundType;
     }
-    
-	/**
-	 * Deletes a <code>RefundType</code> from the persistent storage.
-	 * 
-	 * @param refundType A <code>RefundType</code> to delete from the storage.
-	 */
+
+    /**
+     * Deletes a <code>RefundType</code> from the persistent storage.
+     *
+     * @param refundType A <code>RefundType</code> to delete from the storage.
+     */
     @Override
-    @Transactional(readOnly=false)
-	public void deleteRefundType(RefundType refundType) {
-		deleteEntity(refundType.getId(), RefundType.class);
-	}
+    @Transactional(readOnly = false)
+    public void deleteRefundType(RefundType refundType) {
+        deleteEntity(refundType.getId(), RefundType.class);
+    }
 
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public Refund payoffWithRefund(String accountId, BigDecimal maxPayoff) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public Refund doPayoffRefund(Long refundId) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public Refund doPayoffRefund(Long refundId, String batch) {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    @Transactional(readOnly=false)
+    @Transactional(readOnly = false)
     public List<Refund> doPayoffRefunds(String batch) {
         // TODO Auto-generated method stub
         return null;
@@ -1174,18 +1174,16 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @param accountId An invalid <code>Account</code> identifier.
      */
     private void createInvalidAccountActivity(String accountId) {
+
         Activity activity = new Activity();
-        String currentUserId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
 
         activity.setAccountId(accountId);
         activity.setEntityId(accountId);
         activity.setEntityType(Account.class.getSimpleName());
-        activity.setCreatorId(currentUserId);
-        activity.setIpAddress("127.0.0.1");
+        activity.setIpAddress(RequestUtils.getClientIpAddress());
         activity.setLogDetail("Invalid account identifier [" + accountId + "] in processing Account Refunds.");
-        activity.setTimestamp(new Date());
 
-        persistEntity(activity);
+        activityService.persistActivity(activity);
     }
 
     /**

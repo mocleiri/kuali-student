@@ -65,9 +65,6 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
     @Autowired
     private TransactionService transactionService;
 
-    @Autowired
-    private AuditableEntityService auditableEntityService;
-
     @PostConstruct
     private void postConstruct() {
         schemaValidator = new XmlSchemaValidator(XML_SCHEMA_LOCATION, REPORT_SCHEMA_LOCATION);
@@ -783,12 +780,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
     private KsaBatchTransactionResponse getBatchTransactionResponse(BatchReceipt batchReceipt) {
         // Get the response XML, which is the "outgoingXml" attribute:
         XmlDocument receiptXml = batchReceipt.getOutgoingXml();
-
-        if (receiptXml != null) {
-            return JaxbUtils.fromXml(receiptXml.getXml(), KsaBatchTransactionResponse.class);
-        }
-
-        return null;
+        return receiptXml != null ? JaxbUtils.fromXml(receiptXml.getXml(), KsaBatchTransactionResponse.class) : null;
     }
 
     /**
@@ -803,10 +795,10 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
         if (accepted != null) {
             // Iterate through the List of KsaTransactions and TransactionDetails objects:
-            for (Object o : accepted.getKsaTransactionAndTransactionDetails()) {
+            for (Object object : accepted.getKsaTransactionAndTransactionDetails()) {
                 // Pick only KsaTransaction objects:
-                if (o instanceof KsaTransaction) {
-                    result.add((KsaTransaction) o);
+                if (object instanceof KsaTransaction) {
+                    result.add((KsaTransaction) object);
                 }
             }
         }

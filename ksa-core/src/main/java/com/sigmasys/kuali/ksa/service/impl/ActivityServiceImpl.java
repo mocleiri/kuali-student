@@ -2,10 +2,14 @@ package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.Activity;
 import com.sigmasys.kuali.ksa.service.ActivityService;
+import com.sigmasys.kuali.ksa.util.GuidGenerator;
+import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -79,6 +83,13 @@ public class ActivityServiceImpl extends GenericPersistenceService implements Ac
     @Override
     @Transactional(readOnly = false)
     public Long persistActivity(Activity activity) {
+        activity.setTimestamp(new Date());
+        if (activity.getId() == null) {
+            activity.setId(GuidGenerator.generateLong());
+            HttpServletRequest request = RequestUtils.getThreadRequest();
+            String userId = (request != null) ? userSessionManager.getUserId(request) : null;
+            activity.setCreatorId(userId);
+        }
         return persistEntity(activity);
     }
 

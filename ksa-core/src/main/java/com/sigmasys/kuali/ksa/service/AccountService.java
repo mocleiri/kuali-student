@@ -182,4 +182,12 @@ public interface AccountService {
      */
     List<Account> findAccountsByNamePattern(String namePattern);
 
+    /**
+     * Returns the account protected information by user ID.
+     *
+     * @param userId Account ID
+     * @return AccountProtectedInfo instance
+     */
+    AccountProtectedInfo getAccountProtectedInfo(String userId);
+
 }

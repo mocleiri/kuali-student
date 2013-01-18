@@ -7,6 +7,7 @@ import com.sigmasys.kuali.ksa.model.Activity;
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.Identifiable;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
+import com.sigmasys.kuali.ksa.util.GuidGenerator;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,7 +36,6 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Audit trail interceptor for Hibernate.
@@ -50,8 +50,6 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
     private static final Log logger = LogFactory.getLog(AuditTrailInterceptor.class);
 
     private static final int MAX_VALUE_LENGTH = 4000;
-
-    private static final AtomicLong idGenerator = new AtomicLong(System.currentTimeMillis() * 100000);
 
     private EntityManager entityManager;
 
@@ -267,7 +265,7 @@ public class AuditTrailInterceptor extends EmptyInterceptor {
                                      String oldValue, String newValue, String logDetail) {
 
         Activity activity = new Activity();
-        activity.setId(idGenerator.incrementAndGet());
+        activity.setId(GuidGenerator.generateLong());
         activity.setEntityId(id.toString());
         activity.setEntityType(entityClass.getSimpleName());
         activity.setCreatorId(userId);

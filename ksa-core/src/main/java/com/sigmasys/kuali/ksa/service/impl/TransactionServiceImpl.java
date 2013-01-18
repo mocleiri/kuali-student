@@ -1875,7 +1875,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
         writeOffTransaction.setStatementText(statementText);
 
-        String rollupCode = configService.getInitialParameter(Constants.DEFAULT_WRITE_OFF_ROLLUP_PARAM_NAME);
+        String rollupCode = configService.getInitialParameter(Constants.DEFAULT_WRITE_OFF_ROLLUP);
         Rollup rollup = getRollupByCode(rollupCode);
         if (rollup != null) {
             writeOffTransaction.setRollup(rollup);
@@ -2426,9 +2426,9 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
 
         // Getting the default contest payment type ID
-        String contestPaymentTypeId = configService.getInitialParameter(Constants.CONTEST_PAYMENT_TYPE_PARAM_NAME);
+        String contestPaymentTypeId = configService.getInitialParameter(Constants.CONTEST_PAYMENT_TYPE);
         if (contestPaymentTypeId == null) {
-            String errMsg = "The default contest payment type '" + Constants.CONTEST_PAYMENT_TYPE_PARAM_NAME +
+            String errMsg = "The default contest payment type '" + Constants.CONTEST_PAYMENT_TYPE +
                     "' has not been set";
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);

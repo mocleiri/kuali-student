@@ -17,6 +17,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.*;
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
@@ -175,8 +176,8 @@ public class GenericPersistenceService implements PersistenceService {
 
         if (entity instanceof AuditableEntity) {
             AuditableEntity auditableEntity = (AuditableEntity) entity;
-            String userId = (RequestUtils.getThreadRequest() != null) ?
-                    userSessionManager.getUserId(RequestUtils.getThreadRequest()) : null;
+            HttpServletRequest request = RequestUtils.getThreadRequest();
+            String userId = (request != null) ? userSessionManager.getUserId(request) : null;
             Date currentDate = new Date();
             auditableEntity.setLastUpdate(currentDate);
             if (auditableEntity.getId() == null) {

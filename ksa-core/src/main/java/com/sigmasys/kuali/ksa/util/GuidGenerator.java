@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.util;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Creates a Global/Universal Unique ID, per DCE RPC specification.
@@ -13,6 +14,9 @@ import java.util.Random;
  * @version $Revision: 1$
  */
 public class GuidGenerator {
+
+    private static final AtomicLong longIdGenerator = new AtomicLong(System.currentTimeMillis() * 100000);
+
     /**
      * CLOCKMOD constitutes the net value range for the clock counter per RFC.
      *
@@ -78,6 +82,12 @@ public class GuidGenerator {
 
     // Random generator
     private static final Random random = new Random();
+
+
+
+    public static Long generateLong() {
+        return longIdGenerator.incrementAndGet();
+    }
 
     /**
      * Returns the hexidecimal representation of byte values in the array.

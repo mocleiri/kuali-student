@@ -119,8 +119,8 @@ public abstract class AbstractViewModel extends UifFormBase {
         if (params == null) {
             Map<String, String> userPreferences = getUserPreferences();
             if (userPreferences != null) {
-                String localeLang = userPreferences.get(Constants.LOCALE_LANG_PARAM_NAME);
-                String localeCountry = userPreferences.get(Constants.LOCALE_COUNTRY_PARAM_NAME);
+                String localeLang = userPreferences.get(Constants.LOCALE_LANG);
+                String localeCountry = userPreferences.get(Constants.LOCALE_COUNTRY);
                 if (localeLang != null && localeCountry != null) {
                     Locale locale = new Locale(localeLang, localeCountry);
                     params = getConfigService().getLocalizedParameters(locale);

@@ -16,17 +16,19 @@ public interface Constants {
     String RICE_PERSISTENCE_UNIT = "rice";
 
     // KSA parameter names
-    String DEFAULT_WRITE_OFF_ROLLUP_PARAM_NAME = "ksa.writeoff.rollup";
-    String DEFAULT_MEMO_LEVEL_PARAM_NAME = "ksa.memo.level";
-    String LOCALE_LANG_PARAM_NAME = "ksa.locale.lang";
-    String LOCALE_COUNTRY_PARAM_NAME = "ksa.locale.country";
-    String IMPORT_SINGLE_BATCH_FAILURE_PARAM_NAME = "ksa.import.single.batch.failure";
-    String DEFAULT_GL_TYPE_PARAM_NAME = "ksa.general.ledger.type";
-    String DEFAULT_GL_MODE_PARAM_NAME = "ksa.general.ledger.mode";
-    String DEFAULT_DEFERMENT_TYPE_PARAM_NAME = "ksa.deferment.type.id";
-    String CONTEST_PAYMENT_TYPE_PARAM_NAME = "ksa.payment.contest.type.id";
     String LOGGING_OPERATION = "ksa.logging.operation";
     String SYSTEM_CURRENCY = "ksa.system.currency";
+
+    String DEFAULT_WRITE_OFF_ROLLUP = "ksa.writeoff.rollup";
+    String DEFAULT_MEMO_LEVEL = "ksa.memo.level";
+    String LOCALE_LANG = "ksa.locale.lang";
+    String LOCALE_COUNTRY = "ksa.locale.country";
+    String IMPORT_SINGLE_BATCH_FAILURE = "ksa.import.single.batch.failure";
+    String DEFAULT_GL_TYPE = "ksa.general.ledger.type";
+    String DEFAULT_GL_MODE = "ksa.general.ledger.mode";
+    String DEFAULT_DEFERMENT_TYPE = "ksa.deferment.type.id";
+    String CONTEST_PAYMENT_TYPE = "ksa.payment.contest.type.id";
+
 
     // Drools parameters
     String DROOLS_CLASSPATH = "drools";
