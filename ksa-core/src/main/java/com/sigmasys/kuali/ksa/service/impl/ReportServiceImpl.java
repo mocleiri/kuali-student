@@ -660,11 +660,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         transactionReceipt.setTransactionType(transactionType);
 
         // Get the system currency:
-        String systemCurrencyCode = configService.getInitialParameter(Constants.SYSTEM_CURRENCY);
-
-        if (StringUtils.isBlank(systemCurrencyCode)) {
-            systemCurrencyCode = java.util.Currency.getInstance(Locale.getDefault()).getCurrencyCode();
-        }
+        String systemCurrencyCode = java.util.Currency.getInstance(Locale.getDefault()).getCurrencyCode();
 
         // Compare system currency to the transaction currency:
         Currency transactionCurrency = transaction.getCurrency();

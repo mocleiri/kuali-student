@@ -17,7 +17,6 @@ public interface Constants {
 
     // KSA parameter names
     String LOGGING_OPERATION = "ksa.logging.operation";
-    String SYSTEM_CURRENCY = "ksa.system.currency";
 
     String DEFAULT_WRITE_OFF_ROLLUP = "ksa.writeoff.rollup";
     String DEFAULT_MEMO_LEVEL = "ksa.memo.level";
@@ -26,7 +25,6 @@ public interface Constants {
     String IMPORT_SINGLE_BATCH_FAILURE = "ksa.import.single.batch.failure";
     String DEFAULT_GL_TYPE = "ksa.general.ledger.type";
     String DEFAULT_GL_MODE = "ksa.general.ledger.mode";
-    String DEFAULT_DEFERMENT_TYPE = "ksa.deferment.type.id";
     String CONTEST_PAYMENT_TYPE = "ksa.payment.contest.type.id";
 
 
