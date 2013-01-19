@@ -366,7 +366,7 @@
                               p:style="resize:none;"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="formattedUSDAmount"
+                <bean parent="Uif-InputField" p:propertyName="formattedAmount"
                       p:label="Balance"
                       p:maxLength="21"
                       p:align="right">

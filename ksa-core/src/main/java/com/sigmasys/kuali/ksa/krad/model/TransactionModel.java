@@ -124,7 +124,7 @@ public class TransactionModel extends Transaction {
     public TransactionTypeValue getTransactionTypeValue() {
         return transactionTypeValue;
     }
-
+/*
    @Transient
    public String getFormattedUSDAmount(String value) {
 
@@ -151,6 +151,7 @@ public class TransactionModel extends Transaction {
       }
       return formattedNumber;
    }
+*/
 
    @Transient
    public String getFormattedAmount(BigDecimal value) {
@@ -158,16 +159,28 @@ public class TransactionModel extends Transaction {
       String formattedNumber = "";
 
       if (value != null) {
-         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.US);
-         //double doubleValue = Double.parseDouble(value);
-         String usdCurrency = numberFormat.format(value);
-         formattedNumber = usdCurrency.substring(1);
+          NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
+          //numberFormat.setCurrency(java.util.Currency.getInstance(Locale.getDefault()));
+          formattedNumber = numberFormat.format(value);
       }
       return formattedNumber;
    }
 
+    @Transient
+    public String getFormattedAmount(String value) {
 
-   public String getTransactionTypeId() {
+        String formattedNumber = "";
+
+        if (value != null) {
+            NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
+            //numberFormat.setCurrency(java.util.Currency.getInstance(getCurrency().getCode()));
+            formattedNumber = numberFormat.format(new BigDecimal(value));
+        }
+        return formattedNumber;
+    }
+
+
+    public String getTransactionTypeId() {
       return transactionTypeId;
    }
 
@@ -199,7 +212,7 @@ public class TransactionModel extends Transaction {
    }
 
    public String getTransactionAmount() {
-      return transactionAmount = getFormattedUSDAmount(this.getAmount());
+      return transactionAmount = getFormattedAmount(this.getAmount());
    }
 
    public void setTransactionAmount(String transactionAmount) {
@@ -219,7 +232,7 @@ public class TransactionModel extends Transaction {
    }
 
    public String getTransactionAmountAllocated() {
-      return transactionAmountAllocated = getFormattedUSDAmount(this.getAllocatedAmount());
+      return transactionAmountAllocated = getFormattedAmount(this.getAllocatedAmount());
    }
 
    public void setTransactionAmountAllocated(String transactionAmountAllocated) {
@@ -229,7 +242,7 @@ public class TransactionModel extends Transaction {
    }
 
    public String getTransactionAmountAllocatedLocked() {
-      return transactionAmountAllocatedLocked = getFormattedUSDAmount(this.getLockedAllocatedAmount());
+      return transactionAmountAllocatedLocked = getFormattedAmount(this.getLockedAllocatedAmount());
    }
 
    public void setTransactionAmountAllocatedLocked(String transactionAmountAllocatedLocked) {
@@ -369,7 +382,7 @@ public class TransactionModel extends Transaction {
 
    // aggregates
    public String getRollUpBalance() {
-      return getFormattedUSDAmount(rollUpBalance);
+      return getFormattedAmount(rollUpBalance);
    }
 
    public void setRollUpBalance(String rollUpBalance) {
@@ -377,7 +390,7 @@ public class TransactionModel extends Transaction {
    }
 
    public String getRollUpDebit() {
-      return getFormattedUSDAmount(rollUpDebit);
+      return getFormattedAmount(rollUpDebit);
    }
 
    public void setRollUpDebit(String rollUpDebit) {
@@ -385,7 +398,7 @@ public class TransactionModel extends Transaction {
    }
 
    public String getRollUpCredit() {
-      return getFormattedUSDAmount(rollUpCredit);
+      return getFormattedAmount(rollUpCredit);
    }
 
    public void setRollUpCredit(String rollUpCredit) {
@@ -393,7 +406,7 @@ public class TransactionModel extends Transaction {
    }
 
    public String getUnGroupedBalance() {
-      return getFormattedUSDAmount(unGroupedBalance);
+      return getFormattedAmount(unGroupedBalance);
    }
 
    public void setUnGroupedBalance(String unGroupedBalance) {
@@ -401,7 +414,7 @@ public class TransactionModel extends Transaction {
    }
 
    public String getUnGroupedDebit() {
-      return getFormattedUSDAmount(unGroupedDebit);
+      return getFormattedAmount(unGroupedDebit);
    }
 
    public void setUnGroupedDebit(String unGroupedDebit) {
@@ -409,7 +422,7 @@ public class TransactionModel extends Transaction {
    }
 
    public String getUnGroupedCredit() {
-      return getFormattedUSDAmount(unGroupedCredit);
+      return getFormattedAmount(unGroupedCredit);
    }
 
    public void setUnGroupedCredit(String unGroupedCredit) {
@@ -417,7 +430,7 @@ public class TransactionModel extends Transaction {
    }
 
    public String getUnGroupedTotalCredit() {
-      return getFormattedUSDAmount(unGroupedTotalCredit);
+      return getFormattedAmount(unGroupedTotalCredit);
    }
 
    public void setUnGroupedTotalCredit(String unGroupedTotalCredit) {
