@@ -28,12 +28,7 @@ end
 
 And /^I approve the subject code for scheduling$/ do
   @course_offering.search_by_subjectcode
-  on ManageCourseOfferingList do  |page|
-      page.approve_subject_code_for_scheduling
-      @browser.alert.ok
-      #wait for approval process done
-      sleep(60)
-  end
+  on(ManageCourseOfferingList).approve_subject_code
 end
 
 When /^I manage a Course Offering$/ do
@@ -54,10 +49,7 @@ And /^I approve the Course Offering for scheduling$/ do
   on ManageCourseOfferingList do |page|
     page.select_cos([@course_offering.course])
     page.selected_offering_actions.select("Approve for Scheduling")
-    page.go
-    @browser.alert.ok
-    #wait for approval process done
-    sleep(30)
+    page.go_click
   end
 end
 
