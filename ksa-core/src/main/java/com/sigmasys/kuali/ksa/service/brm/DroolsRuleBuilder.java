@@ -5,6 +5,8 @@ import com.sigmasys.kuali.ksa.model.rule.RuleSet;
 
 /**
  * This utility should be used to build a String representation of a Drools rule or rule set objects.
+ *
+ * @author Michael Ivanov
  */
 public class DroolsRuleBuilder {
 
