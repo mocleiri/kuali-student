@@ -13,79 +13,69 @@ import java.util.Locale;
  */
 public class TransactionModel extends Transaction {
 
-   private TransactionTypeValue transactionTypeValue;
+    private TransactionTypeValue transactionTypeValue;
 
-   private String transactionAmount;
+    private String transactionTypeId;
 
-   private String transactionNativeAmount;
+    private String transactionTypeDesc;
 
-   private String transactionAmountAllocated;
+    private String rollupDesc;
 
-   private String transactionAmountAllocatedLocked;
+    // a comma delimited collection of rollup tag values for the transactionType
+    private String rollupTag;
 
-   private String transactionTypeId;
-
-   private String transactionTypeDesc;
-
-   private String currencyCode;
-   //
-   private String rollupDesc;
-
-   // a comma delimited collection of rollup tag values for the transactionType
-   private String rollupTag;
-
-   // transaction type subcode
-   private String transactionTypeSubCode;
+    // transaction type subcode
+    private String transactionTypeSubCode;
 
     // Integer equivalent for a Debit, otherwise null
-   private String debitPriority;
+    private String debitPriority;
 
-   private String deferredId;
+    private String deferredId;
 
-   // Date for a deferment, otherwise null
-   private Date defermentExpirationDate;
+    // Date for a deferment, otherwise null
+    private Date defermentExpirationDate;
 
-   // Date for a Payment, otherwise null
-   private Date paymentClearDate;
+    // Date for a Payment, otherwise null
+    private Date paymentClearDate;
 
-   private String refundRule;
+    private String refundRule;
 
-   // Boolean get method does not work well except as a string
-   private String internal;
+    // Boolean get method does not work well except as a string
+    private String internal;
 
-   // Document id as a string
-   private String documentId;
+    // Document id as a string
+    private String documentId;
 
-   // General Ledger id;
-   private String generalLedgerTypeId;
+    // General Ledger id;
+    private String generalLedgerTypeId;
 
-   // Boolean get method does not work well except as a string
-   private String glOverRidden;
+    // Boolean get method does not work well except as a string
+    private String glOverRidden;
 
-   // aggregated values
-   private String rollUpBalance;
+    // aggregated values
+    private String rollUpBalance;
 
-   private String rollUpDebit;
+    private String rollUpDebit;
 
-   private String rollUpCredit;
+    private String rollUpCredit;
 
-   private String unGroupedBalance;
+    private String unGroupedBalance;
 
-   private String unGroupedDebit;
+    private String unGroupedDebit;
 
-   private String unGroupedCredit;
+    private String unGroupedCredit;
 
-   private String unGroupedTotalCredit;
+    private String unGroupedTotalCredit;
 
 
-   // checkboxes
-   private String paymentBilling;
+    // checkboxes
+    private String paymentBilling;
 
-   private String refundable;
+    private String refundable;
 
-   private String entryGenerated;
+    private String entryGenerated;
 
-   private String allocationLocked;
+    private String allocationLocked;
 
 
     // Constructor
@@ -153,287 +143,266 @@ public class TransactionModel extends Transaction {
    }
 */
 
-   @Transient
-   public String getFormattedAmount(BigDecimal value) {
-
-      String formattedNumber = "";
-
-      if (value != null) {
-          NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
-          //numberFormat.setCurrency(java.util.Currency.getInstance(Locale.getDefault()));
-          formattedNumber = numberFormat.format(value);
-      }
-      return formattedNumber;
-   }
-
     @Transient
-    public String getFormattedAmount(String value) {
-
+    public String getFormattedAmount(BigDecimal value) {
         String formattedNumber = "";
-
         if (value != null) {
             NumberFormat numberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
-            //numberFormat.setCurrency(java.util.Currency.getInstance(getCurrency().getCode()));
-            formattedNumber = numberFormat.format(new BigDecimal(value));
+            formattedNumber = numberFormat.format(value);
         }
         return formattedNumber;
     }
 
+    @Transient
+    public String getFormattedAmount(String value) {
+        return getFormattedAmount(new BigDecimal(value));
+    }
 
     public String getTransactionTypeId() {
-      return transactionTypeId;
-   }
+        return transactionTypeId;
+    }
 
-   public void setTransactionTypeId(String transactionTypeId) {
-      this.transactionTypeId = transactionTypeId;
-   }
+    public void setTransactionTypeId(String transactionTypeId) {
+        this.transactionTypeId = transactionTypeId;
+    }
 
-   public String getTransactionTypeDesc() {
-      return transactionTypeDesc;
-   }
+    public String getTransactionTypeDesc() {
+        return transactionTypeDesc;
+    }
 
-   public void setTransactionTypeDesc(String transactionTypeDesc) {
-      this.transactionTypeDesc = transactionTypeDesc;
-   }
+    public void setTransactionTypeDesc(String transactionTypeDesc) {
+        this.transactionTypeDesc = transactionTypeDesc;
+    }
 
-   public String getCurrencyCode() {
-      if (this.getCurrency() != null) {
-         return this.getCurrency().getCode();
-      }
+    public String getCurrencyCode() {
+        return (this.getCurrency() != null) ? this.getCurrency().getCode() : "";
+    }
 
-      return "";
-   }
+    public void setCurrencyCode(String currencyCode) {
+        if (this.getCurrency() != null) {
+            this.getCurrency().setCode(currencyCode);
+        }
+    }
 
-   public void setCurrencyCode(String currencyCode) {
-      if (this.getCurrency() != null) {
-         this.getCurrency().setCode(currencyCode);
-         this.currencyCode = currencyCode;
-      }
-   }
+    public String getTransactionAmount() {
+        return getFormattedAmount(this.getAmount());
+    }
 
-   public String getTransactionAmount() {
-      return transactionAmount = getFormattedAmount(this.getAmount());
-   }
+    public void setTransactionAmount(String transactionAmount) {
+        double value = Double.parseDouble(transactionAmount);
+        this.setAmount(BigDecimal.valueOf(value));
+    }
 
-   public void setTransactionAmount(String transactionAmount) {
-      double value = Double.parseDouble(transactionAmount);
-      this.setAmount(BigDecimal.valueOf(value));
-      this.transactionAmount = transactionAmount;
-   }
+    public String getTransactionNativeAmount() {
+        return getFormattedAmount(this.getNativeAmount());
+    }
 
-   public String getTransactionNativeAmount() {
-      return transactionNativeAmount = getFormattedAmount(this.getNativeAmount());
-   }
+    public void setTransactionNativeAmount(String transactionNativeAmount) {
+        double value = Double.parseDouble(transactionNativeAmount);
+        this.setNativeAmount(BigDecimal.valueOf(value));
+    }
 
-   public void setTransactionNativeAmount(String transactionNativeAmount) {
-      double value = Double.parseDouble(transactionNativeAmount);
-      this.setNativeAmount(BigDecimal.valueOf(value));
-      this.transactionNativeAmount = transactionNativeAmount;
-   }
+    public String getTransactionAmountAllocated() {
+        return getFormattedAmount(this.getAllocatedAmount());
+    }
 
-   public String getTransactionAmountAllocated() {
-      return transactionAmountAllocated = getFormattedAmount(this.getAllocatedAmount());
-   }
+    public void setTransactionAmountAllocated(String transactionAmountAllocated) {
+        double value = Double.parseDouble(transactionAmountAllocated);
+        this.setAllocatedAmount(BigDecimal.valueOf(value));
+    }
 
-   public void setTransactionAmountAllocated(String transactionAmountAllocated) {
-      double value = Double.parseDouble(transactionAmountAllocated);
-      this.setAllocatedAmount(BigDecimal.valueOf(value));
-      this.transactionAmountAllocated = transactionAmountAllocated;
-   }
+    public String getTransactionAmountAllocatedLocked() {
+        return getFormattedAmount(this.getLockedAllocatedAmount());
+    }
 
-   public String getTransactionAmountAllocatedLocked() {
-      return transactionAmountAllocatedLocked = getFormattedAmount(this.getLockedAllocatedAmount());
-   }
+    public void setTransactionAmountAllocatedLocked(String transactionAmountAllocatedLocked) {
+        double value = Double.parseDouble(transactionAmountAllocatedLocked);
+        this.setLockedAllocatedAmount(BigDecimal.valueOf(value));
+    }
 
-   public void setTransactionAmountAllocatedLocked(String transactionAmountAllocatedLocked) {
-      double value = Double.parseDouble(transactionAmountAllocatedLocked);
-      this.setLockedAllocatedAmount(BigDecimal.valueOf(value));
-      this.transactionAmountAllocatedLocked = transactionAmountAllocatedLocked;
-   }
+    public String getRollupDesc() {
+        return rollupDesc;
+    }
 
-   public String getRollupDesc() {
-      return rollupDesc;
-   }
+    public void setRollupDesc(String rollupDesc) {
+        this.rollupDesc = rollupDesc;
+    }
 
-   public void setRollupDesc(String rollupDesc) {
-      this.rollupDesc = rollupDesc;
-   }
+    public String getTransactionTypeSubCode() {
+        return transactionTypeSubCode;
+    }
 
-   public String getTransactionTypeSubCode() {
-      return transactionTypeSubCode;
-   }
+    public String getRollupTag() {
+        return rollupTag;
+    }
 
-   public String getRollupTag() {
-      return rollupTag;
-   }
+    public void setRollupTag(String rollupTag) {
+        this.rollupTag = rollupTag;
+    }
 
-   public void setRollupTag(String rollupTag) {
-      this.rollupTag = rollupTag;
-   }
+    public void setTransactionTypeSubCode(String transactionTypeSubCode) {
+        this.transactionTypeSubCode = transactionTypeSubCode;
+    }
 
-   public void setTransactionTypeSubCode(String transactionTypeSubCode) {
-      this.transactionTypeSubCode = transactionTypeSubCode;
-   }
+    public String getDebitPriority() {
+        return debitPriority;
+    }
 
-   public String getDebitPriority() {
-      return debitPriority;
-   }
+    public void setDebitPriority(String debitPriority) {
+        this.debitPriority = debitPriority;
+    }
 
-   public void setDebitPriority(String debitPriority) {
-      this.debitPriority = debitPriority;
-   }
+    public String getDeferredId() {
+        return deferredId;
+    }
 
-   public String getDeferredId() {
-      return deferredId;
-   }
+    public void setDeferredId(String deferredId) {
+        this.deferredId = deferredId;
+    }
 
-   public void setDeferredId(String deferredId) {
-      this.deferredId = deferredId;
-   }
+    public Date getDefermentExpirationDate() {
+        return defermentExpirationDate;
+    }
 
-   public Date getDefermentExpirationDate() {
-      return defermentExpirationDate;
-   }
+    public void setDefermentExpirationDate(Date defermentExpirationDate) {
+        this.defermentExpirationDate = defermentExpirationDate;
+    }
 
-   public void setDefermentExpirationDate(Date defermentExpirationDate) {
-      this.defermentExpirationDate = defermentExpirationDate;
-   }
+    public Date getPaymentClearDate() {
+        return paymentClearDate;
+    }
 
-   public Date getPaymentClearDate() {
-      return paymentClearDate;
-   }
+    public void setPaymentClearDate(Date paymentClearDate) {
+        this.paymentClearDate = paymentClearDate;
+    }
 
-   public void setPaymentClearDate(Date paymentClearDate) {
-      this.paymentClearDate = paymentClearDate;
-   }
+    public String getRefundRule() {
+        return refundRule;
+    }
 
-   public String getRefundRule() {
-      return refundRule;
-   }
+    public void setRefundRule(String refundRule) {
+        this.refundRule = refundRule;
+    }
 
-   public void setRefundRule(String refundRule) {
-      this.refundRule = refundRule;
-   }
+    public String getInternal() {
+        return internal;
+    }
 
-   public String getInternal() {
-      return internal;
-   }
+    public void setInternal(String internal) {
+        this.internal = internal;
+    }
 
-   public void setInternal(String internal) {
-      this.internal = internal;
-   }
+    public String getDocumentId() {
+        return documentId;
+    }
 
-   public String getDocumentId() {
-      return documentId;
-   }
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
 
-   public void setDocumentId(String documentId) {
-      this.documentId = documentId;
-   }
+    public String getGeneralLedgerTypeId() {
+        return generalLedgerTypeId;
+    }
 
-   public String getGeneralLedgerTypeId() {
-      return generalLedgerTypeId;
-   }
+    public void setGeneralLedgerTypeId(String generalLedgerTypeId) {
+        this.generalLedgerTypeId = generalLedgerTypeId;
+    }
 
-   public void setGeneralLedgerTypeId(String generalLedgerTypeId) {
-      this.generalLedgerTypeId = generalLedgerTypeId;
-   }
+    public String getGlOverRidden() {
+        return glOverRidden;
+    }
 
-   public String getGlOverRidden() {
-      return glOverRidden;
-   }
+    public void setGlOverRidden(String glOverRidden) {
+        this.glOverRidden = glOverRidden;
+    }
 
-   public void setGlOverRidden(String glOverRidden) {
-      this.glOverRidden = glOverRidden;
-   }
+    public String getPaymentBilling() {
+        return paymentBilling;
+    }
 
-   public String getPaymentBilling() {
-      return paymentBilling;
-   }
+    public void setPaymentBilling(String paymentBilling) {
+        this.paymentBilling = paymentBilling;
+    }
 
-   public void setPaymentBilling(String paymentBilling) {
-      this.paymentBilling = paymentBilling;
-   }
+    public String getRefundable() {
+        return refundable;
+    }
 
-   public String getRefundable() {
-      return refundable;
-   }
+    public void setRefundable(String refundable) {
+        this.refundable = refundable;
+    }
 
-   public void setRefundable(String refundable) {
-      this.refundable = refundable;
-   }
+    public String getEntryGenerated() {
+        return entryGenerated;
+    }
 
-   public String getEntryGenerated() {
-      return entryGenerated;
-   }
+    public void setEntryGenerated(String entryGenerated) {
+        this.entryGenerated = entryGenerated;
+    }
 
-   public void setEntryGenerated(String entryGenerated) {
-      this.entryGenerated = entryGenerated;
-   }
+    public String getAllocationLocked() {
+        return allocationLocked;
+    }
 
-   public String getAllocationLocked() {
-      return allocationLocked;
-   }
-
-   public void setAllocationLocked(String allocationLocked) {
-      this.allocationLocked = allocationLocked;
-   }
+    public void setAllocationLocked(String allocationLocked) {
+        this.allocationLocked = allocationLocked;
+    }
 
 
-   // aggregates
-   public String getRollUpBalance() {
-      return getFormattedAmount(rollUpBalance);
-   }
+    // aggregates
+    public String getRollUpBalance() {
+        return getFormattedAmount(rollUpBalance);
+    }
 
-   public void setRollUpBalance(String rollUpBalance) {
-      this.rollUpBalance = rollUpBalance;
-   }
+    public void setRollUpBalance(String rollUpBalance) {
+        this.rollUpBalance = rollUpBalance;
+    }
 
-   public String getRollUpDebit() {
-      return getFormattedAmount(rollUpDebit);
-   }
+    public String getRollUpDebit() {
+        return getFormattedAmount(rollUpDebit);
+    }
 
-   public void setRollUpDebit(String rollUpDebit) {
-      this.rollUpDebit = rollUpDebit;
-   }
+    public void setRollUpDebit(String rollUpDebit) {
+        this.rollUpDebit = rollUpDebit;
+    }
 
-   public String getRollUpCredit() {
-      return getFormattedAmount(rollUpCredit);
-   }
+    public String getRollUpCredit() {
+        return getFormattedAmount(rollUpCredit);
+    }
 
-   public void setRollUpCredit(String rollUpCredit) {
-      this.rollUpCredit = rollUpCredit;
-   }
+    public void setRollUpCredit(String rollUpCredit) {
+        this.rollUpCredit = rollUpCredit;
+    }
 
-   public String getUnGroupedBalance() {
-      return getFormattedAmount(unGroupedBalance);
-   }
+    public String getUnGroupedBalance() {
+        return getFormattedAmount(unGroupedBalance);
+    }
 
-   public void setUnGroupedBalance(String unGroupedBalance) {
-      this.unGroupedBalance = unGroupedBalance;
-   }
+    public void setUnGroupedBalance(String unGroupedBalance) {
+        this.unGroupedBalance = unGroupedBalance;
+    }
 
-   public String getUnGroupedDebit() {
-      return getFormattedAmount(unGroupedDebit);
-   }
+    public String getUnGroupedDebit() {
+        return getFormattedAmount(unGroupedDebit);
+    }
 
-   public void setUnGroupedDebit(String unGroupedDebit) {
-      this.unGroupedDebit = unGroupedDebit;
-   }
+    public void setUnGroupedDebit(String unGroupedDebit) {
+        this.unGroupedDebit = unGroupedDebit;
+    }
 
-   public String getUnGroupedCredit() {
-      return getFormattedAmount(unGroupedCredit);
-   }
+    public String getUnGroupedCredit() {
+        return getFormattedAmount(unGroupedCredit);
+    }
 
-   public void setUnGroupedCredit(String unGroupedCredit) {
-      this.unGroupedCredit = unGroupedCredit;
-   }
+    public void setUnGroupedCredit(String unGroupedCredit) {
+        this.unGroupedCredit = unGroupedCredit;
+    }
 
-   public String getUnGroupedTotalCredit() {
-      return getFormattedAmount(unGroupedTotalCredit);
-   }
+    public String getUnGroupedTotalCredit() {
+        return getFormattedAmount(unGroupedTotalCredit);
+    }
 
-   public void setUnGroupedTotalCredit(String unGroupedTotalCredit) {
-      this.unGroupedTotalCredit = unGroupedTotalCredit;
-   }
+    public void setUnGroupedTotalCredit(String unGroupedTotalCredit) {
+        this.unGroupedTotalCredit = unGroupedTotalCredit;
+    }
 }

@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.krad.model.TransactionTypeModel;
-import com.sigmasys.kuali.ksa.krad.util.CreditDebitKeyValuesFinder;
 import com.sigmasys.kuali.ksa.model.*;
 import org.kuali.rice.core.api.util.ConcreteKeyValue;
 import org.kuali.rice.core.api.util.KeyValue;
@@ -13,15 +12,15 @@ import java.util.List;
 
 public class TransactionTypeForm extends AbstractViewModel {
 
-   // Currency stuff
+    // Currency stuff
 
-   private Account account;
+    private Account account;
 
-   private List<TransactionTypeModel> entities;
+    private List<TransactionTypeModel> entities;
 
-   private TransactionTypeModel transactionType;
+    private TransactionTypeModel transactionType;
 
-   private String statusMessage;
+    private String statusMessage;
 
     private KeyValuesFinder creditDebitKeyValuesFinder;
 
@@ -45,27 +44,27 @@ public class TransactionTypeForm extends AbstractViewModel {
       Get/Set methods
     */
 
-   public Account getAccount() {
-      return account;
-   }
+    public Account getAccount() {
+        return account;
+    }
 
-   public void setAccount(Account account) {
-      this.account = account;
-   }
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     public List<TransactionTypeModel> getTransactionTypes() {
         return entities;
     }
 
-    public <T extends AuditableEntity> void setTransactionTypes(List<T> entities){
+    public <T extends AuditableEntity> void setTransactionTypes(List<T> entities) {
         List<TransactionTypeModel> list = new ArrayList<TransactionTypeModel>(entities.size());
 
-        for(AuditableEntity entity : entities){
+        for (AuditableEntity entity : entities) {
             TransactionTypeModel m;
-            if(entity instanceof TransactionType) {
-                m = new TransactionTypeModel((TransactionType)entity);
+            if (entity instanceof TransactionType) {
+                m = new TransactionTypeModel((TransactionType) entity);
             } else {
-                m = (TransactionTypeModel)entity;
+                m = (TransactionTypeModel) entity;
             }
             list.add(m);
         }
@@ -87,12 +86,12 @@ public class TransactionTypeForm extends AbstractViewModel {
 
 
     public String getStatusMessage() {
-      return statusMessage;
-   }
+        return statusMessage;
+    }
 
-   public void setStatusMessage(String statusMessage) {
-      this.statusMessage = statusMessage;
-   }
+    public void setStatusMessage(String statusMessage) {
+        this.statusMessage = statusMessage;
+    }
 
     public List<KeyValue> getTransactionTypeCodes() {
         List<KeyValue> labels = new ArrayList<KeyValue>();
@@ -102,7 +101,7 @@ public class TransactionTypeForm extends AbstractViewModel {
         return labels;
     }
 
-    public void reset(){
+    public void reset() {
 
     }
 
