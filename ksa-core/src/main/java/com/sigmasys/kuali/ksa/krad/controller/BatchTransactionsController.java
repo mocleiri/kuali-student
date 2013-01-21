@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.FileUploadForm;
+import com.sigmasys.kuali.ksa.model.Transaction;
 import com.sigmasys.kuali.ksa.service.TransactionImportService;
 import com.sigmasys.kuali.ksa.util.CommonUtils;
 import org.apache.commons.logging.Log;
@@ -15,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by: dmulderink on 9/26/12 at 9:11 AM
@@ -124,6 +127,29 @@ public class BatchTransactionsController extends GenericSearchController {
         try {
             accountService.ageDebt(true);
             form.setUploadProcessState("Debts successfully aged.");
+        } catch (Exception e) {
+            form.setUploadProcessState(e.getLocalizedMessage());
+        }
+
+        return getUIFModelAndView(form);
+    }
+
+    /**
+     * @param form
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=makeEffective")
+    public ModelAndView makeEffective(@ModelAttribute("KualiForm") FileUploadForm form) {
+
+        try {
+            List<Transaction> transactions = transactionService.getTransactions();
+
+            Date today = new Date();
+            for(Transaction t : transactions){
+                if(! t.isGlEntryGenerated() && t.getEffectiveDate().before(today)){
+                    transactionService.makeEffective(t.getId(), false);
+                }
+            }
         } catch (Exception e) {
             form.setUploadProcessState(e.getLocalizedMessage());
         }
