@@ -239,7 +239,7 @@
                         <bean parent="Uif-DateControl" p:size="11" />
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="memoModel.infoAccessLevel"
+                <bean parent="Uif-InputField" p:propertyName="memoModel.accessLevelString"
                       p:label="Level">
                     <property name="control">
                         <bean parent="Uif-HorizontalRadioControl">
@@ -434,7 +434,7 @@
                         <bean parent="Uif-DateControl" p:size="11" />
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="memoModel.infoAccessLevel"
+                <bean parent="Uif-InputField" p:propertyName="memoModel.accessLevelString"
                       p:label="Level"
                       p:maxLength="2"
                       p:labelPlacement="LEFT"
@@ -522,7 +522,7 @@
                         <bean parent="Uif-DateControl" p:size="11" />
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="memoModel.infoAccessLevel"
+                <bean parent="Uif-InputField" p:propertyName="memoModel.accessLevelString"
                       p:label="Level">
                     <property name="control">
                         <bean parent="Uif-HorizontalRadioControl">
