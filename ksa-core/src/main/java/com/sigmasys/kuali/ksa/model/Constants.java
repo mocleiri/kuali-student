@@ -93,4 +93,17 @@ public interface Constants {
     String KFS_ORIGINATION_CODE_PARAM_NAME = "kfs.origination.code";
     String KFS_TRANSACTION_GL_ENTRY_DESCRIPTION_PARAM_NAME = "kfs.transaction.gl.entry.description";
 
+    // 1098T Report constants
+    String KSA_1098_SSN_TYPE_TYPE = "ksa.1098.us.ssn.tax.type";
+    String KSA_1098_FILER_NAME = "ksa.1098.filer.name";
+    String KSA_1098_FILER_ADDRESS1 = "ksa.1098.filer.address1";
+    String KSA_1098_FILER_ADDRESS2 = "ksa.1098.filer.address2";
+    String KSA_1098_FILER_ADDRESS3 = "ksa.1098.filer.address3";
+    String KSA_1098_FILER_CITY = "ksa.1098.filer.city";
+    String KSA_1098_FILER_STATE = "ksa.1098.filer.state";
+    String KSA_1098_FILER_COUNTRY = "ksa.1098.filer.country";
+    String KSA_1098_FILER_ZIP = "ksa.1098.filer.zip";
+    String KSA_1098_FILER_FEIN = "ksa.1098.filer.fein";
+    String KSA_1098_FILER_PHONE = "ksa.1098.filer.phone";
+
 }

@@ -253,7 +253,7 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
         headerType.setOrganizationCode(configService.getInitialParameter(KFS_ORGANIZATION_CODE_PARAM_NAME));
         headerType.setPersonUserId(currentUserId);
         headerType.setPhoneNumber(configService.getInitialParameter(KFS_PHONE_NUMBER_PARAM_NAME));
-        headerType.setTransmissionDate(currentXmlDate);
+        headerType.setTransmissionDate(CalendarUtils.toXmlGregorianCalendar(currentDate, true));
 
         batchType.setHeader(headerType);
 

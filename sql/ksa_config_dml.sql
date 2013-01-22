@@ -95,10 +95,13 @@ insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.transaction.gl.entry.descript
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.filer.name', 'Sigma University');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.filer.address1', '2305 S Colorado Blvd');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.filer.address2', '');
+insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.filer.address3', '');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.filer.city', 'Denver');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.filer.state', 'CO');
+insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.filer.country', 'US');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.filer.zip', '80222');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.filer.fein', '55-5555555');
+insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.filer.phone', '703-555-5555');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.reporting.method.change', 'false');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.tag.amount.billed', 'Billed1098');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.tag.insurance.refund', 'InsRef1098');

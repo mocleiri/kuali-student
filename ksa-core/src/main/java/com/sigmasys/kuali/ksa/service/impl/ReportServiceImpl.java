@@ -13,6 +13,7 @@ import javax.jws.WebService;
 import javax.persistence.Query;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.sigmasys.kuali.ksa.transform.PostalAddress;
 import org.aopalliance.aop.Advice;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -201,16 +202,107 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      * @param accountId ID of an account for which to produce the report.
      * @param startDate Payments and Refunds tracking start date.
      * @param endDate   Payments and Refunds tracking end date date
-     * @param year      Tax year.
      * @param ssnMask   The number of final digits of the social security number that will be stored in the local record.
      * @param noRecord  Whether to keep the record of the produces 1098T
      * @return String representation of an IRS 1098T form.
      * @throws IllegalArgumentException If <code>dateFrom</code> or <code>dateTo</code> are invalid or do not fall within the <code>year</code>.
      * @see Irs1098T
      */
-    public String generate1098TReport(String accountId, Date startDate, Date endDate, Integer year, Integer ssnMask, boolean noRecord) {
-        // TODO Auto-generated method stub
+    public String generate1098TReport(String accountId, Date startDate, Date endDate, int ssnMask, boolean noRecord) {
+
+        Account account = accountService.getFullAccount(accountId);
+        if (account == null) {
+            String errMsg = "Cannot find Account with ID = " + accountId;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        AccountProtectedInfo accountInfo = accountService.getAccountProtectedInfo(accountId);
+        if (accountInfo == null) {
+            String errMsg = "Cannot find Account Protected Information for Account ID = " + accountId;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        TaxType taxType = accountInfo.getTaxType();
+        if (taxType == null) {
+            String errMsg = "Cannot find Tax Type for Account ID = " + accountId;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        String ssnTaxTypeCode = configService.getInitialParameter(Constants.KSA_1098_SSN_TYPE_TYPE);
+        if (StringUtils.isBlank(ssnTaxTypeCode)) {
+            String errMsg = "Initial parameter 'ksa.1098.us.ssn.tax.type' must be set";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        final Irs1098T irs1098T = new Irs1098T();
+
+        final Irs1098T.Student student = new Irs1098T.Student();
+
+        final Irs1098T.Filer filer = new Irs1098T.Filer();
+
+        final Irs1098T.Financial financialEntry = new Irs1098T.Financial();
+
+        final Irs1098T.FormCheckboxes formCheckboxes = new Irs1098T.FormCheckboxes();
+
+        String taxReference = accountInfo.getTaxReference();
+
+        // Filling in Student
+
+        if (StringUtils.isNotBlank(taxReference)) {
+            student.setSocialSecurityNumber(maskString(taxReference, 'X', 4));
+        }
+
+        student.setAccountNumber(accountId);
+
+        com.sigmasys.kuali.ksa.model.PersonName personName = account.getDefaultPersonName();
+
+        student.setName(personName.getFirstName() + " " + personName.getLastName());
+
+        com.sigmasys.kuali.ksa.model.PostalAddress address = account.getDefaultPostalAddress();
+
+        PostalAddress postalAddress = ObjectFactory.getInstance().createPostalAddress();
+        postalAddress.setAddressLine1(address.getStreetAddress1());
+        postalAddress.setAddressLine2(address.getStreetAddress2());
+        postalAddress.setAddressLine3(address.getStreetAddress3());
+        postalAddress.setCity(address.getCity());
+        postalAddress.setStateCode(address.getState());
+        postalAddress.setPostalCode(address.getPostalCode());
+        postalAddress.setCountryCode(address.getCountry());
+
+        student.setPostalAddress(postalAddress);
+
+        // Filling in Filer
+
+        filer.setName(configService.getInitialParameter(Constants.KSA_1098_FILER_NAME));
+        filer.setFederalIdentificationNumber(configService.getInitialParameter(Constants.KSA_1098_FILER_FEIN));
+
+        postalAddress = ObjectFactory.getInstance().createPostalAddress();
+        postalAddress.setAddressLine1(configService.getInitialParameter(Constants.KSA_1098_FILER_ADDRESS1));
+        postalAddress.setAddressLine2(configService.getInitialParameter(Constants.KSA_1098_FILER_ADDRESS2));
+        postalAddress.setAddressLine3(configService.getInitialParameter(Constants.KSA_1098_FILER_ADDRESS3));
+        postalAddress.setCity(configService.getInitialParameter(Constants.KSA_1098_FILER_CITY));
+        postalAddress.setStateCode(configService.getInitialParameter(Constants.KSA_1098_FILER_STATE));
+        postalAddress.setPostalCode(configService.getInitialParameter(Constants.KSA_1098_FILER_ZIP));
+        postalAddress.setCountryCode(configService.getInitialParameter(Constants.KSA_1098_FILER_COUNTRY));
+
+        filer.setPostalAddress(postalAddress);
+
+        filer.setTelephoneNumber(configService.getInitialParameter(Constants.KSA_1098_FILER_PHONE));
+
+        // Filling in FormCheckboxes
+        // TODO - provide correct values
+        formCheckboxes.setVoid(false);
+        formCheckboxes.setReportingMethodChanged(false);
+        formCheckboxes.setCorrected(false);
+
+        // TODO: complete IRS 1098T form
+
         return null;
+
     }
 
 
@@ -234,9 +326,33 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      */
     @Override
     @WebMethod(exclude = true)
-    public String generate1098TReport(String accountId, Integer year, Integer ssnMask, boolean noRecord) {
+    public String generateAnnual1098TReport(String accountId, int year, int ssnMask, boolean noRecord) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    protected String maskString(String value, Character mask, int numberOfCharsToPreserve) {
+
+        if (StringUtils.isEmpty(value)) {
+            return value;
+        }
+
+        int length = value.length();
+        if (numberOfCharsToPreserve < length) {
+            length -= numberOfCharsToPreserve;
+        }
+
+        StringBuilder builder = new StringBuilder(value.length());
+
+        for (int i = 0; i < length; i++) {
+            builder.append(mask);
+        }
+
+        if (length < value.length()) {
+            builder.append(value.substring(length));
+        }
+
+        return builder.toString();
     }
 
 

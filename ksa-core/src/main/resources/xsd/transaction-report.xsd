@@ -25,7 +25,7 @@
                             <xs:element name="name" type="xs:string"/>
                             <xs:element ref="postal-address"/>
                             <xs:element name="telephone-number" type="xs:string"/>
-                            <xs:element name="federal-identification-number"/>
+                            <xs:element name="federal-identification-number" type="xs:string"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
@@ -34,8 +34,8 @@
                         <xs:sequence>
                             <xs:element name="name" type="xs:string"/>
                             <xs:element ref="postal-address"/>
-                            <xs:element name="social-security-number"/>
-                            <xs:element name="account-number"/>
+                            <xs:element name="social-security-number" type="xs:string"/>
+                            <xs:element name="account-number" type="xs:string"/>
                             <xs:element name="half-time" type="xs:boolean"/>
                             <xs:element name="graduate-student" type="xs:boolean"/>
                         </xs:sequence>

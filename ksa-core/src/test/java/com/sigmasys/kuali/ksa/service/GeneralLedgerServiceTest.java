@@ -316,11 +316,12 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
 
 
     @Test
-    public void getQueuedGlTransactions(){
+    public void getQueuedGlTransactions() {
+
         List<GlTransaction> transactions = glService.getGlTransactionsByStatus(GlTransactionStatus.QUEUED);
 
         Assert.notNull(transactions);
 
-        //Assert.isTrue(transactions.size() == 8);
+        Assert.isTrue(transactions.size() > 0);
     }
 }

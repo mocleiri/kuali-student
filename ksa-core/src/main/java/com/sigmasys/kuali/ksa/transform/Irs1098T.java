@@ -18,9 +18,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -94,16 +94,14 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "formYear",
-    "formCheckboxes",
-    "filer",
-    "student",
-    "financial"
+        "formYear",
+        "formCheckboxes",
+        "filer",
+        "student",
+        "financial"
 })
 @XmlRootElement(name = "irs-1098-t")
 public class Irs1098T {
@@ -121,11 +119,9 @@ public class Irs1098T {
 
     /**
      * Gets the value of the formYear property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
+     *
+     * @return possible object is
+     *         {@link String }
      */
     public String getFormYear() {
         return formYear;
@@ -133,11 +129,9 @@ public class Irs1098T {
 
     /**
      * Sets the value of the formYear property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link String }
      */
     public void setFormYear(String value) {
         this.formYear = value;
@@ -145,11 +139,9 @@ public class Irs1098T {
 
     /**
      * Gets the value of the formCheckboxes property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Irs1098T.FormCheckboxes }
-     *     
+     *
+     * @return possible object is
+     *         {@link Irs1098T.FormCheckboxes }
      */
     public Irs1098T.FormCheckboxes getFormCheckboxes() {
         return formCheckboxes;
@@ -157,11 +149,9 @@ public class Irs1098T {
 
     /**
      * Sets the value of the formCheckboxes property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Irs1098T.FormCheckboxes }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Irs1098T.FormCheckboxes }
      */
     public void setFormCheckboxes(Irs1098T.FormCheckboxes value) {
         this.formCheckboxes = value;
@@ -169,11 +159,9 @@ public class Irs1098T {
 
     /**
      * Gets the value of the filer property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Irs1098T.Filer }
-     *     
+     *
+     * @return possible object is
+     *         {@link Irs1098T.Filer }
      */
     public Irs1098T.Filer getFiler() {
         return filer;
@@ -181,11 +169,9 @@ public class Irs1098T {
 
     /**
      * Sets the value of the filer property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Irs1098T.Filer }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Irs1098T.Filer }
      */
     public void setFiler(Irs1098T.Filer value) {
         this.filer = value;
@@ -193,11 +179,9 @@ public class Irs1098T {
 
     /**
      * Gets the value of the student property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Irs1098T.Student }
-     *     
+     *
+     * @return possible object is
+     *         {@link Irs1098T.Student }
      */
     public Irs1098T.Student getStudent() {
         return student;
@@ -205,11 +189,9 @@ public class Irs1098T {
 
     /**
      * Sets the value of the student property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Irs1098T.Student }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Irs1098T.Student }
      */
     public void setStudent(Irs1098T.Student value) {
         this.student = value;
@@ -217,11 +199,9 @@ public class Irs1098T {
 
     /**
      * Gets the value of the financial property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Irs1098T.Financial }
-     *     
+     *
+     * @return possible object is
+     *         {@link Irs1098T.Financial }
      */
     public Irs1098T.Financial getFinancial() {
         return financial;
@@ -229,11 +209,9 @@ public class Irs1098T {
 
     /**
      * Sets the value of the financial property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Irs1098T.Financial }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Irs1098T.Financial }
      */
     public void setFinancial(Irs1098T.Financial value) {
         this.financial = value;
@@ -242,9 +220,9 @@ public class Irs1098T {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     * <p/>
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -259,15 +237,13 @@ public class Irs1098T {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "name",
-        "postalAddress",
-        "telephoneNumber",
-        "federalIdentificationNumber"
+            "name",
+            "postalAddress",
+            "telephoneNumber",
+            "federalIdentificationNumber"
     })
     public static class Filer {
 
@@ -278,15 +254,13 @@ public class Irs1098T {
         @XmlElement(name = "telephone-number", required = true)
         protected String telephoneNumber;
         @XmlElement(name = "federal-identification-number", required = true)
-        protected Object federalIdentificationNumber;
+        protected String federalIdentificationNumber;
 
         /**
          * Gets the value of the name property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getName() {
             return name;
@@ -294,11 +268,9 @@ public class Irs1098T {
 
         /**
          * Sets the value of the name property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setName(String value) {
             this.name = value;
@@ -306,11 +278,9 @@ public class Irs1098T {
 
         /**
          * Gets the value of the postalAddress property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link PostalAddress }
-         *     
+         *
+         * @return possible object is
+         *         {@link PostalAddress }
          */
         public PostalAddress getPostalAddress() {
             return postalAddress;
@@ -318,11 +288,9 @@ public class Irs1098T {
 
         /**
          * Sets the value of the postalAddress property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link PostalAddress }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link PostalAddress }
          */
         public void setPostalAddress(PostalAddress value) {
             this.postalAddress = value;
@@ -330,11 +298,9 @@ public class Irs1098T {
 
         /**
          * Gets the value of the telephoneNumber property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getTelephoneNumber() {
             return telephoneNumber;
@@ -342,11 +308,9 @@ public class Irs1098T {
 
         /**
          * Sets the value of the telephoneNumber property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setTelephoneNumber(String value) {
             this.telephoneNumber = value;
@@ -354,25 +318,21 @@ public class Irs1098T {
 
         /**
          * Gets the value of the federalIdentificationNumber property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link Object }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
-        public Object getFederalIdentificationNumber() {
+        public String getFederalIdentificationNumber() {
             return federalIdentificationNumber;
         }
 
         /**
          * Sets the value of the federalIdentificationNumber property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link Object }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
-        public void setFederalIdentificationNumber(Object value) {
+        public void setFederalIdentificationNumber(String value) {
             this.federalIdentificationNumber = value;
         }
 
@@ -381,9 +341,9 @@ public class Irs1098T {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     * <p/>
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -403,18 +363,16 @@ public class Irs1098T {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "paymentsReceived",
-        "amountBilled",
-        "includesNextQuarter",
-        "priorYearAdjustment",
-        "scholarshipsOrGrants",
-        "priorYearScholarshipAdjustment",
-        "insuranceContract"
+            "paymentsReceived",
+            "amountBilled",
+            "includesNextQuarter",
+            "priorYearAdjustment",
+            "scholarshipsOrGrants",
+            "priorYearScholarshipAdjustment",
+            "insuranceContract"
     })
     public static class Financial {
 
@@ -435,11 +393,9 @@ public class Irs1098T {
 
         /**
          * Gets the value of the paymentsReceived property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getPaymentsReceived() {
             return paymentsReceived;
@@ -447,11 +403,9 @@ public class Irs1098T {
 
         /**
          * Sets the value of the paymentsReceived property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setPaymentsReceived(BigDecimal value) {
             this.paymentsReceived = value;
@@ -459,11 +413,9 @@ public class Irs1098T {
 
         /**
          * Gets the value of the amountBilled property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getAmountBilled() {
             return amountBilled;
@@ -471,11 +423,9 @@ public class Irs1098T {
 
         /**
          * Sets the value of the amountBilled property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setAmountBilled(BigDecimal value) {
             this.amountBilled = value;
@@ -483,7 +433,6 @@ public class Irs1098T {
 
         /**
          * Gets the value of the includesNextQuarter property.
-         * 
          */
         public boolean isIncludesNextQuarter() {
             return includesNextQuarter;
@@ -491,7 +440,6 @@ public class Irs1098T {
 
         /**
          * Sets the value of the includesNextQuarter property.
-         * 
          */
         public void setIncludesNextQuarter(boolean value) {
             this.includesNextQuarter = value;
@@ -499,11 +447,9 @@ public class Irs1098T {
 
         /**
          * Gets the value of the priorYearAdjustment property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getPriorYearAdjustment() {
             return priorYearAdjustment;
@@ -511,11 +457,9 @@ public class Irs1098T {
 
         /**
          * Sets the value of the priorYearAdjustment property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setPriorYearAdjustment(BigDecimal value) {
             this.priorYearAdjustment = value;
@@ -523,11 +467,9 @@ public class Irs1098T {
 
         /**
          * Gets the value of the scholarshipsOrGrants property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getScholarshipsOrGrants() {
             return scholarshipsOrGrants;
@@ -535,11 +477,9 @@ public class Irs1098T {
 
         /**
          * Sets the value of the scholarshipsOrGrants property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setScholarshipsOrGrants(BigDecimal value) {
             this.scholarshipsOrGrants = value;
@@ -547,11 +487,9 @@ public class Irs1098T {
 
         /**
          * Gets the value of the priorYearScholarshipAdjustment property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getPriorYearScholarshipAdjustment() {
             return priorYearScholarshipAdjustment;
@@ -559,11 +497,9 @@ public class Irs1098T {
 
         /**
          * Sets the value of the priorYearScholarshipAdjustment property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setPriorYearScholarshipAdjustment(BigDecimal value) {
             this.priorYearScholarshipAdjustment = value;
@@ -571,11 +507,9 @@ public class Irs1098T {
 
         /**
          * Gets the value of the insuranceContract property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @return possible object is
+         *         {@link BigDecimal }
          */
         public BigDecimal getInsuranceContract() {
             return insuranceContract;
@@ -583,11 +517,9 @@ public class Irs1098T {
 
         /**
          * Sets the value of the insuranceContract property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link BigDecimal }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link BigDecimal }
          */
         public void setInsuranceContract(BigDecimal value) {
             this.insuranceContract = value;
@@ -598,9 +530,9 @@ public class Irs1098T {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     * <p/>
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -614,14 +546,12 @@ public class Irs1098T {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "_void",
-        "corrected",
-        "reportingMethodChanged"
+            "_void",
+            "corrected",
+            "reportingMethodChanged"
     })
     public static class FormCheckboxes {
 
@@ -633,7 +563,6 @@ public class Irs1098T {
 
         /**
          * Gets the value of the void property.
-         * 
          */
         public boolean isVoid() {
             return _void;
@@ -641,7 +570,6 @@ public class Irs1098T {
 
         /**
          * Sets the value of the void property.
-         * 
          */
         public void setVoid(boolean value) {
             this._void = value;
@@ -649,7 +577,6 @@ public class Irs1098T {
 
         /**
          * Gets the value of the corrected property.
-         * 
          */
         public boolean isCorrected() {
             return corrected;
@@ -657,7 +584,6 @@ public class Irs1098T {
 
         /**
          * Sets the value of the corrected property.
-         * 
          */
         public void setCorrected(boolean value) {
             this.corrected = value;
@@ -665,7 +591,6 @@ public class Irs1098T {
 
         /**
          * Gets the value of the reportingMethodChanged property.
-         * 
          */
         public boolean isReportingMethodChanged() {
             return reportingMethodChanged;
@@ -673,7 +598,6 @@ public class Irs1098T {
 
         /**
          * Sets the value of the reportingMethodChanged property.
-         * 
          */
         public void setReportingMethodChanged(boolean value) {
             this.reportingMethodChanged = value;
@@ -684,9 +608,9 @@ public class Irs1098T {
 
     /**
      * <p>Java class for anonymous complex type.
-     * 
+     * <p/>
      * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
+     * <p/>
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>
@@ -703,17 +627,15 @@ public class Irs1098T {
      *   &lt;/complexContent>
      * &lt;/complexType>
      * </pre>
-     * 
-     * 
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "name",
-        "postalAddress",
-        "socialSecurityNumber",
-        "accountNumber",
-        "halfTime",
-        "graduateStudent"
+            "name",
+            "postalAddress",
+            "socialSecurityNumber",
+            "accountNumber",
+            "halfTime",
+            "graduateStudent"
     })
     public static class Student {
 
@@ -722,9 +644,9 @@ public class Irs1098T {
         @XmlElement(name = "postal-address", required = true)
         protected PostalAddress postalAddress;
         @XmlElement(name = "social-security-number", required = true)
-        protected Object socialSecurityNumber;
+        protected String socialSecurityNumber;
         @XmlElement(name = "account-number", required = true)
-        protected Object accountNumber;
+        protected String accountNumber;
         @XmlElement(name = "half-time")
         protected boolean halfTime;
         @XmlElement(name = "graduate-student")
@@ -732,11 +654,9 @@ public class Irs1098T {
 
         /**
          * Gets the value of the name property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link String }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
         public String getName() {
             return name;
@@ -744,11 +664,9 @@ public class Irs1098T {
 
         /**
          * Sets the value of the name property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link String }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
         public void setName(String value) {
             this.name = value;
@@ -756,11 +674,9 @@ public class Irs1098T {
 
         /**
          * Gets the value of the postalAddress property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link PostalAddress }
-         *     
+         *
+         * @return possible object is
+         *         {@link PostalAddress }
          */
         public PostalAddress getPostalAddress() {
             return postalAddress;
@@ -768,11 +684,9 @@ public class Irs1098T {
 
         /**
          * Sets the value of the postalAddress property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link PostalAddress }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link PostalAddress }
          */
         public void setPostalAddress(PostalAddress value) {
             this.postalAddress = value;
@@ -780,55 +694,46 @@ public class Irs1098T {
 
         /**
          * Gets the value of the socialSecurityNumber property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link Object }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
-        public Object getSocialSecurityNumber() {
+        public String getSocialSecurityNumber() {
             return socialSecurityNumber;
         }
 
         /**
          * Sets the value of the socialSecurityNumber property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link Object }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
-        public void setSocialSecurityNumber(Object value) {
+        public void setSocialSecurityNumber(String value) {
             this.socialSecurityNumber = value;
         }
 
         /**
          * Gets the value of the accountNumber property.
-         * 
-         * @return
-         *     possible object is
-         *     {@link Object }
-         *     
+         *
+         * @return possible object is
+         *         {@link String }
          */
-        public Object getAccountNumber() {
+        public String getAccountNumber() {
             return accountNumber;
         }
 
         /**
          * Sets the value of the accountNumber property.
-         * 
-         * @param value
-         *     allowed object is
-         *     {@link Object }
-         *     
+         *
+         * @param value allowed object is
+         *              {@link String }
          */
-        public void setAccountNumber(Object value) {
+        public void setAccountNumber(String value) {
             this.accountNumber = value;
         }
 
         /**
          * Gets the value of the halfTime property.
-         * 
          */
         public boolean isHalfTime() {
             return halfTime;
@@ -836,7 +741,6 @@ public class Irs1098T {
 
         /**
          * Sets the value of the halfTime property.
-         * 
          */
         public void setHalfTime(boolean value) {
             this.halfTime = value;
@@ -844,7 +748,6 @@ public class Irs1098T {
 
         /**
          * Gets the value of the graduateStudent property.
-         * 
          */
         public boolean isGraduateStudent() {
             return graduateStudent;
@@ -852,7 +755,6 @@ public class Irs1098T {
 
         /**
          * Sets the value of the graduateStudent property.
-         * 
          */
         public void setGraduateStudent(boolean value) {
             this.graduateStudent = value;

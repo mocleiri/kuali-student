@@ -62,14 +62,13 @@ public interface ReportService {
      * @param accountId ID of an account for which to produce the report.
      * @param startDate Payments and Refunds tracking start date.
      * @param endDate   Payments and Refunds tracking end date date
-     * @param year      Tax year.
      * @param ssnMask   The number of final digits of the social security number that will be stored in the local record.
      * @param noRecord  Whether to keep the record of the produces 1098T
      * @return String representation of an IRS 1098T form.
      * @throws IllegalArgumentException If <code>dateFrom</code> or <code>dateTo</code> are invalid or do not fall within the <code>year</code>.
      * @see Irs1098T
      */
-    String generate1098TReport(String accountId, Date startDate, Date endDate, Integer year, Integer ssnMask, boolean noRecord);
+    String generate1098TReport(String accountId, Date startDate, Date endDate, int ssnMask, boolean noRecord);
 
     /**
      * Returns an XML representation of a complete year federal 1098T form. Note that many of the parameters for producing a correct 1098T
@@ -90,7 +89,7 @@ public interface ReportService {
      * @see Irs1098T
      */
     @WebMethod(exclude = true)
-    String generate1098TReport(String accountId, Integer year, Integer ssnMask, boolean noRecord);
+    String generateAnnual1098TReport(String accountId, int year, int ssnMask, boolean noRecord);
 
     /**
      * Produce an XML aged balance report for the accounts in the list. If <code>ageAccounts</code> is <code>true</code>, then each
