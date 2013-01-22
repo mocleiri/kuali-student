@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.kuali.rice.krad.web.form.UifFormBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +29,7 @@ import com.sigmasys.kuali.ksa.service.TransactionExportService;
  */
 @Controller
 @RequestMapping(value = "/exportTransactions")
-@Transactional
+@Transactional(timeout = 300, propagation = Propagation.REQUIRES_NEW)
 public class TransactionExportController extends GenericSearchController {
 
     @Autowired
