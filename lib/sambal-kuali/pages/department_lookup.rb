@@ -8,8 +8,8 @@ class DepartmentLookup < BasePage
     self.frame(class: "fancybox-iframe")
   end
 
-  element(:short_name) { |b| b.frm.div(data_label: "Short Name").text_field }
-  element(:long_name) { |b| b.frm.div(data_label: "Long Name").text_field }
+  element(:short_name) { |b| b.frm.div(data_label: "Abbreviation").text_field }
+  element(:long_name) { |b| b.frm.div(data_label: "Name").text_field }
   element(:results_table) { |b| b.frm.div(id: "uLookupResults").table(index: 0) }
 
   element(:paginate_links_span) { |b| b.frm.div(class: "dataTables_paginate paging_full_numbers").span() }
@@ -27,7 +27,7 @@ class DepartmentLookup < BasePage
   end
 
   def target_row(long_name)
-    results_table.row(text: /#{long_name}/)
+    results_table.row(text: /^\b#{long_name}\b$/)
   end
 
   def change_results_page(page_number)
