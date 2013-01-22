@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "/batchTransactionsView")
-@Transactional
+@Transactional(timeout = 300, propagation = Propagation.REQUIRES_NEW)
 public class BatchTransactionsController extends GenericSearchController {
 
     private static final Log logger = LogFactory.getLog(BatchTransactionsController.class);
@@ -142,14 +143,16 @@ public class BatchTransactionsController extends GenericSearchController {
     public ModelAndView makeEffective(@ModelAttribute("KualiForm") FileUploadForm form) {
 
         try {
+
             List<Transaction> transactions = transactionService.getTransactions();
 
             Date today = new Date();
-            for(Transaction t : transactions){
-                if(! t.isGlEntryGenerated() && t.getEffectiveDate().before(today)){
+            for (Transaction t : transactions) {
+                if (!t.isGlEntryGenerated() && t.getEffectiveDate().before(today)) {
                     transactionService.makeEffective(t.getId(), false);
                 }
             }
+
         } catch (Exception e) {
             form.setUploadProcessState(e.getLocalizedMessage());
         }
