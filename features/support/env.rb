@@ -10,30 +10,36 @@ World DateFactory
 World Workflows
 
 client = Selenium::WebDriver::Remote::Http::Default.new
-client.timeout = 15 # seconds – default is 60
+client.timeout = 15 # seconds default is 60
+
+browser = nil
+headless = nil
 
 if ENV['HEADLESS']
   require 'headless'
   headless = Headless.new
   headless.start
-  at_exit do
-    headless.destroy
-  end
-
-  #After do | scenario |
-  #  if scenario.failed?
-  #    @browser.close
-  #    browser = Watir::Browser.new :firefox, :http_client => client
-  #    @browser = browser
-  #  end
-  #end
-
 end
 
-browser = Watir::Browser.new :firefox, :http_client => client
-
 Before do
+  if browser == nil
+    browser = Watir::Browser.new :firefox, :http_client => client
+  end
   @browser = browser
 end
 
 at_exit { browser.close }
+
+
+if ENV['HEADLESS']
+  #at_exit do
+  #  headless.destroy
+  #end
+
+  After do | scenario |
+    if scenario.failed?
+      @browser.close
+      browser = nil
+    end
+  end
+end
