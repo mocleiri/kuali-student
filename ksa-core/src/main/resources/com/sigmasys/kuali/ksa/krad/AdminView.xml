@@ -365,8 +365,7 @@
             <list>
                 <bean parent="Uif-InputField" p:label="GL Transaction Date" p:propertyName="date" p:width="10%"/>
                 <bean parent="Uif-InputField" p:label="GL Account" p:propertyName="glAccountId" p:width="10%"/>
-                <bean parent="Uif-InputField" p:label="Start Date" p:propertyName="recognitionPeriod.startDate" p:width="10%"/>
-                <bean parent="Uif-InputField" p:label="End Date" p:propertyName="recognitionPeriod.endDate" p:width="10%"/>
+                <bean parent="Uif-InputField" p:label="Recognition Period" p:propertyName="recognitionPeriod.code" p:width="10%"/>
                 <bean parent="Uif-InputField" p:label="Operation" p:propertyName="glOperation" p:width="10%"/>
                 <bean parent="Uif-InputField" p:label="Start Date" p:propertyName="amount" p:width="20%"/>
             </list>

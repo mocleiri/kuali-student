@@ -125,8 +125,9 @@
             <list>
                 <bean parent="Uif-InputField" p:label="ID" p:propertyName="transactionType.id.id" p:width="10%"/>
                 <bean parent="Uif-InputField" p:label="Sub Code" p:propertyName="transactionType.id.subCode" p:width="5%"/>
-                <bean parent="Uif-InputField" p:label="Description" p:propertyName="transactionType.description" p:width="60%"/>
+                <bean parent="Uif-InputField" p:label="Description" p:propertyName="transactionType.description" p:width="55%"/>
                 <bean parent="Uif-InputField" p:label="Start Date" p:propertyName="transactionType.startDate" p:width="15%"/>
+                <bean parent="Uif-InputField" p:label="End Date" p:propertyName="transactionType.endDate" p:width="15%"/>
             </list>
         </property>
     </bean>
