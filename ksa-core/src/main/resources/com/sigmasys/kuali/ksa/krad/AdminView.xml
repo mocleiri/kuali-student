@@ -43,7 +43,8 @@
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="SystemRolesUsers" p:actionLabel="System Roles &amp; Users"/>
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="GeneralLedger" p:actionLabel="General Ledger"/>
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="Transactions" p:actionLabel="Transactions"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="TransactionsExport" p:actionLabel="Transactions Export"/>
+                        <bean parent="Uif-Link" p:linkText="Transactions Export" p:target="_self"
+                              p:href="adminView?methodToCall=get&amp;viewId=AdminView&amp;pageId=TransactionsExport"/>
                         <bean parent="Uif-NavigationActionLink" p:navigateToPageId="Refunds" p:actionLabel="Refunds"/>
                     </list>
                 </property>
@@ -204,6 +205,8 @@
 										<bean parent="Uif-LinkField" p:linkText="Export Transactions" p:target="_self"
 											p:href="javascript: void(0)"
 											p:onClickScript="jQuery.download('/ksa/uif/exportTransactions', 'methodToCall=download');"/>
+
+                                        <ref bean="GLTransactionListSection"/>
                                     </list>
                                 </property>
                             </bean>
@@ -338,5 +341,37 @@
             </list>
         </property>
     </bean>
+
+    <bean id="GLTransactionListSection" parent="Uif-Disclosure-TableCollectionSection"
+          p:layoutManager.numberOfColumns="4"
+          p:width="85%">
+        <property name="title" value="View Transaction Types"/>
+        <property name="readOnly" value="true"/>
+        <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.GlTransaction"/>
+        <property name="propertyName" value="glTransactions"/>
+        <property name="layoutManager.sequencePropertyName" value="id.id"/>
+        <property name="layoutManager.richTable.render" value="true"/>
+        <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="layoutManager.applyDefaultCellWidths" value="false"/>
+        <property name="layoutManager.richTable.disableTableSort" value="false"/>
+        <property name="layoutManager.richTable.templateOptions">
+            <map merge="true">
+                <entry key="bPaginate" value="true"/>
+                <entry key="iDisplayLength" value="20"/>
+            </map>
+        </property>
+
+        <property name="items">
+            <list>
+                <bean parent="Uif-InputField" p:label="GL Transaction Date" p:propertyName="date" p:width="10%"/>
+                <bean parent="Uif-InputField" p:label="GL Account" p:propertyName="glAccountId" p:width="10%"/>
+                <bean parent="Uif-InputField" p:label="Start Date" p:propertyName="recognitionPeriod.startDate" p:width="10%"/>
+                <bean parent="Uif-InputField" p:label="End Date" p:propertyName="recognitionPeriod.startDate" p:width="10%"/>
+                <bean parent="Uif-InputField" p:label="Operation" p:propertyName="glOperation" p:width="10%"/>
+                <bean parent="Uif-InputField" p:label="Start Date" p:propertyName="amount" p:width="20%"/>
+            </list>
+        </property>
+    </bean>
+
 
 </beans>

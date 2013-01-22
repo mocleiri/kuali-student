@@ -713,4 +713,32 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
         return getGlTransactions(startDate, endDate, null);
     }
 
+    /**
+     * Retrieves all GL transactions for the given GL transaction status.
+     *
+     * @param status GL Transaction status
+     * @return list of GlTransaction instances
+     */
+    @Override
+    public List<GlTransaction> getGlTransactionsByStatus(GlTransactionStatus status) {
+        if (status == null) {
+            String errMsg = "Status cannot be null";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+
+        Query query = em.createQuery("select glt from GlTransaction glt " +
+                " left outer join fetch glt.recognitionPeriod rp " +
+                " left outer join fetch glt.transmission t " +
+                " left outer join fetch glt.transactions ts " +
+                " where glt.statusCode = :status " +
+                " order by glt.date asc");
+
+        query.setParameter("status", status.getId());
+
+        return query.getResultList();
+    }
+
+
 }

@@ -22,8 +22,8 @@ public class CreditDebitKeyValuesFinder extends GenericKeyValuesFinder {
         if(isBlankOption()){
             keys.add(new ConcreteKeyValue("", ""));
         }
-        keys.add(new ConcreteKeyValue(GlOperationType.CREDIT_CODE, GlOperationType.CREDIT_CODE.toString()));
-        keys.add(new ConcreteKeyValue(GlOperationType.DEBIT_CODE, GlOperationType.DEBIT_CODE.toString()));
+        keys.add(new ConcreteKeyValue(GlOperationType.CREDIT_CODE, GlOperationType.CREDIT.toString()));
+        keys.add(new ConcreteKeyValue(GlOperationType.DEBIT_CODE, GlOperationType.DEBIT.toString()));
 
     }
 

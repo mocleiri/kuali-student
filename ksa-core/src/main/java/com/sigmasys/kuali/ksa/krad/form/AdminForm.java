@@ -43,7 +43,9 @@ public class AdminForm extends AbstractViewModel {
 	private KeyValuesFinder taxTypeOptionsFinder;
 	private KeyValuesFinder idTypeKeyValuesFinder;
 	
-	
+
+    private List<GlTransaction> glTransactions;
+
    /*
      Activities
    */
@@ -160,8 +162,16 @@ public class AdminForm extends AbstractViewModel {
 	public void setAccountInfo(AccountInformation accountInfo) {
 		this.accountInfo = accountInfo;
 	}
-	
-	/**
+
+    public List<GlTransaction> getGlTransactions() {
+        return glTransactions;
+    }
+
+    public void setGlTransactions(List<GlTransaction> glTransactions) {
+        this.glTransactions = glTransactions;
+    }
+
+    /**
 	 * Account Biographic information container class.
 	 * 
 	 * @author Sergey

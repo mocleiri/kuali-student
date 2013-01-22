@@ -208,4 +208,13 @@ public interface GeneralLedgerService {
     @WebMethod(exclude = true)
     List<GlTransaction> getGlTransactions(Date startDate, Date endDate);
 
+    /**
+     * Retrieves all GL transactions for the given GL transaction status.
+     *
+     * @param status GL Transaction status
+     * @return list of GlTransaction instances
+     */
+    @WebMethod(exclude = true)
+    List<GlTransaction> getGlTransactionsByStatus(GlTransactionStatus status);
+
 }
