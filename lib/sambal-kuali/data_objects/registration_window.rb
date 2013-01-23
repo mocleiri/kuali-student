@@ -32,14 +32,25 @@ class RegistrationWindow
         :slot_rule_enum_type => 'Undergrad Standard'
     }
     options = defaults.merge(opts)
-    options[:start_date] = get_date_for(RegistrationWindowsConstants::DATE_BOUND_START, options[:start_date], options[:period_key])
-    options[:end_date] = get_date_for(RegistrationWindowsConstants::DATE_BOUND_END, options[:end_date], options[:period_key])
     #puts "Options = #{options}"
 
     set_options(options)
   end
 
+  def show_windows_for_period
+    go_to_manage_reg_windows
+    on RegistrationWindowsTermLookup do |page1|
+      page1.search_by_term_and_year @year, @term_type
+    end
+    on RegistrationWindowsPeriodLookup do |page2|
+      page2.show_windows_by_period
+    end
+  end
+
   def add
+    @start_date = get_date_for(RegistrationWindowsConstants::DATE_BOUND_START, @start_date, @period_key)
+    @end_date = get_date_for(RegistrationWindowsConstants::DATE_BOUND_END, @end_date, @period_key)
+
     puts "Adding Registration Window #{@appointment_window_info_name} for Period #{@period_key}. Start Date = #{@start_date} and End Date = #{@end_date}"
     on RegistrationWindowsCreate do |page|
       page.appointment_window_info_name.set @appointment_window_info_name

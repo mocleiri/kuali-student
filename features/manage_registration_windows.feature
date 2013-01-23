@@ -8,21 +8,6 @@ Feature: Search for a registration window
     When I manage Registration Windows for a term and a period
     Then I verify that all Registration Window fields are present
 
-  Scenario: Validate input fields for One Slot per Window of Slot Allocation Method dropdown
-    When I manage Registration Windows for a term and a period
-    And I select One Slot per Window from Slot Allocation Method dropdown
-    Then I verify that no One Slot per Window field is present
-
-  Scenario: Validate input fields for Max Slotted Window of Slot Allocation Method dropdown
-    When I manage Registration Windows for a term and a period
-    And I select Max Slotted Window from Slot Allocation Method dropdown
-    Then I verify that Max Slotted Window fields are visible
-
-  Scenario: Validate input fields for Uniform Slotted Window of Slot Allocation Method dropdown
-    When I manage Registration Windows for a term and a period
-    And I select Uniform Slotted Window from Slot Allocation Method dropdown
-    Then I verify that Uniform Slotted Window fields are visible
-
   Scenario: Successfully add a new Registration Window
     Given I manage Registration Windows for a term and a period
     And Successfully add a Registration Window for the period

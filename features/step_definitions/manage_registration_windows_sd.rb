@@ -1,58 +1,11 @@
 When /^I manage Registration Windows for a term and a period$/ do
-  #TODO: term and year are hard-coded in the page object - requires data object refactoring
-  go_to_manage_reg_windows
-  on RegistrationWindowsTermLookup do |page1|
-    page1.search_by_term_and_year
-  end
-  on RegistrationWindowsPeriodLookup do |page2|
-    page2.show_windows_by_period
-  end
+  @registrationWindow = make RegistrationWindow
+  @registrationWindow.show_windows_for_period
 end
 
 Then /^I verify that all Registration Window fields are present$/ do
   on RegistrationWindowsCreate do |page|
     page.validate_fields
-  end
-end
-
-#TODO: 3 step defs can be parameterized re Slot Allocation method - requires data object refactoring (wrappers for these)
-Then /^I select Uniform Slotted Window from Slot Allocation Method dropdown$/ do
-  on RegistrationWindowsCreate do |page|
-    page.window_type_key.select RegistrationWindowsConstants::METHOD_UNIFORM_SLOTTED_WINDOW
-    page.loading.wait_while_present
-  end
-end
-
-Then /^I select One Slot per Window from Slot Allocation Method dropdown$/ do
-  on RegistrationWindowsCreate do |page|
-    page.window_type_key.select RegistrationWindowsConstants::METHOD_ONE_SLOT_PER_WINDOW
-    page.loading.wait_while_present
-  end
-end
-
-Then /^I select Max Slotted Window from Slot Allocation Method dropdown$/ do
-  on RegistrationWindowsCreate do |page|
-    page.window_type_key.select RegistrationWindowsConstants::METHOD_MAX_SLOTTED_WINDOW
-    page.loading.wait_while_present
-  end
-end
-
-Then /^I verify that no One Slot per Window field is present$/ do
-  on RegistrationWindowsCreate do |page|
-    page.validate_dynamic_fields(RegistrationWindowsConstants::METHOD_ONE_SLOT_PER_WINDOW).should be_true
-  end
-end
-
-
-Then /^I verify that Max Slotted Window fields are visible$/ do
-  on RegistrationWindowsCreate do |page|
-    page.validate_dynamic_fields(RegistrationWindowsConstants::METHOD_MAX_SLOTTED_WINDOW).should be_true
-  end
-end
-
-Then /^I verify that Uniform Slotted Window fields are visible$/ do
-  on RegistrationWindowsCreate do |page|
-    page.validate_dynamic_fields(RegistrationWindowsConstants::METHOD_UNIFORM_SLOTTED_WINDOW).should be_true
   end
 end
 
@@ -111,18 +64,10 @@ Then /^I verify the Registration Window is unique within the same period$/ do
   end
 end
 
-Then /^I verify each Registration Window is unique within each period/ do
-  on RegistrationWindowsCreate do |page|
-    page.is_window_name_unique(@registrationWindow.appointment_window_info_name, 'Sophomore Registration').should be_true
-    page.is_window_name_unique(@registrationWindow.appointment_window_info_name, 'Freshmen Registration').should be_true
-    page.is_window_created(@registrationWindow.appointment_window_info_name, period_key = @registrationWindow.period_key).should be_true
-  end
-end
-
 Then /^I verify each Registration Window is created within each period/ do
   on RegistrationWindowsCreate do |page|
-    page.is_window_created(@registrationWindow.appointment_window_info_name, 'Sophomore Registration').should be_true
-    page.is_window_created(@registrationWindow.appointment_window_info_name, 'Sophomore Registration').should be_true
+    page.is_window_created(@registrationWindow.appointment_window_info_name, @registrationWindow.period_key).should be_true
+    page.is_window_created(@registrationWindow2.appointment_window_info_name, @registrationWindow2.period_key).should be_true
   end
 end
 
@@ -189,7 +134,7 @@ end
 When /^I add two Registration Windows with the same name for the same Period$/ do
   @registrationWindow = make RegistrationWindow
   @registrationWindow.add
-  @registrationWindow = make RegistrationWindow, :appointment_window_info_name => @registrationWindow.appointment_window_info_name
+  @registrationWindow2 = make RegistrationWindow, :appointment_window_info_name => @registrationWindow.appointment_window_info_name
   @registrationWindow.add
 end
 

@@ -17,9 +17,9 @@ class RegistrationWindowsTermLookup < RegistrationWindowsBase
 
   expected_element :term_type
 
-  def search_by_term_and_year
-    term_type.select 'Spring Term'
-    year.set '2013'
+  def search_by_term_and_year(year_st, term)
+    term_type.select term
+    year.set year_st
     search
     #page.loading.wait_while_present
   end
