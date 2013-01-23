@@ -141,8 +141,8 @@ end
 When /^I add two Registration Windows with the same name in two different Periods$/ do
   @registrationWindow = make RegistrationWindow, :period_key => 'Freshmen Registration'
   @registrationWindow.add
-  @registrationWindow = make RegistrationWindow, :appointment_window_info_name => @registrationWindow.appointment_window_info_name, :period_key => 'Sophomore Registration'
-  @registrationWindow.add
+  @registrationWindow2 = make RegistrationWindow, :appointment_window_info_name => @registrationWindow.appointment_window_info_name, :period_key => 'Sophomore Registration'
+  @registrationWindow2.add
 end
 
 When /^I edit a Registration Window setting its Start Date outside the period dates$/ do
