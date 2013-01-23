@@ -1147,19 +1147,30 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     private List<AbstractGlBreakdown> getGlBreakdowns(Transaction transaction) {
+
+        GeneralLedgerType glType = transaction.getGeneralLedgerType();
+        if (glType == null) {
+            String errMsg = "Transaction (ID = " + transaction.getId() + ") must have GL type";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
         Query query = em.createQuery("select g from " +
                 (transaction.isGlOverridden() ? "GlBreakdownOverride" : "GlBreakdown") +
                 " g where " +
                 (transaction.isGlOverridden() ? "g.transaction.id" : "g.generalLedgerType.id") +
                 " = :id order by g.breakdown desc");
-        query.setParameter("id", transaction.isGlOverridden() ?
-                transaction.getId() : transaction.getGeneralLedgerType().getId());
+
+        query.setParameter("id", transaction.isGlOverridden() ? transaction.getId() : glType.getId());
+
         List<AbstractGlBreakdown> breakdowns = query.getResultList();
+
         if (!transaction.isGlOverridden() && CollectionUtils.isEmpty(breakdowns)) {
             GeneralLedgerType defaultGlType = glService.getDefaultGeneralLedgerType();
             query.setParameter("id", defaultGlType.getId());
             breakdowns = query.getResultList();
         }
+
         return breakdowns;
     }
 
@@ -1291,18 +1302,32 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         BigDecimal initialAmount = transaction.getAmount();
         BigDecimal remainingAmount = initialAmount;
-        GlOperationType operationType = glType.getGlOperationOnCharge();
-        for (AbstractGlBreakdown glBreakdown : getGlBreakdowns(transaction)) {
-            BigDecimal percentage = glBreakdown.getBreakdown();
-            if (percentage.compareTo(BigDecimal.ZERO) > 0) {
-                BigDecimal amount = initialAmount.divide(new BigDecimal(100)).multiply(percentage);
-                glService.createGlTransaction(transactionId, glAccount, amount, operationType, true);
-                remainingAmount = remainingAmount.subtract(amount);
-            } else {
-                // If the remaining amount == 0 then apply it to the new GL transaction and exit
-                // considering that GL breakdowns are sorted by percentage in descendant order :)
-                glService.createGlTransaction(transactionId, glAccount, remainingAmount, operationType, true);
-                break;
+
+        List<AbstractGlBreakdown> glBreakDowns = getGlBreakdowns(transaction);
+        if (CollectionUtils.isNotEmpty(glBreakDowns)) {
+            for (AbstractGlBreakdown glBreakdown : glBreakDowns) {
+
+                BigDecimal percentage = glBreakdown.getBreakdown();
+                if (percentage == null) {
+                    String errMsg = "Breakdown percentage cannot be null, transaction ID = " + transactionId;
+                    logger.error(errMsg);
+                    throw new IllegalStateException(errMsg);
+                }
+
+                glAccount = glBreakdown.getGlAccount();
+                GlOperationType operationType = (glBreakdown instanceof GlBreakdown) ?
+                        ((GlBreakdown)glBreakdown).getGlOperation() : glType.getGlOperationOnCharge();
+
+                if (percentage.compareTo(BigDecimal.ZERO) > 0) {
+                    BigDecimal amount = initialAmount.divide(new BigDecimal(100)).multiply(percentage);
+                    glService.createGlTransaction(transactionId, glBreakdown.getGlAccount(), amount, operationType, true);
+                    remainingAmount = remainingAmount.subtract(amount);
+                } else {
+                    // If the remaining amount == 0 then apply it to the new GL transaction and exit
+                    // considering that GL breakdowns are sorted by percentage in descendant order :)
+                    glService.createGlTransaction(transactionId, glAccount, remainingAmount, operationType, true);
+                    break;
+                }
             }
         }
 
