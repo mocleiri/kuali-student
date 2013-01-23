@@ -1,5 +1,5 @@
 @nightly
-Feature: Search for a registration window
+Feature: Simple Performance Metrics
 
   Background:
     Given I am logged in as admin
