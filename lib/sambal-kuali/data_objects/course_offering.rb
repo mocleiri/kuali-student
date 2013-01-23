@@ -211,7 +211,10 @@ class CourseOffering
     on ManageCourseOfferings do |page|
       page.term.set @term
       page.input_code.set @course[0,4]
+      st_time = Time.new
       page.show
+      end_time = Time.new
+      puts "#{@course[0,4]} subj code search time: #{end_time-st_time}"
     end
   end
 
