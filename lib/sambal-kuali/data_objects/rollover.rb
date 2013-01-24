@@ -13,8 +13,8 @@ class Rollover
     @browser = browser
 
     defaults = {
-        :source_term=>"20122",
-        :target_term=>"20212"
+        :source_term=>"201201",
+        :target_term=>"202101"
     }
     options = defaults.merge(opts)
     set_options(options)
@@ -42,6 +42,7 @@ class Rollover
         sleep 30
         page.go
       end
+      puts "Completed: Rollover duration: #{page.rollover_duration}" unless page.status != "Finished"
     end
   end
 

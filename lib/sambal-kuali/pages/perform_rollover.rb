@@ -63,6 +63,6 @@ class PerformRollover < BasePage
   end
 
   def increment_term_code_year(term_code)
-    "#{term_code[0..1]}#{(term_code[2..3].to_i + 1)}#{term_code[4]}"
+    "#{term_code[0..1]}#{(term_code[2..3].to_i + 1)}#{term_code[4..5]}"
   end
 end
