@@ -293,16 +293,62 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
         filer.setTelephoneNumber(configService.getInitialParameter(Constants.KSA_1098_FILER_PHONE));
 
+        // Filling in FinancialEntry
+        final String billedAmountTag = configService.getInitialParameter(Constants.KSA_1098_TAG_BILLED_AMOUNT);
+        final String insuranceRefundTag = configService.getInitialParameter(Constants.KSA_1098_TAG_INSURANCE_REFUND);
+        final String grantTag = configService.getInitialParameter(Constants.KSA_1098_TAG_GRANTS);
+
+        BigDecimal chargeAmount = BigDecimal.ZERO;
+        BigDecimal refundPaymentAmount = BigDecimal.ZERO;
+        BigDecimal grantPaymentAmount = BigDecimal.ZERO;
+        List<Transaction> transactions = transactionService.getTransactions(accountId, startDate, endDate);
+        for (Transaction transaction : transactions) {
+            TransactionTypeValue transactionTypeValue = transaction.getTransactionTypeValue();
+            BigDecimal transactionAmount = (transaction.getAmount() != null) ? transaction.getAmount() : BigDecimal.ZERO;
+            List<Tag> tags = transaction.getTransactionType().getTags();
+            if (CollectionUtils.isNotEmpty(tags)) {
+                if (TransactionTypeValue.PAYMENT.equals(transactionTypeValue)) {
+                    if (containsTag(insuranceRefundTag, tags)) {
+                        refundPaymentAmount = refundPaymentAmount.add(transactionAmount);
+                    } else if (containsTag(grantTag, tags)) {
+                        grantPaymentAmount = grantPaymentAmount.add(transactionAmount);
+                    }
+                } else if (TransactionTypeValue.CHARGE.equals(transactionTypeValue) && containsTag(billedAmountTag, tags)) {
+                    chargeAmount = chargeAmount.add(transactionAmount);
+                }
+            }
+        }
+
+        financialEntry.setAmountBilled(chargeAmount);
+        financialEntry.setInsuranceContract(refundPaymentAmount);
+        financialEntry.setScholarshipsOrGrants(grantPaymentAmount);
+
         // Filling in FormCheckboxes
         // TODO - provide correct values
-        formCheckboxes.setVoid(false);
         formCheckboxes.setReportingMethodChanged(false);
         formCheckboxes.setCorrected(false);
+
+        if (noRecord) {
+            formCheckboxes.setVoid(true);
+        } else {
+
+            // TODO: the process document has a few discrepancies that have to be discussed with Paul
+        }
+
 
         // TODO: complete IRS 1098T form
 
         return null;
 
+    }
+
+    private boolean containsTag(String tagCode, Collection<Tag> tags) {
+        for (Tag tag : tags) {
+            if (tagCode.equalsIgnoreCase(tag.getCode())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 

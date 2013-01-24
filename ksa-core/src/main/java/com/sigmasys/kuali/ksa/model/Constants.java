@@ -105,5 +105,8 @@ public interface Constants {
     String KSA_1098_FILER_ZIP = "ksa.1098.filer.zip";
     String KSA_1098_FILER_FEIN = "ksa.1098.filer.fein";
     String KSA_1098_FILER_PHONE = "ksa.1098.filer.phone";
+    String KSA_1098_TAG_BILLED_AMOUNT = "ksa.1098.tag.amount.billed";
+    String KSA_1098_TAG_INSURANCE_REFUND = "ksa.1098.tag.insurance.refund";
+    String KSA_1098_TAG_GRANTS = "ksa.1098.tag.grants";
 
 }
