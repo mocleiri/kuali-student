@@ -2,7 +2,6 @@ package com.sigmasys.kuali.ksa.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.sigmasys.kuali.ksa.annotation.Auditable;
+import com.sigmasys.kuali.ksa.util.HibernateUtils;
 
 /**
  * KSA Account model
@@ -342,19 +342,6 @@ public class Account implements Identifiable {
 
     @Transient
     public Account getCopy() {
-        Account account = new Account();
-        account.setId(getId());
-        account.setEntityId(getEntityId());
-        account.setStatusType(getStatusType());
-        account.setCreationDate(getCreationDate());
-        account.setLastKimUpdate(getLastKimUpdate());
-        account.setKimAccount(isKimAccount());
-        account.setLatePeriod(getLatePeriod());
-        account.setAbleToAuthenticate(isAbleToAuthenticate());
-        account.setCreditLimit(getCreditLimit());
-        account.setPersonNames(new HashSet<PersonName>(getPersonNames()));
-        account.setElectronicContacts(new HashSet<ElectronicContact>(getElectronicContacts()));
-        account.setPostalAddresses(new HashSet<PostalAddress>(getPostalAddresses()));
-        return account;
+        return HibernateUtils.detach(this);
     }
 }
