@@ -1,10 +1,12 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.kuali.rice.core.api.util.KeyValue;
 import org.kuali.rice.kim.impl.identity.address.EntityAddressTypeBo;
 import org.kuali.rice.kim.impl.identity.email.EntityEmailTypeBo;
 import org.kuali.rice.kim.impl.identity.name.EntityNameTypeBo;
@@ -17,9 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sigmasys.kuali.ksa.gwt.client.view.widget.value.DateRangeValue;
 import com.sigmasys.kuali.ksa.krad.form.AdminForm;
-import com.sigmasys.kuali.ksa.krad.util.AuditableEntityKeyValuesFinder;
-import com.sigmasys.kuali.ksa.krad.util.KradTypeEntityKeyValuesFinder;
+import com.sigmasys.kuali.ksa.krad.util.*;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AuditableEntityService;
 
@@ -43,6 +45,7 @@ public class AccountManagementController extends GenericSearchController {
 	private volatile KeyValuesFinder bankTypeOptionsFinder;
 	private volatile KeyValuesFinder taxTypeOptionsFinder;
 	private volatile KeyValuesFinder idTypeKeyValuesFinder;
+	private volatile KeyValuesFinder searchResultFieldsOptionsFinder;
 
 	
 
@@ -63,46 +66,20 @@ public class AccountManagementController extends GenericSearchController {
 	 */
 	@RequestMapping(method = RequestMethod.GET, params = "methodToCall=newPersonAccount")
 	public ModelAndView newPersonAccount(@ModelAttribute("KualiForm") AdminForm form, HttpServletRequest request) {
-		// Nullify the Account to make sure a new one is being created:
-		form.setAccount(null);
-		
-		// Create a new AccountInformation holder object:
-		AdminForm.AccountInformation accountInfo = new AdminForm.AccountInformation();
-		PersonName name = new PersonName();
-		PostalAddress address = new PostalAddress();
-		ElectronicContact electronicContact = new ElectronicContact();
-        BigDecimal creditLimit = new BigDecimal(0);
-		
-		accountInfo.setName(name);
-		accountInfo.setAddress(address);
-		accountInfo.setElectronicContact(electronicContact);
-		accountInfo.setDateOfBirth(new Date());
-		accountInfo.setAbleToAuthenticate(Boolean.TRUE);
-		accountInfo.setCreditLimit(creditLimit);
-		form.setAccountInfo(accountInfo);
-		
-		// Set option finders:
-		form.setNameTypeOptionsFinder(getNameTypeOptionsFinder());
-		form.setAddressTypeOptionsFinder(getAddressTypeOptionsFinder());
-		form.setEmailTypeOptionsFinder(getEmailTypeOptionsFinder());
-		form.setPhoneTypeOptionsFinder(getPhoneTypeOptionsFinder());
-		form.setLatePeriodOptionsFinder(getLatePeriodOptionsFinder());
-		form.setBankTypeOptionsFinder(getBankTypeOptionsFinder());
-		form.setTaxTypeOptionsFinder(getTaxTypeOptionsFinder());
-		form.setIdTypeKeyValuesFinder(getIdTypeKeyValuesFinder());
-		form.setAccountStatusTypeOptionsFinder(getAccountStatusTypeOptionsFinder());
+		// Populate the form:
+		populateForNewPersonAccount(form);
 		
 		return getUIFModelAndView(form);
 	}
 	
 	/**
-	 * Cancels creation of a new personal account.
+	 * Cancels the current page and goes back to the landing page.
 	 * @param form
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancelNewPersonAccount")
-	public ModelAndView cancelNewPersonAccount(@ModelAttribute("KualiForm") AdminForm form, HttpServletRequest request) {
+	@RequestMapping(method = RequestMethod.POST, params = "methodToCall=cancel")
+	public ModelAndView cancel(@ModelAttribute("KualiForm") AdminForm form, HttpServletRequest request) {
 		// Nullify the Account and Account info:
 		form.setAccount(null);
 		form.setAccountInfo(null);
@@ -127,6 +104,32 @@ public class AccountManagementController extends GenericSearchController {
 	}
 	
 	
+	/**
+	 * Handles display of the Search Person Account page.
+	 * @param form
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.GET, params = "methodToCall=searchPersonAccount")
+	public ModelAndView searchPersonAccount(@ModelAttribute("KualiForm") AdminForm form, HttpServletRequest request) {
+		// Populate the form:
+		populateForSearchPersonAccount(form);
+		
+		return getUIFModelAndView(form);
+	}
+	
+	/**
+	 * Handles Person Account search and redirection to the search result page.
+	 * 
+	 * @param form
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(method = RequestMethod.POST, params = "methodToCall=doSearchPersonAccount")
+	public ModelAndView doSearchPersonAccount(@ModelAttribute("KualiForm") AdminForm form, HttpServletRequest request) {
+		// Navigate to the landing page for now:
+		return cancel(form, request);
+	}
 	
 	/* ========================================================================================
 	 * 
@@ -267,5 +270,82 @@ public class AccountManagementController extends GenericSearchController {
 		}
 		
 		return idTypeKeyValuesFinder;
+	}
+	
+	/*
+	 * Returns Search Result Fields option finder.
+	 */
+	public KeyValuesFinder getSearchResultFieldsOptionsFinder() {
+		if (searchResultFieldsOptionsFinder == null) {
+			synchronized(this) {
+				if (searchResultFieldsOptionsFinder == null) {
+					searchResultFieldsOptionsFinder = new AccountSearchResultFieldsKeyValuesFinder();
+				}
+			}
+		}
+		
+		return searchResultFieldsOptionsFinder;
+	}
+	
+	
+	/* *******************************************************************************************************************
+	 * 
+	 * Helper methods. 
+	 * 
+	 * ******************************************************************************************************************/
+	
+	/*
+	 * Populates the given form for a New Person Account page.
+	 */
+	private void populateForNewPersonAccount(AdminForm form) {
+		// Nullify the Account to make sure a new one is being created:
+		form.setAccount(null);
+		
+		// Create a new AccountInformation holder object:
+		AdminForm.AccountInformation accountInfo = new AdminForm.AccountInformation();
+		PersonName name = new PersonName();
+		PostalAddress address = new PostalAddress();
+		ElectronicContact electronicContact = new ElectronicContact();
+        BigDecimal creditLimit = new BigDecimal(0);
+		
+		accountInfo.setName(name);
+		accountInfo.setAddress(address);
+		accountInfo.setElectronicContact(electronicContact);
+		accountInfo.setDateOfBirth(new Date());
+		accountInfo.setAbleToAuthenticate(Boolean.TRUE);
+		accountInfo.setCreditLimit(creditLimit);
+		form.setAccountInfo(accountInfo);
+		
+		// Set option finders:
+		form.setNameTypeOptionsFinder(getNameTypeOptionsFinder());
+		form.setAddressTypeOptionsFinder(getAddressTypeOptionsFinder());
+		form.setEmailTypeOptionsFinder(getEmailTypeOptionsFinder());
+		form.setPhoneTypeOptionsFinder(getPhoneTypeOptionsFinder());
+		form.setLatePeriodOptionsFinder(getLatePeriodOptionsFinder());
+		form.setBankTypeOptionsFinder(getBankTypeOptionsFinder());
+		form.setTaxTypeOptionsFinder(getTaxTypeOptionsFinder());
+		form.setIdTypeKeyValuesFinder(getIdTypeKeyValuesFinder());
+		form.setAccountStatusTypeOptionsFinder(getAccountStatusTypeOptionsFinder());
+	}
+	
+	/*
+	 * Populates the specified form for a Search Person Account page.
+	 */
+	private void populateForSearchPersonAccount(AdminForm form) {
+		// Populate for New Person Account first:
+		populateForNewPersonAccount(form);
+		
+		// Add additional Search specific info:
+		AdminForm.AccountSearchInformation accountSearchInfo = new AdminForm.AccountSearchInformation();
+		
+		accountSearchInfo.setIsKimAccount(true);
+		accountSearchInfo.setLastNameSubstringSearch(true);
+		accountSearchInfo.setDobDateRange(new DateRangeValue());
+		accountSearchInfo.setLastUpdateDateRange(new DateRangeValue());
+		accountSearchInfo.setCreationDateRange(new DateRangeValue());
+		accountSearchInfo.setUserPreference(new UserPreference());
+		accountSearchInfo.setSearchResultFields(new ArrayList<String>());
+		form.setSearchResultFieldsOptionsFinder(getSearchResultFieldsOptionsFinder());
+		form.setAccountSearchInfo(accountSearchInfo);
 	}
 }

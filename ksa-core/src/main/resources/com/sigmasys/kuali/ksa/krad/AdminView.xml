@@ -26,7 +26,8 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<import resource="AccountManagementView.xml"/>
+	<import resource="AccountManagementView-NewPerson.xml"/>
+	<import resource="AccountManagementView-SearchPerson.xml"/>
 	
     <bean id="AdminView" parent="Uif-KsaFormView">
         <property name="title" value="Administration"/>
@@ -70,13 +71,13 @@
 													<bean parent="Uif-LinkField" p:linkText="Create a New Account for a Person" p:target="_self"
 														p:href="accountManagement?methodToCall=newPersonAccount&amp;viewId=AdminView&amp;pageId=NewPersonAccountPage" p:style="text-decoration:underline"/>
 														
-														
 													<bean parent="Uif-LinkField" p:linkText="Create a New Account for an Organization" p:target="_self"
 														p:href="javascript: void(0)" p:style="text-decoration:underline"
 														p:onClickScript="javascript:alert('This will create a new account for an organization some day...Maybe.')"/>
+														
 													<bean parent="Uif-LinkField" p:linkText="Update a Person&apos;s Account" p:target="_self"
-														p:href="javascript: void(0)" p:style="text-decoration:underline"
-														p:onClickScript="javascript:alert('This will a personal account some day...Maybe.')"/>
+														p:href="accountManagement?methodToCall=searchPersonAccount&amp;viewId=AdminView&amp;pageId=SearchPersonAccountPage" p:style="text-decoration:underline"/>
+														
 													<bean parent="Uif-LinkField" p:linkText="Update an Organization&apos;s Account" p:target="_self"
 														p:href="javascript: void(0)" p:style="text-decoration:underline"
 														p:onClickScript="javascript:alert('This will update an organization account some day...Maybe.')"/>
@@ -93,6 +94,8 @@
 				
 				<!-- New Person Account Page -->
 				<ref bean="NewPersonAccountPage"/>
+				<!-- Search Person Account Page -->
+				<ref bean="SearchPersonAccountPage"/>
 				
                 <!--End Account Management Page-->
 

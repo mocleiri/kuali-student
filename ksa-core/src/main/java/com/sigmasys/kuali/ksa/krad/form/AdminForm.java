@@ -4,9 +4,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 
-import org.kuali.rice.kim.api.identity.Person;
+import org.kuali.rice.core.api.util.KeyValue;
 import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
 
+import com.sigmasys.kuali.ksa.gwt.client.view.widget.value.DateRangeValue;
 import com.sigmasys.kuali.ksa.model.*;
 
 /**
@@ -30,6 +31,11 @@ public class AdminForm extends AbstractViewModel {
 	 */
 	private List<UserPreference> accountUserPreferences = new ArrayList<UserPreference>();
 	
+	/**
+	 * Account search information holder. 
+	 */
+	private AccountSearchInformation accountSearchInfo;
+	
 	/*
 	 * Option KeyValueFinders.
 	 */
@@ -42,6 +48,7 @@ public class AdminForm extends AbstractViewModel {
 	private KeyValuesFinder bankTypeOptionsFinder;
 	private KeyValuesFinder taxTypeOptionsFinder;
 	private KeyValuesFinder idTypeKeyValuesFinder;
+	private KeyValuesFinder searchResultFieldsOptionsFinder;
 	
 
     private List<GlTransaction> glTransactions;
@@ -57,7 +64,15 @@ public class AdminForm extends AbstractViewModel {
      Get / Set methods
    */
 
-   	public KeyValuesFinder getNameTypeOptionsFinder() {
+   	public AccountSearchInformation getAccountSearchInfo() {
+		return accountSearchInfo;
+	}
+	
+	public void setAccountSearchInfo(AccountSearchInformation accountSearchInfo) {
+		this.accountSearchInfo = accountSearchInfo;
+	}
+
+	public KeyValuesFinder getNameTypeOptionsFinder() {
 		return nameTypeOptionsFinder;
 	}
 	
@@ -163,7 +178,16 @@ public class AdminForm extends AbstractViewModel {
 		this.accountInfo = accountInfo;
 	}
 
-    public List<GlTransaction> getGlTransactions() {
+    public KeyValuesFinder getSearchResultFieldsOptionsFinder() {
+		return searchResultFieldsOptionsFinder;
+	}
+
+	public void setSearchResultFieldsOptionsFinder(
+			KeyValuesFinder searchResultFieldsOptionsFinder) {
+		this.searchResultFieldsOptionsFinder = searchResultFieldsOptionsFinder;
+	}
+
+	public List<GlTransaction> getGlTransactions() {
         return glTransactions;
     }
 
@@ -272,5 +296,85 @@ public class AdminForm extends AbstractViewModel {
 		}
 	}
 
+	/**
+	 * Account Search information holder.
+	 * 
+	 * @author Sergey
+	 *
+	 */
+	public static class AccountSearchInformation implements Serializable {
+		private String accountId;
+		private String creatorId;
+		private String editorId;
+		private Boolean isKimAccount;
+		private UserPreference userPreference;
+		private DateRangeValue dobDateRange;
+		private DateRangeValue creationDateRange;
+		private DateRangeValue lastUpdateDateRange;
+		private Boolean lastNameSubstringSearch;
+		private List<String> searchResultFields;
+		
+		
+		public DateRangeValue getDobDateRange() {
+			return dobDateRange;
+		}
+		public void setDobDateRange(DateRangeValue dobDateRange) {
+			this.dobDateRange = dobDateRange;
+		}
+		public DateRangeValue getCreationDateRange() {
+			return creationDateRange;
+		}
+		public void setCreationDateRange(DateRangeValue creationDateRange) {
+			this.creationDateRange = creationDateRange;
+		}
+		public DateRangeValue getLastUpdateDateRange() {
+			return lastUpdateDateRange;
+		}
+		public void setLastUpdateDateRange(DateRangeValue lastUpdateDateRange) {
+			this.lastUpdateDateRange = lastUpdateDateRange;
+		}
+		public String getAccountId() {
+			return accountId;
+		}
+		public void setAccountId(String accountId) {
+			this.accountId = accountId;
+		}
+		public String getCreatorId() {
+			return creatorId;
+		}
+		public void setCreatorId(String creatorId) {
+			this.creatorId = creatorId;
+		}
+		public String getEditorId() {
+			return editorId;
+		}
+		public void setEditorId(String editorId) {
+			this.editorId = editorId;
+		}
+		public Boolean getIsKimAccount() {
+			return isKimAccount;
+		}
+		public void setIsKimAccount(Boolean isKimAccount) {
+			this.isKimAccount = isKimAccount;
+		}
+		public UserPreference getUserPreference() {
+			return userPreference;
+		}
+		public void setUserPreference(UserPreference userPreference) {
+			this.userPreference = userPreference;
+		}
+		public Boolean getLastNameSubstringSearch() {
+			return lastNameSubstringSearch;
+		}
+		public void setLastNameSubstringSearch(Boolean lastNameSubstringSearch) {
+			this.lastNameSubstringSearch = lastNameSubstringSearch;
+		}
+		public List<String> getSearchResultFields() {
+			return searchResultFields;
+		}
+		public void setSearchResultFields(List<String> searchResultFields) {
+			this.searchResultFields = searchResultFields;
+		}
+	}
 
 }
