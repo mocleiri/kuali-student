@@ -1,3 +1,13 @@
+# stores test data for creating/editing and validating academic calendars and provides convenience methods for navigation and data entry
+#
+# class attributes are initialized with default data unless values are explicitly provided
+#
+# Typical usage: (with optional setting of explicit data value in [] )
+#  @calendar = make AcademicCalendar, [:name=>"acal_name1", :start_date=>"12/12/2012", :end_date=>"12/12/2013", :organization=>"Example_Org"]
+#  @calendar.create
+# OR alternatively 2 steps together as
+#  @calendar = create AcademicCalendar, :name=>"acal_name1", :start_date=>"12/12/2012", :end_date=>"12/12/2013", :organization=>"Example_Org"
+# Note the use of the ruby options hash pattern re: setting attribute values
 class AcademicCalendar
 
   include Foundry
@@ -6,9 +16,19 @@ class AcademicCalendar
   include StringFactory
   include Workflows
 
-  attr_accessor :name, :start_date, :end_date, :organization, :events,
-                :holidays, :terms
+  #generally set using options hash
+  attr_accessor :name, :start_date, :end_date, :organization
+  #not implemented
+  attr_accessor :events, :holidays, :terms
 
+  # provides default data:
+  #  defaults = {
+  #      :name=>random_alphanums.strip,
+  #      :start_date=>"09/01/#{next_year[:year]}",
+  #      :end_date=>"06/25/#{next_year[:year] + 1}",
+  #      :organization=>"Registrar's Office"
+  #  }
+  # initialize is generally called using TestFactory Foundry .make or .create methods
   def initialize(browser, opts={})
     @browser = browser
 
@@ -22,6 +42,7 @@ class AcademicCalendar
     set_options(options)
   end
 
+  #navigates to Create Calendar page and creates academic calendar from blank
   def create
     go_to_academic_calendar
     on CreateAcadCalendar do |page|
@@ -36,6 +57,9 @@ class AcademicCalendar
     end
   end
 
+  #navigates to Create Calendar page and creates academic calendar by copying the calendar matching the name parameter
+  #
+  #@param name [String] name of source calendar
   def copy_from(name)
     go_to_academic_calendar
     if right_source? name
@@ -64,6 +88,7 @@ class AcademicCalendar
     end
   end
 
+  #search for academic calendar matching the :name attribute
   def search
     go_to_calendar_search
     on CalendarSearch do |page|
@@ -71,6 +96,11 @@ class AcademicCalendar
     end
   end
 
+  #checks currently selected calendar matches name
+  #
+  #@param name [String] name of selected calendar
+  #
+  #@returns boolean
   def right_source?(name)
     on CreateAcadCalendar do |page|
       if page.source_name == name
@@ -81,6 +111,7 @@ class AcademicCalendar
     end
   end
 
+  #make currently selected calendar official
   def make_official
     on EditAcademicCalendar do |page|
       page.make_official

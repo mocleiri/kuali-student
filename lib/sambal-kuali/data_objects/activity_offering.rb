@@ -5,17 +5,21 @@
     include StringFactory
     include Workflows
 
+    #generally set using options hash
     attr_accessor :code,
                   :format,
                   :activity_type,
                   :max_enrollment,
-                  :actual_delivery_logistics_list,
-                  :requested_delivery_logistics_list,
-                  :personnel_list,
-                  :seat_pool_list,
                   :seat_remaining_percent,
-                  :course_url,
-                  :evaluation,
+                  :course_url
+    #hash - generally set using options hash
+    attr_accessor :actual_delivery_logistics_list,
+                  :requested_delivery_logistics_list,
+                  :seat_pool_list
+    #array - generally set using options hash
+    attr_accessor :personnel_list
+    #boolean - generally set using options hash
+    attr_accessor :evaluation,
                   :honors_course
 
     def initialize(browser, code)
@@ -275,6 +279,7 @@
     include Workflows
     include PopulationsSearch
 
+    #generally set using options hash
     attr_accessor :priority,
                   :seats,
                   :population_name,
@@ -348,6 +353,7 @@
     include StringFactory
     include Workflows
 
+    #generally set using options hash
     attr_accessor :id,
                   :affiliation,
                   :inst_effort
@@ -400,8 +406,10 @@
     include StringFactory
     include Workflows
 
-    attr_accessor :tba, #boolean
-                  :days,
+    #boolean - generally set using options hash
+    attr_accessor :tba, :process
+    #generally set using options hash
+    attr_accessor :days,
                   :start_time,
                   :start_time_ampm,
                   :end_time,
@@ -409,8 +417,8 @@
                   :facility,
                   :facility_long_name,
                   :room,
-                  :features_list,
-                  :process
+                  :features_list
+
 
     alias_method :tba?, :tba
     alias_method :process?, :process

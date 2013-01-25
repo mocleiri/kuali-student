@@ -1,3 +1,13 @@
+# stores test data for creating/editing and validating holiday calendars and provides convenience methods for navigation and data entry
+#
+# class attributes are initialized with default data unless values are explicitly provided
+#
+# Typical usage: (with optional setting of explicit data value in [] )
+#  @calendar = make HolidayCalendar, [:name=>"acal_name1", :start_date=>"12/12/2012", :end_date=>"12/12/2013", :organization=>"Example_Org"]
+#  @calendar.create
+# OR alternatively 2 steps together as
+#  @calendar = create HolidayCalendar, :name=>"acal_name1", :start_date=>"12/12/2012", :end_date=>"12/12/2013", :organization=>"Example_Org"
+# Note the use of the ruby options hash pattern re: setting attribute values
 class HolidayCalendar
 
   include Foundry
@@ -6,8 +16,23 @@ class HolidayCalendar
   include StringFactory
   include Workflows
 
+  #generally set using options hash
   attr_accessor :name, :start_date, :end_date, :organization, :holiday_types
 
+  # provides default data:
+  #defaults = {
+     # :name=>random_alphanums.strip,
+     # :start_date=>"09/01/#{next_year[:year]}",
+     # :end_date=>"06/25/#{next_year[:year] + 1}",
+     # :organization=>"Registrar's Office",
+     # :holiday_types=>[
+     # {:type=>"random", :start_date=>"02/01/#{next_year[:year] + 1}", :all_day=>true, :date_range=>false, :instructional=>false},
+     # {:type=>"random", :start_date=>"03/02/#{next_year[:year] + 1}", :end_date=>"03/04/#{next_year[:year] + 1}", :all_day=>true, :date_range=>true, :instructional=>false},
+     # {:type=>"random", :start_date=>"04/05/#{next_year[:year] + 1}", :start_time=>"03:00", :start_meridian=>"pm", :end_time=>"07:44", :end_meridian=>"pm", :all_day=>false, :date_range=>false, :instructional=>false},
+     # {:type=>"random", :start_date=>"05/11/#{next_year[:year] + 1}", :start_time=>"02:22", :start_meridian=>"am", :end_date=>"05/22/#{next_year[:year] + 1}", :end_time=>"07:44", :end_meridian=>"pm", :all_day=>false, :date_range=>true, :instructional=>false}
+     # ]
+     #}
+  # initialize is generally called using TestFactory Foundry .make or .create methods
   def initialize(browser, opts={})
     @browser = browser
 
@@ -27,6 +52,7 @@ class HolidayCalendar
     set_options(options)
   end
 
+  #navigates to Create Calendar page and creates academic calendar from blank
   def create
     go_to_holiday_calendar
     on CopyHolidayCalendar do |page|
@@ -65,6 +91,9 @@ class HolidayCalendar
     end
   end
 
+  #navigates to Create Calendar page and creates academic calendar by copying the calendar matching the name parameter
+  #
+  #@param name [String] name of source calendar
   def copy_from(name)
     go_to_holiday_calendar
     if right_source? name

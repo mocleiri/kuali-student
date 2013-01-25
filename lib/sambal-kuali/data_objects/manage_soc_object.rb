@@ -1,3 +1,12 @@
+# stores test data for managing and validating the SOC process and provides convenience methods for navigation and data entry
+#
+# class attributes are initialized with default data unless values are explicitly provided
+#
+# Typical usage: (with optional setting of explicit data value in [] )
+#  @manageSoc = make ManageSoc, [:term_code=>"201301"]
+#  @manageSoc.search
+#
+# Note the use of the ruby options hash pattern re: setting attribute values
 class ManageSoc
 
   include Foundry
@@ -6,9 +15,14 @@ class ManageSoc
   include StringFactory
   include Workflows
 
-  attr_accessor :term_code
-  attr_accessor :co_code
+  #generally set using options hash
+  attr_accessor :term_code, :co_code
 
+  # provides default data:
+  #  defaults = {
+  #    :term_code=>"20122" ,
+  #    :co_code=>"ENGL103"
+  #  }
   def initialize(browser, opts={})
     @browser = browser
 
@@ -20,6 +34,7 @@ class ManageSoc
     set_options(options)
   end
 
+  #navigate to Manage SOC page and search for :term_code
   def search
     go_to_manage_soc
     on ManageSocPage do |page|
@@ -28,6 +43,11 @@ class ManageSoc
     end
   end
 
+  #(on Manage SOC page) raise error unless state change button is in the expected state for specified current_state
+  #
+  #@raises error if SOC is in unexpected state
+  #
+  # @param curent_state [String] in Lock, FinalEdit, Scedule, Publish, Close
   def check_state_change_button_exists(current_state)
     on ManageSocPage do |page|
     case(current_state)
@@ -60,6 +80,12 @@ class ManageSoc
     end
   end
 
+  #proces SOC to next state
+  #
+  # @raises error if SOC is in unexpected state
+  #
+  #@param new_state [String] in Lock, FinalEdit, Publish, Schedule
+  #@param confirm_state_change [String] Yes/No
   def change_action(new_state,confirm_state_change)
     validate_confirm_option(confirm_state_change)
     on ManageSocPage do |page|
@@ -90,7 +116,11 @@ class ManageSoc
     end
   end
 
-
+  private
+  #schedule soc
+  #
+  #@param page(ManageSoc page)
+  #@param confirm_state_change [String] Yes/No
   def schedule_soc(page,confirm_state_change)
     page.send_to_scheduler_action
     if confirm_state_change == 'Yes'
@@ -110,7 +140,10 @@ class ManageSoc
     end
   end
 
-
+  #pubilsh soc
+  #
+  #@param page(ManageSoc page)
+  #@param confirm_state_change [String] Yes/No
   def publish_soc(page,confirm_state_change)
     page.publish_action
     if confirm_state_change == 'Yes'
@@ -132,6 +165,9 @@ class ManageSoc
     end
   end
 
+  #validates dialog
+  #
+  #@param confirm_state_change [String] Yes/No
   def validate_confirm_option(confirm_state_change)
     case confirm_state_change
       when 'Yes'

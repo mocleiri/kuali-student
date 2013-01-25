@@ -1,3 +1,13 @@
+# stores test data for creating/editing and validating populations and provides convenience methods for navigation and data entry
+#
+# class attributes are initialized with default data unless values are explicitly provided
+#
+# Typical usage: (with optional setting of explicit data value in [] )
+#  @population = make Population, [:name=>"example_name", :description=>"example_desc", :type=>"union-based" ...]
+#  @population.create
+# OR alternatively 2 steps together as
+#  @population = create Population, [:name=>"example_name", :description=>"example_desc", :type=>"union-based" ...]
+# Note the use of the ruby options hash pattern re: setting attribute values
 class Population
 
   include Foundry
@@ -7,9 +17,24 @@ class Population
   include Workflows
   include PopulationsSearch
 
-  attr_accessor :name, :description, :rule, :operation, :child_populations,
+  #generally set using options hash
+  attr_accessor :name, :description, :rule, :child_populations,
                 :reference_population, :status, :type
+  #do not access directly - set using 'type' attribute
+  attr_accessor :operation
 
+
+  # provides default data:
+  #  defaults = {
+  #    :name=>random_alphanums.strip,
+  #    :description=>random_alphanums_plus.strip,
+  #    :type=>"rule-based",
+  #    :child_populations=>[],
+  #    :rule=>nil,
+  #    :reference_population=>nil,
+  #    :status=>"Active"
+  #  }
+  # initialize is generally called using TestFactory Foundry .make or .create methods
   def initialize(browser, opts={})
     @browser = browser
 
@@ -29,6 +54,7 @@ class Population
     @operation = operations[type.to_sym]
   end
 
+  #navigates to Create Population page and creates population based on attributes
   def create
     go_to_create_population
     on CreatePopulation do |page|
@@ -74,6 +100,11 @@ class Population
     sleep 10
   end
 
+  # searches for and edits an existing population matching :name attribute
+  # @example
+  #  @population.edit_population :description=> "new description"
+  #
+  # @param opts [Hash] key => value for attribute to be updated
   def edit_population opts={}
 
     defaults = {
@@ -132,6 +163,7 @@ class Population
     end
   end
 
+  private
   def add_child_population(child_population)
     on CreatePopulation do |page|
       page.lookup_population
