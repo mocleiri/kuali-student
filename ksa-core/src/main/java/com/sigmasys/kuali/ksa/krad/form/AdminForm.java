@@ -8,6 +8,7 @@ import org.kuali.rice.core.api.util.KeyValue;
 import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
 
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.value.DateRangeValue;
+import com.sigmasys.kuali.ksa.krad.util.AccountSearchResultCollectionLine;
 import com.sigmasys.kuali.ksa.model.*;
 
 /**
@@ -35,6 +36,11 @@ public class AdminForm extends AbstractViewModel {
 	 * Account search information holder. 
 	 */
 	private AccountSearchInformation accountSearchInfo;
+	
+	/**
+	 * Account search results.
+	 */
+	private List<AccountSearchResultCollectionLine> accountSearchResults;
 	
 	/*
 	 * Option KeyValueFinders.
@@ -195,7 +201,16 @@ public class AdminForm extends AbstractViewModel {
         this.glTransactions = glTransactions;
     }
 
-    /**
+    public List<AccountSearchResultCollectionLine> getAccountSearchResults() {
+		return accountSearchResults;
+	}
+
+	public void setAccountSearchResults(
+			List<AccountSearchResultCollectionLine> accountSearchResults) {
+		this.accountSearchResults = accountSearchResults;
+	}
+
+	/**
 	 * Account Biographic information container class.
 	 * 
 	 * @author Sergey

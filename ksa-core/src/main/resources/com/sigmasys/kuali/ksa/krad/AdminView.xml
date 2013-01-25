@@ -76,7 +76,7 @@
 														p:onClickScript="javascript:alert('This will create a new account for an organization some day...Maybe.')"/>
 														
 													<bean parent="Uif-LinkField" p:linkText="Update a Person&apos;s Account" p:target="_self"
-														p:href="accountManagement?methodToCall=searchPersonAccount&amp;viewId=AdminView&amp;pageId=SearchPersonAccountPage" p:style="text-decoration:underline"/>
+														p:href="accountSearch?methodToCall=searchPersonAccount&amp;viewId=AdminView&amp;pageId=SearchPersonAccountPage" p:style="text-decoration:underline"/>
 														
 													<bean parent="Uif-LinkField" p:linkText="Update an Organization&apos;s Account" p:target="_self"
 														p:href="javascript: void(0)" p:style="text-decoration:underline"
@@ -96,6 +96,8 @@
 				<ref bean="NewPersonAccountPage"/>
 				<!-- Search Person Account Page -->
 				<ref bean="SearchPersonAccountPage"/>
+				<!-- Search Account Results Page -->
+				<ref bean="SearchAccountResultsPage"/>
 				
                 <!--End Account Management Page-->
 

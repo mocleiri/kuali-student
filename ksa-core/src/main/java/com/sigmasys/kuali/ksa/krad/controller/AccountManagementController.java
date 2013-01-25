@@ -1,12 +1,10 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.kuali.rice.core.api.util.KeyValue;
 import org.kuali.rice.kim.impl.identity.address.EntityAddressTypeBo;
 import org.kuali.rice.kim.impl.identity.email.EntityEmailTypeBo;
 import org.kuali.rice.kim.impl.identity.name.EntityNameTypeBo;
@@ -19,11 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sigmasys.kuali.ksa.gwt.client.view.widget.value.DateRangeValue;
 import com.sigmasys.kuali.ksa.krad.form.AdminForm;
-import com.sigmasys.kuali.ksa.krad.util.*;
+import com.sigmasys.kuali.ksa.krad.util.AuditableEntityKeyValuesFinder;
+import com.sigmasys.kuali.ksa.krad.util.KradTypeEntityKeyValuesFinder;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AuditableEntityService;
+import com.sigmasys.kuali.ksa.service.PersistenceService;
 
 @Controller
 @RequestMapping(value = "/accountManagement")
@@ -32,6 +31,10 @@ public class AccountManagementController extends GenericSearchController {
 	
 	@Autowired
 	private AuditableEntityService auditableEntityService;
+	
+	@Autowired
+	private PersistenceService persistenceService;
+	
 
 	/*
 	 * Option KeyValueFinders.
@@ -45,7 +48,7 @@ public class AccountManagementController extends GenericSearchController {
 	private volatile KeyValuesFinder bankTypeOptionsFinder;
 	private volatile KeyValuesFinder taxTypeOptionsFinder;
 	private volatile KeyValuesFinder idTypeKeyValuesFinder;
-	private volatile KeyValuesFinder searchResultFieldsOptionsFinder;
+	
 
 	
 
@@ -98,38 +101,33 @@ public class AccountManagementController extends GenericSearchController {
 	 */
 	@RequestMapping(method = RequestMethod.POST, params = "methodToCall=saveNewPersonAccount")
 	public ModelAndView saveNewPersonAccount(@ModelAttribute("KualiForm") AdminForm form, HttpServletRequest request) {
-		// Save an Account:
+		// Save the Account on the form:
+		Account account = form.getAccount();
 		
-		return getUIFModelAndView(form);
-	}
-	
-	
-	/**
-	 * Handles display of the Search Person Account page.
-	 * @param form
-	 * @param request
-	 * @return
-	 */
-	@RequestMapping(method = RequestMethod.GET, params = "methodToCall=searchPersonAccount")
-	public ModelAndView searchPersonAccount(@ModelAttribute("KualiForm") AdminForm form, HttpServletRequest request) {
-		// Populate the form:
-		populateForSearchPersonAccount(form);
+		persistenceService.persistEntity(account);
 		
+		// Return the saved form:
 		return getUIFModelAndView(form);
 	}
 	
 	/**
-	 * Handles Person Account search and redirection to the search result page.
+	 * Handles edit of a person's account.
 	 * 
-	 * @param form
-	 * @param request
-	 * @return
+	 * @param form		Admin form.
+	 * @param request	HTTP Request.
+	 * @return			Page ModelAndView.
 	 */
-	@RequestMapping(method = RequestMethod.POST, params = "methodToCall=doSearchPersonAccount")
-	public ModelAndView doSearchPersonAccount(@ModelAttribute("KualiForm") AdminForm form, HttpServletRequest request) {
-		// Navigate to the landing page for now:
-		return cancel(form, request);
+	@RequestMapping(method = RequestMethod.GET, params = "methodToCall=editPersonAccount")
+	public ModelAndView editPersonAccount(@ModelAttribute("KualiForm") AdminForm form, @RequestParam("accountId") String accountId) {
+		// Find the Account with the given ID:
+		Account account = accountService.getFullAccount(accountId);
+		
+		// Populate the form with the Account details:
+		populateForExistingAccount(form, account);
+
+		return getUIFModelAndView(form);
 	}
+	
 	
 	/* ========================================================================================
 	 * 
@@ -272,21 +270,6 @@ public class AccountManagementController extends GenericSearchController {
 		return idTypeKeyValuesFinder;
 	}
 	
-	/*
-	 * Returns Search Result Fields option finder.
-	 */
-	public KeyValuesFinder getSearchResultFieldsOptionsFinder() {
-		if (searchResultFieldsOptionsFinder == null) {
-			synchronized(this) {
-				if (searchResultFieldsOptionsFinder == null) {
-					searchResultFieldsOptionsFinder = new AccountSearchResultFieldsKeyValuesFinder();
-				}
-			}
-		}
-		
-		return searchResultFieldsOptionsFinder;
-	}
-	
 	
 	/* *******************************************************************************************************************
 	 * 
@@ -297,7 +280,7 @@ public class AccountManagementController extends GenericSearchController {
 	/*
 	 * Populates the given form for a New Person Account page.
 	 */
-	private void populateForNewPersonAccount(AdminForm form) {
+	protected void populateForNewPersonAccount(AdminForm form) {
 		// Nullify the Account to make sure a new one is being created:
 		form.setAccount(null);
 		
@@ -329,23 +312,39 @@ public class AccountManagementController extends GenericSearchController {
 	}
 	
 	/*
-	 * Populates the specified form for a Search Person Account page.
+	 * Populates the given form for an existing Account.
 	 */
-	private void populateForSearchPersonAccount(AdminForm form) {
-		// Populate for New Person Account first:
-		populateForNewPersonAccount(form);
+	protected void populateForExistingAccount(AdminForm form, Account account) {
+		// Set the Account on the form:
+		form.setAccount(account);
 		
-		// Add additional Search specific info:
-		AdminForm.AccountSearchInformation accountSearchInfo = new AdminForm.AccountSearchInformation();
+		// Set the Account attributes:
+		AdminForm.AccountInformation accountInfo = new AdminForm.AccountInformation();
 		
-		accountSearchInfo.setIsKimAccount(true);
-		accountSearchInfo.setLastNameSubstringSearch(true);
-		accountSearchInfo.setDobDateRange(new DateRangeValue());
-		accountSearchInfo.setLastUpdateDateRange(new DateRangeValue());
-		accountSearchInfo.setCreationDateRange(new DateRangeValue());
-		accountSearchInfo.setUserPreference(new UserPreference());
-		accountSearchInfo.setSearchResultFields(new ArrayList<String>());
-		form.setSearchResultFieldsOptionsFinder(getSearchResultFieldsOptionsFinder());
-		form.setAccountSearchInfo(accountSearchInfo);
+		accountInfo.setName(account.getDefaultPersonName());
+		accountInfo.setAddress(account.getDefaultPostalAddress());
+		accountInfo.setElectronicContact(account.getDefaultElectronicContact());
+		accountInfo.setDateOfBirth(getAccountDateOfBirth(account));
+		accountInfo.setAbleToAuthenticate(account.isAbleToAuthenticate());
+		accountInfo.setCreditLimit(account.getCreditLimit());
+		form.setAccountInfo(accountInfo);
+		
+		// Set option finders:
+		form.setNameTypeOptionsFinder(getNameTypeOptionsFinder());
+		form.setAddressTypeOptionsFinder(getAddressTypeOptionsFinder());
+		form.setEmailTypeOptionsFinder(getEmailTypeOptionsFinder());
+		form.setPhoneTypeOptionsFinder(getPhoneTypeOptionsFinder());
+		form.setLatePeriodOptionsFinder(getLatePeriodOptionsFinder());
+		form.setBankTypeOptionsFinder(getBankTypeOptionsFinder());
+		form.setTaxTypeOptionsFinder(getTaxTypeOptionsFinder());
+		form.setIdTypeKeyValuesFinder(getIdTypeKeyValuesFinder());
+		form.setAccountStatusTypeOptionsFinder(getAccountStatusTypeOptionsFinder());
+	}
+	
+	/*
+	 * Determines if the given Account has a Date of Birth and returns it. Otherwise, returns null.
+	 */
+	protected Date getAccountDateOfBirth(Account account) {
+		return (account instanceof DirectChargeAccount) ? ((DirectChargeAccount)account).getDateOfBirth() : null;
 	}
 }
