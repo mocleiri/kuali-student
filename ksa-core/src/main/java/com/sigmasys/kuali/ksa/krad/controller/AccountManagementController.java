@@ -256,13 +256,13 @@ public class AccountManagementController extends GenericSearchController {
 	}
 
 	/*
-	 * Returns IdType option finder.
+	 * Returns IdentityType option finder.
 	 */
 	public KeyValuesFinder getIdTypeKeyValuesFinder() {
 		if (idTypeKeyValuesFinder == null) {
 			synchronized(this) {
 				if (idTypeKeyValuesFinder == null) {
-					idTypeKeyValuesFinder = new AuditableEntityKeyValuesFinder<IdType>(auditableEntityService, IdType.class);
+					idTypeKeyValuesFinder = new AuditableEntityKeyValuesFinder<IdentityType>(auditableEntityService, IdentityType.class);
 				}
 			}
 		}

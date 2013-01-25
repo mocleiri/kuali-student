@@ -61,7 +61,7 @@
 										<list>
 											<bean parent="Uif-DataField" p:label="Account ID" p:propertyName="account.id"/>
 											<bean parent="Uif-DataField" p:label="Last Name" p:propertyName="account.defaultPersonName.firstName"/>
-											<bean parent="Uif-DataField" p:label="Identity Detail" p:propertyName="accountProtectedInfo.idType.description"/>
+											<bean parent="Uif-DataField" p:label="Identity Detail" p:propertyName="accountProtectedInfo.identityType.description"/>
 											<bean parent="Uif-DataField" p:label="Date of Birth" p:propertyName="dateOfBirth"/>
 										</list>
 									</property>

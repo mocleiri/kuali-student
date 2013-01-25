@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.*;
 
-import org.kuali.rice.core.api.util.KeyValue;
 import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
 
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.value.DateRangeValue;
@@ -224,18 +223,18 @@ public class AdminForm extends AbstractViewModel {
 		private Date dateOfBirth;
 		private BankType bankType;
 		private TaxType taxType;
-		private IdType idType;
+		private IdentityType identityType;
 		private AccountStatusType statusType;
 		private LatePeriod latePeriod;
 		private Boolean ableToAuthenticate;
 		private AccountProtectedInfo accountProtectedInfo;
 		private BigDecimal creditLimit;
 		
-		public IdType getIdType() {
-			return idType;
+		public IdentityType getIdentityType() {
+			return identityType;
 		}
-		public void setIdType(IdType idType) {
-			this.idType = idType;
+		public void setIdentityType(IdentityType identityType) {
+			this.identityType = identityType;
 		}
 		public AccountProtectedInfo getAccountProtectedInfo() {
 			return accountProtectedInfo;

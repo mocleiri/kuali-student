@@ -3,7 +3,7 @@ package com.sigmasys.kuali.ksa.model;
 import javax.persistence.*;
 
 /**
- * ID Type.
+ * Identity Type.
  * <p/>
  * User: mike
  * Date: 1/22/12
@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "KSSA_ID_TYPE")
-public class IdType extends AuditableEntity<Long> {
+public class IdentityType extends AuditableEntity<Long> {
 
     @Id
     @Column(name = "ID", nullable = false, updatable = false)

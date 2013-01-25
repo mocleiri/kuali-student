@@ -718,7 +718,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         Query query = em.createQuery("select a from AccountProtectedInfo a " +
                 " left outer join fetch a.bankType" +
                 " left outer join fetch a.taxType" +
-                " left outer join fetch a.idType" +
+                " left outer join fetch a.identityType" +
                 " where a.id = :id");
         query.setParameter("id", userId);
         List<AccountProtectedInfo> protectedInfoList = query.getResultList();

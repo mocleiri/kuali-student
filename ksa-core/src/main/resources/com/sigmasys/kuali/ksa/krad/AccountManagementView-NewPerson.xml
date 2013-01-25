@@ -325,7 +325,7 @@
 	<bean id="NewPersonAccountAccountInfoSection3" parent="Uif-VerticalBoxSection" p:layoutManager.orientation="VERTICAL">
 		<property name="items">
 			<list>
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.idType.name" p:labelPlacement="TOP" p:label="Identity Type" 
+				<bean parent="Uif-InputField" p:propertyName="accountInfo.identityType.name" p:labelPlacement="TOP" p:label="Identity Type"
 						p:fieldLabel.renderColon="false">
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
@@ -333,14 +333,14 @@
 					<property name="optionsFinder" value="@{getIdTypeKeyValuesFinder()}"/>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.idType.description" p:labelPlacement="TOP" p:label="Identity Serial"
+				<bean parent="Uif-InputField" p:propertyName="accountInfo.identityType.description" p:labelPlacement="TOP" p:label="Identity Serial"
 						p:constraintText="Format: DL-123456789">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="50"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.idType.description" p:labelPlacement="TOP" p:label="Identity Issuer">
+				<bean parent="Uif-InputField" p:propertyName="accountInfo.identityType.description" p:labelPlacement="TOP" p:label="Identity Issuer">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="50"/>
 					</property>

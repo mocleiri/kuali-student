@@ -24,12 +24,12 @@ public class AccountProtectedInfo implements Identifiable {
     private String id;
 
     /**
-     * Tax reference
+     * The actual tax identifier as referenced in TAX_TYPE.
      */
     private String taxReference;
 
     /**
-     * Bank details
+     * The actual detail as references in BANK_TYPE, for example, the actual IBAN of the account holder.
      */
     private String bankDetails;
 
@@ -46,7 +46,19 @@ public class AccountProtectedInfo implements Identifiable {
     /**
      * ID type
      */
-    private IdType idType;
+    private IdentityType identityType;
+
+    /**
+     * The issuing authority of a document. For a passport, this would often be a country.
+     * For a US Driver’s license, it would most often be the state that issued the license.
+     */
+    private String identityIssuer;
+
+    /**
+     * The actual serial number of the document defined by ID_TYPE.
+     * For example, if the document is a passport, this would likely be the passport’s number.
+     */
+    private String identitySerial;
 
 
     @Id
@@ -100,11 +112,29 @@ public class AccountProtectedInfo implements Identifiable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ID_TYPE_ID_FK")
-    public IdType getIdType() {
-        return idType;
+    public IdentityType getIdentityType() {
+        return identityType;
     }
 
-    public void setIdType(IdType idType) {
-        this.idType = idType;
+    public void setIdentityType(IdentityType identityType) {
+        this.identityType = identityType;
+    }
+
+    @Column(name = "ID_ISSUER", length = 100)
+    public String getIdentityIssuer() {
+        return identityIssuer;
+    }
+
+    public void setIdentityIssuer(String identityIssuer) {
+        this.identityIssuer = identityIssuer;
+    }
+
+    @Column(name = "ID_SERIAL", length = 100)
+    public String getIdentitySerial() {
+        return identitySerial;
+    }
+
+    public void setIdentitySerial(String identitySerial) {
+        this.identitySerial = identitySerial;
     }
 }
