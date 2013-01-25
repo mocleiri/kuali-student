@@ -5,9 +5,9 @@ import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.ActivityService;
-import com.sigmasys.kuali.ksa.service.CalendarService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import com.sigmasys.kuali.ksa.jaxb.Ach;
+import com.sigmasys.kuali.ksa.util.CalendarUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -55,10 +55,6 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
             "where pn.default = true and " +
             "      pa.default = true and " +
             "      ec.default = true";
-
-
-    @Autowired
-    private CalendarService calendarService;
 
     @Autowired
     private TransactionService transactionService;
@@ -155,9 +151,9 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         LatePeriod latePeriod = chargeableAccount.getLatePeriod();
 
         final Date curDate = new Date();
-        final Date lateDate1 = calendarService.addCalendarDays(curDate, -latePeriod.getDaysLate1());
-        final Date lateDate2 = calendarService.addCalendarDays(curDate, -latePeriod.getDaysLate2());
-        final Date lateDate3 = calendarService.addCalendarDays(curDate, -latePeriod.getDaysLate3());
+        final Date lateDate1 = CalendarUtils.addCalendarDays(curDate, -latePeriod.getDaysLate1());
+        final Date lateDate2 = CalendarUtils.addCalendarDays(curDate, -latePeriod.getDaysLate2());
+        final Date lateDate3 = CalendarUtils.addCalendarDays(curDate, -latePeriod.getDaysLate3());
 
         BigDecimal lateAmount1 = BigDecimal.ZERO;
         BigDecimal lateAmount2 = BigDecimal.ZERO;

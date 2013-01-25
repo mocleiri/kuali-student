@@ -50,9 +50,6 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
     private AccountService accountService;
 
     @Autowired
-    private CalendarService calendarService;
-
-    @Autowired
     private AuditableEntityService auditableEntityService;
 
     @Autowired
@@ -494,7 +491,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
                 clearPeriod = (creditType.getClearPeriod() != null) ? creditType.getClearPeriod() : 0;
             }
 
-            payment.setClearDate(calendarService.addCalendarDays(effectiveDate, clearPeriod));
+            payment.setClearDate(CalendarUtils.addCalendarDays(effectiveDate, clearPeriod));
 
         }
 

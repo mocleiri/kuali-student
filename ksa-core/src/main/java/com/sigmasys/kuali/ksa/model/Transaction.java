@@ -1,7 +1,7 @@
 package com.sigmasys.kuali.ksa.model;
 
 import com.sigmasys.kuali.ksa.annotation.Auditable;
-import com.sigmasys.kuali.ksa.service.CalendarService;
+import com.sigmasys.kuali.ksa.util.CalendarUtils;
 import com.sigmasys.kuali.ksa.util.EnumUtils;
 
 import java.math.BigDecimal;
@@ -417,7 +417,7 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
 
     @Transient
     public int getDaysBeforeDueDate() {
-        return CalendarService.getInstance().getCalendarDaysBetween(getEffectiveDate(), new Date());
+        return CalendarUtils.getCalendarDaysBetween(getEffectiveDate(), new Date());
     }
 
     @Transient

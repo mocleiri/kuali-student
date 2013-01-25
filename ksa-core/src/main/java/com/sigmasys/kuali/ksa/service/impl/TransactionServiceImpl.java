@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import com.sigmasys.kuali.ksa.exception.*;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
+import com.sigmasys.kuali.ksa.util.CalendarUtils;
 import com.sigmasys.kuali.ksa.util.TransactionUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -53,9 +54,6 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
     @Autowired
     private AuditableEntityService auditableEntityService;
-
-    @Autowired
-    private CalendarService calendarService;
 
     @Autowired
     private InformationService informationService;
@@ -449,7 +447,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             CreditType creditType = (CreditType) transactionType;
             Payment payment = (Payment) transaction;
             int clearPeriod = (creditType.getClearPeriod() != null) ? creditType.getClearPeriod() : 0;
-            payment.setClearDate(calendarService.addCalendarDays(effectiveDate, clearPeriod));
+            payment.setClearDate(CalendarUtils.addCalendarDays(effectiveDate, clearPeriod));
             payment.setRefundRule(creditType.getRefundRule());
             payment.setRefundable(creditType.getRefundRule() != null);
         } else if (transaction instanceof Deferment) {
@@ -2121,7 +2119,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 String ruleValue = clause.substring(index + 1);
 
                 int days = Integer.parseInt(daysValue);
-                date = calendarService.addCalendarDays(date, days);
+                date = CalendarUtils.addCalendarDays(date, days);
 
                 builder.append("DATE(");
                 builder.append(dateFormat.format(date));
