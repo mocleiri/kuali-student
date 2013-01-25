@@ -1,3 +1,13 @@
+# stores test data for creating/editing and validating registration windows and provides convenience methods for navigation and data entry
+#
+# class attributes are initialized with default data unless values are expliitly provided
+#
+# Typical usage: (with optional setting of explicit data value in [] )
+#   @registration_window = make RegistrationWindow, [:start_date => RegistrationWindowsConstants::DATE_BEFORE]
+#   @registration_window.create
+# OR alternatively 2 steps together as
+#   @registration_window = create RegistrationWindow, [:start_date => RegistrationWindowsConstants::DATE_BEFORE]
+# Note the use of the ruby options hash pattern re: setting attribute values
 class RegistrationWindow
 
   include Foundry
@@ -8,10 +18,31 @@ class RegistrationWindow
 
   require 'base_page_classes'
 
+  #access using options hash
   attr_accessor :term_type, :year, :period_id, :period_key, :appointment_window_info_name, :assigned_population_name,
-                :start_date, :start_time, :start_time_am_pm,
-                :end_date, :end_time, :end_time_am_pm, :window_type_key, :slot_rule_enum_type
+                :start_time, :start_time_am_pm,
+                :end_time, :end_time_am_pm, :window_type_key, :slot_rule_enum_type
+  # access using options hash - populate using RegistrationWindowsConstants
+  attr_accessor  :end_date,:start_date
 
+  # provides default data:
+  #  defaults = {
+  #    :term_type => 'Spring Term',
+  #    :year => '2013',
+  #    :period_id => 'All Registration Periods for this Term',
+  #    :period_key => 'Senior Registration',
+  #    :appointment_window_info_name => random_string,
+  #    :assigned_population_name => 'ENGL',
+  #    :start_date => RegistrationWindowsConstants::DATE_WITHIN,
+  #    :start_time => '09:00',
+  #    :start_time_am_pm => 'am',
+  #    :end_date => RegistrationWindowsConstants::DATE_WITHIN,
+  #    :end_time => '10:00',
+  #    :end_time_am_pm => 'am',
+  #    :window_type_key => 'One Slot per Window',
+  #    :slot_rule_enum_type => 'Undergrad Standard'
+  #  }
+  # initialize is generally called using TestFactory Foundry .make or .create methods
 
   def initialize(browser, opts={})
     @browser = browser
@@ -37,7 +68,9 @@ class RegistrationWindow
     set_options(options)
   end
 
+  #navigate to registration windows page and display reg windows for a specific term/period
   def show_windows_for_period
+    #TODO need conditional logic here if already on the right page
     go_to_manage_reg_windows
     on RegistrationWindowsTermLookup do |page1|
       page1.search_by_term_and_year @year, @term_type
@@ -47,7 +80,9 @@ class RegistrationWindow
     end
   end
 
-  def add
+  #navigate to reg windows page, create a registration window
+  def create
+    show_windows_for_period
     @start_date = get_date_for(RegistrationWindowsConstants::DATE_BOUND_START, @start_date, @period_key)
     @end_date = get_date_for(RegistrationWindowsConstants::DATE_BOUND_END, @end_date, @period_key)
 
@@ -86,9 +121,13 @@ class RegistrationWindow
   end
 
 
-
-  def edit_registration_window opts={}
-
+  # searches for and edits an existing registration window matching :appointment_window_info_name, term, period attributes
+  # @example
+  #  @registration_window.edit :assigned_population_name=> "Freshmen"
+  #
+  # @param opts [Hash] key => value for attribute to be updated
+  def edit opts={}
+    #TODO simplify method
     defaults = {
         :update_opts => false,
         :term_type => @term_type,
@@ -122,6 +161,7 @@ class RegistrationWindow
 
   end
 
+  #assign students for the existing registration window matching :appointment_window_info_name, term, period attributes
   def assign_students
     on RegistrationWindowsCreate do |page|
       page.assign_students(@appointment_window_info_name, @period_key)
@@ -135,7 +175,8 @@ class RegistrationWindow
     end
   end
 
-  def delete_window(confirm_delete=true)
+  #delete the existing registration window matching :appointment_window_info_name, term, period attributes
+  def delete(confirm_delete=true)
     puts "Deleting Registration Window #{@appointment_window_info_name}"
     on RegistrationWindowsCreate do |page|
       page.remove(@appointment_window_info_name, @period_key)
@@ -157,7 +198,7 @@ class RegistrationWindow
     end
   end
 
-
+  private
   def get_before_date(date)
     new_date = Date.strptime(date, '%m/%d/%Y')
     return new_date.prev_day.strftime('%m/%d/%Y')
