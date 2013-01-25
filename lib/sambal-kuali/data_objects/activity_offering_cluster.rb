@@ -1,3 +1,17 @@
+# stores test data for creating/editing and validating activity offering clusters and provides convenience methods for navigation and data entry
+#
+# ActivityOfferingCluster objects are always children of a CourseOffering
+#
+# ActivityOfferingCluster objects are parents of 0 to many RegistrationGroups objects
+#
+# class attributes are initialized with default data unless values are explicitly provided
+#
+# Typical usage: (with optional setting of explicit data value in [] )
+#  @cluster = make ActivityOfferingCluster, [:is_constrained=>true,:private_name=>"test1_pri",:published_name=>"test1_pub"...]
+#  @cluster.create
+# OR alternatively 2 steps together as
+#  @cluster = create ActivityOfferingCluster, [:is_constrained=>true,:private_name=>"test1_pri",:published_name=>"test1_pub"...]
+# Note the use of the ruby options hash pattern re: setting attribute values
 class ActivityOfferingCluster
 
   include Foundry
@@ -6,6 +20,7 @@ class ActivityOfferingCluster
   include StringFactory
   include Workflows
 
+  #generally set using options hash
   attr_accessor :is_constrained,
                 :private_name,
                 :published_name,
@@ -17,6 +32,17 @@ class ActivityOfferingCluster
   alias_method :constrained?, :is_constrained
   alias_method :valid?, :is_valid
 
+  # provides default data:
+  #  defaults = {
+  #    :is_constrained=>true,
+  #    :private_name=>"#{random_alphanums(5).strip}_pri",
+  #    :published_name=>"#{random_alphanums(5).strip}_pub",
+  #    :is_valid=>true,
+  #    :expected_msg=>"",
+  #    :assigned_ao_list=>[],
+  #    :to_assign_ao_list=>["A"]
+  #  }
+  # initialize is generally called using TestFactory Foundry .make or .create methods
   def initialize(browser, opts={})
     @browser = browser
 
@@ -33,19 +59,7 @@ class ActivityOfferingCluster
     set_options(options)
   end
 
-  def create(opts={})
-    defaults = {
-        :is_constrained=>@is_constrained,
-        :private_name=>@private_name,
-        :published_name=>@published_name,
-        :is_valid=>@is_valid,
-        :expected_msg=>@expected_msg,
-        :assigned_ao_list=>@assigned_ao_list,
-        :to_assign_ao_list=>@to_assign_ao_list
-    }
-    options = defaults.merge(opts)
-    set_options(options)
-
+  def create
     if @is_constrained
       on ManageRegistrationGroups do |page|
         page.create_new_cluster

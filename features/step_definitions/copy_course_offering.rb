@@ -7,8 +7,7 @@ When /^the registration groups are not copied$/ do
 end
 
 Then /^the activity offering clusters? and assigned AOs are copied over with the course offering$/ do
-  @course_offering_copy.manage
-  @course_offering_copy.manage_registration_groups(false)
+  @course_offering_copy.manage_registration_groups({:cleanup_existing_clusters => false})
 
   on ManageRegistrationGroups do |page|
     clusters = page.cluster_div_list
@@ -23,13 +22,8 @@ Then /^the activity offering clusters? and assigned AOs are copied over with the
       end
     end
   end
-
 end
 
-
 Then /^I copy the course offering$/ do
-  #TODO: once CO refactoring is done, merge this into 'deep_copy' method
-  new_course_name = @course_offering.create_co_copy
-  @course_offering_copy = make CourseOffering, :course=>new_course_name
-  @course_offering_copy.activity_offering_cluster_list = @course_offering.activity_offering_cluster_list.sort
+  @course_offering.create :create_by_copy => true
 end

@@ -1,3 +1,15 @@
+# stores test data for creating/editing and validating course offerings and provides convenience methods for navigation and data entry
+#
+# CourseOffering objects contain ActivityOfferings, ActivityOfferingClusters, DeliveryFormats....
+#
+# class attributes are initialized with default data unless values are explicitly provided
+#
+# Typical usage: (with optional setting of explicit data value in [] )
+#  @course_offering = make CourseOffering, [:course => "CHEM317",...]
+#  @course_offering.create
+# OR alternatively 2 steps together as
+#  @course_offering = create CourseOffering, [:course => "CHEM317",...]
+# Note the use of the ruby options hash pattern re: setting attribute values
 class CourseOffering
 
   include Foundry
@@ -6,27 +18,42 @@ class CourseOffering
   include StringFactory
   include Workflows
 
+  #generally set using options hash
   attr_accessor :term,
                 :course,
                 :suffix,
-                :activity_offering_cluster_list,
+                :final_exam_type
+  #generally set using options hash
+  attr_accessor :activity_offering_cluster_list,
                 :ao_list,
-                :final_exam_type,
-                :wait_list,
+                :affiliated_person_list,
+                :affiliated_org_list
+  #generally set using options hash
+  attr_accessor :wait_list,
                 :wait_list_level,
                 :wait_list_type,
                 :grade_format,
                 :delivery_format_list,
                 :final_exam_driver,
                 :honors_flag,
-                :affiliated_person_list,
-                :affiliated_org_list,
                 :grade_options,
                 :reg_options,
-                :search_by_subj
+                :search_by_subj,
+                :create_by_copy
 
 
 
+  # provides default data:
+  #  defaults = {
+  #    :is_constrained=>true,
+  #    :private_name=>"#{random_alphanums(5).strip}_pri",
+  #    :published_name=>"#{random_alphanums(5).strip}_pub",
+  #    :is_valid=>true,
+  #    :expected_msg=>"",
+  #    :assigned_ao_list=>[],
+  #    :to_assign_ao_list=>["A"]
+  #  }
+  # initialize is generally called using TestFactory Foundry .make or .create methods
   def initialize(browser, opts={})
     @browser = browser
 
@@ -48,35 +75,46 @@ class CourseOffering
         :affiliated_org_list => {},
         :grade_options => "Letter",
         :reg_options => "None available",
-        :search_by_subj => false
+        :search_by_subj => false,
+        :create_by_copy => false
     }
     options = defaults.merge(opts)
     set_options(options)
   end
 
-  def create_offering
-    on CreateCourseOffering do  |page|
-      @suffix = random_alphanums.strip
-      page.suffix.set @suffix
-      @course = "#{@course}#{@suffix}"
-      delivery_obj = make DeliveryFormat
-      delivery_obj.select_random_delivery_formats
-      @delivery_format_list << delivery_obj
-      page.create_offering
+  def create
+    if @create_by_copy
+      @course = create_co_copy
+    else
+      on CreateCourseOffering do  |page|
+        @suffix = random_alphanums.strip
+        page.suffix.set @suffix
+        @course = "#{@course}#{@suffix}"
+        delivery_obj = make DeliveryFormat
+        delivery_obj.select_random_delivery_formats
+        @delivery_format_list << delivery_obj
+        page.create_offering
+      end
     end
   end
 
+  # searches for and edits an existing course offering course_code matching @course attribute
+  # @example
+  #  @course_offering.edit :honors_flag=> "YES"
+  #
+  # @param opts [Hash] key => value for attribute to be updated
   def edit_offering options={}
+    #TODO change method name to 'edit'
     if options[:suffix] != @suffix
-     #TODO:Add Suffix to edit method Course Offerings
+      #TODO:Add Suffix to edit method Course Offerings
     end
 
     if options[:wait_list] != nil
       on CourseOfferingEdit do |page|
         if options[:wait_list] == "NO"
-         page.waitlist_off
+          page.waitlist_off
         else
-         page.waitlist_on
+          page.waitlist_on
         end
         @wait_list = options[:wait_list]
       end
@@ -84,12 +122,12 @@ class CourseOffering
 
     if options[:wait_list_level] != nil
       on CourseOfferingEdit do |page|
-      if options[:wait_list_level] == "Activity Offering"
-       page.waitlist_option_activity_offering
-      else
-       page.waitlist_option_course_offering
-      end
-      @wait_list_level = options[:wait_list_level]
+        if options[:wait_list_level] == "Activity Offering"
+          page.waitlist_option_activity_offering
+        else
+          page.waitlist_option_course_offering
+        end
+        @wait_list_level = options[:wait_list_level]
       end
     end
 
@@ -102,11 +140,11 @@ class CourseOffering
 
     if options[:honors_flag] != nil
       on CourseOfferingEdit do |page|
-       if options[:honors_flag] == "YES"
-        page.honors_flag.set
-       else
-        page.honors_flag.clear
-      end
+        if options[:honors_flag] == "YES"
+          page.honors_flag.set
+        else
+          page.honors_flag.clear
+        end
         @honors_flag = options[:honors_flag]
       end
     end
@@ -128,9 +166,9 @@ class CourseOffering
     end
 
     if options[:grade_format] != nil
-     on CourseOfferingEdit do |page|
-       page.select_grade_roster_level(options[:grade_format])
-     end
+      on CourseOfferingEdit do |page|
+        page.select_grade_roster_level(options[:grade_format])
+      end
       @grade_format = options[:grade_format]
     end
 
@@ -175,11 +213,10 @@ class CourseOffering
         end
       end
     end
-
-
   end
 
   def manage
+    #TODO: ?change to def manage_and_init
     go_to_manage_course_offerings
     on ManageCourseOfferings do |page|
       page.term.set @term
@@ -242,17 +279,22 @@ class CourseOffering
     end
   end
 
-  def manage_registration_groups(cleanup=true)
+  #navigate for the manage registration groups page for the course offering
+  #
+  #@param  opts [Hash] {:cleanup_existing_clusters => true/false}
+  def manage_registration_groups(opts = {:cleanup_existing_clusters => true})
+    manage
     on ManageCourseOfferings do |page|
       page.manage_registration_groups
     end
-    #init
-    if cleanup
+    if opts[:cleanup_existing_clusters]
       cleanup_all_ao_clusters
     end
-
   end
 
+  #delete specified activity offering
+  #
+  #@param  opts [Hash] {:ao_code => "CODE"}
   def delete_ao(opts)
     ao_code = opts[:ao_code]
     on ManageCourseOfferings do |page|
@@ -263,6 +305,9 @@ class CourseOffering
     end
   end
 
+  #copy the specified activity offering
+  #
+  #@param  opts [Hash] {:ao_code => "CODE"}
   def copy_ao(opts)
     ao_code = opts[:ao_code]
     on ManageCourseOfferings do |page|
@@ -270,6 +315,9 @@ class CourseOffering
     end
   end
 
+  #enter the edit page for the specified activity offering
+  #
+  #@param  opts [Hash] {:ao_code => "CODE"}
   def edit_ao(opts)
     ao_code = opts[:ao_code]
     on ManageCourseOfferings do |page|
@@ -305,13 +353,14 @@ class CourseOffering
     retVal = nil
     aoCode = ao_code[:ao_code]
     on ManageCourseOfferings do |page|
-       retVal = page.ao_schedule_data(aoCode)
+      retVal = page.ao_schedule_data(aoCode)
     end
 
     retVal
   end
 
   def add_ao_cluster(ao_cluster)
+    @ao_cluster.create
     @activity_offering_cluster_list << ao_cluster
   end
 
@@ -428,15 +477,15 @@ class AffiliatedOrg
                 :org_name
 
   def initialize(browser, opts={})
-      @browser = browser
+    @browser = browser
 
-       defaults = {
-                 :org_id => "65",
-                 :org_name => "Biology"
-                  }
-        options = defaults.merge(opts)
-        set_options(options)
-   end
+    defaults = {
+        :org_id => "65",
+        :org_name => "Biology"
+    }
+    options = defaults.merge(opts)
+    set_options(options)
+  end
 
 end
 
@@ -455,9 +504,9 @@ class DeliveryFormat
     @browser = browser
 
     defaults = {
-      :format => "Lecture/Quiz",
-      :grade_format => "Course",
-      :final_exam_driver => "Lecture"
+        :format => "Lecture/Quiz",
+        :grade_format => "Course",
+        :final_exam_driver => "Lecture"
     }
     options = defaults.merge(opts)
     set_options(options)

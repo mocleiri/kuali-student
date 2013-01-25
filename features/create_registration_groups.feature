@@ -178,3 +178,5 @@ As an Administrator, I want to create registration groups for a Course Offering
 #    When I set an course offering to '???' #how change course offering status
 #    And I generate unconstrained registration groups
 #    Then registration groups are not generated for the course offering in '???' status
+
+
