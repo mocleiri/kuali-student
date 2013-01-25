@@ -1,3 +1,14 @@
+# stores test data for performing and validating term rollovers and provides convenience methods for navigation and data entry
+#
+# class attributes are initialized with default data unless values are explicitly provided
+#
+# Typical usage: (with optional setting of explicit data value in [] )
+#   @rollover = make Rollover, [:source_term => "201201",:target_term=>"202101"]
+#   @rollover.perform_rollover
+#
+#  will automatically select next valid target_term
+#
+# Note the use of the ruby options hash pattern re: setting attribute values
 class Rollover
 
   include Foundry
@@ -9,17 +20,27 @@ class Rollover
   attr_accessor :source_term,
                 :target_term
 
+  # provides default data:
+  #  defaults = {
+  #    :source_term=>"201201",
+  #    :target_term=>"202101"
+  #  }
+  # initialize is generally called using TestFactory Foundry .make or .create methods
   def initialize(browser, opts={})
     @browser = browser
 
     defaults = {
-        :source_term=>"201201",
-        :target_term=>"202101"
+        :source_term=>"201212",
+        :target_term=>"202112"
     }
     options = defaults.merge(opts)
     set_options(options)
   end
 
+  #performs rollover, will increment target term year until rollover button is enabled
+  #(ie searches for valid target term)
+  #
+  #@raises exception if the rollover cannot be successfully initiated
   def perform_rollover
     go_to_perform_rollover
     on PerformRollover do |page|
@@ -31,6 +52,9 @@ class Rollover
     end
   end
 
+  #polls rollover status for 20 mins
+  #
+  #@raises exception if the rollover is not completed within test timeout limit
   def wait_for_rollover_to_complete
     go_to_rollover_details
     on RolloverDetails do |page|
@@ -43,9 +67,13 @@ class Rollover
         page.go
       end
       puts "Completed: Rollover duration: #{page.rollover_duration}" unless page.status != "Finished"
+      raise "rollover did not complete - test timed out" unless page.status == "Finished"
     end
   end
 
+  #release rollover to depts in target term
+  #
+  #@raises exception if the rollover cannot be released
   def release_to_depts
     go_to_rollover_details
     on RolloverDetails do |page|
