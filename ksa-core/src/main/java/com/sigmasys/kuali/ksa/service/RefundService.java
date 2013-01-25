@@ -8,7 +8,7 @@ import com.sigmasys.kuali.ksa.model.PostalAddress;
 import com.sigmasys.kuali.ksa.model.Refund;
 import com.sigmasys.kuali.ksa.model.RefundStatus;
 import com.sigmasys.kuali.ksa.model.RefundType;
-import com.sigmasys.kuali.ksa.transform.Ach;
+import com.sigmasys.kuali.ksa.jaxb.Ach;
 
 /**
  * The refund service is the core of KSA-RM-RM. It handles the production of refunds from the system. 

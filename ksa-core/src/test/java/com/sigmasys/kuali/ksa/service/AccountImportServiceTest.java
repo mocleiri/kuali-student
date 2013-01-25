@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
-import com.sigmasys.kuali.ksa.transform.StudentProfile;
+import com.sigmasys.kuali.ksa.jaxb.StudentProfile;
 import com.sigmasys.kuali.ksa.util.CommonUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)

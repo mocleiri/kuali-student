@@ -7,7 +7,7 @@ import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.ActivityService;
 import com.sigmasys.kuali.ksa.service.CalendarService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
-import com.sigmasys.kuali.ksa.transform.Ach;
+import com.sigmasys.kuali.ksa.jaxb.Ach;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;

@@ -1,7 +1,7 @@
 package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.transform.Ach;
+import com.sigmasys.kuali.ksa.jaxb.Ach;
 
 import java.math.BigDecimal;
 import java.util.List;

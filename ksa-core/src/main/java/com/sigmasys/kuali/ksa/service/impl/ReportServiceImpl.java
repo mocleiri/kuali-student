@@ -1,6 +1,6 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
-import static com.sigmasys.kuali.ksa.transform.FailedTransactionsReport.*;
+import static com.sigmasys.kuali.ksa.jaxb.FailedTransactionsReport.*;
 import static com.sigmasys.kuali.ksa.util.TransactionUtils.getFormattedAmount;
 
 import java.lang.reflect.Method;
@@ -13,7 +13,7 @@ import javax.jws.WebService;
 import javax.persistence.Query;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import com.sigmasys.kuali.ksa.transform.PostalAddress;
+import com.sigmasys.kuali.ksa.jaxb.PostalAddress;
 import org.aopalliance.aop.Advice;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -31,10 +31,10 @@ import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.*;
-import com.sigmasys.kuali.ksa.transform.*;
-import com.sigmasys.kuali.ksa.transform.AgedBalanceReport.AgedAccountDetail;
-import com.sigmasys.kuali.ksa.transform.GeneralLedgerReport.GeneralLedgerReportEntry;
-import com.sigmasys.kuali.ksa.transform.PersonName;
+import com.sigmasys.kuali.ksa.jaxb.*;
+import com.sigmasys.kuali.ksa.jaxb.AgedBalanceReport.AgedAccountDetail;
+import com.sigmasys.kuali.ksa.jaxb.GeneralLedgerReport.GeneralLedgerReportEntry;
+import com.sigmasys.kuali.ksa.jaxb.PersonName;
 import com.sigmasys.kuali.ksa.util.*;
 
 /**
@@ -777,7 +777,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      *
      * @param transactionId ID of a transaction for which to produce a receipt.
      * @return String representation of a transaction XML receipt.
-     * @see com.sigmasys.kuali.ksa.transform.TransactionReceipt
+     * @see com.sigmasys.kuali.ksa.jaxb.TransactionReceipt
      */
     @Override
     public String generateTransactionReceipt(Long transactionId) {

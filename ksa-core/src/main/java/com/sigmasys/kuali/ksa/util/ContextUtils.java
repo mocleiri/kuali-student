@@ -15,6 +15,13 @@ public class ContextUtils {
     private ContextUtils() {
     }
 
+    private static void validateContext() {
+        if (applicationContext == null) {
+            throw new IllegalStateException("Application context has not been initialized. " +
+                    " Call initContext() prior to using other methods.");
+        }
+    }
+
     public static BeanFactory initContext(BeanFactory context) {
         if (context != null) {
             applicationContext = context;
@@ -24,30 +31,22 @@ public class ContextUtils {
     }
 
     public static BeanFactory getBeanFactory() {
-        if (applicationContext == null) {
-            throw new IllegalArgumentException("Application context cannot be null");
-        }
+        validateContext();
         return applicationContext;
     }
 
     public static <T> T getBean(String name) {
-        if (applicationContext == null) {
-            throw new IllegalStateException("Application context is not initialized. Call one of init() methods prior to calling getBean()");
-        }
+        validateContext();
         return (T) applicationContext.getBean(name);
     }
 
     public static <T> T getBean(Class<T> beanInterface) {
-        if (applicationContext == null) {
-            throw new IllegalStateException("Application context is not initialized. Call one of init() methods prior to calling getBean()");
-        }
+        validateContext();
         return applicationContext.getBean(beanInterface);
     }
 
     public static <T> T getBean(String name, Class<T> beanInterface) {
-        if (applicationContext == null) {
-            throw new IllegalStateException("Application context is not initialized. Call one of init() methods prior to calling getBean()");
-        }
+        validateContext();
         return applicationContext.getBean(name, beanInterface);
     }
 }

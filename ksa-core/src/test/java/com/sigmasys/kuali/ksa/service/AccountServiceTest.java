@@ -2,7 +2,7 @@ package com.sigmasys.kuali.ksa.service;
 
 
 import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.transform.Ach;
+import com.sigmasys.kuali.ksa.jaxb.Ach;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

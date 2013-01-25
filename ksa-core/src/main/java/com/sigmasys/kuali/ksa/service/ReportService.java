@@ -8,10 +8,10 @@ import javax.jws.WebService;
 
 import com.sigmasys.kuali.ksa.annotation.Url;
 import com.sigmasys.kuali.ksa.model.Constants;
-import com.sigmasys.kuali.ksa.transform.AccountReport;
-import com.sigmasys.kuali.ksa.transform.AgedBalanceReport;
-import com.sigmasys.kuali.ksa.transform.FailedTransactionsReport;
-import com.sigmasys.kuali.ksa.transform.Irs1098T;
+import com.sigmasys.kuali.ksa.jaxb.AccountReport;
+import com.sigmasys.kuali.ksa.jaxb.AgedBalanceReport;
+import com.sigmasys.kuali.ksa.jaxb.FailedTransactionsReport;
+import com.sigmasys.kuali.ksa.jaxb.Irs1098T;
 
 /**
  * This interface represents a collection of useful KSA reporting methods to
@@ -158,7 +158,7 @@ public interface ReportService {
      *
      * @param transactionId ID of a transaction for which to produce a receipt.
      * @return String representation of a transaction receipt.
-     * @see com.sigmasys.kuali.ksa.transform.TransactionReceipt
+     * @see com.sigmasys.kuali.ksa.jaxb.TransactionReceipt
      */
     String generateTransactionReceipt(Long transactionId);
 }

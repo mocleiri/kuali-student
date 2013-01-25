@@ -25,8 +25,8 @@ import com.sigmasys.kuali.ksa.model.PeriodKeyPair;
 import com.sigmasys.kuali.ksa.service.AccountImportService;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.FeeManagementService;
-import com.sigmasys.kuali.ksa.transform.KeyPair;
-import com.sigmasys.kuali.ksa.transform.StudentProfile;
+import com.sigmasys.kuali.ksa.jaxb.KeyPair;
+import com.sigmasys.kuali.ksa.jaxb.StudentProfile;
 import com.sigmasys.kuali.ksa.util.XmlSchemaValidator;
 
 @Service("accountImportService")
@@ -177,21 +177,21 @@ public class AccountImportServiceImpl implements AccountImportService {
             // Step 6: Import StudentProfile.PeriodInformation.Study.learningUnit (List<LearningUnit>)
             StudentProfile.PeriodInformation.Study study = periodInfo.getStudy();
 
-            for (com.sigmasys.kuali.ksa.transform.LearningUnit lu : study.getLearningUnit()) {
+            for (com.sigmasys.kuali.ksa.jaxb.LearningUnit lu : study.getLearningUnit()) {
                 importLearningUnit(feeBase, lu, period);
             }
         }
     }
 
     /**
-     * Imports a {@link LearningUnit} from a {@link com.sigmasys.kuali.ksa.transform.LearningUnit} into a
+     * Imports a {@link LearningUnit} from a {@link com.sigmasys.kuali.ksa.jaxb.LearningUnit} into a
      * <code>FeeBase</code> using the specified <code>LearningPeriod</code>.
      *
      * @param feeBase   A <code>FeeBase</code> object.
-     * @param luFromXml A {@link com.sigmasys.kuali.ksa.transform.LearningUnit} from the student's profile object.
+     * @param luFromXml A {@link com.sigmasys.kuali.ksa.jaxb.LearningUnit} from the student's profile object.
      * @param period    A <code>LearningPeriod</code>.
      */
-    private void importLearningUnit(FeeBase feeBase, com.sigmasys.kuali.ksa.transform.LearningUnit luFromXml, LearningPeriod period) {
+    private void importLearningUnit(FeeBase feeBase, com.sigmasys.kuali.ksa.jaxb.LearningUnit luFromXml, LearningPeriod period) {
         // Try to find an existing LearningUnit:
         LearningUnit luFromFeeBase = findMatchingLearningUnit(feeBase, luFromXml);
         Date effectiveDate = (luFromXml.getEffectiveDate() != null) ? luFromXml.getEffectiveDate().toGregorianCalendar().getTime() : new Date();
@@ -236,10 +236,10 @@ public class AccountImportServiceImpl implements AccountImportService {
      * that matches the argument.
      *
      * @param feeBase   A <code>FeeBase</code> object.
-     * @param luToMatch A <code>com.sigmasys.kuali.ksa.transform.LearningUnit</code> to find a match for.
+     * @param luToMatch A <code>com.sigmasys.kuali.ksa.jaxb.LearningUnit</code> to find a match for.
      * @return A matching <code>LearningUnit</code> or <code>null</code> if no match is found.
      */
-    private LearningUnit findMatchingLearningUnit(FeeBase feeBase, com.sigmasys.kuali.ksa.transform.LearningUnit luToMatch) {
+    private LearningUnit findMatchingLearningUnit(FeeBase feeBase, com.sigmasys.kuali.ksa.jaxb.LearningUnit luToMatch) {
         LearningUnit existingLu = null;
 
         for (LearningUnit lu : feeBase.getLearningUnits()) {

@@ -5,7 +5,7 @@ import javax.jws.WebService;
 
 import com.sigmasys.kuali.ksa.annotation.Url;
 import com.sigmasys.kuali.ksa.model.Constants;
-import com.sigmasys.kuali.ksa.transform.StudentProfile;
+import com.sigmasys.kuali.ksa.jaxb.StudentProfile;
 
 /**
  * Represents a facility to import student profiles based on a StudentProfile entity data.

@@ -45,10 +45,10 @@ import com.sigmasys.kuali.ksa.model.RefundStatus;
 import com.sigmasys.kuali.ksa.model.RefundType;
 import com.sigmasys.kuali.ksa.model.Rollup;
 import com.sigmasys.kuali.ksa.model.Transaction;
-import com.sigmasys.kuali.ksa.transform.Ach;
-import com.sigmasys.kuali.ksa.transform.BatchAch;
-import com.sigmasys.kuali.ksa.transform.BatchCheck;
-import com.sigmasys.kuali.ksa.transform.Check;
+import com.sigmasys.kuali.ksa.jaxb.Ach;
+import com.sigmasys.kuali.ksa.jaxb.BatchAch;
+import com.sigmasys.kuali.ksa.jaxb.BatchCheck;
+import com.sigmasys.kuali.ksa.jaxb.Check;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import com.sigmasys.kuali.ksa.util.TransactionUtils;
 
@@ -1244,9 +1244,9 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      * @param address A persistent entity.
      * @return XML type.
      */
-    private com.sigmasys.kuali.ksa.transform.PostalAddress convertToXMLAddress(PostalAddress address) {
+    private com.sigmasys.kuali.ksa.jaxb.PostalAddress convertToXMLAddress(PostalAddress address) {
         // Create a new XML Postal Address:
-        com.sigmasys.kuali.ksa.transform.PostalAddress xmlAddress = new com.sigmasys.kuali.ksa.transform.PostalAddress();
+        com.sigmasys.kuali.ksa.jaxb.PostalAddress xmlAddress = new com.sigmasys.kuali.ksa.jaxb.PostalAddress();
 
         xmlAddress.setAddressLine1(address.getStreetAddress1());
         xmlAddress.setAddressLine2(address.getStreetAddress2());
