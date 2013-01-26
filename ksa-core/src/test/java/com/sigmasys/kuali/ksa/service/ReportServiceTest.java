@@ -44,21 +44,19 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
     @Test
     public void generateGeneralLedgerReport() throws Exception {
 
-        final String glAccountId = "01-0-13112 3456";
-
-        GlTransaction glTransaction1 = createGlTransaction(transaction1, glAccountId);
+        GlTransaction glTransaction1 = createGlTransaction(transaction1);
         Assert.notNull(glTransaction1);
         Assert.notNull(glTransaction1.getId());
         Assert.notNull(glTransaction1.getStatus());
         Assert.notNull(glTransaction1.getRecognitionPeriod());
 
-        GlTransaction glTransaction2 = createGlTransaction(transaction2, glAccountId);
+        GlTransaction glTransaction2 = createGlTransaction(transaction2);
         Assert.notNull(glTransaction2);
         Assert.notNull(glTransaction2.getId());
         Assert.notNull(glTransaction2.getStatus());
         Assert.notNull(glTransaction2.getRecognitionPeriod());
 
-        GlTransaction glTransaction3 = createGlTransaction(transaction2, glAccountId);
+        GlTransaction glTransaction3 = createGlTransaction(transaction2);
         Assert.notNull(glTransaction3);
         Assert.notNull(glTransaction3.getId());
         Assert.notNull(glTransaction3.getStatus());
@@ -67,7 +65,7 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
         Date startDate = dateFormat.parse("01/01/1970");
         Date endDate = dateFormat.parse("01/01/2020");
 
-        String xml = reportService.generateGeneralLedgerReport(glAccountId, startDate, endDate);
+        String xml = reportService.generateGeneralLedgerReport(GL_ACCOUNT_ID, startDate, endDate);
 
         logger.debug("GL Report: \n" + xml);
 
@@ -79,15 +77,13 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
     @Test
     public void generateGeneralLedgerReport2() throws Exception {
 
-        final String glAccountId = "01-0-13112 3456";
-
-        GlTransaction glTransaction1 = createGlTransaction(transaction1, glAccountId);
+        GlTransaction glTransaction1 = createGlTransaction(transaction1);
         Assert.notNull(glTransaction1);
         Assert.notNull(glTransaction1.getId());
         Assert.notNull(glTransaction1.getStatus());
         Assert.notNull(glTransaction1.getRecognitionPeriod());
 
-        GlTransaction glTransaction2 = createGlTransaction(transaction2, glAccountId);
+        GlTransaction glTransaction2 = createGlTransaction(transaction2);
         Assert.notNull(glTransaction2);
         Assert.notNull(glTransaction2.getId());
         Assert.notNull(glTransaction2.getStatus());
@@ -108,7 +104,7 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
         Date startDate = dateFormat.parse("12/01/2010");
         Date endDate = dateFormat.parse("12/01/2015");
 
-        xml = reportService.generateGeneralLedgerReport(glAccountId, startDate, endDate, true);
+        xml = reportService.generateGeneralLedgerReport(GL_ACCOUNT_ID, startDate, endDate, true);
 
         logger.debug("GL Report: \n" + xml);
 

@@ -21,6 +21,8 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public class GeneralLedgerServiceTest extends AbstractServiceTest {
 
+    protected static final String GL_ACCOUNT_ID = "01-0-131120 1326";
+
     @Autowired
     protected AccountService accountService;
 
@@ -36,22 +38,30 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
 
     @Before
     public void setUpWithinTransaction() {
+
         // set up test data within the transaction
         String userId = "admin";
         accountService.getOrCreateAccount(userId);
+
+        // Creating transactions with the test user ID
         transaction1 = transactionService.createTransaction("1020", userId, new Date(), new BigDecimal(10e7));
         transaction2 = transactionService.createTransaction("cash", userId, new Date(), new BigDecimal(300.99));
         transaction3 = transactionService.createTransaction("chip", userId, new Date(), new BigDecimal(77777.980));
+
+        // Creating GL transactions with the status Q and the test user ID
+        createGlTransaction(transaction1);
+        createGlTransaction(transaction2);
+        createGlTransaction(transaction3);
     }
 
-    protected GlTransaction createGlTransaction(Transaction transaction, String glAccountId) {
-        return glService.createGlTransaction(transaction.getId(), glAccountId, new BigDecimal(10e4), GlOperationType.DEBIT);
+    protected GlTransaction createGlTransaction(Transaction transaction) {
+        return glService.createGlTransaction(transaction.getId(), GL_ACCOUNT_ID, new BigDecimal(10e4), GlOperationType.DEBIT);
     }
 
     @Test
     public void createGlTransaction() throws Exception {
 
-        GlTransaction glTransaction = createGlTransaction(transaction1, "admin");
+        GlTransaction glTransaction = createGlTransaction(transaction1);
 
         Assert.notNull(glTransaction);
         Assert.notNull(glTransaction.getId());
@@ -65,13 +75,13 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
     @Test
     public void summarizeGlTransactions() throws Exception {
 
-        GlTransaction glTransaction2 = createGlTransaction(transaction2, "admin");
+        GlTransaction glTransaction2 = createGlTransaction(transaction2);
         Assert.notNull(glTransaction2);
         Assert.notNull(glTransaction2.getId());
         Assert.notNull(glTransaction2.getStatus());
         Assert.notNull(glTransaction2.getRecognitionPeriod());
 
-        GlTransaction glTransaction3 = createGlTransaction(transaction3, "admin");
+        GlTransaction glTransaction3 = createGlTransaction(transaction3);
         Assert.notNull(glTransaction3);
         Assert.notNull(glTransaction3.getId());
         Assert.notNull(glTransaction3.getStatus());
@@ -88,13 +98,13 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
     @Test
     public void prepareGlTransmission1() throws Exception {
 
-        GlTransaction glTransaction1 = createGlTransaction(transaction1, "admin");
+        GlTransaction glTransaction1 = createGlTransaction(transaction1);
         Assert.notNull(glTransaction1);
         Assert.notNull(glTransaction1.getId());
         Assert.notNull(glTransaction1.getStatus());
         Assert.notNull(glTransaction1.getRecognitionPeriod());
 
-        GlTransaction glTransaction2 = createGlTransaction(transaction2, "admin");
+        GlTransaction glTransaction2 = createGlTransaction(transaction2);
         Assert.notNull(glTransaction2);
         Assert.notNull(glTransaction2.getId());
         Assert.notNull(glTransaction2.getStatus());
@@ -107,13 +117,13 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
     @Test
     public void prepareGlTransmission2() throws Exception {
 
-        GlTransaction glTransaction1 = createGlTransaction(transaction2, "admin");
+        GlTransaction glTransaction1 = createGlTransaction(transaction2);
         Assert.notNull(glTransaction1);
         Assert.notNull(glTransaction1.getId());
         Assert.notNull(glTransaction1.getStatus());
         Assert.notNull(glTransaction1.getRecognitionPeriod());
 
-        GlTransaction glTransaction2 = createGlTransaction(transaction3, "admin");
+        GlTransaction glTransaction2 = createGlTransaction(transaction3);
         Assert.notNull(glTransaction2);
         Assert.notNull(glTransaction2.getId());
         Assert.notNull(glTransaction2.getStatus());
@@ -126,13 +136,13 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
     @Test
     public void prepareGlTransmission3() throws Exception {
 
-        GlTransaction glTransaction1 = createGlTransaction(transaction2, "admin");
+        GlTransaction glTransaction1 = createGlTransaction(transaction2);
         Assert.notNull(glTransaction1);
         Assert.notNull(glTransaction1.getId());
         Assert.notNull(glTransaction1.getStatus());
         Assert.notNull(glTransaction1.getRecognitionPeriod());
 
-        GlTransaction glTransaction2 = createGlTransaction(transaction3, "admin");
+        GlTransaction glTransaction2 = createGlTransaction(transaction3);
         Assert.notNull(glTransaction2);
         Assert.notNull(glTransaction2.getId());
         Assert.notNull(glTransaction2.getStatus());
@@ -150,13 +160,13 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
     @Test
     public void prepareGlTransmission4() throws Exception {
 
-        GlTransaction glTransaction1 = createGlTransaction(transaction1, "admin");
+        GlTransaction glTransaction1 = createGlTransaction(transaction1);
         Assert.notNull(glTransaction1);
         Assert.notNull(glTransaction1.getId());
         Assert.notNull(glTransaction1.getStatus());
         Assert.notNull(glTransaction1.getRecognitionPeriod());
 
-        GlTransaction glTransaction2 = createGlTransaction(transaction3, "admin");
+        GlTransaction glTransaction2 = createGlTransaction(transaction3);
         Assert.notNull(glTransaction2);
         Assert.notNull(glTransaction2.getId());
         Assert.notNull(glTransaction2.getStatus());
@@ -175,7 +185,7 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
     public void createGeneralLedgerType() throws Exception {
 
         GeneralLedgerType glType = glService.createGeneralLedgerType("GL_TYPE1", "Test GL type1",
-                "Test GL Description 1", "01-0-13112 1326", GlOperationType.CREDIT);
+                "Test GL Description 1", GL_ACCOUNT_ID, GlOperationType.CREDIT);
 
         Assert.notNull(glType);
         Assert.notNull(glType.getId());
@@ -195,7 +205,7 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
     public void persistGeneralLedgerType() throws Exception {
 
         GeneralLedgerType glType = glService.createGeneralLedgerType("GL_TYPE1", "Test GL type1",
-                "Test GL Description 1", "01-0-13112 1326", GlOperationType.CREDIT);
+                "Test GL Description 1", GL_ACCOUNT_ID, GlOperationType.CREDIT);
 
         Assert.notNull(glType);
         Assert.notNull(glType.getId());
@@ -228,7 +238,7 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
     public void getGeneralLedgerTypes() throws Exception {
 
         GeneralLedgerType glType = glService.createGeneralLedgerType("GL_TYPE10000000", "Test GL type2",
-                "Test GL Description 2", "01-0-13112 3456", GlOperationType.DEBIT);
+                "Test GL Description 2", GL_ACCOUNT_ID, GlOperationType.DEBIT);
 
         Assert.notNull(glType);
         Assert.notNull(glType.getId());
@@ -287,7 +297,7 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
     @Test
     public void getGeneralLedgerTransactions2() throws Exception {
 
-        GlTransaction glTransaction1 = createGlTransaction(transaction1, "01-0-13112 3456");
+        GlTransaction glTransaction1 = createGlTransaction(transaction1);
         Assert.notNull(glTransaction1);
         Assert.notNull(glTransaction1.getId());
         Assert.notNull(glTransaction1.getStatus());
@@ -298,7 +308,7 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
         Date startDate = dateFormat.parse("01/01/1970");
         Date endDate = dateFormat.parse("01/01/2020");
 
-        List<GlTransaction> glTransactions = glService.getGlTransactions(startDate, endDate, "01-0-13112 3456");
+        List<GlTransaction> glTransactions = glService.getGlTransactions(startDate, endDate, GL_ACCOUNT_ID);
 
         Assert.notNull(glTransactions);
         Assert.notEmpty(glTransactions);
@@ -315,7 +325,6 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
     }
 
 
-    /*  There aren't any queued transactions in the test data
     @Test
     public void getQueuedGlTransactions() {
 
@@ -323,7 +332,9 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
 
         Assert.notNull(transactions);
 
-        Assert.isTrue(transactions.size() > 0);
+        Assert.notEmpty(transactions);
+
+        Assert.isTrue(transactions.size() >= 3);
     }
-    */
+
 }

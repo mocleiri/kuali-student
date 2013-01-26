@@ -907,7 +907,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             GeneralLedgerType glType = debitTransaction.getGeneralLedgerType();
             if (glType != null) {
                 // Getting the opposite GL operation for debit
-                operationType = (GlOperationType.CREDIT == glType.getGlOperationOnCharge()) ?
+                operationType = (GlOperationType.CREDIT.equals(glType.getGlOperationOnCharge())) ?
                         GlOperationType.DEBIT :
                         GlOperationType.CREDIT;
 

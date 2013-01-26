@@ -1,5 +1,6 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
+import com.sigmasys.kuali.ksa.exception.InvalidGeneralLedgerAccountException;
 import com.sigmasys.kuali.ksa.exception.InvalidGeneralLedgerTypeException;
 import com.sigmasys.kuali.ksa.exception.TransactionNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
@@ -51,6 +52,13 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @Transactional(readOnly = false)
     public GeneralLedgerType createGeneralLedgerType(String code, String name, String description, String glAccountId,
                                                      GlOperationType glOperationOnCharge) {
+
+        if (!isGlAccountValid(glAccountId)) {
+            String errMsg = "GL Account '" + glAccountId + "' is invalid";
+            logger.error(errMsg);
+            throw new InvalidGeneralLedgerAccountException(errMsg);
+        }
+
         GeneralLedgerType glType = new GeneralLedgerType();
         glType.setCode(code);
         glType.setName(name);
@@ -89,7 +97,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      * Creates a new general ledger transaction based on the given parameters
      *
      * @param transactionId ID of the corresponding transaction
-     * @param glAccountId        General ledger account ID
+     * @param glAccountId   General ledger account ID
      * @param amount        Transaction amount
      * @param operationType GL operation type
      * @param isQueued      Set status to Q unless isQueued is passed and is false, in which case, set status to W
@@ -100,6 +108,12 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     @Transactional(readOnly = false)
     public GlTransaction createGlTransaction(Long transactionId, String glAccountId, BigDecimal amount,
                                              GlOperationType operationType, boolean isQueued) {
+
+        if (!isGlAccountValid(glAccountId)) {
+            String errMsg = "GL Account '" + glAccountId + "' is invalid";
+            logger.error(errMsg);
+            throw new InvalidGeneralLedgerAccountException(errMsg);
+        }
 
         Transaction transaction = em.find(Transaction.class, transactionId);
         if (transaction == null) {
@@ -141,7 +155,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      * Creates a new general ledger transaction based on the given parameters
      *
      * @param transactionId ID of the corresponding transaction
-     * @param glAccountId        General ledger account ID
+     * @param glAccountId   General ledger account ID
      * @param amount        Transaction amount
      * @param operationType GL operation type
      * @return new GL Transaction instance
@@ -328,6 +342,12 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
     private GlTransmission createGlTransmission(String glAccountId, Date earliestDate, Date latestDate,
                                                 GlOperationType glOperation, BigDecimal amount,
                                                 GlRecognitionPeriod recognitionPeriod, String batchId) {
+
+        if (!isGlAccountValid(glAccountId)) {
+            String errMsg = "GL Account '" + glAccountId + "' is invalid";
+            logger.error(errMsg);
+            throw new InvalidGeneralLedgerAccountException(errMsg);
+        }
 
         GlTransmission transmission = new GlTransmission();
         transmission.setStatus(GlTransmissionStatus.GENERATED);
@@ -649,7 +669,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
 
         glAccount = StringUtils.deleteAny(glAccount, " \n\t\r-");
 
-        if (glAccount.length() != 12) {
+        if (glAccount.length() != 13) {
             logger.warn("GL Account '" + glAccount + "' is invalid, the length must be 12");
             return false;
         }
@@ -721,12 +741,12 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public List<GlTransaction> getGlTransactionsByStatus(GlTransactionStatus status) {
+
         if (status == null) {
             String errMsg = "Status cannot be null";
             logger.error(errMsg);
             throw new IllegalArgumentException(errMsg);
         }
-
 
         Query query = em.createQuery("select glt from GlTransaction glt " +
                 " left outer join fetch glt.recognitionPeriod rp " +

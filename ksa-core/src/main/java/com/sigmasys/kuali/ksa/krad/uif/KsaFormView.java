@@ -5,6 +5,8 @@ import org.kuali.rice.krad.uif.view.FormView;
 
 /**
  * KSA extension of the standard KRAD FormView.
+ *
+ * @author Michael Ivanov
  */
 public class KsaFormView extends FormView {
 

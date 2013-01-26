@@ -25,6 +25,8 @@ import static org.springframework.util.Assert.*;
 @SuppressWarnings("unchecked")
 public class TransactionServiceTest extends AbstractServiceTest {
 
+    private static final String GL_ACCOUNT_ID = "03-2-998870 7723";
+
     @PersistenceContext(unitName = Constants.KSA_PERSISTENCE_UNIT)
     protected EntityManager em;
 
@@ -1118,7 +1120,6 @@ public class TransactionServiceTest extends AbstractServiceTest {
     @Test
     public void createGlBreakdowns() throws Exception {
 
-        final String glAccount = "01-0-13112 1326";
 
         TransactionType chargeType = transactionService.getTransactionType("1299", new Date());
 
@@ -1131,19 +1132,19 @@ public class TransactionServiceTest extends AbstractServiceTest {
         List<GlBreakdown> breakdowns = new LinkedList<GlBreakdown>();
 
         GlBreakdown breakdown = new GlBreakdown();
-        breakdown.setGlAccount(glAccount);
+        breakdown.setGlAccount(GL_ACCOUNT_ID);
         breakdown.setGlOperation(GlOperationType.CREDIT);
         breakdown.setBreakdown(new BigDecimal(20.5));
         breakdowns.add(breakdown);
 
         breakdown = new GlBreakdown();
-        breakdown.setGlAccount(glAccount);
+        breakdown.setGlAccount(GL_ACCOUNT_ID);
         breakdown.setGlOperation(GlOperationType.DEBIT);
         breakdown.setBreakdown(new BigDecimal(50));
         breakdowns.add(breakdown);
 
         breakdown = new GlBreakdown();
-        breakdown.setGlAccount(glAccount);
+        breakdown.setGlAccount(GL_ACCOUNT_ID);
         breakdown.setGlOperation(GlOperationType.CREDIT);
         breakdown.setBreakdown(new BigDecimal(0));
         breakdowns.add(breakdown);
@@ -1156,7 +1157,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
         for (GlBreakdown b : breakdowns) {
             notNull(b.getId());
-            isTrue(glAccount.equals(b.getGlAccount()));
+            isTrue(GL_ACCOUNT_ID.equals(b.getGlAccount()));
         }
 
     }
@@ -1166,7 +1167,7 @@ public class TransactionServiceTest extends AbstractServiceTest {
     public void setGeneralLedgerType() throws Exception {
 
         GeneralLedgerType glType = glService.createGeneralLedgerType("GL_TYPE10000000", "Test GL type2",
-                "Test GL Description 2", "01-0-13112 3456", GlOperationType.DEBIT);
+                "Test GL Description 2", GL_ACCOUNT_ID, GlOperationType.DEBIT);
 
         notNull(glType);
         notNull(glType.getId());
