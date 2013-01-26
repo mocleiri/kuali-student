@@ -656,7 +656,6 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
     @Override
     public Ach getAch(String userId) throws AccountTypeNotFoundException {
 
-        // TODO - is it correct to hard code "US ACH." as the type?
         String errMsg = "ACH Account with ID = " + userId + " does not exist";
 
         AccountProtectedInfo account = getAccountProtectedInfo(userId);
