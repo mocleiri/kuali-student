@@ -1,13 +1,11 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
 
-import com.sigmasys.kuali.ksa.gwt.client.view.widget.value.DateRangeValue;
-import com.sigmasys.kuali.ksa.krad.util.AccountSearchResultCollectionLine;
+import com.sigmasys.kuali.ksa.krad.util.*;
 import com.sigmasys.kuali.ksa.model.*;
 
 /**
@@ -24,17 +22,12 @@ public class AdminForm extends AbstractViewModel {
 	/**
 	 * Account information holder object
 	 */
-	private AccountInformation accountInfo;
-	
-	/**
-	 * Account's user preferences.
-	 */
-	private List<UserPreference> accountUserPreferences = new ArrayList<UserPreference>();
+	private AccountInformationHolder accountInfo;
 	
 	/**
 	 * Account search information holder. 
 	 */
-	private AccountSearchInformation accountSearchInfo;
+	private AccountSearchInformationHolder accountSearchInfo;
 	
 	/**
 	 * Account search results.
@@ -69,11 +62,11 @@ public class AdminForm extends AbstractViewModel {
      Get / Set methods
    */
 
-   	public AccountSearchInformation getAccountSearchInfo() {
+   	public AccountSearchInformationHolder getAccountSearchInfo() {
 		return accountSearchInfo;
 	}
 	
-	public void setAccountSearchInfo(AccountSearchInformation accountSearchInfo) {
+	public void setAccountSearchInfo(AccountSearchInformationHolder accountSearchInfo) {
 		this.accountSearchInfo = accountSearchInfo;
 	}
 
@@ -150,15 +143,6 @@ public class AdminForm extends AbstractViewModel {
 		this.idTypeKeyValuesFinder = idTypeKeyValuesFinder;
 	}
 
-	public List<UserPreference> getAccountUserPreferences() {
-   		return accountUserPreferences;
-   	}
-
-   	public void setAccountUserPreferences(
-   			List<UserPreference> accountUserPreferences) {
-   		this.accountUserPreferences = accountUserPreferences;
-   	}
-
 	public List<Activity> getActivities() {
    		return activities;
    	}
@@ -175,11 +159,11 @@ public class AdminForm extends AbstractViewModel {
 		this.account = account;
 	}
 	
-	public AccountInformation getAccountInfo() {
+	public AccountInformationHolder getAccountInfo() {
 		return accountInfo;
 	}
 	
-	public void setAccountInfo(AccountInformation accountInfo) {
+	public void setAccountInfo(AccountInformationHolder accountInfo) {
 		this.accountInfo = accountInfo;
 	}
 
@@ -207,188 +191,6 @@ public class AdminForm extends AbstractViewModel {
 	public void setAccountSearchResults(
 			List<AccountSearchResultCollectionLine> accountSearchResults) {
 		this.accountSearchResults = accountSearchResults;
-	}
-
-	/**
-	 * Account Biographic information container class.
-	 * 
-	 * @author Sergey
-	 *
-	 */
-	public static class AccountInformation implements Serializable {
-		private PersonName name;
-		private PostalAddress address;
-		private ElectronicContact electronicContact;
-		private String accountType;
-		private Date dateOfBirth;
-		private BankType bankType;
-		private TaxType taxType;
-		private IdentityType identityType;
-		private AccountStatusType statusType;
-		private LatePeriod latePeriod;
-		private Boolean ableToAuthenticate;
-		private AccountProtectedInfo accountProtectedInfo;
-		private BigDecimal creditLimit;
-		
-		public IdentityType getIdentityType() {
-			return identityType;
-		}
-		public void setIdentityType(IdentityType identityType) {
-			this.identityType = identityType;
-		}
-		public AccountProtectedInfo getAccountProtectedInfo() {
-			return accountProtectedInfo;
-		}
-		public void setAccountProtectedInfo(AccountProtectedInfo accountProtectedInfo) {
-			this.accountProtectedInfo = accountProtectedInfo;
-		}
-		public BigDecimal getCreditLimit() {
-			return creditLimit;
-		}
-		public void setCreditLimit(BigDecimal creditLimit) {
-			this.creditLimit = creditLimit;
-		}
-		public AccountStatusType getStatusType() {
-			return statusType;
-		}
-		public void setStatusType(AccountStatusType statusType) {
-			this.statusType = statusType;
-		}
-		public LatePeriod getLatePeriod() {
-			return latePeriod;
-		}
-		public void setLatePeriod(LatePeriod latePeriod) {
-			this.latePeriod = latePeriod;
-		}
-		public Boolean getAbleToAuthenticate() {
-			return ableToAuthenticate;
-		}
-		public void setAbleToAuthenticate(Boolean ableToAuthenticate) {
-			this.ableToAuthenticate = ableToAuthenticate;
-		}
-		public PersonName getName() {
-			return name;
-		}
-		public void setName(PersonName name) {
-			this.name = name;
-		}
-		public PostalAddress getAddress() {
-			return address;
-		}
-		public void setAddress(PostalAddress address) {
-			this.address = address;
-		}
-		public ElectronicContact getElectronicContact() {
-			return electronicContact;
-		}
-		public void setElectronicContact(ElectronicContact electronicContact) {
-			this.electronicContact = electronicContact;
-		}
-		public String getAccountType() {
-			return accountType;
-		}
-		public void setAccountType(String accountType) {
-			this.accountType = accountType;
-		}
-		public Date getDateOfBirth() {
-			return dateOfBirth;
-		}
-		public void setDateOfBirth(Date dateOfBirth) {
-			this.dateOfBirth = dateOfBirth;
-		}
-		public BankType getBankType() {
-			return bankType;
-		}
-		public void setBankType(BankType bankType) {
-			this.bankType = bankType;
-		}
-		public TaxType getTaxType() {
-			return taxType;
-		}
-		public void setTaxType(TaxType taxType) {
-			this.taxType = taxType;
-		}
-	}
-
-	/**
-	 * Account Search information holder.
-	 * 
-	 * @author Sergey
-	 *
-	 */
-	public static class AccountSearchInformation implements Serializable {
-		private String accountId;
-		private String creatorId;
-		private String editorId;
-		private Boolean isKimAccount;
-		private UserPreference userPreference;
-		private DateRangeValue dobDateRange;
-		private DateRangeValue creationDateRange;
-		private DateRangeValue lastUpdateDateRange;
-		private Boolean lastNameSubstringSearch;
-		private List<String> searchResultFields;
-		
-		
-		public DateRangeValue getDobDateRange() {
-			return dobDateRange;
-		}
-		public void setDobDateRange(DateRangeValue dobDateRange) {
-			this.dobDateRange = dobDateRange;
-		}
-		public DateRangeValue getCreationDateRange() {
-			return creationDateRange;
-		}
-		public void setCreationDateRange(DateRangeValue creationDateRange) {
-			this.creationDateRange = creationDateRange;
-		}
-		public DateRangeValue getLastUpdateDateRange() {
-			return lastUpdateDateRange;
-		}
-		public void setLastUpdateDateRange(DateRangeValue lastUpdateDateRange) {
-			this.lastUpdateDateRange = lastUpdateDateRange;
-		}
-		public String getAccountId() {
-			return accountId;
-		}
-		public void setAccountId(String accountId) {
-			this.accountId = accountId;
-		}
-		public String getCreatorId() {
-			return creatorId;
-		}
-		public void setCreatorId(String creatorId) {
-			this.creatorId = creatorId;
-		}
-		public String getEditorId() {
-			return editorId;
-		}
-		public void setEditorId(String editorId) {
-			this.editorId = editorId;
-		}
-		public Boolean getIsKimAccount() {
-			return isKimAccount;
-		}
-		public void setIsKimAccount(Boolean isKimAccount) {
-			this.isKimAccount = isKimAccount;
-		}
-		public UserPreference getUserPreference() {
-			return userPreference;
-		}
-		public void setUserPreference(UserPreference userPreference) {
-			this.userPreference = userPreference;
-		}
-		public Boolean getLastNameSubstringSearch() {
-			return lastNameSubstringSearch;
-		}
-		public void setLastNameSubstringSearch(Boolean lastNameSubstringSearch) {
-			this.lastNameSubstringSearch = lastNameSubstringSearch;
-		}
-		public List<String> getSearchResultFields() {
-			return searchResultFields;
-		}
-		public void setSearchResultFields(List<String> searchResultFields) {
-			this.searchResultFields = searchResultFields;
-		}
 	}
 
 }

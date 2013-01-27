@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.value.DateRangeValue;
 import com.sigmasys.kuali.ksa.krad.form.AdminForm;
+import com.sigmasys.kuali.ksa.krad.util.AccountSearchInformationHolder;
 import com.sigmasys.kuali.ksa.krad.util.AccountSearchResultFieldsKeyValuesFinder;
 import com.sigmasys.kuali.ksa.model.UserPreference;
 
@@ -104,9 +105,8 @@ public class AccountSearchController extends AccountManagementController {
 		populateForNewPersonAccount(form);
 		
 		// Add additional Search specific info:
-		AdminForm.AccountSearchInformation accountSearchInfo = new AdminForm.AccountSearchInformation();
+		AccountSearchInformationHolder accountSearchInfo = new AccountSearchInformationHolder();
 		
-		accountSearchInfo.setIsKimAccount(true);
 		accountSearchInfo.setLastNameSubstringSearch(true);
 		accountSearchInfo.setDobDateRange(new DateRangeValue());
 		accountSearchInfo.setLastUpdateDateRange(new DateRangeValue());

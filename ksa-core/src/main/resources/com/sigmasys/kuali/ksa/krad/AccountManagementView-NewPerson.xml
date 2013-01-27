@@ -81,7 +81,7 @@
 		<property name="headerText" value="NAME"/>
 		<property name="items">
 			<list>
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.name.kimNameType" p:labelPlacement="TOP" p:label="Name Type" 
+				<bean parent="Uif-InputField" p:propertyName="account.defaultPersonName.kimNameType" p:labelPlacement="TOP" p:label="Name Type" 
 						p:fieldLabel.renderColon="false">
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
@@ -89,31 +89,31 @@
 					<property name="optionsFinder" value="@{getNameTypeOptionsFinder()}"/>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.name.firstName" p:labelPlacement="TOP" p:label="First Name" p:required="true" p:fieldLabel.renderColon="false">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultPersonName.firstName" p:labelPlacement="TOP" p:label="First Name" p:required="true" p:fieldLabel.renderColon="false">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="100"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.name.middleName" p:labelPlacement="TOP" p:label="Middle Name">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultPersonName.middleName" p:labelPlacement="TOP" p:label="Middle Name">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="100"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.name.lastName" p:labelPlacement="TOP" p:label="Last Name" p:required="true">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultPersonName.lastName" p:labelPlacement="TOP" p:label="Last Name" p:required="true">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="100"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.name.suffix" p:labelPlacement="TOP" p:label="Suffix">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultPersonName.suffix" p:labelPlacement="TOP" p:label="Suffix">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.name.title" p:labelPlacement="TOP" p:label="Title">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultPersonName.title" p:labelPlacement="TOP" p:label="Title">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
 					</property>
@@ -128,7 +128,7 @@
 		<property name="headerText" value="ADDRESS"/>
 		<property name="items">
 			<list>
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.address.kimAddressType" p:labelPlacement="TOP" p:label="Address Type" 
+				<bean parent="Uif-InputField" p:propertyName="account.defaultPostalAddress.kimAddressType" p:labelPlacement="TOP" p:label="Address Type" 
 						p:fieldLabel.renderColon="false">
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
@@ -136,43 +136,43 @@
 					<property name="optionsFinder" value="@{getAddressTypeOptionsFinder()}"/>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.address.streetAddress1" p:labelPlacement="TOP" p:label="Line 1" p:required="true">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultPostalAddress.streetAddress1" p:labelPlacement="TOP" p:label="Line 1" p:required="true">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="100"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.address.streetAddress2" p:labelPlacement="TOP" p:label="Line 2" p:required="false">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultPostalAddress.streetAddress2" p:labelPlacement="TOP" p:label="Line 2" p:required="false">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="100"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.address.streetAddress3" p:labelPlacement="TOP" p:label="Line 3" p:required="false">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultPostalAddress.streetAddress3" p:labelPlacement="TOP" p:label="Line 3" p:required="false">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="100"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.address.city" p:labelPlacement="TOP" p:label="City" p:required="true">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultPostalAddress.city" p:labelPlacement="TOP" p:label="City" p:required="true">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="100"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.address.state" p:labelPlacement="TOP" p:label="State Code" p:required="true">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultPostalAddress.state" p:labelPlacement="TOP" p:label="State Code" p:required="true">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="5"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.address.postalCode" p:labelPlacement="TOP" p:label="Postal Code" p:required="true">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultPostalAddress.postalCode" p:labelPlacement="TOP" p:label="Postal Code" p:required="true">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="12"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.address.country" p:labelPlacement="TOP" p:label="Country Code" p:required="true">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultPostalAddress.country" p:labelPlacement="TOP" p:label="Country Code" p:required="true">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
 					</property>
@@ -187,7 +187,7 @@
 		<property name="headerText" value="ELECTRONIC CONTACT"/>
 		<property name="items">
 			<list>
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.electronicContact.kimEmailAddressType" p:labelPlacement="TOP" p:label="Email Address Type" 
+				<bean parent="Uif-InputField" p:propertyName="account.defaultElectronicContact.kimEmailAddressType" p:labelPlacement="TOP" p:label="Email Address Type" 
 						p:fieldLabel.renderColon="false">
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
@@ -195,13 +195,13 @@
 					<property name="optionsFinder" value="@{getEmailTypeOptionsFinder()}"/>
 				</bean>
 			
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.electronicContact.emailAddress" p:labelPlacement="TOP" p:label="Email">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultElectronicContact.emailAddress" p:labelPlacement="TOP" p:label="Email">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="255"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.electronicContact.kimPhoneType" p:labelPlacement="TOP" p:label="Phone Type" 
+				<bean parent="Uif-InputField" p:propertyName="account.defaultElectronicContact.kimPhoneType" p:labelPlacement="TOP" p:label="Phone Type" 
 						p:fieldLabel.renderColon="false">
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
@@ -209,19 +209,19 @@
 					<property name="optionsFinder" value="@{getPhoneTypeOptionsFinder()}"/>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.electronicContact.phoneCountry" p:labelPlacement="TOP" p:label="Phone Country">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultElectronicContact.phoneCountry" p:labelPlacement="TOP" p:label="Phone Country">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="5"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.electronicContact.phoneNumber" p:labelPlacement="TOP" p:label="Phone Number">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultElectronicContact.phoneNumber" p:labelPlacement="TOP" p:label="Phone Number">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="20"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.electronicContact.phoneExtension" p:labelPlacement="TOP" p:label="Phone Ext.">
+				<bean parent="Uif-InputField" p:propertyName="account.defaultElectronicContact.phoneExtension" p:labelPlacement="TOP" p:label="Phone Ext.">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="10"/>
 					</property>
@@ -234,7 +234,7 @@
 	<bean id="NewPersonAccountAccountInfoSection1" parent="Uif-VerticalBoxSection" p:layoutManager.orientation="VERTICAL">
 		<property name="items">
 			<list>
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.statusType.name" p:labelPlacement="TOP" p:label="Status" 
+				<bean parent="Uif-InputField" p:propertyName="account.statusType.id" p:labelPlacement="TOP" p:label="Status" 
 						p:fieldLabel.renderColon="false">
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
@@ -259,13 +259,13 @@
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.creditLimit" p:labelPlacement="TOP" p:label="Credit Limit">
+				<bean parent="Uif-InputField" p:propertyName="account.creditLimit" p:labelPlacement="TOP" p:label="Credit Limit">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="20"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.latePeriod.name" p:labelPlacement="TOP" p:label="Late Period" 
+				<bean parent="Uif-InputField" p:propertyName="account.latePeriod.id" p:labelPlacement="TOP" p:label="Late Period" 
 						p:fieldLabel.renderColon="false">
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
@@ -273,7 +273,7 @@
 					<property name="optionsFinder" value="@{getLatePeriodOptionsFinder()}"/>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.ableToAuthenticate">
+				<bean parent="Uif-InputField" p:propertyName="account.ableToAuthenticate">
 					<property name="control">
 						<bean parent="Uif-CheckboxControl"  p:checkboxLabel="Account can Authenticate"/>
 					</property>
@@ -287,7 +287,7 @@
 	<bean id="NewPersonAccountAccountInfoSection2" parent="Uif-VerticalBoxSection" p:layoutManager.orientation="VERTICAL">
 		<property name="items">
 			<list>
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.bankType.name" p:labelPlacement="TOP" p:label="Bank Type" 
+				<bean parent="Uif-InputField" p:propertyName="accountInfo.accountProtectedInfo.bankType.id" p:labelPlacement="TOP" p:label="Bank Type" 
 						p:fieldLabel.renderColon="false">
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
@@ -295,14 +295,14 @@
 					<property name="optionsFinder" value="@{getBankTypeOptionsFinder()}"/>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.bankType.description" p:labelPlacement="TOP" p:label="Bank Detail"
+				<bean parent="Uif-InputField" p:propertyName="accountInfo.accountProtectedInfo.bankDetails" p:labelPlacement="TOP" p:label="Bank Detail"
 						p:constraintText="Format: xxx-xxx-xxx">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="50"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.taxType.name" p:labelPlacement="TOP" p:label="Tax Type" 
+				<bean parent="Uif-InputField" p:propertyName="accountInfo.accountProtectedInfo.taxType.id" p:labelPlacement="TOP" p:label="Tax Type" 
 						p:fieldLabel.renderColon="false">
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
@@ -310,7 +310,7 @@
 					<property name="optionsFinder" value="@{getTaxTypeOptionsFinder()}"/>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.taxType.description" p:labelPlacement="TOP" p:label="Tax Detail"
+				<bean parent="Uif-InputField" p:propertyName="accountInfo.accountProtectedInfo.taxReference" p:labelPlacement="TOP" p:label="Tax Detail"
 						p:constraintText="Format: xxx-xxx-xxx">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="50"/>
@@ -325,7 +325,7 @@
 	<bean id="NewPersonAccountAccountInfoSection3" parent="Uif-VerticalBoxSection" p:layoutManager.orientation="VERTICAL">
 		<property name="items">
 			<list>
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.identityType.name" p:labelPlacement="TOP" p:label="Identity Type"
+				<bean parent="Uif-InputField" p:propertyName="accountInfo.accountProtectedInfo.identityType.id" p:labelPlacement="TOP" p:label="Identity Type"
 						p:fieldLabel.renderColon="false">
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
@@ -333,14 +333,14 @@
 					<property name="optionsFinder" value="@{getIdTypeKeyValuesFinder()}"/>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.identityType.description" p:labelPlacement="TOP" p:label="Identity Serial"
+				<bean parent="Uif-InputField" p:propertyName="accountInfo.accountProtectedInfo.identitySerial" p:labelPlacement="TOP" p:label="Identity Serial"
 						p:constraintText="Format: DL-123456789">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="50"/>
 					</property>
 				</bean>
 				
-				<bean parent="Uif-InputField" p:propertyName="accountInfo.identityType.description" p:labelPlacement="TOP" p:label="Identity Issuer">
+				<bean parent="Uif-InputField" p:propertyName="accountInfo.accountProtectedInfo.identityIssuer" p:labelPlacement="TOP" p:label="Identity Issuer">
 					<property name="control">
 						<bean parent="Uif-TextControl" p:size="11" p:maxLength="50"/>
 					</property>
@@ -360,7 +360,7 @@
 					<property name="title" value="Recent Activity"/>
 					<property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.UserPreference"/>
 					<property name="readOnly" value="true"/>
-					<property name="propertyName" value="accountUserPreferences"/>
+					<property name="propertyName" value="accountInfo.userPreferences"/>
 					<property name="layoutManager.richTable.render" value="true"/>
 					<property name="layoutManager.renderSequenceField" value="false"/>
 					<property name="layoutManager.richTable.disableTableSort" value="false"/>

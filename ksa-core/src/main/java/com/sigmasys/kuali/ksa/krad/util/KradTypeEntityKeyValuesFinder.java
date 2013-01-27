@@ -20,7 +20,7 @@ public class KradTypeEntityKeyValuesFinder<T extends BusinessObject> extends Gen
 	}
 	
 	@Override
-	public List<KeyValue> getKeyValues() {
+	protected List<KeyValue> buildKeyValues() {
 		// Get object of the generic type from the BusinessObjectService:
 		BusinessObjectService businessObjectService = KRADServiceLocator.getBusinessObjectService();
 		Collection<T> allEntities = businessObjectService.findAll(type);

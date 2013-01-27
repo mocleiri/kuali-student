@@ -10,10 +10,10 @@ import org.kuali.rice.krad.keyvalues.KeyValuesBase;
 import com.sigmasys.kuali.ksa.model.AccountTypeValue;
 
 @SuppressWarnings("serial")
-public class AccountTypeKeyValuesFinder extends KeyValuesBase {
+public class AccountTypeKeyValuesFinder extends GenericKeyValuesFinder {
 
 	@Override
-	public List<KeyValue> getKeyValues() {
+	protected List<KeyValue> buildKeyValues() {
 		// Add all AccountTypeValue enum elements with translations:
 		List<KeyValue> result = new ArrayList<KeyValue>();
 		

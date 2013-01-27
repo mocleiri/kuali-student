@@ -24,7 +24,7 @@ public class AuditableEntityKeyValuesFinder<T extends AuditableEntity> extends G
 	}
 
 	@Override
-	public List<KeyValue> getKeyValues() {
+	protected List<KeyValue> buildKeyValues() {
 		// Get all entities of the generic type:
 		List<T> entities = auditableEntityService.getAuditableEntities(type);
 		List<KeyValue> result = new ArrayList<KeyValue>();
