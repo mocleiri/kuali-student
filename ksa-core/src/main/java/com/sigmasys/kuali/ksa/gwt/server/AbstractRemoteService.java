@@ -6,7 +6,7 @@ import com.google.gwt.user.server.rpc.RPC;
 import com.google.gwt.user.server.rpc.RPCRequest;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.sigmasys.kuali.ksa.annotation.ProxyEntityAnnotationResolver;
-import com.sigmasys.kuali.ksa.util.HibernateUtils;
+import com.sigmasys.kuali.ksa.util.BeanUtils;
 import org.aopalliance.aop.Advice;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -72,7 +72,7 @@ public abstract class AbstractRemoteService extends RemoteServiceServlet impleme
             if (useProxy) {
                 Object returnValue = rpcRequest.getMethod().invoke(getInstance(), rpcRequest.getParameters());
                 // Making a copy with HibernateBeanReplicator
-                returnValue = HibernateUtils.detach(returnValue);
+                returnValue = BeanUtils.getDeepCopy(returnValue);
                 return RPC.encodeResponseForSuccess(rpcRequest.getMethod(), returnValue,
                         rpcRequest.getSerializationPolicy());
             }

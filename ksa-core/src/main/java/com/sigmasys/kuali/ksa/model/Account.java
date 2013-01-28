@@ -20,7 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.sigmasys.kuali.ksa.annotation.Auditable;
-import com.sigmasys.kuali.ksa.util.HibernateUtils;
+import com.sigmasys.kuali.ksa.util.BeanUtils;
 
 /**
  * KSA Account model
@@ -342,6 +342,6 @@ public class Account implements Identifiable {
 
     @Transient
     public Account getCopy() {
-        return HibernateUtils.detach(this);
+        return BeanUtils.getDeepCopy(this);
     }
 }

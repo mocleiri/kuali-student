@@ -11,12 +11,12 @@ import net.sf.beanlib.spi.CustomBeanTransformerSpi;
 import org.hibernate.Hibernate;
 
 /**
- * HibernateUtils.
- * It is primarily used for GWT serialization.
+ * This class contains useful methods for dealing with POJOs, JPA entities
+ * and lazy-loaded JPA associations.
  *
  * @author Michael Ivanov
  */
-public class HibernateUtils {
+public class BeanUtils {
 
     private static final HibernateBeanReplicator hibernateBeanReplicator;
 
@@ -28,11 +28,6 @@ public class HibernateUtils {
         hibernateBeanReplicator.initDetailedPropertyFilter(JavaBeanDetailedPropertyFilter.ALWAYS_PROPAGATE);
         hibernateBeanReplicator.initCustomTransformerFactory(new LazyKillingBeanTransformerFactory());
     }
-
-
-    private HibernateUtils() {
-    }
-
 
     /**
      * A custom bean transformer that sets non-initialized Hibernate entity properties to NULL
@@ -56,11 +51,40 @@ public class HibernateUtils {
         }
     }
 
-    public static <T> T detach(T entity) {
+    private BeanUtils() {
+    }
+
+    private static void prepare() {
         // Using Javassist instead of CGLIB (performance enhancement) per thread
         UnEnhancer.setCheckCGLibForThisThread(false);
-        // Making a copy with HibernateBeanReplicator
+    }
+
+    /**
+     * Convenient method to deep copy the given object using the default behavior.
+     *
+     * @param entity an object that needs to be copied
+     * @param <T>    an entity type
+     * @return a deep copy of the given object
+     */
+    public static <T> T getDeepCopy(T entity) {
+        prepare();
+        // Making a deep copy with HibernateBeanReplicator
         return hibernateBeanReplicator.deepCopy(entity);
+    }
+
+    /**
+     * Convenient method to shallow copy the given object using the default behavior.
+     * Shallow copy means skipping those properties that are of type collection, map
+     * or under a package that doesn't start with "java.".
+     *
+     * @param entity an object that needs to be copied
+     * @param <T>    an entity type
+     * @return a shallow copy of the given object
+     */
+    public static <T> T getShallowCopy(T entity) {
+        prepare();
+        // Making a shallow copy with HibernateBeanReplicator
+        return hibernateBeanReplicator.shallowCopy(entity);
     }
 
 
