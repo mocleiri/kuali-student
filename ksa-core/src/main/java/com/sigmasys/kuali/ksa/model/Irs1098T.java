@@ -150,7 +150,7 @@ public class Irs1098T implements Identifiable {
     /**
      * If there is an insurance reimbursement or refund amount, it will be stored here.
      */
-    private BigDecimal refundAmount;
+    private BigDecimal insRefundAmount;
 
     /**
      * Link to the XML document that holds the representation of the 1098T data.
@@ -164,7 +164,7 @@ public class Irs1098T implements Identifiable {
             table = "KSSA_SEQUENCE_TABLE",
             pkColumnName = "SEQ_NAME",
             valueColumnName = "SEQ_VALUE",
-            pkColumnValue = "XML_SEQ")
+            pkColumnValue = "IRS_1098T_SEQ")
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "TABLE_GEN_IRS_1098T")
     @Override
     public Long getId() {
@@ -409,13 +409,13 @@ public class Irs1098T implements Identifiable {
         this.scholarshipAdjustedAmount = scholarshipAdjustedAmount;
     }
 
-    @Column(name = "REFUND_AMOUNT")
-    public BigDecimal getRefundAmount() {
-        return refundAmount;
+    @Column(name = "INS_REFUND_AMOUNT")
+    public BigDecimal getInsRefundAmount() {
+        return insRefundAmount;
     }
 
-    public void setRefundAmount(BigDecimal refundAmount) {
-        this.refundAmount = refundAmount;
+    public void setInsRefundAmount(BigDecimal insRefundAmount) {
+        this.insRefundAmount = insRefundAmount;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
