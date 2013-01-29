@@ -13,7 +13,10 @@ import javax.jws.WebService;
 import javax.persistence.Query;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import com.sigmasys.kuali.ksa.jaxb.Irs1098T;
 import com.sigmasys.kuali.ksa.jaxb.PostalAddress;
+import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.model.Account;
 import org.aopalliance.aop.Advice;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -27,9 +30,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sigmasys.kuali.ksa.exception.*;
-import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.Currency;
 import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.jaxb.*;
 import com.sigmasys.kuali.ksa.jaxb.AgedBalanceReport.AgedAccountDetail;
@@ -825,7 +825,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         String systemCurrencyCode = java.util.Currency.getInstance(Locale.getDefault()).getCurrencyCode();
 
         // Compare system currency to the transaction currency:
-        Currency transactionCurrency = transaction.getCurrency();
+        com.sigmasys.kuali.ksa.model.Currency transactionCurrency = transaction.getCurrency();
 
         if ((transactionCurrency != null) && !StringUtils.equalsIgnoreCase(transactionCurrency.getCode(), systemCurrencyCode)) {
             // Create a ForeignTransactionNode:

@@ -31,6 +31,7 @@ drop table KSA.KSSA_GL_TRANS_TRANSACTION cascade constraints;
 drop table KSA.KSSA_GL_TYPE cascade constraints;
 drop table KSA.KSSA_ID_TYPE cascade constraints;
 drop table KSA.KSSA_INFORMATION cascade constraints;
+drop table KSA.KSSA_IRS_1098T cascade constraints;
 drop table KSA.KSSA_KYPR cascade constraints;
 drop table KSA.KSSA_LANGUAGE cascade constraints;
 drop table KSA.KSSA_LATE_PERIOD cascade constraints;
