@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.krad.form.TransactionTypeForm;
 import com.sigmasys.kuali.ksa.krad.model.TransactionTypeModel;
+import com.sigmasys.kuali.ksa.krad.util.AuditableEntityKeyValuesFinder;
 import com.sigmasys.kuali.ksa.krad.util.CreditDebitKeyValuesFinder;
 import com.sigmasys.kuali.ksa.krad.util.KradTypeEntityKeyValuesFinder;
 import com.sigmasys.kuali.ksa.model.*;
@@ -34,6 +35,7 @@ public class TransactionTypeController extends GenericSearchController {
 
     private static final Log logger = LogFactory.getLog(TransactionTypeController.class);
     private volatile KeyValuesFinder creditDebitTypeOptionsFinder;
+    private volatile KeyValuesFinder rollupTypeOptionsFinder;
 
     @Autowired
     private AuditableEntityService auditableEntityService;
@@ -114,6 +116,7 @@ public class TransactionTypeController extends GenericSearchController {
         form.setGlBreakdowns(breakdowns);
 
         form.setCreditDebitKeyValuesFinder(this.getCreditDebitTypeOptionsFinder());
+        form.setRollupOptionsFinder(this.getRollupOptionsFinder());
 
         return getUIFModelAndView(form);
     }
@@ -242,6 +245,21 @@ public class TransactionTypeController extends GenericSearchController {
         }
 
         return creditDebitTypeOptionsFinder;
+    }
+
+    /*
+      * Returns Rollup type option finder.
+      */
+    public KeyValuesFinder getRollupOptionsFinder() {
+        if (rollupTypeOptionsFinder == null) {
+            synchronized(this) {
+                if (rollupTypeOptionsFinder == null) {
+                    rollupTypeOptionsFinder = new AuditableEntityKeyValuesFinder<Rollup>(auditableEntityService, Rollup.class);
+                }
+            }
+        }
+
+        return rollupTypeOptionsFinder;
     }
 
 

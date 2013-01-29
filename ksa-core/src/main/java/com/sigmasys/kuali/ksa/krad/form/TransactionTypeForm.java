@@ -23,13 +23,17 @@ public class TransactionTypeForm extends AbstractViewModel {
     private String statusMessage;
 
     private KeyValuesFinder creditDebitKeyValuesFinder;
+    private KeyValuesFinder rollupOptionsFinder;
 
     // Fields used for creating a new transaction type
     private String type;
     private String code;
     private String description;
+    private String defaultTransactionText;
     private Date startDate;
+    private Date endDate;
     private Integer priority;
+    private Rollup rollup;
 
     // Credit types only
     private Integer clearPeriod;
@@ -39,6 +43,10 @@ public class TransactionTypeForm extends AbstractViewModel {
     private List<GlBreakdown> glBreakdowns;
 
     // Debit types only
+
+
+    // Display only fields
+    private boolean showEndDate;
 
     /*
       Get/Set methods
@@ -138,6 +146,14 @@ public class TransactionTypeForm extends AbstractViewModel {
         this.startDate = startDate;
     }
 
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
     public Integer getPriority() {
         return priority;
     }
@@ -192,5 +208,37 @@ public class TransactionTypeForm extends AbstractViewModel {
 
     public void setCreditDebitKeyValuesFinder(KeyValuesFinder creditDebitKeyValuesFinder) {
         this.creditDebitKeyValuesFinder = creditDebitKeyValuesFinder;
+    }
+
+    public boolean getShowEndDate() {
+        return showEndDate;
+    }
+
+    public void setShowEndDate(boolean showEndDate) {
+        this.showEndDate = showEndDate;
+    }
+
+    public String getDefaultTransactionText() {
+        return defaultTransactionText;
+    }
+
+    public void setDefaultTransactionText(String defaultTransactionText) {
+        this.defaultTransactionText = defaultTransactionText;
+    }
+
+    public KeyValuesFinder getRollupOptionsFinder() {
+        return rollupOptionsFinder;
+    }
+
+    public void setRollupOptionsFinder(KeyValuesFinder rollupOptionsFinder) {
+        this.rollupOptionsFinder = rollupOptionsFinder;
+    }
+
+    public Rollup getRollup() {
+        return rollup;
+    }
+
+    public void setRollup(Rollup rollup) {
+        this.rollup = rollup;
     }
 }

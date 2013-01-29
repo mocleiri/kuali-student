@@ -9,7 +9,21 @@
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+          <root url="file://$MODULE_DIR$/target/generated-sources/annotations" />
+        </sourceRoots>
       </configuration>
+      <facet type="struts" name="Struts">
+        <configuration>
+          <option name="myStrutsValidationEnabled" value="true" />
+          <option name="myTilesValidationEnabled" value="true" />
+          <option name="myValidatorValidationEnabled" value="true" />
+          <option name="myReportErrorsAsWarnings" value="true" />
+          <option name="mySuppressPropertiesValidation" value="false" />
+        </configuration>
+      </facet>
     </facet>
     <facet type="gwt" name="GWT">
       <configuration>
@@ -22,7 +36,42 @@
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset1" name="Xml Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/TransactionTypeView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/AccountImportView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/AccountManagementView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/AdminView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/AlertView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/BatchTransactionsView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/BiographicView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/ChargeView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/CollectionsView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/DefermentView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/FlagView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/KsaWidgetDefinitions.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/MemoView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/PaymentView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/QuickView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/ReportReconciliationView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/RulesView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/SearchView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/SettingsView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/SponsorView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/TemplateView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/TransactionUploadView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/TransactionView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/com/sigmasys/kuali/ksa/krad/WriteOffView.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/META-INF/ks-beans.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/META-INF/ksa-beans.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/META-INF/ksa-config-beans.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/META-INF/ksa-context.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/META-INF/ksa-datasource.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/META-INF/rice-beans.xml</file>
+          <file>file://$MODULE_DIR$/src/test/resources/META-INF/test-context.xml</file>
+          <file>file://$MODULE_DIR$/src/test/resources/META-INF/ws-context.xml</file>
+        </fileset>
+      </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">

@@ -149,6 +149,7 @@ public class BatchTransactionsController extends GenericSearchController {
             Date today = new Date();
             for (Transaction t : transactions) {
                 if (!t.isGlEntryGenerated() && t.getEffectiveDate().before(today)) {
+                    logger.info("Calling 'makeEffective' for ID: " + t.getId());
                     transactionService.makeEffective(t.getId(), false);
                 }
             }
