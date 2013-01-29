@@ -17,7 +17,7 @@ headless = nil
 
 if ENV['HEADLESS']
   require 'headless'
-  headless = Headless.new
+  headless = Headless.new :destroy_at_exit => false
   headless.start
 end
 
@@ -28,7 +28,7 @@ Before do
   @browser = browser
 end
 
-at_exit { browser.close }
+at_exit { browser.close unless browser == nil }
 
 
 if ENV['HEADLESS']
