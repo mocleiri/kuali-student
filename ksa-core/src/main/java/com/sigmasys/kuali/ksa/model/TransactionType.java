@@ -27,6 +27,8 @@ public abstract class TransactionType extends AuditableEntity<TransactionTypeId>
 
     protected Date endDate;
 
+    protected String defaultTransactionText;
+
     protected List<Tag> tags;
 
     /**
@@ -72,6 +74,15 @@ public abstract class TransactionType extends AuditableEntity<TransactionTypeId>
 
     public void setPriority(Integer priority) {
         this.priority = priority;
+    }
+
+    @Column(name = "DEFAULT_TRN_TXT", length = 100)
+    public String getDefaultTransactionText() {
+        return defaultTransactionText;
+    }
+
+    public void setDefaultTransactionText(String defaultTransactionText) {
+        this.defaultTransactionText = defaultTransactionText;
     }
 
     /**
