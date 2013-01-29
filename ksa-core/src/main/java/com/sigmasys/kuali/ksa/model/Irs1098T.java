@@ -80,17 +80,17 @@ public class Irs1098T implements Identifiable {
     /**
      * Filer FEIN
      */
-    private String filerFein;
+    private String filerFederalId;
 
     /**
      * Filer Postal Address
      */
-    private PostalAddress filerPortalAddress;
+    private PostalAddress filerPostalAddress;
 
     /**
      * Student Postal Address
      */
-    private PostalAddress studentPortalAddress;
+    private PostalAddress studentPostalAddress;
 
     /**
      * Student name
@@ -279,32 +279,32 @@ public class Irs1098T implements Identifiable {
     }
 
     @Column(name = "FILER_FEIN", length = 10)
-    public String getFilerFein() {
-        return filerFein;
+    public String getFilerFederalId() {
+        return filerFederalId;
     }
 
-    public void setFilerFein(String filerFein) {
-        this.filerFein = filerFein;
+    public void setFilerFederalId(String filerFederalId) {
+        this.filerFederalId = filerFederalId;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FILER_POSTAL_ADDRESS_ID_FK")
-    public PostalAddress getFilerPortalAddress() {
-        return filerPortalAddress;
+    public PostalAddress getFilerPostalAddress() {
+        return filerPostalAddress;
     }
 
-    public void setFilerPortalAddress(PostalAddress filerPortalAddress) {
-        this.filerPortalAddress = filerPortalAddress;
+    public void setFilerPostalAddress(PostalAddress filerPostalAddress) {
+        this.filerPostalAddress = filerPostalAddress;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STUDENT_POSTAL_ADDRESS_ID_FK")
-    public PostalAddress getStudentPortalAddress() {
-        return studentPortalAddress;
+    public PostalAddress getStudentPostalAddress() {
+        return studentPostalAddress;
     }
 
-    public void setStudentPortalAddress(PostalAddress studentPortalAddress) {
-        this.studentPortalAddress = studentPortalAddress;
+    public void setStudentPostalAddress(PostalAddress studentPostalAddress) {
+        this.studentPostalAddress = studentPostalAddress;
     }
 
     @Column(name = "STUDENT_NAME", length = 100)
