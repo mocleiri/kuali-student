@@ -108,8 +108,12 @@ Insert into KSSA_TRANSACTION (TYPE,ID,ACNT_ID_FK,ALLOCATED,AMNT,LEDGER_DATE,CREA
 --   FILTER = none used
 ---------------------------------------------------
 REM INSERTING into KSSA_TAG
-Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL) values (1,'pheald','This item will be reported on IRS form 1098(T).',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'1098T',3);
-Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL) values (2,'pheald','This item is considered cash for the combined-cash limit tracking requirement.',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Cash or Equivalent',5);
+REM INSERTING into KSSA_TAG
+Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (1,'pheald','This item will be reported on IRS form 1098(T).',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'1098T',3,'1098T');
+Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (2,'pheald','This item is considered cash for the combined-cash limit tracking requirement.',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Cash or Equivalent',5, 'Cash');
+Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (3,'pheald','This is the IRS1098T Tag for Billed Amounts',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'1098T Billed Amounts',5,'Billed1098');
+Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (4,'pheald','This is the IRS1098T Tag for Insurance Refunds',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'1098T Insurance',5,'InsRef1098T');
+Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (5,'pheald','This is the IRS1098T Tag for Scholarships and grants',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'1098T Scholarships',5,'Scholarship1098T');
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_TAG
