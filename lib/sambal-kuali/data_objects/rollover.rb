@@ -17,6 +17,7 @@ class Rollover
   include StringFactory
   include Workflows
 
+  #generally set using options hash
   attr_accessor :source_term,
                 :target_term
 
@@ -66,8 +67,15 @@ class Rollover
         sleep 30
         page.go
       end
-      puts "Completed: Rollover duration: #{page.rollover_duration}" unless page.status != "Finished"
-      raise "rollover did not complete - test timed out" unless page.status == "Finished"
+      if page.status == "Finished"
+        puts "Completed: Rollover duration: #{page.rollover_duration}"
+        puts "Course Offerings transitioned: #{page.course_offerings_transitioned}"
+        puts "Course Offerings exceptions: #{page.course_offerings_exceptions}"
+        puts "Activity Offerings transitioned: #{page.activity_offerings_transitioned}"
+        puts "Activity Offerings exceptions: #{page.activity_offerings_exceptions}"
+      else
+        raise "rollover did not complete - test timed out"
+      end
     end
   end
 

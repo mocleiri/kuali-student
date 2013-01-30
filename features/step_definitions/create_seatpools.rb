@@ -1,6 +1,5 @@
 When /^I create a seat pool for an activity offering by completing all fields$/ do
-  @activity_offering = make ActivityOffering
-  @activity_offering.create :requested_delivery_logistics_list => {},
+  @activity_offering = create ActivityOffering, :requested_delivery_logistics_list => {},
                             :personnel_list => []
   end
 
@@ -25,14 +24,12 @@ Then /^a warning message is displayed about seats exceeding max enrollment$/ do
 end
 
 When /^I create seat pools for an activity offering and priorities are duplicated and not sequential$/ do
-  @activity_offering = make ActivityOffering
-
   seatpool_hash = {}
   seatpool_hash[1] = make SeatPool, :population_name => "Core", :seats => 10, :priority => 2, :priority_after_reseq => 2
   seatpool_hash[2] = make SeatPool, :population_name => "DSS", :seats => 11, :priority => 2, :priority_after_reseq => 1
   seatpool_hash[3] = make SeatPool, :population_name => "Fraternity/Sorority", :seats => 12, :priority => 4, :priority_after_reseq => 3
 
-  @activity_offering.create   :seat_pool_list => seatpool_hash,
+  @activity_offering = create ActivityOffering, :seat_pool_list => seatpool_hash,
                               :requested_delivery_logistics_list => {},
                               :personnel_list => []
 
@@ -46,13 +43,11 @@ Then /^the seat pool priorities are correctly sequenced$/ do
 end
 
 When /^I add a seat pool using a population that is already used for that activity offering$/ do
-  @activity_offering = make ActivityOffering
-
   seatpool_hash = {}
   seatpool_hash["Core"] = make SeatPool, :population_name => "Core", :seats => 10, :priority => 1
   seatpool_hash["dup"] = make SeatPool, :population_name => "Core", :seats => 11, :priority => 2, :exp_add_succeed => false
 
-  @activity_offering.create  :seat_pool_list => seatpool_hash,
+  @activity_offering = create ActivityOffering,  :seat_pool_list => seatpool_hash,
                              :requested_delivery_logistics_list => {},
                               :personnel_list => []
 end
@@ -64,11 +59,9 @@ Then /^an error message is displayed about the duplicate population$/ do
 end
 
 When /^I add a seat pool without specifying a population$/ do
-  @activity_offering = make ActivityOffering
-
   seatpool1 = make SeatPool, :population_name => "", :seats => 10, :priority => 2, :exp_add_succeed => false
 
-  @activity_offering.create :seat_pool_list => {"blank" => seatpool1},
+  @activity_offering = create ActivityOffering, :seat_pool_list => {"blank" => seatpool1},
                             :requested_delivery_logistics_list => {},
                             :personnel_list => []
 

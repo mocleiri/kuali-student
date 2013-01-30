@@ -41,17 +41,27 @@ class CourseOffering
                 :search_by_subj,
                 :create_by_copy
 
-
-
   # provides default data:
   #  defaults = {
-  #    :is_constrained=>true,
-  #    :private_name=>"#{random_alphanums(5).strip}_pri",
-  #    :published_name=>"#{random_alphanums(5).strip}_pub",
-  #    :is_valid=>true,
-  #    :expected_msg=>"",
-  #    :assigned_ao_list=>[],
-  #    :to_assign_ao_list=>["A"]
+  #    :term=>"201201",
+  #    :course=>"ENGL211",
+  #    :suffix=>"",
+  #    :activity_offering_cluster_list=>[],
+  #    :ao_list => [],
+  #    :final_exam_type => "NONE",
+  #    :wait_list => "NO",
+  #    :wait_list_level => "Course Offering",
+  #    :wait_list_type => "Automatic",
+  #    :grade_format => "",
+  #    :delivery_format_list => [],
+  #    :final_exam_driver => "",
+  #    :honors_flag => "NO",
+  #    :affiliated_person_list => {},
+  #    :affiliated_org_list => {},
+  #    :grade_options => "Letter",
+  #    :reg_options => "None available",
+  #    :search_by_subj => false,
+  #    :create_by_copy => false
   #  }
   # initialize is generally called using TestFactory Foundry .make or .create methods
   def initialize(browser, opts={})
@@ -82,6 +92,7 @@ class CourseOffering
     set_options(options)
   end
 
+  # creates course offering based on class attributes
   def create
     if @create_by_copy
       @course = create_co_copy

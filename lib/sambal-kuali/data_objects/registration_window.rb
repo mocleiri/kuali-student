@@ -168,6 +168,7 @@ class RegistrationWindow
     end
   end
 
+  #break appointments for the existing registration window matching :appointment_window_info_name, term, period attributes
   def break_appointments
     on RegistrationWindowsCreate do |page|
       page.break_appointments(@appointment_window_info_name, @period_key)

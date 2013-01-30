@@ -1,4 +1,18 @@
-  class ActivityOffering
+# stores test data for creating/editing and validating activity offerings and provides convenience methods for navigation and data entry
+#
+# ActivityOffering objects contain the following objects: SeatPool, DeliveryLogistic (requested and actual) and Personnel (Affiliated Personnel)
+#
+# ActivityOffering is a child of a CourseOffering
+#
+# class attributes are initialized with default data unless values are explicitly provided
+#
+# Typical usage: (with optional setting of explicit data value in [] )
+#  @activity_offering = make ActivityOffering, [:seat_pool_list => {},...]
+#  @activity_offering.create
+# OR alternatively 2 steps together as
+#  @activity_offering = create ActivityOffering, [:seat_pool_list => {},...]
+# Note the use of the ruby options hash pattern re: setting attribute values
+class ActivityOffering
     include Foundry
     include DataFactory
     include DateFactory
@@ -12,7 +26,7 @@
                   :max_enrollment,
                   :seat_remaining_percent,
                   :course_url
-    #hash - generally set using options hash
+    #type: hash - generally set using options hash
     attr_accessor :actual_delivery_logistics_list,
                   :requested_delivery_logistics_list,
                   :seat_pool_list
@@ -22,15 +36,24 @@
     attr_accessor :evaluation,
                   :honors_course
 
-    def initialize(browser, code)
+    # provides default data:
+    # default_seat_pool_hash = {"random"=> (make SeatPool)}
+    # default_rdl_hash = {"default"=> (make DeliveryLogistics)}
+    #  defaults = {
+    #    :format => "Lecture Only",
+    #    :activity_type => "Lecture",
+    #    :max_enrollment => 100,
+    #    :actual_delivery_logistics_list => {},
+    #    :requested_delivery_logistics_list => default_rdl_hash,
+    #    :personnel_list => Array.new(1){make Personnel} ,
+    #    :seat_pool_list => default_seat_pool_hash,
+    #    :course_url => "www.test_course.com",
+    #    :evaluation => true,
+    #    :honors_course => true
+    #  }
+    # initialize is generally called using TestFactory Foundry .make or .create methods
+    def initialize(browser, opts={})
       @browser = browser
-      @seat_pool_list = {}
-      @actual_delivery_logistics_list = {}
-      @requested_delivery_logistics_list = {}
-
-    end
-
-    def create(opts = {})
 
       default_seat_pool_hash = {"random"=> (make SeatPool)}
       default_rdl_hash = {"default"=> (make DeliveryLogistics)}
@@ -52,6 +75,11 @@
 
       @format = options[:format]
       @activity_type = options[:activity_type]
+
+    end
+
+    #navigates to activity offering edit page and sets up activity offering based on class attributes
+    def create
 
       on ManageCourseOfferings do |page|
         pre_add_ao_list = page.codes_list
@@ -77,9 +105,16 @@
       edit(options)
     end
 
-
+    #navigates activity offering edit page and updates activity offering based on class attributes
+    # @example - must always call save
+    #  @activity_offering.edit :honors_course=> true
+    #  @activity_offering.save
+    #
+    # NB: 'save' is a separate step from edit as it allows validation steps to occur during the edit process
+    #
+    # @param opts [Hash] key => value for attribute to be updated
     def edit opts={}
-
+    #TODO switch to simpler edit format once other refactoring has been validated
       defaults = {
           :max_enrollment => @max_enrollment,
           :actual_delivery_logistics_list => @actual_delivery_logistics_list,
@@ -113,7 +148,7 @@
           requests_added = {}
 
           options[:requested_delivery_logistics_list].values.each do |request|
-            request.add_logistics_request()
+            request.create
             requests_added["#{request.days}#{request.start_time}#{request.start_time_ampm.upcase}".delete(' ')] = request
           end
 
@@ -158,7 +193,7 @@
         @personnel_list = options[:personnel_list]
       end
 
-      #TODO: comparison could be more robust
+      #TODO: comparison could be more robust/could rework to include remove/edit/add seatpool methods?
       if options[:seat_pool_list].keys != @seat_pool_list.keys
         options[:seat_pool_list].each do |key,seat_pool|
           seat_pool.add_seatpool(seatpool_populations_used)
@@ -167,18 +202,17 @@
       end
     end
 
-    def update()
-      on ActivityOfferingMaintenance do |page|
-        page.submit
-      end
-    end
-
+    #completes activity offering edit operation
+    #this is a separate step from edit as it allows validation steps to occur during the edit process
     def save()
       on ActivityOfferingMaintenance do |page|
         page.submit
       end
     end
 
+    #calculates the expected number of seats remaining
+    #
+    #@return [int] expected number of seats remaining
     def seats_remaining
       seats_used = 0
       @seat_pool_list.each do |key,seat_pool|
@@ -187,6 +221,9 @@
       [@max_enrollment - seats_used , 0].max
     end
 
+    #removes seatpool from activity offering
+    #
+    #@param [string] seat_pool_list hash key
     def remove_seatpool(seatpool_key)
       on ActivityOfferingMaintenance do |page|
         page.remove_seatpool(@seat_pool_list[seatpool_key].population_name)
@@ -194,6 +231,7 @@
       @seat_pool_list.delete(seatpool_key)
     end
 
+    #removes all seatpools from activity offering
     def remove_seatpools()
       @seat_pool_list.each do |seatpool_key|
         if @seat_pool_list[seatpool_key].remove
@@ -205,12 +243,24 @@
       end
     end
 
-    def resequence_seatpools()
+    # updates the value in @seatpool.priority with @seatpool.priority_after_reseq for each seatpool
+    #
+    # e.g. after removing the seatpool with priory 1, the seatpool with priority 2 becomes priority 1
+    def resequence_expected_seatpool_priorities()
       @seat_pool_list.values.each do |seatpool|
         seatpool.priority = seatpool.priority_after_reseq
       end
     end
 
+    #while on activity offering edit page and updates the details for a specific seatpool
+    # @example - must always call save
+    #  @activity_offering.edit :honors_course=> true
+    #  @activity_offering.edit_seatpool :seats => 2
+    #  @activity_offering.save
+    #
+    # NB: 'save' is a separate step from edit as it allows validation steps to occur during the edit process
+    #
+    # @param opts [Hash] key => value for attribute to be updated
     def edit_seatpool opts = {}
 
       sp_key = opts[:seatpool_key]
@@ -258,6 +308,9 @@
       end
     end
 
+    #returns a list of populations used in the AO seatpool
+    #
+    # @returns [Array] list of population names
     def seatpool_populations_used
       populations_used = []
       @seat_pool_list.values.each do |seatpool|
@@ -268,8 +321,19 @@
 
   end
 
-
-
+# stoes test data for creating/editing and validating seatpool and provides convenience methods for navigation and data entry
+#
+# SeatPool is a child of a ActivityOffering
+#
+# class attributes are initialized with default data unless values are explicitly provided
+#
+# Typical usage: (with optional setting of explicit data value in [] )
+# seatpool_hash[1] = make SeatPool, :population_name => "Core", :seats => 10, :priority => 2, :priority_after_reseq => 2
+#
+# @activity_offering = create ActivityOffering, :seat_pool_list => seatpool_hash
+#
+#create generally called from ActivityOffering class
+# Note the use of the ruby options hash pattern re: setting attribute values
   class SeatPool
 
     include Foundry
@@ -291,6 +355,17 @@
     alias_method :remove?, :remove
     alias_method :exp_add_succeed?, :exp_add_succeed
 
+    # provides default data:
+    #defaults = {
+    #    :priority => 1,
+    #    :seats => 10,
+    #    :population_name => "random",
+    #    :expiration_milestone => "First Day of Classes",
+    #    :remove => false,
+    #    :priority_after_reseq => 0,
+    #    :exp_add_succeed => true
+    #}
+    # initialize is generally called using TestFactory Foundry .make or .create methods
     def initialize(browser, opts={})
       @browser = browser
 
@@ -309,10 +384,16 @@
 
     end
 
+    #calculates expected % of total enrollment for the seatpool
+    #
+    # @returns [int] expected % of total enrollment
     def percent_of_total(max_enrollment)
       "#{(@seats.to_i*100/max_enrollment.to_i).round(0)}%"
     end
 
+    # add_seatpool to activity offering
+    #
+    # @param [Array] list of populations used in seatpools already added
     def add_seatpool(pops_used_list)
       on ActivityOfferingMaintenance do |page|
         page.add_pool_priority.set @priority
@@ -346,6 +427,20 @@
     end
   end
 
+# stores test data for creating/editing and validating personnel data and provides convenience methods for navigation and data entry
+#
+# Personnel is a child of a ActivityOffering or CourseOffering (Affiliated Personnel)
+#
+# class attributes are initialized with default data unless values are explicitly provided
+#
+# Typical usage: (with optional setting of explicit data value in [] )
+#
+# personnel_list[0] = make Personnel, :id=> "user1", :affiliation =>"Instructor"
+#
+# @activity_offering.edit_offering :affiliated_person_list => personnel_list
+#
+#create generally called from ActivityOffering/CourseOffering class
+# Note the use of the ruby options hash pattern re: setting attribute values
   class Personnel
     include Foundry
     include DataFactory
@@ -357,17 +452,29 @@
     attr_accessor :id,
                   :affiliation,
                   :inst_effort
-    DEFAULTS = {
-        :id => "admin",
-        :affiliation => "Instructor",
-        :inst_effort => 50
-    }
 
+    # provides default data:
+    # defaults = {
+    #    :id => "admin",
+    #    :affiliation => "Instructor",
+    #    :inst_effort => 50
+    # }
+    # initialize is generally called using TestFactory Foundry .make or .create methods
     def initialize(browser, opts={})
       @browser = browser
-      set_options(DEFAULTS.merge(opts))
+
+      defaults = {
+          :id => "admin",
+          :affiliation => "Instructor",
+          :inst_effort => 50
+      }
+
+      set_options(defaults.merge(opts))
     end
 
+    # creates personnel based on class attributes
+    #
+    # generally called from ActivityOffering class
     def create
       on ActivityOfferingMaintenance do |page|
           page.add_person_id.set @id
@@ -377,6 +484,9 @@
       end
     end
 
+    # edits personnel based on values in options hash
+    #
+    #  @param opts [Hash] key => value for attribute to be updated
     def edit opts={}
       on ActivityOfferingMaintenance do |page|
         page.add_person_id.fit opts[:id]
@@ -386,6 +496,9 @@
 #        update_options(opts)
     end
 
+    # edits personnel based on values in options hash
+    #
+    #  @param opts [Hash] key => value for attribute to be updated
     def add_personnel(opts={})
       @id = opts[:id]
       @affiliation = opts[:affiliation]
@@ -399,6 +512,20 @@
     end
   end
 
+# stores test data for creating/editing and validating delivery logistics data and provides convenience methods for navigation and data entry
+#
+# DeliveryLogistics is a child of a ActivityOffering (Requested delivery logistics - rdl and actual - adl)
+#
+# class attributes are initialized with default data unless values are explicitly provided
+#
+# Typical usage: (with optional setting of explicit data value in [] )
+#
+# rdl_list[0] = make DeliveryLogistics, :days=> M, ...
+#
+# @activity_offering.edit_offering :requested_delivery_logistics_list = rdl_list
+#
+#create generally called from ActivityOffering
+# Note the use of the ruby options hash pattern re: setting attribute values
   class DeliveryLogistics
     include Foundry
     include DataFactory
@@ -423,6 +550,21 @@
     alias_method :tba?, :tba
     alias_method :process?, :process
 
+    # provides default data:
+    # defaults = {
+    #    :tba  => false,
+    #    :days  => "MWF",
+    #    :start_time  => "01:00",
+    #    :start_time_ampm  => "pm",
+    #    :end_time  => "02:00",
+    #    :end_time_ampm  => "pm",
+    #    :facility  => "ARM",
+    #    :facility_long_name  => "Reckord Armory",
+    #    :room  => "126",
+    #    :features_list  => [],
+    #    :process => true
+        # }
+    # initialize is generally called using TestFactory Foundry .make or .create methods
     def initialize(browser, opts={})
       @browser = browser
 
@@ -443,7 +585,12 @@
       set_options(options)
     end
 
-    def add_logistics_request
+    # adds Delivery Logistics request based on class attributes
+    #
+    # add must be completed by calling save or save_and_process (allows adding of multiple rdls)
+    #
+    # generally called from ActivityOffering class
+    def create
       on DeliveryLogisticsEdit do |page|
         if @tba
           page.add_tba.set
@@ -464,18 +611,25 @@
 
     end
 
+    # completes create operation (allows adding multiple rdls)
     def save_and_process
       on DeliveryLogisticsEdit do |page|
         page.save_and_process_request
       end
     end
 
+    # completes create operation (allows adding multiple rdls)
     def save
       on DeliveryLogisticsEdit do |page|
         page.save_request
       end
     end
 
+    # delete Delivery Logistics request row
+    #
+    # generally called from ActivityOffering class - see ActivityOffering
+    #
+    # @param row
     def delete_rdl(row)
       on DeliveryLogisticsEdit do |page|
         page.delete_requested_logistics_features(row)
@@ -483,6 +637,11 @@
       end
     end
 
+    # delete multiple Delivery Logistics requests
+    #
+    # generally called from ActivityOffering class - see ActivityOffering
+    #
+    # @param [int] num of rows to delete
     def delete_rdls(num)
       on DeliveryLogisticsEdit do |page|
         i = 1
@@ -500,6 +659,8 @@
       end
 
     end
+
+    # ??
     def rdl_row_numbers
       on DeliveryLogisticsEdit do |page|
         page.rdl_table_row_nums

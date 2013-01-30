@@ -249,21 +249,18 @@ end
 
 Given /^I add two activity offerings to the course offering$/ do
   @course_offering.manage
-  @activity_offering = make ActivityOffering
-  @activity_offering.create :requested_delivery_logistics_list => {},
+  @activity_offering = create ActivityOffering, :requested_delivery_logistics_list => {},
                             :personnel_list => [],
                             :seat_pool_list => {},
                             :format => "Lecture/Lab"
   @activity_offering.save
 
   @course_offering.manage
-  @activity_offering1 = make ActivityOffering
-  @activity_offering1.create :requested_delivery_logistics_list => {},
+  @activity_offering1 = create ActivityOffering, :requested_delivery_logistics_list => {},
                             :personnel_list => [],
                             :seat_pool_list => {},
                             :format => "Lecture/Lab"
   @activity_offering1.save
-
 end
 
 When /^I confirm that the activity offerings are listed as unassigned$/ do

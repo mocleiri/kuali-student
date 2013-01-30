@@ -1,6 +1,5 @@
 When /^I add requested delivery logistics to an activity offering$/ do
-  @activity_offering = make ActivityOffering
-  @activity_offering.create :seat_pool_list => {},
+  @activity_offering = create ActivityOffering, :seat_pool_list => {},
                             :personnel_list => []
 end
 

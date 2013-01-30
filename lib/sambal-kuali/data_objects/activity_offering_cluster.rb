@@ -59,6 +59,7 @@ class ActivityOfferingCluster
     set_options(options)
   end
 
+  # while on manage reg groups page, sets up activity offering cluster based on class attributes
   def create
     if @is_constrained
       on ManageRegistrationGroups do |page|
@@ -74,6 +75,9 @@ class ActivityOfferingCluster
 
   end
 
+  # moves activity offerings from unassigned list to cluster
+  #
+  # @param ao_list [Array of strings] list of acivity offering codes
   def add_unassigned_aos(ao_list=[])
     @to_assign_ao_list = ao_list unless ao_list == []
 
@@ -99,6 +103,9 @@ class ActivityOfferingCluster
     end
   end
 
+  # generates unconstrained reg groups and default cluster
+  #
+  # all activity offerings are automatically assigned to the cluster
   def generate_unconstrained_reg_groups
     @to_assign_ao_list = []
     on ManageRegistrationGroups do |page|
@@ -118,12 +125,17 @@ class ActivityOfferingCluster
     end
   end
 
+  # generates reg groups for the cluster
   def generate_reg_groups
     on ManageRegistrationGroups do |page|
       page.cluster_generate_reg_groups(@private_name)
     end
   end
 
+  # moves activity offering from cluster to target cluster
+  #
+  # @param ao_code [String] activity offering code
+  # @param target cluster [ActivityOfferingCluster] target cluster object
   def move_ao_to_another_cluster(ao_code, target_cluster)
     on ManageRegistrationGroups do |page|
       row = page.get_cluster_ao_row(@private_name,ao_code)
@@ -135,6 +147,9 @@ class ActivityOfferingCluster
     end
   end
 
+  # removes activity offering from cluster (ao becomes unassigned)
+  #
+  # @param ao_code [String] activity offering code
   def remove_ao(ao_code)
     on ManageRegistrationGroups do |page|
       row = page.get_cluster_ao_row(@private_name,ao_code)
@@ -144,6 +159,7 @@ class ActivityOfferingCluster
     end
   end
 
+# deletes the activity offering cluster
   def delete
     on ManageRegistrationGroups do |page|
       page.remove_cluster(@private_name)
@@ -157,12 +173,22 @@ class ActivityOfferingCluster
     @assigned_ao_list = []
   end
 
+#initiates generates all reg groups operation
   def generate_all_reg_groups
     on ManageRegistrationGroups do |page|
       page.generate_all_reg_groups
     end
   end
 
+  # renames cluster
+  #
+  # @param opts [Hash] key => value for attribute to be updated
+  #
+  # defaults = {
+  #    :private_name=>"#{random_alphanums(5).strip}_pri",
+  #    :published_name=>"#{random_alphanums(5).strip}_pub",
+  #    :expect_success=>true
+  #}
   def rename(opts={})
 
     defaults = {

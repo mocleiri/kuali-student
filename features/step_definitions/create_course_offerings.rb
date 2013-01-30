@@ -4,7 +4,7 @@ When /^I designate a valid term and Catalog Course Code$/ do
 end
 
 And /^I create a Course Offering with selected Delivery Formats$/ do
-  @course_offering.create_offering
+  @course_offering.create
 end
 
 Then /^the new Course Offering should contain only the selected delivery formats$/ do

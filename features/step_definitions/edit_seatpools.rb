@@ -10,8 +10,6 @@ Then /^the seats remaining is updated$/ do
 end
 
 When /^I edit an existing activity offering with (\d+) seat pools?$/ do |number|
-  @activity_offering = make ActivityOffering
-
   temp_list = {}
   ctr = 0
   #create required number of seatpools
@@ -21,7 +19,7 @@ When /^I edit an existing activity offering with (\d+) seat pools?$/ do |number|
     temp_list[ctr] = seatpool
   end
 
-  @activity_offering.create :seat_pool_list => temp_list,
+  @activity_offering = create ActivityOffering, :seat_pool_list => temp_list,
                             :requested_delivery_logistics_list => {},
                             :personnel_list => []
 
@@ -118,7 +116,7 @@ Then /^the activity offering is updated when saved$/ do
 
 
   #seat_pool priorities are resequenced when you go back into to edit AO
-  @activity_offering.resequence_seatpools()
+  @activity_offering.resequence_expected_seatpool_priorities()
 
   #reopens activity offering in edit mode to recheck everything persisted
   @course_offering.manage

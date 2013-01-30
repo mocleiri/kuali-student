@@ -32,7 +32,7 @@ When /^I search for course offerings by course by entering a course offering cod
 end
 
 Then /^a list of course offerings with that course offering code is displayed$/ do
-  @schedule_of_classes.check_expected_results
+  @schedule_of_classes.check_expected_results_by_course
 end
 
 When /^I search for course offerings by instructor$/ do
@@ -50,7 +50,7 @@ When /^I search for course offerings by department$/ do
 end
 
 Then /^a list of course offerings for that department is displayed$/ do
-   @schedule_of_classes.check_expected_results
+   @schedule_of_classes.check_expected_results_by_course
 end
 
 When /^I search for course offerings by title and department by entering a keyword$/ do
@@ -59,7 +59,7 @@ When /^I search for course offerings by title and department by entering a keywo
 end
 
 Then /^a list of course offerings with that keyword is displayed$/ do
-  @schedule_of_classes.check_expected_results
+  @schedule_of_classes.check_expected_results_by_course
 end
 
 When /^I search for course offerings that are in draft status$/ do

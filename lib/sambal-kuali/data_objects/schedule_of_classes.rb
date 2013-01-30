@@ -1,3 +1,12 @@
+# stores test data for performing and validating schedule of classes searches and provides convenience methods for navigation and data entry
+#
+# class attributes are initialized with default data unless values are explicitly provided
+#
+# Typical usage:
+# @schedule_of_classes = make ScheduleOfClasses, :course_search_parm => "CHEM", :exp_course_list => ["CHEM135","CHEM425"]
+# @schedule_of_classes.display
+#
+# Note the use of the ruby options hash pattern re: setting attribute values
 class ScheduleOfClasses
 
   include Foundry
@@ -6,6 +15,7 @@ class ScheduleOfClasses
   include StringFactory
   include Workflows
 
+  #generally set using options hash
   attr_accessor :term,
                 :course_search_parm,
                 :keyword,
@@ -15,6 +25,17 @@ class ScheduleOfClasses
                 :type_of_search,
                 :exp_course_list #TODO: exp results can be expanded to include AO info, etc.
 
+  # provides default data:
+  #  defaults = {
+  #     :term=>"Spring 2012",
+  #    :course_search_parm=>"ENGL103",
+  #    :department_long_name=>"ENGL",
+  #    :instructor_principal_name=>"B.JOHND",
+  #    :keyword=>"WRITING FROM SOURCES" ,
+  #    :type_of_search=>"Course",    #Course, Department, Instructor, Title & Description
+  #    :exp_course_list=>["ENGL103"]
+  #  }
+  # initialize is generally called using TestFactory Foundry .make or method
   def initialize(browser, opts={})
     @browser = browser
 
@@ -31,6 +52,7 @@ class ScheduleOfClasses
     set_options(options)
   end
 
+  # performs schedule of classes search
   def display
     on DisplayScheduleOfClasses do |page|
       page.term.select @term
@@ -47,6 +69,9 @@ class ScheduleOfClasses
     end
   end
 
+  # perform department lookup based on dept long name
+  #
+  # @param [String] long_name - the long name of the dept
   def department_lookup(long_name)
     on  DisplayScheduleOfClasses do |page|
       page.department_search_lookup
@@ -58,6 +83,9 @@ class ScheduleOfClasses
     end
   end
 
+  # perform instructor lookup based on dept principal name
+  #
+  # @param [String] principal_name - the principal name of the instructor
   def instructor_lookup(principal_name)
     on  DisplayScheduleOfClasses do |page|
       page.instructor_search_lookup
@@ -70,6 +98,10 @@ class ScheduleOfClasses
     end
   end
 
+  # checks to make sure search results have the specified subject code
+  #
+  # @raises exception if any of the courses don't match the subject code
+  # @param subject_code [String] e.g. CHEM
   def check_results_for_subject_code_match(subject_code)
     on DisplayScheduleOfClasses do |page|
       page.get_results_course_list.each do |course_code|
@@ -78,7 +110,10 @@ class ScheduleOfClasses
     end
   end
 
-  def check_expected_results
+  # checks to make sure search results contain all the :exp_course_list items
+  #
+  #  @raises exception if any of the courses are not found
+  def check_expected_results_by_course
     on DisplayScheduleOfClasses do |page|
       @exp_course_list.each do |course_code|
         raise "correct course not found" unless page.target_course_row(course_code).exists?
@@ -86,6 +121,9 @@ class ScheduleOfClasses
     end
   end
 
+  # expand course details for the courses in the :exp_course_list
+  #
+  #  @raises exception if course details are not displayed
   def expand_course_details
     on DisplayScheduleOfClasses do |page|
       page.course_expand(@exp_course_list[0])
@@ -93,6 +131,9 @@ class ScheduleOfClasses
     end
   end
 
+  # expands/collapses courses in sequence for bulking testing of this functionality
+  #
+  #   outputs message if course details are not displayed
   def expand_all_course_details
     on DisplayScheduleOfClasses do |page|
       list_of_courses = page.get_results_course_list()
@@ -111,7 +152,9 @@ class ScheduleOfClasses
     end
   end
 
-
+  # checks to make sure search results have the :instructor
+  #
+  # @raises exception if any of the courses don't match the instructor
   def check_results_for_instructor
     course_list = []
     on DisplayScheduleOfClasses do |page|
@@ -127,5 +170,5 @@ class ScheduleOfClasses
     end
   end
 
-  end
+end
 
