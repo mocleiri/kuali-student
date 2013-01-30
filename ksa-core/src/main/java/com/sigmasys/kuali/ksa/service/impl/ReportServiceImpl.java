@@ -228,7 +228,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
             throw new IllegalStateException(errMsg);
         }
 
-        String ssnTaxTypeCode = configService.getInitialParameter(Constants.KSA_1098_SSN_TYPE_TYPE);
+        String ssnTaxTypeCode = configService.getParameter(Constants.KSA_1098_SSN_TYPE_TYPE);
         if (StringUtils.isBlank(ssnTaxTypeCode)) {
             String errMsg = "Initial parameter 'ksa.1098.us.ssn.tax.type' must be set";
             logger.error(errMsg);
@@ -274,26 +274,26 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
         // Filling in Filer
 
-        filer.setName(configService.getInitialParameter(Constants.KSA_1098_FILER_NAME));
-        filer.setFederalIdentificationNumber(configService.getInitialParameter(Constants.KSA_1098_FILER_FEIN));
+        filer.setName(configService.getParameter(Constants.KSA_1098_FILER_NAME));
+        filer.setFederalIdentificationNumber(configService.getParameter(Constants.KSA_1098_FILER_FEIN));
 
         postalAddress = ObjectFactory.getInstance().createPostalAddress();
-        postalAddress.setAddressLine1(configService.getInitialParameter(Constants.KSA_1098_FILER_ADDRESS1));
-        postalAddress.setAddressLine2(configService.getInitialParameter(Constants.KSA_1098_FILER_ADDRESS2));
-        postalAddress.setAddressLine3(configService.getInitialParameter(Constants.KSA_1098_FILER_ADDRESS3));
-        postalAddress.setCity(configService.getInitialParameter(Constants.KSA_1098_FILER_CITY));
-        postalAddress.setStateCode(configService.getInitialParameter(Constants.KSA_1098_FILER_STATE));
-        postalAddress.setPostalCode(configService.getInitialParameter(Constants.KSA_1098_FILER_ZIP));
-        postalAddress.setCountryCode(configService.getInitialParameter(Constants.KSA_1098_FILER_COUNTRY));
+        postalAddress.setAddressLine1(configService.getParameter(Constants.KSA_1098_FILER_ADDRESS1));
+        postalAddress.setAddressLine2(configService.getParameter(Constants.KSA_1098_FILER_ADDRESS2));
+        postalAddress.setAddressLine3(configService.getParameter(Constants.KSA_1098_FILER_ADDRESS3));
+        postalAddress.setCity(configService.getParameter(Constants.KSA_1098_FILER_CITY));
+        postalAddress.setStateCode(configService.getParameter(Constants.KSA_1098_FILER_STATE));
+        postalAddress.setPostalCode(configService.getParameter(Constants.KSA_1098_FILER_ZIP));
+        postalAddress.setCountryCode(configService.getParameter(Constants.KSA_1098_FILER_COUNTRY));
 
         filer.setPostalAddress(postalAddress);
 
-        filer.setTelephoneNumber(configService.getInitialParameter(Constants.KSA_1098_FILER_PHONE));
+        filer.setTelephoneNumber(configService.getParameter(Constants.KSA_1098_FILER_PHONE));
 
         // Filling in FinancialEntry
-        final String billedAmountTag = configService.getInitialParameter(Constants.KSA_1098_TAG_BILLED_AMOUNT);
-        final String insuranceRefundTag = configService.getInitialParameter(Constants.KSA_1098_TAG_INSURANCE_REFUND);
-        final String grantTag = configService.getInitialParameter(Constants.KSA_1098_TAG_GRANTS);
+        final String billedAmountTag = configService.getParameter(Constants.KSA_1098_TAG_BILLED_AMOUNT);
+        final String insuranceRefundTag = configService.getParameter(Constants.KSA_1098_TAG_INSURANCE_REFUND);
+        final String grantTag = configService.getParameter(Constants.KSA_1098_TAG_GRANTS);
 
         BigDecimal chargeAmount = BigDecimal.ZERO;
         BigDecimal refundPaymentAmount = BigDecimal.ZERO;
@@ -381,7 +381,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
             throw new IllegalStateException(errMsg);
         }
 
-        String ssnTaxTypeCode = configService.getInitialParameter(Constants.KSA_1098_SSN_TYPE_TYPE);
+        String ssnTaxTypeCode = configService.getParameter(Constants.KSA_1098_SSN_TYPE_TYPE);
         if (StringUtils.isBlank(ssnTaxTypeCode)) {
             String errMsg = "Initial parameter 'ksa.1098.us.ssn.tax.type' must be set";
             logger.error(errMsg);
@@ -415,23 +415,23 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
         // Filling in Filer
 
-        irs1098T.setFilerName(configService.getInitialParameter(Constants.KSA_1098_FILER_NAME));
-        irs1098T.setFilerFederalId(configService.getInitialParameter(Constants.KSA_1098_FILER_FEIN));
-        irs1098T.setFilerPhoneNumber(configService.getInitialParameter(Constants.KSA_1098_FILER_PHONE));
+        irs1098T.setFilerName(configService.getParameter(Constants.KSA_1098_FILER_NAME));
+        irs1098T.setFilerFederalId(configService.getParameter(Constants.KSA_1098_FILER_FEIN));
+        irs1098T.setFilerPhoneNumber(configService.getParameter(Constants.KSA_1098_FILER_PHONE));
 
-        irs1098T.setStreetAddress1(configService.getInitialParameter(Constants.KSA_1098_FILER_ADDRESS1));
-        irs1098T.setStreetAddress2(configService.getInitialParameter(Constants.KSA_1098_FILER_ADDRESS2));
-        irs1098T.setCity(configService.getInitialParameter(Constants.KSA_1098_FILER_CITY));
-        irs1098T.setState(configService.getInitialParameter(Constants.KSA_1098_FILER_STATE));
-        irs1098T.setPostalCode(configService.getInitialParameter(Constants.KSA_1098_FILER_ZIP));
-        irs1098T.setCountry(configService.getInitialParameter(Constants.KSA_1098_FILER_COUNTRY));
+        irs1098T.setStreetAddress1(configService.getParameter(Constants.KSA_1098_FILER_ADDRESS1));
+        irs1098T.setStreetAddress2(configService.getParameter(Constants.KSA_1098_FILER_ADDRESS2));
+        irs1098T.setCity(configService.getParameter(Constants.KSA_1098_FILER_CITY));
+        irs1098T.setState(configService.getParameter(Constants.KSA_1098_FILER_STATE));
+        irs1098T.setPostalCode(configService.getParameter(Constants.KSA_1098_FILER_ZIP));
+        irs1098T.setCountry(configService.getParameter(Constants.KSA_1098_FILER_COUNTRY));
 
         // Filling in FinancialEntry
-        final String billedAmountTag = configService.getInitialParameter(Constants.KSA_1098_TAG_BILLED_AMOUNT);
-        final String insuranceRefundTag = configService.getInitialParameter(Constants.KSA_1098_TAG_INSURANCE_REFUND);
-        final String grantTag = configService.getInitialParameter(Constants.KSA_1098_TAG_GRANTS);
+        final String billedAmountTag = configService.getParameter(Constants.KSA_1098_TAG_BILLED_AMOUNT);
+        final String insuranceRefundTag = configService.getParameter(Constants.KSA_1098_TAG_INSURANCE_REFUND);
+        final String grantTag = configService.getParameter(Constants.KSA_1098_TAG_GRANTS);
         final int recognitionYear =
-                Integer.valueOf(configService.getInitialParameter(Constants.KSA_TRANSACTION_RECOGNITION_YEAR));
+                Integer.valueOf(configService.getParameter(Constants.KSA_TRANSACTION_RECOGNITION_YEAR));
 
         BigDecimal chargeAmount = BigDecimal.ZERO;
         BigDecimal refundPaymentAmount = BigDecimal.ZERO;
@@ -466,7 +466,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
         irs1098T.setIncludesNextQuarter(includesNextQuarter);
 
-        boolean reportMethodChange = Boolean.valueOf(configService.getInitialParameter(Constants.KSA_1098_REPORTING_METHOD_CHANGE));
+        boolean reportMethodChange = Boolean.valueOf(configService.getParameter(Constants.KSA_1098_REPORTING_METHOD_CHANGE));
         irs1098T.setReportingMethodChanged(reportMethodChange);
 
         // Getting the report for the same account and year

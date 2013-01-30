@@ -51,7 +51,7 @@ public class GenericPersistenceService implements PersistenceService {
     @Override
     public List<Advice> getAdvices(BeanFactory beanFactory) {
         LinkedList<Advice> advices = new LinkedList<Advice>();
-        if (configService != null && Boolean.valueOf(configService.getInitialParameter(Constants.LOGGING_OPERATION))) {
+        if (configService != null && Boolean.valueOf(configService.getParameter(Constants.LOGGING_OPERATION))) {
             // Setting up the logging interceptor
             LoggingInterceptor loggingInterceptor = beanFactory.getBean(LoggingInterceptor.class);
             loggingInterceptor.setTargetObject(this);

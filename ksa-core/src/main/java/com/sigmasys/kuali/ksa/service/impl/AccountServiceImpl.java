@@ -664,7 +664,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
             throw new IllegalArgumentException(errMsg);
         }
 
-        String achBankType = configService.getInitialParameter(Constants.REFUND_ACH_BANK_TYPE);
+        String achBankType = configService.getParameter(Constants.REFUND_ACH_BANK_TYPE);
         if (achBankType == null) {
             errMsg = "Refund ACH Bank Type '" + achBankType + "' does not exist";
             throw new IllegalArgumentException(errMsg);

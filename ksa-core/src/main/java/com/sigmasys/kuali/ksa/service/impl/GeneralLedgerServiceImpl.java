@@ -320,7 +320,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public GeneralLedgerType getDefaultGeneralLedgerType() {
-        return getGeneralLedgerType(configService.getInitialParameter(DEFAULT_GL_TYPE));
+        return getGeneralLedgerType(configService.getParameter(DEFAULT_GL_TYPE));
     }
 
     /**
@@ -330,7 +330,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
      */
     @Override
     public GeneralLedgerMode getDefaultGeneralLedgerMode() {
-        String glMode = configService.getInitialParameter(DEFAULT_GL_MODE);
+        String glMode = configService.getParameter(DEFAULT_GL_MODE);
         if (glMode != null) {
             return EnumUtils.findById(GeneralLedgerMode.class, glMode);
         }
@@ -397,7 +397,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
             throw new IllegalArgumentException(errMsg);
         }
 
-        String glModeCode = configService.getInitialParameter(DEFAULT_GL_MODE);
+        String glModeCode = configService.getParameter(DEFAULT_GL_MODE);
         GeneralLedgerMode glMode = EnumUtils.findById(GeneralLedgerMode.class, glModeCode);
         if (glMode == null) {
             String errMsg = "General Ledger mode must be specified";

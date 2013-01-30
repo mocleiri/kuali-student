@@ -137,7 +137,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         ksaBatchTransactionResponse.setAccepted(accepted);
         ksaBatchTransactionResponse.setFailed(failed);
 
-        String failureValue = configService.getInitialParameter(Constants.IMPORT_SINGLE_BATCH_FAILURE);
+        String failureValue = configService.getParameter(Constants.IMPORT_SINGLE_BATCH_FAILURE);
         Boolean singleBatchFailure = Boolean.valueOf(failureValue);
 
         // determine if batch or single transaction
@@ -452,7 +452,7 @@ public class TransactionImportServiceImpl extends GenericPersistenceService impl
         // Setting general ledger type
         String glTypeCode = (override != null && override.getGeneralLedgerType() != null) ?
                 override.getGeneralLedgerType() :
-                configService.getInitialParameter(Constants.DEFAULT_GL_TYPE);
+                configService.getParameter(Constants.DEFAULT_GL_TYPE);
 
         if (glTypeCode != null) {
             transaction.setGeneralLedgerType(glService.getGeneralLedgerType(glTypeCode));

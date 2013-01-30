@@ -351,7 +351,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
         persistEntity(paymentTransaction);
 
         // Set the Refund system:
-        String systemName = configService.getInitialParameter(Constants.REFUND_ACCOUNT_SYSTEM_NAME);
+        String systemName = configService.getParameter(Constants.REFUND_ACCOUNT_SYSTEM_NAME);
 
         refund.setSystem(systemName);
 
@@ -373,7 +373,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
     public List<Refund> doAccountRefunds(String batch) {
         // Find all Refund object with the given value of "batch":
         String sql = "select r from Refund r where r.batchId = :batchId and r.status = :status and r.refundType.debitTypeId = :refundTypeId";
-        String refundTypeId = configService.getInitialParameter(Constants.REFUND_ACCOUNT_TYPE);
+        String refundTypeId = configService.getParameter(Constants.REFUND_ACCOUNT_TYPE);
         Query query = em.createQuery(sql)
                 .setParameter("batchId", batch)
                 .setParameter("status", RefundStatus.VERIFIED)
@@ -416,7 +416,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
     @Transactional(readOnly = false)
     public String doCheckRefund(Long refundId, String batch, Date checkDate, String checkMemo) {
         // Check the flag to consolidate same account checks:
-        boolean consolidateSameAccountRefunds = BooleanUtils.toBoolean(configService.getInitialParameter(Constants.REFUND_CHECK_GROUP));
+        boolean consolidateSameAccountRefunds = BooleanUtils.toBoolean(configService.getParameter(Constants.REFUND_CHECK_GROUP));
         Check check = doCheckRefundInternal(refundId, batch, checkDate, checkMemo, consolidateSameAccountRefunds);
 
         return JaxbUtils.toXml(check);
@@ -436,7 +436,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
     public String doCheckRefunds(String batch, Date checkDate, String checkMemo) {
         // Find all VERIFIED Check Refunds in the batch:
         String sql = "select r from Refund r where r.batchId = :batchId and r.status = :status and r.refundType.debitTypeId = :refundTypeId";
-        String refundTypeId = configService.getInitialParameter(Constants.REFUND_CHECK_TYPE);
+        String refundTypeId = configService.getParameter(Constants.REFUND_CHECK_TYPE);
         Query query = em.createQuery(sql)
                 .setParameter("batchId", batch)
                 .setParameter("status", RefundStatus.VERIFIED)
@@ -514,7 +514,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
     @Transactional(readOnly = false)
     public String doAchRefund(Long refundId, String batch) {
         // Check the flag to consolidate same account checks:
-        boolean consolidateSameAccountRefunds = BooleanUtils.toBoolean(configService.getInitialParameter(Constants.REFUND_ACH_GROUP));
+        boolean consolidateSameAccountRefunds = BooleanUtils.toBoolean(configService.getParameter(Constants.REFUND_ACH_GROUP));
         Ach achTransmission = doAchRefundInternal(refundId, batch, consolidateSameAccountRefunds);
 
         return JaxbUtils.toXml(achTransmission);
@@ -534,7 +534,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
     public String doAchRefunds(String batch) {
         // Find all VERIFIED Ach Refunds in the batch:
         String sql = "select r from Refund r where r.batchId = :batchId and r.status = :status and r.refundType.debitTypeId = :refundTypeId";
-        String refundTypeId = configService.getInitialParameter(Constants.REFUND_ACH_TYPE);
+        String refundTypeId = configService.getParameter(Constants.REFUND_ACH_TYPE);
         Query query = em.createQuery(sql)
                 .setParameter("batchId", batch)
                 .setParameter("status", RefundStatus.VERIFIED)
@@ -790,7 +790,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 
         // Check the refund is of an ACH type. Compare the valueof the system setting to RefundType:
         String refundTypeId = refund.getRefundType().getDebitTypeId();
-        String systemPropRefundType = configService.getInitialParameter(Constants.REFUND_ACH_TYPE);
+        String systemPropRefundType = configService.getParameter(Constants.REFUND_ACH_TYPE);
 
         if (!StringUtils.equalsIgnoreCase(refundTypeId, systemPropRefundType)) {
             throw new InvalidRefundTypeException("Invalid Refund type for an Ach refund. Refund type is [" + refundTypeId + "].");
@@ -815,7 +815,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 
         // Perform either an individual or consolidate refund:
         List<Refund> allDueRefunds = new ArrayList<Refund>();
-        String systemName = configService.getInitialParameter(Constants.REFUND_ACH_SYSTEM_NAME);
+        String systemName = configService.getParameter(Constants.REFUND_ACH_SYSTEM_NAME);
         String achReference;
         BigDecimal amount;
 
@@ -837,7 +837,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
             achReference = refundGroup;
 
             // Get the new Rollup:
-            String achRoolupCode = configService.getInitialParameter(Constants.REFUND_ACH_GROUP_ROLLUP);
+            String achRoolupCode = configService.getParameter(Constants.REFUND_ACH_GROUP_ROLLUP);
             Rollup achRollup = getAuditableEntityByCode(achRoolupCode, Rollup.class);
 
             // Sum all due Refunds into one Ach transmission and perform refund:
@@ -887,7 +887,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 
         // Check that this refund of of a Check type. Compare the value of the system setting to RefundType:
         String refundTypeId = refund.getRefundType().getDebitTypeId();
-        String systemPropRefundType = configService.getInitialParameter(Constants.REFUND_CHECK_TYPE);
+        String systemPropRefundType = configService.getParameter(Constants.REFUND_CHECK_TYPE);
 
         if (!StringUtils.equalsIgnoreCase(refundTypeId, systemPropRefundType)) {
             throw new InvalidRefundTypeException("Invalid Refund type for a Check refund. Refund type is [" + refundTypeId + "].");
@@ -895,7 +895,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 
         // Perform either an individual refund or a consolidated check refund:
         List<Refund> allDueRefunds = new ArrayList<Refund>();
-        String systemName = configService.getInitialParameter(Constants.REFUND_CHECK_SYSTEM_NAME);
+        String systemName = configService.getParameter(Constants.REFUND_CHECK_SYSTEM_NAME);
         String checkId;
         BigDecimal amount;
 
@@ -918,7 +918,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
             amount = new BigDecimal(0);
 
             // Get the new Rollup:
-            String checkRoolupCode = configService.getInitialParameter(Constants.REFUND_CHECK_GROUP_ROLLUP);
+            String checkRoolupCode = configService.getParameter(Constants.REFUND_CHECK_GROUP_ROLLUP);
             Rollup checkRollup = getAuditableEntityByCode(checkRoolupCode, Rollup.class);
 
             // Sum all due Refunds into one check and perform refund:
@@ -1101,11 +1101,11 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      */
     private Refund createCashRefund(Payment payment, Date requestDate, Account requestedBy) {
         // Figure out the refund type method. Get the overriden value first:
-        String refundTypeMethod = configService.getInitialParameter(Constants.OVERRIDE_REFUND_METHOD);
+        String refundTypeMethod = configService.getParameter(Constants.OVERRIDE_REFUND_METHOD);
 
         if (StringUtils.isBlank(refundTypeMethod)) {
             // If there is no overriden value, get the configured value:
-            refundTypeMethod = configService.getInitialParameter(Constants.REFUND_METHOD);
+            refundTypeMethod = configService.getParameter(Constants.REFUND_METHOD);
 
             // If there is still no value, use the User preference:
             if (StringUtils.isBlank(refundTypeMethod)) {
@@ -1144,7 +1144,7 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
      */
     private Refund createSourceRefund(Payment payment, Date requestDate, Account requestedBy, String refundRule) {
         // Create a new Refund:
-        String refundTypeMethod = configService.getInitialParameter(Constants.REFUND_SOURCE_TYPE);
+        String refundTypeMethod = configService.getParameter(Constants.REFUND_SOURCE_TYPE);
         RefundType refundType = getOrCreateRefundType(refundTypeMethod, refundTypeMethod);
         BigDecimal refundAmount = TransactionUtils.getUnallocatedAmount(payment);
         Refund refund = new Refund();

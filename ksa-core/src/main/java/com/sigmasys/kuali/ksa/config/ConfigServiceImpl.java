@@ -37,9 +37,9 @@ public class ConfigServiceImpl implements ConfigService, InitializingBean {
     @Override
     public void afterPropertiesSet() {
         // Setting up locale if "locale" initial parameters exist
-        String localeLang = getInitialParameter(Constants.LOCALE_LANG);
+        String localeLang = getParameter(Constants.LOCALE_LANG);
         if (localeLang != null && !localeLang.trim().isEmpty()) {
-            String localeCountry = getInitialParameter(Constants.LOCALE_COUNTRY);
+            String localeCountry = getParameter(Constants.LOCALE_COUNTRY);
             Locale locale = (localeCountry != null && !localeCountry.trim().isEmpty()) ?
                     new Locale(localeLang, localeCountry) : new Locale(localeLang);
             Locale.setDefault(locale);
@@ -66,7 +66,7 @@ public class ConfigServiceImpl implements ConfigService, InitializingBean {
     }
 
     @Override
-    public String getInitialParameter(String name) {
+    public String getParameter(String name) {
         return getInitialParameters().get(name);
     }
 
@@ -77,23 +77,23 @@ public class ConfigServiceImpl implements ConfigService, InitializingBean {
 
     @Override
     @Transactional(readOnly = false)
-    public Integer updateInitialParameters(List<InitialParameter> params) {
+    public Integer updateParameters(List<InitialParameter> params) {
         return parameterConfigurer.updateInitialParameters(params);
     }
 
     @Override
     @Transactional(readOnly = false)
-    public Integer deleteInitialParameters(Set<String> paramNames) {
+    public Integer deleteParameters(Set<String> paramNames) {
         return parameterConfigurer.deleteInitialParameters(paramNames);
     }
 
     @Override
-    public List<InitialParameter> getInitialParameterList() {
+    public List<InitialParameter> getParameterList() {
         return parameterConfigurer.getInitialParameterList();
     }
 
     @Override
-    public Map<String, String> refreshInitialParameters() {
+    public Map<String, String> refreshParameters() {
         parameterConfigurer.loadDatabaseParameters(true);
         return getInitialParameters();
     }

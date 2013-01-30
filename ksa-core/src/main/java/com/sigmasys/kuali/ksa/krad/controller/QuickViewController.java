@@ -329,7 +329,7 @@ public class QuickViewController extends GenericSearchController {
             form.setDefermentAmount(deferment.toString());
         }
 
-        int itemsPerPage = Integer.valueOf(configService.getInitialParameter(Constants.QUICKVIEW_INFORMATION_COUNT));
+        int itemsPerPage = Integer.valueOf(configService.getParameter(Constants.QUICKVIEW_INFORMATION_COUNT));
 
         List<Alert> alertsAll = informationService.getAlerts(userId);
 

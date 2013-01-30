@@ -443,7 +443,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public Integer getDefaultMemoLevel() {
-        return Integer.valueOf(configService.getInitialParameter(Constants.DEFAULT_MEMO_LEVEL));
+        return Integer.valueOf(configService.getParameter(Constants.DEFAULT_MEMO_LEVEL));
     }
 
 }
