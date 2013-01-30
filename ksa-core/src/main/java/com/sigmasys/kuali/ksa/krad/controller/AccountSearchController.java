@@ -102,7 +102,7 @@ public class AccountSearchController extends AccountManagementController {
 	 */
 	private void populateForSearchPersonAccount(AdminForm form) {
 		// Populate for New Person Account first:
-		populateForNewPersonAccount(form);
+		populateForNewPersonAccount(form, true);
 		
 		// Add additional Search specific info:
 		AccountSearchInformationHolder accountSearchInfo = new AccountSearchInformationHolder();

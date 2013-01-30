@@ -7,10 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
-import org.kuali.rice.kim.impl.identity.address.EntityAddressTypeBo;
-import org.kuali.rice.kim.impl.identity.email.EntityEmailTypeBo;
-import org.kuali.rice.kim.impl.identity.name.EntityNameTypeBo;
-import org.kuali.rice.kim.impl.identity.phone.EntityPhoneTypeBo;
 import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
 import org.kuali.rice.krad.web.form.UifFormBase;
 import org.springframework.beans.BeanUtils;
@@ -21,7 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sigmasys.kuali.ksa.krad.form.AdminForm;
-import com.sigmasys.kuali.ksa.krad.util.*;
+import com.sigmasys.kuali.ksa.krad.util.AccountInformationHolder;
+import com.sigmasys.kuali.ksa.krad.util.AuditableEntityKeyValuesFinder;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
@@ -46,10 +43,6 @@ public class AccountManagementController extends GenericSearchController {
 	/*
 	 * Option KeyValueFinders.
 	 */
-	private volatile KeyValuesFinder nameTypeOptionsFinder;
-	private volatile KeyValuesFinder addressTypeOptionsFinder;
-	private volatile KeyValuesFinder emailTypeOptionsFinder;
-	private volatile KeyValuesFinder phoneTypeOptionsFinder;
 	private volatile KeyValuesFinder accountStatusTypeOptionsFinder;
 	private volatile KeyValuesFinder latePeriodOptionsFinder;
 	private volatile KeyValuesFinder bankTypeOptionsFinder;
@@ -77,7 +70,7 @@ public class AccountManagementController extends GenericSearchController {
 	@RequestMapping(method = RequestMethod.GET, params = "methodToCall=newPersonAccount")
 	public ModelAndView newPersonAccount(@ModelAttribute("KualiForm") AdminForm form, HttpServletRequest request) {
 		// Populate the form:
-		populateForNewPersonAccount(form);
+		populateForNewPersonAccount(form, false);
 		
 		return getUIFModelAndView(form);
 	}
@@ -141,7 +134,7 @@ public class AccountManagementController extends GenericSearchController {
 		Account account = accountService.getFullAccount(accountId);
 		
 		// Populate the form with the Account details:
-		populateForExistingAccount(form, account);
+		populateForExistingAccount(form, account, false);
 
 		return getUIFModelAndView(form);
 	}
@@ -153,74 +146,15 @@ public class AccountManagementController extends GenericSearchController {
 	 * 
 	 * ========================================================================================*/
 
-	/*
-	 * Returns KIM Name type option finder.
-	 */
-	public KeyValuesFinder getNameTypeOptionsFinder() {
-		if (nameTypeOptionsFinder == null) {
-			synchronized(this) {
-				if (nameTypeOptionsFinder == null) {
-					nameTypeOptionsFinder = new KradTypeEntityKeyValuesFinder<EntityNameTypeBo>(EntityNameTypeBo.class);
-				}
-			}
-		}
-		
-		return nameTypeOptionsFinder;
-	}
-
-	/*
-	 * Returns KIM Address type option finder.
-	 */
-	public KeyValuesFinder getAddressTypeOptionsFinder() {
-		if (addressTypeOptionsFinder == null) {
-			synchronized(this) {
-				if (addressTypeOptionsFinder == null) {
-					addressTypeOptionsFinder = new KradTypeEntityKeyValuesFinder<EntityAddressTypeBo>(EntityAddressTypeBo.class);
-				}
-			}
-		}
-		
-		return addressTypeOptionsFinder;
-	}
-
-	/*
-	 * Returns KIM Email type options finder.
-	 */
-	public KeyValuesFinder getEmailTypeOptionsFinder() {
-		if (emailTypeOptionsFinder == null) {
-			synchronized(this) {
-				if (emailTypeOptionsFinder == null) {
-					emailTypeOptionsFinder = new KradTypeEntityKeyValuesFinder<EntityEmailTypeBo>(EntityEmailTypeBo.class);
-				}
-			}
-		}
-		
-		return emailTypeOptionsFinder;
-	}
-
-	/*
-	 * Returns KIM Phone type options finder. 
-	 */
-	public KeyValuesFinder getPhoneTypeOptionsFinder() {
-		if (phoneTypeOptionsFinder == null) {
-			synchronized(this) {
-				if (phoneTypeOptionsFinder == null) {
-					phoneTypeOptionsFinder = new KradTypeEntityKeyValuesFinder<EntityPhoneTypeBo>(EntityPhoneTypeBo.class);
-				}
-			}
-		}
-		
-		return phoneTypeOptionsFinder;
-	}
 
 	/*
 	 * Returns Account status option finder. 
 	 */
-	public KeyValuesFinder getAccountStatusTypeOptionsFinder() {
+	public KeyValuesFinder getAccountStatusTypeOptionsFinder(boolean blankOption) {
 		if (accountStatusTypeOptionsFinder == null) {
 			synchronized(this) {
 				if (accountStatusTypeOptionsFinder == null) {
-					accountStatusTypeOptionsFinder = new AuditableEntityKeyValuesFinder<AccountStatusType>(auditableEntityService, AccountStatusType.class);
+					accountStatusTypeOptionsFinder = new AuditableEntityKeyValuesFinder<AccountStatusType>(auditableEntityService, AccountStatusType.class, blankOption);
 				}
 			}
 		}
@@ -231,11 +165,11 @@ public class AccountManagementController extends GenericSearchController {
 	/*
 	 * Returns LatePeriod type option finder. 
 	 */
-	public KeyValuesFinder getLatePeriodOptionsFinder() {
+	public KeyValuesFinder getLatePeriodOptionsFinder(boolean blankOption) {
 		if (latePeriodOptionsFinder == null) {
 			synchronized(this) {
 				if (latePeriodOptionsFinder == null) {
-					latePeriodOptionsFinder = new AuditableEntityKeyValuesFinder<LatePeriod>(auditableEntityService, LatePeriod.class);
+					latePeriodOptionsFinder = new AuditableEntityKeyValuesFinder<LatePeriod>(auditableEntityService, LatePeriod.class, blankOption);
 				}
 			}
 		}
@@ -246,11 +180,11 @@ public class AccountManagementController extends GenericSearchController {
 	/*
 	 * Returns BankType option finder. 
 	 */
-	public KeyValuesFinder getBankTypeOptionsFinder() {
+	public KeyValuesFinder getBankTypeOptionsFinder(boolean blankOption) {
 		if (bankTypeOptionsFinder == null) {
 			synchronized(this) {
 				if (bankTypeOptionsFinder == null) {
-					bankTypeOptionsFinder = new AuditableEntityKeyValuesFinder<BankType>(auditableEntityService, BankType.class);
+					bankTypeOptionsFinder = new AuditableEntityKeyValuesFinder<BankType>(auditableEntityService, BankType.class, blankOption);
 				}
 			}
 		}
@@ -261,11 +195,11 @@ public class AccountManagementController extends GenericSearchController {
 	/*
 	 * Returns TaxType option finder.
 	 */
-	public KeyValuesFinder getTaxTypeOptionsFinder() {
+	public KeyValuesFinder getTaxTypeOptionsFinder(boolean blankOption) {
 		if (taxTypeOptionsFinder == null) {
 			synchronized(this) {
 				if (taxTypeOptionsFinder == null) {
-					taxTypeOptionsFinder = new AuditableEntityKeyValuesFinder<TaxType>(auditableEntityService, TaxType.class);
+					taxTypeOptionsFinder = new AuditableEntityKeyValuesFinder<TaxType>(auditableEntityService, TaxType.class, blankOption);
 				}
 			}
 		}
@@ -276,11 +210,11 @@ public class AccountManagementController extends GenericSearchController {
 	/*
 	 * Returns IdentityType option finder.
 	 */
-	public KeyValuesFinder getIdTypeKeyValuesFinder() {
+	public KeyValuesFinder getIdTypeKeyValuesFinder(boolean blankOption) {
 		if (idTypeKeyValuesFinder == null) {
 			synchronized(this) {
 				if (idTypeKeyValuesFinder == null) {
-					idTypeKeyValuesFinder = new AuditableEntityKeyValuesFinder<IdentityType>(auditableEntityService, IdentityType.class);
+					idTypeKeyValuesFinder = new AuditableEntityKeyValuesFinder<IdentityType>(auditableEntityService, IdentityType.class, blankOption);
 				}
 			}
 		}
@@ -298,7 +232,7 @@ public class AccountManagementController extends GenericSearchController {
 	/*
 	 * Populates the given form for a New Person Account page.
 	 */
-	protected void populateForNewPersonAccount(AdminForm form) {
+	protected void populateForNewPersonAccount(AdminForm form, boolean addBlankOption) {
 		// Create a new AccountInformationHolder object:
 		AccountInformationHolder accountInfo = new AccountInformationHolder();
 		Account account = new AccountWrapper();
@@ -331,13 +265,13 @@ public class AccountManagementController extends GenericSearchController {
 		form.setAccountInfo(accountInfo);
 		
 		// Set option finders:
-		setUpOptionFinders(form);
+		setUpOptionFinders(form, addBlankOption);
 	}
 	
 	/*
 	 * Populates the given form for an existing Account.
 	 */
-	protected void populateForExistingAccount(AdminForm form, Account account) {
+	protected void populateForExistingAccount(AdminForm form, Account account, boolean addBlankOption) {
 		// Set the Account attributes:
 		String accountId = account.getId();
 		AccountInformationHolder accountInfo = new AccountInformationHolder();
@@ -354,22 +288,18 @@ public class AccountManagementController extends GenericSearchController {
 		form.setAccount(account);
 		
 		// Set option finders:
-		setUpOptionFinders(form);
+		setUpOptionFinders(form, addBlankOption);
 	}
 	
 	/*
 	 * Sets ups form's Select controls (drop-down list) option finders.
 	 */
-	protected void setUpOptionFinders(AdminForm form) {
-		form.setNameTypeOptionsFinder(getNameTypeOptionsFinder());
-		form.setAddressTypeOptionsFinder(getAddressTypeOptionsFinder());
-		form.setEmailTypeOptionsFinder(getEmailTypeOptionsFinder());
-		form.setPhoneTypeOptionsFinder(getPhoneTypeOptionsFinder());
-		form.setLatePeriodOptionsFinder(getLatePeriodOptionsFinder());
-		form.setBankTypeOptionsFinder(getBankTypeOptionsFinder());
-		form.setTaxTypeOptionsFinder(getTaxTypeOptionsFinder());
-		form.setIdTypeKeyValuesFinder(getIdTypeKeyValuesFinder());
-		form.setAccountStatusTypeOptionsFinder(getAccountStatusTypeOptionsFinder());
+	protected void setUpOptionFinders(AdminForm form, boolean addBlankOption) {
+		form.setLatePeriodOptionsFinder(getLatePeriodOptionsFinder(addBlankOption));
+		form.setBankTypeOptionsFinder(getBankTypeOptionsFinder(addBlankOption));
+		form.setTaxTypeOptionsFinder(getTaxTypeOptionsFinder(addBlankOption));
+		form.setIdTypeKeyValuesFinder(getIdTypeKeyValuesFinder(addBlankOption));
+		form.setAccountStatusTypeOptionsFinder(getAccountStatusTypeOptionsFinder(addBlankOption));
 	}
 	
 	/*

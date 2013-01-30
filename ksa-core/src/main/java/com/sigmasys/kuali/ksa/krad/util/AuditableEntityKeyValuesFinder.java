@@ -19,8 +19,13 @@ public class AuditableEntityKeyValuesFinder<T extends AuditableEntity> extends G
 	
 	
 	public AuditableEntityKeyValuesFinder(AuditableEntityService service, Class<T> type) {
+		this(service, type, false);
+	}
+
+	public AuditableEntityKeyValuesFinder(AuditableEntityService service, Class<T> type, boolean blankOption) {
 		this.auditableEntityService = service;
 		this.type = type;
+		setBlankOption(blankOption);
 	}
 
 	@Override

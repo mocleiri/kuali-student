@@ -86,7 +86,15 @@
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
-					<property name="optionsFinder" value="@{getNameTypeOptionsFinder()}"/>
+					<property name="optionsFinder">
+						<bean class="com.sigmasys.kuali.ksa.krad.util.KradTypeEntityKeyValuesFinder">
+							<constructor-arg>
+								<bean class="java.lang.Class" factory-method="forName">
+									<constructor-arg value="org.kuali.rice.kim.impl.identity.name.EntityNameTypeBo"/>
+								</bean>
+							</constructor-arg>
+						</bean>
+					</property>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="account.defaultPersonName.firstName" p:labelPlacement="TOP" p:label="First Name" p:required="true" p:fieldLabel.renderColon="false">
@@ -133,7 +141,15 @@
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
-					<property name="optionsFinder" value="@{getAddressTypeOptionsFinder()}"/>
+					<property name="optionsFinder">
+						<bean class="com.sigmasys.kuali.ksa.krad.util.KradTypeEntityKeyValuesFinder">
+							<constructor-arg>
+								<bean class="java.lang.Class" factory-method="forName">
+									<constructor-arg value="org.kuali.rice.kim.impl.identity.address.EntityAddressTypeBo"/>
+								</bean>
+							</constructor-arg>
+						</bean>
+					</property>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="account.defaultPostalAddress.streetAddress1" p:labelPlacement="TOP" p:label="Line 1" p:required="true">
@@ -192,7 +208,15 @@
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
-					<property name="optionsFinder" value="@{getEmailTypeOptionsFinder()}"/>
+					<property name="optionsFinder">
+						<bean class="com.sigmasys.kuali.ksa.krad.util.KradTypeEntityKeyValuesFinder">
+							<constructor-arg>
+								<bean class="java.lang.Class" factory-method="forName">
+									<constructor-arg value="org.kuali.rice.kim.impl.identity.email.EntityEmailTypeBo"/>
+								</bean>
+							</constructor-arg>
+						</bean>
+					</property>
 				</bean>
 			
 				<bean parent="Uif-InputField" p:propertyName="account.defaultElectronicContact.emailAddress" p:labelPlacement="TOP" p:label="Email">
@@ -206,7 +230,15 @@
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
-					<property name="optionsFinder" value="@{getPhoneTypeOptionsFinder()}"/>
+					<property name="optionsFinder">
+						<bean class="com.sigmasys.kuali.ksa.krad.util.KradTypeEntityKeyValuesFinder">
+							<constructor-arg>
+								<bean class="java.lang.Class" factory-method="forName">
+									<constructor-arg value="org.kuali.rice.kim.impl.identity.phone.EntityPhoneTypeBo"/>
+								</bean>
+							</constructor-arg>
+						</bean>
+					</property>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="account.defaultElectronicContact.phoneCountry" p:labelPlacement="TOP" p:label="Phone Country">

@@ -1,6 +1,5 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
@@ -37,10 +36,6 @@ public class AdminForm extends AbstractViewModel {
 	/*
 	 * Option KeyValueFinders.
 	 */
-	private KeyValuesFinder nameTypeOptionsFinder;
-	private KeyValuesFinder addressTypeOptionsFinder;
-	private KeyValuesFinder emailTypeOptionsFinder;
-	private KeyValuesFinder phoneTypeOptionsFinder;
 	private KeyValuesFinder accountStatusTypeOptionsFinder;
 	private KeyValuesFinder latePeriodOptionsFinder;
 	private KeyValuesFinder bankTypeOptionsFinder;
@@ -48,7 +43,6 @@ public class AdminForm extends AbstractViewModel {
 	private KeyValuesFinder idTypeKeyValuesFinder;
 	private KeyValuesFinder searchResultFieldsOptionsFinder;
 	
-
     private List<GlTransaction> glTransactions;
 
    /*
@@ -68,38 +62,6 @@ public class AdminForm extends AbstractViewModel {
 	
 	public void setAccountSearchInfo(AccountSearchInformationHolder accountSearchInfo) {
 		this.accountSearchInfo = accountSearchInfo;
-	}
-
-	public KeyValuesFinder getNameTypeOptionsFinder() {
-		return nameTypeOptionsFinder;
-	}
-	
-	public void setNameTypeOptionsFinder(KeyValuesFinder nameTypeOptionsFinder) {
-		this.nameTypeOptionsFinder = nameTypeOptionsFinder;
-	}
-	
-	public KeyValuesFinder getAddressTypeOptionsFinder() {
-		return addressTypeOptionsFinder;
-	}
-	
-	public void setAddressTypeOptionsFinder(KeyValuesFinder addressTypeOptionsFinder) {
-		this.addressTypeOptionsFinder = addressTypeOptionsFinder;
-	}
-	
-	public KeyValuesFinder getEmailTypeOptionsFinder() {
-		return emailTypeOptionsFinder;
-	}
-	
-	public void setEmailTypeOptionsFinder(KeyValuesFinder emailTypeOptionsFinder) {
-		this.emailTypeOptionsFinder = emailTypeOptionsFinder;
-	}
-	
-	public KeyValuesFinder getPhoneTypeOptionsFinder() {
-		return phoneTypeOptionsFinder;
-	}
-	
-	public void setPhoneTypeOptionsFinder(KeyValuesFinder phoneTypeOptionsFinder) {
-		this.phoneTypeOptionsFinder = phoneTypeOptionsFinder;
 	}
 
 	public KeyValuesFinder getAccountStatusTypeOptionsFinder() {
@@ -192,5 +154,4 @@ public class AdminForm extends AbstractViewModel {
 			List<AccountSearchResultCollectionLine> accountSearchResults) {
 		this.accountSearchResults = accountSearchResults;
 	}
-
 }
