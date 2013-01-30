@@ -42,7 +42,6 @@ alter table KSA.KSSA_INFORMATION add constraint FKD2A2E003FE6E074B foreign key (
 alter table KSA.KSSA_IRS_1098T add constraint FKCD8EF71887CB7AAA foreign key (STUDENT_POSTAL_ADDRESS_ID_FK) references KSA.KSSA_POSTAL_ADDRESS;
 alter table KSA.KSSA_IRS_1098T add constraint FKCD8EF71898518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;
 alter table KSA.KSSA_IRS_1098T add constraint FKCD8EF718F13B97E6 foreign key (XML_ID_FK) references KSA.KSSA_XML;
-alter table KSA.KSSA_IRS_1098T add constraint FKCD8EF71815A0454F foreign key (FILER_POSTAL_ADDRESS_ID_FK) references KSA.KSSA_POSTAL_ADDRESS;
 alter table KSA.KSSA_KYPR add constraint FKB8FC70D99A56DE38 foreign key (LEARNING_PERIOD_ID_FK) references KSA.KSSA_LEARNING_PERIOD;
 alter table KSA.KSSA_LU add constraint FK11C630B29A56DE38 foreign key (LEARNING_PERIOD_ID_FK) references KSA.KSSA_LEARNING_PERIOD;
 alter table KSA.KSSA_LU add constraint FK11C630B298518DD2 foreign key (ACNT_ID_FK) references KSA.KSSA_ACNT;

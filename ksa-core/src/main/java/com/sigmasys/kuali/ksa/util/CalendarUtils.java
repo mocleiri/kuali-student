@@ -114,7 +114,7 @@ public class CalendarUtils {
         return setTime(date, 0, 0, 0, 0);
     }
 
-    public static Integer getWorkingDaysBetween(Date fromDate, Date toDate) {
+    public static int getWorkingDaysBetween(Date fromDate, Date toDate) {
 
         if (fromDate == null || toDate == null) {
             return 0;
@@ -168,6 +168,12 @@ public class CalendarUtils {
         cal.setTime(date);
         cal.add(Calendar.MONTH, months);
         return cal.getTime();
+    }
+
+    public static int getYear(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal.get(Calendar.YEAR);
     }
 
 }

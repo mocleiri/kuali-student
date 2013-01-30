@@ -108,5 +108,8 @@ public interface Constants {
     String KSA_1098_TAG_BILLED_AMOUNT = "ksa.1098.tag.amount.billed";
     String KSA_1098_TAG_INSURANCE_REFUND = "ksa.1098.tag.insurance.refund";
     String KSA_1098_TAG_GRANTS = "ksa.1098.tag.grants";
+    String KSA_1098_REPORTING_METHOD_CHANGE = "ksa.1098.reporting.method.change";
 
+    // KSA Transaction constants
+    String KSA_TRANSACTION_RECOGNITION_YEAR = "ksa.transaction.recognition.year";
 }

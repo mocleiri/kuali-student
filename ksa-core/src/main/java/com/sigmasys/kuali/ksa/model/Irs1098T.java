@@ -83,9 +83,34 @@ public class Irs1098T implements Identifiable {
     private String filerFederalId;
 
     /**
-     * Filer Postal Address
+     * Filer Street Address 1
      */
-    private PostalAddress filerPostalAddress;
+    private String streetAddress1;
+
+    /**
+     * Filer Street Address 2
+     */
+    private String streetAddress2;
+
+    /**
+     * Filer City
+     */
+    private String city;
+
+    /**
+     * Filer State
+     */
+    private String state;
+
+    /**
+     * Filer Postal Code
+     */
+    private String postalCode;
+
+    /**
+     * Filer Country
+     */
+    private String country;
 
     /**
      * Student Postal Address
@@ -288,16 +313,6 @@ public class Irs1098T implements Identifiable {
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "FILER_POSTAL_ADDRESS_ID_FK")
-    public PostalAddress getFilerPostalAddress() {
-        return filerPostalAddress;
-    }
-
-    public void setFilerPostalAddress(PostalAddress filerPostalAddress) {
-        this.filerPostalAddress = filerPostalAddress;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STUDENT_POSTAL_ADDRESS_ID_FK")
     public PostalAddress getStudentPostalAddress() {
         return studentPostalAddress;
@@ -426,5 +441,59 @@ public class Irs1098T implements Identifiable {
 
     public void setXmlDocument(XmlDocument xmlDocument) {
         this.xmlDocument = xmlDocument;
+    }
+
+    @Column(name = "FILER_ADDRESS_LINE_1", length = 100)
+    public String getStreetAddress1() {
+        return streetAddress1;
+    }
+
+    public void setStreetAddress1(String streetAddress1) {
+        this.streetAddress1 = streetAddress1;
+    }
+
+    @Column(name = "FILER_ADDRESS_LINE_2", length = 100)
+    public String getStreetAddress2() {
+        return streetAddress2;
+    }
+
+    public void setStreetAddress2(String streetAddress2) {
+        this.streetAddress2 = streetAddress2;
+    }
+
+    @Column(name = "FILER_ADDRESS_CITY", length = 100)
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    @Column(name = "FILER_ADDRESS_STATE", length = 10)
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    @Column(name = "FILER_ADDRESS_POSTAL_CODE", length = 10)
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    @Column(name = "FILER_ADDRESS_COUNTRY", length = 100)
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

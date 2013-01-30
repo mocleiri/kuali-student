@@ -353,6 +353,13 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
     public com.sigmasys.kuali.ksa.model.Irs1098T create1098TReport(String accountId, Date startDate, Date endDate,
                                                                    int ssnMask, boolean noRecord) {
 
+        final int reportYear = CalendarUtils.getYear(startDate);
+        if (reportYear != CalendarUtils.getYear(endDate)) {
+            String errMsg = "Start and End dates must have the same year";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
         Account account = accountService.getFullAccount(accountId);
         if (account == null) {
             String errMsg = "Cannot find Account with ID = " + accountId;
@@ -381,7 +388,14 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
             throw new IllegalStateException(errMsg);
         }
 
+        final String currentUserId = userSessionManager.getUserId(RequestUtils.getThreadRequest());
+
         final com.sigmasys.kuali.ksa.model.Irs1098T irs1098T = new com.sigmasys.kuali.ksa.model.Irs1098T();
+
+        irs1098T.setCreatorId(currentUserId);
+        irs1098T.setCreationDate(new Date());
+
+        irs1098T.setFormYear(String.valueOf(reportYear));
 
         String taxReference = accountInfo.getTaxReference();
 
@@ -403,29 +417,29 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
         irs1098T.setFilerName(configService.getInitialParameter(Constants.KSA_1098_FILER_NAME));
         irs1098T.setFilerFederalId(configService.getInitialParameter(Constants.KSA_1098_FILER_FEIN));
+        irs1098T.setFilerPhoneNumber(configService.getInitialParameter(Constants.KSA_1098_FILER_PHONE));
 
-        /*postalAddress = ObjectFactory.getInstance().createPostalAddress();
-        postalAddress.setAddressLine1(configService.getInitialParameter(Constants.KSA_1098_FILER_ADDRESS1));
-        postalAddress.setAddressLine2(configService.getInitialParameter(Constants.KSA_1098_FILER_ADDRESS2));
-        postalAddress.setAddressLine3(configService.getInitialParameter(Constants.KSA_1098_FILER_ADDRESS3));
-        postalAddress.setCity(configService.getInitialParameter(Constants.KSA_1098_FILER_CITY));
-        postalAddress.setStateCode(configService.getInitialParameter(Constants.KSA_1098_FILER_STATE));
-        postalAddress.setPostalCode(configService.getInitialParameter(Constants.KSA_1098_FILER_ZIP));
-        postalAddress.setCountryCode(configService.getInitialParameter(Constants.KSA_1098_FILER_COUNTRY));
-
-        filer.setPostalAddress(postalAddress);
-
-        filer.setTelephoneNumber(configService.getInitialParameter(Constants.KSA_1098_FILER_PHONE));
+        irs1098T.setStreetAddress1(configService.getInitialParameter(Constants.KSA_1098_FILER_ADDRESS1));
+        irs1098T.setStreetAddress2(configService.getInitialParameter(Constants.KSA_1098_FILER_ADDRESS2));
+        irs1098T.setCity(configService.getInitialParameter(Constants.KSA_1098_FILER_CITY));
+        irs1098T.setState(configService.getInitialParameter(Constants.KSA_1098_FILER_STATE));
+        irs1098T.setPostalCode(configService.getInitialParameter(Constants.KSA_1098_FILER_ZIP));
+        irs1098T.setCountry(configService.getInitialParameter(Constants.KSA_1098_FILER_COUNTRY));
 
         // Filling in FinancialEntry
         final String billedAmountTag = configService.getInitialParameter(Constants.KSA_1098_TAG_BILLED_AMOUNT);
         final String insuranceRefundTag = configService.getInitialParameter(Constants.KSA_1098_TAG_INSURANCE_REFUND);
         final String grantTag = configService.getInitialParameter(Constants.KSA_1098_TAG_GRANTS);
+        final int recognitionYear =
+                Integer.valueOf(configService.getInitialParameter(Constants.KSA_TRANSACTION_RECOGNITION_YEAR));
 
         BigDecimal chargeAmount = BigDecimal.ZERO;
         BigDecimal refundPaymentAmount = BigDecimal.ZERO;
         BigDecimal grantPaymentAmount = BigDecimal.ZERO;
+        boolean includesNextQuarter = false;
+
         List<Transaction> transactions = transactionService.getTransactions(accountId, startDate, endDate);
+
         for (Transaction transaction : transactions) {
             TransactionTypeValue transactionTypeValue = transaction.getTransactionTypeValue();
             BigDecimal transactionAmount = (transaction.getAmount() != null) ? transaction.getAmount() : BigDecimal.ZERO;
@@ -439,31 +453,85 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
                     }
                 } else if (TransactionTypeValue.CHARGE.equals(transactionTypeValue) && containsTag(billedAmountTag, tags)) {
                     chargeAmount = chargeAmount.add(transactionAmount);
+                    if (!includesNextQuarter && recognitionYear > reportYear) {
+                        includesNextQuarter = true;
+                    }
                 }
             }
         }
 
-        financialEntry.setAmountBilled(chargeAmount);
-        financialEntry.setInsuranceContract(refundPaymentAmount);
-        financialEntry.setScholarshipsOrGrants(grantPaymentAmount);
+        irs1098T.setBilledAmount(chargeAmount);
+        irs1098T.setInsRefundAmount(refundPaymentAmount);
+        irs1098T.setScholarshipAmount(grantPaymentAmount);
 
-        // Filling in FormCheckboxes
-        // TODO - provide correct values
-        formCheckboxes.setReportingMethodChanged(false);
-        formCheckboxes.setCorrected(false);
+        irs1098T.setIncludesNextQuarter(includesNextQuarter);
+
+        boolean reportMethodChange = Boolean.valueOf(configService.getInitialParameter(Constants.KSA_1098_REPORTING_METHOD_CHANGE));
+        irs1098T.setReportingMethodChanged(reportMethodChange);
+
+        // Getting the report for the same account and year
+        com.sigmasys.kuali.ksa.model.Irs1098T oldReport = getIrs1098T(accountId, startDate, endDate);
+
+        irs1098T.setCorrected(oldReport != null);
 
         if (noRecord) {
-            formCheckboxes.setVoid(true);
+            irs1098T.setVoid(true);
         } else {
 
-            // TODO: the process document has a few discrepancies that have to be discussed with Paul
+            // Getting the report for the same account and PREVIOUS year
+            com.sigmasys.kuali.ksa.model.Irs1098T priorReport = getIrs1098T(accountId, reportYear - 1);
+            if (priorReport != null) {
+
+                // Calculating adjustments
+                BigDecimal billedAmountAdjustment = irs1098T.getBilledAmount().subtract(priorReport.getBilledAmount());
+                BigDecimal paymentAmountAdjustment = irs1098T.getReceivedPayments().subtract(priorReport.getReceivedPayments());
+
+                BigDecimal priorYearAdjustment = billedAmountAdjustment.add(paymentAmountAdjustment);
+                if (priorYearAdjustment.compareTo(BigDecimal.ZERO) != 0) {
+                    irs1098T.setPriorYearAdjustedAmount(priorYearAdjustment);
+                }
+
+                // Calculating scholarship or grant adjustment
+                BigDecimal scholarshipAdjustment = irs1098T.getScholarshipAmount().subtract(priorReport.getScholarshipAmount());
+                if (scholarshipAdjustment.compareTo(BigDecimal.ZERO) != 0) {
+                    irs1098T.setScholarshipAdjustedAmount(scholarshipAdjustment);
+                }
+            }
+
+            // TODO: complete the form
+
         }
 
-        */
-        // TODO: complete IRS 1098T form
-
+        // TODO
         return null;
 
+    }
+
+    private com.sigmasys.kuali.ksa.model.Irs1098T getIrs1098T(String accountId, Date startDate, Date endDate) {
+
+        startDate = CalendarUtils.removeTime(startDate);
+        endDate = CalendarUtils.removeTime(endDate);
+
+        Query query = em.createQuery("select irs from Irs1098T irs where irs.accountId = :accountId and " +
+                " irs.startDate <= :startDate and irs.endDate >= :endDate order by irs.creationDate desc");
+
+        query.setParameter("accountId", accountId);
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+        query.setMaxResults(1);
+
+        List<com.sigmasys.kuali.ksa.model.Irs1098T> results = query.getResultList();
+        return CollectionUtils.isNotEmpty(results) ? results.get(0) : null;
+    }
+
+    private com.sigmasys.kuali.ksa.model.Irs1098T getIrs1098T(String accountId, int year) {
+
+        // Getting January the first date
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, Calendar.JANUARY, 1);
+        Date date = calendar.getTime();
+
+        return getIrs1098T(accountId, date, date);
     }
 
     private boolean containsTag(String tagCode, Collection<Tag> tags) {
@@ -1072,8 +1140,9 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      * @return A List of only <code>KsaTransaction</code> objects from the given <code>Accepted</code> object.
      */
     private List<KsaTransaction> extractKsaTransactions(KsaBatchTransactionResponse.Accepted accepted) {
+
         // Create an empty List:
-        List<KsaTransaction> result = new ArrayList<KsaTransaction>();
+        List<KsaTransaction> result = new LinkedList<KsaTransaction>();
 
         if (accepted != null) {
             // Iterate through the List of KsaTransactions and TransactionDetails objects:

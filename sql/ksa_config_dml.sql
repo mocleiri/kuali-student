@@ -92,6 +92,9 @@ insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.object.type.code', '');
 insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.origination.code', 'KS');
 insert into KSSA_CONFIG (NAME, VALUE) values ('kfs.transaction.gl.entry.description', 'KSA General Ledger Transaction');
 
+-- KSA Transaction settings
+insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.transaction.recognition.year', '2014');
+
 -- 1098T settings
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.filer.name', 'Sigma University');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.filer.address1', '2305 S Colorado Blvd');
@@ -108,6 +111,7 @@ insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.tag.amount.billed', 'Bil
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.tag.insurance.refund', 'InsRef1098');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.tag.grants', 'Scholarship1098');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.us.ssn.tax.type', 'SSN');
+insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.reporting.method.change', 'true');
 
 -- Refund constants
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.refund.ach.bank.type', 'ACH');
