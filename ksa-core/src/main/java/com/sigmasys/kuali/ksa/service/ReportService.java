@@ -62,13 +62,13 @@ public interface ReportService {
      * @param accountId ID of an account for which to produce the report.
      * @param startDate Payments and Refunds tracking start date.
      * @param endDate   Payments and Refunds tracking end date date
-     * @param ssnMask   The number of final digits of the social security number that will be stored in the local record.
-     * @param noRecord  Whether to keep the record of the produces 1098T
+     * @param numberOfDisplayedDigits   The number of final digits of the social security number that will be stored in the local record.
+     * @param isTransient  Whether to keep the record of the produces 1098T
      * @return String representation of an IRS 1098T form.
      * @throws IllegalArgumentException If <code>dateFrom</code> or <code>dateTo</code> are invalid or do not fall within the <code>year</code>.
      * @see Irs1098T
      */
-    String generate1098TReport(String accountId, Date startDate, Date endDate, int ssnMask, boolean noRecord);
+    String generate1098TReport(String accountId, Date startDate, Date endDate, int numberOfDisplayedDigits, boolean isTransient);
 
     /**
      * Returns an XML representation of a complete year federal 1098T form. Note that many of the parameters for producing a correct 1098T
@@ -76,20 +76,20 @@ public interface ReportService {
      * <br>
      * <code>ssnMask<code> is the number of final digits of the social security number that will be stored in the local record.
      * The XML file produced will contain the entire social security number, and it is imperative that the institution provide appropriate controls over this data.<br>
-     * If <code>noRecord</code> is passed as true, then the system will not keep a record of the produced 1098T.
+     * If <code>isTransient</code> is passed as true, then the system will not keep a record of the produced 1098T.
      * This option is ONLY to be used if the 1098T is being used to verify previous year's data, as the system does in order to complete the current year's return.
      * This form will automatically be returned as void, and a paper 1098T should not be produced from this data.
      * <br>
      *
      * @param accountId ID of an account for which to produce the report.
      * @param year      Tax year.
-     * @param ssnMask   The number of final digits of the social security number that will be stored in the local record.
-     * @param noRecord  Whether to keep the record of the produces 1098T
+     * @param numberOfDisplayedDigits   The number of final digits of the social security number that will be stored in the local record.
+     * @param isTransient  Whether to keep the record of the produces 1098T
      * @return String representation of an IRS 1098T form.
      * @see Irs1098T
      */
     @WebMethod(exclude = true)
-    String generateAnnual1098TReport(String accountId, int year, int ssnMask, boolean noRecord);
+    String generateAnnual1098TReport(String accountId, int year, int numberOfDisplayedDigits, boolean isTransient);
 
     /**
      * Produce an XML aged balance report for the accounts in the list. If <code>ageAccounts</code> is <code>true</code>, then each

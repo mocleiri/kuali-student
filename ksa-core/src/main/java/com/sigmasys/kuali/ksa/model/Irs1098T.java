@@ -85,32 +85,37 @@ public class Irs1098T implements Identifiable {
     /**
      * Filer Street Address 1
      */
-    private String streetAddress1;
+    private String filerStreetAddress1;
 
     /**
      * Filer Street Address 2
      */
-    private String streetAddress2;
+    private String filerStreetAddress2;
+
+    /**
+        * Filer Street Address 3
+        */
+    private String filerStreetAddress3;
 
     /**
      * Filer City
      */
-    private String city;
+    private String filerCity;
 
     /**
      * Filer State
      */
-    private String state;
+    private String filerState;
 
     /**
      * Filer Postal Code
      */
-    private String postalCode;
+    private String filerPostalCode;
 
     /**
      * Filer Country
      */
-    private String country;
+    private String filerCountry;
 
     /**
      * Student Postal Address
@@ -444,56 +449,66 @@ public class Irs1098T implements Identifiable {
     }
 
     @Column(name = "FILER_ADDRESS_LINE_1", length = 100)
-    public String getStreetAddress1() {
-        return streetAddress1;
+    public String getFilerStreetAddress1() {
+        return filerStreetAddress1;
     }
 
-    public void setStreetAddress1(String streetAddress1) {
-        this.streetAddress1 = streetAddress1;
+    public void setFilerStreetAddress1(String filerStreetAddress1) {
+        this.filerStreetAddress1 = filerStreetAddress1;
     }
 
     @Column(name = "FILER_ADDRESS_LINE_2", length = 100)
-    public String getStreetAddress2() {
-        return streetAddress2;
+    public String getFilerStreetAddress2() {
+        return filerStreetAddress2;
     }
 
-    public void setStreetAddress2(String streetAddress2) {
-        this.streetAddress2 = streetAddress2;
+    public void setFilerStreetAddress2(String filerStreetAddress2) {
+        this.filerStreetAddress2 = filerStreetAddress2;
+    }
+
+
+    @Column(name = "FILER_ADDRESS_LINE_3", length = 100)
+    public String getFilerStreetAddress3() {
+        return filerStreetAddress3;
+    }
+
+    public void setFilerStreetAddress3(String filerStreetAddress3) {
+        this.filerStreetAddress3 = filerStreetAddress3;
     }
 
     @Column(name = "FILER_ADDRESS_CITY", length = 100)
-    public String getCity() {
-        return city;
+    public String getFilerCity() {
+        return filerCity;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setFilerCity(String filerCity) {
+        this.filerCity = filerCity;
     }
 
     @Column(name = "FILER_ADDRESS_STATE", length = 10)
-    public String getState() {
-        return state;
+    public String getFilerState() {
+        return filerState;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setFilerState(String state) {
+        this.filerState = state;
     }
 
     @Column(name = "FILER_ADDRESS_POSTAL_CODE", length = 10)
-    public String getPostalCode() {
-        return postalCode;
+    public String getFilerPostalCode() {
+        return filerPostalCode;
     }
 
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
+    public void setFilerPostalCode(String postalCode) {
+        this.filerPostalCode = postalCode;
     }
 
     @Column(name = "FILER_ADDRESS_COUNTRY", length = 100)
-    public String getCountry() {
-        return country;
+    public String getFilerCountry() {
+        return filerCountry;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setFilerCountry(String country) {
+        this.filerCountry = country;
     }
 }
