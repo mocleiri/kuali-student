@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import com.sigmasys.kuali.ksa.jaxb.Irs1098T;
@@ -205,6 +206,8 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      * @return XML representation of IRS 1098T form.
      * @see Irs1098T
      */
+    @Override
+    @Transactional(readOnly = false)
     public String generate1098TReport(String accountId, Date startDate, Date endDate, int numberOfDisplayedDigits,
                                       boolean isTransient) {
 
@@ -318,6 +321,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      * @return Irs1098T instance
      * @see Irs1098T
      */
+    @Transactional(readOnly = false)
     protected com.sigmasys.kuali.ksa.model.Irs1098T create1098TReport(String accountId, Date startDate, Date endDate,
                                                                       int numberOfDisplayedDigits, boolean isTransient) {
 
@@ -360,8 +364,13 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
         final com.sigmasys.kuali.ksa.model.Irs1098T irs1098T = new com.sigmasys.kuali.ksa.model.Irs1098T();
 
+        irs1098T.setAccount(account);
+
         irs1098T.setCreatorId(currentUserId);
         irs1098T.setCreationDate(new Date());
+
+        irs1098T.setStartDate(startDate);
+        irs1098T.setEndDate(endDate);
 
         irs1098T.setFormYear(String.valueOf(reportYear));
 
@@ -450,7 +459,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         } else {
 
             // Generating the report (but not persisting!) for the same account and PREVIOUS year
-            com.sigmasys.kuali.ksa.model.Irs1098T priorReport = createAnnual1098TReport(accountId, reportYear - 1,
+            com.sigmasys.kuali.ksa.model.Irs1098T priorReport = create1098TReportByYear(accountId, reportYear - 1,
                     numberOfDisplayedDigits, true);
 
             if (priorReport != null) {
@@ -513,12 +522,14 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         startDate = CalendarUtils.removeTime(startDate);
         endDate = CalendarUtils.removeTime(endDate);
 
-        Query query = em.createQuery("select irs from Irs1098T irs where irs.accountId = :accountId and " +
+        Query query = em.createQuery("select irs from Irs1098T irs " +
+                " left outer join fetch irs.account account" +
+                " where account.id = :accountId and " +
                 " irs.startDate <= :startDate and irs.endDate >= :endDate order by irs.creationDate desc");
 
         query.setParameter("accountId", accountId);
-        query.setParameter("startDate", startDate);
-        query.setParameter("endDate", endDate);
+        query.setParameter("startDate", startDate, TemporalType.DATE);
+        query.setParameter("endDate", endDate, TemporalType.DATE);
         query.setMaxResults(1);
 
         List<com.sigmasys.kuali.ksa.model.Irs1098T> results = query.getResultList();
@@ -546,7 +557,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         com.sigmasys.kuali.ksa.model.Irs1098T report = getIrs1098T(accountId, startDate, endDate);
         if (report == null) {
             String errMsg = "Cannot find Irs1098T record for Account ID '" + accountId +
-                    "' and dates [" + startDate + "," + endDate + "]";
+                    "' and dates [" + startDate + ", " + endDate + "]";
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
         }
@@ -596,13 +607,14 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      * @see Irs1098T
      */
     @Override
+    @Transactional(readOnly = false)
     public String generate1098TReportByYear(String accountId, int year, int numberOfDisplayedDigits, boolean isTransient) {
         Date firstDate = CalendarUtils.getFirstDateOfYear(year);
         Date lastDate = CalendarUtils.getLastDateOfYear(year);
         return generate1098TReport(accountId, firstDate, lastDate, numberOfDisplayedDigits, isTransient);
     }
 
-    protected com.sigmasys.kuali.ksa.model.Irs1098T createAnnual1098TReport(String accountId, int year,
+    protected com.sigmasys.kuali.ksa.model.Irs1098T create1098TReportByYear(String accountId, int year,
                                                                             int numberOfDisplayedDigits, boolean isTransient) {
         Date firstDate = CalendarUtils.getFirstDateOfYear(year);
         Date lastDate = CalendarUtils.getLastDateOfYear(year);

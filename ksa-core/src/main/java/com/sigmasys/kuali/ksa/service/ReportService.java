@@ -56,8 +56,6 @@ public interface ReportService {
 
     /**
      * An overloaded version of the <code>prepare1098TReport</code> method that produces a partial year federal 1098T form.
-     * Note that the <code>dateFrom</code> and <code>dateTo</code> must fall within the <code>year</code>. Otherwise,
-     * a runtime validation <code>IllegalArgumentException</code> will be thrown.
      *
      * @param accountId               ID of an account for which to produce the report.
      * @param startDate               Payments and Refunds tracking start date.

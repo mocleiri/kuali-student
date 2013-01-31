@@ -49,9 +49,9 @@
                                 <xs:element name="amount-billed" type="xs:decimal"/>
                             </xs:choice>
                             <xs:element name="includes-next-quarter" type="xs:boolean"/>
-                            <xs:element name="prior-year-adjustment" type="xs:decimal"/>
+                            <xs:element name="prior-year-adjustment" type="xs:decimal" minOccurs="0"/>
                             <xs:element name="scholarships-or-grants" type="xs:decimal"/>
-                            <xs:element name="prior-year-scholarship-adjustment" type="xs:decimal"/>
+                            <xs:element name="prior-year-scholarship-adjustment" type="xs:decimal" minOccurs="0"/>
                             <xs:element name="insurance-contract" type="xs:decimal"/>
                         </xs:sequence>
                     </xs:complexType>

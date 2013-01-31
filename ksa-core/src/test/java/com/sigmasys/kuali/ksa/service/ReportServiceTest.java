@@ -37,7 +37,9 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
     @Before
     public void setUpWithinTransaction() {
         super.setUpWithinTransaction();
+        accountService.getOrCreateAccount("admin");
         accountService.getOrCreateAccount("user1");
+        accountService.getOrCreateAccount("user2");
         dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
     }
 
@@ -166,4 +168,69 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
         Assert.hasText(xml);
 
     }
+
+    @Test
+    public void generateIrs1098TReports() throws Exception {
+
+        Date startDate = dateFormat.parse("01/01/2012");
+        Date endDate = dateFormat.parse("12/31/2012");
+
+        List<String> userIds = Arrays.asList("admin", "user1", "user2");
+
+        for (boolean isTransient : Arrays.asList(true, false)) {
+
+            for (String userId : userIds) {
+
+                String createdXml = reportService.generate1098TReport(userId, startDate, endDate, 4, isTransient);
+
+                logger.debug("IRS 1098T Report for user '" + userId + "' \n" + createdXml);
+
+                Assert.notNull(createdXml);
+                Assert.hasText(createdXml);
+
+                if (!isTransient) {
+
+                    String restoredXml = reportService.getIrs1098TReport(userId, startDate, endDate);
+
+                    Assert.notNull(restoredXml);
+                    Assert.hasText(restoredXml);
+
+                    Assert.isTrue(createdXml.equals(restoredXml));
+                }
+            }
+        }
+
+    }
+
+    @Test
+    public void generateIrs1098TReportsByYear() throws Exception {
+
+        final int year = 2012;
+
+        List<String> userIds = Arrays.asList("admin", "user1", "user2");
+
+        for (boolean isTransient : new boolean[]{true, false}) {
+
+            for (String userId : userIds) {
+
+                String createdXml = reportService.generate1098TReportByYear(userId, year, 4, isTransient);
+
+                logger.debug("IRS 1098T Report for user '" + userId + "' \n" + createdXml);
+
+                Assert.notNull(createdXml);
+                Assert.hasText(createdXml);
+
+                if (!isTransient) {
+
+                    String restoredXml = reportService.getIrs1098TReportByYear(userId, year);
+
+                    Assert.notNull(restoredXml);
+                    Assert.hasText(restoredXml);
+
+                    Assert.isTrue(createdXml.equals(restoredXml));
+                }
+            }
+        }
+    }
+
 }
