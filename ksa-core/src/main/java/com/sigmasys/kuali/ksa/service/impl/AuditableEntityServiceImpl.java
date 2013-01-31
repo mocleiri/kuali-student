@@ -63,6 +63,20 @@ public class AuditableEntityServiceImpl extends GenericPersistenceService implem
     }
 
     /**
+     * Returns all AuditableEntity instances containg the name string sorted by ID in the descendant order for the given entity type
+     *
+     * @param name       String containing characters within the name
+     * @param entityType Class instance of AuditableEntity subclass
+     * @return List of Information instances
+     */
+    @Override
+    public <T extends AuditableEntity> List<T> getAuditableEntitiesByName(String name, Class<T> entityType) {
+        Query query = em.createQuery("select ae from " + entityType.getName() + " ae where upper(ae.name) like upper(:name)");
+        query.setParameter("name", "%" +  name + "%");
+        return query.getResultList();
+    }
+
+    /**
      * Persists the AuditableEntity entity in the database.
      * Creates a new entity when ID is null and updates the existing one otherwise.
      *

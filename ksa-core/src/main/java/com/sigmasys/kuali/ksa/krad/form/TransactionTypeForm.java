@@ -41,12 +41,14 @@ public class TransactionTypeForm extends AbstractViewModel {
     private String unallocatedGLAccount;
     private String unallocatedGLOperation;
     private List<GlBreakdown> glBreakdowns;
+    private List<Tag> tags;
 
     // Debit types only
 
 
     // Display only fields
     private boolean showEndDate;
+    private String tagSearch;
 
     /*
       Get/Set methods
@@ -240,5 +242,21 @@ public class TransactionTypeForm extends AbstractViewModel {
 
     public void setRollup(Rollup rollup) {
         this.rollup = rollup;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public String getTagSearch() {
+        return tagSearch;
+    }
+
+    public void setTagSearch(String tagSearch) {
+        this.tagSearch = tagSearch;
     }
 }

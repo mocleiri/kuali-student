@@ -113,6 +113,8 @@ public class TransactionTypeController extends GenericSearchController {
             breakdowns.add(b);
         }
 
+        form.setTags(auditableEntityService.getAuditableEntities(Tag.class));
+
         form.setGlBreakdowns(breakdowns);
 
         form.setCreditDebitKeyValuesFinder(this.getCreditDebitTypeOptionsFinder());
@@ -261,6 +263,5 @@ public class TransactionTypeController extends GenericSearchController {
 
         return rollupTypeOptionsFinder;
     }
-
 
 }

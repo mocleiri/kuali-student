@@ -209,4 +209,22 @@ public class AuditableEntityServiceTest extends AbstractServiceTest {
 
     }
 
+    @Test
+    public void searchByWildcard() throws Exception {
+        String searchString = "Num";
+
+        List<TaxType> types = auditableEntityService.getAuditableEntitiesByName(searchString, TaxType.class);
+
+        Assert.notNull(types);
+        Assert.isTrue(types.size() == 3, "Searching TaxType for '" + searchString + "' returned " + types.size() + " results instead of 3");
+
+        searchString = "cash";
+
+        List<Tag> tags = auditableEntityService.getAuditableEntitiesByName(searchString, Tag.class);
+
+        Assert.notNull(types);
+        Assert.isTrue(tags.size() == 1, "Searching Tags for '" + searchString + "' returned " + types.size() + " results instead of 1");
+
+    }
+
 }
