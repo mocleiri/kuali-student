@@ -79,7 +79,7 @@
     <bean id="Uif-KsaFormView" class="com.sigmasys.kuali.ksa.krad.uif.KsaFormView" parent="Uif-FormView"
           abstract="true">
         <property name="template" value="/WEB-INF/ftl/view.ftl"/>
-        <property name="viewHelperServiceClass" value="com.sigmasys.kuali.ksa.krad.util.KsaHelper"/>
+        <property name="viewHelperService" ref="ksaHelper"/>
         <property name="additionalCssFiles">
             <list>
                 <value>css/ksa.css?forceReload</value>
