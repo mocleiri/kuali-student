@@ -176,4 +176,20 @@ public class CalendarUtils {
         return cal.get(Calendar.YEAR);
     }
 
+    public static Date getFirstDateOfYear(int year) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 2012);
+        cal.set(Calendar.WEEK_OF_YEAR, 1);
+        cal.set(Calendar.DAY_OF_WEEK, 1);
+        return cal.getTime();
+    }
+
+    public static Date getLastDateOfYear(int year) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, 2012);
+        cal.set(Calendar.MONTH, 11); // 11 = december
+        cal.set(Calendar.DAY_OF_MONTH, 31); // new years eve
+        return cal.getTime();
+    }
+
 }

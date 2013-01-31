@@ -202,7 +202,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      * @param endDate                 Payments and Refunds tracking end date date
      * @param numberOfDisplayedDigits The number of final digits of the social security number that will be stored in the local record.
      * @param isTransient             Whether to keep the record of the produces 1098T
-     * @return String representation of an IRS 1098T form.
+     * @return XML representation of IRS 1098T form.
      * @see Irs1098T
      */
     public String generate1098TReport(String accountId, Date startDate, Date endDate, int numberOfDisplayedDigits,
@@ -218,6 +218,18 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
             throw new IllegalStateException(errMsg);
         }
 
+        return toXml(accountId, accountInfo.getTaxReference(), newReport);
+    }
+
+    /**
+     * Converts the internal representation of IRS 1098T report (Irs1098T JPA entity) into XML format.
+     *
+     * @param accountId    Account ID
+     * @param taxReference Tax reference (SSN)
+     * @param report       Irs1098T instance
+     * @return XML representation of IRS 1098T form.
+     */
+    protected String toXml(String accountId, String taxReference, com.sigmasys.kuali.ksa.model.Irs1098T report) {
 
         final Irs1098T irs1098T = new Irs1098T();
 
@@ -229,17 +241,17 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
         final Irs1098T.FormCheckboxes formCheckboxes = new Irs1098T.FormCheckboxes();
 
-        irs1098T.setFormYear(newReport.getFormYear());
+        irs1098T.setFormYear(report.getFormYear());
 
         // Filling in Student
         // Setting the entire SNN
-        student.setSocialSecurityNumber(accountInfo.getTaxReference());
+        student.setSocialSecurityNumber(taxReference);
         student.setAccountNumber(accountId);
-        student.setName(newReport.getStudentName());
-        student.setHalfTime(newReport.isStudentHalfTime());
-        student.setGraduateStudent(newReport.isStudentGraduate());
+        student.setName(report.getStudentName());
+        student.setHalfTime(report.isStudentHalfTime());
+        student.setGraduateStudent(report.isStudentGraduate());
 
-        com.sigmasys.kuali.ksa.model.PostalAddress studentAddress = newReport.getStudentPostalAddress();
+        com.sigmasys.kuali.ksa.model.PostalAddress studentAddress = report.getStudentPostalAddress();
 
         if (studentAddress != null) {
 
@@ -257,35 +269,35 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
         // Filling in Filer
 
-        filer.setName(newReport.getFilerName());
-        filer.setFederalIdentificationNumber(newReport.getFilerFederalId());
+        filer.setName(report.getFilerName());
+        filer.setFederalIdentificationNumber(report.getFilerFederalId());
 
         PostalAddress filerAddress = ObjectFactory.getInstance().createPostalAddress();
-        filerAddress.setAddressLine1(newReport.getFilerStreetAddress1());
-        filerAddress.setAddressLine2(newReport.getFilerStreetAddress2());
-        filerAddress.setAddressLine3(newReport.getFilerStreetAddress3());
+        filerAddress.setAddressLine1(report.getFilerStreetAddress1());
+        filerAddress.setAddressLine2(report.getFilerStreetAddress2());
+        filerAddress.setAddressLine3(report.getFilerStreetAddress3());
 
-        filerAddress.setCity(newReport.getFilerCity());
-        filerAddress.setStateCode(newReport.getFilerState());
-        filerAddress.setPostalCode(newReport.getFilerPostalCode());
-        filerAddress.setCountryCode(newReport.getFilerCountry());
+        filerAddress.setCity(report.getFilerCity());
+        filerAddress.setStateCode(report.getFilerState());
+        filerAddress.setPostalCode(report.getFilerPostalCode());
+        filerAddress.setCountryCode(report.getFilerCountry());
 
         filer.setPostalAddress(filerAddress);
 
-        filer.setTelephoneNumber(newReport.getFilerPhoneNumber());
+        filer.setTelephoneNumber(report.getFilerPhoneNumber());
 
         // Filling in FinancialEntry
 
-        financialEntry.setAmountBilled(newReport.getBilledAmount());
-        financialEntry.setInsuranceContract(newReport.getInsRefundAmount());
-        financialEntry.setScholarshipsOrGrants(newReport.getScholarshipAmount());
-        financialEntry.setPriorYearAdjustment(newReport.getPriorYearAdjustedAmount());
-        financialEntry.setPriorYearScholarshipAdjustment(newReport.getScholarshipAdjustedAmount());
+        financialEntry.setAmountBilled(report.getBilledAmount());
+        financialEntry.setInsuranceContract(report.getInsRefundAmount());
+        financialEntry.setScholarshipsOrGrants(report.getScholarshipAmount());
+        financialEntry.setPriorYearAdjustment(report.getPriorYearAdjustedAmount());
+        financialEntry.setPriorYearScholarshipAdjustment(report.getScholarshipAdjustedAmount());
 
         // Filling in FormCheckboxes
-        formCheckboxes.setReportingMethodChanged(newReport.isReportingMethodChanged());
-        formCheckboxes.setCorrected(newReport.isCorrected());
-        formCheckboxes.setVoid(newReport.isVoid());
+        formCheckboxes.setReportingMethodChanged(report.isReportingMethodChanged());
+        formCheckboxes.setCorrected(report.isCorrected());
+        formCheckboxes.setVoid(report.isVoid());
 
         irs1098T.setStudent(student);
         irs1098T.setFiler(filer);
@@ -488,7 +500,15 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         return irs1098T;
     }
 
-    private com.sigmasys.kuali.ksa.model.Irs1098T getIrs1098T(String accountId, Date startDate, Date endDate) {
+    /**
+     * Looks for an existing IRS 1098T report in the KSA database and returns the Irs1098T JPA entity.
+     *
+     * @param accountId ID of an account for which to produce the report.
+     * @param startDate Payments and Refunds tracking start date.
+     * @param endDate   Payments and Refunds tracking end date date
+     * @return Irs1098T instance
+     */
+    protected com.sigmasys.kuali.ksa.model.Irs1098T getIrs1098T(String accountId, Date startDate, Date endDate) {
 
         startDate = CalendarUtils.removeTime(startDate);
         endDate = CalendarUtils.removeTime(endDate);
@@ -505,6 +525,49 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         return CollectionUtils.isNotEmpty(results) ? results.get(0) : null;
     }
 
+    /**
+     * Looks for an existing IRS 1098T report in the KSA database and returns the result in XML format.
+     *
+     * @param accountId ID of an account for which to produce the report.
+     * @param startDate Payments and Refunds tracking start date.
+     * @param endDate   Payments and Refunds tracking end date date
+     * @return XML representation of an IRS 1098T form.
+     */
+    @Override
+    public String getIrs1098TReport(String accountId, Date startDate, Date endDate) {
+
+        AccountProtectedInfo accountInfo = accountService.getAccountProtectedInfo(accountId);
+        if (accountInfo == null) {
+            String errMsg = "Cannot find Account Protected Information for Account ID = " + accountId;
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        com.sigmasys.kuali.ksa.model.Irs1098T report = getIrs1098T(accountId, startDate, endDate);
+        if (report == null) {
+            String errMsg = "Cannot find Irs1098T record for Account ID '" + accountId +
+                    "' and dates [" + startDate + "," + endDate + "]";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        return toXml(accountId, accountInfo.getTaxReference(), report);
+    }
+
+    /**
+     * Looks for an existing IRS 1098T report in the KSA database and returns the result in XML format.
+     *
+     * @param accountId ID of an account for which to produce the report.
+     * @param year      Tax year
+     * @return XML representation of an IRS 1098T form.
+     */
+    @Override
+    public String getIrs1098TReportByYear(String accountId, int year) {
+        Date firstDate = CalendarUtils.getFirstDateOfYear(year);
+        Date lastDate = CalendarUtils.getLastDateOfYear(year);
+        return getIrs1098TReport(accountId, firstDate, lastDate);
+    }
+
     private boolean containsTag(String tagCode, Collection<Tag> tags) {
         for (Tag tag : tags) {
             if (tagCode.equalsIgnoreCase(tag.getCode())) {
@@ -513,7 +576,6 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         }
         return false;
     }
-
 
     /**
      * Returns an XML representation of a complete year federal 1098T form. Note that many of the parameters for producing a correct 1098T
@@ -534,16 +596,17 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
      * @see Irs1098T
      */
     @Override
-    @WebMethod(exclude = true)
-    public String generateAnnual1098TReport(String accountId, int year, int numberOfDisplayedDigits, boolean isTransient) {
-        // TODO Auto-generated method stub
-        return null;
+    public String generate1098TReportByYear(String accountId, int year, int numberOfDisplayedDigits, boolean isTransient) {
+        Date firstDate = CalendarUtils.getFirstDateOfYear(year);
+        Date lastDate = CalendarUtils.getLastDateOfYear(year);
+        return generate1098TReport(accountId, firstDate, lastDate, numberOfDisplayedDigits, isTransient);
     }
 
     protected com.sigmasys.kuali.ksa.model.Irs1098T createAnnual1098TReport(String accountId, int year,
                                                                             int numberOfDisplayedDigits, boolean isTransient) {
-        // TODO Auto-generated method stub
-        return null;
+        Date firstDate = CalendarUtils.getFirstDateOfYear(year);
+        Date lastDate = CalendarUtils.getLastDateOfYear(year);
+        return create1098TReport(accountId, firstDate, lastDate, numberOfDisplayedDigits, isTransient);
     }
 
     protected String maskString(String value, Character mask, int numberOfCharsToPreserve) {

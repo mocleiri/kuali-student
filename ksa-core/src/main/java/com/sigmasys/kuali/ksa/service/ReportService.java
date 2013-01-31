@@ -59,11 +59,11 @@ public interface ReportService {
      * Note that the <code>dateFrom</code> and <code>dateTo</code> must fall within the <code>year</code>. Otherwise,
      * a runtime validation <code>IllegalArgumentException</code> will be thrown.
      *
-     * @param accountId ID of an account for which to produce the report.
-     * @param startDate Payments and Refunds tracking start date.
-     * @param endDate   Payments and Refunds tracking end date date
-     * @param numberOfDisplayedDigits   The number of final digits of the social security number that will be stored in the local record.
-     * @param isTransient  Whether to keep the record of the produces 1098T
+     * @param accountId               ID of an account for which to produce the report.
+     * @param startDate               Payments and Refunds tracking start date.
+     * @param endDate                 Payments and Refunds tracking end date date
+     * @param numberOfDisplayedDigits The number of final digits of the social security number that will be stored in the local record.
+     * @param isTransient             Whether to keep the record of the produces 1098T
      * @return String representation of an IRS 1098T form.
      * @throws IllegalArgumentException If <code>dateFrom</code> or <code>dateTo</code> are invalid or do not fall within the <code>year</code>.
      * @see Irs1098T
@@ -81,15 +81,33 @@ public interface ReportService {
      * This form will automatically be returned as void, and a paper 1098T should not be produced from this data.
      * <br>
      *
-     * @param accountId ID of an account for which to produce the report.
-     * @param year      Tax year.
-     * @param numberOfDisplayedDigits   The number of final digits of the social security number that will be stored in the local record.
-     * @param isTransient  Whether to keep the record of the produces 1098T
+     * @param accountId               ID of an account for which to produce the report.
+     * @param year                    Tax year.
+     * @param numberOfDisplayedDigits The number of final digits of the social security number that will be stored in the local record.
+     * @param isTransient             Whether to keep the record of the produces 1098T
      * @return String representation of an IRS 1098T form.
      * @see Irs1098T
      */
-    @WebMethod(exclude = true)
-    String generateAnnual1098TReport(String accountId, int year, int numberOfDisplayedDigits, boolean isTransient);
+    String generate1098TReportByYear(String accountId, int year, int numberOfDisplayedDigits, boolean isTransient);
+
+    /**
+     * Looks for an existing IRS 1098T report in the KSA database and returns the result in XML format.
+     *
+     * @param accountId ID of an account for which to produce the report.
+     * @param startDate Payments and Refunds tracking start date.
+     * @param endDate   Payments and Refunds tracking end date date
+     * @return XML representation of an IRS 1098T form.
+     */
+    String getIrs1098TReport(String accountId, Date startDate, Date endDate);
+
+    /**
+     * Looks for an existing IRS 1098T report in the KSA database and returns the result in XML format.
+     *
+     * @param accountId ID of an account for which to produce the report.
+     * @param year      Tax year
+     * @return XML representation of an IRS 1098T form.
+     */
+    String getIrs1098TReportByYear(String accountId, int year);
 
     /**
      * Produce an XML aged balance report for the accounts in the list. If <code>ageAccounts</code> is <code>true</code>, then each
@@ -154,7 +172,6 @@ public interface ReportService {
 
     /**
      * Produces a receipt for a transaction with the specified ID.
-     *
      *
      * @param transactionId ID of a transaction for which to produce a receipt.
      * @return String representation of a transaction receipt.
