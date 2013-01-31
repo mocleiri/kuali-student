@@ -1,5 +1,5 @@
 Given /^I manage registration groups for (?:a|the) course offering$/ do
-  @course_offering = make CourseOffering, :course=>"ENGL211", :create_by_copy=>true
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"ENGL211")
   @course_offering.manage_registration_groups
 end
 
@@ -105,7 +105,7 @@ Then /^a registration groups error message appears stating "(.*?)"$/ do|errMsg|
 end
 
 Given /^I manage registration groups for a course offering with multiple activity types$/ do
-  @course_offering = make CourseOffering, :course=>"BSCI106", :create_by_copy=>true
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"BSCI106")
   @course_offering.manage_registration_groups
 end
 
@@ -136,7 +136,7 @@ Then /^registration groups are not generated$/ do
 end
 
 Given /^I manage registration groups for a course offering with multiple activity types but no activity offering for one of the activity types$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM347", :create_by_copy=>true
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM347")
   @course_offering.manage
   @course_offering.delete_ao :ao_code=>"AA"
   @course_offering.manage_registration_groups
@@ -150,7 +150,7 @@ Then /^no activity offering cluster is created$/ do
 end
 
 Given /^I manage registration groups for a course offering with 2 activity types?$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM317", :create_by_copy=>true
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM317")
   @course_offering.manage_registration_groups
 end
 
@@ -166,7 +166,7 @@ Then /registration groups? (?:are|is) generated$/ do
 end
 
 Given /^I manage registration groups for a course offering with multiple activity types where the total max enrolment for each type is not equal$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM317", :create_by_copy=>true
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM317")
   @course_offering.manage_registration_groups
 end
 
@@ -188,7 +188,7 @@ When /^I generate all registration groups$/ do
 end
 
 Given /^I manage registration groups for a course offering with multiple activity types where there are activity offering scheduling conflicts$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM317", :create_by_copy=>true
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM317")
   @course_offering.manage_registration_groups
 end
 
@@ -208,7 +208,7 @@ Then /^registration groups with time conflicts are marked as invalid$/ do
 end
 
 Given /^I have generated a registration group for a course offering with lecture and quiz activity types leaving some activity offerings unassigned$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM221", :create_by_copy=>true
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM221")
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
   @course_offering.add_ao_cluster(@ao_cluster)
@@ -237,8 +237,8 @@ Then /^the quiz is not listed as an unassigned activity offering$/ do
   end
 end
 
-Given /^I have created the default registration group for a course offering$/ do
-  @course_offering = make CourseOffering, :course=>"BSCI283", :create_by_copy=>true
+Given /^I have created the default registration groups for a course offering$/ do
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"BSCI283")
   @course_offering.manage_registration_groups
 
   @ao_cluster = make ActivityOfferingCluster,  :is_constrained=>false
@@ -294,7 +294,7 @@ Then /^the registration group is updated$/ do
 end
 
 Given /^I have generated two registration groups for a course offering with lecture and lab activity types$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM317", :create_by_copy=>true
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM317")
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
   @course_offering.add_ao_cluster(@ao_cluster)
@@ -320,7 +320,7 @@ Then /^the registration groups? sets? (?:is|are) updated$/ do
 end
 
 Given /^I have created the default cluster and related registration groups for a course offering with lecture and lab activity types$/ do
-  @course_offering = make CourseOffering, :course=>"BSCI283", :create_by_copy=>true
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"BSCI283")
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster,  :is_constrained=>false
   @course_offering.add_ao_cluster(@ao_cluster)
@@ -337,7 +337,7 @@ When /^I move a lecture activity offering from the default activity offering clu
 end
 
 Given /^I have generated a registration group for a course offering with lecture and lab activity types$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM426", :create_by_copy=>true
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM426")
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
   @course_offering.add_ao_cluster(@ao_cluster)
@@ -368,7 +368,7 @@ Then /^activity offering cluster published and private names are successfully ch
 end
 
 Given /^I have created two activity offering clusters for a course offering$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM152", :create_by_copy=>true
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM152")
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
   @course_offering.add_ao_cluster(@ao_cluster)
@@ -377,7 +377,7 @@ Given /^I have created two activity offering clusters for a course offering$/ do
 end
 
 Given /^I have created two activity offering clusters and generated registration groups for a course offering$/ do
-  @course_offering = make CourseOffering, :course=>"BSCI412", :create_by_copy=>true
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"BSCI412")
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
   @course_offering.add_ao_cluster(@ao_cluster)

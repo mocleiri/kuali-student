@@ -43,6 +43,7 @@ class ManageCourseOfferingList < BasePage
   end
 
   def target_row(co_code)
+    course_offering_results_table.wait_until_present(60)
     course_offering_results_table.row(text: /\b#{Regexp.escape(co_code)}\b/)
   end
 

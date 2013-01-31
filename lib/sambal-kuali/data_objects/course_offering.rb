@@ -38,7 +38,8 @@ class CourseOffering
                 :honors_flag,
                 :grade_options,
                 :reg_options,
-                :search_by_subj,
+                :search_by_subj
+  #generally set using options hash - course offering object to copy
                 :create_by_copy
 
   # provides default data:
@@ -61,7 +62,7 @@ class CourseOffering
   #    :grade_options => "Letter",
   #    :reg_options => "None available",
   #    :search_by_subj => false,
-  #    :create_by_copy => false
+  #    :create_by_copy => nil
   #  }
   # initialize is generally called using TestFactory Foundry .make or .create methods
   def initialize(browser, opts={})
@@ -86,7 +87,7 @@ class CourseOffering
         :grade_options => "Letter",
         :reg_options => "None available",
         :search_by_subj => false,
-        :create_by_copy => false
+        :create_by_copy => nil
     }
     options = defaults.merge(opts)
     set_options(options)
@@ -94,8 +95,11 @@ class CourseOffering
 
   # creates course offering based on class attributes
   def create
-    if @create_by_copy
-      @course = create_co_copy
+    if @create_by_copy != nil
+      @course = create_co_copy(@create_by_copy.course)
+      #deep copy
+      @activity_offering_cluster_list = @create_by_copy.activity_offering_cluster_list
+      @ao_list = @create_by_copy.ao_list
     else
       on CreateCourseOffering do  |page|
         @suffix = random_alphanums.strip
@@ -371,7 +375,7 @@ class CourseOffering
   end
 
   def add_ao_cluster(ao_cluster)
-    @ao_cluster.create
+    ao_cluster.create
     @activity_offering_cluster_list << ao_cluster
   end
 
@@ -384,19 +388,19 @@ class CourseOffering
     expected_unassigned
   end
 
-  def create_co_copy
+  def create_co_copy(source_course_code)
     pre_copy_co_list = []
     post_copy_co_list = []
 
     go_to_manage_course_offerings
     on ManageCourseOfferings do |page|
       page.term.set @term
-      page.input_code.set @course[0,4] #subject code
+      page.input_code.set source_course_code[0,4] #subject code
       page.show
     end
     on ManageCourseOfferingList do |page|
       pre_copy_co_list = page.co_list
-      page.copy @course
+      page.copy source_course_code
     end
     on CopyCourseOffering do |page|
       page.create_copy
@@ -409,7 +413,6 @@ class CourseOffering
   end
 
   def delete_co(args={})
-
     should_confirm_delete = false
     case args[:should_confirm_delete]
       when true

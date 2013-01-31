@@ -25,5 +25,9 @@ Then /^the activity offering clusters? and assigned AOs are copied over with the
 end
 
 Then /^I copy the course offering$/ do
-  @course_offering.create :create_by_copy => true
+  @course_offering_copy = create CourseOffering, :create_by_copy=>@course_offering
+end
+
+When /^I create a course offering by copying from a previous term$/ do
+
 end
