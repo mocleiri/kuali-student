@@ -14,27 +14,21 @@ import java.util.List;
  * Date: 1/30/13
  * Time: 5:25 PM
  */
-@Service("ksaHelper")
 public class KsaHelper  extends ViewHelperServiceImpl {
 
-    @Autowired
+    //@Autowired
     private AuditableEntityService auditableEntityService;
 
 
     public List<Tag> getTagsForSuggest(String suggest){
 
-        return auditableEntityService.getAuditableEntitiesByName(suggest, Tag.class);
+        return getAuditableEntityService().getAuditableEntitiesByName(suggest, Tag.class);
     }
 
-
-    /*
     private AuditableEntityService getAuditableEntityService() {
         if(auditableEntityService == null) {
             auditableEntityService = ContextUtils.getBean(AuditableEntityService.class);
         }
         return auditableEntityService;
     }
-
-    */
-
 }
