@@ -256,7 +256,7 @@ public class TransactionTypeController extends GenericSearchController {
         if (rollupTypeOptionsFinder == null) {
             synchronized(this) {
                 if (rollupTypeOptionsFinder == null) {
-                    rollupTypeOptionsFinder = new AuditableEntityKeyValuesFinder<Rollup>(auditableEntityService, Rollup.class);
+                    rollupTypeOptionsFinder = new AuditableEntityKeyValuesFinder<Rollup>(Rollup.class);
                 }
             }
         }

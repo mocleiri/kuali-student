@@ -2,8 +2,6 @@ package com.sigmasys.kuali.ksa.krad.form;
 
 import java.util.List;
 
-import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
-
 import com.sigmasys.kuali.ksa.krad.util.*;
 import com.sigmasys.kuali.ksa.model.*;
 
@@ -33,17 +31,10 @@ public class AdminForm extends AbstractViewModel {
 	 */
 	private List<AccountSearchResultCollectionLine> accountSearchResults;
 	
-	/*
-	 * Option KeyValueFinders.
+	/**
+	 * General Ledger Transactions.
 	 */
-	private KeyValuesFinder accountStatusTypeOptionsFinder;
-	private KeyValuesFinder latePeriodOptionsFinder;
-	private KeyValuesFinder bankTypeOptionsFinder;
-	private KeyValuesFinder taxTypeOptionsFinder;
-	private KeyValuesFinder idTypeKeyValuesFinder;
-	private KeyValuesFinder searchResultFieldsOptionsFinder;
-	
-    private List<GlTransaction> glTransactions;
+	private List<GlTransaction> glTransactions;
 
    /*
      Activities
@@ -62,47 +53,6 @@ public class AdminForm extends AbstractViewModel {
 	
 	public void setAccountSearchInfo(AccountSearchInformationHolder accountSearchInfo) {
 		this.accountSearchInfo = accountSearchInfo;
-	}
-
-	public KeyValuesFinder getAccountStatusTypeOptionsFinder() {
-		return accountStatusTypeOptionsFinder;
-	}
-	
-	public void setAccountStatusTypeOptionsFinder(
-			KeyValuesFinder accountStatusTypeOptionsFinder) {
-		this.accountStatusTypeOptionsFinder = accountStatusTypeOptionsFinder;
-	}
-
-	public KeyValuesFinder getLatePeriodOptionsFinder() {
-   		return latePeriodOptionsFinder;
-	}
-	
-	public void setLatePeriodOptionsFinder(KeyValuesFinder latePeriodOptionsFinder) {
-		this.latePeriodOptionsFinder = latePeriodOptionsFinder;
-	}
-	
-	public KeyValuesFinder getBankTypeOptionsFinder() {
-		return bankTypeOptionsFinder;
-	}
-	
-	public void setBankTypeOptionsFinder(KeyValuesFinder bankTypeOptionsFinder) {
-		this.bankTypeOptionsFinder = bankTypeOptionsFinder;
-	}
-	
-	public KeyValuesFinder getTaxTypeOptionsFinder() {
-		return taxTypeOptionsFinder;
-	}
-	
-	public void setTaxTypeOptionsFinder(KeyValuesFinder taxTypeOptionsFinder) {
-		this.taxTypeOptionsFinder = taxTypeOptionsFinder;
-	}
-	
-	public KeyValuesFinder getIdTypeKeyValuesFinder() {
-		return idTypeKeyValuesFinder;
-	}
-	
-	public void setIdTypeKeyValuesFinder(KeyValuesFinder idTypeKeyValuesFinder) {
-		this.idTypeKeyValuesFinder = idTypeKeyValuesFinder;
 	}
 
 	public List<Activity> getActivities() {
@@ -127,15 +77,6 @@ public class AdminForm extends AbstractViewModel {
 	
 	public void setAccountInfo(AccountInformationHolder accountInfo) {
 		this.accountInfo = accountInfo;
-	}
-
-    public KeyValuesFinder getSearchResultFieldsOptionsFinder() {
-		return searchResultFieldsOptionsFinder;
-	}
-
-	public void setSearchResultFieldsOptionsFinder(
-			KeyValuesFinder searchResultFieldsOptionsFinder) {
-		this.searchResultFieldsOptionsFinder = searchResultFieldsOptionsFinder;
 	}
 
 	public List<GlTransaction> getGlTransactions() {

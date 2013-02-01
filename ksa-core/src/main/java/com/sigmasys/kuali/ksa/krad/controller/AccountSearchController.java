@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.value.DateRangeValue;
 import com.sigmasys.kuali.ksa.krad.form.AdminForm;
 import com.sigmasys.kuali.ksa.krad.util.AccountSearchInformationHolder;
-import com.sigmasys.kuali.ksa.krad.util.AccountSearchResultFieldsKeyValuesFinder;
 import com.sigmasys.kuali.ksa.model.UserPreference;
 
 /**
@@ -26,12 +24,6 @@ import com.sigmasys.kuali.ksa.model.UserPreference;
 @Transactional
 public class AccountSearchController extends AccountManagementController {
 
-	/*
-	 * Option value finders.
-	 */
-	private volatile KeyValuesFinder searchResultFieldsOptionsFinder;
-	
-	
 	
 	/**
 	 * Handles display of the Search Person Account page.
@@ -68,28 +60,6 @@ public class AccountSearchController extends AccountManagementController {
 		return getUIFModelAndView(form);
 	}
 
-	
-	/* ========================================================================================
-	 * 
-	 * Select control option finders.
-	 * 
-	 * ========================================================================================*/
-
-	/*
-	 * Returns Search Result Fields option finder.
-	 */
-	public KeyValuesFinder getSearchResultFieldsOptionsFinder() {
-		if (searchResultFieldsOptionsFinder == null) {
-			synchronized(this) {
-				if (searchResultFieldsOptionsFinder == null) {
-					searchResultFieldsOptionsFinder = new AccountSearchResultFieldsKeyValuesFinder();
-				}
-			}
-		}
-		
-		return searchResultFieldsOptionsFinder;
-	}
-	
 
 	/* *******************************************************************************************************************
 	 * 
@@ -113,7 +83,7 @@ public class AccountSearchController extends AccountManagementController {
 		accountSearchInfo.setCreationDateRange(new DateRangeValue());
 		accountSearchInfo.setUserPreference(new UserPreference());
 		accountSearchInfo.setSearchResultFields(new ArrayList<String>());
-		form.setSearchResultFieldsOptionsFinder(getSearchResultFieldsOptionsFinder());
 		form.setAccountSearchInfo(accountSearchInfo);
+		form.getAccountInfo().setAccountType(null);
 	}
 }

@@ -271,7 +271,15 @@
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
-					<property name="optionsFinder" value="@{getAccountStatusTypeOptionsFinder()}"/>
+					<property name="optionsFinder">
+						<bean class="com.sigmasys.kuali.ksa.krad.util.AuditableEntityKeyValuesFinder">
+							<constructor-arg>
+								<bean class="java.lang.Class" factory-method="forName">
+									<constructor-arg value="com.sigmasys.kuali.ksa.model.AccountStatusType"/>
+								</bean>
+							</constructor-arg>
+						</bean>
+					</property>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.accountType" p:labelPlacement="TOP" p:label="Account Type" 
@@ -302,7 +310,15 @@
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
-					<property name="optionsFinder" value="@{getLatePeriodOptionsFinder()}"/>
+					<property name="optionsFinder">
+						<bean class="com.sigmasys.kuali.ksa.krad.util.AuditableEntityKeyValuesFinder">
+							<constructor-arg>
+								<bean class="java.lang.Class" factory-method="forName">
+									<constructor-arg value="com.sigmasys.kuali.ksa.model.LatePeriod"/>
+								</bean>
+							</constructor-arg>
+						</bean>
+					</property>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="account.ableToAuthenticate">
@@ -324,7 +340,15 @@
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
-					<property name="optionsFinder" value="@{getBankTypeOptionsFinder()}"/>
+					<property name="optionsFinder">
+						<bean class="com.sigmasys.kuali.ksa.krad.util.AuditableEntityKeyValuesFinder">
+							<constructor-arg>
+								<bean class="java.lang.Class" factory-method="forName">
+									<constructor-arg value="com.sigmasys.kuali.ksa.model.BankType"/>
+								</bean>
+							</constructor-arg>
+						</bean>
+					</property>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.accountProtectedInfo.bankDetails" p:labelPlacement="TOP" p:label="Bank Detail"
@@ -339,7 +363,15 @@
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
-					<property name="optionsFinder" value="@{getTaxTypeOptionsFinder()}"/>
+					<property name="optionsFinder">
+						<bean class="com.sigmasys.kuali.ksa.krad.util.AuditableEntityKeyValuesFinder">
+							<constructor-arg>
+								<bean class="java.lang.Class" factory-method="forName">
+									<constructor-arg value="com.sigmasys.kuali.ksa.model.TaxType"/>
+								</bean>
+							</constructor-arg>
+						</bean>
+					</property>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.accountProtectedInfo.taxReference" p:labelPlacement="TOP" p:label="Tax Detail"
@@ -362,7 +394,15 @@
 					<property name="control">
 						<bean parent="Uif-DropdownControl" p:width="100%"/>
 					</property>
-					<property name="optionsFinder" value="@{getIdTypeKeyValuesFinder()}"/>
+					<property name="optionsFinder">
+						<bean class="com.sigmasys.kuali.ksa.krad.util.AuditableEntityKeyValuesFinder">
+							<constructor-arg>
+								<bean class="java.lang.Class" factory-method="forName">
+									<constructor-arg value="com.sigmasys.kuali.ksa.model.IdentityType"/>
+								</bean>
+							</constructor-arg>
+						</bean>
+					</property>
 				</bean>
 				
 				<bean parent="Uif-InputField" p:propertyName="accountInfo.accountProtectedInfo.identitySerial" p:labelPlacement="TOP" p:label="Identity Serial"

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
-import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
 import org.kuali.rice.krad.web.form.UifFormBase;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sigmasys.kuali.ksa.krad.form.AdminForm;
 import com.sigmasys.kuali.ksa.krad.util.AccountInformationHolder;
-import com.sigmasys.kuali.ksa.krad.util.AuditableEntityKeyValuesFinder;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
@@ -40,17 +38,6 @@ public class AccountManagementController extends GenericSearchController {
 	@Autowired
     protected UserSessionManager userSessionManager;
 
-	/*
-	 * Option KeyValueFinders.
-	 */
-	private volatile KeyValuesFinder accountStatusTypeOptionsFinder;
-	private volatile KeyValuesFinder latePeriodOptionsFinder;
-	private volatile KeyValuesFinder bankTypeOptionsFinder;
-	private volatile KeyValuesFinder taxTypeOptionsFinder;
-	private volatile KeyValuesFinder idTypeKeyValuesFinder;
-	
-
-	
 
 	/**
 	 * Creates an initial form, which is the Admin page form.
@@ -139,90 +126,7 @@ public class AccountManagementController extends GenericSearchController {
 		return getUIFModelAndView(form);
 	}
 	
-	
-	/* ========================================================================================
-	 * 
-	 * Select control option finders.
-	 * 
-	 * ========================================================================================*/
-
-
-	/*
-	 * Returns Account status option finder. 
-	 */
-	public KeyValuesFinder getAccountStatusTypeOptionsFinder(boolean blankOption) {
-		if (accountStatusTypeOptionsFinder == null) {
-			synchronized(this) {
-				if (accountStatusTypeOptionsFinder == null) {
-					accountStatusTypeOptionsFinder = new AuditableEntityKeyValuesFinder<AccountStatusType>(auditableEntityService, AccountStatusType.class, blankOption);
-				}
-			}
-		}
 		
-		return accountStatusTypeOptionsFinder;
-	}
-
-	/*
-	 * Returns LatePeriod type option finder. 
-	 */
-	public KeyValuesFinder getLatePeriodOptionsFinder(boolean blankOption) {
-		if (latePeriodOptionsFinder == null) {
-			synchronized(this) {
-				if (latePeriodOptionsFinder == null) {
-					latePeriodOptionsFinder = new AuditableEntityKeyValuesFinder<LatePeriod>(auditableEntityService, LatePeriod.class, blankOption);
-				}
-			}
-		}
-		
-		return latePeriodOptionsFinder;
-	}
-
-	/*
-	 * Returns BankType option finder. 
-	 */
-	public KeyValuesFinder getBankTypeOptionsFinder(boolean blankOption) {
-		if (bankTypeOptionsFinder == null) {
-			synchronized(this) {
-				if (bankTypeOptionsFinder == null) {
-					bankTypeOptionsFinder = new AuditableEntityKeyValuesFinder<BankType>(auditableEntityService, BankType.class, blankOption);
-				}
-			}
-		}
-		
-		return bankTypeOptionsFinder;
-	}
-
-	/*
-	 * Returns TaxType option finder.
-	 */
-	public KeyValuesFinder getTaxTypeOptionsFinder(boolean blankOption) {
-		if (taxTypeOptionsFinder == null) {
-			synchronized(this) {
-				if (taxTypeOptionsFinder == null) {
-					taxTypeOptionsFinder = new AuditableEntityKeyValuesFinder<TaxType>(auditableEntityService, TaxType.class, blankOption);
-				}
-			}
-		}
-		
-		return taxTypeOptionsFinder;
-	}
-
-	/*
-	 * Returns IdentityType option finder.
-	 */
-	public KeyValuesFinder getIdTypeKeyValuesFinder(boolean blankOption) {
-		if (idTypeKeyValuesFinder == null) {
-			synchronized(this) {
-				if (idTypeKeyValuesFinder == null) {
-					idTypeKeyValuesFinder = new AuditableEntityKeyValuesFinder<IdentityType>(auditableEntityService, IdentityType.class, blankOption);
-				}
-			}
-		}
-		
-		return idTypeKeyValuesFinder;
-	}
-	
-	
 	/* *******************************************************************************************************************
 	 * 
 	 * Helper methods. 
@@ -263,9 +167,6 @@ public class AccountManagementController extends GenericSearchController {
 		// Set the form's objects:
 		form.setAccount(account);
 		form.setAccountInfo(accountInfo);
-		
-		// Set option finders:
-		setUpOptionFinders(form, addBlankOption);
 	}
 	
 	/*
@@ -286,20 +187,6 @@ public class AccountManagementController extends GenericSearchController {
 		// Set the form's objects:
 		form.setAccountInfo(accountInfo);
 		form.setAccount(account);
-		
-		// Set option finders:
-		setUpOptionFinders(form, addBlankOption);
-	}
-	
-	/*
-	 * Sets ups form's Select controls (drop-down list) option finders.
-	 */
-	protected void setUpOptionFinders(AdminForm form, boolean addBlankOption) {
-		form.setLatePeriodOptionsFinder(getLatePeriodOptionsFinder(addBlankOption));
-		form.setBankTypeOptionsFinder(getBankTypeOptionsFinder(addBlankOption));
-		form.setTaxTypeOptionsFinder(getTaxTypeOptionsFinder(addBlankOption));
-		form.setIdTypeKeyValuesFinder(getIdTypeKeyValuesFinder(addBlankOption));
-		form.setAccountStatusTypeOptionsFinder(getAccountStatusTypeOptionsFinder(addBlankOption));
 	}
 	
 	/*
@@ -371,7 +258,7 @@ public class AccountManagementController extends GenericSearchController {
 	 */
 	private void setAccountIdAndAuditableInfo(Account account) {
 		// TODO: Determine what to do about the account ID:
-		String id = RandomStringUtils.randomAlphabetic(15);
+		String id = RandomStringUtils.randomAlphabetic(8);
 		String currentUser = userSessionManager.getUserId(RequestUtils.getThreadRequest());
 		// TODO: Figure out what to do with KIM IDs!
 		boolean isKimAccount = false;

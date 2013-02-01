@@ -9,28 +9,22 @@ import org.kuali.rice.core.api.util.KeyValue;
 
 import com.sigmasys.kuali.ksa.model.AuditableEntity;
 import com.sigmasys.kuali.ksa.service.AuditableEntityService;
+import com.sigmasys.kuali.ksa.util.ContextUtils;
 
 @SuppressWarnings("all")
 public class AuditableEntityKeyValuesFinder<T extends AuditableEntity> extends GenericKeyValuesFinder {
 	
-	private AuditableEntityService auditableEntityService;
-	
 	private Class<T> type;
 	
 	
-	public AuditableEntityKeyValuesFinder(AuditableEntityService service, Class<T> type) {
-		this(service, type, false);
-	}
-
-	public AuditableEntityKeyValuesFinder(AuditableEntityService service, Class<T> type, boolean blankOption) {
-		this.auditableEntityService = service;
+	public AuditableEntityKeyValuesFinder(Class<T> type) {
 		this.type = type;
-		setBlankOption(blankOption);
 	}
 
 	@Override
 	protected List<KeyValue> buildKeyValues() {
 		// Get all entities of the generic type:
+		AuditableEntityService auditableEntityService = ContextUtils.getBean(AuditableEntityService.class);
 		List<T> entities = auditableEntityService.getAuditableEntities(type);
 		List<KeyValue> result = new ArrayList<KeyValue>();
 		
