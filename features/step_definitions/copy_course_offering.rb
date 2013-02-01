@@ -28,6 +28,16 @@ Then /^I copy the course offering$/ do
   @course_offering_copy = create CourseOffering, :create_by_copy=>@course_offering
 end
 
-When /^I create a course offering by copying from a previous term$/ do
+When /^I create a new course offering in a subsequent term by copying the course offering$/ do
+  @source_term = "20122"
+  @target_term = "20142"
+  @catalogue_course_code = "ENGL110"
+#  set target term and course code
+  go_to_create_course_offerings
+  on CreateCourseOffering do |page|
+    page.target_term.set @target_term
+    page.catalogue_course_code.set @catalogue_course_code
+    page.show
+  end
 
 end

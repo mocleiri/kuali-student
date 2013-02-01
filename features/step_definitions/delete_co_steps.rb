@@ -1,12 +1,11 @@
 When /^I cancel the deletion of a Course Offering in Course Offering Code view$/ do
-  @course_offering = make CourseOffering
-  @course_offering.create_co_copy
+
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
   @course_offering.delete_co :should_delete_from_subj_code_view=>false, :should_confirm_delete=>false
 end
 
 When /^I cancel the deletion of a Course Offering in Subject Code view$/ do
-  @course_offering = make CourseOffering
-  @course_offering.create_co_copy
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
   @course_offering.delete_co :should_delete_from_subj_code_view=>true, :should_confirm_delete=>false
 end
 
@@ -20,8 +19,7 @@ end
 
 When /^I delete a Course Offering with Draft Activity Offerings in Course Offering Code view$/ do
   #setup
-  @course_offering = make CourseOffering
-  @course_offering.create_co_copy
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
   on ManageCourseOfferings do |page|
     page.target_row(@course_offering.course).link(text: "Manage").click
     page.ao_status("A", "Draft").should == true

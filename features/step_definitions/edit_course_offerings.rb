@@ -23,8 +23,7 @@ When /^I can return to search using the cancel button$/ do
 end
 
 When /^I edit a course offering with multiple format types$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM132"
-  @course_offering.create_co_copy
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM132")
   @course_offering.manage
   on ManageCourseOfferings do |page|
     page.edit_offering
@@ -61,8 +60,7 @@ When /^a final exam driver of "([^"]*)"$/ do |final_driver|
 end
 
 When /^I edit a course offering$/ do
-  @course_offering = make CourseOffering, :course=>"CHEM132"
-  @course_offering.create_co_copy
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM132")
   @course_offering.manage
   on ManageCourseOfferings do |page|
     page.edit_offering

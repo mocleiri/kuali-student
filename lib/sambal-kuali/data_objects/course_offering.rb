@@ -400,19 +400,19 @@ class CourseOffering
     expected_unassigned
   end
 
-  def create_co_copy
+  def create_co_copy(source_course_code)
     pre_copy_co_list = []
     post_copy_co_list = []
 
     go_to_manage_course_offerings
     on ManageCourseOfferings do |page|
       page.term.set @term
-      page.input_code.set @course[0,4] #subject code
+      page.input_code.set source_course_code[0,4] #subject code
       page.show
     end
     on ManageCourseOfferingList do |page|
       pre_copy_co_list = page.co_list
-      page.copy @course
+      page.copy source_course_code
     end
     on CopyCourseOffering do |page|
       page.create_copy
