@@ -42,6 +42,8 @@ class CourseOffering
   #generally set using options hash - course offering object to copy
                 :create_by_copy
 
+
+
   # provides default data:
   #  defaults = {
   #    :term=>"201201",
@@ -74,8 +76,8 @@ class CourseOffering
         :suffix=>"",
         :activity_offering_cluster_list=>[],
         :ao_list => [],
-        :final_exam_type => "NONE",
-        :wait_list => "NO",
+        :final_exam_type => "STANDARD",
+        :wait_list => "YES",
         :wait_list_level => "Course Offering",
         :wait_list_type => "Automatic",
         :grade_format => "",
@@ -85,7 +87,7 @@ class CourseOffering
         :affiliated_person_list => {},
         :affiliated_org_list => {},
         :grade_options => "Letter",
-        :reg_options => "None available",
+        :reg_options => "Pass/Fail Grading",
         :search_by_subj => false,
         :create_by_copy => nil
     }
@@ -105,6 +107,10 @@ class CourseOffering
         @suffix = random_alphanums.strip
         page.suffix.set @suffix
         @course = "#{@course}#{@suffix}"
+        #page.add_format.select().select("Lab")
+        #page.add_grade_roster_level.select().select("Course")
+        #page.add_final_exam_driver.select().select("Lab")
+        #page.add_format_btn
         delivery_obj = make DeliveryFormat
         delivery_obj.select_random_delivery_formats
         @delivery_format_list << delivery_obj
@@ -178,6 +184,12 @@ class CourseOffering
             @final_exam_type = "NONE"
         end
       end
+    end
+
+    if options[:delivery_format_list] != nil
+      delivery_obj = make DeliveryFormat
+      delivery_obj.edit_random_delivery_formats
+      @delivery_format_list << delivery_obj
     end
 
     if options[:grade_format] != nil
@@ -375,7 +387,7 @@ class CourseOffering
   end
 
   def add_ao_cluster(ao_cluster)
-    ao_cluster.create
+    @ao_cluster.create
     @activity_offering_cluster_list << ao_cluster
   end
 
@@ -388,19 +400,19 @@ class CourseOffering
     expected_unassigned
   end
 
-  def create_co_copy(source_course_code)
+  def create_co_copy
     pre_copy_co_list = []
     post_copy_co_list = []
 
     go_to_manage_course_offerings
     on ManageCourseOfferings do |page|
       page.term.set @term
-      page.input_code.set source_course_code[0,4] #subject code
+      page.input_code.set @course[0,4] #subject code
       page.show
     end
     on ManageCourseOfferingList do |page|
       pre_copy_co_list = page.co_list
-      page.copy source_course_code
+      page.copy @course
     end
     on CopyCourseOffering do |page|
       page.create_copy
@@ -413,6 +425,7 @@ class CourseOffering
   end
 
   def delete_co(args={})
+
     should_confirm_delete = false
     case args[:should_confirm_delete]
       when true

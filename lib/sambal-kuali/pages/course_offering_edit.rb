@@ -9,9 +9,9 @@ class CourseOfferingEdit < BasePage
   action(:submit) { |b| b.frm.button(text: "submit").click; b.loading.wait_while_present }
   action(:cancel) { |b| b.frm.link(text: "cancel").click; b.loading.wait_while_present }
 
-  element(:course_code_element) { |b| b.frm.div(data_label: "Course Offering Code").span(index: 2) }
+  element(:course_code_element) { |b| b.frm.div(data_label: "Course Code(Subject/Number)").span(index: 1) }
   value(:course_code) { |b| b.frm.course_code_element.text() }
-  element(:change_suffix) { |b| b.frm.div(data_label: "Change Suffix").text_field() }
+  element(:suffix) { |b| b.frm.div(data_label: "Course Number Suffix").text_field }
 
   element(:grading_option_letter) { |b| b.frm.radio(value: "kuali.resultComponent.grade.letter") }
   element(:credit_type_option_fixed) { |b| b.frm.radio(value: "kuali.result.values.group.type.fixed") }
@@ -21,7 +21,7 @@ class CourseOfferingEdit < BasePage
   action(:final_exam_option_alternate) { |b| b.frm.radio(value: "ALTERNATE").set; b.loading.wait_while_present }
   action(:final_exam_option_none) { |b| b.frm.radio(value: "NONE").set; b.loading.wait_while_present }
 
-  element(:delivery_formats_table) { |b| b.frm.div(id: "KS-CourseOfferingEdit-FormatOfferingSubSection").table() }
+  element(:delivery_formats_table) { |b| b.frm.div(id: "KS-CourseOfferingEdit-FormatOfferingSubSection").table }
   FORMAT_COLUMN = 0
   GRADE_ROSTER_LEVEL_COLUMN = 1
   FINAL_EXAM_COLUMN = 2
@@ -31,6 +31,21 @@ class CourseOfferingEdit < BasePage
   element(:select_grade_roster_level_add) {|b| b.frm.delivery_formats_table.rows[1].cells[GRADE_ROSTER_LEVEL_COLUMN].select() }
   element(:delivery_format_add_element) {|b| b.frm.delivery_formats_table.rows[1].cells[ACTIONS_COLUMN].button(text: "add")  }
   action(:delivery_format_add) {|b| b.delivery_format_add_element.click; b.loading.wait_while_present   }
+
+  def edit_random_delivery_format
+    selected_options = {:del_format => delivery_formats_table.rows[2].cells[FORMAT_COLUMN].text, :grade_format => select_random_option(delivery_formats_table[2].cells[GRADE_ROSTER_LEVEL_COLUMN]), :final_exam_driver => select_random_option(delivery_formats_table[2].cells[FINAL_EXAM_COLUMN])}
+    return selected_options
+  end
+
+  def select_random_option(sel_list)
+    options = sel_list.options.map{|option| option.text}
+    if options != []
+      options.delete_if{|a| a.index("Select") != nil or  a == "" }
+      sel_opt = rand(options.length)
+      sel_list.select().select(options[sel_opt])
+      return options[sel_opt]
+    end
+  end
 
   def grade_roster_level(format)
     delivery_format_row(format).cells[GRADE_ROSTER_LEVEL_COLUMN].select().selected_options[0].text

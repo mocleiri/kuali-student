@@ -14,16 +14,14 @@ Feature: Edit Course Offerings
   Scenario: Edit an existing course offering deactivating final examinations and update the grade roster level
     When I edit a course offering with multiple format types
     And I select a final exam type of "No final exam or assessment"
-    And a grade roster level of "Lecture"
+    And I change the delivery format options
     Then I can submit and the course offering is updated
 
   #KSENROLL-1503.2
   Scenario: Edit an existing course offering activating final examinations and update the grade roster level
     When I edit a course offering with multiple format types
-    #And I add a delivery format
     And I select a final exam type of "Standard final Exam"
-    And a grade roster level of "Quiz"
-    And a final exam driver of "Quiz"
+    And I change the delivery format options
     Then I can submit and the course offering is updated
 
   #KSENROLL-1504

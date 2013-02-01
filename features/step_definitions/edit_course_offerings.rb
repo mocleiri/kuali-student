@@ -35,8 +35,10 @@ When /^I select a final exam type of "([^"]*)"$/ do |final_option|
      @course_offering.edit_offering :final_exam_type => final_option
 end
 
-When /^a grade roster level of "([^"]*)"$/ do |grade_format|
-      @course_offering.edit_offering :grade_format => grade_format
+When /^I change the delivery format options$/ do
+  delivery_format_list = {}
+  delivery_format_list[0] = make DeliveryFormat, :format=>"Lab Only"
+  @course_offering.edit_offering :delivery_format_list => delivery_format_list
 end
 
 Then /^I can submit and the course offering is updated$/ do
