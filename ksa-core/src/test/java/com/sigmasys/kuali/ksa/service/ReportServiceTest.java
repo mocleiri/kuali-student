@@ -31,16 +31,15 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
     @Autowired
     private GeneralLedgerService glService;
 
-    private SimpleDateFormat dateFormat;
-
 
     @Before
-    public void setUpWithinTransaction() {
+    public void setUpWithinTransaction() throws Exception {
+
         super.setUpWithinTransaction();
+
         accountService.getOrCreateAccount("admin");
         accountService.getOrCreateAccount("user1");
         accountService.getOrCreateAccount("user2");
-        dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
     }
 
     @Test

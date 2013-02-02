@@ -291,11 +291,11 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
         // Filling in FinancialEntry
 
-        financialEntry.setAmountBilled(report.getBilledAmount());
-        financialEntry.setInsuranceContract(report.getInsRefundAmount());
-        financialEntry.setScholarshipsOrGrants(report.getScholarshipAmount());
-        financialEntry.setPriorYearAdjustment(report.getPriorYearAdjustedAmount());
-        financialEntry.setPriorYearScholarshipAdjustment(report.getScholarshipAdjustedAmount());
+        financialEntry.setAmountBilled(getFormattedAmount(report.getBilledAmount()));
+        financialEntry.setInsuranceContract(getFormattedAmount(report.getInsRefundAmount()));
+        financialEntry.setScholarshipsOrGrants(getFormattedAmount(report.getScholarshipAmount()));
+        financialEntry.setPriorYearAdjustment(getFormattedAmount(report.getPriorYearAdjustedAmount()));
+        financialEntry.setPriorYearScholarshipAdjustment(getFormattedAmount(report.getScholarshipAdjustedAmount()));
 
         // Filling in FormCheckboxes
         formCheckboxes.setReportingMethodChanged(report.isReportingMethodChanged());

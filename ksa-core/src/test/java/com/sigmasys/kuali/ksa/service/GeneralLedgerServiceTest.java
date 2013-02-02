@@ -36,17 +36,24 @@ public class GeneralLedgerServiceTest extends AbstractServiceTest {
     protected Transaction transaction2;
     protected Transaction transaction3;
 
+    protected SimpleDateFormat dateFormat;
+
     @Before
-    public void setUpWithinTransaction() {
+    public void setUpWithinTransaction() throws Exception {
 
         // set up test data within the transaction
         String userId = "admin";
+
+        dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
+
+        Date transactionDate = dateFormat.parse("12/12/2012");
+
         accountService.getOrCreateAccount(userId);
 
         // Creating transactions with the test user ID
-        transaction1 = transactionService.createTransaction("1020", userId, new Date(), new BigDecimal(10e7));
-        transaction2 = transactionService.createTransaction("cash", userId, new Date(), new BigDecimal(300.99));
-        transaction3 = transactionService.createTransaction("chip", userId, new Date(), new BigDecimal(77777.980));
+        transaction1 = transactionService.createTransaction("1020", userId, transactionDate, new BigDecimal(10e7));
+        transaction2 = transactionService.createTransaction("cash", userId, transactionDate, new BigDecimal(300.99));
+        transaction3 = transactionService.createTransaction("chip", userId, transactionDate, new BigDecimal(77777.980));
 
         // Creating GL transactions with the status Q and the test user ID
         createGlTransaction(transaction1);
