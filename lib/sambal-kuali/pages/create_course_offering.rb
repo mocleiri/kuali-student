@@ -17,7 +17,13 @@ class CreateCourseOffering < BasePage
 
   element(:create_offering_from_div)  { |b| b.frm.div(id: "KS-CourseOffering-LinkSection").text_field() }
   #action(:create_from_existing_offering)  { |b| b.create_offering_from_div.link(text: /Existing Offering/).click }
-  element(:suffix) { |b| b.frm.div(data_label: "Add Suffix").text_field() }
+  element(:suffix) { |b| b.frm.div(data_label: "Suffix").text_field() }
+
+  element(:add_format){|b| b.frm.div(data_label:"FORMAT")}
+  element(:add_grade_roster_level){|b| b.frm.div(data_label:"GRADE ROSTER LEVEL")}
+  element(:add_final_exam_driver){|b| b.frm.div(data_label:"FINAL EXAM DRIVER ACTIVITY")}
+  #element(:add_format_btn_element) { |b| b.frm.button(text: "Add")}
+  action(:add_format_btn) { |b| b.frm.button(text: "Add").click; b.loading.wait_while_present }
 
   action(:create_from_existing_offering_tab) { |b| b.frm.link(text: /Create from Existing Offering/).click; b.loading.wait_while_present }
   action(:configure_course_offering_copy_toggle) { |b| b.frm.link(id: "KS-ExistingOffering-ConfigureCopySubSection_toggle").click }
@@ -43,8 +49,10 @@ class CreateCourseOffering < BasePage
   ACTIONS_COLUMN_CO = 5
 
   def add_random_delivery_format
-    selected_options = {:del_format => select_random_option(delivery_formats_table[1].cells[FORMAT_COLUMN]), :grade_format => select_random_option(delivery_formats_table[1].cells[GRADE_ROSTER_LEVEL_COLUMN]), :final_exam_driver => select_random_option(delivery_formats_table[1].cells[FINAL_EXAM_COLUMN])}
-    delivery_format_add
+    #selected_options = {:del_format => select_random_option(delivery_formats_table[1].cells[FORMAT_COLUMN]), :grade_format => select_random_option(delivery_formats_table[1].cells[GRADE_ROSTER_LEVEL_COLUMN]), :final_exam_driver => select_random_option(delivery_formats_table[1].cells[FINAL_EXAM_COLUMN])}
+    #delivery_format_add
+    selected_options = {:del_format => select_random_option(add_format), :grade_format => select_random_option(add_grade_roster_level), :final_exam_driver => select_random_option(add_final_exam_driver)}
+    add_format_btn
     return selected_options
   end
 
@@ -65,6 +73,7 @@ class CreateCourseOffering < BasePage
     options.delete_if{|a| a.index("Select") != nil or  a == "" }
     sel_opt = rand(options.length)
     sel_list.select().select(options[sel_opt])
+    loading.wait_while_present
     return options[sel_opt]
   end
 

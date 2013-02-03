@@ -29,7 +29,7 @@ And /^I press Copy$/ do
   on CreateCourseOffering do |page|
     page.create_from_existing_offering_copy_submit
     @newly_created_co = /Course offering (.+) has been successfully created/.match(page.growl_message.text)[1]
-    page.create_offering
+    page.create
   end
 end
 
