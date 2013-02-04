@@ -23,7 +23,7 @@ public interface ConfigService {
 
     public String getParameter(String name);
 
-    public Map<String, String> getInitialParameters();
+    public Map<String, String> getParameters();
 
     public Integer updateParameters(List<InitialParameter> params);
 

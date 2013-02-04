@@ -67,11 +67,11 @@ public class ConfigServiceImpl implements ConfigService, InitializingBean {
 
     @Override
     public String getParameter(String name) {
-        return getInitialParameters().get(name);
+        return getParameters().get(name);
     }
 
     @Override
-    public Map<String, String> getInitialParameters() {
+    public Map<String, String> getParameters() {
         return parameterConfigurer.getInitialParameters();
     }
 
@@ -95,7 +95,7 @@ public class ConfigServiceImpl implements ConfigService, InitializingBean {
     @Override
     public Map<String, String> refreshParameters() {
         parameterConfigurer.loadDatabaseParameters(true);
-        return getInitialParameters();
+        return getParameters();
     }
 
     private Logger getLogger(String loggerName) {

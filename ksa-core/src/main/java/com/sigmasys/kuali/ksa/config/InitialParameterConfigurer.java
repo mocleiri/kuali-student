@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.config;
 
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.InitialParameter;
+import com.sigmasys.kuali.ksa.util.CommonUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -86,7 +87,7 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
                 String name = rs.getString("name");
                 String value = rs.getString("value");
                 String locked = rs.getString("locked");
-                boolean isLocked = (locked != null) ? locked.equalsIgnoreCase("Y") : false;
+                boolean isLocked = (locked != null) && locked.equalsIgnoreCase("Y");
                 if (name != null) {
                     InitialParameter parameter = new InitialParameter(name, value, false, isLocked);
                     databaseParameters.add(parameter);
@@ -100,16 +101,15 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
 
         // Loading local properties first and saving them as "read-only"
         super.loadProperties(props);
+
         readOnlyProperties.putAll(props);
 
-        // Local properties should have the higher priority than DB parameters so we have to add them at the end.
-
+        // Local properties should have the higher priority than DB parameters so we have to add them
+        // to the final properties at the very end.
         for (InitialParameter databaseParameter : databaseParameters) {
             String name = databaseParameter.getName();
-            String value = databaseParameter.getValue();
-            if (name != null && value != null) {
-                props.setProperty(name, value);
-            }
+            String value = CommonUtils.nvl(databaseParameter.getValue());
+            props.setProperty(name, value);
         }
 
         props.putAll(readOnlyProperties);
@@ -171,15 +171,25 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
     }
 
     public List<InitialParameter> getInitialParameterList() {
+
         Map<String, String> readOnlyParams = getReadOnlyParameters();
+
+        Set<String> readOnlyParamNames = readOnlyParams.keySet();
+
         List<InitialParameter> params = new ArrayList<InitialParameter>(databaseParameters.size() + readOnlyParams.size());
+
         for (InitialParameter databaseParameter : databaseParameters) {
+          if (!readOnlyParamNames.contains(databaseParameter.getName())) {
             params.add(databaseParameter);
+          }
         }
+
         for (Map.Entry<String, String> entry : readOnlyParams.entrySet()) {
             params.add(new InitialParameter(entry.getKey(), entry.getValue(), true));
         }
+
         Collections.sort(params);
+
         return params;
     }
 
@@ -198,6 +208,7 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         logger.debug("Deleting the following properties from KSA_CONFIG: " + paramNameList);
 
         if (!paramNameList.isEmpty()) {
+
             Map<String, String> parameterMap = new HashMap<String, String>(paramNameList.size());
             StringBuilder sql = new StringBuilder("delete from " + schemaPrefix + "KSA_CONFIG where NAME in (");
             for (int i = 0; i < paramNameList.size(); i++) {
@@ -208,9 +219,12 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
                 sql.append(":").append(paramName);
                 parameterMap.put(paramName, paramNameList.get(i));
             }
+
             sql.append(")");
+
             return jdbcTemplate.update(sql.toString(), parameterMap);
         }
+
         return 0;
     }
 
@@ -225,11 +239,13 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         validateJdbcTemplate();
 
         logger.debug("Deleting the following parameters from KSA_CONFIG: " + params);
+
         // Deleting the old parameters within the same transaction
         Set<String> paramNames = new HashSet<String>(params.size());
         for (InitialParameter param : params) {
             paramNames.add(param.getName());
         }
+
         deleteInitialParameters(paramNames);
 
         // Assembling the batch parameters for insert statements
@@ -243,6 +259,7 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
                 batchParams.add(map);
             }
         }
+
         if (!batchParams.isEmpty()) {
             logger.debug("Inserting the following properties into KSA_CONFIG: " + batchParams);
             String sql = "insert into " + schemaPrefix + "KSA_CONFIG (NAME, VALUE, LOCKED) values (:name, :value, :locked)";
@@ -254,6 +271,7 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
             }
             return insertedRows;
         }
+
         return 0;
     }
 
