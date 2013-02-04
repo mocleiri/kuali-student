@@ -89,7 +89,8 @@ class CourseOffering
         :grade_options => "Letter",
         :reg_options => "Pass/Fail Grading",
         :search_by_subj => false,
-        :create_by_copy => nil
+        :create_by_copy => nil,
+        :create_from_existing => nil
     }
     options = defaults.merge(opts)
     set_options(options)
@@ -102,6 +103,14 @@ class CourseOffering
       #deep copy
       @activity_offering_cluster_list = @create_by_copy.activity_offering_cluster_list
       @ao_list = @create_by_copy.ao_list
+    elsif @create_from_existing != nil
+      on CreateCourseOffering do |page|
+        page.create_from_existing_offering_tab
+        page.configure_course_offering_copy_toggle
+        page.select_exclude_instructor_checkbox
+        page.create_from_existing_offering_copy_submit
+        #@course = /Course offering (.+) has been successfully created/.match(page.growl_message.text)[1]
+      end
     else
       on CreateCourseOffering do  |page|
         @suffix = random_alphanums.strip
