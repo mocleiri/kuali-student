@@ -167,6 +167,6 @@ Then /^the activity offering is updated when saved$/ do
 end
 
 Given /^I am managing a course offering$/ do
-  @course_offering = make CourseOffering
+  @course_offering = make CourseOffering, :term => "202001"
   @course_offering.manage
 end

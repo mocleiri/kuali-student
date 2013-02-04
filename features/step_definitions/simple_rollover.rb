@@ -3,6 +3,11 @@ When /^I initiate a rollover by specifying source and target terms$/ do
   @rollover.perform_rollover
 end
 
+When /^I initiate a rollover to allow create an open term$/ do
+  @rollover = make Rollover, :source_term => "201201", :target_term => "202001"
+  @rollover.perform_rollover
+end
+
 Then /^the results of the rollover are available$/ do
   @rollover.wait_for_rollover_to_complete
   #TODO validation

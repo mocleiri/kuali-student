@@ -2,4 +2,4 @@ default: --format pretty
 headless: HEADLESS=true --tags @nightly --tags ~@draft --tags ~@wip --tags ~@pending
 headless_all: HEADLESS=true
 parallel: HEADLESS=true --tags @nightly --tags ~@draft --tags ~@wip --tags ~@pending
-
+headless_data: HEADLESS=true --tags @data_setup --tags ~@draft --tags ~@wip --tags ~@pending

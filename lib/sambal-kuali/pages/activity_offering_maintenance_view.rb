@@ -32,17 +32,18 @@ class ActivityOfferingMaintenanceView < ActivityOfferingMaintenanceBase
 
 
     def get_priority(pop_name)
-      target_pool_row(pop_name).cells[PRIORITY_COLUMN].text
-      #target_pool_row(pop_name).div(id: /u886_line/).span(id: /u886_line/).text
+      #target_pool_row(pop_name).cells[PRIORITY_COLUMN].text
+      target_pool_row(pop_name).cells[PRIORITY_COLUMN].text_field.value
     end
 
     def get_seats(pop_name)
-      target_pool_row(pop_name).div(id: /seatLimit_line/).text
+      #target_pool_row(pop_name).div(id: /seatLimit_line/).text
+      target_pool_row(pop_name).div(id: /seatLimit_line/).text_field.value
     end
 
     def get_expiration_milestone(pop_name)
-      target_pool_row(pop_name).cells[EXP_MILESTONE_COLUMN].text
-      #target_pool_row(pop_name).div(id: /u927_line/).span(id: /u927_line/).text
+      #target_pool_row(pop_name).cells[EXP_MILESTONE_COLUMN].text
+      target_pool_row(pop_name).cells[EXP_MILESTONE_COLUMN].select.selected_options[0].text
     end
 
     private

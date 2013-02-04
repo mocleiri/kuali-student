@@ -76,6 +76,8 @@ class ActivityOffering
       @format = options[:format]
       @activity_type = options[:activity_type]
 
+      set_options(options)
+
     end
 
     #navigates to activity offering edit page and sets up activity offering based on class attributes
@@ -102,7 +104,18 @@ class ActivityOffering
         page.edit @code
       end
 
-      edit(options)
+      init = {
+          :max_enrollment => @max_enrollment,
+          :actual_delivery_logistics_list => @actual_delivery_logistics_list,
+          :requested_delivery_logistics_list => @requested_delivery_logistics_list,
+          :personnel_list => @personnel_list ,
+          :seat_pool_list => @seat_pool_list,
+          :course_url => @course_url,
+          :evaluation => @evaluation,
+          :honors_course => @honors_course
+      }
+
+      edit(init)
     end
 
     #navigates activity offering edit page and updates activity offering based on class attributes
@@ -114,40 +127,27 @@ class ActivityOffering
     #
     # @param opts [Hash] key => value for attribute to be updated
     def edit opts={}
-    #TODO switch to simpler edit format once other refactoring has been validated
-      defaults = {
-          :max_enrollment => @max_enrollment,
-          :actual_delivery_logistics_list => @actual_delivery_logistics_list,
-          :requested_delivery_logistics_list => @requested_delivery_logistics_list,
-          :personnel_list => @personnel_list ,
-          :seat_pool_list => @seat_pool_list,
-          :course_url => @course_url,
-          :evaluation => @evaluation,
-          :honors_course => @honors_course
-      }
 
-      options=defaults.merge(opts)
-
-      if options[:max_enrollment] != @max_enrollment
+      if opts[:max_enrollment] != nil
         on ActivityOfferingMaintenance do |page|
-          page.total_maximum_enrollment.set options[:max_enrollment]
+          page.total_maximum_enrollment.set opts[:max_enrollment]
           page.total_maximum_enrollment.fire_event "onchange"
-          @max_enrollment = options[:max_enrollment]
+          @max_enrollment = opts[:max_enrollment]
         end
       end
 
       #TODO: comparison could be more robust
-      if options[:requested_delivery_logistics_list].keys != @requested_delivery_logistics_list.keys
-        if options[:requested_delivery_logistics_list].length > 0
+      if opts[:requested_delivery_logistics_list] != nil
+        if opts[:requested_delivery_logistics_list].length > 0
           on ActivityOfferingMaintenance do |page|
             page.revise_logistics
           end
           #'save' vs 'save and process' determined by first rdl
-          first_rdl = options[:requested_delivery_logistics_list].values[0]
+          first_rdl = opts[:requested_delivery_logistics_list].values[0]
           #list of requests added with updated keys
           requests_added = {}
 
-          options[:requested_delivery_logistics_list].values.each do |request|
+          opts[:requested_delivery_logistics_list].values.each do |request|
             request.create
             requests_added["#{request.days}#{request.start_time}#{request.start_time_ampm.upcase}".delete(' ')] = request
           end
@@ -163,39 +163,39 @@ class ActivityOffering
       end
 
       on ActivityOfferingMaintenance do |page|
-        if options[:course_url] != @course_url
-          page.course_url.set options[:course_url]
-          @course_url = options[:course_url]
+        if opts[:course_url] != nil
+          page.course_url.set opts[:course_url]
+          @course_url = opts[:course_url]
         end
 
-        if options[:evaluation] != @evaluation
-          if options[:evaluation]
+        if opts[:evaluation] != nil
+          if opts[:evaluation]
             page.requires_evaluation.set
           else
             page.requires_evaluation.clear
           end
-          @evaluation =  options[:evaluation]
+          @evaluation =  opts[:evaluation]
         end
 
-        if options[:honors_course] != @honors_course
-          if options[:honors_course]
+        if opts[:honors_course] != nil
+          if opts[:honors_course]
             page.honors_flag.set
           else
             page.honors_flag.clear
           end
-          @honors_course = options[:honors_course]
+          @honors_course = opts[:honors_course]
         end
       end
-      if options[:personnel_list] != @personnel_list
-        options[:personnel_list].each do |person|
+      if opts[:personnel_list] != nil
+        opts[:personnel_list].each do |person|
           person.add_personnel
         end
-        @personnel_list = options[:personnel_list]
+        @personnel_list = opts[:personnel_list]
       end
 
       #TODO: comparison could be more robust/could rework to include remove/edit/add seatpool methods?
-      if options[:seat_pool_list].keys != @seat_pool_list.keys
-        options[:seat_pool_list].each do |key,seat_pool|
+      if opts[:seat_pool_list] != nil
+        opts[:seat_pool_list].each do |key,seat_pool|
           seat_pool.add_seatpool(seatpool_populations_used)
           @seat_pool_list[key] = seat_pool unless !seat_pool.exp_add_succeed?
         end
