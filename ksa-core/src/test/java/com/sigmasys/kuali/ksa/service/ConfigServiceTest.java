@@ -41,12 +41,17 @@ public class ConfigServiceTest extends AbstractServiceTest {
         Assert.notNull(params);
         Assert.notEmpty(params);
 
+        logger.info("Config parameters: " + params);
+
         for (Map.Entry<String, String> entry : params.entrySet()) {
+
             String name = entry.getKey();
             String value = entry.getValue();
+
+            logger.info("Config parameter: name = " + name + ", value = " + value);
+
             Assert.notNull(name);
-            Assert.notNull(value);
-            logger.info("Initial parameter: name = " + name + ", value = " + value);
+
         }
 
     }

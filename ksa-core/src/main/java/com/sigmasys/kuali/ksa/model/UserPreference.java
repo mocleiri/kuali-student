@@ -27,6 +27,12 @@ public class UserPreference extends AccountIdAware implements Identifiable {
      */
     private String value;
 
+    /**
+     * Overridden value
+     */
+    private String overriddenValue;
+
+
     public UserPreference() {
     }
 
@@ -67,4 +73,12 @@ public class UserPreference extends AccountIdAware implements Identifiable {
         this.value = value;
     }
 
+    @Column(name = "OVRD_VALUE", length = 1024)
+    public String getOverriddenValue() {
+        return overriddenValue;
+    }
+
+    public void setOverriddenValue(String overriddenValue) {
+        this.overriddenValue = overriddenValue;
+    }
 }

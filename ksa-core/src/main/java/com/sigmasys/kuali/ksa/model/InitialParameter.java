@@ -2,62 +2,68 @@ package com.sigmasys.kuali.ksa.model;
 
 public class InitialParameter implements Comparable<InitialParameter> {
 
-	private String name;
-	private String value;
-	private boolean readOnly;
+    private String name;
+    private String value;
+    private Boolean readOnly;
+    private Boolean locked;
 
-	public InitialParameter() {
-	}
+    public InitialParameter() {
+    }
 
-	public InitialParameter(String name, String value) {
-		this(name, value, false);
-	}
+    public InitialParameter(String name, String value) {
+        this(name, value, false, false);
+    }
 
-	public InitialParameter(String name, String value, boolean readOnly) {
-		setName(name);
-		setValue(value);
-		setReadOnly(readOnly);
-	}
+    public InitialParameter(String name, String value, boolean readOnly) {
+        this(name, value, readOnly, false);
+    }
 
-	public String getName() {
-		return name;
-	}
+    public InitialParameter(String name, String value, boolean readOnly, boolean locked) {
+        setName(name);
+        setValue(value);
+        setReadOnly(readOnly);
+        setLocked(locked);
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getValue() {
-		return value;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setValue(String value) {
-		this.value = value;
-	}
+    public String getValue() {
+        return value;
+    }
 
-	public boolean isReadOnly() {
-		return readOnly;
-	}
+    public void setValue(String value) {
+        this.value = value;
+    }
 
-	public void setReadOnly(Boolean readOnly) {
-		this.readOnly = readOnly;
-	}
+    public boolean isReadOnly() {
+        return readOnly != null ? readOnly : false;
+    }
 
-	@Override
-	public int compareTo(InitialParameter param) {
-		if (getName() == null) {
-			return -1;
-		}
-		return getName().toLowerCase().compareTo(param.getName().toLowerCase());
-	}
-	
-	public InitialParameter copy() {
-		InitialParameter d = new InitialParameter();
-		d.setName(getName());
-		d.setValue(getValue());
-		d.setReadOnly(isReadOnly());
-		return d;
-	}
+    public void setReadOnly(Boolean readOnly) {
+        this.readOnly = readOnly;
+    }
+
+    public Boolean isLocked() {
+        return locked != null ? locked : false;
+    }
+
+    public void setLocked(Boolean locked) {
+        this.locked = locked;
+    }
+
+    @Override
+    public int compareTo(InitialParameter param) {
+        if (getName() == null) {
+            return -1;
+        }
+        return getName().toLowerCase().compareTo(param.getName().toLowerCase());
+    }
 
 }
 

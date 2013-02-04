@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.config;
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.InitialParameter;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.core.api.config.property.Config;
@@ -33,7 +34,7 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
 
     private static final Log logger = LogFactory.getLog(InitialParameterConfigurer.class);
 
-    private final Properties databaseProperties = new Properties();
+    private final List<InitialParameter> databaseParameters = new LinkedList<InitialParameter>();
     private final Properties readOnlyProperties = new Properties();
 
     private String schemaPrefix;
@@ -76,16 +77,19 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         validateJdbcTemplate();
 
         if (!refreshOnly) {
-            databaseProperties.clear();
+            databaseParameters.clear();
         }
 
-        String query = "select NAME as name, VALUE as value from " + schemaPrefix + "KSSA_CONFIG";
+        String query = "select NAME as name, VALUE as value, LOCKED as locked from " + schemaPrefix + "KSSA_CONFIG";
         jdbcTemplate.query(query, new HashMap<String, Object>(), new RowCallbackHandler() {
             public void processRow(ResultSet rs) throws SQLException {
                 String name = rs.getString("name");
                 String value = rs.getString("value");
-                if (name != null && value != null) {
-                    databaseProperties.setProperty(name, value);
+                String locked = rs.getString("locked");
+                boolean isLocked = (locked != null) ? locked.equalsIgnoreCase("Y") : false;
+                if (name != null) {
+                    InitialParameter parameter = new InitialParameter(name, value, false, isLocked);
+                    databaseParameters.add(parameter);
                 }
             }
         });
@@ -98,8 +102,16 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         super.loadProperties(props);
         readOnlyProperties.putAll(props);
 
-        // Local properties should have the higher priority than DB parameters
-        props.putAll(databaseProperties);
+        // Local properties should have the higher priority than DB parameters so we have to add them at the end.
+
+        for (InitialParameter databaseParameter : databaseParameters) {
+            String name = databaseParameter.getName();
+            String value = databaseParameter.getValue();
+            if (name != null && value != null) {
+                props.setProperty(name, value);
+            }
+        }
+
         props.putAll(readOnlyProperties);
 
         logger.debug("Initial parameters = " + props);
@@ -135,6 +147,14 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         return initialParamMap;
     }
 
+    private Map<String, String> getParameters(List<InitialParameter> parameters) {
+        Map<String, String> initialParamMap = new HashMap<String, String>(parameters.size());
+        for (InitialParameter parameter : parameters) {
+            initialParamMap.put(parameter.getName(), parameter.getValue());
+        }
+        return initialParamMap;
+    }
+
     public Map<String, String> getInitialParameters() {
         // Local properties should have the higher priority than DB parameters
         Map<String, String> initialParams = new HashMap<String, String>(getDatabaseParameters());
@@ -143,7 +163,7 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
     }
 
     public Map<String, String> getDatabaseParameters() {
-        return getParameters(databaseProperties);
+        return getParameters(databaseParameters);
     }
 
     public Map<String, String> getReadOnlyParameters() {
@@ -151,11 +171,10 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
     }
 
     public List<InitialParameter> getInitialParameterList() {
-        Map<String, String> databaseParams = getDatabaseParameters();
         Map<String, String> readOnlyParams = getReadOnlyParameters();
-        List<InitialParameter> params = new ArrayList<InitialParameter>(databaseParams.size() + readOnlyParams.size());
-        for (Map.Entry<String, String> entry : databaseParams.entrySet()) {
-            params.add(new InitialParameter(entry.getKey(), entry.getValue()));
+        List<InitialParameter> params = new ArrayList<InitialParameter>(databaseParameters.size() + readOnlyParams.size());
+        for (InitialParameter databaseParameter : databaseParameters) {
+            params.add(databaseParameter);
         }
         for (Map.Entry<String, String> entry : readOnlyParams.entrySet()) {
             params.add(new InitialParameter(entry.getKey(), entry.getValue(), true));
@@ -213,19 +232,20 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         }
         deleteInitialParameters(paramNames);
 
-        // Assembling the batch paremeters for insert statements
+        // Assembling the batch parameters for insert statements
         List<Map<String, String>> batchParams = new ArrayList<Map<String, String>>();
         for (InitialParameter param : params) {
             if (!param.isReadOnly()) {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("name", param.getName());
                 map.put("value", param.getValue());
+                map.put("locked", param.isLocked() ? "Y" : "N");
                 batchParams.add(map);
             }
         }
         if (!batchParams.isEmpty()) {
             logger.debug("Inserting the following properties into KSA_CONFIG: " + batchParams);
-            String sql = "insert into " + schemaPrefix + "KSA_CONFIG (NAME, VALUE) values (:name, :value)";
+            String sql = "insert into " + schemaPrefix + "KSA_CONFIG (NAME, VALUE, LOCKED) values (:name, :value, :locked)";
             Map<String, ?>[] batchParamArray = new Map[batchParams.size()];
             int[] values = jdbcTemplate.batchUpdate(sql, batchParams.toArray(batchParamArray));
             int insertedRows = 0;
