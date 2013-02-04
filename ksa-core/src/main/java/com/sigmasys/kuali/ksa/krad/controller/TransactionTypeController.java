@@ -4,13 +4,11 @@ import com.sigmasys.kuali.ksa.krad.form.TransactionTypeForm;
 import com.sigmasys.kuali.ksa.krad.model.TransactionTypeModel;
 import com.sigmasys.kuali.ksa.krad.util.AuditableEntityKeyValuesFinder;
 import com.sigmasys.kuali.ksa.krad.util.CreditDebitKeyValuesFinder;
-import com.sigmasys.kuali.ksa.krad.util.KradTypeEntityKeyValuesFinder;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AuditableEntityService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.kuali.rice.kim.impl.identity.name.EntityNameTypeBo;
 import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -79,7 +77,9 @@ public class TransactionTypeController extends GenericSearchController {
                 throw new IllegalArgumentException("'entityId' request parameter must be specified");
             }
 
-            if(subCode == null){ subCode = "1"; }
+            if (subCode == null) {
+                subCode = "1";
+            }
 
             TransactionTypeId ttId = new TransactionTypeId(entityId, Integer.parseInt(subCode));
 
@@ -105,7 +105,7 @@ public class TransactionTypeController extends GenericSearchController {
 
         List<GlBreakdown> breakdowns = new ArrayList<GlBreakdown>(gltypes.size());
 
-        for(GeneralLedgerType type : gltypes){
+        for (GeneralLedgerType type : gltypes) {
             GlBreakdown b = new GlBreakdown();
             b.setGeneralLedgerType(type);
             b.setGlOperation(type.getGlOperationOnCharge());
@@ -123,16 +123,12 @@ public class TransactionTypeController extends GenericSearchController {
         return getUIFModelAndView(form);
     }
 
-        /**
-        * @param form
-        * @return
-        */
+    /**
+     * @param form
+     * @return
+     */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=insert")
     public ModelAndView insert(@ModelAttribute("KualiForm") TransactionTypeForm form) {
-
-        TransactionType transType = null;
-
-
 
         String type = form.getType();
         String code = form.getCode();
@@ -142,17 +138,17 @@ public class TransactionTypeController extends GenericSearchController {
 
         boolean typeExists = transactionService.transactionTypeExists(type);
 
-        TransactionType tt = null;
+        TransactionType tt;
 
-        if("C".equalsIgnoreCase(type)){
-            if(!typeExists){
+        if ("C".equalsIgnoreCase(type)) {
+            if (!typeExists) {
                 tt = transactionService.createCreditType(code, null, startDate, priority, description);
             } else {
                 tt = transactionService.createCreditSubType(code, startDate);
             }
 
-        } else if("D".equalsIgnoreCase(type)){
-            if(!typeExists){
+        } else if ("D".equalsIgnoreCase(type)) {
+            if (!typeExists) {
                 tt = transactionService.createDebitType(code, null, startDate, priority, description);
             } else {
                 tt = transactionService.createDebitSubType(code, startDate);
@@ -166,43 +162,6 @@ public class TransactionTypeController extends GenericSearchController {
 
         logger.info("Transaction Type saved: " + tt.getId());
 
-
-
-
-        /*
-        // Common fields
-        String code = form.getCode();
-
-
-
-
-
-        logger.debug("Entity code: " + entity.getCode());
-
-        try {
-
-            String code = entity.getCode();
-            String name = entity.getName();
-            String description = entity.getDescription();
-
-            auditableEntityService.createAuditableEntity(code, name, description, TransactionType.class);
-
-            List<TransactionType> entities = auditableEntityService.getAuditableEntities(TransactionType.class);
-
-            form.setTransactionTypes(entities);
-
-            // success in creating the currency.
-            String statusMsg = "Success: Transaction Type saved, ID = " + entity.getId();
-            form.setStatusMessage(statusMsg);
-            logger.info(statusMsg);
-        } catch (Exception e) {
-            // failed to create the currency. Leave the currency information in the view
-            String statusMsg = "Failure: Transaction Type entity did not save, ID = " + entity.getId() +
-                    ". " + e.getMessage();
-            form.setStatusMessage(statusMsg);
-            logger.error(statusMsg);
-        }
-          */
         return getUIFModelAndView(form);
     }
 
@@ -239,13 +198,12 @@ public class TransactionTypeController extends GenericSearchController {
 
     public KeyValuesFinder getCreditDebitTypeOptionsFinder() {
         if (creditDebitTypeOptionsFinder == null) {
-            synchronized(this) {
+            synchronized (this) {
                 if (creditDebitTypeOptionsFinder == null) {
                     creditDebitTypeOptionsFinder = new CreditDebitKeyValuesFinder();
                 }
             }
         }
-
         return creditDebitTypeOptionsFinder;
     }
 
@@ -254,13 +212,12 @@ public class TransactionTypeController extends GenericSearchController {
       */
     public KeyValuesFinder getRollupOptionsFinder() {
         if (rollupTypeOptionsFinder == null) {
-            synchronized(this) {
+            synchronized (this) {
                 if (rollupTypeOptionsFinder == null) {
                     rollupTypeOptionsFinder = new AuditableEntityKeyValuesFinder<Rollup>(Rollup.class);
                 }
             }
         }
-
         return rollupTypeOptionsFinder;
     }
 
