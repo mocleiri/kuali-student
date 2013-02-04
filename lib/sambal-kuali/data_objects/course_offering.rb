@@ -107,10 +107,6 @@ class CourseOffering
         @suffix = random_alphanums.strip
         page.suffix.set @suffix
         @course = "#{@course}#{@suffix}"
-        #page.add_format.select().select("Lab")
-        #page.add_grade_roster_level.select().select("Course")
-        #page.add_final_exam_driver.select().select("Lab")
-        #page.add_format_btn
         delivery_obj = make DeliveryFormat
         delivery_obj.select_random_delivery_formats
         @delivery_format_list << delivery_obj
@@ -548,6 +544,16 @@ class DeliveryFormat
       return selected_options
     end
 
+  end
+
+  def edit_random_delivery_formats
+    on CourseOfferingEdit do |page|
+      selected_options = page.edit_random_delivery_format
+      @format = selected_options[:del_format]
+      @grade_format = selected_options[:grade_format]
+      @final_exam_driver = selected_options[:final_exam_driver]
+      return selected_options
+    end
   end
 
 end
