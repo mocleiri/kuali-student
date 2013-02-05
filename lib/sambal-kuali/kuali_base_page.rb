@@ -44,7 +44,9 @@ class BasePage < PageFactory
       value(:first_error) { |b| b.error_list.link.text }
       value(:first_msg) { |b| b.info_list.li.text }
     end
+
+    def krms_frame_element
+      element(:frm) { |b| b.frame(:id=>/easyXDM_default\d+_provider/).frame(id: "iframeportlet") } #
+    end
   end
-
-
 end

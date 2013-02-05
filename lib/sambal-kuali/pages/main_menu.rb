@@ -70,4 +70,7 @@ class MainMenu < BasePage
   action(:population_maintenance_edoc) { |b| b.link(title: "Population Maintenance eDoc (New)").click }
   action(:schedule_of_classes) { |b| b.link(title: "Schedule of Classes").click }
 
+  #KRMS Links
+  action(:krms_components) { |b| b.link(text: "KRMS Components").click }
+  action(:krms_edit_agenda) { |b| b.link(text: "Edit Agenda").click }
 end

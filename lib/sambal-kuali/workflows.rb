@@ -136,4 +136,15 @@ module Workflows
     end
   end
 
+  def go_to_krms_components
+    visit MainMenu do |page|
+      page.krms_components
+    end
+  end
+
+  def go_to_krms_edit_agenda
+    visit MainMenu do |page|
+      page.krms_edit_agenda
+    end
+  end
 end
