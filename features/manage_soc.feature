@@ -8,7 +8,7 @@ Feature: Manage SOC
   MSR 4.3: Mark COs and AOs ready for Publishing
 
   Background:
-    I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
 
   Scenario: Lock the SOC but cancel the process
     Given the SOC is valid for "Lock"

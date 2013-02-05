@@ -5,7 +5,7 @@ As an Administrator, I want to create one or more seat pools and add to my Activ
 so that I can reserve seats in this Activity Offering for one or more populations of students.
 
   Background:
-    I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
     Given I am managing a course offering
 
   Scenario: Successfully create a seat pool for a population by completing all fields

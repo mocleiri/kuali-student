@@ -5,7 +5,7 @@ Feature: Add Activity Offerings to existing Course Offerings
   so that the Course Offering will have additional associated Activity Offerings for the term.
 
   Background:
-    I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
 
   Scenario: Add new Activity Offerings - COC view
     When I manage an existing Course Offering in "Course Offering Code" view

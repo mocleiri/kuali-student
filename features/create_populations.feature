@@ -5,7 +5,7 @@ In order to reserve seats in a course offering for a group of students
 I want to create populations by using rules, and based on other populations
 
   Background:
-    I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
 
   Scenario: Successfully create a new population using a rule
     When I create a population that is rule-based

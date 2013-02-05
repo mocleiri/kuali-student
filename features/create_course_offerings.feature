@@ -1,7 +1,7 @@
 @wip
 Feature: Create Course Offerings
 Background:
-  Given I am logged in as a Schedule Coordinator
+  Given Given I am logged in as a Schedule Coordinator
 
   #CO 5.1 & 5.2
   Scenario: Create Course Offerings with selected delivery formats

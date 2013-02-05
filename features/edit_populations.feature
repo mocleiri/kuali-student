@@ -6,7 +6,7 @@ I want to create populations and in order to effectively manage populations
 I want to be able to edit them.
 
   Background:
-    I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
 
   Scenario: Successfully edit a rule based population
     When I create a population that is rule-based

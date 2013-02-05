@@ -7,7 +7,7 @@ Feature: populate RDLs in various copying processes and rollover process
   delivery logistics a new AO when copying an Activity Offering from the current term
 
   Background:
-    I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
     Given I am managing a course offering that has Offered AOs
 
   Scenario: Copy ADL from a source AO to RDL of a new AO from the current term

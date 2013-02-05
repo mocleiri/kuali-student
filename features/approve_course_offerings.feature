@@ -11,7 +11,7 @@ Feature: Approve COs and their AOs for scheduling
   so that these Activity Offerings will be available for scheduling.
 
   Background:
-    I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
 
   Scenario: Approve a departmental set of COs and their AOs for scheduling
     When I create two new Course Offerings

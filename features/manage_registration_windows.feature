@@ -2,7 +2,7 @@
 Feature: Search for a registration window
 
   Background:
-    I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
 
   Scenario: Successfully search for Registration Windows
     When I manage Registration Windows for a term and a period

@@ -5,7 +5,7 @@ As an Administrator, I want to modify attributes of one of the seat pools for th
 Activity Offering so that the seat pool reflects current business needs.
 
   Background:
-    I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
     Given I am managing a course offering
 
   Scenario: Edit existing seat pool seat count and expiration milestone

@@ -2,7 +2,7 @@
 Feature: Academic Calendar CRED
 
   Background:
-    I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
     And I create an Academic Calendar
 
   Scenario: Create and save academic calendar from blank

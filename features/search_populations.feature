@@ -5,7 +5,7 @@ In order to avoid creating a duplicate population (alternate: In order to modify
 I want to search for a population
 
   Background:
-    I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
 
   Scenario: Search for existing population by Name
     When I search populations for keyword "New Freshmen"

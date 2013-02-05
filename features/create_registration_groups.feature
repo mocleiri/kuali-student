@@ -4,7 +4,7 @@ Feature: Create registration groups
 As an Administrator, I want to create registration groups for a Course Offering
 
   Background:
-    I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
 
   Scenario: RG 2.1A: Successfully create a activity offering cluster (for a course offering with a single activity offering type) and assign activity offerings to the cluster
     Given I manage registration groups for a course offering
@@ -165,7 +165,7 @@ As an Administrator, I want to create registration groups for a Course Offering
 
 #suspend AO functionality in M6?
 #  Scenario: Generate registration groups - suspended or cancelled activity offerings are excluded
-#    I am logged in as a Schedule Coordinator
+#    Given I am logged in as a Schedule Coordinator
 #    And I manage course offerings for a course offering with a single actvitiy #use ENGL103A (delete if exists, then copy ENGL103)
 #    When I set an activity offering status to cancelled 
 #    And I generate unconstrained registration groups
@@ -173,7 +173,7 @@ As an Administrator, I want to create registration groups for a Course Offering
 
 #suspend CO functionality?
 # Scenario: Generate registration groups - cannot be generated for course offering in '???' status (can be generated in Draft,Planned,Offered,Open)
-#    I am logged in as a Schedule Coordinator
+#    Given I am logged in as a Schedule Coordinator
 #    And I manage registration groups for a course offering with a single actvitiy #use ENGL103A (delete if exists, then copy ENGL103)
 #    When I set an course offering to '???' #how change course offering status
 #    And I generate unconstrained registration groups

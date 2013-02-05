@@ -6,7 +6,7 @@ Feature: Simple Rollover
   offering data from the source term will be copied over to create new course offerings in the target term.
 
   Background:
-    I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
 
   Scenario: Successfully rollover courses to target term
     When I initiate a rollover by specifying source and target terms

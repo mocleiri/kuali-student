@@ -7,7 +7,7 @@ Feature: delete activity offerings
   Activity Offerings so that I will not accidentally delete Activity Offerings that I intend to keep.
 
   Background:
-    I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
     Given I am managing a course offering that has Offered AOs
 
   Scenario: Delete multiple AOs
