@@ -4,7 +4,7 @@ Given /^I am logged in as admin$/ do
   end
 end
 
-Given /^Given I am logged in as a Schedule Coordinator/ do
+Given /^I am logged in as a Schedule Coordinator/ do
   visit Login do |page|
     log_in "martha", "martha" unless logged_in_user == "martha"
   end
