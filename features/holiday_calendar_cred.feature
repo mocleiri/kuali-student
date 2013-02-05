@@ -3,7 +3,7 @@ Feature: Holiday Calendar CRED
 
 
   Scenario: Create and save Holiday Calendar from blank
-    Given I am logged in as admin
+    I am logged in as a Schedule Coordinator
     When I create a Holiday Calendar
     Then I should be able to save the Holiday Calendar, and the Make Official button should become active
 

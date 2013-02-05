@@ -2,7 +2,7 @@
 Feature: Copy course offerings - activity offering clusters
 
   Background:
-    Given I am logged in as admin
+    I am logged in as a Schedule Coordinator
 
   Scenario: Copy course offering and ensure default activity offering cluster is copied
     Given I have created the default registration groups for a course offering

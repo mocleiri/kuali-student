@@ -2,7 +2,7 @@
 Feature: Edit Activity Offering Attributes
 
   Background:
-    Given I am logged in as admin
+    I am logged in as a Schedule Coordinator
     Given I manage a given Course Offering
     Given I edit an Activity Offering
 

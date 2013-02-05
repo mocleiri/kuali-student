@@ -5,7 +5,7 @@ As an Administrator, I want to remove one of the seat pools from the Activity Of
 since this seat pool is no longer needed.
 
   Background:
-    Given I am logged in as admin
+    I am logged in as a Schedule Coordinator
     Given I am managing a course offering
 
   Scenario: Remove seat pool and ensure seat pool priorities are properly re-sequenced

@@ -6,7 +6,7 @@ As a Departmental Administrator, I want to delete a Course Offering and all of i
 it will no longer be offered for the term.
 
   Background:
-    Given I am logged in as admin
+    I am logged in as a Schedule Coordinator
 
   @pending
   @bjg

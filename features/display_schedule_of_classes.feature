@@ -5,7 +5,7 @@ Feature: Schedule of Classes
   understand the courses being offered, including both descriptive and scheduling info
 
   Background:
-    Given I am logged in as admin
+    I am logged in as a Schedule Coordinator
     And I am using the schedule of classes page
 
   Scenario: Successfully display schedule of classes by subject code and display individual course details

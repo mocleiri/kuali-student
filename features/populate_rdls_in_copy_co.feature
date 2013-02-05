@@ -7,7 +7,7 @@
   requested delivery logistics on AOs in the target term when performing a simple rollover
 
   Background:
-    Given I am logged in as admin
+    I am logged in as a Schedule Coordinator
 
   Scenario: Copy ADLs from source AOs to RDLs of new AOs of different term when copying a Course Offering from a previous term
     Given I am creating a new course offering

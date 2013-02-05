@@ -1,7 +1,7 @@
 @wip
 Feature: Create Course Offerings
 Background:
-  Given I am logged in as admin
+  Given I am logged in as a Schedule Coordinator
 
   #CO 5.1 & 5.2
   Scenario: Create Course Offerings with selected delivery formats
@@ -9,7 +9,7 @@ Background:
     And I create a Course Offering with selected Delivery Formats
     Then the new Course Offering should contain only the selected delivery formats
 
-#CO 5.1 & 5.2
+  #CO 5.1 & 5.2
   Scenario: Create Course Offerings with lecture delivery formats
     When I designate a valid term and Catalog Course Code for lecture formats
     And I create a Course Offering with selected Delivery Formats
