@@ -1,7 +1,7 @@
 @nightly
 Feature: Edit Course Offerings
   Background:
-    Given Given I am logged in as a Schedule Coordinator
+    Given I am logged in as a Schedule Coordinator
 
   #KSENROLL-1499
   Scenario: Verify course offering pages are accessible
