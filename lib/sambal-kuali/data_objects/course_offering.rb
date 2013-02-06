@@ -330,7 +330,7 @@ class CourseOffering
   def delete_ao(opts)
     ao_code = opts[:ao_code]
     on ManageCourseOfferings do |page|
-      page.delete(ao_code)
+      page.delete_ao(ao_code)
     end
     on ActivityOfferingConfirmDelete do |page|
       page.delete_activity_offering
@@ -392,7 +392,7 @@ class CourseOffering
   end
 
   def add_ao_cluster(ao_cluster)
-    @ao_cluster.create
+    ao_cluster.create
     @activity_offering_cluster_list << ao_cluster
   end
 

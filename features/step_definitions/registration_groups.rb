@@ -1,5 +1,5 @@
 Given /^I manage registration groups for (?:a|the) course offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"ENGL211")
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"BSCI283")
   @course_offering.manage_registration_groups
 end
 
@@ -105,12 +105,12 @@ Then /^a registration groups error message appears stating "(.*?)"$/ do|errMsg|
 end
 
 Given /^I manage registration groups for a course offering with multiple activity types$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"BSCI106")
+  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"BSCI283")
   @course_offering.manage_registration_groups
 end
 
 When /^I assign two activity offerings of the same type to the cluster$/ do
-  @ao_cluster.add_unassigned_aos(["A","K"])
+  @ao_cluster.add_unassigned_aos(["C","D"])
 end
 
 When /^I generate registration groups$/ do
@@ -136,9 +136,9 @@ Then /^registration groups are not generated$/ do
 end
 
 Given /^I manage registration groups for a course offering with multiple activity types but no activity offering for one of the activity types$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM347")
+  @course_offering = create CourseOffering, :term => "202001", :create_by_copy=>(make CourseOffering, :course=>"BSCI283")
   @course_offering.manage
-  @course_offering.delete_ao :ao_code=>"AA"
+  @course_offering.delete_ao :ao_code=>"A"
   @course_offering.manage_registration_groups
 end
 
@@ -150,12 +150,12 @@ Then /^no activity offering cluster is created$/ do
 end
 
 Given /^I manage registration groups for a course offering with 2 activity types?$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM317")
+  @course_offering = create CourseOffering, :term => "202001",  :create_by_copy=>(make CourseOffering, :course=>"BSCI330")
   @course_offering.manage_registration_groups
 end
 
 When /^I assign two activity offerings of different types and different max enrolment$/ do
-  @ao_cluster.add_unassigned_aos(["A","AA"])
+  @ao_cluster.add_unassigned_aos(["A","B"])
 end
 
 Then /registration groups? (?:are|is) generated$/ do
@@ -166,7 +166,14 @@ Then /registration groups? (?:are|is) generated$/ do
 end
 
 Given /^I manage registration groups for a course offering with multiple activity types where the total max enrolment for each type is not equal$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM317")
+  @course_offering = create CourseOffering, :term => "202001", :create_by_copy=>(make CourseOffering, :course=>"BSCI283")
+  @course_offering.manage
+  @activity_offering = create ActivityOffering, :requested_delivery_logistics_list => {},
+                              :personnel_list => [],
+                              :seat_pool_list => {},
+                              :format => "Lecture/Lab",
+                              :activity_type => "Lab",
+                              :max_enrollment => "50"
   @course_offering.manage_registration_groups
 end
 
@@ -179,8 +186,8 @@ When /^I create (\d+) activity offering clusters$/ do |arg1|
 end
 
 When /^I assign two activity offerings to each cluster$/ do
-  @ao_cluster.add_unassigned_aos(["A","AA"])
-  @ao_cluster2.add_unassigned_aos(["B","BB"])
+  @ao_cluster.add_unassigned_aos(["A","B"])
+  @ao_cluster2.add_unassigned_aos(["Y","Z"])
 end
 
 When /^I generate all registration groups$/ do
@@ -188,13 +195,13 @@ When /^I generate all registration groups$/ do
 end
 
 Given /^I manage registration groups for a course offering with multiple activity types where there are activity offering scheduling conflicts$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM317")
+  @course_offering = create CourseOffering, :term => "202001", :create_by_copy=>(make CourseOffering, :course=>"BSCI330")
   @course_offering.manage_registration_groups
 end
 
 When /^I assign two activity offerings to each cluster with scheduling conflicts$/ do
-  @ao_cluster.add_unassigned_aos(["B","AA"])
-  @ao_cluster2.add_unassigned_aos(["A","BB"])
+  @ao_cluster.add_unassigned_aos(["A","S"])
+  @ao_cluster2.add_unassigned_aos(["Y","R"])
 end
 
 Then /^registration groups with time conflicts are marked as invalid$/ do
@@ -208,16 +215,16 @@ Then /^registration groups with time conflicts are marked as invalid$/ do
 end
 
 Given /^I have generated a registration group for a course offering with lecture and quiz activity types leaving some activity offerings unassigned$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM221")
+  @course_offering = create CourseOffering, :term => "202001", :create_by_copy=>(make CourseOffering, :course=>"CHEM237")
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
   @course_offering.add_ao_cluster(@ao_cluster)
-  @ao_cluster.add_unassigned_aos(["A","AA"])
+  @ao_cluster.add_unassigned_aos(["A","B","C"])
   @ao_cluster.generate_reg_groups
 end
 
 When /^I assign a quiz activity offering to the existing activity offering cluster$/ do
-  @ao_cluster.add_unassigned_aos(["AB"])
+  @ao_cluster.add_unassigned_aos(["D","E"])
 end
 
 Then /^additional registration groups are generated for the new quiz$/ do
@@ -225,7 +232,7 @@ Then /^additional registration groups are generated for the new quiz$/ do
     page.view_cluster_reg_groups(@ao_cluster.private_name)
   end
   on ViewRegistrationGroups do |page|
-    page.reg_group_list.length.should == 2
+    page.reg_group_list.length.should == 4
     page.close
   end
   #TODO - reg group ids don't change
@@ -238,7 +245,7 @@ Then /^the quiz is not listed as an unassigned activity offering$/ do
 end
 
 Given /^I have created the default registration groups for a course offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"BSCI283")
+  @course_offering = create CourseOffering, :term=>"202001", :create_by_copy=>(make CourseOffering, :course=>"BSCI283")
   @course_offering.manage_registration_groups
 
   @ao_cluster = make ActivityOfferingCluster,  :is_constrained=>false
@@ -278,7 +285,7 @@ Then /^additional registration groups are generated for the new activity offerin
     page.view_cluster_reg_groups(@ao_cluster.private_name)
   end
   on ViewRegistrationGroups do |page|
-    page.reg_group_list.length.should == 3
+    page.reg_group_list.length.should == 9
     page.close
   end
 end
@@ -294,20 +301,20 @@ Then /^the registration group is updated$/ do
 end
 
 Given /^I have generated two registration groups for a course offering with lecture and lab activity types$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM317")
+  @course_offering = create CourseOffering, :term=>"202001", :create_by_copy=>(make CourseOffering, :course=>"BSCI330")
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
   @course_offering.add_ao_cluster(@ao_cluster)
-  @ao_cluster.add_unassigned_aos(["A","AA"])
+  @ao_cluster.add_unassigned_aos(["A","B"])
   @ao_cluster.generate_reg_groups
   @ao_cluster2 = make ActivityOfferingCluster
   @course_offering.add_ao_cluster(@ao_cluster2)
-  @ao_cluster2.add_unassigned_aos(["B","BB","AB"])
+  @ao_cluster2.add_unassigned_aos(["N","O","P"])
   @ao_cluster2.generate_reg_groups
 end
 
 When /^I move a lab activity offering from the first activity offering cluster to the second activity offering cluster$/ do
-  @ao_cluster2.move_ao_to_another_cluster("AB",@ao_cluster)
+  @ao_cluster2.move_ao_to_another_cluster("P",@ao_cluster)
 end
 
 Then /^the registration groups? sets? (?:is|are) updated$/ do
@@ -320,7 +327,7 @@ Then /^the registration groups? sets? (?:is|are) updated$/ do
 end
 
 Given /^I have created the default cluster and related registration groups for a course offering with lecture and lab activity types$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"BSCI283")
+  @course_offering = create CourseOffering, :term=>"202001", :create_by_copy=>(make CourseOffering, :course=>"BSCI283")
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster,  :is_constrained=>false
   @course_offering.add_ao_cluster(@ao_cluster)
@@ -329,7 +336,7 @@ Given /^I have created the default cluster and related registration groups for a
 end
 
 When /^I move a lab activity offering from the default activity offering cluster to the new activity offering cluster$/ do
-  @course_offering.activity_offering_cluster_list[0].move_ao_to_another_cluster("AA",@course_offering.activity_offering_cluster_list[1])
+  @course_offering.activity_offering_cluster_list[0].move_ao_to_another_cluster("B",@course_offering.activity_offering_cluster_list[1])
 end
 
 When /^I move a lecture activity offering from the default activity offering cluster to the new activity offering cluster$/ do
@@ -337,7 +344,7 @@ When /^I move a lecture activity offering from the default activity offering clu
 end
 
 Given /^I have generated a registration group for a course offering with lecture and lab activity types$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM426")
+  @course_offering = create CourseOffering, :term=>"202001", :create_by_copy=>(make CourseOffering, :course=>"CHEM425")
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
   @course_offering.add_ao_cluster(@ao_cluster)
@@ -346,7 +353,7 @@ Given /^I have generated a registration group for a course offering with lecture
 end
 
 When /^I remove a lab activity offering from the existing activity offering cluster$/ do
-  @ao_cluster.remove_ao("AA")
+  @ao_cluster.remove_ao("B")
 end
 
 Then /^the lab is now listed as an unassigned activity offering$/ do
@@ -368,7 +375,7 @@ Then /^activity offering cluster published and private names are successfully ch
 end
 
 Given /^I have created two activity offering clusters for a course offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM152")
+  @course_offering = create CourseOffering, :term=>:"202001", :create_by_copy=>(make CourseOffering, :course=>"CHEM132")
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
   @course_offering.add_ao_cluster(@ao_cluster)

@@ -28,7 +28,10 @@ class ManageCourseOfferings < BasePage
   element(:quantity) { |b| b.frm.text_field(name: "noOfActivityOfferings") }
   element(:create_co_button)   { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-CO") }
 
-  action(:add) { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-AO").click; b.loading.wait_while_present } # Persistent ID needed!
+  action(:add) { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-AO").click; b.loading.wait_while_present }
+  action(:delete) { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Delete-AO").click; b.loading.wait_while_present }
+
+
   
   action(:select_all) { |b| b.frm.link(id: "KS-CourseOfferingManagement-SelectAll").click; b.loading.wait_while_present }
 
@@ -53,6 +56,10 @@ class ManageCourseOfferings < BasePage
     activity_offering_results_table.row(text: /\b#{Regexp.escape(code)}\b/)
   end
 
+  def course_list_returned?(subject_code)
+    activity_offering_results_table.row(text: /#{subject_code}/).exists?
+  end
+
   def ao_db_id(code)
     target_row(code).cells[AO_CODE].link.attribute_value("href").scan(/aoInfo.id=(.*)&dataObjectClassName/)[0][0]
   end
@@ -71,16 +78,9 @@ class ManageCourseOfferings < BasePage
     loading.wait_while_present(120)
   end
 
-  def delete(code)
-    retVal = false
-    if target_row(code).link(text: "Delete").exists?
-      target_row(code).link(text: "Delete").click
-      loading.wait_while_present
-      retVal = true
-    else
-      puts "delete not enabled for activity offering code: #{code}"
-    end
-    retVal
+  def delete_ao(code)
+    target_row(code).checkbox.set
+    delete
   end
 
   def select_aos(code_list)

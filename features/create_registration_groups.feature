@@ -1,4 +1,4 @@
-@pending
+@nightly
 Feature: Create registration groups
 
 As an Administrator, I want to create registration groups for a Course Offering
@@ -93,7 +93,7 @@ As an Administrator, I want to create registration groups for a Course Offering
 
   Scenario: RG 3.1B: assign one or more AOs to an existing default AOC and update the Reg Groups for this FO
   #existing reg group ids don't change
-    Given I have created the default registration group for a course offering
+    Given I have created the default registration groups for a course offering
     And I add two activity offerings to the course offering
     When I manage registration groups for the existing course offering
     And I confirm that the activity offerings are listed as unassigned
@@ -158,7 +158,7 @@ As an Administrator, I want to create registration groups for a Course Offering
     And the associated activity offerings are now listed as unassigned
 
   Scenario: RG 3.5B: Delete an unconstrained/default AO Cluster and all of its associations with AOs and also deletes the related Reg Groups
-    Given I have created the default registration group for a course offering
+    Given I have created the default registration groups for a course offering
     And I delete the default activity offering cluster
     Then the registration groups are deleted
     And the associated activity offerings are now listed as unassigned

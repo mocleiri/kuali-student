@@ -3,7 +3,7 @@ class ManageRegistrationGroups < BasePage
   wrapper_elements
   frame_element
 
-  expected_element :subject_code, 120
+  expected_element :subject_code, 180
 
   element(:subject_code) { |b| b.frm.div(id: "manageRegistrationGroupsView").h3.span() }
   element(:format_select) { |b| b.frm.div(data_label: "Select Format").select() }
@@ -39,7 +39,7 @@ class ManageRegistrationGroups < BasePage
     return column
   end
 
-  action(:generate_unconstrained_reg_groups) { |b| b.frm.button(id: "generate_unconstrained_rgs_button").click; b.loading.wait_while_present}
+  action(:generate_unconstrained_reg_groups) { |b| b.frm.button(id: "generate_unconstrained_rgs_button").click; b.loading.wait_while_present(180)}
   element(:ao_cluster_select) { |b| b.frm.select(id: "KS-ManageRegistrationGroups-ClusterForFormat_Dropdown_control") }
   action(:ao_cluster_assign_button) { |b| b.frm.button(id: "move_ao_button").click; b.loading.wait_while_present}
 
@@ -55,7 +55,7 @@ class ManageRegistrationGroups < BasePage
   element(:createNewClusterDialog_div)  { |b| b.frm.div(id: "createNewClusterDialog") }
   element(:private_name) { |b| b.createNewClusterDialog_div.div(data_label: "Private Name").text_field() }
   element(:published_name) { |b| b.createNewClusterDialog_div.div(data_label: "Published Name").text_field() }
-  action(:create_cluster){ |b|b.createNewClusterDialog_div.checkbox(index: 0).click; b.loading.wait_while_present}
+  action(:create_cluster){ |b|b.createNewClusterDialog_div.checkbox(index: 0).click; b.loading.wait_while_present(180)}
   action(:cancel_create_cluster){ |b|b.createNewClusterDialog_div.checkbox(index: 1).click; b.loading.wait_while_present}
   value(:create_cluster_first_error_msg)  { |b| b.div(id: /jquerybubblepopup/).ul.li.text() }
   #end create cluster dialog

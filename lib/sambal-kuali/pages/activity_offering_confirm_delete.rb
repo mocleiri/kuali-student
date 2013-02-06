@@ -6,7 +6,7 @@ class ActivityOfferingConfirmDelete < BasePage
 
   expected_element :delete_activity_offering_button
 
-  element(:delete_activity_offering_button) { |b| b.frm.button(id: "u286") }
+  element(:delete_activity_offering_button) { |b| b.frm.button(id: "u297") }
 #  action(:delete_activity_offering) { |b| b.delete_activity_offering_button.click; b.loading.wait_while_present }
   action(:delete_activity_offering) { |b| b.frm.button(text: "Delete Activity Offering(s)").click; b.loading.wait_while_present }
 
