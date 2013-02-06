@@ -36,10 +36,17 @@ public class UserPreference extends AccountIdAware implements Identifiable {
     public UserPreference() {
     }
 
-    public UserPreference(String userId, String name, String value) {
+    public UserPreference(String userId, String name, String originalValue) {
         setAccountId(userId);
         setName(name);
-        setOriginalValue(value);
+        setOriginalValue(originalValue);
+    }
+
+    public UserPreference(String userId, String name, String originalValue, String overriddenValue) {
+        setAccountId(userId);
+        setName(name);
+        setOriginalValue(originalValue);
+        setOverriddenValue(overriddenValue);
     }
 
     @Transient

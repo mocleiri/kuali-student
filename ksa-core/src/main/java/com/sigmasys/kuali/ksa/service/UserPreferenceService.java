@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.model.UserPreference;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User Preference Service interface
@@ -18,6 +19,14 @@ public interface UserPreferenceService  {
      * @return a list of preferences
      */
     List<UserPreference> getUserPreferences(String userId);
+
+    /**
+     * Returns the map of user preferences for the given user ID
+     *
+     * @param userId User ID
+     * @return a map of key/value pairs
+     */
+    Map<String, String> getUserPreferenceMap(String userId);
     
     /**
      * Returns a single user preference with the specified name for the given user ID.

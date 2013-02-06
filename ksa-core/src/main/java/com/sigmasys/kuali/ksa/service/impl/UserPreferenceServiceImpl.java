@@ -62,7 +62,8 @@ public class UserPreferenceServiceImpl extends GenericPersistenceService impleme
                 UserPreference finalUserPref = userPref;
                 for (ConfigParameter parameter : lockedParameters) {
                     if (userPref.getName().equals(parameter.getName())) {
-                        finalUserPref = new UserPreference(userId, parameter.getName(), parameter.getValue());
+                        finalUserPref = new UserPreference(userId, userPref.getName(), userPref.getOriginalValue());
+                        finalUserPref.setOverriddenValue(parameter.getValue());
                         break;
                     }
                 }
@@ -71,6 +72,22 @@ public class UserPreferenceServiceImpl extends GenericPersistenceService impleme
         }
 
         return finalUserPreferences;
+    }
+
+    /**
+     * Returns the map of user preferences for the given user ID
+     *
+     * @param userId User ID
+     * @return a map of key/value pairs
+     */
+    @Override
+    public Map<String, String> getUserPreferenceMap(String userId) {
+        List<UserPreference> userPreferences = getUserPreferences(userId);
+        Map<String, String> preferenceMap = new HashMap<String, String>(userPreferences.size());
+        for (UserPreference userPreference : userPreferences) {
+            preferenceMap.put(userPreference.getName(), userPreference.getValue());
+        }
+        return preferenceMap;
     }
 
     /**

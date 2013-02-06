@@ -61,8 +61,9 @@ public abstract class AbstractViewModel extends UifFormBase {
       Should we decide to reuse then this constructor and the setting of the searchType should be removed
      */
     public AbstractViewModel() {
-       searchType = SearchTypeValue.ACCOUNT.name();
+        searchType = SearchTypeValue.ACCOUNT.name();
     }
+
     protected ConfigService getConfigService() {
         return ContextUtils.getBean(ConfigService.class);
     }
@@ -95,14 +96,8 @@ public abstract class AbstractViewModel extends UifFormBase {
             if (userId == null) {
                 throw new IllegalStateException("User ID is null");
             }
-            List<UserPreference> userPreferences = getUserPreferenceService().getUserPreferences(userId);
-            if (userPreferences != null) {
-                preferencesMap = new HashMap<String, String>(userPreferences.size());
-                for (UserPreference userPreference : userPreferences) {
-                    preferencesMap.put(userPreference.getName(), userPreference.getValue());
-                }
-                getSession().setAttribute(USER_PREF_ATTR_NAME, userPreferences);
-            }
+            preferencesMap = getUserPreferenceService().getUserPreferenceMap(userId);
+            getSession().setAttribute(USER_PREF_ATTR_NAME, preferencesMap);
         }
         return preferencesMap;
     }
