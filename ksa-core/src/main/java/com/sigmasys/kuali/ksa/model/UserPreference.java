@@ -23,9 +23,9 @@ public class UserPreference extends AccountIdAware implements Identifiable {
     private String name;
 
     /**
-     * The preference value
+     * Original value
      */
-    private String value;
+    private String originalValue;
 
     /**
      * Overridden value
@@ -39,13 +39,12 @@ public class UserPreference extends AccountIdAware implements Identifiable {
     public UserPreference(String userId, String name, String value) {
         setAccountId(userId);
         setName(name);
-        setValue(value);
+        setOriginalValue(value);
     }
 
     @Transient
     public UserPreferenceId getId() {
-        return (getAccountId() != null && getName() != null) ?
-                new UserPreferenceId(getAccountId(), getName()) : null;
+        return (getAccountId() != null && getName() != null) ? new UserPreferenceId(getAccountId(), getName()) : null;
     }
 
     @Id
@@ -65,12 +64,12 @@ public class UserPreference extends AccountIdAware implements Identifiable {
     }
 
     @Column(name = "VALUE", length = 1024)
-    public String getValue() {
-        return value;
+    public String getOriginalValue() {
+        return originalValue;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setOriginalValue(String originalValue) {
+        this.originalValue = originalValue;
     }
 
     @Column(name = "OVRD_VALUE", length = 1024)
@@ -80,5 +79,38 @@ public class UserPreference extends AccountIdAware implements Identifiable {
 
     public void setOverriddenValue(String overriddenValue) {
         this.overriddenValue = overriddenValue;
+    }
+
+    @Transient
+    public String getValue() {
+        // Overridden value should be used if not null
+        return overriddenValue != null ? overriddenValue : originalValue;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+
+        if (object == null || !(object instanceof UserPreference)) {
+            return false;
+        }
+
+        UserPreference userPref = (UserPreference) object;
+
+        return (getAccountId().equals(userPref.getAccountId()) && getName().equals(userPref.getName()));
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * getAccountId().hashCode() + getName().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "UserPreference{" +
+                "accountId='" + accountId + '\'' +
+                ",name='" + name + '\'' +
+                ",originalValue='" + originalValue + '\'' +
+                ",overriddenValue='" + overriddenValue + '\'' +
+                '}';
     }
 }

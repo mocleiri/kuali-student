@@ -64,7 +64,7 @@ public class UserPreferenceServiceTest extends AbstractServiceTest {
         Assert.isTrue(userPrefs.size() > 1);
 
         UserPreference userPref = userPrefs.get(0);
-        userPref.setValue("test.1.value.updated");
+        userPref.setOriginalValue("test.1.value.updated");
 
         UserPreferenceId userPrefId = userPref.getId();
 

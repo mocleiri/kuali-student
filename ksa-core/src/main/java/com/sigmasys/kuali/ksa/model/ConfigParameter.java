@@ -1,24 +1,29 @@
 package com.sigmasys.kuali.ksa.model;
 
-public class InitialParameter implements Comparable<InitialParameter> {
+/**
+ * Configuration parameter model.
+ *
+ * @author Michael Ivanov
+ */
+public class ConfigParameter implements Comparable<ConfigParameter> {
 
     private String name;
     private String value;
     private Boolean readOnly;
     private Boolean locked;
 
-    public InitialParameter() {
+    public ConfigParameter() {
     }
 
-    public InitialParameter(String name, String value) {
+    public ConfigParameter(String name, String value) {
         this(name, value, false, false);
     }
 
-    public InitialParameter(String name, String value, boolean readOnly) {
+    public ConfigParameter(String name, String value, boolean readOnly) {
         this(name, value, readOnly, false);
     }
 
-    public InitialParameter(String name, String value, boolean readOnly, boolean locked) {
+    public ConfigParameter(String name, String value, boolean readOnly, boolean locked) {
         setName(name);
         setValue(value);
         setReadOnly(readOnly);
@@ -49,7 +54,7 @@ public class InitialParameter implements Comparable<InitialParameter> {
         this.readOnly = readOnly;
     }
 
-    public Boolean isLocked() {
+    public boolean isLocked() {
         return locked != null ? locked : false;
     }
 
@@ -58,11 +63,11 @@ public class InitialParameter implements Comparable<InitialParameter> {
     }
 
     @Override
-    public int compareTo(InitialParameter param) {
+    public int compareTo(ConfigParameter param) {
         if (getName() == null) {
             return -1;
         }
-        return getName().toLowerCase().compareTo(param.getName().toLowerCase());
+        return getName().compareToIgnoreCase(param.getName());
     }
 
 }

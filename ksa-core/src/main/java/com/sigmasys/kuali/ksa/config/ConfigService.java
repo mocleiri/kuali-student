@@ -1,6 +1,6 @@
 package com.sigmasys.kuali.ksa.config;
 
-import com.sigmasys.kuali.ksa.model.InitialParameter;
+import com.sigmasys.kuali.ksa.model.ConfigParameter;
 
 import java.util.*;
 
@@ -19,22 +19,26 @@ public interface ConfigService {
      * @param locale java.util.Locale instance
      * @return map of locale-aware parameters
      */
-    public Map<String, String> getLocalizedParameters(Locale locale);
+    Map<String, String> getLocalizedParameters(Locale locale);
 
-    public String getParameter(String name);
+    String getParameter(String name);
 
-    public Map<String, String> getParameters();
+    Map<String, String> getParameterMap();
 
-    public Integer updateParameters(List<InitialParameter> params);
+    Integer updateParameters(List<ConfigParameter> params);
 
-    public Integer deleteParameters(Set<String> paramNames);
+    Integer deleteParameters(Set<String> paramNames);
 
-    public List<InitialParameter> getParameterList();
+    List<ConfigParameter> getParameters();
 
-    public Map<String, String> refreshParameters();
+    List<ConfigParameter> getLockedParameters();
 
-    public void changeLoggingLevel(Map<String, String> loggers);
+    List<ConfigParameter> getReadOnlyParameters();
 
-    public Map<String, String> getLoggingLevel(String[] loggers);
+    Map<String, String> refreshParameters();
+
+    void changeLoggingLevel(Map<String, String> loggers);
+
+    Map<String, String> getLoggingLevel(String[] loggers);
 
 }

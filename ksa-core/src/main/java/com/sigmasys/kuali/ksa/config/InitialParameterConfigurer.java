@@ -1,10 +1,9 @@
 package com.sigmasys.kuali.ksa.config;
 
+import com.sigmasys.kuali.ksa.model.ConfigParameter;
 import com.sigmasys.kuali.ksa.model.Constants;
-import com.sigmasys.kuali.ksa.model.InitialParameter;
 import com.sigmasys.kuali.ksa.util.CommonUtils;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.core.api.config.property.Config;
@@ -35,7 +34,7 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
 
     private static final Log logger = LogFactory.getLog(InitialParameterConfigurer.class);
 
-    private final List<InitialParameter> databaseParameters = new LinkedList<InitialParameter>();
+    private final List<ConfigParameter> databaseParameters = new LinkedList<ConfigParameter>();
     private final Properties readOnlyProperties = new Properties();
 
     private String schemaPrefix;
@@ -89,7 +88,7 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
                 String locked = rs.getString("locked");
                 boolean isLocked = (locked != null) && locked.equalsIgnoreCase("Y");
                 if (name != null) {
-                    InitialParameter parameter = new InitialParameter(name, value, false, isLocked);
+                    ConfigParameter parameter = new ConfigParameter(name, value, false, isLocked);
                     databaseParameters.add(parameter);
                 }
             }
@@ -106,7 +105,7 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
 
         // Local properties should have the higher priority than DB parameters so we have to add them
         // to the final properties at the very end.
-        for (InitialParameter databaseParameter : databaseParameters) {
+        for (ConfigParameter databaseParameter : databaseParameters) {
             String name = databaseParameter.getName();
             String value = CommonUtils.nvl(databaseParameter.getValue());
             props.setProperty(name, value);
@@ -147,15 +146,15 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         return initialParamMap;
     }
 
-    private Map<String, String> getParameters(List<InitialParameter> parameters) {
+    private Map<String, String> getParameters(List<ConfigParameter> parameters) {
         Map<String, String> initialParamMap = new HashMap<String, String>(parameters.size());
-        for (InitialParameter parameter : parameters) {
+        for (ConfigParameter parameter : parameters) {
             initialParamMap.put(parameter.getName(), parameter.getValue());
         }
         return initialParamMap;
     }
 
-    public Map<String, String> getInitialParameters() {
+    public Map<String, String> getParameterMap() {
         // Local properties should have the higher priority than DB parameters
         Map<String, String> initialParams = new HashMap<String, String>(getDatabaseParameters());
         initialParams.putAll(getReadOnlyParameters());
@@ -170,22 +169,22 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         return getParameters(readOnlyProperties);
     }
 
-    public List<InitialParameter> getInitialParameterList() {
+    public List<ConfigParameter> getParameters() {
 
         Map<String, String> readOnlyParams = getReadOnlyParameters();
 
         Set<String> readOnlyParamNames = readOnlyParams.keySet();
 
-        List<InitialParameter> params = new ArrayList<InitialParameter>(databaseParameters.size() + readOnlyParams.size());
+        List<ConfigParameter> params = new ArrayList<ConfigParameter>(databaseParameters.size() + readOnlyParams.size());
 
-        for (InitialParameter databaseParameter : databaseParameters) {
+        for (ConfigParameter databaseParameter : databaseParameters) {
           if (!readOnlyParamNames.contains(databaseParameter.getName())) {
             params.add(databaseParameter);
           }
         }
 
         for (Map.Entry<String, String> entry : readOnlyParams.entrySet()) {
-            params.add(new InitialParameter(entry.getKey(), entry.getValue(), true));
+            params.add(new ConfigParameter(entry.getKey(), entry.getValue(), true));
         }
 
         Collections.sort(params);
@@ -228,13 +227,13 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         return 0;
     }
 
-    public int updateInitialParameters(List<InitialParameter> params) {
+    public int updateInitialParameters(List<ConfigParameter> params) {
         int updated = updateDatabaseParameters(params);
         loadDatabaseParameters();
         return updated;
     }
 
-    private int updateDatabaseParameters(List<InitialParameter> params) {
+    private int updateDatabaseParameters(List<ConfigParameter> params) {
 
         validateJdbcTemplate();
 
@@ -242,7 +241,7 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
 
         // Deleting the old parameters within the same transaction
         Set<String> paramNames = new HashSet<String>(params.size());
-        for (InitialParameter param : params) {
+        for (ConfigParameter param : params) {
             paramNames.add(param.getName());
         }
 
@@ -250,7 +249,7 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
 
         // Assembling the batch parameters for insert statements
         List<Map<String, String>> batchParams = new ArrayList<Map<String, String>>();
-        for (InitialParameter param : params) {
+        for (ConfigParameter param : params) {
             if (!param.isReadOnly()) {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("name", param.getName());

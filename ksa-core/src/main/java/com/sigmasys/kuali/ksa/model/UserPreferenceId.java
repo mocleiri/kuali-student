@@ -39,17 +39,17 @@ public class UserPreferenceId implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object object) {
 
-        if (this == o) {
+        if (this == object) {
             return true;
         }
 
-        if (o == null || getClass() != o.getClass()) {
+        if (object == null || !getClass().equals(object.getClass())) {
             return false;
         }
 
-        UserPreferenceId that = (UserPreferenceId) o;
+        UserPreferenceId that = (UserPreferenceId) object;
 
         return !((name != null) ? !name.equals(that.name) : that.name != null) &&
                 !((accountId != null) ? !accountId.equals(that.accountId) : that.accountId != null);

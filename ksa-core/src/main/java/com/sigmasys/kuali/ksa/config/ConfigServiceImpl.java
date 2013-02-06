@@ -1,7 +1,7 @@
 package com.sigmasys.kuali.ksa.config;
 
+import com.sigmasys.kuali.ksa.model.ConfigParameter;
 import com.sigmasys.kuali.ksa.model.Constants;
-import com.sigmasys.kuali.ksa.model.InitialParameter;
 import com.sigmasys.kuali.ksa.model.LocalizedString;
 import com.sigmasys.kuali.ksa.service.LocalizationService;
 import com.sigmasys.kuali.ksa.util.LocaleUtils;
@@ -67,17 +67,17 @@ public class ConfigServiceImpl implements ConfigService, InitializingBean {
 
     @Override
     public String getParameter(String name) {
-        return getParameters().get(name);
+        return getParameterMap().get(name);
     }
 
     @Override
-    public Map<String, String> getParameters() {
-        return parameterConfigurer.getInitialParameters();
+    public Map<String, String> getParameterMap() {
+        return parameterConfigurer.getParameterMap();
     }
 
     @Override
     @Transactional(readOnly = false)
-    public Integer updateParameters(List<InitialParameter> params) {
+    public Integer updateParameters(List<ConfigParameter> params) {
         return parameterConfigurer.updateInitialParameters(params);
     }
 
@@ -88,14 +88,36 @@ public class ConfigServiceImpl implements ConfigService, InitializingBean {
     }
 
     @Override
-    public List<InitialParameter> getParameterList() {
-        return parameterConfigurer.getInitialParameterList();
+    public List<ConfigParameter> getParameters() {
+        return parameterConfigurer.getParameters();
+    }
+
+    @Override
+    public List<ConfigParameter> getLockedParameters() {
+        List<ConfigParameter> lockedParameters = new LinkedList<ConfigParameter>();
+        for (ConfigParameter parameter : getParameters()) {
+            if (parameter.isLocked()) {
+                lockedParameters.add(parameter);
+            }
+        }
+        return lockedParameters;
+    }
+
+    @Override
+    public List<ConfigParameter> getReadOnlyParameters() {
+        List<ConfigParameter> readOnlyParameters = new LinkedList<ConfigParameter>();
+        for (ConfigParameter parameter : getParameters()) {
+            if (parameter.isReadOnly()) {
+                readOnlyParameters.add(parameter);
+            }
+        }
+        return readOnlyParameters;
     }
 
     @Override
     public Map<String, String> refreshParameters() {
         parameterConfigurer.loadDatabaseParameters(true);
-        return getParameters();
+        return getParameterMap();
     }
 
     private Logger getLogger(String loggerName) {
