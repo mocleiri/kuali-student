@@ -375,7 +375,7 @@ Then /^activity offering cluster published and private names are successfully ch
 end
 
 Given /^I have created two activity offering clusters for a course offering$/ do
-  @course_offering = create CourseOffering, :term=>:"202001", :create_by_copy=>(make CourseOffering, :course=>"CHEM132")
+  @course_offering = create CourseOffering, :term=> "202001", :create_by_copy=>(make CourseOffering, :course=>"CHEM132")
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
   @course_offering.add_ao_cluster(@ao_cluster)
