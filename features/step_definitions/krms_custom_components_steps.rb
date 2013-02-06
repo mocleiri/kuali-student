@@ -38,6 +38,7 @@ Then /^the "(.*)" should have an error message$/ do |section|
   fields = {"GPA"=>:gpa, "Test Score"=>:test_score}
   on CustomComponents do |page|
     page.send_keys :tab
+    page.send(fields[section]).click
     sleep 2
     if page.error_message.exists?
       if fields[section] == "gpa"
@@ -49,18 +50,24 @@ Then /^the "(.*)" should have an error message$/ do |section|
       elsif fields[section] == "test_score"
         page.error_message.text.should eq "Must be a positive whole number"
       end
+    else
+      false
     end
     page.execute_script("window.confirm = function() {return true}")
     sleep 1
   end
 end
 
-Then /^there should be no error message$/ do
+Then /^the "(.*)" should have no error message$/ do |section|
+  fields = {"GPA"=>:gpa, "Test Score"=>:test_score}
   on CustomComponents do |page|
     page.send_keys :tab
+    page.send(fields[section]).click
     sleep 2
     if page.error_message.exists?
       page.error_message.text.should eq ""
+    else
+      true
     end
     page.execute_script("window.confirm = function() {return true}")
   end

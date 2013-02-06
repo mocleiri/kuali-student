@@ -28,11 +28,11 @@ Check to see if result is true when valid course is given and false otherwise
 
   Scenario Outline: Return true for correct number entered
     When I enter "<num>" in the "<field>" text field
-    Then there should be no error message
+    Then the "<field>" should have no error message
 
     Examples:
     | num | field      |
-    | 1.2 | GPA        |
+    | 123 | GPA        |
     | 20  | Test Score |
 
   Scenario Outline: Return false for incorrect number entered
@@ -42,7 +42,7 @@ Check to see if result is true when valid course is given and false otherwise
     Examples:
     | num   | field      |
     | 1     | GPA        |
-    | 123   | GPA        |
+    | 1.2   | GPA        |
     | 12.3  | Test Score |
     | -12.3 | Test Score |
 
