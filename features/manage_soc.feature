@@ -9,6 +9,7 @@ Feature: Manage SOC
 
   Background:
     Given I am logged in as a Schedule Coordinator
+    And I manage SOC for a term
 
   Scenario: Lock the SOC but cancel the process
     Given the SOC is valid for "Lock"

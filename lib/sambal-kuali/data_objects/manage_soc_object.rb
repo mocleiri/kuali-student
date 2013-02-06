@@ -27,8 +27,8 @@ class ManageSoc
     @browser = browser
 
     defaults = {
-        :term_code=>"20122" ,
-        :co_code=>"ENGL103"
+        :term_code=>"201201" ,
+        :co_code=>"ENGL206"
     }
     options = defaults.merge(opts)
     set_options(options)
@@ -116,7 +116,7 @@ class ManageSoc
     end
   end
 
-  private
+  #private
   #schedule soc
   #
   #@param page(ManageSoc page)
@@ -178,7 +178,7 @@ class ManageSoc
   end
 
   def verify_schedule_state_changes
-    @browser.goto "#{test_site}/kr-krad/statusview/#{term_code}/#{co_code}"
+    @browser.goto "#{$test_site}/kr-krad/statusview/#{@term_code}/#{@co_code}"
     on StatusViewPage do |page|
       page.soc_state.should == 'Locked'
       page.soc_scheduling_state.should == 'Completed'

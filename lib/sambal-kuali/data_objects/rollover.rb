@@ -48,6 +48,9 @@ class Rollover
       @target_term = page.select_terms(@target_term,@source_term)
       raise "source_term_code issue" unless  page.source_term_code == @source_term
       raise "target_term_code issue" unless  page.target_term_code == @target_term
+
+      puts "Rollover initiated - source term: #{@source_term}"
+      puts "Rollover initiated - target term: #{@target_term}"
       page.rollover_course_offerings
       raise "rollover issue" unless page.status == "In Progress"
     end

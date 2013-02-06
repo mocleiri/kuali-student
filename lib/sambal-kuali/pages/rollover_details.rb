@@ -6,7 +6,7 @@ class RolloverDetails < BasePage
   expected_element :term
 
   element(:term) { |b| b.frm.text_field(name: "rolloverTargetTermCode") }
-  action(:go) { |b| b.frm.button(text: "Go").click; b.loading.wait_while_present }
+  action(:go) { |b| b.frm.button(text: "Go").click; b.loading.wait_while_present(300) }
 
   value(:status) { |b| b.frm.div(data_label: "Status").span(index: 2).text } #status shows after rollover initiated
 

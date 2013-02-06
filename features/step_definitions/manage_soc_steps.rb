@@ -1,5 +1,12 @@
-Given /^the SOC is valid for "(.*?)"$/ do |currentState|
+Given /^I manage SOC for a term$/ do
   @manageSoc = make ManageSoc
+end
+
+Given /^I manage SOC for "(.*?)"$/ do |term_code|
+  @manageSoc = make ManageSoc, :term_code =>term_code
+end
+
+Given /^the SOC is valid for "(.*?)"$/ do |currentState|
   @manageSoc.search
   @manageSoc.check_state_change_button_exists currentState
 end
