@@ -190,7 +190,7 @@ class ManageSoc
   end
 
   def verify_publish_state_changes
-    @browser.goto "#{test_site}/kr-krad/statusview/#{term_code}/#{co_code}"
+    @browser.goto "#{$test_site}/kr-krad/statusview/#{@term_code}/#{@co_code}"
     on StatusViewPage do |page|
       page.soc_state.should == 'Published'
       page.soc_scheduling_state.should == 'Completed'
