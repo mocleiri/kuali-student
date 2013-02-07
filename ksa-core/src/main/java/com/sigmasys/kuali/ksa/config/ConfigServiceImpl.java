@@ -1,5 +1,7 @@
 package com.sigmasys.kuali.ksa.config;
 
+import com.sigmasys.kuali.ksa.event.EventMulticaster;
+import com.sigmasys.kuali.ksa.event.LoadConfigEvent;
 import com.sigmasys.kuali.ksa.model.ConfigParameter;
 import com.sigmasys.kuali.ksa.model.Constants;
 import com.sigmasys.kuali.ksa.model.LocalizedString;
@@ -34,9 +36,16 @@ public class ConfigServiceImpl implements ConfigService, InitializingBean {
     @Qualifier("localizationService")
     private LocalizationService localizationService;
 
+
     @Override
     public void afterPropertiesSet() {
-        // Setting up locale if "locale" initial parameters exist
+        initLocalizedParameters();
+        // After loading all config parameters we have to fire LoadConfigEvent
+        EventMulticaster.getInstance().fireEvent(new LoadConfigEvent(getParameters()));
+    }
+
+    private void initLocalizedParameters() {
+         // Setting up locale if "locale" initial parameters exist
         String localeLang = getParameter(Constants.LOCALE_LANG);
         if (localeLang != null && !localeLang.trim().isEmpty()) {
             String localeCountry = getParameter(Constants.LOCALE_COUNTRY);
@@ -115,9 +124,12 @@ public class ConfigServiceImpl implements ConfigService, InitializingBean {
     }
 
     @Override
-    public Map<String, String> refreshParameters() {
-        parameterConfigurer.loadDatabaseParameters(true);
-        return getParameterMap();
+    public List<ConfigParameter> reloadParameters() {
+        parameterConfigurer.loadDatabaseParameters();
+        List<ConfigParameter> updatedParameters = getParameters();
+         // After re-loading all config parameters we have to fire LoadConfigEvent
+        EventMulticaster.getInstance().fireEvent(new LoadConfigEvent(updatedParameters));
+        return updatedParameters;
     }
 
     private Logger getLogger(String loggerName) {

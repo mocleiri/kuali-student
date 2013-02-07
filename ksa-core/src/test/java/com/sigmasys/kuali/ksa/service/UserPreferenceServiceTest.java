@@ -1,6 +1,8 @@
 package com.sigmasys.kuali.ksa.service;
 
 
+import com.sigmasys.kuali.ksa.config.ConfigService;
+import com.sigmasys.kuali.ksa.model.ConfigParameter;
 import com.sigmasys.kuali.ksa.model.UserPreference;
 import com.sigmasys.kuali.ksa.model.UserPreferenceId;
 import org.junit.Before;
@@ -20,6 +22,9 @@ import java.util.Map;
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
 @Transactional
 public class UserPreferenceServiceTest extends AbstractServiceTest {
+
+    @Autowired
+    private ConfigService configService;
 
     @Autowired
     private UserPreferenceService userPreferenceService;
@@ -109,5 +114,51 @@ public class UserPreferenceServiceTest extends AbstractServiceTest {
         Assert.isTrue("test.2.value".equals(prefsMap.get("test.2.name")));
 
     }
+
+    @Test
+    public void overrideUserPreference() {
+
+        UserPreference userPref = userPreferenceService.createUserPreference("admin", "pref_7", "value_7");
+
+        Assert.notNull(userPref);
+        Assert.notNull(userPref.getId());
+
+        userPref = userPreferenceService.overrideUserPreferenceValue("admin", "pref_7", "ovrd_value_7");
+
+        String value = userPref.getValue();
+
+        Assert.notNull(value);
+        Assert.isTrue(value.equals("ovrd_value_7"));
+        Assert.isTrue(value.equals(userPref.getOverriddenValue()));
+
+    }
+
+    @Test
+    public void reloadLockedParameters() {
+
+           UserPreference userPref = userPreferenceService.createUserPreference("admin", "pref_1", "value_1");
+
+           Assert.notNull(userPref);
+           Assert.notNull(userPref.getId());
+
+           List<ConfigParameter> configParameters = configService.getParameters();
+
+           Assert.notNull(configParameters);
+
+           // Adding a new locked config parameter
+           configParameters.add(new ConfigParameter("pref_1", "value_2", false, true));
+
+           configService.updateParameters(configParameters);
+
+           // Forcing LoadConfigEvent to be fired
+           // and hence make "pref_1" locked parameter available in UserPreferenceService
+           configService.reloadParameters();
+
+           String prefValue = userPreferenceService.getUserPreferenceValue("admin", "pref_1");
+
+           Assert.notNull(prefValue);
+           Assert.isTrue(prefValue.equals("value_2"));
+
+     }
 
 }

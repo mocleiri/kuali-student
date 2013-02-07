@@ -35,7 +35,7 @@ public interface ConfigService {
 
     List<ConfigParameter> getReadOnlyParameters();
 
-    Map<String, String> refreshParameters();
+    List<ConfigParameter> reloadParameters();
 
     void changeLoggingLevel(Map<String, String> loggers);
 

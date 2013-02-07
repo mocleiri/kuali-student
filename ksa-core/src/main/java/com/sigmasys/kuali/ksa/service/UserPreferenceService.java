@@ -63,4 +63,14 @@ public interface UserPreferenceService  {
      */
     UserPreference createUserPreference(String userId, String prefName, String prefValue);
 
+    /**
+        * Overrides a user preference value,
+        * throws <code>IllegalArgumentException</code> if the preference is not found.
+        *
+        * @param prefName Preference name
+        * @param overriddenValue Preference overridden value
+        * @return user preference instance
+        */
+    UserPreference overrideUserPreferenceValue(String userId, String prefName, String overriddenValue);
+
 }

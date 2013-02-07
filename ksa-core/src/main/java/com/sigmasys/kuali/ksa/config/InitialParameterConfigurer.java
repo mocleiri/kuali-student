@@ -34,6 +34,8 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
 
     private static final Log logger = LogFactory.getLog(InitialParameterConfigurer.class);
 
+    public static final String CONFIG_TABLE_NAME = "KSSA_CONFIG";
+
     private final List<ConfigParameter> databaseParameters = new LinkedList<ConfigParameter>();
     private final Properties readOnlyProperties = new Properties();
 
@@ -61,10 +63,6 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         this.riceConfig = riceConfig;
     }
 
-    protected void loadDatabaseParameters() {
-        loadDatabaseParameters(false);
-    }
-
     private void validateJdbcTemplate() {
         if (jdbcTemplate == null) {
             logger.error("jdbcTemplate is null");
@@ -72,25 +70,23 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         }
     }
 
-    protected void loadDatabaseParameters(boolean refreshOnly) {
+    public void loadDatabaseParameters() {
 
         validateJdbcTemplate();
 
-        if (!refreshOnly) {
-            databaseParameters.clear();
-        }
+        databaseParameters.clear();
 
-        String query = "select NAME as name, VALUE as value, LOCKED as locked from " + schemaPrefix + "KSSA_CONFIG";
-        jdbcTemplate.query(query, new HashMap<String, Object>(), new RowCallbackHandler() {
+        StringBuilder queryBuilder = new StringBuilder("select NAME as name, VALUE as value, LOCKED as locked from ");
+        queryBuilder.append(schemaPrefix);
+        queryBuilder.append(CONFIG_TABLE_NAME);
+
+        jdbcTemplate.query(queryBuilder.toString(), new HashMap<String, Object>(), new RowCallbackHandler() {
             public void processRow(ResultSet rs) throws SQLException {
                 String name = rs.getString("name");
                 String value = rs.getString("value");
                 String locked = rs.getString("locked");
                 boolean isLocked = (locked != null) && locked.equalsIgnoreCase("Y");
-                if (name != null) {
-                    ConfigParameter parameter = new ConfigParameter(name, value, false, isLocked);
-                    databaseParameters.add(parameter);
-                }
+                databaseParameters.add(new ConfigParameter(name, value, false, isLocked));
             }
         });
     }
@@ -178,9 +174,9 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         List<ConfigParameter> params = new ArrayList<ConfigParameter>(databaseParameters.size() + readOnlyParams.size());
 
         for (ConfigParameter databaseParameter : databaseParameters) {
-          if (!readOnlyParamNames.contains(databaseParameter.getName())) {
-            params.add(databaseParameter);
-          }
+            if (!readOnlyParamNames.contains(databaseParameter.getName())) {
+                params.add(databaseParameter);
+            }
         }
 
         for (Map.Entry<String, String> entry : readOnlyParams.entrySet()) {
@@ -204,24 +200,29 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
 
         List<String> paramNameList = new ArrayList<String>(paramNames);
 
-        logger.debug("Deleting the following properties from KSA_CONFIG: " + paramNameList);
+        logger.debug("Deleting the following properties from " + CONFIG_TABLE_NAME + " : " + paramNameList);
 
         if (!paramNameList.isEmpty()) {
 
+            StringBuilder queryBuilder = new StringBuilder("delete from ");
+            queryBuilder.append(schemaPrefix);
+            queryBuilder.append(CONFIG_TABLE_NAME);
+            queryBuilder.append(" where NAME in (");
+
             Map<String, String> parameterMap = new HashMap<String, String>(paramNameList.size());
-            StringBuilder sql = new StringBuilder("delete from " + schemaPrefix + "KSA_CONFIG where NAME in (");
+
             for (int i = 0; i < paramNameList.size(); i++) {
                 if (i > 0) {
-                    sql.append(",");
+                    queryBuilder.append(",");
                 }
                 String paramName = "p" + i;
-                sql.append(":").append(paramName);
+                queryBuilder.append(":").append(paramName);
                 parameterMap.put(paramName, paramNameList.get(i));
             }
 
-            sql.append(")");
+            queryBuilder.append(")");
 
-            return jdbcTemplate.update(sql.toString(), parameterMap);
+            return jdbcTemplate.update(queryBuilder.toString(), parameterMap);
         }
 
         return 0;
@@ -237,7 +238,7 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
 
         validateJdbcTemplate();
 
-        logger.debug("Deleting the following parameters from KSA_CONFIG: " + params);
+        logger.debug("Deleting the following parameters from " + CONFIG_TABLE_NAME + " : " + params);
 
         // Deleting the old parameters within the same transaction
         Set<String> paramNames = new HashSet<String>(params.size());
@@ -260,14 +261,23 @@ public class InitialParameterConfigurer extends PropertyPlaceholderConfigurer {
         }
 
         if (!batchParams.isEmpty()) {
-            logger.debug("Inserting the following properties into KSA_CONFIG: " + batchParams);
-            String sql = "insert into " + schemaPrefix + "KSA_CONFIG (NAME, VALUE, LOCKED) values (:name, :value, :locked)";
+
+            logger.debug("Inserting the following properties into " + CONFIG_TABLE_NAME + " : " + batchParams);
+
+            StringBuilder queryBuilder = new StringBuilder("insert into ");
+            queryBuilder.append(schemaPrefix);
+            queryBuilder.append(CONFIG_TABLE_NAME);
+            queryBuilder.append(" (NAME, VALUE, LOCKED) values (:name, :value, :locked)");
+
             Map<String, ?>[] batchParamArray = new Map[batchParams.size()];
-            int[] values = jdbcTemplate.batchUpdate(sql, batchParams.toArray(batchParamArray));
+
+            int[] values = jdbcTemplate.batchUpdate(queryBuilder.toString(), batchParams.toArray(batchParamArray));
+
             int insertedRows = 0;
             for (int value : values) {
                 insertedRows += value;
             }
+
             return insertedRows;
         }
 

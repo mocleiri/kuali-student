@@ -1,11 +1,16 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.config.ConfigService;
+import com.sigmasys.kuali.ksa.event.EventMulticaster;
+import com.sigmasys.kuali.ksa.event.LoadConfigEvent;
+import com.sigmasys.kuali.ksa.event.LoadConfigListener;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.UserPreferenceService;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +29,9 @@ import java.util.*;
 @SuppressWarnings("unchecked")
 public class UserPreferenceServiceImpl extends GenericPersistenceService implements UserPreferenceService {
 
+    private static final Log logger = LogFactory.getLog(UserPreferenceServiceImpl.class);
+
+
     @Autowired
     private ConfigService configService;
 
@@ -35,6 +43,17 @@ public class UserPreferenceServiceImpl extends GenericPersistenceService impleme
 
     @PostConstruct
     private void postConstruct() {
+        initResources();
+        // Registering LoadConfigListener to update the parameters every time LoadConfigEvent is fired
+        EventMulticaster.getInstance().addListener(new LoadConfigListener() {
+            @Override
+            public void onLoad(LoadConfigEvent loadConfigEvent) {
+                initResources();
+            }
+        });
+    }
+
+    private void initResources() {
         lockedParameters = configService.getLockedParameters();
     }
 
@@ -157,6 +176,30 @@ public class UserPreferenceServiceImpl extends GenericPersistenceService impleme
     public String getUserPreferenceValue(String userId, String prefName) {
         UserPreference pref = getUserPreference(userId, prefName);
         return (pref != null) ? pref.getValue() : null;
+    }
+
+    /**
+     * Overrides a user preference value,
+     * throws <code>IllegalArgumentException</code> if the preference is not found.
+     *
+     * @param prefName        Preference name
+     * @param overriddenValue Preference overridden value
+     * @return user preference instance
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public UserPreference overrideUserPreferenceValue(String userId, String prefName, String overriddenValue) {
+
+        UserPreference preference = getUserPreference(userId, prefName);
+        if (preference == null) {
+            String errMsg = "Cannot find user preference with name '" + prefName + "', account ID '" + userId + "'";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(errMsg);
+        }
+
+        preference.setOverriddenValue(overriddenValue);
+
+        return persistUserPreference(preference);
     }
 
 }
