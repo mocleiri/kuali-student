@@ -17,4 +17,3 @@ Feature: Student Authorization
     And I do not have direct access to the edit course offerings page
     And I do not have direct access to the edit activity offering page
     And I do not have direct access to the manage registration group page
-
