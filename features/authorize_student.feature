@@ -11,7 +11,7 @@ Feature: Student Authorization
     And I do not have direct access to the course offering results page
     And I do not have direct access to the course offering single course results page
 
-  Scenario: Student does not have access to Copy, Edit and Create pages
+  Scenario: Student does not have access to Copy Edit and Create pages
     When I navigate to create course offerings and I do not have access
     And I do not have direct access to the create course offerings page
     And I do not have direct access to the edit course offerings page
