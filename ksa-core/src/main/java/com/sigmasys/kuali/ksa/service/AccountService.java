@@ -76,23 +76,6 @@ public interface AccountService {
      */
     BigDecimal getDeferredAmount(String userId);
 
-
-    /**
-     * Simple Balance Forward Only
-     * <p/>
-     * Notes:
-     * This is a simple, balance-forward payment application routine.
-     * “Allocate” requires both the transaction allocationAmount to be updated, as well as updating/instantiating
-     * the Allocation objects.
-     * Deferments, when created, are allocated to their charge using lockedAllocationAmount.
-     * A more complex, rule-based payment application system, that takes into account payment
-     * divisions, priority codes, etc. will be developed to supplement this algorithm.
-     *
-     * @param userId Account ID
-     */
-    void paymentApplication(String userId);
-
-
     /**
      * This method is used to verify that an account exists before a transaction or other operations are
      * performed on the account. There is an initial inquiry into the KSA store. If no account exists, then there is

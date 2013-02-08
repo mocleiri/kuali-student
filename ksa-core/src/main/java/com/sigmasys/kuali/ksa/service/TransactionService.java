@@ -729,15 +729,17 @@ public interface TransactionService {
      *
      * @param transactionId Transaction ID
      * @param tags          a list of tags
+     * @return the updated transaction instance with tags
      */
-    void addTagsToTransaction(Long transactionId, List<Tag> tags);
+    Transaction addTagsToTransaction(Long transactionId, List<Tag> tags);
 
     /**
      * Adds the list of tags to the transaction type specified by TransactionType ID.
      *
      * @param typeId Transaction ID
      * @param tags   a list of tags
+     * @return the updated transaction type instance with tags
      */
-    void addTagsToTransactionType(TransactionTypeId typeId, List<Tag> tags);
+    TransactionType addTagsToTransactionType(TransactionTypeId typeId, List<Tag> tags);
 
 }

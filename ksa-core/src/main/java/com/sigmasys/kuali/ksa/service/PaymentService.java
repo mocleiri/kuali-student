@@ -42,5 +42,18 @@ public interface PaymentService {
      */
     List<GlTransaction> applyPayments(List<Transaction> transactions, BigDecimal maxAmount, boolean isQueued);
 
+    /**
+     * Calls the rules set for payment application.
+     * Many other services can be used and will be useful to payment application,
+     * including a direct creation of an allocation if needed.
+     * However, the majority of use cases should be possible by filtering the lists as needed
+     * and passing them to the automatic applyPayments() method.
+     * This method will create a TransactionList object containing all the unallocated transactions (of any value)
+     * for this accountId, ignoring all expired deferments (isExpired = true) and pass this object to the rules engine.
+     *
+     * @param userId Account ID
+     */
+    void paymentApplication(String userId);
+
 
 }

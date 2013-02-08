@@ -318,12 +318,6 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
         return totalAmount;
     }
 
-
-    @Override
-    public void paymentApplication(String userId) {
-        // TODO
-    }
-
     /**
      * Checks if KSA account exists
      *

@@ -13,8 +13,7 @@ import javax.persistence.Query;
 import com.sigmasys.kuali.ksa.exception.*;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
-import com.sigmasys.kuali.ksa.util.CalendarUtils;
-import com.sigmasys.kuali.ksa.util.TransactionUtils;
+import com.sigmasys.kuali.ksa.util.*;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -22,9 +21,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.sigmasys.kuali.ksa.util.ContextUtils;
-import com.sigmasys.kuali.ksa.util.RequestUtils;
 
 /**
  * Transaction service JPA implementation.
@@ -442,6 +438,12 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         transaction.setCreatorId(creatorId);
 
         transaction.setStatus(TransactionStatus.ACTIVE);
+
+        // Copying tags from the transaction type to the new transaction if they exist
+        List<Tag> tags = transactionType.getTags();
+        if (CollectionUtils.isNotEmpty(tags)) {
+            transaction.setTags(new ArrayList<Tag>(tags));
+        }
 
         if (transaction instanceof Payment) {
             CreditType creditType = (CreditType) transactionType;
@@ -1189,7 +1191,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         GeneralLedgerType glType = glService.getGeneralLedgerType(glTypeId);
         if (glType == null) {
-            String errMsg = "General Ledger Type with ID = " + glTypeId + " does nto exist";
+            String errMsg = "General Ledger Type with ID = " + glTypeId + " does not exist";
             logger.error(errMsg);
             throw new InvalidGeneralLedgerTypeException(errMsg);
         }
@@ -2474,11 +2476,22 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      *
      * @param transactionId Transaction ID
      * @param tags          a list of tags
+     * @return the updated transaction instance with tags
      */
     @Override
     @Transactional(readOnly = false)
-    public void addTagsToTransaction(Long transactionId, List<Tag> tags) {
-        // TODO
+    public Transaction addTagsToTransaction(Long transactionId, List<Tag> tags) {
+
+        Transaction transaction = getTransaction(transactionId);
+        if (transaction == null) {
+            String errMsg = "Transaction with ID = " + transactionId + " does not exist";
+            logger.error(errMsg);
+            throw new TransactionNotFoundException(errMsg);
+        }
+
+        transaction.setTags(mergeNewAndPersistentTags(tags, transaction.getTags()));
+
+        return transaction;
     }
 
     /**
@@ -2486,11 +2499,51 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
      *
      * @param typeId Transaction ID
      * @param tags   a list of tags
+     * @return the updated transaction type instance with tags
      */
     @Override
     @Transactional(readOnly = false)
-    public void addTagsToTransactionType(TransactionTypeId typeId, List<Tag> tags) {
-        // TODO
+    public TransactionType addTagsToTransactionType(TransactionTypeId typeId, List<Tag> tags) {
+
+        TransactionType transactionType = getTransactionType(typeId);
+        if (transactionType == null) {
+            String errMsg = "Transaction type with ID = " + typeId + " does not exist";
+            logger.error(errMsg);
+            throw new TransactionTypeNotFoundException(errMsg);
+        }
+
+        transactionType.setTags(mergeNewAndPersistentTags(tags, transactionType.getTags()));
+
+        return transactionType;
+    }
+
+    private List<Tag> mergeNewAndPersistentTags(List<Tag> tagsToAdd, List<Tag> persistentTags) {
+
+        List<Tag> newTags = new ArrayList<Tag>(tagsToAdd);
+
+        // Persisting new or merging existing tags in the persistence store
+        Set<Long> tagIds = new HashSet<Long>();
+        for (Tag tag : newTags) {
+            if (tag.getId() != null) {
+                tagIds.add(tag.getId());
+            }
+            auditableEntityService.persistAuditableEntity(tag);
+        }
+
+        if (persistentTags != null) {
+            for (Tag currentTag : new ArrayList<Tag>(persistentTags)) {
+                if (tagIds.contains(currentTag.getId())) {
+                    persistentTags.remove(currentTag);
+                }
+            }
+        } else {
+            persistentTags = new ArrayList<Tag>(newTags.size());
+        }
+
+        persistentTags.addAll(newTags);
+
+        return persistentTags;
+
     }
 
 

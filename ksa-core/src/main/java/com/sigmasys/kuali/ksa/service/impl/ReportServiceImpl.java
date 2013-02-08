@@ -65,6 +65,9 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
     private AccountService accountService;
 
     @Autowired
+    private PaymentService paymentService;
+
+    @Autowired
     private TransactionService transactionService;
 
     @PostConstruct
@@ -852,7 +855,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         }
 
         if (paymentApplication) {
-            accountService.paymentApplication(accountId);
+            paymentService.paymentApplication(accountId);
         }
 
         if (ageAccount) {

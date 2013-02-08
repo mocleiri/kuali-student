@@ -2,10 +2,7 @@ package com.sigmasys.kuali.ksa.service;
 
 
 import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.util.Assert;
 
 import static org.springframework.util.Assert.*;
 
@@ -32,6 +30,9 @@ public class TransactionServiceTest extends AbstractServiceTest {
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private AuditableEntityService auditableEntityService;
 
     @Autowired
     private GeneralLedgerService glService;
@@ -1195,6 +1196,102 @@ public class TransactionServiceTest extends AbstractServiceTest {
         notNull(transaction.getGeneralLedgerType());
         notNull(transaction.getGeneralLedgerType().getId());
         isTrue(glType.getId().equals(transaction.getGeneralLedgerType().getId()));
+
+    }
+
+    @Test
+    public void addTagsToTransaction() throws Exception {
+
+        int numberOfTags = 100;
+
+        List<Tag> tags = new ArrayList<Tag>(numberOfTags);
+
+        for (int i = 0; i < numberOfTags; i++) {
+            int j = i + 1;
+            Tag tag = auditableEntityService.createAuditableEntity("tag_" + j, "Tag name" + j, "Tag desc " + j, Tag.class);
+            tags.add(tag);
+        }
+
+        Transaction transaction = transactionService.createTransaction("cash", "admin", new Date(), new BigDecimal(10e3));
+
+        Assert.notNull(transaction);
+        Assert.notNull(transaction.getId());
+
+        transaction = transactionService.addTagsToTransaction(transaction.getId(), tags);
+
+        tags = transaction.getTags();
+
+        Assert.notNull(tags);
+        Assert.notEmpty(tags);
+        Assert.isTrue(tags.size() >= numberOfTags);
+
+        for (Tag tag : tags) {
+            Assert.notNull(tag);
+            Assert.notNull(tag.getId());
+            Assert.notNull(tag.getCode());
+            Assert.notNull(tag.getCreatorId());
+            Assert.notNull(tag.getCreationDate());
+            Assert.isTrue(tag.getCreationDate().before(new Date()));
+        }
+
+        Tag tag = auditableEntityService.createAuditableEntity("t##", "t##", "Tag desc ##", Tag.class);
+        tags.add(tag);
+
+        transaction = transactionService.addTagsToTransaction(transaction.getId(), tags);
+
+        tags = transaction.getTags();
+
+        Assert.notNull(tags);
+        Assert.notEmpty(tags);
+        Assert.isTrue(tags.size() >= numberOfTags + 1);
+
+    }
+
+    @Test
+    public void addTagsToTransactionType() throws Exception {
+
+        int numberOfTags = 66;
+
+        List<Tag> tags = new ArrayList<Tag>(numberOfTags);
+
+        for (int i = 0; i < numberOfTags; i++) {
+            int j = i + 1;
+            Tag tag = auditableEntityService.createAuditableEntity("tag_" + j, "Tag name" + j, "Tag desc " + j, Tag.class);
+            tags.add(tag);
+        }
+
+        TransactionType transactionType = transactionService.getTransactionType("cash", new Date());
+
+        Assert.notNull(transactionType);
+        Assert.notNull(transactionType.getId());
+
+        transactionType = transactionService.addTagsToTransactionType(transactionType.getId(), tags);
+
+        tags = transactionType.getTags();
+
+        Assert.notNull(tags);
+        Assert.notEmpty(tags);
+        Assert.isTrue(tags.size() >= numberOfTags);
+
+        for (Tag tag : tags) {
+            Assert.notNull(tag);
+            Assert.notNull(tag.getId());
+            Assert.notNull(tag.getCode());
+            Assert.notNull(tag.getCreatorId());
+            Assert.notNull(tag.getCreationDate());
+            Assert.isTrue(tag.getCreationDate().before(new Date()));
+        }
+
+        Tag tag = auditableEntityService.createAuditableEntity("t##", "t##", "Tag desc ##", Tag.class);
+        tags.add(tag);
+
+        transactionType = transactionService.addTagsToTransactionType(transactionType.getId(), tags);
+
+        tags = transactionType.getTags();
+
+        Assert.notNull(tags);
+        Assert.notEmpty(tags);
+        Assert.isTrue(tags.size() >= numberOfTags + 1);
 
     }
 
