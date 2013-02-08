@@ -1,4 +1,4 @@
-@draft
+@nightly
 Feature: Student Authorization
 
   Background:
