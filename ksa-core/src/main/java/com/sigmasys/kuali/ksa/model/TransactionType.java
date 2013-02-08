@@ -98,6 +98,10 @@ public abstract class TransactionType extends AuditableEntity<TransactionTypeId>
             },
             inverseJoinColumns = {
                     @JoinColumn(name = "TAG_ID_FK")
+            },
+            uniqueConstraints = {
+                    @UniqueConstraint(columnNames =
+                            {"TRANSACTION_TYPE_ID_FK", "TRANSACTION_TYPE_SUB_CODE_FK", "TAG_ID_FK"})
             }
     )
     public List<Tag> getTags() {

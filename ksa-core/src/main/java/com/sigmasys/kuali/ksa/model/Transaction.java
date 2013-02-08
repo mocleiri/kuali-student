@@ -7,6 +7,7 @@ import com.sigmasys.kuali.ksa.util.EnumUtils;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.persistence.*;
@@ -124,17 +125,17 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
     /**
      * Reference to the corresponding account
      */
-    private Account account;
+    protected Account account;
 
     /**
      * Indicates whether GL entry has been generated
      */
-    private Boolean glEntryGenerated;
+    protected Boolean glEntryGenerated;
 
     /**
      * Reference to general ledger type
      */
-    private GeneralLedgerType generalLedgerType;
+    protected GeneralLedgerType generalLedgerType;
 
     /**
      * Indicates if debit has been overridden by GL
@@ -144,17 +145,22 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
     /**
      * This is a transient property used in payment application services
      */
-    private Integer matrixScore;
+    protected Integer matrixScore;
 
     /**
      * Transaction status
      */
-    private TransactionStatus status;
+    protected TransactionStatus status;
 
     /**
      * Transaction status code
      */
-    private String statusCode;
+    protected String statusCode;
+
+    /**
+     * List of tags associated with the current transaction
+     */
+    protected List<Tag> tags;
 
 
     @PostLoad
@@ -395,6 +401,33 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
         this.statusCode = statusCode;
         status = EnumUtils.findById(TransactionStatus.class, statusCode);
     }
+
+    /**
+     * Returns the list of associated tags
+     *
+     * @return list of tags
+     */
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "KSSA_TRANSACTION_TAG",
+            joinColumns = {
+                    @JoinColumn(name = "TRANSACTION_ID_FK"),
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "TAG_ID_FK")
+            },
+            uniqueConstraints = {
+                    @UniqueConstraint(columnNames = {"TRANSACTION_ID_FK", "TAG_ID_FK"})
+            }
+    )
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    // ----------------------------------------------------------------------------------------------------------------
 
     @Transient
     public TransactionStatus getStatus() {

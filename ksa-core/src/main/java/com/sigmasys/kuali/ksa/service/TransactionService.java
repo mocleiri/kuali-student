@@ -724,4 +724,20 @@ public interface TransactionService {
      */
     List<Long> createGlBreakdowns(Long glTypeId, TransactionTypeId transactionTypeId, List<GlBreakdown> breakdowns);
 
+    /**
+     * Adds the list of tags to the transaction specified by Transaction ID.
+     *
+     * @param transactionId Transaction ID
+     * @param tags          a list of tags
+     */
+    void addTagsToTransaction(Long transactionId, List<Tag> tags);
+
+    /**
+     * Adds the list of tags to the transaction type specified by TransactionType ID.
+     *
+     * @param typeId Transaction ID
+     * @param tags   a list of tags
+     */
+    void addTagsToTransactionType(TransactionTypeId typeId, List<Tag> tags);
+
 }

@@ -1,7 +1,8 @@
 
+set echo on
+
 @ksa_drop_ddl.sql
 
-set echo on
 whenever sqlerror exit failure
 
 @ksa_create_ddl.sql
@@ -10,3 +11,5 @@ whenever sqlerror exit failure
 @ksa_constraints_ddl.sql
 
 commit;
+
+whenever sqlerror continue

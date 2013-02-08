@@ -1314,7 +1314,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
                 glAccount = glBreakdown.getGlAccount();
                 GlOperationType operationType = (glBreakdown instanceof GlBreakdown) ?
-                        ((GlBreakdown)glBreakdown).getGlOperation() : glType.getGlOperationOnCharge();
+                        ((GlBreakdown) glBreakdown).getGlOperation() : glType.getGlOperationOnCharge();
 
                 if (percentage.compareTo(BigDecimal.ZERO) > 0) {
                     BigDecimal amount = initialAmount.divide(new BigDecimal(100)).multiply(percentage);
@@ -2467,7 +2467,30 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         // Creating a memo
         Integer memoLevel = informationService.getDefaultMemoLevel();
         informationService.createMemo(deferment.getId(), memoText, memoLevel, new Date(), expirationDate, null);
+    }
 
+    /**
+     * Adds the list of tags to the transaction specified by Transaction ID.
+     *
+     * @param transactionId Transaction ID
+     * @param tags          a list of tags
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public void addTagsToTransaction(Long transactionId, List<Tag> tags) {
+        // TODO
+    }
+
+    /**
+     * Adds the list of tags to the transaction type specified by TransactionType ID.
+     *
+     * @param typeId Transaction ID
+     * @param tags   a list of tags
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public void addTagsToTransactionType(TransactionTypeId typeId, List<Tag> tags) {
+        // TODO
     }
 
 
