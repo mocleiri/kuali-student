@@ -410,6 +410,16 @@ public interface TransactionService {
     List<GlTransaction> removeAllocations(Long transactionId);
 
     /**
+        * Removes all allocations associated with the given Account ID
+        * <p/>
+        *
+        * @param userId Account ID
+        * @return list of generated GL transactions
+        */
+    @WebMethod(exclude = true)
+    List<GlTransaction> removeAllocations(String userId);
+
+    /**
      * Removes allocation between two given transactions
      * <p/>
      *

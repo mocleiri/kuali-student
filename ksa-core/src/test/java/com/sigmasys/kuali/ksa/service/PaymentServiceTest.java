@@ -97,4 +97,17 @@ public class PaymentServiceTest extends AbstractServiceTest {
 
     }
 
+    @Test
+    public void paymentApplication() throws Exception {
+
+        String userId = "admin";
+
+        List<GlTransaction> glTransactions1 = transactionService.removeAllocations(userId);
+
+        List<GlTransaction> glTransactions2 = transactionService.allocateReversals(userId);
+
+        // TODO: simulate the rule-based paymentApplication()
+
+    }
+
 }

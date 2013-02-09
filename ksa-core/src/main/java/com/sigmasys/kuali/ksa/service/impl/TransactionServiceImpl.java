@@ -990,7 +990,7 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
             throw new TransactionNotFoundException(errMsg);
         }
 
-        Query query = em.createQuery("select a from Allocation a " +
+        Query query = em.createQuery("select distinct a from Allocation a " +
                 " left outer join fetch a.firstTransaction t1 " +
                 " left outer join fetch a.secondTransaction t2 " +
                 " where t1.id = :id or t2.id = :id");
@@ -1007,6 +1007,33 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
 
         return glTransactions;
 
+    }
+
+    /**
+     * Removes all allocations associated with the given Account ID
+     * <p/>
+     *
+     * @param userId Account ID
+     * @return list of generated GL transactions
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public List<GlTransaction> removeAllocations(String userId) {
+
+        List<GlTransaction> glTransactions = new LinkedList<GlTransaction>();
+
+        Query query = em.createQuery("select t.id from Transaction t where t.account.id = :userId");
+        query.setParameter("userId", userId);
+
+        List<Long> transactionIds = query.getResultList();
+        if (transactionIds != null) {
+            for (Long transactionId : transactionIds) {
+                glTransactions.addAll(removeAllocations(transactionId));
+            }
+        }
+
+        return glTransactions;
     }
 
     /**
