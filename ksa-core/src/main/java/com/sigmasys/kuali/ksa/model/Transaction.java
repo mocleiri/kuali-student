@@ -410,7 +410,7 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "KSSA_TRANSACTION_TAG",
             joinColumns = {
-                    @JoinColumn(name = "TRANSACTION_ID_FK"),
+                    @JoinColumn(name = "TRANSACTION_ID_FK")
             },
             inverseJoinColumns = {
                     @JoinColumn(name = "TAG_ID_FK")

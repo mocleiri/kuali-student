@@ -33,6 +33,22 @@ public interface InformationService {
     Memo getMemo(Long id);
 
     /**
+     * Returns Alert by ID
+     *
+     * @param id Alert ID
+     * @return Alert instance
+     */
+    Alert getAlert(Long id);
+
+    /**
+     * Returns Flag by ID
+     *
+     * @param id Flag ID
+     * @return Flag instance
+     */
+    Flag getFlag(Long id);
+
+    /**
      * Returns all Information entities sorted by ID in the descendant order
      *
      * @return List of Information instances
@@ -45,6 +61,20 @@ public interface InformationService {
      * @return List of memos
      */
     List<Memo> getMemos();
+
+    /**
+     * Returns all Flag entities sorted by ID in the descendant order
+     *
+     * @return List of flags
+     */
+    List<Flag> getFlags();
+
+    /**
+     * Returns all Alert entities sorted by ID in the descendant order
+     *
+     * @return List of alerts
+     */
+    List<Alert> getAlerts();
 
     /**
      * Returns all Memo entities by Transaction ID
@@ -193,6 +223,24 @@ public interface InformationService {
      * @return level number
      */
     Integer getDefaultMemoLevel();
+
+    /**
+     * Associates the information represented by Information ID with the given Account ID
+     *
+     * @param informationId Information ID
+     * @param accountId     Account ID
+     * @return an updated instance of Information
+     */
+    Information associateWithAccount(Long informationId, String accountId);
+
+    /**
+     * Associates the information represented by Information ID with the Transaction specified by ID
+     *
+     * @param informationId Information ID
+     * @param transactionId Transaction ID
+     * @return an updated instance of Information
+     */
+    Information associateWithTransaction(Long informationId, Long transactionId);
 
 
 }

@@ -33,8 +33,8 @@ public class InformationServiceTest extends AbstractServiceTest {
     @Before
     public void setUpWithinTransaction() {
         // set up test data within the transaction
-        String userId = "admin";
-        accountService.getOrCreateAccount(userId);
+        accountService.getOrCreateAccount("admin");
+        accountService.getOrCreateAccount("user1");
     }
 
     @Test
@@ -154,7 +154,7 @@ public class InformationServiceTest extends AbstractServiceTest {
         Assert.notNull(memo.getTransaction());
 
         Assert.isTrue("New memo for 1020".equals(memo.getText()));
-        Assert.isTrue(TEST_USER_ID.equals(memo.getCreatorId()));
+        Assert.isTrue("admin".equals(memo.getCreatorId()));
 
         Assert.isTrue(new Date().compareTo(memo.getEffectiveDate()) >= 0);
         Assert.isTrue(new Date().compareTo(memo.getCreationDate()) >= 0);
@@ -186,7 +186,7 @@ public class InformationServiceTest extends AbstractServiceTest {
         Assert.notNull(alert.getTransaction());
 
         Assert.isTrue("New alert for 1020".equals(alert.getText()));
-        Assert.isTrue(TEST_USER_ID.equals(alert.getCreatorId()));
+        Assert.isTrue("admin".equals(alert.getCreatorId()));
 
         Assert.isTrue(new Date().compareTo(alert.getEffectiveDate()) >= 0);
         Assert.isTrue(new Date().compareTo(alert.getCreationDate()) >= 0);
@@ -214,7 +214,7 @@ public class InformationServiceTest extends AbstractServiceTest {
         Assert.notNull(flag.getAccount());
         Assert.notNull(flag.getTransaction());
 
-        Assert.isTrue(TEST_USER_ID.equals(flag.getCreatorId()));
+        Assert.isTrue("admin".equals(flag.getCreatorId()));
 
         Assert.isTrue(new Date().compareTo(flag.getEffectiveDate()) >= 0);
         Assert.isTrue(new Date().compareTo(flag.getCreationDate()) >= 0);
@@ -222,7 +222,6 @@ public class InformationServiceTest extends AbstractServiceTest {
         Assert.isTrue(1 == flag.getAccessLevel());
 
         Assert.isNull(flag.getExpirationDate());
-
     }
 
     @Test
@@ -240,7 +239,74 @@ public class InformationServiceTest extends AbstractServiceTest {
         Assert.notNull(memos);
         Assert.notEmpty(memos);
         Assert.isTrue(memos.size() == 1);
+    }
 
+    @Test
+    public void associateWithTransaction() {
+
+        String userId = "admin";
+
+        Transaction transaction1 = transactionService.createTransaction("chip", userId, new Date(), new BigDecimal(44.9));
+
+        Assert.notNull(transaction1);
+        Assert.notNull(transaction1.getId());
+
+        Transaction transaction2 = transactionService.createTransaction("cash", userId, new Date(), new BigDecimal(0.1));
+
+        Assert.notNull(transaction2);
+        Assert.notNull(transaction2.getId());
+
+        Flag flag = informationService.createFlag(transaction1.getId(), 1L, 1, 1, new Date(), null);
+
+        Assert.notNull(flag);
+        Assert.notNull(flag.getId());
+        Assert.notNull(flag.getTransaction());
+        Assert.isTrue(flag.getTransaction().equals(transaction1));
+
+        Information info = informationService.associateWithTransaction(flag.getId(), transaction2.getId());
+
+        Assert.notNull(info);
+        Assert.notNull(info.getId());
+        Assert.isTrue(info.getId().equals(flag.getId()));
+        Assert.isTrue(info instanceof Flag);
+
+        Assert.notNull(info.getTransaction());
+        Assert.notNull(info.getTransaction().getId());
+        Assert.isTrue(info.getTransaction().getId().equals(transaction2.getId()));
+
+    }
+
+    @Test
+    public void associateWithAccount() throws Exception {
+
+        String userId2 = "user1";
+
+        Account account2 = accountService.getFullAccount(userId2);
+
+        Assert.notNull(account2);
+        Assert.notNull(account2.getId());
+        Assert.isTrue(account2.getId().equals(userId2));
+
+        Memo memo = createMemoForTransaction("1020");
+
+        Assert.notNull(memo);
+        Assert.notNull(memo.getId());
+        Assert.notNull(memo.getAccount());
+        //Assert.notNull(memo.getAccountId());
+
+        Information info = informationService.associateWithAccount(memo.getId(), userId2);
+
+        Assert.notNull(info);
+        Assert.notNull(info.getId());
+        Assert.isTrue(info.getId().equals(memo.getId()));
+        Assert.isTrue(info instanceof Memo);
+
+        //Assert.notNull(info.getAccountId());
+        Assert.notNull(info.getAccount());
+        Assert.notNull(info.getAccount().getId());
+        //Assert.isTrue(info.getAccountId().equals(info.getAccount().getId()));
+
+        Assert.isTrue(info.getAccount().getId().equals(userId2));
     }
 
 

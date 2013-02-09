@@ -1,11 +1,14 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
+import com.sigmasys.kuali.ksa.exception.InformationNotFoundException;
+import com.sigmasys.kuali.ksa.exception.TransactionNotFoundException;
 import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import com.sigmasys.kuali.ksa.service.TransactionService;
 import com.sigmasys.kuali.ksa.util.RequestUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +33,42 @@ public class InformationServiceImpl extends GenericPersistenceService implements
 
     private static final Log logger = LogFactory.getLog(InformationServiceImpl.class);
 
+    private static final String GET_INFORMATION_JOIN =
+            " left outer join fetch i.account a " +
+                    " left outer join fetch i.transaction t ";
+
 
     @Autowired
     private TransactionService transactionService;
 
     @Autowired
     private AccountService accountService;
+
+
+    private <T extends Information> T getInformation(Long id, Class<T> entityType) {
+
+        Query query = em.createQuery("select i from " + entityType.getName() + " i " + GET_INFORMATION_JOIN +
+                " where i.id = :id ");
+
+        query.setParameter("id", id);
+
+        List<T> transactions = query.getResultList();
+
+        return CollectionUtils.isNotEmpty(transactions) ? transactions.get(0) : null;
+    }
+
+    private <T extends Information> List<T> getInformations(String userId, Class<T> entityType) {
+
+        Query query = em.createQuery("select i from " + entityType.getName() + " i " + GET_INFORMATION_JOIN +
+                (userId != null ? " where a.id = :userId " : "") +
+                " order by i.creationDate desc, i.effectiveDate");
+
+        if (userId != null) {
+            query.setParameter("userId", userId);
+        }
+
+        return query.getResultList();
+    }
 
 
     /**
@@ -46,7 +79,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public Information getInformation(Long id) {
-        return getEntity(id, Information.class);
+        return getInformation(id, Information.class);
     }
 
     /**
@@ -57,7 +90,29 @@ public class InformationServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public Memo getMemo(Long id) {
-        return getEntity(id, Memo.class);
+        return getInformation(id, Memo.class);
+    }
+
+    /**
+     * Returns Alert by ID
+     *
+     * @param id Alert ID
+     * @return Alert instance
+     */
+    @Override
+    public Alert getAlert(Long id) {
+        return getInformation(id, Alert.class);
+    }
+
+    /**
+     * Returns Flag by ID
+     *
+     * @param id Flag ID
+     * @return Flag instance
+     */
+    @Override
+    public Flag getFlag(Long id) {
+        return getInformation(id, Flag.class);
     }
 
 
@@ -68,7 +123,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Information> getInformations() {
-        return getEntities(Information.class, new Pair<String, SortOrder>("id", SortOrder.DESC));
+        return getInformations(null, Information.class);
     }
 
     /**
@@ -78,7 +133,25 @@ public class InformationServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Memo> getMemos() {
-        return getEntities(Memo.class, new Pair<String, SortOrder>("id", SortOrder.DESC));
+        return getInformations(null, Memo.class);
+    }
+
+    /**
+     * Returns all Flag entities sorted by ID in the descendant order
+     *
+     * @return List of flags
+     */
+    public List<Flag> getFlags() {
+        return getInformations(null, Flag.class);
+    }
+
+    /**
+     * Returns all Alert entities sorted by ID in the descendant order
+     *
+     * @return List of alerts
+     */
+    public List<Alert> getAlerts() {
+        return getInformations(null, Alert.class);
     }
 
     /**
@@ -89,10 +162,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Alert> getAlerts(String userId) {
-        Query query = em.createQuery("select a from Alert a where a.account.id = :userId order by " +
-                " a.creationDate desc, a.effectiveDate desc");
-        query.setParameter("userId", userId);
-        return query.getResultList();
+        return getInformations(userId, Alert.class);
     }
 
     /**
@@ -103,10 +173,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Flag> getFlags(String userId) {
-        Query query = em.createQuery("select f from Flag f where f.account.id = :userId order by " +
-                " f.creationDate desc, f.effectiveDate desc");
-        query.setParameter("userId", userId);
-        return query.getResultList();
+        return getInformations(userId, Flag.class);
     }
 
     /**
@@ -117,10 +184,7 @@ public class InformationServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Memo> getMemos(String userId) {
-        Query query = em.createQuery("select m from Memo m where m.account.id = :userId order by " +
-                " m.creationDate desc, m.effectiveDate desc");
-        query.setParameter("userId", userId);
-        return query.getResultList();
+        return getInformations(userId, Memo.class);
     }
 
     /**
@@ -131,11 +195,11 @@ public class InformationServiceImpl extends GenericPersistenceService implements
      */
     @Override
     public List<Memo> getMemos(Long transactionId) {
-        Query query = em.createQuery("select m from Memo m " +
-                " left outer join fetch m.nextMemo nm " +
-                " left outer join fetch m.previousMemo pm " +
-                " where m.transaction.id = :transactionId order by " +
-                " m.creationDate desc, m.effectiveDate desc");
+        Query query = em.createQuery("select i from Memo i " + GET_INFORMATION_JOIN +
+                " left outer join fetch i.nextMemo nm " +
+                " left outer join fetch i.previousMemo pm " +
+                " where i.transaction.id = :transactionId order by " +
+                " i.creationDate desc, i.effectiveDate desc");
         query.setParameter("transactionId", transactionId);
         return query.getResultList();
     }
@@ -444,6 +508,67 @@ public class InformationServiceImpl extends GenericPersistenceService implements
     @Override
     public Integer getDefaultMemoLevel() {
         return Integer.valueOf(configService.getParameter(Constants.DEFAULT_MEMO_LEVEL));
+    }
+
+    /**
+     * Associates the information represented by Information ID with the given Account ID
+     *
+     * @param informationId Information ID
+     * @param accountId     Account ID
+     * @return an updated instance of Information
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Information associateWithAccount(Long informationId, String accountId) {
+
+        Information information = getInformation(informationId);
+        if (information == null) {
+            String errMsg = "Information with ID = " + informationId + " does not exist";
+            logger.error(errMsg);
+            throw new InformationNotFoundException(errMsg);
+        }
+
+        Account account = accountService.getFullAccount(accountId);
+        if (account == null) {
+            String errMsg = "Account with ID = " + accountId + " does not exist";
+            logger.error(errMsg);
+            throw new UserNotFoundException(errMsg);
+        }
+
+        information.setAccount(account);
+
+        return information;
+
+    }
+
+    /**
+     * Associates the information represented by Information ID with the Transaction specified by ID
+     *
+     * @param informationId Information ID
+     * @param transactionId Transaction ID
+     * @return an updated instance of Information
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public Information associateWithTransaction(Long informationId, Long transactionId) {
+
+        Information information = getInformation(informationId);
+        if (information == null) {
+            String errMsg = "Information with ID = " + informationId + " does not exist";
+            logger.error(errMsg);
+            throw new InformationNotFoundException(errMsg);
+        }
+
+        Transaction transaction = transactionService.getTransaction(transactionId);
+        if (transaction == null) {
+            String errMsg = "Transaction with ID = " + transactionId + " does not exist";
+            logger.error(errMsg);
+            throw new TransactionNotFoundException(errMsg);
+        }
+
+        information.setTransaction(transaction);
+
+        return information;
     }
 
 }

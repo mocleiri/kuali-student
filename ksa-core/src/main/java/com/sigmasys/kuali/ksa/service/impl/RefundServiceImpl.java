@@ -799,18 +799,22 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
         // Check that the account in question has bank type listed under protected information type of type refund.ach.banktype available.
         // If so, get the bank information.
         String accountId = refund.getTransaction().getAccountId();
-        Ach ach = null;
+        Ach ach;
 
         try {
-            ach = accountService.getAch(accountId);
-        } catch (Exception e) {/*ignored. null value of "ach" assumed*/}
 
-        if (ach == null) {
+            ach = accountService.getAch(accountId);
+
+        } catch (Exception e) {
+
             // Mark refund as FAILED:
             refund.setStatus(RefundStatus.FAILED);
             persistEntity(refund);
 
-            throw new NoAchInformationException("No ACH information found for account " + accountId);
+            String errMsg = "No ACH information found for account " + accountId;
+
+            logger.error(errMsg, e);
+            throw new NoAchInformationException(errMsg);
         }
 
         // Perform either an individual or consolidate refund:
@@ -824,7 +828,8 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
 
         if (consolidateSameAccountRefunds) {
             // Find all VALIDATED Ach Refunds for the same account, EXCEPT for the current Refund:
-            String sql = "select r from Refund r where r.status = :refundStatus and r.transaction.accountId = :accountId and r.refundType.debitTypeId = :refundType and r.id <> :id";
+            String sql = "select r from Refund r where r.status = :refundStatus and " +
+                    " r.transaction.accountId = :accountId and r.refundType.debitTypeId = :refundType and r.id <> :id";
             Query query = em.createQuery(sql)
                     .setParameter("refundStatus", RefundStatus.VERIFIED)
                     .setParameter("accountId", accountId)

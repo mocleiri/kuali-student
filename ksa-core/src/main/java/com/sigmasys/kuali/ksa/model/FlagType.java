@@ -5,9 +5,8 @@ import javax.persistence.*;
 /**
  * Flag type.
  * <p/>
- * User: mike
- * Date: 1/22/12
- * Time: 3:47 PM
+ *
+ * @author Michael Ivanov
  */
 @Entity
 @Table(name = "KSSA_FLAG_TYPE")

@@ -648,7 +648,7 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
      * @return Ach instance
      */
     @Override
-    public Ach getAch(String userId) throws AccountTypeNotFoundException {
+    public Ach getAch(String userId) {
 
         String errMsg = "ACH Account with ID = " + userId + " does not exist";
 
