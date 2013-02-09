@@ -1,6 +1,8 @@
 
 set echo on
 
+whenever sqlerror continue
+
 @ksa_drop_ddl.sql
 
 whenever sqlerror exit failure
