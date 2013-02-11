@@ -103,7 +103,7 @@ class RegistrationWindow
       page.end_time_am_pm.select @end_time_am_pm
       page.window_type_key.select @window_type_key
       page.loading.wait_while_present
-      if (page.slot_rule_enum_type.exists?)
+      if (page.slot_rule_enum_type.present?)
         page.slot_rule_enum_type.select @slot_rule_enum_type
       end
       page.add
