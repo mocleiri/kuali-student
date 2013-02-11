@@ -17,9 +17,9 @@ package org.kuali.student.loader.standardizedtest;
 
 import org.kuali.student.loader.util.AdminOrgInfoHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
-import org.kuali.student.lum.lu.dto.AdminOrgInfo;
-import org.kuali.student.lum.lu.dto.CluIdentifierInfo;
-import org.kuali.student.lum.lu.dto.CluInfo;
+import org.kuali.student.r2.lum.clu.dto.AdminOrgInfo;
+import org.kuali.student.r2.lum.clu.dto.CluIdentifierInfo;
+import org.kuali.student.r2.lum.clu.dto.CluInfo;
 
 
 /**

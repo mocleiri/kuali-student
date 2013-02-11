@@ -1,6 +1,6 @@
 package org.kuali.student.loader.organization;
 
-import org.kuali.student.core.organization.dto.OrgOrgRelationInfo;
+import org.kuali.student.r2.core.organization.dto.OrgOrgRelationInfo;
 
 public class OrgOrgRelation extends OrgOrgRelationInfo{
 	private String orgShortName;

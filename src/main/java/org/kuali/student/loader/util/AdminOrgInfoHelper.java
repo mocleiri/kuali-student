@@ -19,8 +19,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.kuali.student.loader.search.OrgFinderHelper;
-import org.kuali.student.lum.lu.dto.AdminOrgInfo;
+import org.kuali.student.r2.lum.clu.dto.AdminOrgInfo;
 
 
 

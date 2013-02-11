@@ -19,11 +19,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.kuali.student.core.atp.service.AtpService;
-import org.kuali.student.common.exceptions.DataValidationErrorException;
-import org.kuali.student.common.validation.dto.ValidationResultInfo;
-import org.kuali.student.lum.course.dto.CourseInfo;
-import org.kuali.student.lum.course.service.CourseService;
+import org.kuali.student.loader.util.ContextInfoHelper;
+import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
+import org.kuali.student.r2.lum.course.dto.CourseInfo;
+import org.kuali.student.r2.lum.course.service.CourseService;
 
 /**
  *
@@ -62,6 +62,9 @@ public class CreditCourseLoader
 
  public List<CreditCourseLoadResult> update ()
  {
+	//TODO revisit ContextInfo.
+	 ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
+	 
 	List<CreditCourseLoadResult> results = new CreditCoursesToCourseInfosConverter (inputDataSource, helperService).convert ();
   for (CreditCourseLoadResult result : results)
   {
@@ -73,7 +76,7 @@ public class CreditCourseLoader
    try
    {
 //    System.out.println ("Debug: " + info.getAttributes ());
-    CourseInfo createdInfo = courseService.createCourse (info);
+    CourseInfo createdInfo = courseService.createCourse (info,ctxInfoHelper.getDefaultContextInfo());
     result.setCourseInfo (createdInfo);
     result.setStatus (CreditCourseLoadResult.Status.CREATED);
    }
@@ -82,7 +85,7 @@ public class CreditCourseLoader
     List<ValidationResultInfo> vris = null;
     try
     {
-     vris = courseService.validateCourse ("SYSTEM", info);
+     vris = courseService.validateCourse ("SYSTEM", info, ctxInfoHelper.getDefaultContextInfo());
     }
     catch (Exception ex1)
     {

@@ -90,7 +90,7 @@ public class OrgOrgRelationInputModelFactoryTest
   OrgOrgRelation orgRelation = orgRalations.get (1);
   assertEquals ("4", orgRelation.getOrgId());
   assertEquals ("1", orgRelation.getRelatedOrgId());
-  assertEquals ("kuali.org.Part", orgRelation.getType ());
+  assertEquals ("kuali.org.Part", orgRelation.getTypeKey ());
   assertEquals ("kuali.org.org.relation.state.active", orgRelation.getState ());
   assertEquals ("KU", orgRelation.getOrgShortName());
   assertEquals ("KUSystem", orgRelation.getRelatedOrgShortName());

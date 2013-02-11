@@ -15,10 +15,10 @@
  */
 package org.kuali.student.loader.course;
 
-import org.kuali.student.loader.atp.AtpServiceFactory;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
 import org.kuali.student.spreadsheet.CompositeSpreadsheetReader;
 import org.kuali.student.spreadsheet.ExcelSpreadsheetReader;
 import org.kuali.student.spreadsheet.SpreadsheetReader;

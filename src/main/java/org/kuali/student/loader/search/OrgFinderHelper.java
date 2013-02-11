@@ -17,12 +17,15 @@ package org.kuali.student.loader.search;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.kuali.student.common.search.dto.SearchParam;
-import org.kuali.student.common.search.dto.SearchRequest;
-import org.kuali.student.common.search.dto.SearchResult;
-import org.kuali.student.common.search.dto.SearchResultRow;
-import org.kuali.student.common.search.dto.SearchTypeInfo;
-import org.kuali.student.common.search.service.SearchService;
+
+import org.kuali.student.loader.util.ContextInfoHelper;
+import org.kuali.student.r2.core.class1.type.dto.TypeInfo;
+import org.kuali.student.r2.core.search.dto.SearchParamInfo;
+import org.kuali.student.r2.core.search.dto.SearchRequestInfo;
+import org.kuali.student.r2.core.search.dto.SearchTypeInfo;
+import org.kuali.student.r2.core.search.infc.SearchResult;
+import org.kuali.student.r2.core.search.infc.SearchResultRow;
+import org.kuali.student.r2.core.search.service.SearchService;
 
 
 /**
@@ -49,15 +52,16 @@ public class OrgFinderHelper
  public List<OrgResultGeneric> getAll ()
  {
   SearchService service = getSearchService ();
+ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
 
 //  System.out.println ("Invoking search request to get all org result generics...");
-  SearchRequest req = new SearchRequest ();
+  SearchRequestInfo req = new SearchRequestInfo ();
   req.setSearchKey ("org.search.generic");
 //  System.out.println ("getSearchKey ()=" + req.getSearchKey ());
   SearchResult result = null;
   try
   {
-   result = service.search (req);
+   result = service.search (req, ctxInfoHelper.getDefaultContextInfo());
   }
   catch (Exception ex)
   {
@@ -79,19 +83,21 @@ public class OrgFinderHelper
  public List<OrgResultGeneric> getAllWithType (String type)
  {
   SearchService service = getSearchService ();
-
+  ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
 //  System.out.println ("Invoking search request to get all org result generics...");
-  SearchRequest req = new SearchRequest ();
+  SearchRequestInfo req = new SearchRequestInfo ();
   req.setSearchKey ("org.search.generic");
-  SearchParam param = new SearchParam ();
+  SearchParamInfo param = new SearchParamInfo ();
   param.setKey ("org.queryParam.orgOptionalType");
-  param.setValue (type);
+  List<String> values = new ArrayList<String>();
+		  values.add(type);
+  param.setValues (values);
   req.getParams ().add (param);
 //  System.out.println ("getSearchKey ()=" + req.getSearchKey ());
   SearchResult result = null;
   try
   {
-   result = service.search (req);
+   result = service.search (req, ctxInfoHelper.getDefaultContextInfo());
   }
   catch (Exception ex)
   {
@@ -127,19 +133,34 @@ public class OrgFinderHelper
   return org.getOrgId ();
  }
 
- public List<SearchTypeInfo> getSearchTypes ()
+// public List<SearchTypeInfo> getSearchTypes ()
+// {
+//  SearchService service = getSearchService ();
+//  ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
+////  System.out.println ("Invoking get search types search request...");
+//  try
+//  {
+//   return (List<SearchTypeInfo>) service.getSearchTypes (ctxInfoHelper.getDefaultContextInfo());
+//  }
+//  catch (Exception ex)
+//  {
+//   throw new RuntimeException (ex);
+//  }
+// }
+
+ public List<TypeInfo> getTypeInfos ()
+ //TODO: Verify with the above implementation
  {
   SearchService service = getSearchService ();
-
+  ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
 //  System.out.println ("Invoking get search types search request...");
   try
   {
-   return service.getSearchTypes ();
+   return service.getSearchTypes (ctxInfoHelper.getDefaultContextInfo());
   }
   catch (Exception ex)
   {
    throw new RuntimeException (ex);
   }
  }
-
 }

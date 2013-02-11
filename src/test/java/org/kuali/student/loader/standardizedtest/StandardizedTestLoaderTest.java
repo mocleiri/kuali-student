@@ -23,7 +23,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kuali.student.lum.lu.service.LuService;
+import org.kuali.student.r2.lum.clu.service.CluService;
 
 /**
  *
@@ -32,7 +32,7 @@ import org.kuali.student.lum.lu.service.LuService;
 public class StandardizedTestLoaderTest
 {
 
- private static LuService luService;
+ private static CluService cluService;
 
  public StandardizedTestLoaderTest ()
  {
@@ -44,7 +44,7 @@ public class StandardizedTestLoaderTest
  {
   LuServiceFactory factory = new LuServiceFactory ();
   factory.setHostUrl (LuServiceFactory.LOCAL_HOST_EMBEDDED_URL);
-  luService = factory.getLuService ();
+  cluService = factory.getCluService ();
  }
 
  @AfterClass
@@ -73,7 +73,7 @@ public class StandardizedTestLoaderTest
   System.out.println (new Date () + " load standardized tests");
 
   StandardizedTestLoader ccLoader = new StandardizedTestLoader ();
-  ccLoader.setLuService (luService);
+  ccLoader.setLuService (cluService);
   StandardizedTestInputModel ccModel = StandardizedTestInputModelFactoryTest.getInstance ().
     getModel ();
 

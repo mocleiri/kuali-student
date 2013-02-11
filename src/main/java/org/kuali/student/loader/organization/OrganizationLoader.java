@@ -18,11 +18,13 @@ package org.kuali.student.loader.organization;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import org.kuali.student.common.exceptions.AlreadyExistsException;
-import org.kuali.student.common.exceptions.DataValidationErrorException;
-import org.kuali.student.core.organization.dto.OrgInfo;
-import org.kuali.student.core.organization.service.OrganizationService;
-import org.kuali.student.common.validation.dto.ValidationResultInfo;
+
+import org.kuali.student.loader.util.ContextInfoHelper;
+import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.AlreadyExistsException;
+import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
+import org.kuali.student.r2.core.organization.dto.OrgInfo;
+import org.kuali.student.r2.core.organization.service.OrganizationService;
 
 /**
  *
@@ -60,6 +62,7 @@ public class OrganizationLoader
 
  public List<OrganizationLoadResult> load ()
  {
+	 ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
   List<OrganizationLoadResult> results = new ArrayList (500);
   int row = 0;
   for (Organization org : inputDataSource)
@@ -73,23 +76,25 @@ public class OrganizationLoader
    result.setOrgInfo (info);
    try
    {
-    OrgInfo createdInfo = getOrganizationService ().createOrganization (
-      info.getType (), info);
+	   
+    OrgInfo createdInfo = getOrganizationService ().createOrg (
+      info.getTypeKey (), info, ctxInfoHelper.getDefaultContextInfo());
     result.setOrgInfo (createdInfo);
     result.setStatus (OrganizationLoadResult.Status.CREATED);
    }
-   catch (AlreadyExistsException ex)
-   {
-    //TODO update if already exists?
-    result.setStatus (OrganizationLoadResult.Status.NOT_PROCESSED_ALREADY_EXISTS);
-    result.setException (ex);
-   }
+//   catch (AlreadyExistsException ex)
+//   {
+//    //TODO update if already exists?
+//    result.setStatus (OrganizationLoadResult.Status.NOT_PROCESSED_ALREADY_EXISTS);
+//    result.setException (ex);
+//   }
    catch (DataValidationErrorException ex)
    {
     List<ValidationResultInfo> vris = null;
     try
     {
-     vris = organizationService.validateOrg ("SYSTEM", info);
+    	//TODO verify first and second arguments
+     vris = organizationService.validateOrg ("SYSTEM", info.getTypeKey (), info, ctxInfoHelper.getDefaultContextInfo());
     }
     catch (Exception ex1)
     {

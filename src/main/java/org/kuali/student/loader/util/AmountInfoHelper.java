@@ -15,7 +15,7 @@
  */
 package org.kuali.student.loader.util;
 
-import org.kuali.student.common.dto.AmountInfo;
+import org.kuali.student.r2.common.dto.AmountInfo;
 
 
 /**
@@ -33,7 +33,7 @@ public class AmountInfoHelper
    return null;
   }
   AmountInfo info = new AmountInfo ();
-  info.setUnitType (unitType);
+  info.setUnitTypeKey (unitType);
   info.setUnitQuantity (unitQuantity);
   return info;
  }

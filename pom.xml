@@ -4,11 +4,13 @@
  <groupId>org.kuali.student</groupId>
  <artifactId>ks-loader</artifactId>
  <packaging>jar</packaging>
- <version>1.0-SNAPSHOT</version>
- <name>KS-Loader</name>
+ <version>2.0-SNAPSHOT</version>
+ <name>KS-Loader-2.0</name>
  <url>http://maven.apache.org</url>
  <properties>
-  <kuali.student.version>1.2</kuali.student.version>
+  <kuali.student.version>2.0.0-SNAPSHOT</kuali.student.version>
+  <kuali.student.api.version>2.0.0-M6-SNAPSHOT</kuali.student.api.version>
+  
   <junit.version>4.4</junit.version>
   <atomikos.version>3.4.1</atomikos.version>
   <log4j.version>1.2.14</log4j.version>
@@ -20,7 +22,19 @@
   <artifactId>ks-lum-impl</artifactId>
   <version>1.1.0-M10-SNAPSHOT</version>
  </parent>-->
-
+ <repositories>
+        <repository>
+            <id>kuali.nexus</id>
+            <name>Nexus Repository Manager</name>
+            <url>http://nexus.kuali.org/content/groups/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
  <dependencies>
   <dependency>
    <groupId>junit</groupId>
@@ -53,9 +67,9 @@
 
   <!-- Kuali Student Dependencies-->
   <dependency>
-   <groupId>org.kuali.student.lum</groupId>
+   <groupId>org.kuali.student.api</groupId>
    <artifactId>ks-lum-api</artifactId>
-   <version>${kuali.student.version}</version>
+   <version>${kuali.student.api.version}</version>
   </dependency>
 
   <dependency>
@@ -98,26 +112,26 @@
      </archive>
     </configuration>
    </plugin>
-   <plugin>
-    <groupId>org.dstovall</groupId>
-    <artifactId>onejar-maven-plugin</artifactId>
-    <version>1.4.3</version>
-    <executions>
-     <execution>
-      <configuration>
-       <!-- Optional -->
-       <onejarVersion>0.97</onejarVersion>
-       <!-- Optional, default is false -->
-       <attachToBuild>true</attachToBuild>
-       <!-- Optional, default is "onejar" -->
-       <classifier>onejar</classifier>
-      </configuration>
-      <goals>
-       <goal>one-jar</goal>
-      </goals>
-     </execution>
-    </executions>
-   </plugin>
+<!--    <plugin> -->
+<!--     <groupId>org.dstovall</groupId> -->
+<!--     <artifactId>onejar-maven-plugin</artifactId> -->
+<!--     <version>1.4.3</version> -->
+<!--     <executions> -->
+<!--      <execution> -->
+<!--       <configuration> -->
+<!--        Optional -->
+<!--        <onejarVersion>0.97</onejarVersion> -->
+<!--        Optional, default is false -->
+<!--        <attachToBuild>true</attachToBuild> -->
+<!--        Optional, default is "onejar" -->
+<!--        <classifier>onejar</classifier> -->
+<!--       </configuration> -->
+<!--       <goals> -->
+<!--        <goal>one-jar</goal> -->
+<!--       </goals> -->
+<!--      </execution> -->
+<!--     </executions> -->
+<!--    </plugin> -->
   </plugins>
  </build>
 </project>

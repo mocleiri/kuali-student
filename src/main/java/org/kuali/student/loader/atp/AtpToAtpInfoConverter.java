@@ -15,7 +15,7 @@
  */
 package org.kuali.student.loader.atp;
 
-import org.kuali.student.core.atp.dto.AtpInfo;
+import org.kuali.student.r2.core.atp.dto.AtpInfo;
 
 /**
  *

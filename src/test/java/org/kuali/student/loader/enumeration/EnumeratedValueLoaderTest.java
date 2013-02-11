@@ -17,13 +17,13 @@ package org.kuali.student.loader.enumeration;
 
 import java.util.Date;
 import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kuali.student.core.enumerationmanagement.service.EnumerationManagementService;
-import static org.junit.Assert.*;
+import org.kuali.student.r2.core.enumerationmanagement.service.EnumerationManagementService;
 
 /**
  *

@@ -18,7 +18,7 @@ package org.kuali.student.loader.atp;
 import java.net.MalformedURLException;
 import java.net.URL;
 import javax.xml.namespace.QName;
-import org.kuali.student.core.atp.service.AtpService;
+import org.kuali.student.r2.core.atp.service.AtpService;
 
 
 /**
@@ -34,7 +34,7 @@ public class AtpServiceFactory
  public static final String DEV_EMBEDDED_URL =
                             "http://dev.ks.kuali.org";
  public static final String LOCAL_HOST_EMBEDDED_URL =
-                            "http://localhost:9393/ks-embedded-dev";
+                            "http://localhost:8081/ks-with-rice-bundled-dev";
  private String hostUrl = LOCAL_HOST_EMBEDDED_URL;
 
  public String getHostUrl ()

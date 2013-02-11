@@ -17,7 +17,9 @@ package org.kuali.student.loader.organization;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.kuali.student.loader.util.ExcelLoaderHelper;
+import org.kuali.student.loader.util.RichTextInfoHelper;
 import org.kuali.student.spreadsheet.SpreadsheetReader;
 import org.kuali.student.spreadsheet.WorksheetNotFoundException;
 import org.kuali.student.spreadsheet.WorksheetReader;
@@ -65,7 +67,8 @@ public class PosRestrictionInputModelExcelImpl implements PositionRestrictionInp
    posRestriction.setOrgShortName(helper.getFixup ("orgShortName"));
    posRestriction.setTitle(helper.getFixup ("Title"));
    posRestriction.setOrgPersonRelationTypeKey(helper.getFixup ("OrgPersonRelationTypeKey"));
-   posRestriction.setDesc(helper.getFixup ("Desc"));
+   RichTextInfoHelper richTextInfoHelper = new RichTextInfoHelper();
+   posRestriction.setDescr(richTextInfoHelper.getFromPlain(helper.getFixup ("Desc")));
    posRestriction.setMinNumRelations(helper.getFixupInteger("MinNum"));
    posRestriction.setMaxNumRelations(helper.getFixup("MaxNum"));
    posRestriction.setDurationUnit(helper.getFixup("DurationUnit"));

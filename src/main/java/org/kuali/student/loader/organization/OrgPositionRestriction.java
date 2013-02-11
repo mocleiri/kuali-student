@@ -1,6 +1,6 @@
 package org.kuali.student.loader.organization;
 
-import org.kuali.student.core.organization.dto.OrgPositionRestrictionInfo;
+import org.kuali.student.r2.core.organization.dto.OrgPositionRestrictionInfo;
 
 public class OrgPositionRestriction extends OrgPositionRestrictionInfo {
 	private String orgShortName;

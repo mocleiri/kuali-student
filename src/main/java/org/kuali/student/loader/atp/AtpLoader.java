@@ -19,13 +19,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import org.kuali.student.common.exceptions.AlreadyExistsException;
-import org.kuali.student.common.exceptions.DataValidationErrorException;
-import org.kuali.student.core.atp.dto.AtpInfo;
-import org.kuali.student.core.atp.service.AtpService;
-import org.kuali.student.common.dto.RichTextInfo;
-import org.kuali.student.common.exceptions.DoesNotExistException;
-import org.kuali.student.common.validation.dto.ValidationResultInfo;
+
+import org.kuali.student.loader.util.ContextInfoHelper;
+import org.kuali.student.r2.common.dto.ContextInfo;
+import org.kuali.student.r2.common.dto.RichTextInfo;
+import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.AlreadyExistsException;
+import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
+import org.kuali.student.r2.common.exceptions.DoesNotExistException;
+import org.kuali.student.r2.core.atp.dto.AtpInfo;
+import org.kuali.student.r2.core.atp.service.AtpService;
 
 /**
  *
@@ -46,8 +49,12 @@ public class AtpLoader
   this.atpService = atpService;
  }
 
+ ContextInfo contextInfo;
+ 
  public AtpLoader ()
  {
+	 ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
+	 contextInfo = ctxInfoHelper.getDefaultContextInfo();
  }
  private List<Atp> inputDataSource;
 
@@ -96,10 +103,12 @@ public class AtpLoader
   AtpInfo info = result.getAtpInfo ();
   try
   {
+
+	  
    AtpInfo createdInfo = getAtpService ().createAtp (
-     info.getType (),
      info.getId (),
-     info);
+     info,
+     contextInfo);
    result.setAtpInfo (createdInfo);
    result.setStatus (AtpLoadResult.Status.CREATED);
    return;
@@ -108,18 +117,18 @@ public class AtpLoader
   {
    validate (result);
   }
-  catch (AlreadyExistsException ex)
-  {
-   AtpInfo oldInfo = this.get (result.getAtpInfo ().getId ());
-   if (oldInfo == null)
-   {
-    result.setStatus (AtpLoadResult.Status.EXCEPTION);
-    result.setException (new RuntimeException (
-      "could not get after getting already exists exception"));
-    return;
-   }
-   updateIfDifferent (result, oldInfo);
-  }
+//  catch (AlreadyExistsException ex)
+//  {
+//   AtpInfo oldInfo = this.get (result.getAtpInfo ().getId ());
+//   if (oldInfo == null)
+//   {
+//    result.setStatus (AtpLoadResult.Status.EXCEPTION);
+//    result.setException (new RuntimeException (
+//      "could not get after getting already exists exception"));
+//    return;
+//   }
+//   updateIfDifferent (result, oldInfo);
+//  }
   catch (Exception ex)
   {
    result.setStatus (AtpLoadResult.Status.EXCEPTION);
@@ -131,7 +140,8 @@ public class AtpLoader
  {
   try
   {
-   AtpInfo oldInfo = getAtpService ().getAtp (key);
+	  
+   AtpInfo oldInfo = getAtpService ().getAtp (key, contextInfo);
    if (oldInfo == null)
    {
     return null;
@@ -164,12 +174,12 @@ public class AtpLoader
  private void copy (AtpInfo oldInfo, AtpInfo newInfo)
  {
   oldInfo.setAttributes (newInfo.getAttributes ());
-  oldInfo.setDesc (newInfo.getDesc ());
+  oldInfo.setDescr (newInfo.getDescr ());
   oldInfo.setEndDate (newInfo.getEndDate ());
   oldInfo.setName (newInfo.getName ());
   oldInfo.setStartDate (newInfo.getStartDate ());
-  oldInfo.setState (newInfo.getState ());
-  oldInfo.setType (newInfo.getType ());
+  oldInfo.setStateKey (newInfo.getStateKey ());
+  oldInfo.setTypeKey (newInfo.getTypeKey ());
  }
 
 
@@ -178,7 +188,7 @@ public class AtpLoader
   AtpInfo info = result.getAtpInfo ();
   try
   {
-   AtpInfo updatedInfo = getAtpService ().updateAtp (info.getId (), info);
+   AtpInfo updatedInfo = getAtpService ().updateAtp (info.getId (), info, contextInfo);
    result.setAtpInfo (updatedInfo);
    result.setStatus (AtpLoadResult.Status.UPDATED);
   }
@@ -198,7 +208,9 @@ public class AtpLoader
   List<ValidationResultInfo> vris = null;
   try
   {
-   vris = atpService.validateAtp ("SYSTEM", result.getAtp ());
+	  //TODO verify the second arg.
+	  AtpInfo info = result.getAtpInfo ();
+	  vris = atpService.validateAtp ("SYSTEM", info.getId(), result.getAtp (), contextInfo);
   }
   catch (Exception ex1)
   {
@@ -238,7 +250,7 @@ public class AtpLoader
   {
    return false;
   }
-  if ( ! matches (oldInfo.getDesc (), newInfo.getDesc ()))
+  if ( ! matches (oldInfo.getDescr (), newInfo.getDescr ()))
   {
    return false;
   }

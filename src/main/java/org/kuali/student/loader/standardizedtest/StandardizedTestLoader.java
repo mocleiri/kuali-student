@@ -17,14 +17,17 @@ package org.kuali.student.loader.standardizedtest;
 
 import java.util.Arrays;
 import java.util.List;
-import org.kuali.student.common.exceptions.AlreadyExistsException;
-import org.kuali.student.common.exceptions.DataValidationErrorException;
-import org.kuali.student.common.exceptions.DoesNotExistException;
-import org.kuali.student.common.validation.dto.ValidationResultInfo;
+
+import org.kuali.student.loader.util.ContextInfoHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
-import org.kuali.student.lum.lu.dto.CluInfo;
-import org.kuali.student.lum.lu.dto.CluSetInfo;
-import org.kuali.student.lum.lu.service.LuService;
+import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.AlreadyExistsException;
+import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
+import org.kuali.student.r2.common.exceptions.DoesNotExistException;
+import org.kuali.student.r2.core.class1.type.dto.TypeInfo;
+import org.kuali.student.r2.lum.clu.dto.CluInfo;
+import org.kuali.student.r2.lum.clu.dto.CluSetInfo;
+import org.kuali.student.r2.lum.clu.service.CluService;
 
 /**
  *
@@ -33,16 +36,16 @@ import org.kuali.student.lum.lu.service.LuService;
 public class StandardizedTestLoader
 {
 
- private LuService luService;
+ private CluService cluService;
 
- public LuService getLuService ()
+ public CluService getCluService ()
  {
-  return luService;
+  return cluService;
  }
 
- public void setLuService (LuService luService)
+ public void setLuService (CluService cluService)
  {
-  this.luService = luService;
+  this.cluService = cluService;
  }
 
  public StandardizedTestLoader ()
@@ -62,6 +65,8 @@ public class StandardizedTestLoader
 
  public List<StandardizedTestLoadResult> update ()
  {
+	 ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
+	 
   List<StandardizedTestLoadResult> results = new StandardizedTestsToCluInfosConverter (
     inputDataSource).convert ();
   for (StandardizedTestLoadResult result : results)
@@ -74,7 +79,7 @@ public class StandardizedTestLoader
    CluInfo oldClu = null;
    try
    {
-    oldClu = luService.getClu (info.getId ());
+    oldClu = cluService.getClu (info.getId (), ctxInfoHelper.getDefaultContextInfo());
    }
    catch (DoesNotExistException ex)
    {
@@ -96,7 +101,7 @@ public class StandardizedTestLoader
    }
    try
    {
-    CluInfo createdInfo = luService.createClu (info.getType (), info);
+    CluInfo createdInfo = cluService.createClu (info.getTypeKey (), info, ctxInfoHelper.getDefaultContextInfo());
     // I don't think I have to do this
 //    luService.createNewCluVersion (createdInfo.getId (), "Initial Version");
     result.setCluInfo (createdInfo);
@@ -109,7 +114,7 @@ public class StandardizedTestLoader
     List<ValidationResultInfo> vris = null;
     try
     {
-     vris = luService.validateClu ("SYSTEM", info);
+     vris = cluService.validateClu ("SYSTEM", info, ctxInfoHelper.getDefaultContextInfo());
     }
     catch (Exception ex1)
     {
@@ -135,6 +140,7 @@ public class StandardizedTestLoader
 
  private void createCluSet (StandardizedTestLoadResult result)
  {
+	 ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
   CluSetInfo info = new CluSetInfo ();
   CluInfo cluInfo = result.getCluInfo ();
 //  CLU-ID-SAT-SUBJ-SPANISH-LISTENING-SET
@@ -146,7 +152,8 @@ public class StandardizedTestLoader
   CluSetInfo oldInfo = null;
   try
   {
-   oldInfo = luService.getCluSetInfo (info.getId ());
+	  //TODO: verify
+	  TypeInfo typeInfo = cluService.getCluSetType (info.getId (), ctxInfoHelper.getDefaultContextInfo());
   }
   catch (DoesNotExistException ex)
   {
@@ -177,13 +184,13 @@ public class StandardizedTestLoader
   //  don't do this
 //  info.setCluIds (Arrays.asList (cluInfo.getId ()));
   // instead do this
-  info.setCluIds (Arrays.asList (cluInfo.getVersionInfo ().getVersionIndId ()));
-  System.out.println ("Version Independent Id is " + cluInfo.getVersionInfo ().getVersionIndId ());
+  info.setCluIds (Arrays.asList (cluInfo.getVersion ().getVersionIndId ()));
+  System.out.println ("Version Independent Id is " + cluInfo.getVersion ().getVersionIndId ());
   info.setIsReusable (Boolean.TRUE);
   info.setEffectiveDate (cluInfo.getEffectiveDate ());
   info.setExpirationDate (cluInfo.getExpirationDate ());
-  info.setType ("kuali.cluSet.type.Test");
-  info.setState ("active");
+  info.setTypeKey ("kuali.cluSet.type.Test");
+  info.setStateKey ("active");
   info.setName (cluInfo.getOfficialIdentifier ().getLongName ());
   String descr = "Set that holds just the one standardized test "
                  + cluInfo.getOfficialIdentifier ().getLongName ();
@@ -191,7 +198,7 @@ public class StandardizedTestLoader
   try
   {
    System.out.println ("before.id=" + info.getId ());
-   CluSetInfo createdCluSetInfo = luService.createCluSet (info.getType (), info);
+   CluSetInfo createdCluSetInfo = cluService.createCluSet (info.getTypeKey (), info, ctxInfoHelper.getDefaultContextInfo());
    System.out.println ("after.id=" + createdCluSetInfo.getId ());
    result.setCluSetInfo (createdCluSetInfo);
    if (result.getStatus ().equals (
@@ -206,18 +213,18 @@ public class StandardizedTestLoader
     return;
    }
   }
-  catch (AlreadyExistsException ex)
-  {
-   result.setStatus (
-     StandardizedTestLoadResult.Status.NOT_PROCESSED_BOTH_ALREADY_EXISTS);
-   return;
-  }
+//  catch (AlreadyExistsException ex)
+//  {
+//   result.setStatus (
+//     StandardizedTestLoadResult.Status.NOT_PROCESSED_BOTH_ALREADY_EXISTS);
+//   return;
+//  }
   catch (DataValidationErrorException ex)
   {
    List<ValidationResultInfo> vris = null;
    try
    {
-    vris = luService.validateCluSet ("SYSTEM", info);
+    vris = cluService.validateCluSet ("SYSTEM", descr, info, ctxInfoHelper.getDefaultContextInfo());
    }
    catch (Exception ex1)
    {

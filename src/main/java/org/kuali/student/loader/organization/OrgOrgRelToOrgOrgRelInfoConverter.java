@@ -15,10 +15,7 @@
  */
 package org.kuali.student.loader.organization;
 
-import java.util.Arrays;
-import java.util.List;
-import org.kuali.student.core.organization.dto.OrgInfo;
-import org.kuali.student.core.organization.dto.OrgOrgRelationInfo;
+import org.kuali.student.r2.core.organization.dto.OrgOrgRelationInfo;
 
 
 /**

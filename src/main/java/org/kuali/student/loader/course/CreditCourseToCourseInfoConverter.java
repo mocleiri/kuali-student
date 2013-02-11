@@ -16,30 +16,29 @@
 package org.kuali.student.loader.course;
 
 import java.util.ArrayList;
-
-import org.kuali.student.core.atp.dto.AtpInfo;
-import org.kuali.student.core.atp.service.AtpService;
-import org.kuali.student.core.organization.dto.OrgInfo;
-import org.kuali.student.core.organization.service.OrganizationService;
-import org.kuali.student.loader.util.AdminOrgInfoHelper;
-import org.kuali.student.loader.util.AmountInfoHelper;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.kuali.student.loader.util.AdminOrgInfoHelper;
+import org.kuali.student.loader.util.AmountInfoHelper;
 import org.kuali.student.loader.util.AttributeInfoHelper;
 import org.kuali.student.loader.util.GetAtpHelper;
-
 import org.kuali.student.loader.util.GetOrgHelper;
 import org.kuali.student.loader.util.MetaInfoHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
 import org.kuali.student.loader.util.TimeAmountInfoHelper;
-import org.kuali.student.lum.course.dto.ActivityInfo;
-import org.kuali.student.lum.course.dto.CourseInfo;
-import org.kuali.student.lum.course.dto.FormatInfo;
-import org.kuali.student.lum.lrc.dto.ResultComponentInfo;
-import org.kuali.student.lum.lu.dto.AdminOrgInfo;
+import org.kuali.student.r2.common.dto.AttributeInfo;
+import org.kuali.student.r2.core.atp.dto.AtpInfo;
+import org.kuali.student.r2.core.atp.service.AtpService;
+import org.kuali.student.r2.core.organization.dto.OrgInfo;
+import org.kuali.student.r2.core.organization.service.OrganizationService;
+import org.kuali.student.r2.lum.clu.dto.AdminOrgInfo;
+import org.kuali.student.r2.lum.course.dto.ActivityInfo;
+import org.kuali.student.r2.lum.course.dto.CourseInfo;
+import org.kuali.student.r2.lum.course.dto.FormatInfo;
+import org.kuali.student.r2.lum.lrc.dto.ResultValueRangeInfo;
+import org.kuali.student.r2.lum.lrc.dto.ResultValuesGroupInfo;
 
 
 /**
@@ -81,13 +80,13 @@ public class CreditCourseToCourseInfoConverter
   info.setTranscriptTitle (cc.getTranscriptTitle ());
   info.setCourseTitle (cc.getCourseTitle ());
   info.getTermsOffered ().addAll (convertOfferedAtpTypes (cc.getTermsOffered ()));
-  info.setType ("kuali.lu.type.CreditCourse");
+  info.setTypeKey ("kuali.clu.type.CreditCourse");
   List<String> campuses = new ArrayList ();
   campuses.add ("NO"); // north
   info.setCampusLocations (campuses);
   info.setOutOfClassHours (new AmountInfoHelper ().get ("1", "kuali.atp.duration.week"));
   info.setDuration (new TimeAmountInfoHelper ().get (1, "kuali.atp.duration.Semester"));
-  info.setMetaInfo (new MetaInfoHelper ().get ());
+  info.setMeta (new MetaInfoHelper ().get ());
   
   info.setAttributes (new AttributeInfoHelper ().setValue (
     "finalExamStatus", cc.getFinalExam (), info.getAttributes ()));
@@ -210,19 +209,42 @@ public class CreditCourseToCourseInfoConverter
  
  private void setCreditOptions(CourseInfo info){
 	if(cc.getMinCredits() != null && !cc.getMinCredits().isEmpty() && cc.getMaxCredits() != null && !cc.getMaxCredits().isEmpty()){
-	  List<ResultComponentInfo> creditOptions = new ArrayList<ResultComponentInfo> ();
-	  ResultComponentInfo rci = new ResultComponentInfo();
-	  Map<String, String> rciAttributes = new HashMap<String, String>();
+	  List<ResultValuesGroupInfo> creditOptions = new ArrayList<ResultValuesGroupInfo> ();
+	  
+	  ResultValuesGroupInfo rci = new ResultValuesGroupInfo();
+	  List<AttributeInfo> rciAttributes = new ArrayList<AttributeInfo>();
+	  AttributeInfo attInfo = new AttributeInfo();
 	  if (cc.getMinCredits().equals(cc.getMaxCredits())){ 
-		  rci.setType("kuali.resultComponentType.credit.degree.fixed");
-		  rciAttributes.put("fixedCreditValue", cc.getMaxCredits());
-	  }
-	  else{
-		  rci.setType("kuali.resultComponentType.credit.degree.range");
-		  rciAttributes.put("minCreditValue", cc.getMinCredits());
-		  rciAttributes.put("maxCreditValue", cc.getMaxCredits());
-	  }
+		  attInfo.setKey("fixedCreditValue");
+		  attInfo.setValue(cc.getMaxCredits());
+		  rciAttributes.add(attInfo);
+     	  //rci.setTypeKey("kuali.resultComponentType.credit.degree.fixed");
+		  rci.setTypeKey("kuali.result.values.group.type.fixed");
+		  ResultValueRangeInfo resutlValueRangeInfo = new ResultValueRangeInfo();
+		  resutlValueRangeInfo.setMinValue(cc.getMinCredits());
+		  resutlValueRangeInfo.setMaxValue(cc.getMaxCredits());
+		  rci.setResultValueRange(resutlValueRangeInfo);
+		  //Incrments not been set
+		  //resutlValueRangeInfo.setIncrement(cc.Increments());
 		  
+//		  rciAttributes.put("fixedCreditValue", cc.getMaxCredits());
+	  } else {
+		  
+		  rci.setTypeKey("kuali.result.values.group.type.range");
+		  //rci.setTypeKey("kuali.resultComponentType.credit.degree.range");
+		  attInfo.setKey("fixedCreditValue");
+		  attInfo.setValue(cc.getMaxCredits());
+		  ResultValueRangeInfo resutlValueRangeInfo = new ResultValueRangeInfo();
+		  resutlValueRangeInfo.setMinValue(cc.getMinCredits());
+		  resutlValueRangeInfo.setMaxValue(cc.getMaxCredits());
+		  //Increments not been set in previous version of loader. but its needed for range.
+		  //resutlValueRangeInfo.setIncrement(cc.Increments());
+		  rci.setResultValueRange(resutlValueRangeInfo);
+		  
+		  rciAttributes.add(attInfo);
+		  //rciAttributes.put("minCreditValue", cc.getMinCredits());
+		  //rciAttributes.put("maxCreditValue", cc.getMaxCredits());
+	  }
 	  rci.setAttributes(rciAttributes);
 	  creditOptions.add(rci);
 	  info.setCreditOptions(creditOptions);
@@ -250,7 +272,7 @@ public class CreditCourseToCourseInfoConverter
 				 info.setEndTerm(cc.getEndTerm());
 	
 				 AtpInfo atpEnd = new GetAtpHelper (atpService).getAtp(cc.getEndTerm());
-			    if (atpEnd == null){
+			    if (atpEnd == null) {
 			      result.setException (new RuntimeException ("endTerm was not found: "
 			                                                + cc.getEndTerm ()));
 			      result.setStatus (CreditCourseLoadResult.Status.VALIDATION_ERROR);
@@ -258,11 +280,10 @@ public class CreditCourseToCourseInfoConverter
 			    }
 			    
 				info.setExpirationDate(atpEnd.getEndDate());
-				info.setState ("Retired");
+				info.setStateKey ("Retired");
 				return true;
 			 }
-			
-		 info.setState ("Active");
+		 info.setStateKey ("Active");
 		 return true;
 		 }
 	 }
@@ -293,34 +314,29 @@ public class CreditCourseToCourseInfoConverter
  
  private void setFormats(CourseInfo info) {
 	 List<FormatInfo> formats = new ArrayList<FormatInfo>();
-	 
 	 //formatActivities
 	 String formatActivity = cc.getFormatActivities();
 	 if(formatActivity != null && !formatActivity.isEmpty()){
 		 FormatInfo formatInfo = new FormatInfo();
-		 formatInfo.setType("kuali.lu.type.CreditCourseFormatShell");
-		 formatInfo.setState(info.getState());
-		 
+		 formatInfo.setTypeKey("kuali.lu.typeKey.CreditCourseFormatShell");
+		 formatInfo.setStateKey(info.getStateKey());
 		 List<ActivityInfo> activities = new ArrayList<ActivityInfo>();
-		 
 		 if(formatActivity.equals("Lec") || formatActivity.equals("LecLab"))
-			 setActivityInfo(activities, "kuali.lu.type.activity.Lecture", cc.getLecHr(), info.getState());			 
-		 
+			 setActivityInfo(activities, "kuali.lu.type.activity.Lecture", cc.getLecHr(), info.getStateKey());			 
 		 if(formatActivity.equals("Lab") || formatActivity.equals("LecLab"))
-			 setActivityInfo(activities, "kuali.lu.type.activity.Lab", cc.getLabHr(), info.getState());
-		 
+			 setActivityInfo(activities, "kuali.lu.type.activity.Lab", cc.getLabHr(), info.getStateKey());
 		 formatInfo.setActivities(activities);
 		 formats.add(formatInfo);
 	 }		 
-		
 	 if(!formats.isEmpty())
 		 info.setFormats(formats);
  }
  
- private void setActivityInfo(List<ActivityInfo> activities, String activityType, String contactHour, String state){
+ private void setActivityInfo(List<ActivityInfo> activities, String activityType, String contactHour, String state) {
 	 ActivityInfo activityInfo = new ActivityInfo();
-	 activityInfo.setActivityType(activityType);
-	 activityInfo.setState(state);
+	 //TODO: Verify setActivityType not there.
+	 activityInfo.setTypeKey(activityType);
+	 activityInfo.setStateKey(state);
 	 activityInfo.setDuration(new TimeAmountInfoHelper ().get (1, "kuali.atp.duration.Semester"));
 	 activityInfo.setContactHours(new AmountInfoHelper ().get (contactHour, "kuali.atp.duration.week"));
 

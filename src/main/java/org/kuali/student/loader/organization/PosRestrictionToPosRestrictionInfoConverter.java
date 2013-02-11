@@ -15,8 +15,8 @@
  */
 package org.kuali.student.loader.organization;
 
-import org.kuali.student.common.dto.TimeAmountInfo;
-import org.kuali.student.core.organization.dto.OrgPositionRestrictionInfo;
+import org.kuali.student.r2.common.dto.TimeAmountInfo;
+import org.kuali.student.r2.core.organization.dto.OrgPositionRestrictionInfo;
 
 
 /**
@@ -39,7 +39,7 @@ public class PosRestrictionToPosRestrictionInfoConverter
 	 info.setOrgId(posRestriction.getOrgId());
 	 info.setOrgPersonRelationTypeKey(posRestriction.getOrgPersonRelationTypeKey());
 	 info.setTitle(posRestriction.getTitle());
-	 info.setDesc(posRestriction.getDesc());
+	 info.setDescr(posRestriction.getDescr());
 	 info.setMinNumRelations(posRestriction.getMinNumRelations());
 	 info.setMaxNumRelations(posRestriction.getMaxNumRelations());
 	 TimeAmountInfo tai = new TimeAmountInfo();

@@ -17,13 +17,17 @@ package org.kuali.student.loader.util;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.xml.ws.soap.SOAPFaultException;
-import org.kuali.student.core.atp.dto.AtpInfo;
-import org.kuali.student.core.atp.service.AtpService;
-import org.kuali.student.common.exceptions.DoesNotExistException;
-import org.kuali.student.common.exceptions.InvalidParameterException;
-import org.kuali.student.common.exceptions.MissingParameterException;
-import org.kuali.student.common.exceptions.OperationFailedException;
+
+import org.kuali.student.r2.common.dto.ContextInfo;
+import org.kuali.student.r2.common.exceptions.DoesNotExistException;
+import org.kuali.student.r2.common.exceptions.InvalidParameterException;
+import org.kuali.student.r2.common.exceptions.MissingParameterException;
+import org.kuali.student.r2.common.exceptions.OperationFailedException;
+import org.kuali.student.r2.common.exceptions.PermissionDeniedException;
+import org.kuali.student.r2.core.atp.dto.AtpInfo;
+import org.kuali.student.r2.core.atp.service.AtpService;
 
 /**
  *
@@ -55,7 +59,13 @@ public class GetAtpHelper
   }
   try
   {
-   info = atpService.getAtp (atpKey);
+	  ContextInfo ctxInfo = new ContextInfo();
+   try {
+	info = atpService.getAtp (atpKey, ctxInfo);
+} catch (PermissionDeniedException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}
    this.cache.put (atpKey, info);
    return info;
   }

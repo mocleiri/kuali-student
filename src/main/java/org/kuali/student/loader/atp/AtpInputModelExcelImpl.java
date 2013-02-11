@@ -63,7 +63,7 @@ public class AtpInputModelExcelImpl implements AtpInputModel
    }
    list.add (atp);
    row ++;
-   atp.setDesc (new RichTextInfoHelper ().getFromPlain (helper.getFixup ("description")));
+   atp.setDescr (new RichTextInfoHelper ().getFromPlain (helper.getFixup ("description")));
    atp.setName (helper.getFixup ("name"));
    atp.setType (helper.getFixup ("type"));
    atp.setState (helper.getFixup ("stateName"));

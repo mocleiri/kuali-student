@@ -23,7 +23,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kuali.student.lum.program.service.ProgramService;
+import org.kuali.student.r2.lum.program.service.ProgramService;
 
 /**
  *

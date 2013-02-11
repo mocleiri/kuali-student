@@ -15,11 +15,11 @@
  */
 package org.kuali.student.loader.enumeration;
 
-import java.io.PrintStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import org.kuali.student.core.enumerationmanagement.service.EnumerationManagementService;
+
+import org.kuali.student.r2.core.enumerationmanagement.service.EnumerationManagementService;
 
 /**
  *

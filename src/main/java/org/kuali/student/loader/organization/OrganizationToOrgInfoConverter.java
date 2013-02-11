@@ -17,7 +17,9 @@ package org.kuali.student.loader.organization;
 
 import java.util.Arrays;
 import java.util.List;
-import org.kuali.student.core.organization.dto.OrgInfo;
+
+import org.kuali.student.r2.common.util.RichTextHelper;
+import org.kuali.student.r2.core.organization.dto.OrgInfo;
 
 
 /**
@@ -43,10 +45,12 @@ public class OrganizationToOrgInfoConverter
   orgInfo.setShortName (org.getShortName ());
   orgInfo.setLongName (org.getLongName ());
   orgInfo.setSortName (org.getSortName ());
-  orgInfo.setShortDesc (org.getShortDesc ());
-  orgInfo.setLongDesc (org.getLongDesc ());
-  orgInfo.setType (org.getType ());
-  orgInfo.setState (org.getState ());
+  RichTextHelper richTxtHelper = new RichTextHelper();
+  
+  orgInfo.setShortDescr (richTxtHelper.fromPlain(org.getShortDesc ()));
+  orgInfo.setLongDescr (richTxtHelper.fromPlain(org.getLongDesc ()));
+  orgInfo.setTypeKey (org.getType ());
+  orgInfo.setStateKey (org.getState ());
 
   orgInfo.setEffectiveDate (org.getEffectiveDate ());
   orgInfo.setExpirationDate (org.getExpirationDate ());

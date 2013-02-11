@@ -17,8 +17,10 @@ package org.kuali.student.loader.standardizedtest;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import javax.xml.namespace.QName;
-import org.kuali.student.lum.lu.service.LuService;
+
+import org.kuali.student.r2.lum.clu.service.CluService;
 
 /**
  *
@@ -27,13 +29,13 @@ import org.kuali.student.lum.lu.service.LuService;
 public class LuServiceFactory
 {
 
- private static final String LU_SERVICE_NAME = "LuService";
+ private static final String LU_SERVICE_NAME = "CluServiceService";
  private static final QName LU_SERVICE_QNAME =
                             LuService_Service.SERVICE;
   public static final String DEV_EMBEDDED_URL =
                             "http://dev.ks.kuali.org";
   public static final String LOCAL_HOST_EMBEDDED_URL =
-                            "http://localhost:9393/ks-embedded-dev";
+                            "http://localhost:8081/ks-with-rice-bundled-dev";
  private String hostUrl = LOCAL_HOST_EMBEDDED_URL;
 
  public String getHostUrl ()
@@ -53,7 +55,7 @@ public class LuServiceFactory
   return url;
  }
 
- public LuService getLuService ()
+ public CluService getCluService ()
  {
   URL wsdlURL;
   try
@@ -69,7 +71,7 @@ public class LuServiceFactory
   LuService_Service oss =
                         new LuService_Service (wsdlURL,
                                                    LU_SERVICE_QNAME);
-  LuService port = oss.getLuServicePort ();
+  CluService port = oss.getCluServicePort ();
   return port;
  }
 

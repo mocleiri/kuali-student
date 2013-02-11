@@ -18,10 +18,11 @@ package org.kuali.student.loader.program;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.kuali.student.loader.util.AttributeInfoHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
-import org.kuali.student.lum.course.dto.LoDisplayInfo;
-import org.kuali.student.lum.lo.dto.LoInfo;
+import org.kuali.student.r2.lum.course.dto.LoDisplayInfo;
+import org.kuali.student.r2.lum.lo.dto.LoInfo;
 
 /**
  *
@@ -47,9 +48,9 @@ public class SingleUseLoDisplayInfoHelper
    LoDisplayInfo ldi = new LoDisplayInfo ();
    LoInfo li = new LoInfo ();
    li.setLoRepositoryKey ("kuali.loRepository.key.singleUse");
-   li.setDesc (new RichTextInfoHelper ().getFromPlain (lo[i]));
-   li.setType ("kuali.lo.type.singleUse");
-   li.setState ("Active");
+   li.setDescr (new RichTextInfoHelper ().getFromPlain (lo[i]));
+   li.setTypeKey ("kuali.lo.type.singleUse");
+   li.setStateKey ("Active");
    li.setEffectiveDate (effectiveDate);
    li.setName ("SINGLE USE LO");
    ldi.setLoInfo (li);

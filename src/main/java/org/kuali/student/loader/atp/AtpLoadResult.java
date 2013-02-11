@@ -15,9 +15,9 @@
  */
 package org.kuali.student.loader.atp;
 
-import org.kuali.student.common.exceptions.DataValidationErrorException;
-import org.kuali.student.core.atp.dto.AtpInfo;
-import org.kuali.student.common.validation.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
+import org.kuali.student.r2.core.atp.dto.AtpInfo;
 
 /**
  *

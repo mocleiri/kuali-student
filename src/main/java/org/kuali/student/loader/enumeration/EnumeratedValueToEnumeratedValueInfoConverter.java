@@ -17,7 +17,9 @@ package org.kuali.student.loader.enumeration;
 
 import java.util.Arrays;
 import java.util.List;
-import org.kuali.student.core.enumerationmanagement.dto.EnumeratedValueInfo;
+
+import org.kuali.student.r2.common.dto.MetaInfo;
+import org.kuali.student.r2.core.enumerationmanagement.dto.EnumeratedValueInfo;
 
 
 /**
@@ -39,11 +41,15 @@ public class EnumeratedValueToEnumeratedValueInfoConverter
  public EnumeratedValueInfo convert ()
  {
   EnumeratedValueInfo info = new EnumeratedValueInfo ();
+  info.setEnumerationKey(ev.getEnumerationKey());
   info.setCode (ev.getCode ());
   info.setAbbrevValue (ev.getAbbrevValue ());
   info.setValue (ev.getValue ());
   info.setEffectiveDate (ev.getEffectiveDate ());
-  info.setEffectiveDate (ev.getExpirationDate ());
+  info.setExpirationDate (ev.getExpirationDate ());
+  MetaInfo metaInfo = new MetaInfo();
+  metaInfo.setCreateId("admin");
+  info.setMeta(metaInfo);
   if (ev.getSortKey () != null)
   {
    info.setSortKey ("" + ev.getSortKey ());

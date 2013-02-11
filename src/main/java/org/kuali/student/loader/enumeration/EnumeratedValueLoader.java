@@ -18,12 +18,11 @@ package org.kuali.student.loader.enumeration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import org.kuali.student.core.enumerationmanagement.dto.EnumeratedValueInfo;
-import org.kuali.student.core.enumerationmanagement.service.EnumerationManagementService;
-import org.kuali.student.common.exceptions.AlreadyExistsException;
-import org.kuali.student.common.exceptions.DataValidationErrorException;
-import org.kuali.student.common.validation.dto.ValidationResultInfo;
-import org.kuali.student.loader.organization.OrganizationLoadResult;
+
+import org.kuali.student.loader.util.ContextInfoHelper;
+import org.kuali.student.r2.common.exceptions.AlreadyExistsException;
+import org.kuali.student.r2.core.enumerationmanagement.dto.EnumeratedValueInfo;
+import org.kuali.student.r2.core.enumerationmanagement.service.EnumerationManagementService;
 
 /**
  *
@@ -74,7 +73,10 @@ public class EnumeratedValueLoader
    result.setEnumeratedValueInfo (info);
    try
    {
-    EnumeratedValueInfo createdInfo = enumerationManagementService.addEnumeratedValue (info.getEnumerationKey (), info);
+	   ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
+	   //TODO: verify
+	   String code = null;
+    EnumeratedValueInfo createdInfo = enumerationManagementService.addEnumeratedValue (info.getEnumerationKey (), info.getCode(), info, ctxInfoHelper.getDefaultContextInfo());
     result.setEnumeratedValueInfo (createdInfo);
     result.setStatus (EnumeratedValueLoadResult.Status.CREATED);
    }

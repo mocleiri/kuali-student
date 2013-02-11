@@ -92,9 +92,9 @@ public class AtpInputModelFactoryTest
    {
     found = true;
     assertEquals ("AY 2008-2009", atp.getName ());
-    assertEquals ("Academic Year 2008-2009", atp.getDesc ().getPlain ());
-    assertEquals ("kuali.atp.type.AY", atp.getType ());
-    assertEquals ("Actual", atp.getState ());
+    assertEquals ("Academic Year 2008-2009", atp.getDescr ().getPlain ());
+    assertEquals ("kuali.atp.type.AY", atp.getTypeKey ());
+    assertEquals ("Actual", atp.getStateKey ());
     DateFormat format = new SimpleDateFormat ("yyyy-MM-dd");
 
     assertEquals (format.parse ("2008-09-01"), atp.getStartDate ());

@@ -15,11 +15,11 @@
  */
 package org.kuali.student.loader.organization;
 
-import java.io.PrintStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import org.kuali.student.core.organization.service.OrganizationService;
+
+import org.kuali.student.r2.core.organization.service.OrganizationService;
 
 /**
  *

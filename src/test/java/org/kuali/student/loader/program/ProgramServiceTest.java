@@ -27,13 +27,14 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kuali.student.common.dto.StatusInfo;
-import org.kuali.student.common.exceptions.DataValidationErrorException;
-import org.kuali.student.common.exceptions.DoesNotExistException;
-import org.kuali.student.common.validation.dto.ValidationResultInfo;
+import org.kuali.student.loader.util.ContextInfoHelper;
 import org.kuali.student.loader.util.DateHelper;
-import org.kuali.student.lum.program.dto.MajorDisciplineInfo;
-import org.kuali.student.lum.program.service.ProgramService;
+import org.kuali.student.r2.common.dto.StatusInfo;
+import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
+import org.kuali.student.r2.common.exceptions.DoesNotExistException;
+import org.kuali.student.r2.lum.program.dto.MajorDisciplineInfo;
+import org.kuali.student.r2.lum.program.service.ProgramService;
 
 public class ProgramServiceTest
 {
@@ -42,7 +43,7 @@ public class ProgramServiceTest
  {
  }
  private static ProgramService programService;
-
+ static ContextInfoHelper ctxInfoHelper ;
  @Before
  public void setUp () throws Exception
  {
@@ -54,6 +55,7 @@ public class ProgramServiceTest
   ProgramServiceFactory factory = new ProgramServiceFactory ();
   factory.setHostUrl (ProgramServiceFactory.LOCAL_HOST_EMBEDDED_URL);
   programService = factory.getProgramService ();
+  ctxInfoHelper = new ContextInfoHelper();
  }
 
  @AfterClass
@@ -72,14 +74,14 @@ public class ProgramServiceTest
   MajorDisciplineInfo info = new MajorDisciplineInfo ();
   info.setCredentialProgramId ("d02dbbd3-20e2-410d-ab52-1bd6d362748b");
   info.setCode ("BSCI");
-  info.setState ("draft");
-  info.setType ("kuali.lu.type.MajorDiscipline");
+  info.setStateKey ("draft");
+  info.setTypeKey ("kuali.lu.type.MajorDiscipline");
   info.setShortTitle ("Bio Sci");
   info.setEffectiveDate (new DateHelper ().asDate ("2010-01-01"));
   MajorDisciplineInfo result = null;
   try
   {
-   result = programService.createMajorDiscipline (info);
+   result = programService.createMajorDiscipline (info.getTypeKey(), info, ctxInfoHelper.getDefaultContextInfo());
    assertNotNull (result);
    assertNotSame (info, result);
    assertNotNull (result.getId ());
@@ -104,7 +106,7 @@ public class ProgramServiceTest
   info = result;
   try
   {
-   result = programService.getMajorDiscipline (info.getId ());
+   result = programService.getMajorDiscipline (info.getId (), ctxInfoHelper.getDefaultContextInfo());
   }
   catch (DoesNotExistException ex)
   {
@@ -126,7 +128,7 @@ public class ProgramServiceTest
   info.setShortTitle ("Bio Sci - Updated");
   try
   {
-   result = programService.updateMajorDiscipline (info);
+   result = programService.updateMajorDiscipline (info.getTypeKey(), info, ctxInfoHelper.getDefaultContextInfo());
   }
   catch (DoesNotExistException ex)
   {
@@ -141,7 +143,7 @@ public class ProgramServiceTest
       "got DataValidationErrorException but no validation results");
     try
     {
-     vris = programService.validateMajorDiscipline ("system", info);
+     vris = programService.validateMajorDiscipline ("system", info, ctxInfoHelper.getDefaultContextInfo());
     }
     catch (Exception ex2)
     {
@@ -172,7 +174,7 @@ public class ProgramServiceTest
   info = result;
   try
   {
-   result = programService.getMajorDiscipline (info.getId ());
+   result = programService.getMajorDiscipline (info.getId (), ctxInfoHelper.getDefaultContextInfo());
   }
   catch (DoesNotExistException ex)
   {
@@ -194,8 +196,8 @@ public class ProgramServiceTest
   info = result;
   try
   {
-   StatusInfo status = programService.deleteMajorDiscipline (info.getId ());
-   assertTrue (status.getSuccess ());
+   StatusInfo status = programService.deleteMajorDiscipline (info.getId (), ctxInfoHelper.getDefaultContextInfo());
+   assertTrue (status.getIsSuccess());
   }
 //  catch (DataValidationErrorException ex)
 //  {
@@ -212,7 +214,7 @@ public class ProgramServiceTest
 
   try
   {
-   result = programService.getMajorDiscipline (info.getId ());
+   result = programService.getMajorDiscipline (info.getId (), ctxInfoHelper.getDefaultContextInfo());
    fail ("should have thrown does not exist exception");
   }
   catch (DoesNotExistException ex)

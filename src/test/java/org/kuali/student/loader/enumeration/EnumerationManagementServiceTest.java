@@ -15,17 +15,24 @@
  */
 package org.kuali.student.loader.enumeration;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kuali.student.core.enumerationmanagement.dto.EnumeratedValueInfo;
-import org.kuali.student.core.enumerationmanagement.dto.EnumerationInfo;
-import org.kuali.student.core.enumerationmanagement.service.EnumerationManagementService;
-import static org.junit.Assert.*;
-import org.kuali.student.common.exceptions.OperationFailedException;
+import org.kuali.student.loader.util.ContextInfoHelper;
+import org.kuali.student.r2.common.exceptions.InvalidParameterException;
+import org.kuali.student.r2.common.exceptions.MissingParameterException;
+import org.kuali.student.r2.common.exceptions.OperationFailedException;
+import org.kuali.student.r2.common.exceptions.PermissionDeniedException;
+import org.kuali.student.r2.core.enumerationmanagement.dto.EnumeratedValueInfo;
+import org.kuali.student.r2.core.enumerationmanagement.dto.EnumerationInfo;
+import org.kuali.student.r2.core.enumerationmanagement.service.EnumerationManagementService;
 
 /**
  *
@@ -38,7 +45,7 @@ public class EnumerationManagementServiceTest
  {
  }
  private static EnumerationManagementService enumerationManagementService;
-
+ static ContextInfoHelper ctxInfoHelper ;
  @BeforeClass
  public static void setUpClass () throws Exception
  {
@@ -47,6 +54,7 @@ public class EnumerationManagementServiceTest
   factory.setHostUrl (
     EnumerationManagementServiceFactory.LOCAL_HOST_EMBEDDED_URL);
   enumerationManagementService = factory.getEnumerationManagementService ();
+  ctxInfoHelper = new ContextInfoHelper();
  }
 
  @AfterClass
@@ -74,12 +82,21 @@ public class EnumerationManagementServiceTest
   List<EnumerationInfo> result = null;
   try
   {
-   result = enumerationManagementService.getEnumerations ();
+   result = enumerationManagementService.getEnumerations (ctxInfoHelper.getDefaultContextInfo());
   }
   catch (OperationFailedException ex)
   {
    throw new RuntimeException (ex);
-  }
+  } catch (InvalidParameterException e) {
+	// TODO Auto-generated catch block
+	throw new RuntimeException(e);
+} catch (MissingParameterException e) {
+	// TODO Auto-generated catch block
+	throw new RuntimeException(e);
+} catch (PermissionDeniedException e) {
+	// TODO Auto-generated catch block
+	throw new RuntimeException(e);
+}
   assertNotNull (result);
   if (result.size () == 0)
   {
@@ -87,11 +104,11 @@ public class EnumerationManagementServiceTest
   }
   for (EnumerationInfo info : result)
   {
-   System.out.println (info.getId () + " - " + info.getName ());
+   System.out.println (info.getKey () + " - " + info.getName ());
   }
   for (EnumerationInfo meta : result)
   {
-   System.out.println (meta.getId () + " - " + meta.getName ());
+   System.out.println (meta.getKey () + " - " + meta.getName ());
    System.out.println ("     Desc=" + meta.getDescr ());
    String contextsLabel = "     Contexts=";
    for (String context : meta.getContextDescriptors ())
@@ -116,7 +133,7 @@ public class EnumerationManagementServiceTest
      "kuali.atptype.duration",
      null,
      null,
-     null);
+     null, ctxInfoHelper.getDefaultContextInfo());
   }
   catch (Exception ex)
   {

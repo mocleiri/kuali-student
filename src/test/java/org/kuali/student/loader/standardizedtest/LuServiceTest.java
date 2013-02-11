@@ -31,14 +31,15 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kuali.student.common.dto.StatusInfo;
-import org.kuali.student.common.exceptions.DataValidationErrorException;
-import org.kuali.student.common.exceptions.DoesNotExistException;
-import org.kuali.student.common.validation.dto.ValidationResultInfo;
+import org.kuali.student.loader.util.ContextInfoHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
-import org.kuali.student.lum.lu.dto.CluIdentifierInfo;
-import org.kuali.student.lum.lu.dto.CluInfo;
-import org.kuali.student.lum.lu.service.LuService;
+import org.kuali.student.r2.common.dto.StatusInfo;
+import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
+import org.kuali.student.r2.common.exceptions.DoesNotExistException;
+import org.kuali.student.r2.lum.clu.dto.CluIdentifierInfo;
+import org.kuali.student.r2.lum.clu.dto.CluInfo;
+import org.kuali.student.r2.lum.clu.service.CluService;
 
 public class LuServiceTest
 {
@@ -46,8 +47,8 @@ public class LuServiceTest
  public LuServiceTest ()
  {
  }
- private static LuService luService;
-
+ private static CluService cluService;
+ static ContextInfoHelper ctxInfoHelper ;
  @Before
  public void setUp () throws Exception
  {
@@ -58,7 +59,8 @@ public class LuServiceTest
  {
   LuServiceFactory factory = new LuServiceFactory ();
   factory.setHostUrl (LuServiceFactory.LOCAL_HOST_EMBEDDED_URL);
-  luService = factory.getLuService ();
+  cluService = factory.getCluService ();
+  ctxInfoHelper = new ContextInfoHelper();
  }
 
  @AfterClass
@@ -77,7 +79,7 @@ public class LuServiceTest
   CluInfo result = null;
   try
   {
-   result = luService.getClu (id);
+   result = cluService.getClu (id, ctxInfoHelper.getDefaultContextInfo());
   }
   catch (DoesNotExistException ex)
   {
@@ -103,8 +105,8 @@ public class LuServiceTest
     new RichTextInfoHelper ().getFromPlain ("my stupid description"));
   CluIdentifierInfo idInfo = new CluIdentifierInfo ();
   info.setOfficialIdentifier (idInfo);
-  idInfo.setType (StandardizedTestToCluInfoConverter.OFFICIAL_IDENTIFIER_TYPE);
-  idInfo.setState ("Active");
+  idInfo.setTypeKey (StandardizedTestToCluInfoConverter.OFFICIAL_IDENTIFIER_TYPE);
+  idInfo.setStateKey ("Active");
   idInfo.setShortName ("Active");
   idInfo.setCode ("SAT-COMPOSITE");
   idInfo.setDivision ("SAT");
@@ -112,15 +114,15 @@ public class LuServiceTest
   idInfo.setLevel ("UND");
   idInfo.setShortName ("SAT Composite Score");
   idInfo.setLongName ("Scholastic Aptitude TEst");
-  info.setType ("kuali.lu.type.standardized.test");
-  info.setState ("Active");
+  info.setTypeKey ("kuali.lu.type.standardized.test");
+  info.setStateKey ("Active");
   info.setEffectiveDate (toDate ("2000-01-01"));
   info.setExpirationDate (null);
 
   CluInfo result = null;
   try
   {
-   result = luService.createClu (info.getType (), info);
+   result = cluService.createClu (info.getTypeKey (), info, ctxInfoHelper.getDefaultContextInfo());
    assertNotNull (result);
    assertNotSame (info, result);
    assertNotNull (result.getId ());
@@ -141,7 +143,7 @@ public class LuServiceTest
       "got DataValidationErrorException but no validation results");
     try
     {
-     vris = luService.validateClu ("SYSTEM", info);
+     vris = cluService.validateClu ("SYSTEM", info, ctxInfoHelper.getDefaultContextInfo());
     }
     catch (Exception ex2)
     {
@@ -163,7 +165,7 @@ public class LuServiceTest
   info = result;
   try
   {
-   result = luService.getClu (info.getId ());
+   result = cluService.getClu (info.getId (), ctxInfoHelper.getDefaultContextInfo());
   }
   catch (DoesNotExistException ex)
   {
@@ -188,7 +190,7 @@ public class LuServiceTest
   info.getOfficialIdentifier ().setShortName ("SAT Composite Score - Updated");
   try
   {
-   result = luService.updateClu (info.getId (), info);
+   result = cluService.updateClu (info.getId (), info, ctxInfoHelper.getDefaultContextInfo());
   }
   catch (DoesNotExistException ex)
   {
@@ -203,7 +205,7 @@ public class LuServiceTest
       "got DataValidationErrorException but no validation results");
     try
     {
-     vris = luService.validateClu ("SYSTEM", info);
+     vris = cluService.validateClu ("SYSTEM", info, ctxInfoHelper.getDefaultContextInfo());
     }
     catch (Exception ex2)
     {
@@ -237,7 +239,7 @@ public class LuServiceTest
   info = result;
   try
   {
-   result = luService.getClu (info.getId ());
+   result = cluService.getClu (info.getId (), ctxInfoHelper.getDefaultContextInfo());
   }
   catch (DoesNotExistException ex)
   {
@@ -262,8 +264,8 @@ public class LuServiceTest
   info = result;
   try
   {
-   StatusInfo status = luService.deleteClu (info.getId ());
-   assertTrue (status.getSuccess ());
+   StatusInfo status = cluService.deleteClu (info.getId (), ctxInfoHelper.getDefaultContextInfo());
+   assertTrue (status.getIsSuccess());
   }
   catch (Exception ex)
   {
@@ -272,7 +274,7 @@ public class LuServiceTest
 
   try
   {
-   result = luService.getClu (info.getId ());
+   result = cluService.getClu (info.getId (), ctxInfoHelper.getDefaultContextInfo());
    fail ("should have thrown does not exist exception");
   }
   catch (DoesNotExistException ex)

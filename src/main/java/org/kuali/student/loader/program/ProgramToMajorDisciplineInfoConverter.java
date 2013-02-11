@@ -15,24 +15,22 @@
  */
 package org.kuali.student.loader.program;
 
-import org.kuali.student.loader.util.GetAtpHelper;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
-import org.kuali.student.core.atp.service.AtpService;
-import java.util.List;
-import org.kuali.student.core.atp.dto.AtpInfo;
-import org.kuali.student.core.organization.dto.OrgInfo;
-import org.kuali.student.core.organization.service.OrganizationService;
 import org.kuali.student.loader.util.AttributeInfoHelper;
-
-
+import org.kuali.student.loader.util.GetAtpHelper;
 import org.kuali.student.loader.util.GetOrgHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
 import org.kuali.student.loader.util.TimeAmountInfoHelper;
-import org.kuali.student.lum.lu.dto.CluInstructorInfo;
-import org.kuali.student.lum.program.dto.MajorDisciplineInfo;
+import org.kuali.student.r2.core.atp.dto.AtpInfo;
+import org.kuali.student.r2.core.atp.service.AtpService;
+import org.kuali.student.r2.core.organization.dto.OrgInfo;
+import org.kuali.student.r2.core.organization.service.OrganizationService;
+import org.kuali.student.r2.lum.clu.dto.CluInstructorInfo;
+import org.kuali.student.r2.lum.program.dto.MajorDisciplineInfo;
 
 /**
  *

@@ -66,7 +66,7 @@ public class StandardizedTestLoaderFromCommandLine
   StandardizedTestLoader ccLoader = new StandardizedTestLoader ();
   LuServiceFactory servFactory = new LuServiceFactory ();
   servFactory.setHostUrl (hostUrl);
-  ccLoader.setLuService (servFactory.getLuService ());
+  ccLoader.setLuService (servFactory.getCluService ());
 
   System.out.println (new Date () + " getting standardized tests...");
   List<StandardizedTest> standardizedTests = ccModel.getStandardizedTests ();

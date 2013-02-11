@@ -25,9 +25,9 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kuali.student.common.search.dto.SearchTypeInfo;
-import org.kuali.student.core.organization.service.OrganizationService;
 import org.kuali.student.loader.organization.OrganizationServiceFactory;
+import org.kuali.student.r2.core.class1.type.dto.TypeInfo;
+import org.kuali.student.r2.core.organization.service.OrganizationService;
 
 /**
  *
@@ -105,15 +105,15 @@ public class OrgFinderHelperTest
   OrgFinderHelper instance = new OrgFinderHelper ();
   instance.setSearchService (organizationService);
 //  List<OrgTypeInfo> expResult = new ArrayList ();
-  List<SearchTypeInfo> result = instance.getSearchTypes ();
+  List<TypeInfo> result = instance.getTypeInfos ();
   System.out.println (result.size () + " rows returned");
-  for (SearchTypeInfo type : result)
+  for (TypeInfo type : result)
   {
    System.out.print (type.getKey ());
    System.out.print ("|");
    System.out.print (type.getName ());
    System.out.print ("|");
-   System.out.print (type.getDesc ());
+   System.out.print (type.getDescr ());
    System.out.println ("|");
   }
   assertEquals (16, result.size ());

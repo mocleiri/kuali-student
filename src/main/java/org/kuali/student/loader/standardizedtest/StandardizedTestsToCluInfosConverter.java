@@ -17,7 +17,8 @@ package org.kuali.student.loader.standardizedtest;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.kuali.student.lum.lu.dto.CluInfo;
+
+import org.kuali.student.r2.lum.clu.dto.CluInfo;
 
 /**
  *

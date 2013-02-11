@@ -18,12 +18,13 @@ package org.kuali.student.loader.organization;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import org.kuali.student.common.exceptions.AlreadyExistsException;
-import org.kuali.student.common.exceptions.DataValidationErrorException;
-import org.kuali.student.core.organization.dto.OrgInfo;
-import org.kuali.student.core.organization.dto.OrgOrgRelationInfo;
-import org.kuali.student.core.organization.service.OrganizationService;
-import org.kuali.student.common.validation.dto.ValidationResultInfo;
+
+import org.kuali.student.loader.util.ContextInfoHelper;
+import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.AlreadyExistsException;
+import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
+import org.kuali.student.r2.core.organization.dto.OrgOrgRelationInfo;
+import org.kuali.student.r2.core.organization.service.OrganizationService;
 
 /**
  *
@@ -72,32 +73,36 @@ public class OrgOrgRelationLoader
    result.setRow (row);
    result.setOrgOrgRelation(org);
    result.setRelationInfo(relationInfo);
+   ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
    
    try{
-   if(!getOrganizationService ().hasOrgOrgRelation(relationInfo.getOrgId(), relationInfo.getRelatedOrgId(), relationInfo.getType())){
+   if(!getOrganizationService ().hasOrgOrgRelation(relationInfo.getOrgId(), relationInfo.getRelatedOrgId(),
+		   relationInfo.getTypeKey(), ctxInfoHelper.getDefaultContextInfo())){
 	   try
 	   {
 		   OrgOrgRelationInfo createdInfo = getOrganizationService ().createOrgOrgRelation(
 				   	relationInfo.getOrgId(), 
 				   	relationInfo.getRelatedOrgId(), 
-				   	relationInfo.getType(), 
-				   	relationInfo);
+				   	relationInfo.getTypeKey(), 
+				   	relationInfo,
+				   	ctxInfoHelper.getDefaultContextInfo());
 		   
 		   result.setRelationInfo(createdInfo);
 		   result.setStatus (OrgOrgRelationLoadResult.Status.CREATED);
 	   }
-	   catch (AlreadyExistsException ex)
-	   {
-	    //TODO update if already exists?
-	    result.setStatus (OrgOrgRelationLoadResult.Status.NOT_PROCESSED_ALREADY_EXISTS);
-	    result.setException (ex);
-	   }
+//	   catch (AlreadyExistsException ex)
+//	   {
+//	    //TODO update if already exists?
+//	    result.setStatus (OrgOrgRelationLoadResult.Status.NOT_PROCESSED_ALREADY_EXISTS);
+//	    result.setException (ex);
+//	   }
 	   catch (DataValidationErrorException ex)
 	   {
 	    List<ValidationResultInfo> vris = null;
 	    try
 	    {
-	     vris = organizationService.validateOrgOrgRelation("SYSTEM", relationInfo);
+	    //TODO verify	
+	     vris = organizationService.validateOrgOrgRelation("SYSTEM", null, null, null, relationInfo, ctxInfoHelper.getDefaultContextInfo());
 	    }
 	    catch (Exception ex1)
 	    {

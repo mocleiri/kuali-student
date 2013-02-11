@@ -20,10 +20,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.kuali.student.core.atp.service.AtpService;
-import org.kuali.student.lum.course.dto.CourseInfo;
-import org.kuali.student.lum.course.dto.CourseVariationInfo;
-import org.kuali.student.lum.lu.dto.CluIdentifierInfo;
+import org.kuali.student.r2.core.atp.service.AtpService;
+import org.kuali.student.r2.lum.course.dto.CourseInfo;
+import org.kuali.student.r2.lum.course.dto.CourseVariationInfo;
+import org.kuali.student.r2.lum.clu.dto.CluIdentifierInfo;
 
 
 /**
@@ -93,8 +93,7 @@ public class CreditCoursesToCourseInfosConverter
    }
    result.setCourseInfo (info);
    result.setStatus (CreditCourseLoadResult.Status.COURSE_VARIATION_PROCESSED_WITH_MAIN_COURSE);
-   if (info.getVariations () == null)
-   {
+   if (info.getVariations () == null)   {
     info.setVariations (new ArrayList ());
    }
    CourseVariationInfo varInfo = new CourseVariationInfo ();

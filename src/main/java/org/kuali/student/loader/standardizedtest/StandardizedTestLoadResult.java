@@ -15,10 +15,10 @@
  */
 package org.kuali.student.loader.standardizedtest;
 
-import org.kuali.student.common.exceptions.DataValidationErrorException;
-import org.kuali.student.common.validation.dto.ValidationResultInfo;
-import org.kuali.student.lum.lu.dto.CluInfo;
-import org.kuali.student.lum.lu.dto.CluSetInfo;
+import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
+import org.kuali.student.r2.lum.clu.dto.CluInfo;
+import org.kuali.student.r2.lum.clu.dto.CluSetInfo;
 
 /**
  *

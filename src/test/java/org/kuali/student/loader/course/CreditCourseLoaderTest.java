@@ -25,12 +25,12 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kuali.student.core.atp.service.AtpService;
-import org.kuali.student.core.organization.service.OrganizationService;
 import org.kuali.student.loader.atp.AtpServiceFactory;
 import org.kuali.student.loader.organization.OrganizationServiceFactory;
-import org.kuali.student.lum.course.service.CourseService;
-import static org.junit.Assert.*;
+import org.kuali.student.r2.core.atp.service.AtpService;
+import org.kuali.student.r2.core.organization.service.OrganizationService;
+import org.kuali.student.r2.lum.course.service.CourseService;
+import org.kuali.student.loader.course.CreditCourseInputModelFactoryTest;
 
 /**
  *
@@ -93,8 +93,7 @@ public class CreditCourseLoaderTest
   CreditCourseLoader ccLoader = new CreditCourseLoader ();
   ccLoader.setCourseService (courseService);
   ccLoader.setHelperService(helperService);
-  CreditCourseInputModel ccModel = CreditCourseInputModelFactoryTest.getInstance ().
-    getModel ();
+  CreditCourseInputModel ccModel = CreditCourseInputModelFactoryTest.getInstance(). getModel ();
 
   System.out.println (new Date () + " getting credit courses...");
   List<CreditCourse> creditCourses = ccModel.getCreditCourses ();

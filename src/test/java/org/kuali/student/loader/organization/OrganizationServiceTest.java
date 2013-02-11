@@ -27,12 +27,16 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kuali.student.common.dto.StatusInfo;
-import org.kuali.student.common.exceptions.DoesNotExistException;
-import org.kuali.student.common.exceptions.OperationFailedException;
-import org.kuali.student.core.organization.dto.OrgInfo;
-import org.kuali.student.core.organization.dto.OrgTypeInfo;
-import org.kuali.student.core.organization.service.OrganizationService;
+import org.kuali.student.loader.util.ContextInfoHelper;
+import org.kuali.student.r2.common.dto.StatusInfo;
+import org.kuali.student.r2.common.exceptions.DoesNotExistException;
+import org.kuali.student.r2.common.exceptions.InvalidParameterException;
+import org.kuali.student.r2.common.exceptions.MissingParameterException;
+import org.kuali.student.r2.common.exceptions.OperationFailedException;
+import org.kuali.student.r2.common.exceptions.PermissionDeniedException;
+import org.kuali.student.r2.core.class1.type.dto.TypeInfo;
+import org.kuali.student.r2.core.organization.dto.OrgInfo;
+import org.kuali.student.r2.core.organization.service.OrganizationService;
 
 /**
  *
@@ -45,13 +49,14 @@ public class OrganizationServiceTest
  {
  }
  private static OrganizationService organizationService;
-
+ static ContextInfoHelper ctxInfoHelper ;
  @BeforeClass
  public static void setUpClass () throws Exception
  {
   OrganizationServiceFactory factory = new OrganizationServiceFactory ();
   factory.setHostUrl (OrganizationServiceFactory.LOCAL_HOST_EMBEDDED_URL);
   organizationService = factory.getOrganizationService ();
+  ctxInfoHelper = new ContextInfoHelper();
  }
 
  @AfterClass
@@ -77,15 +82,24 @@ public class OrganizationServiceTest
  {
   System.out.println ("getOrgTypes");
 //  List<OrgTypeInfo> expResult = new ArrayList ();
-  List<OrgTypeInfo> result;
+  List<TypeInfo> result;
   try
   {
-   result = organizationService.getOrgTypes ();
+   result = organizationService.getOrgTypes (ctxInfoHelper.getDefaultContextInfo());
   }
   catch (OperationFailedException ex)
   {
    throw new RuntimeException (ex);
-  }
+  } catch (InvalidParameterException e) {
+	// TODO Auto-generated catch block
+	  throw new RuntimeException(e);
+} catch (MissingParameterException e) {
+	// TODO Auto-generated catch block
+	 throw new RuntimeException(e);
+} catch (PermissionDeniedException e) {
+	// TODO Auto-generated catch block
+	 throw new RuntimeException(e);
+}
   System.out.print (result.size () + " types returned");
   System.out.print ("Key");
   System.out.print ("|");
@@ -97,9 +111,9 @@ public class OrganizationServiceTest
   System.out.print ("|");
   System.out.print ("ExpirationDate");
   System.out.println ("|");
-  for (OrgTypeInfo typeInfo : result)
+  for (TypeInfo typeInfo : result)
   {
-   System.out.print (typeInfo.getId ());
+   System.out.print (typeInfo.getKey ());
    System.out.print ("|");
    System.out.print (typeInfo.getName ());
    System.out.print ("|");
@@ -127,7 +141,7 @@ public class OrganizationServiceTest
 
   try
   {
-   result = organizationService.getOrganization (id);
+   result = organizationService.getOrg (id, ctxInfoHelper.getDefaultContextInfo());
   }
   catch (Exception ex)
   {
@@ -150,15 +164,15 @@ public class OrganizationServiceTest
   System.out.println ("createOrganization");
 //  List<OrgTypeInfo> expResult = new ArrayList ();
   OrgInfo info = new OrgInfo ();
-  info.setType ("kuali.org.Department");
-  info.setState ("active");
+  info.setTypeKey ("kuali.org.Department");
+  info.setStateKey ("active");
   info.setShortName ("short name");
   info.setLongName ("long name that is longer than the short name");
   info.setSortName ("sort name");
   OrgInfo result = null;
   try
   {
-   result = organizationService.createOrganization (info.getType (), info);
+   result = organizationService.createOrg (info.getTypeKey (), info,  ctxInfoHelper.getDefaultContextInfo());
   }
   catch (Exception ex)
   {
@@ -166,8 +180,8 @@ public class OrganizationServiceTest
   }
   assertNotNull (result);
   assertNotNull (result.getId ());
-  assertEquals (info.getType (), result.getType ());
-  assertEquals (info.getState (), result.getState ());
+  assertEquals (info.getTypeKey (), result.getTypeKey ());
+  assertEquals (info.getStateKey (), result.getStateKey ());
   assertEquals (info.getShortName (), result.getShortName ());
   assertEquals (info.getLongName (), result.getLongName ());
 //  assertEquals (info.getSortName (), result.getSortName ());
@@ -177,7 +191,7 @@ public class OrganizationServiceTest
   info = result;
   try
   {
-   result = organizationService.getOrganization (info.getId ());
+   result = organizationService.getOrg (info.getId (),  ctxInfoHelper.getDefaultContextInfo());
   }
   catch (DoesNotExistException ex)
   {
@@ -188,8 +202,8 @@ public class OrganizationServiceTest
    throw new RuntimeException (ex);
   }
   assertNotNull (result.getId ());
-  assertEquals (info.getType (), result.getType ());
-  assertEquals (info.getState (), result.getState ());
+  assertEquals (info.getTypeKey (), result.getTypeKey ());
+  assertEquals (info.getStateKey (), result.getStateKey ());
   assertEquals (info.getShortName (), result.getShortName ());
   assertEquals (info.getLongName (), result.getLongName ());
 
@@ -198,7 +212,7 @@ public class OrganizationServiceTest
   info.setLongName ("new long name");
   try
   {
-   result = organizationService.updateOrganization (info.getId (), info);
+   result = organizationService.updateOrg (info.getId (), info,  ctxInfoHelper.getDefaultContextInfo());
   }
   catch (Exception ex)
   {
@@ -206,8 +220,8 @@ public class OrganizationServiceTest
   }
 
   assertNotNull (result.getId ());
-  assertEquals (info.getType (), result.getType ());
-  assertEquals (info.getState (), result.getState ());
+  assertEquals (info.getTypeKey (), result.getTypeKey ());
+  assertEquals (info.getStateKey (), result.getStateKey ());
   assertEquals (info.getShortName (), result.getShortName ());
   assertEquals (info.getLongName (), result.getLongName ());
 
@@ -217,20 +231,20 @@ public class OrganizationServiceTest
   StatusInfo status = null;
   try
   {
-   status = organizationService.deleteOrganization (info.getId ());
+   status = organizationService.deleteOrg (info.getId (),  ctxInfoHelper.getDefaultContextInfo());
   }
   catch (Exception ex)
   {
    throw new RuntimeException (ex);
   }
 
-  assertTrue (status.getSuccess ());
+  assertTrue (status.getIsSuccess());
 
   // get it now
   info = result;
   try
   {
-   result = organizationService.getOrganization (info.getId ());
+   result = organizationService.getOrg (info.getId (),  ctxInfoHelper.getDefaultContextInfo());
    fail ("should not be able to get the org");
   }
   catch (DoesNotExistException ex)

@@ -15,8 +15,10 @@
  */
 package org.kuali.student.loader.util;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.kuali.student.r2.common.dto.AttributeInfo;
 
 /**
  *
@@ -25,8 +27,8 @@ import java.util.Map;
 public class AttributeInfoHelper
 {
 
- public Map<String, String> setValue (String key, Object value,
-                                      Map<String, String> attributes)
+ public List<AttributeInfo> setValue (String key, Object value,
+                                      List<AttributeInfo> attributes)
  {
   if (value == null)
   {
@@ -39,10 +41,14 @@ public class AttributeInfoHelper
   }
   if (attributes == null)
   {
-   attributes = new HashMap ();
+   attributes = new ArrayList ();
   }
-  String valStr = value.toString ();
-  attributes.put (key, valStr);
+  if (key != null && !key.isEmpty() && value != null) {
+	  AttributeInfo attInfo = new AttributeInfo();
+	  attInfo.setKey(key);
+	  attInfo.setValue(value.toString());
+	  attributes.add(attInfo);
+  }
   return attributes;
  }
 }

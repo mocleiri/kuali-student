@@ -18,14 +18,12 @@ package org.kuali.student.loader.program;
 import java.util.Arrays;
 import java.util.Map;
 
-import org.kuali.student.core.organization.dto.OrgInfo;
-import org.kuali.student.core.organization.service.OrganizationService;
-
-
 import org.kuali.student.loader.util.GetOrgHelper;
 import org.kuali.student.loader.util.RichTextInfoHelper;
-import org.kuali.student.lum.lu.dto.AdminOrgInfo;
-import org.kuali.student.lum.program.dto.CredentialProgramInfo;
+import org.kuali.student.r2.core.organization.dto.OrgInfo;
+import org.kuali.student.r2.core.organization.service.OrganizationService;
+import org.kuali.student.r2.lum.clu.dto.AdminOrgInfo;
+import org.kuali.student.r2.lum.program.dto.CredentialProgramInfo;
 
 /**
  *

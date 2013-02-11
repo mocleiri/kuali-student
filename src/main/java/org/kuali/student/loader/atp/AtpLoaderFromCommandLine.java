@@ -18,7 +18,8 @@ package org.kuali.student.loader.atp;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import org.kuali.student.core.atp.service.AtpService;
+
+import org.kuali.student.r2.core.atp.service.AtpService;
 
 /**
  *

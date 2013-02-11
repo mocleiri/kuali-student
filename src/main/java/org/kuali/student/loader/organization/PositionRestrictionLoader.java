@@ -18,11 +18,13 @@ package org.kuali.student.loader.organization;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import org.kuali.student.common.exceptions.AlreadyExistsException;
-import org.kuali.student.common.exceptions.DataValidationErrorException;
-import org.kuali.student.core.organization.dto.OrgPositionRestrictionInfo;
-import org.kuali.student.core.organization.service.OrganizationService;
-import org.kuali.student.common.validation.dto.ValidationResultInfo;
+
+import org.kuali.student.loader.util.ContextInfoHelper;
+import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.AlreadyExistsException;
+import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
+import org.kuali.student.r2.core.organization.dto.OrgPositionRestrictionInfo;
+import org.kuali.student.r2.core.organization.service.OrganizationService;
 
 /**
  *
@@ -61,6 +63,7 @@ public class PositionRestrictionLoader
  public List<PositionRestrictionLoadResult> load ()
  {
   List<PositionRestrictionLoadResult> results = new ArrayList (500);
+  ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
   int row = 0;
   for (OrgPositionRestriction posRestriction : inputDataSource)
   {
@@ -76,26 +79,28 @@ public class PositionRestrictionLoader
    if(!hasPositionRestriction(posRestriction)){
 	   try
 	   {
-		   OrgPositionRestrictionInfo createdInfo = getOrganizationService ().addPositionRestrictionToOrg(
+		   OrgPositionRestrictionInfo createdInfo = getOrganizationService ().createOrgPositionRestriction(
 				   posRestrictionInfo.getOrgId(), 
 				   posRestrictionInfo.getOrgPersonRelationTypeKey(), 
-				   posRestrictionInfo);
+				   posRestrictionInfo,
+				   ctxInfoHelper.getDefaultContextInfo());
 		   
 		   result.setPosRestrictionInfo(createdInfo);
 		   result.setStatus (PositionRestrictionLoadResult.Status.CREATED);
 	   }
-	   catch (AlreadyExistsException ex)
-	   {
-	    //TODO update if already exists?
-	    result.setStatus (PositionRestrictionLoadResult.Status.NOT_PROCESSED_ALREADY_EXISTS);
-	    result.setException (ex);
-	   }
+//	   catch (AlreadyExistsException ex)
+//	   {
+//	    //TODO update if already exists?
+//	    result.setStatus (PositionRestrictionLoadResult.Status.NOT_PROCESSED_ALREADY_EXISTS);
+//	    result.setException (ex);
+//	   }
 	   catch (DataValidationErrorException ex)
 	   {
 	    List<ValidationResultInfo> vris = null;
 	    try
 	    {
-	     vris = organizationService.validateOrgPositionRestriction("SYSTEM", posRestrictionInfo);
+	    	//TODO Verify
+	     vris = organizationService.validateOrgPositionRestriction("SYSTEM", null, null, posRestrictionInfo, ctxInfoHelper.getDefaultContextInfo());
 	    }
 	    catch (Exception ex1)
 	    {
@@ -127,7 +132,9 @@ public class PositionRestrictionLoader
 
  private boolean hasPositionRestriction(OrgPositionRestriction posRestriction){
 	 try {
-		List<OrgPositionRestrictionInfo> pris = getOrganizationService ().getPositionRestrictionsByOrg(posRestriction.getOrgId());
+		 ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
+		 List<String> orgPosResIds =  getOrganizationService ().getOrgPositionRestrictionIdsByOrg(posRestriction.getOrgId(),ctxInfoHelper.getDefaultContextInfo());
+		List<OrgPositionRestrictionInfo> pris = getOrganizationService ().getOrgPositionRestrictionsByIds(orgPosResIds, ctxInfoHelper.getDefaultContextInfo());
 		if(pris != null && !pris.isEmpty()){
 			String personRelationTypeKey = posRestriction.getOrgPersonRelationTypeKey();
 			for (OrgPositionRestrictionInfo pri : pris){
@@ -138,7 +145,6 @@ public class PositionRestrictionLoader
 	} catch (Exception e) {
 		return false;
 	} 
-	
 	 return false;
  }
  

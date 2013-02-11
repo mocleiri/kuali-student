@@ -19,13 +19,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.kuali.student.common.exceptions.DataValidationErrorException;
-import org.kuali.student.common.exceptions.DoesNotExistException;
-import org.kuali.student.common.validation.dto.ValidationResultInfo;
-import org.kuali.student.lum.program.dto.CoreProgramInfo;
-import org.kuali.student.lum.program.dto.CredentialProgramInfo;
-import org.kuali.student.lum.program.dto.MajorDisciplineInfo;
-import org.kuali.student.lum.program.service.ProgramService;
+import org.kuali.student.loader.util.ContextInfoHelper;
+import org.kuali.student.r2.common.dto.ValidationResultInfo;
+import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
+import org.kuali.student.r2.common.exceptions.DoesNotExistException;
+import org.kuali.student.r2.lum.program.dto.CoreProgramInfo;
+import org.kuali.student.r2.lum.program.dto.CredentialProgramInfo;
+import org.kuali.student.r2.lum.program.dto.MajorDisciplineInfo;
+import org.kuali.student.r2.lum.program.service.ProgramService;
 
 /**
  *
@@ -141,7 +142,9 @@ public class ProgramLoader
   }
   return results;
  }
- private boolean processMajor(ProgramLoadResult result){	 
+ private boolean processMajor(ProgramLoadResult result){
+	 ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
+	 
 	 boolean skip = false;
 	   MajorDisciplineInfo info = result.getMajorDisciplineInfo ();
 	   if(info != null){
@@ -150,7 +153,7 @@ public class ProgramLoader
 		    try
 		    {
 		     MajorDisciplineInfo oldInfo =
-		                         programService.getMajorDiscipline (info.getId ());
+		                         programService.getMajorDiscipline (info.getId (), ctxInfoHelper.getDefaultContextInfo());
 		     result.setStatus (ProgramLoadResult.Status.NOT_LOADED_ALREADY_EXISTS);
 		     skip = true;
 		    }
@@ -168,8 +171,9 @@ public class ProgramLoader
 	   
 		   try
 		   {
-		    System.out.println ("state before create=" + info.getState ());
-		    MajorDisciplineInfo createdInfo = programService.createMajorDiscipline (info);
+		    System.out.println ("state before create=" + info.getStateKey ());
+		    //TODO Verify
+		    MajorDisciplineInfo createdInfo = programService.createMajorDiscipline (info.getTypeKey(), info, ctxInfoHelper.getDefaultContextInfo());
 		    result.setMajorDisciplineInfo (createdInfo);
 		    result.setStatus (ProgramLoadResult.Status.MAJOR_DISCIPLINE_CREATED);
 		   }
@@ -178,7 +182,8 @@ public class ProgramLoader
 			    List<ValidationResultInfo> vris = null;
 			    try
 			    {
-			     vris = programService.validateMajorDiscipline ("SYSTEM", info);
+			    	//TODO Verify
+			     vris = programService.validateMajorDiscipline ("SYSTEM", info, ctxInfoHelper.getDefaultContextInfo());
 			    }
 			    catch (Exception ex1)
 			    {
@@ -207,13 +212,13 @@ public class ProgramLoader
 	 
  private boolean processCore(ProgramLoadResult result){
 	 boolean skip = false;
-	 
+	 ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
 	 CoreProgramInfo info = result.getCoreProgramInfo();
 	 if(info != null){
 		 if (info.getId () != null){
 		    try
 		    {
-		    	CoreProgramInfo oldInfo = programService.getCoreProgram(info.getId ());
+		    	CoreProgramInfo oldInfo = programService.getCoreProgram(info.getId (), ctxInfoHelper.getDefaultContextInfo());
 	    		result.setStatus (ProgramLoadResult.Status.NOT_LOADED_ALREADY_EXISTS);
 	    		return true;
 		    }
@@ -231,15 +236,17 @@ public class ProgramLoader
 
 		   try
 		   {
-		    System.out.println ("state before create=" + info.getState ());
-		    CoreProgramInfo createdInfo = programService.createCoreProgram(info);
+		    System.out.println ("state before create=" + info.getStateKey ());
+		    //TODO verify
+		    CoreProgramInfo createdInfo = programService.createCoreProgram(info.getTypeKey(), info, ctxInfoHelper.getDefaultContextInfo());
 		    result.setCoreProgramInfo (createdInfo);
 		    result.setStatus (ProgramLoadResult.Status.CORE_PROGRAM_CREATED);
 		   }catch (DataValidationErrorException ex){
 			    List<ValidationResultInfo> vris = null;
 			    try
 			    {
-			     vris = programService.validateCoreProgram("SYSTEM", info);
+			    	//TODO verify
+			     vris = programService.validateCoreProgram("SYSTEM", info, ctxInfoHelper.getDefaultContextInfo());
 			    }
 			    catch (Exception ex1)
 			    {
@@ -265,13 +272,14 @@ public class ProgramLoader
  
  private boolean processBacc(ProgramLoadResult result){
 	 boolean skip = false;
-	 
+	 ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
 	 CredentialProgramInfo info = result.getCredentialProgramInfo();
 	 if(info != null){
 		 if (info.getId () != null){
 		    try
 		    {
-		    	CredentialProgramInfo oldInfo = programService.getCredentialProgram(info.getId ());
+		    	//TODO verify
+		    	CredentialProgramInfo oldInfo = programService.getCredentialProgram(info.getId (), ctxInfoHelper.getDefaultContextInfo());
 	    		result.setStatus (ProgramLoadResult.Status.NOT_LOADED_ALREADY_EXISTS);
 	    		return true;
 		    }
@@ -289,15 +297,17 @@ public class ProgramLoader
 
 		   try
 		   {
-		    System.out.println ("state before create=" + info.getState ());
-		    CredentialProgramInfo createdInfo = programService.createCredentialProgram(info);
+		    System.out.println ("state before create=" + info.getStateKey ());
+		  //TODO verify
+		    CredentialProgramInfo createdInfo = programService.createCredentialProgram(info.getTypeKey(), info, ctxInfoHelper.getDefaultContextInfo());
 		    result.setCredentialProgramInfo (createdInfo);
 		    result.setStatus (ProgramLoadResult.Status.CREDENTIAL_PROGRAM_CREATED);
 		   }catch (DataValidationErrorException ex){
 			    List<ValidationResultInfo> vris = null;
 			    try
 			    {
-			     vris = programService.validateCredentialProgram("SYSTEM", info);
+			    	//TODO verify
+			     vris = programService.validateCredentialProgram("SYSTEM", info, ctxInfoHelper.getDefaultContextInfo());
 			    }
 			    catch (Exception ex1)
 			    {

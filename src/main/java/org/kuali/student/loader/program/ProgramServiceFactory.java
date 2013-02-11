@@ -17,8 +17,10 @@ package org.kuali.student.loader.program;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import javax.xml.namespace.QName;
-import org.kuali.student.lum.program.service.ProgramService;
+
+import org.kuali.student.r2.lum.program.service.ProgramService;
 
 /**
  *
@@ -33,7 +35,7 @@ public class ProgramServiceFactory
  public static final String DEV_EMBEDDED_URL =
                             "http://dev.ks.kuali.org";
  public static final String LOCAL_HOST_EMBEDDED_URL =
-                            "http://localhost:9393/ks-embedded-dev";
+                            "http://localhost:8081/ks-with-rice-bundled-dev";
  private String hostUrl = LOCAL_HOST_EMBEDDED_URL;
 
  public String getHostUrl ()

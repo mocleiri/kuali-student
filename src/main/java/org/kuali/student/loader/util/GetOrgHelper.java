@@ -3,14 +3,16 @@ package org.kuali.student.loader.util;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.xml.ws.soap.SOAPFaultException;
-import org.kuali.student.common.exceptions.DoesNotExistException;
-import org.kuali.student.common.exceptions.InvalidParameterException;
-import org.kuali.student.common.exceptions.MissingParameterException;
-import org.kuali.student.common.exceptions.OperationFailedException;
-import org.kuali.student.common.exceptions.PermissionDeniedException;
-import org.kuali.student.core.organization.dto.OrgInfo;
-import org.kuali.student.core.organization.service.OrganizationService;
+
+import org.kuali.student.r2.common.exceptions.DoesNotExistException;
+import org.kuali.student.r2.common.exceptions.InvalidParameterException;
+import org.kuali.student.r2.common.exceptions.MissingParameterException;
+import org.kuali.student.r2.common.exceptions.OperationFailedException;
+import org.kuali.student.r2.common.exceptions.PermissionDeniedException;
+import org.kuali.student.r2.core.organization.dto.OrgInfo;
+import org.kuali.student.r2.core.organization.service.OrganizationService;
 
 
 public class GetOrgHelper
@@ -32,6 +34,8 @@ public class GetOrgHelper
   */
  public OrgInfo getOrg (String orgId)
  {	 
+	 ContextInfoHelper ctxInfoHelper = new ContextInfoHelper();
+	 
 	 OrgInfo info = cache.get (orgId);
   if (info != null)
   {
@@ -39,7 +43,7 @@ public class GetOrgHelper
   }
   try
   {
-   info = orgService.getOrganization(orgId);
+   info = orgService.getOrg(orgId, ctxInfoHelper.getDefaultContextInfo());
    this.cache.put (orgId, info);
    return info;
   }

@@ -23,7 +23,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.kuali.student.core.organization.service.OrganizationService;
+import org.kuali.student.r2.core.organization.service.OrganizationService;
 
 /**
  *
@@ -42,7 +42,7 @@ public class PositionRestrictionLoaderTest
  public static void setUpClass () throws Exception
  {
   OrganizationServiceFactory factory = new OrganizationServiceFactory ();
-  factory.setHostUrl ("http://localhost:9080/ks-embedded-dev");
+  factory.setHostUrl ("http://localhost:8081/ks-with-rice-bundled-dev");
   organizationService = factory.getOrganizationService ();
  }
 

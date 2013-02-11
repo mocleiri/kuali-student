@@ -85,7 +85,7 @@ public class LoadFromCommandLine
   out.println (
     "\t@param hostUrl the fully qualified url of the running Kuali Student web service");
   out.println (
-    "ex: java -jar ks-loader.jar organization AccreditingBodies.xls http://localhost:9393/ks-embedded-dev");
+    "ex: java -jar ks-loader.jar organization AccreditingBodies.xls http://localhost:8081/ks-with-rice-bundled-dev");
  }
 
  private void execute (String[] args)

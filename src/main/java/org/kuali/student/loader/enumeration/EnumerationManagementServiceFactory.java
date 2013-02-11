@@ -17,8 +17,10 @@ package org.kuali.student.loader.enumeration;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import javax.xml.namespace.QName;
-import org.kuali.student.core.enumerationmanagement.service.EnumerationManagementService;
+
+import org.kuali.student.r2.core.enumerationmanagement.service.EnumerationManagementService;
 
 /**
  *
@@ -33,7 +35,7 @@ public class EnumerationManagementServiceFactory
  private static final QName ENUMERATION_MANAGEMENT_SERVICE_QNAME =
                             EnumerationManagementService_Service.SERVICE;
  public static final String LOCAL_HOST_EMBEDDED_URL =
-                            "http://localhost:9393/ks-embedded-dev";
+                            "http://localhost:8081/ks-with-rice-bundled-dev";
  private String hostUrl = LOCAL_HOST_EMBEDDED_URL;
 
  public String getHostUrl ()
