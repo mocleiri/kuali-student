@@ -34,7 +34,7 @@ class ManageCourseOfferingList < BasePage
   def approve_subject_code
     approve_subject_code_for_scheduling
     @browser.alert.ok
-    loading.wait_while_present(120)
+    loading.wait_while_present(300)
   end
 
   def view_course_offering(co_code)

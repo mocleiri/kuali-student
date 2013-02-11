@@ -9,42 +9,42 @@ When /^I initiate a rollover to create a term in open state$/ do
 end
 
 When /^I initiate a rollover to create a term in default state EC/ do
-  @rollover = make Rollover, :source_term => "201201", :target_term => "201501"
+  @rollover = make Rollover, :source_term => "201212", :target_term => "201812"
   @rollover.perform_rollover
 end
 
 When /^I initiate a rollover to create a term in open state EC$/ do
-  @rollover = make Rollover, :source_term => "201201", :target_term => "201601"
+  @rollover = make Rollover, :source_term => "201212", :target_term => "201712"
   @rollover.perform_rollover
 end
 
 When /^I initiate a rollover to create a term in final edits state EC$/ do
-  @rollover = make Rollover, :source_term => "201201", :target_term => "201701"
+  @rollover = make Rollover, :source_term => "201212", :target_term => "201612"
   @rollover.perform_rollover
 end
 
 When /^I initiate a rollover to create a term in published state EC$/ do
-  @rollover = make Rollover, :source_term => "201201", :target_term => "201801"
+  @rollover = make Rollover, :source_term => "201212", :target_term => "201512"
   @rollover.perform_rollover
 end
 
 When /^I initiate a rollover to create a term in default state WC/ do
-  @rollover = make Rollover, :source_term => "201205", :target_term => "201505"
+  @rollover = make Rollover, :source_term => "201205", :target_term => "201805"
   @rollover.perform_rollover
 end
 
 When /^I initiate a rollover to create a term in open state WC$/ do
-  @rollover = make Rollover, :source_term => "201205", :target_term => "201605"
-  @rollover.perform_rollover
-end
-
-When /^I initiate a rollover to create a term in final edits state WC$/ do
   @rollover = make Rollover, :source_term => "201205", :target_term => "201705"
   @rollover.perform_rollover
 end
 
+When /^I initiate a rollover to create a term in final edits state WC$/ do
+  @rollover = make Rollover, :source_term => "201205", :target_term => "201605"
+  @rollover.perform_rollover
+end
+
 When /^I initiate a rollover to create a term in published state WC$/ do
-  @rollover = make Rollover, :source_term => "201205", :target_term => "201805"
+  @rollover = make Rollover, :source_term => "201205", :target_term => "201505"
   @rollover.perform_rollover
 end
 
