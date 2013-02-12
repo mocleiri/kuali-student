@@ -37,6 +37,7 @@ As an Administrator, I want to create registration groups for a Course Offering
     Then a cluster error message appears stating "This cluster must contain at least one activity from each of those associated with this Format"
     And registration groups are not generated
 
+  @bug @KSENROLL-5351
   Scenario: RG 2.2B - Cannot generate default (unconstrained) AOC unless there is at least one AO for each AO Type specified by the FO
     Given I manage registration groups for a course offering with multiple activity types but no activity offering for one of the activity types
     When I generate registration groups with no activity offering cluster
@@ -125,7 +126,8 @@ As an Administrator, I want to create registration groups for a Course Offering
     And I move a lecture activity offering from the default activity offering cluster to the new activity offering cluster
     And a cluster status message appears stating "No Registration Groups Generated"
     And I generate all registration groups
-    Then the registration groups sets are updated
+    Then the registration groups sets are updated for the new cluster
+    And  registration groups are not generated for the default cluster
 
  Scenario: Scenario: RG 3.3A Remove one or more AOs from a constrained AOC leaving the AOs orphaned and without a Reg Group association
     Given I have generated a registration group for a course offering with lecture and lab activity types

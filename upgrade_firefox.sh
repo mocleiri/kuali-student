@@ -6,7 +6,7 @@ export installroot=$TARGET/src
 export workpath=$TARGET
 
 unlink /usr/bin/firefox
-rm -rf /usr/lib/firefox-9.0.1
+rm -rf /usr/lib/firefox
 
 cd $workpath
 wget -r --no-parent --reject "index.html*" -nH --cut-dirs=7 https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/14.0.1/linux-x86_64/en-US/

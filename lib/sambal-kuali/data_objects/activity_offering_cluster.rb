@@ -67,6 +67,7 @@ class ActivityOfferingCluster
         page.private_name.set @private_name
         page.published_name.set @published_name
         page.create_cluster
+        page.cluster_list_div.span(text: /#{Regexp.escape("#{private_name}")}/).wait_until_present(120)
       end
     else
       @private_name = "Default Cluster"

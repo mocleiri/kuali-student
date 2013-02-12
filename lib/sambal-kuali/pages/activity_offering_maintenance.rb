@@ -4,7 +4,7 @@ class ActivityOfferingMaintenance < ActivityOfferingMaintenanceBase
 
   expected_element :activity_code
 
-  action(:submit) { |b| b.frm.button(text: "submit").click; b.loading.wait_while_present }
+  action(:submit) { |b| b.frm.button(text: "submit").click; b.loading.wait_while_present(120) }
   
   element(:activity_code) { |b| b.frm.text_field(name: "document.newMaintainableObject.dataObject.aoInfo.activityCode") }
   element(:total_maximum_enrollment) { |b| b.frm.text_field(id: "maximumEnrollment_control") }

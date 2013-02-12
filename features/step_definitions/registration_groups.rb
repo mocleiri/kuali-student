@@ -19,10 +19,10 @@ end
 Then /^the activity offering is shown as part of the cluster$/ do
   #validate all ao_clusters
   @course_offering.activity_offering_cluster_list.each do |cluster|
-      on ManageRegistrationGroups do |page|
-        actual_aos = page.get_cluster_assigned_ao_list(cluster.private_name)
-        actual_aos.sort.should == cluster.assigned_ao_list.sort
-      end
+    on ManageRegistrationGroups do |page|
+      actual_aos = page.get_cluster_assigned_ao_list(cluster.private_name)
+      actual_aos.sort.should == cluster.assigned_ao_list.sort
+    end
   end
 end
 
@@ -84,8 +84,8 @@ Then /^only one activity offering cluster is created$/ do
   on ManageRegistrationGroups do |page|
     clusters = page.cluster_div_list
     clusters.length.should == 1
-    end
   end
+end
 
 Then /^a create cluster dialog error message appears stating "(.*?)"$/ do |errMsg|
   #KSENROLL-4230 Registration groups - error message is not displayed when creating a cluster with a duplicate private name
@@ -126,6 +126,12 @@ end
 Then /^a cluster warning message appears stating "(.*?)"$/ do |errMsg|
   on ManageRegistrationGroups do |page|
     page.get_cluster_warning_msgs(@ao_cluster.private_name).should match /.*#{Regexp.escape(errMsg)}.*/
+  end
+end
+
+Then /^registration groups are not generated for the default cluster$/ do
+  on ManageRegistrationGroups do |page|
+    page.get_cluster_status_msg("Default Cluster").strip.should == "No Registration Groups Generated"
   end
 end
 
@@ -174,6 +180,7 @@ Given /^I manage registration groups for a course offering with multiple activit
                               :format => "Lecture/Lab",
                               :activity_type => "Lab",
                               :max_enrollment => "50"
+  @activity_offering.save
   @course_offering.manage_registration_groups
 end
 
@@ -257,16 +264,16 @@ end
 Given /^I add two activity offerings to the course offering$/ do
   @course_offering.manage
   @activity_offering = create ActivityOffering, :requested_delivery_logistics_list => {},
-                            :personnel_list => [],
-                            :seat_pool_list => {},
-                            :format => "Lecture/Lab"
+                              :personnel_list => [],
+                              :seat_pool_list => {},
+                              :format => "Lecture/Lab"
   @activity_offering.save
 
   @course_offering.manage
   @activity_offering1 = create ActivityOffering, :requested_delivery_logistics_list => {},
-                            :personnel_list => [],
-                            :seat_pool_list => {},
-                            :format => "Lecture/Lab"
+                               :personnel_list => [],
+                               :seat_pool_list => {},
+                               :format => "Lecture/Lab"
   @activity_offering1.save
 end
 
@@ -316,6 +323,16 @@ end
 When /^I move a lab activity offering from the first activity offering cluster to the second activity offering cluster$/ do
   @ao_cluster2.move_ao_to_another_cluster("P",@ao_cluster)
 end
+
+Then /^the registration groups sets are updated for the new cluster$/ do
+  on ManageRegistrationGroups do |page|
+    new_cluster_private_name = @course_offering.activity_offering_cluster_list[-1].private_name
+    page.get_cluster_status_msg(new_cluster_private_name).strip.should == "All Registration Groups Generated"
+  end
+  #TODO: reg groups validation
+end
+
+
 
 Then /^the registration groups? sets? (?:is|are) updated$/ do
   on ManageRegistrationGroups do |page|
@@ -368,10 +385,10 @@ end
 
 Then /^activity offering cluster published and private names are successfully changed$/ do
   @course_offering.activity_offering_cluster_list.each do |cluster|
-      on ManageRegistrationGroups do |page|
-        cluster.published_name.should == page.cluster_published_name(cluster.private_name)
-      end
+    on ManageRegistrationGroups do |page|
+      cluster.published_name.should == page.cluster_published_name(cluster.private_name)
     end
+  end
 end
 
 Given /^I have created two activity offering clusters for a course offering$/ do
