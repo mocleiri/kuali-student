@@ -113,8 +113,6 @@ public class TransactionTypeController extends GenericSearchController {
             breakdowns.add(b);
         }
 
-        form.setTags(auditableEntityService.getAuditableEntities(Tag.class));
-
         form.setGlBreakdowns(breakdowns);
 
         form.setCreditDebitKeyValuesFinder(this.getCreditDebitTypeOptionsFinder());
@@ -136,7 +134,8 @@ public class TransactionTypeController extends GenericSearchController {
         Integer priority = form.getPriority();
         String description = form.getDescription();
 
-        boolean typeExists = transactionService.transactionTypeExists(type);
+
+        boolean typeExists = transactionService.transactionTypeExists(code);
 
         TransactionType tt;
 
@@ -159,6 +158,12 @@ public class TransactionTypeController extends GenericSearchController {
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
         }
+
+        List<Tag> tags = form.getTags();
+        this.persistTags(tags);
+        tt.setTags(tags);
+        transactionService.persistTransactionType(tt);
+
 
         logger.info("Transaction Type saved: " + tt.getId());
 
@@ -195,12 +200,11 @@ public class TransactionTypeController extends GenericSearchController {
         return getUIFModelAndView(form);
     }
 
-
     public KeyValuesFinder getCreditDebitTypeOptionsFinder() {
         if (creditDebitTypeOptionsFinder == null) {
             synchronized (this) {
                 if (creditDebitTypeOptionsFinder == null) {
-                    creditDebitTypeOptionsFinder = new CreditDebitKeyValuesFinder();
+                    creditDebitTypeOptionsFinder = new CreditDebitKeyValuesFinder(true);
                 }
             }
         }
@@ -221,4 +225,17 @@ public class TransactionTypeController extends GenericSearchController {
         return rollupTypeOptionsFinder;
     }
 
+    /**
+     * Loop through all tags in the collection and make sure that they're saved to the database and the ID is updated
+     * @param tags
+     */
+    private void persistTags(List<Tag> tags){
+        //If the tag already has an id then it has been previously persisted.
+        for(Tag tag : tags){
+            if(tag.getId() <= 0){
+                Long id =auditableEntityService.persistAuditableEntity(tag);
+                tag.setId(id);
+            }
+        }
+    }
 }

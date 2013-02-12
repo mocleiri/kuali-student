@@ -48,7 +48,7 @@ public class TransactionTypeForm extends AbstractViewModel {
 
     // Display only fields
     private boolean showEndDate;
-    private String tagSearch;
+    private Tag tagSearch;
 
     /*
       Get/Set methods
@@ -245,6 +245,9 @@ public class TransactionTypeForm extends AbstractViewModel {
     }
 
     public List<Tag> getTags() {
+        if(this.tags == null){
+            this.tags = new ArrayList<Tag>();
+        }
         return tags;
     }
 
@@ -252,11 +255,11 @@ public class TransactionTypeForm extends AbstractViewModel {
         this.tags = tags;
     }
 
-    public String getTagSearch() {
+    public Tag getTagSearch() {
         return tagSearch;
     }
 
-    public void setTagSearch(String tagSearch) {
+    public void setTagSearch(Tag tagSearch) {
         this.tagSearch = tagSearch;
     }
 }

@@ -73,12 +73,12 @@
         <property name="upperGroup" ref="Uif-KsaViewNavigation"/>
     </bean>
 
-    <bean id="ksaHelper" class="com.sigmasys.kuali.ksa.krad.util.KsaHelper"/>
+    <!-- <bean id="ksaHelper" class="com.sigmasys.kuali.ksa.krad.util.KsaHelper"/>-->
 
     <bean id="Uif-KsaFormView" class="com.sigmasys.kuali.ksa.krad.uif.KsaFormView" parent="Uif-FormView"
           abstract="true">
         <property name="template" value="/WEB-INF/ftl/view.ftl"/>
-        <property name="viewHelperService" ref="ksaHelper"/>
+        <!--<property name="viewHelperService" ref="ksaHelper"/> -->
         <property name="additionalCssFiles">
             <list>
                 <value>css/ksa.css?forceReload</value>
