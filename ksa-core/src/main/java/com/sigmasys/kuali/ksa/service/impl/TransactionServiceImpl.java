@@ -1037,6 +1037,26 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     }
 
     /**
+     * Removes all allocations associated with the given transaction list.
+     * <p/>
+     *
+     * @param transactions list of transactions for which allocations have to be removed
+     * @return list of generated GL transactions
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public List<GlTransaction> removeAllocations(List<Transaction> transactions) {
+
+        List<GlTransaction> glTransactions = new LinkedList<GlTransaction>();
+        for (Transaction transaction : transactions) {
+            glTransactions.addAll(removeAllocations(transaction.getId()));
+        }
+
+        return glTransactions;
+    }
+
+    /**
      * Removes allocation between two given transactions
      * <p/>
      *
@@ -1403,11 +1423,38 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
     @Override
     @Transactional(readOnly = false)
     public List<GlTransaction> allocateReversals(String accountId, boolean isQueued) {
+        return allocateReversals(getTransactions(accountId), isQueued);
+    }
+
+    /**
+     * An overridden version of allocateReversals() that takes a list of transactions as an argument.
+     *
+     * @param transactions list of transactions
+     * @return list of generated GL transactions
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public List<GlTransaction> allocateReversals(List<Transaction> transactions) {
+        return allocateReversals(transactions, true);
+    }
+
+    /**
+     * An overridden version of allocateReversals() that takes a list of transactions as an argument.
+     *
+     * @param transactions list of transactions
+     * @param isQueued     indicates whether the GL transaction should be in Q or W status
+     * @return list of generated GL transactions
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public List<GlTransaction> allocateReversals(List<Transaction> transactions, boolean isQueued) {
 
         List<GlTransaction> glTransactions = new LinkedList<GlTransaction>();
         List<Transaction> unallocatedTransactions = new LinkedList<Transaction>();
 
-        for (Transaction transaction : getTransactions(accountId)) {
+        for (Transaction transaction : transactions) {
 
             BigDecimal allocatedAmount = transaction.getAllocatedAmount() != null ?
                     transaction.getAllocatedAmount() : BigDecimal.ZERO;
@@ -1435,7 +1482,6 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
         }
 
         return glTransactions;
-
     }
 
     /**

@@ -56,4 +56,12 @@ public interface PaymentService {
     void paymentApplication(String userId);
 
 
+    /**
+     * Returns the arrays of payment years used in paymentApplication() method.
+     *
+     * @return an int array of years
+     */
+    int[] getPaymentYears();
+
+
 }

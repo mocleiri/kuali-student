@@ -219,6 +219,7 @@ public class TransactionUtils {
                     }
                 }
             }
+
             transaction.setMatrixScore(matrixScore);
         }
     }

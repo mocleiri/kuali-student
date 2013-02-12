@@ -112,4 +112,7 @@ public interface Constants {
 
     // KSA Transaction constants
     String KSA_TRANSACTION_RECOGNITION_YEAR = "ksa.transaction.recognition.year";
+
+    // KSA Payment constants
+    String KSA_PAYMENT_YEARS = "ksa.payment.years";
 }

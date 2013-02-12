@@ -410,14 +410,24 @@ public interface TransactionService {
     List<GlTransaction> removeAllocations(Long transactionId);
 
     /**
-        * Removes all allocations associated with the given Account ID
-        * <p/>
-        *
-        * @param userId Account ID
-        * @return list of generated GL transactions
-        */
+     * Removes all allocations associated with the given Account ID
+     * <p/>
+     *
+     * @param userId Account ID
+     * @return list of generated GL transactions
+     */
     @WebMethod(exclude = true)
     List<GlTransaction> removeAllocations(String userId);
+
+    /**
+     * Removes all allocations associated with the given transaction list.
+     * <p/>
+     *
+     * @param transactions list of transactions for which allocations have to be removed
+     * @return list of generated GL transactions
+     */
+    @WebMethod(exclude = true)
+    List<GlTransaction> removeAllocations(List<Transaction> transactions);
 
     /**
      * Removes allocation between two given transactions
@@ -463,7 +473,6 @@ public interface TransactionService {
      */
     List<GlTransaction> removeLockedAllocation(Long transactionId1, Long transactionId2, boolean isQueued);
 
-
     /**
      * This method is used to apply “obvious” payments to their reversal. Under normal circumstances, this will not be needed,
      * as reversals created inside of KSA will automatically be locked together. However, after an import from an external system,
@@ -492,6 +501,24 @@ public interface TransactionService {
     @WebMethod(exclude = true)
     List<GlTransaction> allocateReversals(String accountId);
 
+    /**
+     * An overridden version of allocateReversals() that takes a list of transactions as an argument.
+     *
+     * @param transactions list of transactions
+     * @param isQueued     indicates whether the GL transaction should be in Q or W status
+     * @return list of generated GL transactions
+     */
+    @WebMethod(exclude = true)
+    List<GlTransaction> allocateReversals(List<Transaction> transactions, boolean isQueued);
+
+    /**
+     * An overridden version of allocateReversals() that takes a list of transactions as an argument.
+     *
+     * @param transactions list of transactions
+     * @return list of generated GL transactions
+     */
+    @WebMethod(exclude = true)
+    List<GlTransaction> allocateReversals(List<Transaction> transactions);
 
     /**
      * Moves a transaction from a pre-effective state to an effective state. Once a transaction is effective, its

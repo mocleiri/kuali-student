@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.jws.WebService;
 import java.math.BigDecimal;
@@ -138,6 +139,30 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
     @Override
     public void paymentApplication(String userId) {
         // TODO
+    }
+
+    /**
+     * Returns the arrays of payment years used in paymentApplication() method.
+     *
+     * @return an int array of years
+     */
+    @Override
+    public int[] getPaymentYears() {
+
+        String paramValue = configService.getParameter(Constants.KSA_PAYMENT_YEARS);
+        if (!StringUtils.hasText(paramValue)) {
+            String errMsg = "Configuration parameter '" + Constants.KSA_PAYMENT_YEARS + "' is required";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        String[] parts = paramValue.split(",");
+        int[] years = new int[parts.length];
+        for (int i = 0; i < parts.length; i++) {
+            years[i] = Integer.valueOf(parts[i]);
+        }
+
+        return years;
     }
 
 

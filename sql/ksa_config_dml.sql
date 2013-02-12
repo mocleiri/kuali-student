@@ -115,6 +115,9 @@ insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.us.ssn.tax.type', 'SSN')
 -- Refund constants
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.refund.ach.bank.type', 'ACH');
 
+-- KSA payment constants
+insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.payment.years', '2009,2010,2011,2012');
+
 
 -- BRM (Drools) rule types
 insert into KSSA_RULE_TYPE (ID, NAME, DESCRIPTION) values (1, 'DSL', 'Drools DSL');

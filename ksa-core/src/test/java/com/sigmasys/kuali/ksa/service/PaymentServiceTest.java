@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service;
 
 
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.util.CalendarUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -102,9 +103,28 @@ public class PaymentServiceTest extends AbstractServiceTest {
 
         String userId = "admin";
 
-        List<GlTransaction> glTransactions1 = transactionService.removeAllocations(userId);
+        int[] paymentYears = paymentService.getPaymentYears();
 
-        List<GlTransaction> glTransactions2 = transactionService.allocateReversals(userId);
+        int minYear = paymentYears[0];
+        int maxYear = paymentYears[0];
+
+        for ( int year : paymentYears ) {
+            if ( minYear > year ) {
+                minYear = year;
+            }
+            if ( maxYear < year ) {
+                maxYear = year;
+            }
+        }
+
+        Date startDate = CalendarUtils.getFirstDateOfYear(minYear);
+        Date endDate = CalendarUtils.getFirstDateOfYear(maxYear);
+
+        List<Transaction> transactions = transactionService.getTransactions(userId, startDate, endDate);
+
+        List<GlTransaction> glTransactions1 = transactionService.removeAllocations(transactions);
+
+        List<GlTransaction> glTransactions2 = transactionService.allocateReversals(transactions);
 
         // TODO: simulate the rule-based paymentApplication()
 
