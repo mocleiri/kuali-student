@@ -21,7 +21,7 @@ class RegistrationWindow
   #access using options hash
   attr_accessor :term_type, :year, :period_id, :period_key, :appointment_window_info_name, :assigned_population_name,
                 :start_time, :start_time_am_pm,
-                :end_time, :end_time_am_pm, :window_type_key, :slot_rule_enum_type
+                :end_time, :end_time_am_pm, :window_type_key, :max_allocation, :slot_rule_enum_type
   # access using options hash - populate using RegistrationWindowsConstants
   attr_accessor  :end_date,:start_date
 
@@ -40,6 +40,7 @@ class RegistrationWindow
   #    :end_time => '10:00',
   #    :end_time_am_pm => 'am',
   #    :window_type_key => 'One Slot per Window',
+  #    :max_allocation => '10'
   #    :slot_rule_enum_type => 'Undergrad Standard'
   #  }
   # initialize is generally called using TestFactory Foundry .make or .create methods
@@ -60,6 +61,7 @@ class RegistrationWindow
         :end_time => '10:00',
         :end_time_am_pm => 'am',
         :window_type_key => 'One Slot per Window',
+        :max_allocation => '10',
         :slot_rule_enum_type => 'Undergrad Standard'
     }
     options = defaults.merge(opts)
@@ -103,6 +105,9 @@ class RegistrationWindow
       page.end_time_am_pm.select @end_time_am_pm
       page.window_type_key.select @window_type_key
       page.loading.wait_while_present
+      if (page.max_appointments_per_slot.present?)
+        page.max_appointments_per_slot.set @max_allocation
+      end
       if (page.slot_rule_enum_type.present?)
         page.slot_rule_enum_type.select @slot_rule_enum_type
       end
@@ -143,6 +148,7 @@ class RegistrationWindow
         :end_time => @end_time,
         :end_time_am_pm => @end_time_am_pm,
         :window_type_key => @window_type_key,
+        :max_allocation => @max_allocation,
         :slot_rule_enum_type => @slot_rule_enum_type
     }
 

@@ -114,6 +114,21 @@ When /^I successfully add a Registration Window for a period$/ do
   @registration_window.create
 end
 
+When /^I successfully add a Registration Window for a period using one slot per window allocation$/ do
+  @registration_window = make RegistrationWindow
+  @registration_window.create
+end
+
+When /^I successfully add a Registration Window for a period using max slotted allocation$/ do
+  @registration_window = make RegistrationWindow, :window_type_key => 'Max Slotted Window'
+  @registration_window.create
+end
+
+When /^I successfully add a Registration Window for a period using uniform slotted method allocation$/ do
+  @registration_window = make RegistrationWindow, :window_type_key => 'Uniform Slotted Window'
+  @registration_window.create
+end
+
 When /^I add a Registration Window with Start Date falling out of the period dates$/ do
   @registration_window = make RegistrationWindow, :start_date => RegistrationWindowsConstants::DATE_BEFORE
   @registration_window.create
