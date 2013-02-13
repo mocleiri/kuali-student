@@ -6,24 +6,11 @@ import com.sigmasys.kuali.ksa.service.AuditableEntityService;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.kuali.rice.core.api.config.property.ConfigurationService;
-import org.kuali.rice.krad.datadictionary.AttributeDefinition;
-import org.kuali.rice.krad.service.DataDictionaryService;
-import org.kuali.rice.krad.uif.component.Component;
-import org.kuali.rice.krad.uif.container.CollectionGroup;
-import org.kuali.rice.krad.uif.container.Container;
-import org.kuali.rice.krad.uif.field.DataField;
-import org.kuali.rice.krad.uif.service.ExpressionEvaluatorService;
-import org.kuali.rice.krad.uif.service.ViewDictionaryService;
 import org.kuali.rice.krad.uif.service.impl.ViewHelperServiceImpl;
 import org.kuali.rice.krad.uif.view.View;
-import org.kuali.rice.krad.uif.view.ViewModel;
-import org.kuali.rice.krad.uif.widget.Inquiry;
-import org.kuali.rice.krad.web.form.UifFormBase;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 /**
  * User: tbornholtz
@@ -57,8 +44,8 @@ public class TransactionTypeHelper extends ViewHelperServiceImpl {
      */
     @Override
     public void processCollectionAddLine(View view, Object model, String collectionPath) {
-        if(model instanceof TransactionTypeForm){
-            this.form = (TransactionTypeForm)model;
+        if (model instanceof TransactionTypeForm) {
+            this.form = (TransactionTypeForm) model;
         }
         super.processCollectionAddLine(view, model, collectionPath);
     }
@@ -73,12 +60,12 @@ public class TransactionTypeHelper extends ViewHelperServiceImpl {
      */
     @Override
     protected void addLine(Collection<Object> collection, Object addLine, boolean insertFirst) {
-        if(addLine instanceof Tag){
-            Tag added = (Tag)addLine;
-            if(this.searchTags != null){
+        if (addLine instanceof Tag) {
+            Tag added = (Tag) addLine;
+            if (this.searchTags != null) {
                 String name = added.getName();
-                for(Tag tag : searchTags){
-                    if(name.equals(tag.getName())){
+                for (Tag tag : searchTags) {
+                    if (name.equals(tag.getName())) {
                         logger.info("Names " + name + " match");
                         addLine = tag;
                         break;
@@ -87,6 +74,5 @@ public class TransactionTypeHelper extends ViewHelperServiceImpl {
             }
         }
         super.addLine(collection, addLine, insertFirst);
-
     }
 }

@@ -32,9 +32,7 @@
         <property name="title" value="Transaction Types"/>
         <property name="headerText" value="Transaction Types"/>
         <property name="entryPageId" value="TransactionTypePage"/>
-        <property name="navigation">
-            <ref bean="settingsNavigation"/>
-        </property>
+        <property name="navigation" ref="settingsNavigation"/>
         <property name="items">
             <list merge="true">
 
