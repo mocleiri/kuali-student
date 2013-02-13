@@ -132,8 +132,12 @@ public class TransactionTypeController extends GenericSearchController {
         String code = form.getCode();
         Date startDate = form.getStartDate();
         Integer priority = form.getPriority();
+        if(priority == null){
+            priority = new Integer(1);
+        }
         String description = form.getDescription();
 
+        Long rollupId = form.getRollupId();
 
         boolean typeExists = transactionService.transactionTypeExists(code);
 
@@ -141,14 +145,18 @@ public class TransactionTypeController extends GenericSearchController {
 
         if ("C".equalsIgnoreCase(type)) {
             if (!typeExists) {
-                tt = transactionService.createCreditType(code, null, startDate, priority, description);
+                if(transactionService == null){
+                    throw new RuntimeException("transactionService is null");
+                }
+                logger.info("Create Credit Type: code: " + code + " startDate: " + startDate + " priority: " + priority + " description: " + description);
+                tt = transactionService.createCreditType(code, "", startDate, priority, description);
             } else {
                 tt = transactionService.createCreditSubType(code, startDate);
             }
 
         } else if ("D".equalsIgnoreCase(type)) {
             if (!typeExists) {
-                tt = transactionService.createDebitType(code, null, startDate, priority, description);
+                tt = transactionService.createDebitType(code, "", startDate, priority, description);
             } else {
                 tt = transactionService.createDebitSubType(code, startDate);
             }
@@ -162,10 +170,45 @@ public class TransactionTypeController extends GenericSearchController {
         List<Tag> tags = form.getTags();
         this.persistTags(tags);
         tt.setTags(tags);
+
+        if(rollupId != null){
+            Rollup r = auditableEntityService.getAuditableEntity(rollupId, Rollup.class);
+            tt.setRollup(r);
+        }
+
         transactionService.persistTransactionType(tt);
 
 
+        if(tt instanceof DebitType){
+            // Handle the GL Breakdown sections.
+            BigDecimal total = new BigDecimal(0);
+            List<GlBreakdown> breakdowns = new ArrayList<GlBreakdown>();
+            Long glTypeId = 0L;
+
+            for(GlBreakdown breakdown : form.getGlBreakdowns()){
+
+                breakdown.setDebitType((DebitType)tt);
+                BigDecimal b = breakdown.getBreakdown();
+                if(b.compareTo(new BigDecimal(0)) != 0){
+                    // Don't save when the breakdown is 0
+                    breakdowns.add(breakdown);
+                    glTypeId = breakdown.getId();
+                }
+                total.add(b);
+
+
+                if(total.compareTo(new BigDecimal(99.9)) == 1){
+                    // Error, the numbers exceed the allowable amount.
+                }
+            }
+
+            transactionService.createGlBreakdowns(glTypeId, tt.getId(), breakdowns);
+
+        }
+
         logger.info("Transaction Type saved: " + tt.getId());
+
+        form.setStatusMessage("Transaction Type added");
 
         return getUIFModelAndView(form);
     }

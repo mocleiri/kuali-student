@@ -265,7 +265,7 @@
                         <bean parent="Uif-TextAreaControl" p:rows="5" p:cols="40"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="rollup" p:labelPlacement="TOP" p:label="Roll-Up"
+                <bean parent="Uif-InputField" p:propertyName="rollupId" p:labelPlacement="TOP" p:label="Roll-Up"
                       p:fieldLabel.renderColon="false">
                     <property name="control">
                         <bean parent="Uif-DropdownControl" p:width="100%"/>
@@ -319,6 +319,7 @@
                       p:instructionalText=""
                       p:disclosure.render="false"
                       p:progressiveRenderViaAJAX="true"
+                      p:renderAddLine="false"
                       p:width="85%">
                     <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.GlBreakdown"/>
                     <property name="propertyName" value="glBreakdowns"/>
@@ -342,16 +343,11 @@
                                 </property>
                             </bean>
 
-                            <bean parent="Uif-InputField" p:propertyName="glOperation" p:labelPlacement="TOP" p:label="Operation" p:readOnly="true">
-                                <!-- readOnly flag doesn't work in Rice 2.2.0 - https://jira.kuali.org/browse/KULRICE-8772 -->
+                            <bean parent="Uif-InputField" p:propertyName="glOperation.id" p:labelPlacement="TOP" p:label="Operation" p:readOnly="true">
                                 <property name="control">
-                                    <bean parent="Uif-TextControl" p:readOnly="@{id != 0}"/>
-                                </property>
-
-                                <!--<property name="control">
                                   <bean parent="Uif-DropdownControl" p:width="100%"/>
                                 </property>
-                                <property name="optionsFinder" value="@{getCreditDebitKeyValuesFinder()}"/>-->
+                                <property name="optionsFinder" value="@{getCreditDebitKeyValuesFinder()}"/>
                             </bean>
                             <bean parent="Uif-InputField" p:propertyName="breakdown"
                                   p:label="Breakdown"

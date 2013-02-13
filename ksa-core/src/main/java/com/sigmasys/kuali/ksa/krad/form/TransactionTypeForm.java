@@ -2,15 +2,22 @@ package com.sigmasys.kuali.ksa.krad.form;
 
 import com.sigmasys.kuali.ksa.krad.model.TransactionTypeModel;
 import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.AuditableEntityService;
 import org.kuali.rice.core.api.util.ConcreteKeyValue;
 import org.kuali.rice.core.api.util.KeyValue;
 import org.kuali.rice.krad.keyvalues.KeyValuesFinder;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class TransactionTypeForm extends AbstractViewModel {
+
+
+    @Autowired
+    private AuditableEntityService auditableEntityService;
+
 
     // Currency stuff
 
@@ -33,7 +40,7 @@ public class TransactionTypeForm extends AbstractViewModel {
     private Date startDate;
     private Date endDate;
     private Integer priority;
-    private Rollup rollup;
+    private Long rollupId;
 
     // Credit types only
     private Integer clearPeriod;
@@ -236,12 +243,12 @@ public class TransactionTypeForm extends AbstractViewModel {
         this.rollupOptionsFinder = rollupOptionsFinder;
     }
 
-    public Rollup getRollup() {
-        return rollup;
+    public Long getRollupId() {
+        return rollupId;
     }
 
-    public void setRollup(Rollup rollup) {
-        this.rollup = rollup;
+    public void setRollupId(Long rollupId) {
+        this.rollupId = rollupId;
     }
 
     public List<Tag> getTags() {
