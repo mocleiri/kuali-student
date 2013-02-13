@@ -115,4 +115,5 @@ public interface Constants {
 
     // KSA Payment constants
     String KSA_PAYMENT_YEARS = "ksa.payment.years";
+    String KSA_PAYMENT_TAG_FINAID = "ksa.payment.tag.finaid";
 }

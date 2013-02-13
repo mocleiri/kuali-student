@@ -367,6 +367,68 @@ public class TransactionUtils {
         return newTransactions;
     }
 
+    public static Map<Integer, List<Transaction>> sortTransactionsByYears(List<Transaction> transactions, int... years) {
+        Map<Integer, List<Transaction>> transactionMap = new HashMap<Integer, List<Transaction>>(years.length);
+        for (int year : years) {
+            for (Transaction transaction : transactions) {
+                Date effectiveDate = transaction.getEffectiveDate();
+                if (effectiveDate != null) {
+                    if (year == CalendarUtils.getYear(effectiveDate)) {
+                        List<Transaction> transactionsForYear = transactionMap.get(year);
+                        if (transactionsForYear == null) {
+                            transactionsForYear = new LinkedList<Transaction>();
+                            transactionMap.put(year, transactionsForYear);
+                        }
+                        transactionsForYear.add(transaction);
+                    }
+                }
+            }
+        }
+        return transactionMap;
+    }
+
+    public static Map<String, List<Transaction>> sortTransactionsByTags(List<Transaction> transactions, String... tagCodes) {
+        Map<String, List<Transaction>> transactionMap = new HashMap<String, List<Transaction>>(tagCodes.length);
+        for (String tagCode : tagCodes) {
+            for (Transaction transaction : transactions) {
+                List<Tag> tags = transaction.getTags();
+                if (tags != null) {
+                    for (Tag tag : tags) {
+                        if (tagCode.equals(tag.getCode())) {
+                            List<Transaction> transactionsForTag = transactionMap.get(tagCode);
+                            if (transactionsForTag == null) {
+                                transactionsForTag = new LinkedList<Transaction>();
+                                transactionMap.put(tagCode, transactionsForTag);
+                            }
+                            transactionsForTag.add(transaction);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return transactionMap;
+    }
+
+    public static Map<TransactionTypeValue, List<Transaction>> sortTransactionsByTypes(List<Transaction> transactions,
+                                                                                       TransactionTypeValue... types) {
+        Map<TransactionTypeValue, List<Transaction>> transactionMap =
+                new HashMap<TransactionTypeValue, List<Transaction>>(types.length);
+        for (TransactionTypeValue type : types) {
+            for (Transaction transaction : transactions) {
+                if (type == transaction.getTransactionTypeValue()) {
+                    List<Transaction> transactionsForType = transactionMap.get(type);
+                    if (transactionsForType == null) {
+                        transactionsForType = new LinkedList<Transaction>();
+                        transactionMap.put(type, transactionsForType);
+                    }
+                    transactionsForType.add(transaction);
+                }
+            }
+        }
+        return transactionMap;
+    }
+
 }
 
 

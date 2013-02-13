@@ -15,6 +15,9 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import static com.sigmasys.kuali.ksa.util.TransactionUtils.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -125,6 +128,25 @@ public class PaymentServiceTest extends AbstractServiceTest {
         List<GlTransaction> glTransactions1 = transactionService.removeAllocations(transactions);
 
         List<GlTransaction> glTransactions2 = transactionService.allocateReversals(transactions);
+
+        Map<Integer, List<Transaction>> transactionsByYears = sortTransactionsByYears(transactions, paymentYears);
+
+        for (Map.Entry<Integer, List<Transaction>> entry : transactionsByYears.entrySet() ) {
+
+           List<Transaction> transactionsForYear = entry.getValue();
+
+           Map<TransactionTypeValue, List<Transaction>> transactionMap = sortTransactionsByTypes(transactionsForYear,
+                TransactionTypeValue.CHARGE, TransactionTypeValue.PAYMENT);
+
+           List<Transaction> chargesForYear = transactionMap.get(TransactionTypeValue.CHARGE);
+           List<Transaction> paymentsForYear = transactionMap.get(TransactionTypeValue.PAYMENT);
+
+            Map<String, List<Transaction>> finAidPaymentMap = sortTransactionsByTags(transactionsForYear,
+                    Constants.KSA_PAYMENT_TAG_FINAID);
+
+           List<Transaction> finAidPaymentsForYear = finAidPaymentMap.get(Constants.KSA_PAYMENT_TAG_FINAID);
+
+        }
 
         // TODO: simulate the rule-based paymentApplication()
 
