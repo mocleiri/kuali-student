@@ -39,8 +39,8 @@ public interface AuditableEntityService {
     <T extends AuditableEntity> List<T> getAuditableEntities(Class<T> entityType);
 
     /**
-     * Returns all AuditableEntity instances containing the name string sorted by ID in
-     * the descendant order for the given entity type.
+     * Returns all AuditableEntity instances containing the name string sorted by ID
+     * in the descendant order for the given entity type.
      *
      * @param name String containing characters within the name
      * @param entityType Class instance of AuditableEntity subclass

@@ -63,7 +63,8 @@ public class AuditableEntityServiceImpl extends GenericPersistenceService implem
     }
 
     /**
-     * Returns all AuditableEntity instances containg the name string sorted by ID in the descendant order for the given entity type
+     * Returns all AuditableEntity instances containing the name string sorted by ID
+     * in the descendant order for the given entity type
      *
      * @param name       String containing characters within the name
      * @param entityType Class instance of AuditableEntity subclass
@@ -72,7 +73,7 @@ public class AuditableEntityServiceImpl extends GenericPersistenceService implem
     @Override
     public <T extends AuditableEntity> List<T> getAuditableEntitiesByName(String name, Class<T> entityType) {
         Query query = em.createQuery("select ae from " + entityType.getName() + " ae where upper(ae.name) like upper(:name)");
-        query.setParameter("name", "%" +  name + "%");
+        query.setParameter("name", "%" + name + "%");
         return query.getResultList();
     }
 
