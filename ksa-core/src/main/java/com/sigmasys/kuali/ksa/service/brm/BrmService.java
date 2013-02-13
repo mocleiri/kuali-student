@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.service.brm;
 
 import com.sigmasys.kuali.ksa.model.rule.RuleSet;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
@@ -11,7 +10,6 @@ import java.util.Map;
  *
  * @author Michael Ivanov
  */
-@Service("droolsService")
 @Transactional
 @SuppressWarnings("unchecked")
 public interface BrmService {

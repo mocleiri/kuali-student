@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
+import com.sigmasys.kuali.ksa.service.brm.BrmService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private BrmService brmService;
 
 
     /**
