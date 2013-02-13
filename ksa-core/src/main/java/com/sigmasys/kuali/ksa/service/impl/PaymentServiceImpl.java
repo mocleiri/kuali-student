@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 import java.math.BigDecimal;
 import java.util.*;
@@ -43,6 +44,7 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
      * @return List of generated GL transactions
      */
     @Override
+    @WebMethod(exclude = true)
     @Transactional(readOnly = true)
     public List<GlTransaction> applyPayments(List<Transaction> transactions, boolean isQueued) {
         return applyPayments(transactions, BigDecimal.valueOf(Long.MAX_VALUE), isQueued);

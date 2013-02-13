@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.service;
 import com.sigmasys.kuali.ksa.annotation.Url;
 import com.sigmasys.kuali.ksa.model.*;
 
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 import java.math.BigDecimal;
 import java.util.List;
@@ -49,6 +50,7 @@ public interface PaymentService {
      * @param isQueued     Indicates whether the generated GL transactions should be put in a queue or not
      * @return List of generated GL transactions
      */
+    @WebMethod(exclude = true)
     List<GlTransaction> applyPayments(List<Transaction> transactions, boolean isQueued);
 
     /**
