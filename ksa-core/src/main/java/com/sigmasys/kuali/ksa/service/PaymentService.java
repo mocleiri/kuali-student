@@ -43,6 +43,15 @@ public interface PaymentService {
     List<GlTransaction> applyPayments(List<Transaction> transactions, BigDecimal maxAmount, boolean isQueued);
 
     /**
+     * An overridden version of applyPayments() that does not take maxAmount into acccount.
+     *
+     * @param transactions List of transactions
+     * @param isQueued     Indicates whether the generated GL transactions should be put in a queue or not
+     * @return List of generated GL transactions
+     */
+    List<GlTransaction> applyPayments(List<Transaction> transactions, boolean isQueued);
+
+    /**
      * Calls the rules set for payment application.
      * Many other services can be used and will be useful to payment application,
      * including a direct creation of an allocation if needed.

@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.util.CalendarUtils;
+import com.sigmasys.kuali.ksa.util.TransactionUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -111,11 +112,11 @@ public class PaymentServiceTest extends AbstractServiceTest {
         int minYear = paymentYears[0];
         int maxYear = paymentYears[0];
 
-        for ( int year : paymentYears ) {
-            if ( minYear > year ) {
+        for (int year : paymentYears) {
+            if (minYear > year) {
                 minYear = year;
             }
-            if ( maxYear < year ) {
+            if (maxYear < year) {
                 maxYear = year;
             }
         }
@@ -131,20 +132,24 @@ public class PaymentServiceTest extends AbstractServiceTest {
 
         Map<Integer, List<Transaction>> transactionsByYears = sortTransactionsByYears(transactions, paymentYears);
 
-        for (Map.Entry<Integer, List<Transaction>> entry : transactionsByYears.entrySet() ) {
+        for (Map.Entry<Integer, List<Transaction>> entry : transactionsByYears.entrySet()) {
 
-           List<Transaction> transactionsForYear = entry.getValue();
+            List<Transaction> transactionsForYear = entry.getValue();
 
-           Map<TransactionTypeValue, List<Transaction>> transactionMap = sortTransactionsByTypes(transactionsForYear,
-                TransactionTypeValue.CHARGE, TransactionTypeValue.PAYMENT);
+            Map<TransactionTypeValue, List<Transaction>> transactionMap = sortTransactionsByTypes(transactionsForYear,
+                    TransactionTypeValue.CHARGE, TransactionTypeValue.PAYMENT);
 
-           List<Transaction> chargesForYear = transactionMap.get(TransactionTypeValue.CHARGE);
-           List<Transaction> paymentsForYear = transactionMap.get(TransactionTypeValue.PAYMENT);
+            List<Transaction> chargesForYear = transactionMap.get(TransactionTypeValue.CHARGE);
+            List<Transaction> paymentsForYear = transactionMap.get(TransactionTypeValue.PAYMENT);
 
             Map<String, List<Transaction>> finAidPaymentMap = sortTransactionsByTags(transactionsForYear,
                     Constants.KSA_PAYMENT_TAG_FINAID);
 
-           List<Transaction> finAidPaymentsForYear = finAidPaymentMap.get(Constants.KSA_PAYMENT_TAG_FINAID);
+            List<Transaction> finAidPaymentsForYear = finAidPaymentMap.get(Constants.KSA_PAYMENT_TAG_FINAID);
+
+            List<Transaction> chargesAndFinAidPayments = union(paymentsForYear, finAidPaymentsForYear);
+
+            List<GlTransaction> glTransactions3 = paymentService.applyPayments(chargesAndFinAidPayments, true);
 
         }
 

@@ -35,6 +35,19 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
     @Autowired
     private BrmService brmService;
 
+    /**
+     * An overridden version of applyPayments() that does not take maxAmount into acccount.
+     *
+     * @param transactions List of transactions
+     * @param isQueued     Indicates whether the generated GL transactions should be put in a queue or not
+     * @return List of generated GL transactions
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<GlTransaction> applyPayments(List<Transaction> transactions, boolean isQueued) {
+        return applyPayments(transactions, BigDecimal.valueOf(Long.MAX_VALUE), isQueued);
+    }
+
 
     /**
      * This method takes the list that has been manipulated by the other payment application filters.
@@ -54,6 +67,7 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
      * @return List of generated GL transactions
      */
     @Override
+    @Transactional(readOnly = false)
     public List<GlTransaction> applyPayments(List<Transaction> transactions, BigDecimal maxAmount, boolean isQueued) {
         BigDecimal remainingAmount = maxAmount;
         List<GlTransaction> glTransactions = new LinkedList<GlTransaction>();
@@ -62,7 +76,9 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
             Long transactionId = transaction.getId();
             TransactionTypeId transactionTypeId = transaction.getTransactionType().getId();
             // Check if it is Credit
-            boolean isCredit = (transaction instanceof Credit);
+            TransactionTypeValue transactionType = transaction.getTransactionTypeValue();
+            boolean isCredit = (transactionType == TransactionTypeValue.PAYMENT
+                    || transactionType == TransactionTypeValue.DEFERMENT);
             if (isCredit) {
                 // Assuming that credit permissions are sorted by priorities in descending order
                 creditPermissions = transactionService.getCreditPermissions(transactionTypeId);
