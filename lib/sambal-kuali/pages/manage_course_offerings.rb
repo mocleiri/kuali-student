@@ -20,7 +20,7 @@ class ManageCourseOfferings < BasePage
 
   action(:show) { |b| b.frm.button(text: "Show").click; sleep 2; b.loading.wait_while_present(180) }
 
-  value(:course_title) { |b| b.frm.div(id: "KS-CourseOfferingManagement-ActivityOfferingResultSection").h3(index: 0).text }
+  value(:course_title) { |b| b.frm.div(id: "ActivityOfferingResultSection").text }
   action(:edit_offering) { |b| b.frm.link(text: "Edit").click; b.loading.wait_while_present } # Persistent ID needed!
 
   element(:format) { |b| b.frm.select(name: "formatIdForNewAO") }
@@ -122,4 +122,10 @@ class ManageCourseOfferings < BasePage
     quantity.set(input_quantity)
     add
   end
+
+  def cross_listed_as(crossListedCoCode)
+
+    course_title
+  end
+
 end

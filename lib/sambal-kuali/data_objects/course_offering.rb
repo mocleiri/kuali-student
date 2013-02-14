@@ -271,7 +271,12 @@ class CourseOffering
     end
 
     on ManageCourseOfferings do |page|
-      @ao_list = page.codes_list
+      begin
+        @ao_list = page.codes_list
+      rescue
+        @ao_list = []
+      end
+
     end
   end
 
@@ -386,6 +391,15 @@ class CourseOffering
     aoCode = ao_code[:ao_code]
     on ManageCourseOfferings do |page|
       retVal = page.ao_schedule_data(aoCode)
+    end
+
+    retVal
+  end
+
+  def cross_listed_co_data(co_code)
+    retVal = nil
+    on ManageCourseOfferings do |page|
+      retVal = page.course_title
     end
 
     retVal

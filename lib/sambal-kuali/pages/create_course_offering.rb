@@ -18,6 +18,8 @@ class CreateCourseOffering < BasePage
   element(:create_offering_from_div)  { |b| b.frm.div(id: "KS-CourseOffering-LinkSection").text_field() }
   #action(:create_from_existing_offering)  { |b| b.create_offering_from_div.link(text: /Existing Offering/).click }
   element(:suffix) { |b| b.frm.div(data_label: "Suffix").text_field() }
+  element(:cross_listed_co_check_boxes) { |b| b.frm.dvi(id:"KS-CoListed-Checkbox-Group")}
+  element(:cross_listed_co_check_box) { |b| b.checkbox(id: "KS-CoListed-Checkbox-Group_control_0") }
 
   element(:add_format){|b| b.frm.div(data_label:"FORMAT")}
   element(:add_grade_roster_level){|b| b.frm.div(data_label:"GRADE ROSTER LEVEL")}
@@ -50,7 +52,12 @@ class CreateCourseOffering < BasePage
   def add_random_delivery_format
     #selected_options = {:del_format => select_random_option(delivery_formats_table[1].cells[FORMAT_COLUMN]), :grade_format => select_random_option(delivery_formats_table[1].cells[GRADE_ROSTER_LEVEL_COLUMN]), :final_exam_driver => select_random_option(delivery_formats_table[1].cells[FINAL_EXAM_COLUMN])}
     #delivery_format_add
-    selected_options = {:del_format => select_random_option(add_format), :grade_format => select_random_option(add_grade_roster_level), :final_exam_driver => select_random_option(add_final_exam_driver)}
+    begin
+      selected_options = {:del_format => select_random_option(add_format), :grade_format => select_random_option(add_grade_roster_level), :final_exam_driver => select_random_option(add_final_exam_driver)}
+    rescue
+      selected_options = {:del_format => select_random_option(add_format), :grade_format => select_random_option(add_grade_roster_level)}
+    end
+
     add_format_btn
     return selected_options
   end
