@@ -96,7 +96,7 @@ public class SettingsController extends GenericSearchController {
             if (entityId == null || entityId.trim().isEmpty()) {
                 throw new IllegalArgumentException("'entityId' request parameter must be specified");
             }
-            form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), LatePeriod.class));
+            form.setAuditableEntity(auditableEntityService.getAuditableEntity(Long.valueOf(entityId), TaxType.class));
         } else if ("LatePeriodPage".equals(pageId)) {
             form.setAuditableEntity(new LatePeriod());
             form.setAuditableEntities(auditableEntityService.getAuditableEntities(LatePeriod.class));
