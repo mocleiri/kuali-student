@@ -358,6 +358,16 @@ public class QuickViewController extends GenericSearchController {
 
         List<Memo> memos = informationService.getMemos(userId);
 
+        Iterator<Memo> iter = memos.iterator();
+        Date today = new Date();
+        while(iter.hasNext()){
+            Date expire = iter.next().getExpirationDate();
+            if(expire != null && expire.before(today)){
+                iter.remove();
+            }
+        }
+
+
         form.setMemoModels(memos);
     }
 }
