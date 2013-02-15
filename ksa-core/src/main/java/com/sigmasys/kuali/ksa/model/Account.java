@@ -188,6 +188,11 @@ public class Account implements Identifiable {
     public Boolean isKimAccount() {
         return isKimAccount;
     }
+    
+    @Transient
+ 	public Boolean getIsKimAccount() {
+ 		return isKimAccount();
+ 	}
 
     public void setKimAccount(Boolean kimAccount) {
         isKimAccount = kimAccount;
@@ -198,6 +203,11 @@ public class Account implements Identifiable {
     public Boolean isAbleToAuthenticate() {
         return ableToAuthenticate;
     }
+    
+    @Transient
+	public Boolean getAbleToAuthenticate() {
+		return isAbleToAuthenticate();
+	}
 
     public void setAbleToAuthenticate(Boolean ableToAuthenticate) {
         this.ableToAuthenticate = ableToAuthenticate;
