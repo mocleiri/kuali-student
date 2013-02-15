@@ -52,9 +52,8 @@
 									<property name="renderLineActions" value="true"/>
 									<property name="lineActions">
 										<list>
-											<bean parent="Uif-ActionLink" p:actionLabel="Edit" 
-												p:actionScript="accountManagement?viewId=AdminView&amp;pageId=NewPersonAccountPage&amp;methodToCall=editPersonAccount&amp;accountId=@{#line.account.id}"/>
-
+											<bean parent="Uif-ActionLink" p:actionLabel="Edit" p:methodToCall="editPersonAccount" 
+												p:actionScript="writeHiddenToForm(&quot;accountId&quot;, &quot;@{#line.account.id}&quot;); window.location.href='accountManagement?viewId=AdminView&amp;pageId=NewPersonAccountPage&amp;methodToCall=editPersonAccount&amp;accountId=@{#line.account.id}'"/>
 										</list>
 									</property>
 									<property name="items">
