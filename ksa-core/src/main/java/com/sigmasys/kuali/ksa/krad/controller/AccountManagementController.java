@@ -122,6 +122,10 @@ public class AccountManagementController extends GenericSearchController {
 		
 		// Populate the form with the Account details:
 		populateForExistingAccount(form, account, false);
+		
+		// Set the navigation parameters:
+		form.setViewId("AdminView");
+		form.setPageId("NewPersonAccountPage");
 
 		return getUIFModelAndView(form);
 	}
@@ -136,10 +140,11 @@ public class AccountManagementController extends GenericSearchController {
 	/*
 	 * Populates the given form for a New Person Account page.
 	 */
+	@SuppressWarnings("serial")
 	protected void populateForNewPersonAccount(AdminForm form, boolean addBlankOption) {
 		// Create a new AccountInformationHolder object:
 		AccountInformationHolder accountInfo = new AccountInformationHolder();
-		Account account = new AccountWrapper();
+		Account account = new Account(){};
 		AccountProtectedInfo accountProtectedInfo = new AccountProtectedInfo();
 		PersonName personName = new PersonName();
 		PostalAddress postalAddress = new PostalAddress();
@@ -269,20 +274,5 @@ public class AccountManagementController extends GenericSearchController {
 		account.setCreationDate(new Date());
 		account.setCreatorId(currentUser);
 		account.setKimAccount(isKimAccount);
-	}
-	
-	
-	/*
-	 * Account class wrapper. Provides additional property access methods.
-	 * This class is useful when used with forms.
-	 */
-	@SuppressWarnings("all")
-	public static class AccountWrapper extends Account {
-		public Boolean getAbleToAuthenticate() {
-			return isAbleToAuthenticate();
-		}
-		public Boolean getIsKimAccount() {
-			return isKimAccount();
-		}
 	}
 }
