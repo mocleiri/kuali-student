@@ -1,6 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,7 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sigmasys.kuali.ksa.gwt.client.view.widget.value.DateRangeValue;
 import com.sigmasys.kuali.ksa.krad.form.AdminForm;
 import com.sigmasys.kuali.ksa.krad.util.AccountSearchInformationHolder;
-import com.sigmasys.kuali.ksa.model.UserPreference;
+import com.sigmasys.kuali.ksa.krad.util.AccountSearchResultCollectionLine;
+import com.sigmasys.kuali.ksa.model.*;
 
 /**
  * This class handles searches for a personal or organizational Accounts.
@@ -50,9 +52,13 @@ public class AccountSearchController extends AccountManagementController {
 	public ModelAndView doSearchPersonAccount(@ModelAttribute("KualiForm") AdminForm form, HttpServletRequest request) {
 		// TODO: Inspect the search parameters
 		
-		// TODO: Search for Accounts:
+		// TODO: Search for Accounts: Temporarily load all Accounts to have some data available for testing:
+		List<Account> matchingAccounts = accountService.getFullAccounts();
 		
 		// TODO: Prepare the result:
+		List<AccountSearchResultCollectionLine> accountSearchResults = prepareDisplayLines(matchingAccounts);
+		
+		form.setAccountSearchResults(accountSearchResults);
 		
 		// Navigate to the Search Result page:
 		form.setPageId("SearchAccountResultsPage");
@@ -85,5 +91,30 @@ public class AccountSearchController extends AccountManagementController {
 		accountSearchInfo.setSearchResultFields(new ArrayList<String>());
 		form.setAccountSearchInfo(accountSearchInfo);
 		form.getAccountInfo().setAccountType(null);
+	}
+	
+	/**
+	 * Prepares a <code>List</code> of Account search result line items suitable for display.
+	 * 
+	 * @param accounts	Accounts - search results to be converted to display elements.
+	 * @return A <code>List</code> of display elements.
+	 */
+	private List<AccountSearchResultCollectionLine> prepareDisplayLines(List<Account> accounts) {
+		// Create the result collection:
+		List<AccountSearchResultCollectionLine> lines = new ArrayList<AccountSearchResultCollectionLine>();
+		
+		// Add elements to the resultant collection:
+		for (Account account : accounts) {
+			// Create a new line item:
+			AccountSearchResultCollectionLine line = new AccountSearchResultCollectionLine();
+			AccountProtectedInfo accountProtectedInfo = accountService.getAccountProtectedInfo(account.getId());
+			
+			line.setAccount(account);
+			line.setAccountProtectedInfo(accountProtectedInfo);
+			line.setDateOfBirth(getAccountDateOfBirth(account));
+			lines.add(line);
+		}
+		
+		return lines;
 	}
 }
