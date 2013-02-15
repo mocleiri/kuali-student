@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
 
 import com.sigmasys.kuali.ksa.exception.*;
 import com.sigmasys.kuali.ksa.model.*;
@@ -72,11 +73,11 @@ public class TransactionServiceImpl extends GenericPersistenceService implements
                 " order by t.id desc");
 
         if (fromDate != null) {
-            query.setParameter("fromDate", fromDate);
+            query.setParameter("fromDate", CalendarUtils.removeTime(fromDate), TemporalType.DATE);
         }
 
         if (toDate != null) {
-            query.setParameter("toDate", toDate);
+            query.setParameter("toDate", CalendarUtils.removeTime(toDate), TemporalType.DATE);
         }
 
         if (userIds != null && userIds.length > 0) {

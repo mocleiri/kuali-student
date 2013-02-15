@@ -208,7 +208,7 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
         this.externalId = externalId;
     }
 
-    @Column(name = "LEDGER_DATE")
+    @Column(name = "CREATION_DATE")
     public Date getCreationDate() {
         return creationDate;
     }

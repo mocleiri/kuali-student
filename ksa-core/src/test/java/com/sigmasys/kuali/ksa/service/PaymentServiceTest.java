@@ -3,7 +3,6 @@ package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.util.CalendarUtils;
-import com.sigmasys.kuali.ksa.util.TransactionUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +26,8 @@ import static com.sigmasys.kuali.ksa.util.TransactionUtils.*;
 @SuppressWarnings("unchecked")
 public class PaymentServiceTest extends AbstractServiceTest {
 
+    @Autowired
+    private GeneralLedgerService glService;
 
     @Autowired
     private TransactionService transactionService;
@@ -43,7 +45,6 @@ public class PaymentServiceTest extends AbstractServiceTest {
         String userId = "admin";
         accountService.getOrCreateAccount(userId);
     }
-
 
     @Test
     public void applyPayments1() throws Exception {
@@ -107,32 +108,50 @@ public class PaymentServiceTest extends AbstractServiceTest {
 
         String userId = "admin";
 
-        int[] paymentYears = paymentService.getPaymentYears();
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
+        Date transactionDate = dateFormat.parse("12/12/2012");
 
-        int minYear = paymentYears[0];
+        transactionService.createTransaction("1310", userId, transactionDate, new BigDecimal(-350.99));
+        transactionService.createTransaction("cash", userId, transactionDate, new BigDecimal(10e11));
+        transactionService.createTransaction("cash", userId, transactionDate, new BigDecimal(-10e3));
+        transactionService.createTransaction("1540", userId, transactionDate, new BigDecimal(10e8));
+        transactionService.createTransaction("ach", userId, transactionDate, new BigDecimal(78800.07));
+        transactionService.createTransaction("1292", userId, transactionDate, new BigDecimal(-0.98));
+        transactionService.createTransaction("ach", userId, transactionDate, new BigDecimal(524.39));
+        transactionService.createTransaction("pp", userId, transactionDate, new BigDecimal(-998.01));
+        transactionService.createTransaction("chip", userId, transactionDate, new BigDecimal(100111.34));
+
+        Integer[] paymentYears = paymentService.getPaymentYears();
+
+        int minYear = paymentYears[paymentYears.length - 1];
         int maxYear = paymentYears[0];
 
-        for (int year : paymentYears) {
-            if (minYear > year) {
-                minYear = year;
-            }
-            if (maxYear < year) {
-                maxYear = year;
-            }
-        }
-
         Date startDate = CalendarUtils.getFirstDateOfYear(minYear);
-        Date endDate = CalendarUtils.getFirstDateOfYear(maxYear);
+        Date endDate = CalendarUtils.getLastDateOfYear(maxYear);
 
         List<Transaction> transactions = transactionService.getTransactions(userId, startDate, endDate);
 
-        List<GlTransaction> glTransactions1 = transactionService.removeAllocations(transactions);
+        logger.debug("All transactions: " + transactions);
 
-        List<GlTransaction> glTransactions2 = transactionService.allocateReversals(transactions);
+        List<GlTransaction> generatedGlTransactions = new LinkedList<GlTransaction>();
+
+        List<GlTransaction> glTransactions = transactionService.removeAllocations(transactions);
+
+        generatedGlTransactions.addAll(glTransactions);
+
+        glTransactions = transactionService.allocateReversals(transactions);
+
+        generatedGlTransactions.addAll(glTransactions);
 
         Map<Integer, List<Transaction>> transactionsByYears = sortTransactionsByYears(transactions, paymentYears);
 
+        logger.debug("Transactions by years: " + transactionsByYears);
+
+        List<Transaction> remainingChargesAndPayments = new LinkedList<Transaction>();
+
         for (Map.Entry<Integer, List<Transaction>> entry : transactionsByYears.entrySet()) {
+
+            int currentYear = entry.getKey();
 
             List<Transaction> transactionsForYear = entry.getValue();
 
@@ -147,13 +166,63 @@ public class PaymentServiceTest extends AbstractServiceTest {
 
             List<Transaction> finAidPaymentsForYear = finAidPaymentMap.get(Constants.KSA_PAYMENT_TAG_FINAID);
 
-            List<Transaction> chargesAndFinAidPayments = union(paymentsForYear, finAidPaymentsForYear);
+            List<Transaction> chargesAndFinAidPayments = union(chargesForYear, finAidPaymentsForYear);
 
-            List<GlTransaction> glTransactions3 = paymentService.applyPayments(chargesAndFinAidPayments, true);
+            glTransactions = paymentService.applyPayments(chargesAndFinAidPayments);
+
+            generatedGlTransactions.addAll(glTransactions);
+
+            // Applying the rest of financial aid payments to charges for the previous years
+            for (int year : paymentYears) {
+
+                if (currentYear > year) {
+
+                    // Gathering all payments with non-zero amounts
+                    List<Transaction> remainingFinAidPayments = new LinkedList<Transaction>();
+                    for (Transaction finAidPayment : finAidPaymentsForYear) {
+                        if (finAidPayment.getAmount().compareTo(BigDecimal.ZERO) > 0) {
+                            remainingFinAidPayments.add(finAidPayment);
+                        }
+                    }
+
+                    if (!remainingFinAidPayments.isEmpty()) {
+
+                        Map<TransactionTypeValue, List<Transaction>> chargeMap =
+                                sortTransactionsByTypes(transactionsByYears.get(year), TransactionTypeValue.CHARGE);
+
+                        List<Transaction> chargesForPrevYear = chargeMap.get(TransactionTypeValue.CHARGE);
+
+                        if (chargesForPrevYear != null && !remainingFinAidPayments.isEmpty()) {
+                            glTransactions = paymentService.applyPayments(union(chargesForYear, finAidPaymentsForYear));
+                            generatedGlTransactions.addAll(glTransactions);
+                        }
+                    }
+                }
+            }
+
+            // Subtracting financial aid payments from all the payments and store the result
+            remainingChargesAndPayments.addAll(subtract(paymentsForYear, finAidPaymentsForYear));
+
+            // Adding charges to remaining payments
+            remainingChargesAndPayments.addAll(chargesForYear);
 
         }
 
-        // TODO: simulate the rule-based paymentApplication()
+        calculateMatrixScores(remainingChargesAndPayments);
+
+        orderByMatrixScore(remainingChargesAndPayments, true);
+
+        glTransactions = paymentService.applyPayments(remainingChargesAndPayments);
+
+        generatedGlTransactions.addAll(glTransactions);
+
+        generatedGlTransactions = glService.summarizeGlTransactions(generatedGlTransactions);
+
+        // The end
+        logger.debug("Generated GL transactions: " + generatedGlTransactions);
+
+        Assert.notNull(generatedGlTransactions);
+        Assert.notEmpty(generatedGlTransactions);
 
     }
 

@@ -44,7 +44,7 @@ public interface PaymentService {
     List<GlTransaction> applyPayments(List<Transaction> transactions, BigDecimal maxAmount, boolean isQueued);
 
     /**
-     * An overridden version of applyPayments() that does not take maxAmount into acccount.
+     * An overridden version of applyPayments() that does not take maxAmount into account.
      *
      * @param transactions List of transactions
      * @param isQueued     Indicates whether the generated GL transactions should be put in a queue or not
@@ -52,6 +52,15 @@ public interface PaymentService {
      */
     @WebMethod(exclude = true)
     List<GlTransaction> applyPayments(List<Transaction> transactions, boolean isQueued);
+
+    /**
+     * An overridden version of applyPayments() that does not take maxAmount into account.
+     *
+     * @param transactions List of transactions
+     * @return List of generated GL transactions
+     */
+    @WebMethod(exclude = true)
+    List<GlTransaction> applyPayments(List<Transaction> transactions);
 
     /**
      * Calls the rules set for payment application.
@@ -72,7 +81,7 @@ public interface PaymentService {
      *
      * @return an int array of years
      */
-    int[] getPaymentYears();
+    Integer[] getPaymentYears();
 
 
 }

@@ -45,9 +45,22 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
      */
     @Override
     @WebMethod(exclude = true)
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = false)
     public List<GlTransaction> applyPayments(List<Transaction> transactions, boolean isQueued) {
         return applyPayments(transactions, BigDecimal.valueOf(Long.MAX_VALUE), isQueued);
+    }
+
+    /**
+     * An overridden version of applyPayments() that does not take maxAmount into account.
+     *
+     * @param transactions List of transactions
+     * @return List of generated GL transactions
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public List<GlTransaction> applyPayments(List<Transaction> transactions) {
+        return applyPayments(transactions, true);
     }
 
 
@@ -169,7 +182,7 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
      * @return an int array of years
      */
     @Override
-    public int[] getPaymentYears() {
+    public Integer[] getPaymentYears() {
 
         String paramValue = configService.getParameter(Constants.KSA_PAYMENT_YEARS);
         if (!StringUtils.hasText(paramValue)) {
@@ -179,12 +192,16 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
         }
 
         String[] parts = paramValue.split(",");
-        int[] years = new int[parts.length];
-        for (int i = 0; i < parts.length; i++) {
-            years[i] = Integer.valueOf(parts[i]);
+
+        List<Integer> listOfYears = new ArrayList<Integer>(parts.length);
+        for (String part : parts) {
+            listOfYears.add(Integer.valueOf(part));
         }
 
-        return years;
+        Collections.sort(listOfYears, Collections.reverseOrder());
+
+        return listOfYears.toArray(new Integer[parts.length]);
+
     }
 
 
