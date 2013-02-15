@@ -1,8 +1,11 @@
 package com.sigmasys.kuali.ksa.service;
 
 
+import com.google.gwt.user.client.rpc.core.java.math.BigDecimal_CustomFieldSerializer;
+import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.util.CalendarUtils;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +28,9 @@ import static com.sigmasys.kuali.ksa.util.TransactionUtils.*;
 @ContextConfiguration(locations = {ServiceTestSuite.TEST_KSA_CONTEXT})
 @SuppressWarnings("unchecked")
 public class PaymentServiceTest extends AbstractServiceTest {
+
+    @Autowired
+    private ConfigService configService;
 
     @Autowired
     private GeneralLedgerService glService;
@@ -120,8 +126,23 @@ public class PaymentServiceTest extends AbstractServiceTest {
         transactionService.createTransaction("ach", userId, transactionDate, new BigDecimal(524.39));
         transactionService.createTransaction("pp", userId, transactionDate, new BigDecimal(-998.01));
         transactionService.createTransaction("chip", userId, transactionDate, new BigDecimal(100111.34));
+        transactionService.createTransaction("finaid", userId, transactionDate, new BigDecimal(20000.88));
+        transactionService.createTransaction("finaid2", userId, transactionDate, new BigDecimal(5500));
+
+        // Start
+
+        String paramValue = configService.getParameter(Constants.KSA_PAYMENT_FINAID_MAX_AMOUNT);
+        if (StringUtils.isBlank(paramValue)) {
+            String errMsg = "Configuration parameter '" + Constants.KSA_PAYMENT_FINAID_MAX_AMOUNT + "' is required";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        final BigDecimal maxAmount = new BigDecimal(paramValue);
 
         Integer[] paymentYears = paymentService.getPaymentYears();
+
+        logger.info("Payment years: " + paymentYears);
 
         int minYear = paymentYears[paymentYears.length - 1];
         int maxYear = paymentYears[0];
@@ -177,13 +198,19 @@ public class PaymentServiceTest extends AbstractServiceTest {
 
                 if (currentYear > year) {
 
-                    // Gathering all payments with non-zero amounts
+                    // Collecting all FinAid payments with non-zero amounts
                     List<Transaction> remainingFinAidPayments = new LinkedList<Transaction>();
                     for (Transaction finAidPayment : finAidPaymentsForYear) {
                         if (finAidPayment.getAmount().compareTo(BigDecimal.ZERO) > 0) {
+                            logger.info("Adding FinAid Payment(id = " + finAidPayment.getId() +
+                                    ", amount = " + finAidPayment.getAmount() +
+                                    ") to the list of remaining FinAid payments...");
                             remainingFinAidPayments.add(finAidPayment);
                         }
                     }
+
+                    logger.info("The number of remaining FinAid payments for " + currentYear + " year is " +
+                            remainingFinAidPayments.size());
 
                     if (!remainingFinAidPayments.isEmpty()) {
 
@@ -192,8 +219,10 @@ public class PaymentServiceTest extends AbstractServiceTest {
 
                         List<Transaction> chargesForPrevYear = chargeMap.get(TransactionTypeValue.CHARGE);
 
-                        if (chargesForPrevYear != null && !remainingFinAidPayments.isEmpty()) {
-                            glTransactions = paymentService.applyPayments(union(chargesForYear, finAidPaymentsForYear));
+                        if (chargesForPrevYear != null && !chargesForPrevYear.isEmpty()) {
+                            List<Transaction> finAidTransactions = union(chargesForYear, finAidPaymentsForYear);
+                            glTransactions = paymentService.applyPayments(finAidTransactions, maxAmount);
+                            logger.info("Generated FinAid GL transactions for " + year + " year: \n" + glTransactions);
                             generatedGlTransactions.addAll(glTransactions);
                         }
                     }
@@ -218,8 +247,9 @@ public class PaymentServiceTest extends AbstractServiceTest {
 
         generatedGlTransactions = glService.summarizeGlTransactions(generatedGlTransactions);
 
-        // The end
-        logger.debug("Generated GL transactions: " + generatedGlTransactions);
+        // End
+        logger.info("The number of generated GL transactions is " + generatedGlTransactions.size());
+        logger.info("Generated GL transactions: \n" + generatedGlTransactions);
 
         Assert.notNull(generatedGlTransactions);
         Assert.notEmpty(generatedGlTransactions);

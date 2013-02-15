@@ -117,6 +117,15 @@ public class GlTransaction extends AbstractGlEntity {
         statusCode = status.getId();
     }
 
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", {transactions=" + transactions +
+                ", transmission=" + transmission +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                "}\n";
+    }
 }
 	
 

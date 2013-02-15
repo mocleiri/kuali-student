@@ -118,6 +118,7 @@ insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.refund.ach.bank.type', 'ACH')
 -- KSA payment constants
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.payment.years', '2009,2010,2011,2012');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.payment.tag.finaid', 'FinAid');
+insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.payment.finaid.max.amount', '200');
 
 
 -- BRM (Drools) rule types

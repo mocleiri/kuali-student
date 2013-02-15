@@ -37,7 +37,7 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
     private BrmService brmService;
 
     /**
-     * An overridden version of applyPayments() that does not take maxAmount into acccount.
+     * An overridden version of applyPayments() that takes a list of transactions and isQueued parameter as arguments
      *
      * @param transactions List of transactions
      * @param isQueued     Indicates whether the generated GL transactions should be put in a queue or not
@@ -51,7 +51,7 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
     }
 
     /**
-     * An overridden version of applyPayments() that does not take maxAmount into account.
+     * An overridden version of applyPayments() that takes a list of transactions as an argument.
      *
      * @param transactions List of transactions
      * @return List of generated GL transactions
@@ -61,6 +61,20 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
     @Transactional(readOnly = false)
     public List<GlTransaction> applyPayments(List<Transaction> transactions) {
         return applyPayments(transactions, true);
+    }
+
+    /**
+     * An overridden version of applyPayments() that takes a list of transactions and maxAmount as arguments.
+     *
+     * @param transactions List of transactions
+     * @param maxAmount    Maximum amount allowed
+     * @return List of generated GL transactions
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public List<GlTransaction> applyPayments(List<Transaction> transactions, BigDecimal maxAmount) {
+        return applyPayments(transactions, maxAmount, true);
     }
 
 

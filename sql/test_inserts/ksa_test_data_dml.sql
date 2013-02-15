@@ -109,11 +109,12 @@ Insert into KSSA_TRANSACTION (TYPE,ID,ACNT_ID_FK,ALLOCATED,AMNT,CREATION_DATE,CR
 --   FILTER = none used
 ---------------------------------------------------
 REM INSERTING into KSSA_TAG
-Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (1,'pheald','This item will be reported on IRS form 1098T',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'1098T',3,'1098T');
-Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (2,'pheald','This item is considered cash for the combined-cash limit tracking requirement.',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Cash or Equivalent',5, 'Cash');
-Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (3,'pheald','This is the IRS1098T Tag for Billed Amounts',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'1098T Billed Amounts',5,'Billed1098');
-Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (4,'pheald','This is the IRS1098T Tag for Insurance Refunds',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'1098T Insurance',5,'InsRef1098');
-Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (5,'pheald','This is the IRS1098T Tag for Scholarships and grants',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'1098T Scholarships',5,'Scholarship1098');
+Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (1,'admin','This item will be reported on IRS form 1098T',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'1098T',3,'1098T');
+Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (2,'admin','This item is considered cash for the combined-cash limit tracking requirement.',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Cash or Equivalent',5, 'Cash');
+Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (3,'admin','This is the IRS1098T Tag for Billed Amounts',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'1098T Billed Amounts',5,'Billed1098');
+Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (4,'admin','This is the IRS1098T Tag for Insurance Refunds',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'1098T Insurance',5,'InsRef1098');
+Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (5,'admin','This is the IRS1098T Tag for Scholarships and grants',null,to_timestamp('03-APR-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'1098T Scholarships',5,'Scholarship1098');
+Insert into KSSA_TAG (ID,CREATOR_ID,DESCRIPTION,EDITOR_ID,CREATION_DATE,NAME,ACCESS_LEVEL, CODE) values (6,'admin','This is the Financial Aid Tag',null,to_timestamp('13-DEC-12 12.00.00.000000000 AM','DD-MON-RR HH.MI.SS.FF AM'),'Financial Aid',2,'FinAid');
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_TAG
@@ -1147,6 +1148,9 @@ Insert into KSSA_TRANSACTION_TYPE_TAG (TRANSACTION_TYPE_ID_FK,TRANSACTION_TYPE_S
 Insert into KSSA_TRANSACTION_TYPE_TAG (TRANSACTION_TYPE_ID_FK,TRANSACTION_TYPE_SUB_CODE_FK,TAG_ID_FK) values ('chip',1,3);
 Insert into KSSA_TRANSACTION_TYPE_TAG (TRANSACTION_TYPE_ID_FK,TRANSACTION_TYPE_SUB_CODE_FK,TAG_ID_FK) values ('chip',1,4);
 Insert into KSSA_TRANSACTION_TYPE_TAG (TRANSACTION_TYPE_ID_FK,TRANSACTION_TYPE_SUB_CODE_FK,TAG_ID_FK) values ('chip',1,5);
+
+Insert into KSSA_TRANSACTION_TYPE_TAG (TRANSACTION_TYPE_ID_FK,TRANSACTION_TYPE_SUB_CODE_FK,TAG_ID_FK) values ('finaid',1,6);
+Insert into KSSA_TRANSACTION_TYPE_TAG (TRANSACTION_TYPE_ID_FK,TRANSACTION_TYPE_SUB_CODE_FK,TAG_ID_FK) values ('finaid2',1,6);
 
 ---------------------------------------------------
 --   END DATA FOR TABLE KSSA_TRANSACTION_TYPE_TAG

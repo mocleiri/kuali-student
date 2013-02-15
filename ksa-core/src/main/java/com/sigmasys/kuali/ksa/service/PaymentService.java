@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.annotation.Url;
 import com.sigmasys.kuali.ksa.model.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -44,7 +45,7 @@ public interface PaymentService {
     List<GlTransaction> applyPayments(List<Transaction> transactions, BigDecimal maxAmount, boolean isQueued);
 
     /**
-     * An overridden version of applyPayments() that does not take maxAmount into account.
+     * An overridden version of applyPayments() that takes a list of transactions and isQueued parameter as arguments
      *
      * @param transactions List of transactions
      * @param isQueued     Indicates whether the generated GL transactions should be put in a queue or not
@@ -54,7 +55,17 @@ public interface PaymentService {
     List<GlTransaction> applyPayments(List<Transaction> transactions, boolean isQueued);
 
     /**
-     * An overridden version of applyPayments() that does not take maxAmount into account.
+     * An overridden version of applyPayments() that takes a list of transactions and maxAmount as arguments.
+     *
+     * @param transactions List of transactions
+     * @param maxAmount    Maximum amount allowed
+     * @return List of generated GL transactions
+     */
+    @WebMethod(exclude = true)
+    List<GlTransaction> applyPayments(List<Transaction> transactions,  BigDecimal maxAmount);
+
+    /**
+     * An overridden version of applyPayments() that takes a list of transactions as an argument
      *
      * @param transactions List of transactions
      * @return List of generated GL transactions

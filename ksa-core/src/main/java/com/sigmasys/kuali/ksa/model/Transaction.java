@@ -475,6 +475,37 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
     @Transient
     public abstract TransactionTypeValue getTransactionTypeValue();
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "{" +
+                "id=" + id +
+                ", transactionType=" + transactionType +
+                ", rollup=" + rollup +
+                ", externalId='" + externalId + '\'' +
+                ", creationDate=" + creationDate +
+                ", effectiveDate=" + effectiveDate +
+                ", originationDate=" + originationDate +
+                ", recognitionDate=" + recognitionDate +
+                ", amount=" + amount +
+                ", nativeAmount=" + nativeAmount +
+                ", currency=" + currency +
+                ", internal=" + internal +
+                ", allocatedAmount=" + allocatedAmount +
+                ", unallocatedAmount=" + unallocatedAmount +
+                ", lockedAllocatedAmount=" + lockedAllocatedAmount +
+                ", creatorId='" + creatorId + '\'' +
+                ", statementText='" + statementText + '\'' +
+                ", document=" + document +
+                ", account=" + account +
+                ", glEntryGenerated=" + glEntryGenerated +
+                ", generalLedgerType=" + generalLedgerType +
+                ", glOverridden=" + glOverridden +
+                ", matrixScore=" + matrixScore +
+                ", status=" + status +
+                ", statusCode='" + statusCode + '\'' +
+                ", tags=" + tags +
+                "}\n";
+    }
 }
 	
 

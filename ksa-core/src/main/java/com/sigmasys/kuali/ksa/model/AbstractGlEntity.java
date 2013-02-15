@@ -125,6 +125,19 @@ public abstract class AbstractGlEntity implements Identifiable {
         glOperationCode = glOperation.getId();
     }
 
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "{" +
+                "id=" + id +
+                ", glAccountId='" + glAccountId + '\'' +
+                ", date=" + date +
+                ", amount=" + amount +
+                ", recognitionPeriod=" + recognitionPeriod +
+                ", glOperation=" + glOperation +
+                ", glOperationCode='" + glOperationCode + '\'' +
+                ", statusCode='" + statusCode + '\'' +
+                '}';
+    }
 }
 	
 
