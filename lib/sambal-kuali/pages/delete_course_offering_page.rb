@@ -11,6 +11,9 @@ class DeleteCourseOffering < BasePage
 
   action(:show) { |b| b.frm.button(text: "Show").click; sleep 2; b.loading.wait_while_present } # Persistent ID needed!
 
+
+  value(:delete_warning_message) { |b| b.frm.div(id: "KS-CoDeleteConfirmation-WarningMessage").text }
+
   action(:confirm_delete) { |p| p.confirm_delete_button.click }
   action(:cancel_delete) { |b| b.frm.link(id: "coDeleteConfirmationResultSection_cancelDeleteButton").click }
 

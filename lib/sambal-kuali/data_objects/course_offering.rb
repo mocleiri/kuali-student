@@ -334,9 +334,6 @@ class CourseOffering
   #@param  opts [Hash] {:ao_code => "CODE"}
   def delete_ao(opts)
     ao_code = opts[:ao_code]
-    on ManageCourseOfferings do |page|
-      page.delete_ao(ao_code)
-    end
     on ActivityOfferingConfirmDelete do |page|
       page.delete_activity_offering
     end
@@ -366,11 +363,21 @@ class CourseOffering
     ao_code_list = opts[:code_list]
     on ManageCourseOfferings do |page|
       page.select_aos(ao_code_list)
-      page.selected_offering_actions.select("Delete")
-      page.go
+      page.delete_aos
     end
     on ActivityOfferingConfirmDelete do |page|
       page.delete_activity_offering
+    end
+  end
+
+  def delete_ao_cross_list_value(opts)
+    ao_code_list = opts[:code_list]
+    on ManageCourseOfferings do |page|
+      page.select_aos(ao_code_list)
+      page.delete_aos
+    end
+    on ActivityOfferingConfirmDelete do |page|
+      page.delete_confirm_message
     end
   end
 

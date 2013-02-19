@@ -6,7 +6,10 @@ class ActivityOfferingConfirmDelete < BasePage
 
   expected_element :delete_activity_offering_button
 
-  element(:delete_activity_offering_button) { |b| b.frm.button(text: "Delete Activity Offering(s)") }
-  action(:delete_activity_offering) { |b| b.delete_activity_offering_button.click; b.loading.wait_while_present }
+  element(:delete_activity_offering_button) { |b| b.frm.button(id: "AoDeleteConfirmationDeleteButton") }
+  action(:delete_activity_offering) { |b| b.frm.button(id: "AoDeleteConfirmationDeleteButton").click; b.loading.wait_while_present }
+
+  value(:delete_warning_message) { |b| b.frm.div(id: "KS-SelectedAoDeleteConfirmation-WarningMessage").text }
+  value(:delete_confirm_message) { |b| b.frm.div(id: "KS-SelectedAoDeleteConfirmation-Message").text}
 
 end

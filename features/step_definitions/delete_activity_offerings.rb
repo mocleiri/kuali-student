@@ -1,4 +1,10 @@
-When /^I delete the selected multiple AOs$/ do
+When /^I designate a valid term and a Course Offering Code$/ do
+  @course_offering = make CourseOffering
+  @course_offering.manage
+end
+
+
+And /^I delete the selected multiple AOs$/ do
   @total_number = @course_offering.ao_list.count
   @course_offering.copy_ao :ao_code =>  @course_offering.ao_list[@total_number-1]
   @course_offering.copy_ao :ao_code =>  @course_offering.ao_list[@total_number-1]
@@ -22,16 +28,29 @@ Then /^The AOs are Successfully deleted$/ do
   end
 end
 
+When /^I designate a valid term and cross\-listed Course Offering Code$/ do
+  @source_term = "201201"
+  @cross_listed_co_code = "WMST255"
+  @catalogue_course_code = "ENGL250"
+  @course_offering = make CourseOffering, :course => @catalogue_course_code
+  @course_offering.manage
+end
 
-When /^I delete an AO with Draft state$/ do
+And /^I delete the AO with Draft state$/ do
   @total_number = @course_offering.ao_list.count
   @course_offering.copy_ao :ao_code =>  @course_offering.ao_list[@total_number-1]
   @course_offering.manage
   new_total = @course_offering.ao_list.count
   new_total.should == @total_number + 1
   @total_number = @course_offering.ao_list.count
-  @deleted_ao_code = @course_offering.ao_list[0]
+  @ao_code_list = [@course_offering.ao_list[0]]
+  confirm_message = @course_offering.delete_ao_cross_list_value :code_list =>  @ao_code_list
+  expect_result = "Crosslisted as: WMST255"
+  message_text = confirm_message.text
+  cross_listed_in_page = message_text.include? expect_result
+  cross_listed_in_page.should == true
   @course_offering.delete_ao :ao_code =>  @course_offering.ao_list[0]
+
 end
 
 Then /^The AO is Successfully deleted$/ do

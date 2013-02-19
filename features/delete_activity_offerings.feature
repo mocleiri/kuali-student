@@ -8,12 +8,13 @@ Feature: delete activity offerings
 
   Background:
     Given I am logged in as a Schedule Coordinator
-    Given I am managing a course offering that has Offered AOs
 
   Scenario: Delete multiple AOs
-    When I delete the selected multiple AOs
+    When I designate a valid term and a Course Offering Code
+    And I delete the selected multiple AOs
     Then The AOs are Successfully deleted
 
-  Scenario: Delete an AO
-    When I delete an AO with Draft state
+  Scenario: Delete an AO in cross-listed course offering
+    When I designate a valid term and cross-listed Course Offering Code
+    And I delete the AO with Draft state
     Then The AO is Successfully deleted

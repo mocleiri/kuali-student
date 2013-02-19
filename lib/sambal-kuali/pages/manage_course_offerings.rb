@@ -29,9 +29,9 @@ class ManageCourseOfferings < BasePage
   element(:create_co_button)   { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-CO") }
 
   action(:add) { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-AO").click; b.loading.wait_while_present }
-  action(:delete) { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Delete-AO").click; b.loading.wait_while_present }
+  action(:delete_aos) { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Delete-AO").click; b.loading.wait_while_present }
 
-
+  action(:delete_cos) { b|b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Delete-CO").click; b.loading.wait_while_present }
   
   action(:select_all) { |b| b.frm.link(id: "KS-CourseOfferingManagement-SelectAll").click; b.loading.wait_while_present }
 
@@ -86,7 +86,7 @@ class ManageCourseOfferings < BasePage
 
   def select_aos(code_list)
     for code in code_list
-      if target_row(code).link(text: "Delete").exists?
+      if !target_row(code).nil?
         target_row(code).checkbox.set
       end
     end
