@@ -37,7 +37,6 @@ As an Administrator, I want to create registration groups for a Course Offering
     Then a cluster error message appears stating "This cluster must contain at least one activity from each of those associated with this Format"
     And registration groups are not generated
 
-  @bug @KSENROLL-5351
   Scenario: RG 2.2B - Cannot generate default (unconstrained) AOC unless there is at least one AO for each AO Type specified by the FO
     Given I manage registration groups for a course offering with multiple activity types but no activity offering for one of the activity types
     When I generate registration groups with no activity offering cluster
