@@ -123,9 +123,51 @@ insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.payment.finaid.max.amount', '
 
 -- BRM (Drools) rule types
 insert into KSSA_RULE_TYPE (ID, NAME, DESCRIPTION) values (1, 'DSL', 'Drools DSL');
-insert into KSSA_RULE_TYPE (ID, NAME, DESCRIPTION) values (2, 'DLR', 'Drools Rule Language');
+insert into KSSA_RULE_TYPE (ID, NAME, DESCRIPTION) values (2, 'DRL', 'Drools Rule Language');
 insert into KSSA_RULE_TYPE (ID, NAME, DESCRIPTION) values (3, 'DSLR', 'Drools DSL Rule');
 insert into KSSA_RULE_TYPE (ID, NAME, DESCRIPTION) values (4, 'XDRL', 'Drools XML Rule Language"');
+
+--- INSERTING RULE SETS ---
+set sqlblanklines on
+set sqlterminator '!'
+
+Insert into KSSA_RULE (ID, NAME, RULE_TYPE_ID_FK, PRIORITY, HEADER, LHS, RHS) values
+(99, 'Payment Application Rule', 2, 0, null, 'context : BrmContext( !transactions.isEmpty() )',
+'
+glTransactions.addAll(context.getTransactionService().removeAllocations(transactions));
+
+glTransactions.addAll(context.getTransactionService().allocateReversals(transactions));
+
+glTransactions.addAll(context.getPaymentService().applyPayments(transactions, remainingTransactions));
+
+TransactionUtils.calculateMatrixScores(remainingTransactions);
+
+TransactionUtils.orderByMatrixScore(remainingTransactions, true);
+
+glTransactions.addAll(context.getPaymentService().applyPayments(remainingTransactions));
+
+glTransactions = context.getGeneralLedgerService().summarizeGlTransactions(glTransactions);
+
+')!
+
+Insert into KSSA_RULE_SET (ID, NAME, RULE_TYPE_ID_FK, HEADER) values (99, 'Payment Application', 2,
+'
+import java.util.*;
+import java.math.*;
+import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.model.rule.*;
+import com.sigmasys.kuali.ksa.service.brm.*;
+import com.sigmasys.kuali.ksa.util.*;
+
+global List transactions;
+global List glTransactions;
+global List remainingTransactions;
+
+')!
+
+Insert into KSSA_RULE_SET_RULE ( RULE_SET_ID_FK, RULE_ID_FK ) values (99, 99)!
+
+set sqlterminator ';'
 
 
 

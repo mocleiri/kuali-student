@@ -2,7 +2,6 @@ package com.sigmasys.kuali.ksa.service;
 
 import com.sigmasys.kuali.ksa.annotation.Url;
 import com.sigmasys.kuali.ksa.model.*;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -62,7 +61,7 @@ public interface PaymentService {
      * @return List of generated GL transactions
      */
     @WebMethod(exclude = true)
-    List<GlTransaction> applyPayments(List<Transaction> transactions,  BigDecimal maxAmount);
+    List<GlTransaction> applyPayments(List<Transaction> transactions, BigDecimal maxAmount);
 
     /**
      * An overridden version of applyPayments() that takes a list of transactions as an argument
@@ -74,6 +73,18 @@ public interface PaymentService {
     List<GlTransaction> applyPayments(List<Transaction> transactions);
 
     /**
+     * Applies payments (including financial aid) to charges using one parameter as a source list and
+     * second as an output list with remaining charges and payments that can be used
+     * in other payment application methods.
+     *
+     * @param transactions                List of transactions
+     * @param remainingChargesAndPayments List of remaining charge sand payments (out parameter)
+     * @return List of generated GL transactions
+     */
+    @WebMethod(exclude = true)
+    List<GlTransaction> applyPayments(List<Transaction> transactions, List<Transaction> remainingChargesAndPayments);
+
+    /**
      * Calls the rules set for payment application.
      * Many other services can be used and will be useful to payment application,
      * including a direct creation of an allocation if needed.
@@ -83,9 +94,9 @@ public interface PaymentService {
      * for this accountId, ignoring all expired deferments (isExpired = true) and pass this object to the rules engine.
      *
      * @param userId Account ID
+     * @return List of generated GL transactions
      */
-    void paymentApplication(String userId);
-
+    List<GlTransaction> paymentApplication(String userId);
 
     /**
      * Returns the arrays of payment years used in paymentApplication() method.

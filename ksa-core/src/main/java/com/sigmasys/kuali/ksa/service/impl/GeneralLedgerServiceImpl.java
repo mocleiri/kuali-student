@@ -194,7 +194,7 @@ public class GeneralLedgerServiceImpl extends GenericPersistenceService implemen
 
         for (GlTransaction glTransaction : glTransactions) {
 
-            if (glTransaction.getStatus() != null && GlTransactionStatus.WAITING == glTransaction.getStatus()) {
+            if (GlTransactionStatus.WAITING.equals(glTransaction.getStatus())) {
 
                 String glAccountId = glTransaction.getGlAccountId();
                 Long recognitionPeriodId = glTransaction.getRecognitionPeriod().getId();

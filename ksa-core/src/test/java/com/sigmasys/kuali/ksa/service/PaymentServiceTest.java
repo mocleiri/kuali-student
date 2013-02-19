@@ -1,7 +1,6 @@
 package com.sigmasys.kuali.ksa.service;
 
 
-import com.google.gwt.user.client.rpc.core.java.math.BigDecimal_CustomFieldSerializer;
 import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.util.CalendarUtils;
@@ -16,10 +15,7 @@ import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.sigmasys.kuali.ksa.util.TransactionUtils.*;
 
@@ -110,7 +106,7 @@ public class PaymentServiceTest extends AbstractServiceTest {
     }
 
     @Test
-    public void paymentApplication() throws Exception {
+    public void paymentApplication1() throws Exception {
 
         String userId = "admin";
 
@@ -142,7 +138,7 @@ public class PaymentServiceTest extends AbstractServiceTest {
 
         Integer[] paymentYears = paymentService.getPaymentYears();
 
-        logger.info("Payment years: " + paymentYears);
+        logger.info("Payment years: " + Arrays.toString(paymentYears));
 
         int minYear = paymentYears[paymentYears.length - 1];
         int maxYear = paymentYears[0];
@@ -253,7 +249,105 @@ public class PaymentServiceTest extends AbstractServiceTest {
 
         Assert.notNull(generatedGlTransactions);
         Assert.notEmpty(generatedGlTransactions);
+    }
 
+    @Test
+    public void paymentApplication2() throws Exception {
+
+        String userId = "admin";
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
+        Date transactionDate = dateFormat.parse("12/12/2012");
+
+        transactionService.createTransaction("1310", userId, transactionDate, new BigDecimal(-350.99));
+        transactionService.createTransaction("cash", userId, transactionDate, new BigDecimal(10e11));
+        transactionService.createTransaction("cash", userId, transactionDate, new BigDecimal(-10e3));
+        transactionService.createTransaction("1540", userId, transactionDate, new BigDecimal(10e8));
+        transactionService.createTransaction("ach", userId, transactionDate, new BigDecimal(78800.07));
+        transactionService.createTransaction("1292", userId, transactionDate, new BigDecimal(-0.98));
+        transactionService.createTransaction("ach", userId, transactionDate, new BigDecimal(524.39));
+        transactionService.createTransaction("pp", userId, transactionDate, new BigDecimal(-998.01));
+        transactionService.createTransaction("chip", userId, transactionDate, new BigDecimal(100111.34));
+        transactionService.createTransaction("finaid", userId, transactionDate, new BigDecimal(20000.88));
+        transactionService.createTransaction("finaid2", userId, transactionDate, new BigDecimal(5500));
+
+        // Start
+
+        Integer[] paymentYears = paymentService.getPaymentYears();
+
+        logger.info("Payment years: " + Arrays.toString(paymentYears));
+
+        int minYear = paymentYears[paymentYears.length - 1];
+        int maxYear = paymentYears[0];
+
+        Date startDate = CalendarUtils.getFirstDateOfYear(minYear);
+        Date endDate = CalendarUtils.getLastDateOfYear(maxYear);
+
+        List<Transaction> transactions = transactionService.getTransactions(userId, startDate, endDate);
+
+        logger.debug("All transactions: " + transactions);
+
+        List<GlTransaction> generatedGlTransactions = new LinkedList<GlTransaction>();
+
+        List<GlTransaction> glTransactions = transactionService.removeAllocations(transactions);
+
+        generatedGlTransactions.addAll(glTransactions);
+
+        glTransactions = transactionService.allocateReversals(transactions);
+
+        generatedGlTransactions.addAll(glTransactions);
+
+        List<Transaction> remainingChargesAndPayments = new LinkedList<Transaction>();
+
+        glTransactions = paymentService.applyPayments(transactions, remainingChargesAndPayments);
+
+        generatedGlTransactions.addAll(glTransactions);
+
+        calculateMatrixScores(remainingChargesAndPayments);
+
+        orderByMatrixScore(remainingChargesAndPayments, true);
+
+        glTransactions = paymentService.applyPayments(remainingChargesAndPayments);
+
+        generatedGlTransactions.addAll(glTransactions);
+
+        generatedGlTransactions = glService.summarizeGlTransactions(generatedGlTransactions);
+
+        // End
+        logger.info("The number of generated GL transactions is " + generatedGlTransactions.size());
+        logger.info("Generated GL transactions: \n" + generatedGlTransactions);
+
+        Assert.notNull(generatedGlTransactions);
+        Assert.notEmpty(generatedGlTransactions);
+    }
+
+    @Test
+    public void paymentApplication3() throws Exception {
+
+        String userId = "admin";
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
+        Date transactionDate = dateFormat.parse("12/12/2012");
+
+        transactionService.createTransaction("1310", userId, transactionDate, new BigDecimal(-350.99));
+        transactionService.createTransaction("cash", userId, transactionDate, new BigDecimal(10e11));
+        transactionService.createTransaction("cash", userId, transactionDate, new BigDecimal(-10e3));
+        transactionService.createTransaction("1540", userId, transactionDate, new BigDecimal(10e8));
+        transactionService.createTransaction("ach", userId, transactionDate, new BigDecimal(78800.07));
+        transactionService.createTransaction("1292", userId, transactionDate, new BigDecimal(-0.98));
+        transactionService.createTransaction("ach", userId, transactionDate, new BigDecimal(524.39));
+        transactionService.createTransaction("pp", userId, transactionDate, new BigDecimal(-998.01));
+        transactionService.createTransaction("chip", userId, transactionDate, new BigDecimal(100111.34));
+        transactionService.createTransaction("finaid", userId, transactionDate, new BigDecimal(20000.88));
+        transactionService.createTransaction("finaid2", userId, transactionDate, new BigDecimal(5500));
+
+        List<GlTransaction> glTransactions = paymentService.paymentApplication(userId);
+
+        logger.info("The number of generated GL transactions is " + glTransactions.size());
+        logger.info("Generated GL transactions: \n" + glTransactions);
+
+        Assert.notNull(glTransactions);
+        Assert.notEmpty(glTransactions);
     }
 
 }

@@ -31,6 +31,7 @@ public interface Constants {
     // Drools parameters
     String DROOLS_CLASSPATH = "drools";
     String DROOLS_FM_RULE_SET_NAME = "Fee Management";
+    String DROOLS_PA_RULE_SET_NAME = "Payment Application";
 
     // Quick View parameters
     String QUICKVIEW_INFORMATION_COUNT = "ksa.quickview.information.count";
