@@ -132,25 +132,18 @@ set sqlblanklines on
 set sqlterminator '!'
 
 Insert into KSSA_RULE (ID, NAME, RULE_TYPE_ID_FK, PRIORITY, HEADER, LHS, RHS) values
-(99, 'Payment Application Rule', 2, 0, null, 'context : BrmContext( !transactions.isEmpty() )',
+(99, 'Payment Application Rule', 3, 0, null, '(Transactions are not empty)',
 '
-glTransactions.addAll(context.getTransactionService().removeAllocations(transactions));
-
-glTransactions.addAll(context.getTransactionService().allocateReversals(transactions));
-
-glTransactions.addAll(context.getPaymentService().applyPayments(transactions, remainingTransactions));
-
-TransactionUtils.calculateMatrixScores(remainingTransactions);
-
-TransactionUtils.orderByMatrixScore(remainingTransactions, true);
-
-glTransactions.addAll(context.getPaymentService().applyPayments(remainingTransactions));
-
-glTransactions = context.getGeneralLedgerService().summarizeGlTransactions(glTransactions);
-
+Remove allocations
+Allocate reversals
+Apply payments
+Calculate matrix scores
+Sort by matrix score in ascending order
+Apply remaining payments
+Summarize GL transactions
 ')!
 
-Insert into KSSA_RULE_SET (ID, NAME, RULE_TYPE_ID_FK, HEADER) values (99, 'Payment Application', 2,
+Insert into KSSA_RULE_SET (ID, NAME, RULE_TYPE_ID_FK, HEADER) values (99, 'Payment Application', 3,
 '
 import java.util.*;
 import java.math.*;
@@ -158,6 +151,8 @@ import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.rule.*;
 import com.sigmasys.kuali.ksa.service.brm.*;
 import com.sigmasys.kuali.ksa.util.*;
+
+expander ksa.dsl
 
 global List transactions;
 global List glTransactions;

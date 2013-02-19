@@ -1,5 +1,7 @@
 # The KSA DSL definition
 
+# FEE MANAGEMENT DSL definitions
+
 [keyword][]and = &&
 [keyword][]equals = ==
 
@@ -26,3 +28,19 @@
 [then][]Set status to "{newStatus}", key pair "{key}" to "{value}" where status is "{oldStatus}" = context.getFeeManagementService().setCourseStatusForStatus(feeBase,"{oldStatus}","{newStatus}","{key}","{value}");
 [then][]Number of credits for LU code "{luCodes}" with status "{statuses}" = context.getFeeManagementService().getNumOfCreditsByLearningUnitCodes(feeBase,"{luCodes}","{statuses}");
 [then][]Use "{transactionTypeId}" to charge ${amountPerCredit} per credit where section is "{sectionCodes}" with status "{statuses}" = context.getFeeManagementService().createTransactionForNumberOfCredits(feeBase,"{transactionTypeId}",new BigDecimal({amountPerCredit}),"{sectionCodes}","{statuses}");
+
+
+# PAYMENT APPLICATION DSL definitions
+
+# LHS definitions
+[when][]Transactions are not empty = !transactions.isEmpty()
+
+# RHS definitions
+[then][]Remove allocations = glTransactions.addAll(context.getTransactionService().removeAllocations(transactions));
+[then][]Allocate reversals = glTransactions.addAll(context.getTransactionService().allocateReversals(transactions));
+[then][]Apply payments = glTransactions.addAll(context.getPaymentService().applyPayments(transactions, remainingTransactions));
+[then][]Apply remaining payments = glTransactions.addAll(context.getPaymentService().applyPayments(remainingTransactions));
+[then][]Calculate matrix scores = TransactionUtils.calculateMatrixScores(remainingTransactions);
+[then][]Sort by matrix score in ascending order = TransactionUtils.orderByMatrixScore(remainingTransactions, true);
+[then][]Sort by matrix score in descending order = TransactionUtils.orderByMatrixScore(remainingTransactions, false);
+[then][]Summarize GL transactions = glTransactions = context.getGeneralLedgerService().summarizeGlTransactions(glTransactions);
