@@ -35,6 +35,8 @@ class ManageCourseOfferings < BasePage
   
   action(:select_all) { |b| b.frm.link(id: "KS-CourseOfferingManagement-SelectAll").click; b.loading.wait_while_present }
 
+  action(:add_course){ |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-CO").click; b.loading.wait_while_present}
+
   AO_CODE = 1
   AO_STATUS = 2
   AO_TYPE = 3
