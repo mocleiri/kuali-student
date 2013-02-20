@@ -1,4 +1,4 @@
-@wip
+@pending
 Feature: Add Course Offering toolbar button
 
 Background:

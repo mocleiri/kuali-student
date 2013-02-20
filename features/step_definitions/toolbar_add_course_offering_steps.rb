@@ -9,11 +9,15 @@ end
 
 Then /^the term is retained in the term field on the Create Course Offering page$/ do
   on CreateCourseOffering do |page|
-    page.target_term.text.should == @course_offering.term
+    page.target_term.value.should == @course_offering.term
   end
 end
 
 
 And /^I am able to create a Course Offering with this term$/ do
-  pending # express the regexp above with the code you wish you had
+  on CreateCourseOffering do |page|
+    page.catalogue_course_code.set @course_offering.course
+    page.show
+    @course_offering.create
+  end
 end
