@@ -15,3 +15,9 @@ Given /^I am logged in as a Student/ do
     log_in "student", "student" unless logged_in_user == "student"
   end
 end
+
+Given /^I am logged in as a Department Schedule Coordinator$/ do
+  visit Login do |page|
+    log_in "carol", "carol" unless logged_in_user == "carol"
+  end
+end

@@ -20,7 +20,7 @@ class ManageCourseDetails < BasePage
   value(:honors_flag) { |b| b.frm.div(data_label: "Honors Flag").span(index: 0).text }
   element(:close_button_element) { |b| b.frm.button(text: "Close")}
   action(:close) { |b| b.close_button_element.click;b.loading.wait_while_present}
-  element(:delivery_formats_table) { |b| b.frm.div(id: "u152").table() }
+  element(:delivery_formats_table) { |b| b.frm.div(id: "u161").table() }
 
   FORMAT_COLUMN = 0
   GRADE_ROSTER_LEVEL_COLUMN = 1

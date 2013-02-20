@@ -24,7 +24,6 @@ class CreateCourseOffering < BasePage
   element(:add_format){|b| b.frm.div(data_label:"FORMAT")}
   element(:add_grade_roster_level){|b| b.frm.div(data_label:"GRADE ROSTER LEVEL")}
   element(:add_final_exam_driver){|b| b.frm.div(data_label:"FINAL EXAM DRIVER ACTIVITY")}
-  #element(:add_format_btn_element) { |b| b.frm.button(text: "Add")}
   action(:add_format_btn) { |b| b.frm.button(text: "Add").click; b.loading.wait_while_present }
 
   action(:create_from_existing_offering_tab) { |b| b.frm.link(text: /Create from Existing Offering/).click; b.loading.wait_while_present }
@@ -50,8 +49,6 @@ class CreateCourseOffering < BasePage
   ACTIONS_COLUMN_CO = 5
 
   def add_random_delivery_format
-    #selected_options = {:del_format => select_random_option(delivery_formats_table[1].cells[FORMAT_COLUMN]), :grade_format => select_random_option(delivery_formats_table[1].cells[GRADE_ROSTER_LEVEL_COLUMN]), :final_exam_driver => select_random_option(delivery_formats_table[1].cells[FINAL_EXAM_COLUMN])}
-    #delivery_format_add
     begin
       selected_options = {:del_format => select_random_option(add_format), :grade_format => select_random_option(add_grade_roster_level), :final_exam_driver => select_random_option(add_final_exam_driver)}
     rescue
@@ -78,9 +75,13 @@ class CreateCourseOffering < BasePage
     options = sel_list.options.map{|option| option.text}
     options.delete_if{|a| a.index("Select") != nil or  a == "" }
     sel_opt = rand(options.length)
-    sel_list.select().select(options[sel_opt])
-    loading.wait_while_present
-    return options[sel_opt]
+    if options != []
+      sel_list.select().select(options[sel_opt])
+      loading.wait_while_present
+      return options[sel_opt]
+    else
+      return nil
+    end
   end
 
   def create_co_from_existing(term, course)

@@ -1,5 +1,5 @@
 When /^I designate a valid term and Catalog Course Code$/ do
-  @course_offering = make CourseOffering, :course => "CHEM132", :grade_format => "Quiz", :delivery_format => "Lecture/Quiz"
+  @course_offering = make CourseOffering, :course => "CHEM132", :grade_format => "Lab", :delivery_format => "Lab"
   @course_offering.create_by_search
 end
 
