@@ -10,6 +10,7 @@ class ManageCourseOfferingList < BasePage
 
   action(:approve_subject_code_for_scheduling) { |b| b.frm.co_results_div.link(id: "KS-CourseOfferingManagement-ApproveSubj").click}
   action(:create_course_offering) { |b| b.frm.co_results_div.button(text: "Create Course Offering").click; b.loading.wait_while_present } #TODO persistent id
+  action(:delete_cos) { |b|b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Delete-CO").click; b.loading.wait_while_present }
 
   SELECT_COLUMN = 0
   CO_CODE_COLUMN = 1
@@ -49,7 +50,7 @@ class ManageCourseOfferingList < BasePage
 
   def copy(co_code)
     target_row(co_code).link(text: "Copy").click
-    loading.wait_while_present(120)
+    loading.wait_while_present(220)
   end
 
   def edit(co_code)

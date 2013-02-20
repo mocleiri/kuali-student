@@ -1,7 +1,7 @@
 When /^I cancel the deletion of a Course Offering in Course Offering Code view$/ do
 
   @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
-  @course_offering.delete_co :should_delete_from_subj_code_view=>false, :should_confirm_delete=>false
+  @course_offering.delete_co :code_list => [@course_offering.course], :should_confirm_delete=>false
 end
 
 When /^I cancel the deletion of a Course Offering in Subject Code view$/ do

@@ -458,21 +458,10 @@ class CourseOffering
         should_confirm_delete = true
     end
 
-    should_delete_from_subj_code_view = false
-    case args[:should_delete_from_subj_code_view]
-      when true
-        should_delete_from_subj_code_view = true
-    end
-
-    on ManageCourseOfferings do |page|
-      case should_delete_from_subj_code_view
-        when true
-          search_by_subjectcode
-          page.target_row(@course).link(text: "Delete").click
-        else
-          manage
-          page.delete_offering
-      end
+    co_code_list = args[:code_list]
+    on ManageCourseOfferingList do |page|
+      page.select_cos(co_code_list)
+      page.delete_cos
     end
     on DeleteCourseOffering do |page|
       case should_confirm_delete
