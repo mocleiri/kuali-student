@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 2005-2012 The Kuali Foundation
+
+    Licensed under the Educational Community License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+    http://www.opensource.org/licenses/ecl2.php
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+
+	<bean id="Generate1098TView" parent="Uif-KsaFormView" p:footer.render="false">
+        <property name="title" value="Generate 1098T"/>
+        <property name="headerText" value="Generate 1098T"/>
+        <property name="entryPageId" value="Generate1098TViewPage"/>
+        <property name="navigation">
+            <bean parent="Uif-KsaPageNavigation">
+                <property name="items">
+                    <list merge="true">
+                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AdvancedSearch"
+                              p:actionLabel="Advanced Search"/>
+                    </list>
+                </property>
+            </bean>
+        </property>
+		<property name="items">
+            <list merge="true">
+				<!-- The main page -->
+				<bean parent="Uif-Page" p:id="Generate1098TViewPage" p:title="Generate 1098T">
+					<property name="headerText" value="@{account.defaultPersonName.displayValue}"/>
+					<property name="items">
+                        <list>
+							<ref bean="biographicInformationSection"/>
+							<ref bean="generateReportSection"/>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+		<property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.Generate1098TForm"/>
+	</bean>
+	
+	<!-- Account Biographic Information section -->
+	<bean id="biographicInformationSection" parent="Uif-VerticalBoxSection" p:title="Biographic Information" p:width="100%">
+		<property name="headerText" value="Biographic Information"/>
+		<property name="items">
+			<list>
+				<!-- Demographic information section -->
+				<bean parent="Uif-HorizontalBoxSection">
+					<property name="items">
+						<list>
+							<!-- Name and ID section -->
+							<bean parent="Uif-VerticalBoxSection">
+								<property name="items">
+									<list>
+										<bean parent="Uif-MessageField" p:messageText="@{account.defaultPersonName.title} @{account.defaultPersonName.firstName} @{account.defaultPersonName.middleName} @{account.defaultPersonName.lastName} @{account.defaultPersonName.suffix}"/>
+										<bean parent="Uif-DataField" p:label="ID" p:shortLabel="ID" p:labelPlacement="LEFT"  p:propertyName="account.id"/>
+									</list>
+								</property>
+							</bean>
+							
+							<!-- Default Address -->
+							<bean parent="Uif-DataField" p:label="Default Address" p:shortLabel="DA" p:labelPlacement="TOP"  p:propertyName="defaultAddressDisplay"/>
+							
+							<!-- Default Contact -->
+							<bean parent="Uif-DataField" p:label="Default Contact" p:shortLabel="DA" p:labelPlacement="TOP"  p:propertyName="defaultContactDisplay"/>
+							
+						</list>
+					</property>
+				</bean>
+				
+				<!-- Details link -->
+				<bean parent="Uif-LinkField" p:href="javascript: void(0);" p:linkText="Details" p:onClickScript="javascript:alert('Open account details')"/>
+				
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- Generate 1098T Report section -->
+	<bean id="generateReportSection" parent="Uif-VerticalBoxSection" p:title="Generate 1098T" p:width="100%">
+		<property name="headerText" value="Generate 1098T"/>
+		<property name="items">
+			<list>
+				<bean parent="Uif-MessageField" p:messageText="Select a period or periods for which to generate a 1098T XML document. Multiple consecutive items can be selected by clicking one item and [Shift] clicking another. Nonconsecutive items can be selected by [Control] clicking items."/>
+				<bean parent="Uif-VerticalBoxSection">
+					<property name="items">
+						<list>
+							<!-- List of report years -->
+							<bean parent="Uif-Disclosure-VerticalBoxSection">
+								<property name="items">
+									<list>
+										<bean parent="Uif-InputField-LabelTop" p:propertyName="reportYears" p:label="Period" p:fieldLabel.renderColon="false">
+											<property name="control">
+												<bean parent="Uif-MultiSelectControl" p:width="100%" p:size="5" p:multiple="false"/>
+											</property>
+											<property name="optionsFinder">
+												<bean class="com.sigmasys.kuali.ksa.krad.util.Generate1098TReportYearKeyValuesFinder"/>
+											</property>
+										</bean>
+									</list>
+								</property>
+							</bean>
+							
+							<!-- Generate Document button -->
+							<bean parent="Uif-SecondaryActionButton-Small" p:actionLabel="Generate Document" p:actionScript="alert('Generate 1098T Report');"/>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+</beans>
