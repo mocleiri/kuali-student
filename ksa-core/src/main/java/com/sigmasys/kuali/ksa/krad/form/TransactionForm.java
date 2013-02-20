@@ -1,9 +1,7 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
-import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.krad.model.TransactionModel;
 import com.sigmasys.kuali.ksa.model.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +19,6 @@ public class TransactionForm extends AbstractViewModel {
     // Not sure if any of these below this line are still used.
 
 
-
-
     // use this object as a query argument for matching transactions by student name
     private String studentLookupByName;
 
@@ -32,247 +28,272 @@ public class TransactionForm extends AbstractViewModel {
     private List<Account> accountBrowseList;
 
 
-
     private List<Charge> chargeList;
 
-   // result set of charges
-   private List<Payment> paymentList;
+    // result set of charges
+    private List<Payment> paymentList;
 
-   // a single charge
-   private Charge charge;
+    // a single charge
+    private Charge charge;
 
-   // a single payment
-   private Payment payment;
+    // a single payment
+    private Payment payment;
 
-   // Currency stuff
-   private List<Currency> currencies;
+    // Currency stuff
+    private List<Currency> currencies;
 
-   private Currency currency;
+    private Currency currency;
 
-   private String code;
+    private String code;
 
-   private String currencyName;
+    private String currencyName;
 
-   private String currencyDescription;
+    private String currencyDescription;
 
-   // a list of activities
-   private List<Activity> activities;
+    // a list of activities
+    private List<Activity> activities;
 
-   /**
-    * Get the student name
-    * Possible uses is a query match for transactions
-    * The value can be a partial matching name
-    * @return
-    */
-   public String getStudentLookupByName() {
-      return studentLookupByName;
-   }
+    /**
+     * Get the student name
+     * Possible uses is a query match for transactions
+     * The value can be a partial matching name
+     *
+     * @return
+     */
+    public String getStudentLookupByName() {
+        return studentLookupByName;
+    }
 
-   /**
-    * Set the student lookup name
-    * Possible uses is a query match for transactions
-    * The value can be a partial matching name
-    * @param studentLookupByName
-    */
-   public void setStudentLookupByName(String studentLookupByName) {
-      this.studentLookupByName = studentLookupByName;
-   }
+    /**
+     * Set the student lookup name
+     * Possible uses is a query match for transactions
+     * The value can be a partial matching name
+     *
+     * @param studentLookupByName
+     */
+    public void setStudentLookupByName(String studentLookupByName) {
+        this.studentLookupByName = studentLookupByName;
+    }
 
-   /**
-    * Get the selected person name
-    * @return
-    */
-   public String getSelectedPersonName() {
-      return selectedPersonName;
-   }
+    /**
+     * Get the selected person name
+     *
+     * @return
+     */
+    public String getSelectedPersonName() {
+        return selectedPersonName;
+    }
 
-   /**
-    * Set the selected person name
-    * @param selectedPersonName
-    */
-   public void setSelectedPersonName(String selectedPersonName) {
-      this.selectedPersonName = selectedPersonName;
-   }
+    /**
+     * Set the selected person name
+     *
+     * @param selectedPersonName
+     */
+    public void setSelectedPersonName(String selectedPersonName) {
+        this.selectedPersonName = selectedPersonName;
+    }
 
-   /**
-    * Get the accountBrowseList
-    * Encapsulates Person and Address model
-    * @return
-    */
-   public List<Account> getAccountBrowseList() {
-      return accountBrowseList;
-   }
+    /**
+     * Get the accountBrowseList
+     * Encapsulates Person and Address model
+     *
+     * @return
+     */
+    public List<Account> getAccountBrowseList() {
+        return accountBrowseList;
+    }
 
-   /**
-    * Set the accountBrowseList
-    * Encapsulates Person and Address model
-    * @param accountBrowseList
-    */
-   public void setAccountBrowseList(List<Account> accountBrowseList) {
-      this.accountBrowseList = accountBrowseList;
-   }
+    /**
+     * Set the accountBrowseList
+     * Encapsulates Person and Address model
+     *
+     * @param accountBrowseList
+     */
+    public void setAccountBrowseList(List<Account> accountBrowseList) {
+        this.accountBrowseList = accountBrowseList;
+    }
 
-   /**
-    * Get the list of Charges found via a selected Account
-    * @return
-    */
-   public List<Charge> getChargeList() {
-      return chargeList;
-   }
+    /**
+     * Get the list of Charges found via a selected Account
+     *
+     * @return
+     */
+    public List<Charge> getChargeList() {
+        return chargeList;
+    }
 
-   /**
-    * Set the list of Charges found via a selected Account
-    * @param chargeList
-    */
-   public void setChargeList(List<Charge> chargeList) {
-      this.chargeList = chargeList;
-   }
+    /**
+     * Set the list of Charges found via a selected Account
+     *
+     * @param chargeList
+     */
+    public void setChargeList(List<Charge> chargeList) {
+        this.chargeList = chargeList;
+    }
 
-   /**
-    * Get the list of Payments found via a selected Account
-    * @return
-    */
-   public List<Payment> getPaymentList() {
-      return paymentList;
-   }
+    /**
+     * Get the list of Payments found via a selected Account
+     *
+     * @return
+     */
+    public List<Payment> getPaymentList() {
+        return paymentList;
+    }
 
-   /**
-    * Set the list of Payments found via a selected Account
-    * @param paymentList
-    */
-   public void setPaymentList(List<Payment> paymentList) {
-      this.paymentList = paymentList;
-   }
+    /**
+     * Set the list of Payments found via a selected Account
+     *
+     * @param paymentList
+     */
+    public void setPaymentList(List<Payment> paymentList) {
+        this.paymentList = paymentList;
+    }
 
-   /**
-    * Get a charge object
-    * @return
-    */
-   public Charge getCharge() {
-      return charge;
-   }
+    /**
+     * Get a charge object
+     *
+     * @return
+     */
+    public Charge getCharge() {
+        return charge;
+    }
 
-   /**
-    * Set a charge object
-    * @param charge
-    */
-   public void setCharge(Charge charge) {
-      this.charge = charge;
-   }
+    /**
+     * Set a charge object
+     *
+     * @param charge
+     */
+    public void setCharge(Charge charge) {
+        this.charge = charge;
+    }
 
-   /**
-    * Get a Payment object
-    * @return
-    */
-   public Payment getPayment() {
-      return payment;
-   }
+    /**
+     * Get a Payment object
+     *
+     * @return
+     */
+    public Payment getPayment() {
+        return payment;
+    }
 
-   /**
-    * Set a Payment object
-    * @param payment
-    */
-   public void setPayment(Payment payment) {
-      this.payment = payment;
-   }
+    /**
+     * Set a Payment object
+     *
+     * @param payment
+     */
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
 
-   // Currency get/Set methods
+    // Currency get/Set methods
 
-   /**
-    * Get the list of Currency objects
-    * @return
-    */
-   public List<Currency> getCurrencies() {
-      return currencies;
-   }
+    /**
+     * Get the list of Currency objects
+     *
+     * @return
+     */
+    public List<Currency> getCurrencies() {
+        return currencies;
+    }
 
-   /**
-    * Set the list of Currency objects
-    * @param currencies
-    */
-   public void setCurrencies(List<Currency> currencies) {
-      this.currencies = currencies;
-   }
+    /**
+     * Set the list of Currency objects
+     *
+     * @param currencies
+     */
+    public void setCurrencies(List<Currency> currencies) {
+        this.currencies = currencies;
+    }
 
-   /**
-    * Get the Currency model object
-    * @return
-    */
-   public Currency getCurrency() {
-      return currency;
-   }
+    /**
+     * Get the Currency model object
+     *
+     * @return
+     */
+    public Currency getCurrency() {
+        return currency;
+    }
 
-   /**
-    * Set teh Currency model object
-    * @param currency
-    */
-   public void setCurrency(Currency currency) {
-      this.currency = currency;
-   }
+    /**
+     * Set teh Currency model object
+     *
+     * @param currency
+     */
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
 
-   /**
-    * Get the ISO symbol
-    * @return
-    */
-   public String getCode() {
-      return code;
-   }
+    /**
+     * Get the ISO symbol
+     *
+     * @return
+     */
+    public String getCode() {
+        return code;
+    }
 
-   /**
-    * Set the ISO symbol
-    * @param code
-    */
-   public void setCode(String code) {
-      this.code = code;
-   }
+    /**
+     * Set the ISO symbol
+     *
+     * @param code
+     */
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-   /**
-    * Get the currencyName
-    * @return
-    */
-   public String getCurrencyName() {
-      return currencyName;
-   }
+    /**
+     * Get the currencyName
+     *
+     * @return
+     */
+    public String getCurrencyName() {
+        return currencyName;
+    }
 
-   /**
-    * Set the Name
-    * @param currencyName
-    */
-   public void setCurrencyName(String currencyName) {
-      this.currencyName = currencyName;
-   }
+    /**
+     * Set the Name
+     *
+     * @param currencyName
+     */
+    public void setCurrencyName(String currencyName) {
+        this.currencyName = currencyName;
+    }
 
-   /**
-    * Get the currency description
-    * @return
-    */
-   public String getCurrencyDescription() {
-      return currencyDescription;
-   }
+    /**
+     * Get the currency description
+     *
+     * @return
+     */
+    public String getCurrencyDescription() {
+        return currencyDescription;
+    }
 
-   /**
-    * Set  the currency description
-    * @param currencyDescription
-    */
-   public void setCurrencyDescription(String currencyDescription) {
-      this.currencyDescription = currencyDescription;
-   }
+    /**
+     * Set  the currency description
+     *
+     * @param currencyDescription
+     */
+    public void setCurrencyDescription(String currencyDescription) {
+        this.currencyDescription = currencyDescription;
+    }
 
-   /**
-    * Get a list of activities
-    * @return
-    */
-   public List<Activity> getActivities() {
-      return activities;
-   }
+    /**
+     * Get a list of activities
+     *
+     * @return
+     */
+    public List<Activity> getActivities() {
+        return activities;
+    }
 
-   /**
-    * Set a list of activities
-    * @param activities
-    */
-   public void setActivities(List<Activity> activities) {
-      this.activities = activities;
-   }
+    /**
+     * Set a list of activities
+     *
+     * @param activities
+     */
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
+    }
 
     public Account getAccount() {
         return account;
@@ -283,41 +304,43 @@ public class TransactionForm extends AbstractViewModel {
     }
 
     public List<Alert> getAlerts() {
-        if(alerts == null){
+        if (alerts == null) {
             alerts = new ArrayList<Alert>();
         }
         return alerts;
     }
 
-    public Integer getAlertSize(){
-        if(alerts == null){ return 0; }
+    public Integer getAlertSize() {
+        if (alerts == null) {
+            return 0;
+        }
         return alerts.size();
     }
 
-    public String getAlertTooltip(){
+    public String getAlertTooltip() {
         int itemsPerPage = 4; //Integer.valueOf(configService.getParameter(Constants.QUICKVIEW_INFORMATION_COUNT));
 
         String html = "<b>Alerts (";
 
-        if(alerts == null || alerts.size() == 0){
+        if (alerts == null || alerts.size() == 0) {
             html += "0/0)</b><br/><p>No alerts</p>";
             return html;
         }
 
         int size = alerts.size();
 
-        if(size > itemsPerPage){
+        if (size > itemsPerPage) {
             html += itemsPerPage + "/" + size + ")</b><br/>";
         } else {
             html += size + "/" + size + ")</b><br/>";
         }
 
         html += "<p>";
-        int count = 0;
-        for(Alert a : alerts){
-            if(count == itemsPerPage){ break; }
+
+        for (Alert a : alerts) {
             html += a.getDisplayValue() + "<br/>";
         }
+
         html += "</p>";
 
         return html;
@@ -328,41 +351,43 @@ public class TransactionForm extends AbstractViewModel {
     }
 
     public List<Flag> getFlags() {
-        if(flags == null){
+        if (flags == null) {
             flags = new ArrayList<Flag>();
         }
         return flags;
     }
 
-    public Integer getFlagSize(){
-        if(flags == null){ return 0; }
+    public Integer getFlagSize() {
+        if (flags == null) {
+            return 0;
+        }
         return flags.size();
     }
 
-    public String getFlagTooltip(){
+    public String getFlagTooltip() {
         int itemsPerPage = 4; //Integer.valueOf(configService.getParameter(Constants.QUICKVIEW_INFORMATION_COUNT));
 
         String html = "<b>Flags (";
 
-        if(flags == null || flags.size() == 0){
+        if (flags == null || flags.size() == 0) {
             html += "0/0)</b><br/><p>No flags</p>";
             return html;
         }
 
         int size = flags.size();
 
-        if(size > itemsPerPage){
+        if (size > itemsPerPage) {
             html += itemsPerPage + "/" + size + ")</b><br/>";
         } else {
             html += size + "/" + size + ")</b><br/>";
         }
 
         html += "<p>";
-        int count = 0;
-        for(Flag f : flags){
-            if(count == itemsPerPage){ break; }
+
+        for (Flag f : flags) {
             html += f.getDisplayValue() + "<br/>";
         }
+
         html += "</p>";
 
         return html;

@@ -88,25 +88,25 @@ public class TransactionController extends GenericSearchController {
 
         // just for the transactions by person page
         String pageId = request.getParameter("pageId");
-        if(pageId == null){
+        if (pageId == null) {
             pageId = "ViewTransactions";
         }
 
         String userId = request.getParameter("userId");
-        if(userId == null){
+        if (userId == null) {
             // Error out here
         }
+
         form.setAccount(accountService.getFullAccount(userId));
 
-        if("ViewTransactions".equals(pageId)){
+        if ("ViewTransactions".equals(pageId)) {
             form.setAlerts(informationService.getAlerts(userId));
             form.setFlags(informationService.getFlags(userId));
 
 
-
-
         }
-        if (pageId != null && pageId.compareTo("bursaTransByPersonPage") == 0) {
+
+        if (pageId.equals("bursaTransByPersonPage")) {
             String id = request.getParameter("id");
             if (id == null || id.isEmpty()) {
                 throw new IllegalArgumentException("'id' request parameter must be specified");
@@ -126,7 +126,7 @@ public class TransactionController extends GenericSearchController {
             form.setPaymentList(payments);
         }
 
-        if (pageId != null && pageId.compareTo("bursaChargePage") == 0) {
+        if (pageId.equals("bursaChargePage")) {
             String id = request.getParameter("id");
             if (id == null || id.isEmpty()) {
                 throw new IllegalArgumentException("'id' request parameter must be specified");
@@ -143,7 +143,7 @@ public class TransactionController extends GenericSearchController {
             form.setCharge(charge);
         }
 
-        if (pageId != null && pageId.compareTo("bursaPaymentPage") == 0) {
+        if (pageId.equals("bursaPaymentPage")) {
             String id = request.getParameter("id");
             if (id == null || id.isEmpty()) {
                 throw new IllegalArgumentException("'id' request parameter must be specified");
@@ -161,7 +161,7 @@ public class TransactionController extends GenericSearchController {
         }
 
         // Currency type
-        if (pageId != null && pageId.compareTo("bursaCurrencyPage") == 0) {
+        if (pageId.equals("bursaCurrencyPage")) {
             String subMethod = request.getParameter("subMethod");
             if (subMethod != null && subMethod.compareTo("deleteCurr") == 0) {
                 String id = request.getParameter("id");
@@ -177,7 +177,7 @@ public class TransactionController extends GenericSearchController {
         }
 
         // Currency type edit
-        if (pageId != null && pageId.compareTo("bursaCurrencyEditPage") == 0) {
+        if (pageId.equals("bursaCurrencyEditPage")) {
 
             String code = request.getParameter("code");
             if (code == null || code.isEmpty()) {
@@ -189,7 +189,7 @@ public class TransactionController extends GenericSearchController {
             form.setCurrency(currency);
         }
 
-        if (pageId != null && pageId.compareTo("bursaActivityPage") == 0) {
+        if (pageId.equals("bursaActivityPage")) {
             form.setActivities(activityService.getActivities());
         }
 
@@ -271,7 +271,7 @@ public class TransactionController extends GenericSearchController {
         throw new UserNotFoundException("Cannot find Account by ID = " + accountId);
     }
 
-    private void populateRollups(TransactionForm form, String userId){
+    private void populateRollups(TransactionForm form, String userId) {
         // All transactions
         List<Transaction> transactions = transactionService.getTransactions(userId);
 
@@ -326,8 +326,6 @@ public class TransactionController extends GenericSearchController {
         //form.setTransactionModel(singleTransactionModel);
         form.setRollupTransactions(rollUpTransactionModelList);
         form.setAllTransactions(unGroupedTransactionModelList);
-
-
     }
 
 }
