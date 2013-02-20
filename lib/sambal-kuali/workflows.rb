@@ -124,15 +124,23 @@ module Workflows
       begin
         user = page.logged_in_user
       rescue Watir::Exception::UnknownObjectException
-        user = "No One"
+        user = :no_user
       end
     end
     user
   end
 
   def log_in(user, pwd)
-    on Login do |page|
-      page.login_with user, pwd
+    visit Login do |page|
+      current_user = logged_in_user
+      if current_user == :no_user
+        page.login_with user, pwd
+      elsif current_user != user
+        page.logout
+        visit Login do |page|
+          page.login_with user, pwd
+        end
+      end
     end
   end
 

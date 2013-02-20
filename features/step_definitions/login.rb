@@ -1,23 +1,15 @@
 Given /^I am logged in as admin$/ do
-  visit Login do |page|
-    log_in "admin", "admin" unless logged_in_user == "admin"
-  end
+    log_in "admin", "admin"
 end
 
 Given /^I am logged in as a Schedule Coordinator/ do
-  visit Login do |page|
-    log_in "martha", "martha" unless logged_in_user == "martha"
-  end
+    log_in "martha", "martha"
 end
 
 Given /^I am logged in as a Student/ do
-  visit Login do |page|
-    log_in "student", "student" unless logged_in_user == "student"
-  end
+      log_in "student", "student"
 end
 
 Given /^I am logged in as a Department Schedule Coordinator$/ do
-  visit Login do |page|
-    log_in "carol", "carol" unless logged_in_user == "carol"
-  end
+    log_in "carol", "carol"
 end
