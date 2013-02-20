@@ -13,22 +13,41 @@
         <property name="headerText" value="Transaction Overview"/>
         <property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.TransactionForm"/>
         <property name="theme" ref="Uif-KsaTheme"/>
-        <property name="entryPageId" value="bursaQuickMenuOptionsPage"/>
+        <property name="entryPageId" value="ViewTransactions"/>
         <property name="navigation">
-            <bean parent="Uif-KsaPageNavigation">
-                <property name="items">
-                    <list>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="bursaPersonLookupPage"
-                              p:actionLabel="Summary"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AlertsPage" p:actionLabel="Alerts"/>
-                        <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HistoryPage"
-                              p:actionLabel="History"/>
-                    </list>
-                </property>
-            </bean>
+            <ref bean="transactionNavigation"/>
         </property>
         <property name="items">
             <list merge="true">
+                <bean parent="Uif-Page" p:id="ViewTransactions" p:title="View Transactions">
+                    <property name="headerText" value="View Transactions"/>
+                    <property name="items">
+                        <list>
+                            <bean id="viewTransactionAccountInfo" parent="Uif-HorizontalBoxSection">
+                                <property name="items">
+                                <list>
+                                    <bean parent="Uif-InputField" p:propertyName="account.compositeDefaultPersonName" p:readOnly="@{true}"/>
+                                    <bean parent="Uif-InputField" p:propertyName="account.id" p:readOnly="@{true}"/>
+                                    <bean parent="Uif-HelpImage" p:source="../images/alert.png" p:altText="" p:title="">
+                                        <property name="toolTip">
+                                            <bean parent="Uif-Tooltip" p:tooltipContent="@{alertTooltip}"/>
+                                        </property>
+                                    </bean>
+                                    <bean parent="Uif-InputField" p:propertyName="alertSize" p:readOnly="@{true}"/>
+                                    <bean parent="Uif-HelpImage" p:source="../images/flag.png" p:altText="" p:title="">
+                                        <property name="toolTip">
+                                            <bean parent="Uif-Tooltip" p:tooltipContent="@{flagTooltip}"/>
+                                        </property>
+                                    </bean>
+                                    <bean parent="Uif-InputField" p:propertyName="flagSize" p:readOnly="@{true}"/>
+
+                                </list>
+                                </property>
+                            </bean>
+                            <ref bean="transactionDisplay"/>
+                        </list>
+                    </property>
+                </bean>
                 <bean parent="Uif-Page" p:id="bursaQuickMenuOptionsPage" p:title="Quick Options">
                     <property name="headerText" value="Quick Options"/>
                     <property name="items">
@@ -114,16 +133,54 @@
         </property>
     </bean>
 
-    <!-- Student Account navigation menu by tabs -->
-    <!--    <bean parent="Uif-TabNavigationGroup" id="StudentTransactionOverview-Menu">
+    <bean name="transactionNavigation" parent="Uif-KsaPageNavigation">
         <property name="items">
             <list>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="bursaPersonLookupPage" p:actionLabel="Summary"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="AlertsPage" p:actionLabel="Alerts"/>
-                <bean parent="Uif-NavigationActionLink" p:navigateToPageId="HistoryPage" p:actionLabel="History"/>
+                <bean parent="Uif-HeaderTwo" p:headerText="Accounts"/>
+                <bean parent="Uif-Link" p:linkText="Advanced Search" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=CurrencyPage"/>
+                <bean parent="Uif-Link" p:linkText="Quick View" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=RollupPage"/>
+                <bean parent="Uif-Link" p:linkText="Transactions" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=TagPage"/>
+                <bean parent="Uif-Link" p:linkText="Make a Payment" p:target="_self"
+                      p:href="transactionTypeView?methodToCall=get&amp;viewId=TransactionTypeView&amp;pageId=TransactionTypePage"/>
+                <bean parent="Uif-Link" p:linkText="Add a Charge" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=BankTypePage"/>
+                <bean parent="Uif-Link" p:linkText="Add a Deferment" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=TaxTypePage"/>
+                <bean parent="Uif-Link" p:linkText="Write-Off Account" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=LatePeriodPage"/>
+                <bean parent="Uif-Link" p:linkText="Biographic Information" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=AccountStatusTypePage"/>
+                <bean parent="Uif-Link" p:linkText="Flags" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=FlagTypePage"/>
+                <bean parent="Uif-Link" p:linkText="Alerts" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=ActivityTypePage"/>
+                <bean parent="Uif-Link" p:linkText="Memos" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=ActivityTypePage"/>
+                <bean parent="Uif-Link" p:linkText="Generate 1098T" p:target="_self"
+                      p:href="settingsView?methodToCall=get&amp;viewId=SettingsView&amp;pageId=ActivityTypePage"/>
             </list>
         </property>
-    </bean>-->
+    </bean>
+
+    <bean name="transactionDisplay" parent="Uif-VerticalBoxSection">
+        <property name="items">
+        <list>
+            <bean parent="Uif-HorizontalFieldGroup">
+                <property name="items">
+                    <list>
+                        <bean parent="Uif-HorizontalBoxSubSection">
+                        </bean>
+                    </list>
+                </property>
+            </bean>
+        </list>
+        </property>
+
+
+    </bean>
 
     <bean id="KSATransOvrVwNav" parent="Uif-KsaPageNavigation">
         <property name="items">

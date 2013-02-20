@@ -1,21 +1,39 @@
 package com.sigmasys.kuali.ksa.krad.form;
 
+import com.sigmasys.kuali.ksa.config.ConfigService;
+import com.sigmasys.kuali.ksa.krad.model.TransactionModel;
 import com.sigmasys.kuali.ksa.model.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionForm extends AbstractViewModel {
 
+    private Account account;
 
-   // use this object as a query argument for matching transactions by student name
-   private String studentLookupByName;
+    private List<Alert> alerts;
+    private List<Flag> flags;
 
-   private String selectedPersonName;
+    private List<TransactionModel> rollupTransactions;
+    private List<TransactionModel> allTransactions;
 
-   // result set of matching persons and address postal information
-   private List<Account> accountBrowseList;
+    // Not sure if any of these below this line are still used.
 
-   private List<Charge> chargeList;
+
+
+
+    // use this object as a query argument for matching transactions by student name
+    private String studentLookupByName;
+
+    private String selectedPersonName;
+
+    // result set of matching persons and address postal information
+    private List<Account> accountBrowseList;
+
+
+
+    private List<Charge> chargeList;
 
    // result set of charges
    private List<Payment> paymentList;
@@ -255,4 +273,118 @@ public class TransactionForm extends AbstractViewModel {
    public void setActivities(List<Activity> activities) {
       this.activities = activities;
    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public List<Alert> getAlerts() {
+        if(alerts == null){
+            alerts = new ArrayList<Alert>();
+        }
+        return alerts;
+    }
+
+    public Integer getAlertSize(){
+        if(alerts == null){ return 0; }
+        return alerts.size();
+    }
+
+    public String getAlertTooltip(){
+        int itemsPerPage = 4; //Integer.valueOf(configService.getParameter(Constants.QUICKVIEW_INFORMATION_COUNT));
+
+        String html = "<b>Alerts (";
+
+        if(alerts == null || alerts.size() == 0){
+            html += "0/0)</b><br/><p>No alerts</p>";
+            return html;
+        }
+
+        int size = alerts.size();
+
+        if(size > itemsPerPage){
+            html += itemsPerPage + "/" + size + ")</b><br/>";
+        } else {
+            html += size + "/" + size + ")</b><br/>";
+        }
+
+        html += "<p>";
+        int count = 0;
+        for(Alert a : alerts){
+            if(count == itemsPerPage){ break; }
+            html += a.getDisplayValue() + "<br/>";
+        }
+        html += "</p>";
+
+        return html;
+    }
+
+    public void setAlerts(List<Alert> alerts) {
+        this.alerts = alerts;
+    }
+
+    public List<Flag> getFlags() {
+        if(flags == null){
+            flags = new ArrayList<Flag>();
+        }
+        return flags;
+    }
+
+    public Integer getFlagSize(){
+        if(flags == null){ return 0; }
+        return flags.size();
+    }
+
+    public String getFlagTooltip(){
+        int itemsPerPage = 4; //Integer.valueOf(configService.getParameter(Constants.QUICKVIEW_INFORMATION_COUNT));
+
+        String html = "<b>Flags (";
+
+        if(flags == null || flags.size() == 0){
+            html += "0/0)</b><br/><p>No flags</p>";
+            return html;
+        }
+
+        int size = flags.size();
+
+        if(size > itemsPerPage){
+            html += itemsPerPage + "/" + size + ")</b><br/>";
+        } else {
+            html += size + "/" + size + ")</b><br/>";
+        }
+
+        html += "<p>";
+        int count = 0;
+        for(Flag f : flags){
+            if(count == itemsPerPage){ break; }
+            html += f.getDisplayValue() + "<br/>";
+        }
+        html += "</p>";
+
+        return html;
+    }
+
+    public void setFlags(List<Flag> flags) {
+        this.flags = flags;
+    }
+
+    public List<TransactionModel> getRollupTransactions() {
+        return rollupTransactions;
+    }
+
+    public void setRollupTransactions(List<TransactionModel> rollupTransactions) {
+        this.rollupTransactions = rollupTransactions;
+    }
+
+    public List<TransactionModel> getAllTransactions() {
+        return allTransactions;
+    }
+
+    public void setAllTransactions(List<TransactionModel> allTransactions) {
+        this.allTransactions = allTransactions;
+    }
 }

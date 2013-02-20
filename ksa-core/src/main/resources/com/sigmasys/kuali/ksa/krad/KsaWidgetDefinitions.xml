@@ -39,8 +39,8 @@
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-Link" p:linkText="Search"
-                      p:href="searchView?methodToCall=get&amp;viewId=SearchView"/>
+                <bean parent="Uif-Link" p:linkText="Accounts"
+                      p:href="searchView?methodToCall=get&amp;viewId=TransactionView"/>
                 <bean parent="Uif-Link" p:linkText="Administration"
                       p:href="adminView?methodToCall=get&amp;viewId=AdminView&amp;pageId=AccountManagement"/>
                 <bean parent="Uif-Link" p:linkText="Reconciliation"
@@ -190,7 +190,7 @@
                                         <!-- Use this to display the combined account, bio, aging and alerts -->
                                         <bean parent="Uif-LinkField" p:linkText="Transactions" p:target="_self"
                                               p:align="center" p:width="10%"
-                                              p:href="searchView?methodToCall=get&amp;viewId=SearchView&amp;pageId=AccountOVTransactionsPage&amp;userId=@{#line.id}"/>
+                                              p:href="transactionView?methodToCall=get&amp;pageId=ViewTransactions&amp;viewId=TransactionView&amp;userId=@{#line.id}"/>
                                         <bean parent="Uif-LinkField" p:linkText="Quick View" p:target="_self"
                                               p:align="center" p:width="10%"
                                               p:href="quickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{#line.id}"/>
