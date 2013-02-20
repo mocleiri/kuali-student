@@ -76,7 +76,7 @@ class CourseOfferingEdit < BasePage
   AFFILIATION_COLUMN = 2
   #ACTIONS_COLUMN -- defined above
 
-  element(:personnel_table) { |b| b.frm.div(id: "KS-ActivityOffering-PersonnelSection").table() }
+  element(:personnel_table) { |b| b.frm.div(id: "KS-CourseOfferingEdit-PersonnelTableSection").table() }
 
   element(:add_person_id) { |b| b.personnel_table.rows[1].cells[ID_COLUMN].text_field() }
   #action(:lookup_person) { |b| b.personnel_table.rows[1].cells[ID_COLUMN].image().click; b.loading.wait_while_present } # Need persistent ID!
