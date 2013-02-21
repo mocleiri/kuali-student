@@ -90,7 +90,9 @@ public abstract class Transaction extends AccountIdAware implements Identifiable
     protected Boolean internal;
 
     /**
-     * This is the amount of the transaction that has been allocated. For example, if a $1000 payment is put towards a $2000 charge, the $1000 will have a $1000 allocation amount, and the $2000 charge will have a $1000 allocation amount. The PA module is responsible for allocating charges to payments.
+     * This is the amount of the transaction that has been allocated. For example, if a $1000 payment is put towards a $2000 charge,
+     * the $1000 will have a $1000 allocation amount, and the $2000 charge will have a $1000 allocation amount. The PA module is
+     * responsible for allocating charges to payments.
      */
     protected BigDecimal allocatedAmount;
 

@@ -10,6 +10,9 @@ import com.sigmasys.kuali.ksa.service.ActivityService;
 import com.sigmasys.kuali.ksa.service.AuditableEntityService;
 
 import com.sigmasys.kuali.ksa.service.InformationService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +29,7 @@ import java.util.*;
 @RequestMapping(value = "/transactionView")
 public class TransactionController extends GenericSearchController {
 
+    private Log logger = LogFactory.getLog(TransactionController.class);
 
     @Autowired
     private ActivityService activityService;
@@ -88,25 +92,33 @@ public class TransactionController extends GenericSearchController {
 
         // just for the transactions by person page
         String pageId = request.getParameter("pageId");
-        if (pageId == null) {
+        if(pageId == null){
             pageId = "ViewTransactions";
         }
 
         String userId = request.getParameter("userId");
-        if (userId == null) {
+        if(userId == null){
             // Error out here
         }
-
         form.setAccount(accountService.getFullAccount(userId));
 
-        if ("ViewTransactions".equals(pageId)) {
+        if("ViewTransactions".equals(pageId)){
             form.setAlerts(informationService.getAlerts(userId));
             form.setFlags(informationService.getFlags(userId));
 
+            // All transactions
+            List<Transaction> transactions = transactionService.getTransactions(userId);
+            List<TransactionModel> models = new ArrayList<TransactionModel>(transactions.size());
+            for(Transaction t : transactions){
+                models.add(new TransactionModel(t));
+            }
+
+            this.populateRollups(form, models);
+
+
 
         }
-
-        if (pageId.equals("bursaTransByPersonPage")) {
+        if ("bursaTransByPersonPage".equals(pageId)) {
             String id = request.getParameter("id");
             if (id == null || id.isEmpty()) {
                 throw new IllegalArgumentException("'id' request parameter must be specified");
@@ -126,7 +138,7 @@ public class TransactionController extends GenericSearchController {
             form.setPaymentList(payments);
         }
 
-        if (pageId.equals("bursaChargePage")) {
+        if ("bursaChargePage".equals(pageId)) {
             String id = request.getParameter("id");
             if (id == null || id.isEmpty()) {
                 throw new IllegalArgumentException("'id' request parameter must be specified");
@@ -143,7 +155,7 @@ public class TransactionController extends GenericSearchController {
             form.setCharge(charge);
         }
 
-        if (pageId.equals("bursaPaymentPage")) {
+        if ("bursaPaymentPage".equals(pageId)) {
             String id = request.getParameter("id");
             if (id == null || id.isEmpty()) {
                 throw new IllegalArgumentException("'id' request parameter must be specified");
@@ -161,7 +173,7 @@ public class TransactionController extends GenericSearchController {
         }
 
         // Currency type
-        if (pageId.equals("bursaCurrencyPage")) {
+        if ("bursaCurrencyPage".equals(pageId)) {
             String subMethod = request.getParameter("subMethod");
             if (subMethod != null && subMethod.compareTo("deleteCurr") == 0) {
                 String id = request.getParameter("id");
@@ -177,7 +189,7 @@ public class TransactionController extends GenericSearchController {
         }
 
         // Currency type edit
-        if (pageId.equals("bursaCurrencyEditPage")) {
+        if ("bursaCurrencyEditPage".equals(pageId)) {
 
             String code = request.getParameter("code");
             if (code == null || code.isEmpty()) {
@@ -189,7 +201,7 @@ public class TransactionController extends GenericSearchController {
             form.setCurrency(currency);
         }
 
-        if (pageId.equals("bursaActivityPage")) {
+        if ("bursaActivityPage".equals(pageId)) {
             form.setActivities(activityService.getActivities());
         }
 
@@ -271,61 +283,56 @@ public class TransactionController extends GenericSearchController {
         throw new UserNotFoundException("Cannot find Account by ID = " + accountId);
     }
 
-    private void populateRollups(TransactionForm form, String userId) {
-        // All transactions
-        List<Transaction> transactions = transactionService.getTransactions(userId);
-
+    private void populateRollups(TransactionForm form, List<TransactionModel> transactions){
         List<TransactionModel> rollUpTransactionModelList = new ArrayList<TransactionModel>();
         List<TransactionModel> unGroupedTransactionModelList = new ArrayList<TransactionModel>();
 
-        BigDecimal rollUpCredit = BigDecimal.ZERO;
-        BigDecimal rollUpDebit = BigDecimal.ZERO;
-        BigDecimal unGroupedCredit = BigDecimal.ZERO;
-        BigDecimal unGroupedDebit = BigDecimal.ZERO;
+        TransactionModel nonRolledUp = null;
 
-        for (Transaction t : transactions) {
+        for (TransactionModel t : transactions) {
+            logger.info("TJB: " + t.getId() + " " + t.getTransactionType().getDescription());
             unGroupedTransactionModelList.add(new TransactionModel(t));
-            if (TransactionTypeValue.CHARGE.equals(t.getTransactionTypeValue())) {
-                unGroupedCredit = unGroupedCredit.add(t.getAmount());
-            } else {
-                unGroupedDebit = unGroupedDebit.add(t.getAmount());
-            }
 
-            TransactionModel transactionModel = new TransactionModel(t);
             Rollup tmRollup = t.getRollup();
+            logger.info("TJB: Rollup - " + tmRollup);
             if (tmRollup != null) {
                 // Check if this rollup is already in there.
                 boolean found = false;
                 for (TransactionModel m : rollUpTransactionModelList) {
                     Rollup r = m.getRollup();
                     if (r.getId().equals(tmRollup.getId())) {
-                        m.setAmount(m.getAmount().add(transactionModel.getAmount()));
+                        m.addSubTransaction(new TransactionModel(t));
                         found = true;
                         break;
                     }
                 }
                 if (!found) {
-                    rollUpTransactionModelList.add(transactionModel);
+                    TransactionModel tm = new TransactionModel();
+                    tm.setRollup(tmRollup);
+
+                    rollUpTransactionModelList.add(tm);
+                    tm.addSubTransaction(t);
                 }
-                if (TransactionTypeValue.CHARGE.equals(t.getTransactionTypeValue())) {
-                    rollUpCredit = rollUpCredit.add(t.getAmount());
-                } else {
-                    rollUpDebit = rollUpDebit.add(t.getAmount());
+            } else {
+                if(nonRolledUp == null){
+                    Rollup r = new Rollup();
+                    r.setName("Other Transactions not in a Roll-up");
+
+                    nonRolledUp = new TransactionModel();
+                    nonRolledUp.setRollup(r);
                 }
+                nonRolledUp.addSubTransaction(t);
             }
         }
-        TransactionModel singleTransactionModel = new TransactionModel();
-        //singleTransactionModel.set
-        singleTransactionModel.setRollUpCredit(rollUpCredit.toString());
-        singleTransactionModel.setRollUpDebit(rollUpDebit.toString());
-        singleTransactionModel.setUnGroupedCredit(unGroupedCredit.toString());
-        singleTransactionModel.setUnGroupedDebit(unGroupedDebit.toString());
 
-        rollUpTransactionModelList.add(singleTransactionModel);
+        if(nonRolledUp != null){
+            rollUpTransactionModelList.add(nonRolledUp);
+        }
 
-        //form.setTransactionModel(singleTransactionModel);
         form.setRollupTransactions(rollUpTransactionModelList);
         form.setAllTransactions(unGroupedTransactionModelList);
+
+
     }
 
 }

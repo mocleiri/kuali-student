@@ -110,9 +110,7 @@
     A table containing a list of transactionType used in the system
     ********************************************************************************************************************
     -->
-    <bean id="tableTransactionTypeSection" parent="Uif-Disclosure-TableCollectionSection"
-          p:layoutManager.numberOfColumns="4"
-          p:width="85%">
+    <bean id="tableTransactionTypeSection" parent="Uif-Disclosure-TableCollectionSection" p:layoutManager.numberOfColumns="4" p:width="85%">
         <property name="title" value="View Transaction Types"/>
         <property name="readOnly" value="true"/>
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.krad.model.TransactionTypeModel"/>

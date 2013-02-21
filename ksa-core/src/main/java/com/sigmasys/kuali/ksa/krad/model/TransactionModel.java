@@ -1,17 +1,22 @@
 package com.sigmasys.kuali.ksa.krad.model;
 
+
 import com.sigmasys.kuali.ksa.model.*;
 
 import javax.persistence.Transient;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
  * Created by: dmulderink on 9/27/12 at 7:46 AM
  */
 public class TransactionModel extends Transaction {
+
+    private List<TransactionModel> subTransactions;
 
     private TransactionTypeValue transactionTypeValue;
 
@@ -68,6 +73,12 @@ public class TransactionModel extends Transaction {
     private String unGroupedTotalCredit;
 
 
+    private BigDecimal chargeAmount;
+    private BigDecimal paymentAmount;
+    private BigDecimal defermentAmount;
+    private BigDecimal allocatedAmount;
+    private BigDecimal unallocatedAmount;
+
     // checkboxes
     private String paymentBilling;
 
@@ -94,11 +105,18 @@ public class TransactionModel extends Transaction {
         setEffectiveDate(transaction.getEffectiveDate());
         setOriginationDate(transaction.getOriginationDate());
         setRecognitionDate(transaction.getRecognitionDate());
-        setAmount(transaction.getAmount());
+        BigDecimal amt = transaction.getAmount();
+        setAmount(amt);
         setNativeAmount(transaction.getNativeAmount());
         setCurrency(transaction.getCurrency());
         setInternal(transaction.isInternal());
-        setAllocatedAmount(transaction.getAllocatedAmount());
+        BigDecimal alloc = transaction.getAllocatedAmount();
+        setAllocatedAmount(alloc);
+        if(alloc == null){
+            setUnallocatedAmount(amt);
+        } else {
+            setUnallocatedAmount(amt == null ? null : amt.subtract(alloc));
+        }
         setLockedAllocatedAmount(transaction.getLockedAllocatedAmount());
         setStatementText(transaction.getStatementText());
         setDocument(transaction.getDocument());
@@ -108,6 +126,15 @@ public class TransactionModel extends Transaction {
         setGlOverridden(transaction.isGlOverridden());
 
         // charge, payment or deferment specific data members
+        BigDecimal amount = transaction.getAmount();
+        if(transaction instanceof Charge){
+            setChargeAmount(amount);
+        } else if(transaction instanceof Payment){
+            setPaymentAmount(amount);
+        } else if(transaction instanceof Deferment){
+            setDefermentAmount(amount);
+        }
+
     }
 
     @Override
@@ -193,18 +220,6 @@ public class TransactionModel extends Transaction {
         this.setAmount(BigDecimal.valueOf(value));
     }
 
-    public String getTransactionNativeAmount() {
-        return getFormattedAmount(this.getNativeAmount());
-    }
-
-    public void setTransactionNativeAmount(String transactionNativeAmount) {
-        double value = Double.parseDouble(transactionNativeAmount);
-        this.setNativeAmount(BigDecimal.valueOf(value));
-    }
-
-    public String getTransactionAmountAllocated() {
-        return getFormattedAmount(this.getAllocatedAmount());
-    }
 
     public void setTransactionAmountAllocated(String transactionAmountAllocated) {
         double value = Double.parseDouble(transactionAmountAllocated);
@@ -405,4 +420,79 @@ public class TransactionModel extends Transaction {
     public void setUnGroupedTotalCredit(String unGroupedTotalCredit) {
         this.unGroupedTotalCredit = unGroupedTotalCredit;
     }
+
+    public List<TransactionModel> getSubTransactions() {
+        if(this.subTransactions == null){
+            this.subTransactions = new ArrayList<TransactionModel>();
+        }
+        return subTransactions;
+    }
+
+    public void setSubTransactions(List<TransactionModel> subTransactions) {
+        this.subTransactions = subTransactions;
+    }
+
+    public void addSubTransaction(TransactionModel transaction){
+        if(this.subTransactions == null){
+            this.subTransactions = new ArrayList<TransactionModel>();
+        }
+        this.subTransactions.add(transaction);
+
+        //this.setAmount(this.getAmount().add(transaction.getAmount()));
+        this.setChargeAmount(this.add(this.getChargeAmount(), transaction.getChargeAmount()));
+        this.setPaymentAmount(this.add(this.getPaymentAmount(), transaction.getPaymentAmount()));
+        this.setDefermentAmount(this.add(this.getDefermentAmount(), transaction.getDefermentAmount()));
+        this.setAllocatedAmount(this.add(this.getAllocatedAmount(), transaction.getAllocatedAmount()));
+        this.setUnallocatedAmount(this.add(this.getUnallocatedAmount(), transaction.getUnallocatedAmount()));
+
+    }
+
+    public BigDecimal getChargeAmount() {
+        return chargeAmount;
+    }
+
+    public void setChargeAmount(BigDecimal chargeAmount) {
+        this.chargeAmount = chargeAmount;
+    }
+
+    public BigDecimal getPaymentAmount() {
+        return paymentAmount;
+    }
+
+    public void setPaymentAmount(BigDecimal paymentAmount) {
+        this.paymentAmount = paymentAmount;
+    }
+
+    public BigDecimal getDefermentAmount() {
+        return defermentAmount;
+    }
+
+    public void setDefermentAmount(BigDecimal defermentAmount) {
+        this.defermentAmount = defermentAmount;
+    }
+
+    public BigDecimal getAllocatedAmount() {
+        return allocatedAmount;
+    }
+
+    public void setAllocatedAmount(BigDecimal allocatedAmount) {
+        this.allocatedAmount = allocatedAmount;
+    }
+
+    public BigDecimal getUnallocatedAmount() {
+        return unallocatedAmount;
+    }
+
+    public void setUnallocatedAmount(BigDecimal unallocatedAmount) {
+        this.unallocatedAmount = unallocatedAmount;
+    }
+
+    // BigDecimal is not friendly to nulls
+    private BigDecimal add(BigDecimal d1, BigDecimal d2){
+        if(d1 == null){ return d2; }
+        if(d2 == null){ return d1; }
+        return d1.add(d2);
+    }
+
+
 }
