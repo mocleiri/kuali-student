@@ -132,7 +132,7 @@ set sqlblanklines on
 set sqlterminator '!'
 
 Insert into KSSA_RULE (ID, NAME, RULE_TYPE_ID_FK, PRIORITY, HEADER, LHS, RHS) values
-(99, 'Payment Application Rule', 3, 0, null, '(Transactions are not empty)',
+(99, 'Payment Application Rule', 3, 0, null, '(Transactions exist)',
 '
 Remove allocations
 Allocate reversals

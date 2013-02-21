@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service.impl;
 
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.AccessControlService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.core.api.criteria.*;
@@ -9,17 +10,21 @@ import org.kuali.rice.core.api.membership.MemberType;
 import org.kuali.rice.core.api.resourceloader.GlobalResourceLoader;
 import org.kuali.rice.kim.api.identity.IdentityService;
 import org.kuali.rice.kim.api.identity.principal.Principal;
+import org.kuali.rice.kim.api.permission.Permission;
+import org.kuali.rice.kim.api.permission.PermissionQueryResults;
+import org.kuali.rice.kim.api.permission.PermissionService;
 import org.kuali.rice.kim.api.role.Role;
 import org.kuali.rice.kim.api.role.RoleMember;
 import org.kuali.rice.kim.api.role.RoleService;
 import org.kuali.rice.kim.api.services.KimApiServiceLocator;
 import org.kuali.rice.kim.impl.KIMPropertyConstants;
-import org.kuali.rice.kim.impl.role.RolePermissionBo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.regex.Pattern;
 
 /**
@@ -35,7 +40,13 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
 
     private static final Log logger = LogFactory.getLog(AccessControlServiceImpl.class);
 
-    private static final String CRITERIA_LOOKUP_SERVICE_NAME = "criteriaLookupService";
+    private static final String PERMISSION_SERVICE_NAME = "kimPermissionService";
+
+    // Map of [User ID, list of Role instances]
+    private static final Map<String, List<Role>> userRoles = new HashMap<String, List<Role>>();
+
+    // Map of [User ID, list of Permission instances]
+    private static final Map<String, List<Permission>> userPermissions = new HashMap<String, List<Permission>>();
 
     private final Set<String> transactionTypeIds = new HashSet<String>();
     private final Map<String, String> transactionTypeMasks = new HashMap<String, String>();
@@ -47,6 +58,10 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
 
     private RoleService getRoleService() {
         return KimApiServiceLocator.getRoleService();
+    }
+
+    private PermissionService getPermissionService() {
+        return GlobalResourceLoader.getService(PERMISSION_SERVICE_NAME);
     }
 
 
@@ -77,27 +92,32 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
     }
 
     private List<Role> getKimRoles(String userId) {
-        Principal principal = getIdentityService().getPrincipalByPrincipalName(userId);
-        Predicate memberPredicate =
-                PredicateFactory.equal(KIMPropertyConstants.RoleMember.MEMBER_ID, principal.getPrincipalId());
-        Predicate memberTypePredicate =
-                PredicateFactory.equal(KIMPropertyConstants.RoleMember.MEMBER_TYPE_CODE, MemberType.PRINCIPAL.getCode());
-        QueryByCriteria criteria = QueryByCriteria.Builder.fromPredicates(memberPredicate, memberTypePredicate);
-        List<RoleMember> roleMembers = getRoleService().findRoleMembers(criteria).getResults();
-        if (roleMembers != null && !roleMembers.isEmpty()) {
-            List<String> roleIds = new ArrayList<String>(roleMembers.size());
-            for (RoleMember roleMember : roleMembers) {
-                roleIds.add(roleMember.getRoleId());
+        List<Role> roles = userRoles.get(userId);
+        if (roles == null) {
+            roles = new LinkedList<Role>();
+            Principal principal = getIdentityService().getPrincipalByPrincipalName(userId);
+            Predicate memberPredicate =
+                    PredicateFactory.equal(KIMPropertyConstants.RoleMember.MEMBER_ID, principal.getPrincipalId());
+            Predicate memberTypePredicate =
+                    PredicateFactory.equal(KIMPropertyConstants.RoleMember.MEMBER_TYPE_CODE, MemberType.PRINCIPAL.getCode());
+            QueryByCriteria criteria = QueryByCriteria.Builder.fromPredicates(memberPredicate, memberTypePredicate);
+            List<RoleMember> roleMembers = getRoleService().findRoleMembers(criteria).getResults();
+            if (roleMembers != null && !roleMembers.isEmpty()) {
+                List<String> roleIds = new ArrayList<String>(roleMembers.size());
+                for (RoleMember roleMember : roleMembers) {
+                    roleIds.add(roleMember.getRoleId());
+                }
+                roles.addAll(getRoleService().getRoles(roleIds));
             }
-            return getRoleService().getRoles(roleIds);
+            userRoles.put(userId, roles);
         }
-        return Collections.emptyList();
+        return roles;
     }
 
     @Override
     public Set<String> getRoles(String userId) {
         List<Role> roles = getKimRoles(userId);
-        if (!roles.isEmpty()) {
+        if (CollectionUtils.isNotEmpty(roles)) {
             Set<String> roleNames = new HashSet<String>(roles.size());
             for (Role role : roles) {
                 roleNames.add(role.getName());
@@ -107,26 +127,37 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
         return Collections.emptySet();
     }
 
+    private List<Permission> getKimPermissions(String userId) {
+        List<Permission> permissions = userPermissions.get(userId);
+        if (permissions == null) {
+            permissions = new LinkedList<Permission>();
+            QueryByCriteria criteria = QueryByCriteria.Builder.create().build();
+            PermissionService permissionService = getPermissionService();
+            PermissionQueryResults results = permissionService.findPermissions(criteria);
+            List<Permission> allPermissions = results.getResults();
+            if (CollectionUtils.isNotEmpty(allPermissions)) {
+                for (Permission permission : allPermissions) {
+                    String name = permission.getName();
+                    String namespaceCode = permission.getNamespaceCode();
+                    if (permissionService.hasPermission(userId, namespaceCode, name)) {
+                        permissions.add(permission);
+                    }
+                }
+            }
+            userPermissions.put(userId, permissions);
+        }
+        return permissions;
+    }
+
     @Override
     public Set<String> getPermissions(String userId) {
-        List<Role> roles = getKimRoles(userId);
-        if (!roles.isEmpty()) {
-            List<String> roleIds = new ArrayList<String>(roles.size());
-            for (Role role : getKimRoles(userId)) {
-                roleIds.add(role.getId());
+        List<Permission> permissions = getKimPermissions(userId);
+        if (CollectionUtils.isNotEmpty(permissions)) {
+            Set<String> permissionNames = new HashSet<String>(permissions.size());
+            for (Permission permission : permissions) {
+                permissionNames.add(permission.getName());
             }
-            Predicate predicate = PredicateFactory.in(KIMPropertyConstants.RoleMember.ROLE_ID, roleIds.toArray());
-            QueryByCriteria criteria = QueryByCriteria.Builder.fromPredicates(predicate);
-            CriteriaLookupService lookupService = GlobalResourceLoader.getService(CRITERIA_LOOKUP_SERVICE_NAME);
-            GenericQueryResults<RolePermissionBo> results = lookupService.lookup(RolePermissionBo.class, criteria);
-            List<RolePermissionBo> permissions = results.getResults();
-            if (permissions != null && !permissions.isEmpty()) {
-                Set<String> permissionNames = new HashSet<String>(permissions.size());
-                for (RolePermissionBo permission : permissions) {
-                    permissionNames.add(permission.getPermission().getName());
-                }
-                return permissionNames;
-            }
+            return permissionNames;
         }
         return Collections.emptySet();
     }
@@ -206,5 +237,7 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
     public void refresh() {
         loadTransactionTypeMasks();
         loadTransactionTypeIds();
+        userRoles.clear();
+        userPermissions.clear();
     }
 }

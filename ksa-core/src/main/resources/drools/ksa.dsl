@@ -33,7 +33,7 @@
 # PAYMENT APPLICATION DSL definitions
 
 # LHS definitions
-[when][]Transactions are not empty = !transactions.isEmpty()
+[when][]Transactions exist = !transactions.isEmpty()
 
 # RHS definitions
 [then][]Remove allocations = glTransactions.addAll(context.getTransactionService().removeAllocations(transactions));
