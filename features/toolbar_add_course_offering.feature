@@ -1,6 +1,9 @@
 @pending
 Feature: Add Course Offering toolbar button
 
+  As a user, I want to Add Courses from the Subject Code display of the Manage Course Offerings process by means of a Toolbar Button
+  so I can more easily manage my Course Offerings.
+
 Background:
   Given I am logged in as admin
 
