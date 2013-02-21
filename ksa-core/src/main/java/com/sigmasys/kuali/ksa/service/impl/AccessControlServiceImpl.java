@@ -7,7 +7,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.core.api.criteria.*;
 import org.kuali.rice.core.api.membership.MemberType;
-import org.kuali.rice.core.api.resourceloader.GlobalResourceLoader;
 import org.kuali.rice.kim.api.identity.IdentityService;
 import org.kuali.rice.kim.api.identity.principal.Principal;
 import org.kuali.rice.kim.api.permission.Permission;
@@ -40,8 +39,6 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
 
     private static final Log logger = LogFactory.getLog(AccessControlServiceImpl.class);
 
-    private static final String PERMISSION_SERVICE_NAME = "kimPermissionService";
-
     // Map of [User ID, list of Role instances]
     private static final Map<String, List<Role>> userRoles = new HashMap<String, List<Role>>();
 
@@ -61,7 +58,7 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
     }
 
     private PermissionService getPermissionService() {
-        return GlobalResourceLoader.getService(PERMISSION_SERVICE_NAME);
+        return KimApiServiceLocator.getPermissionService();
     }
 
 
