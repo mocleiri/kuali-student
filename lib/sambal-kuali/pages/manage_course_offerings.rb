@@ -37,6 +37,12 @@ class ManageCourseOfferings < BasePage
 
   action(:add_course){ |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-CO").click; b.loading.wait_while_present}
 
+  action(:approve_cos){ |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Approve-CO").click; b.loading.wait_while_present}
+
+  element(:approve_co_popup_div) { |b| b.div(id: "approveCODialog") }
+  action(:approve_co_confirm_action) { |b| b.approve_co_popup_div.checkbox(index: 0).click; b.loading.wait_while_present }
+  action(:approve_co_cancel_action) { |b| b.approve_co_popup_div.checkbox(index: 1).click; b.loading.wait_while_present }
+
   AO_CODE = 1
   AO_STATUS = 2
   AO_TYPE = 3
@@ -130,4 +136,20 @@ class ManageCourseOfferings < BasePage
     course_title
   end
 
+  def approve_co(args={})
+    co_code_list = args[:code_list]
+    select_aos(co_code_list)
+    approve_cos
+  end
+
+  def check_all_ao_status(aoStatus)
+    retVal = true
+    activity_offering_results_table.rows.each {|row|
+      if !(row[AO_STATUS].text.eql? aoStatus)
+        retVal = false
+        break
+      end
+    }
+    retVal
+  end
 end
