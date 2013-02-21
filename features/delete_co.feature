@@ -1,8 +1,8 @@
 @pending
 Feature: Delete COs and all associated AOs
 
-As a Departmental Administrator, I want to delete a Course Offering and all of its associated Activity Offerings so that
-it will no longer be offered for the term.
+  As a user, I want to Delete Course Offerings from the Subject Code display of the Manage Course Offerings process
+  by means of a Toolbar Button so I can more easily manage my Course Offerings.
 
   Background:
     Given I am logged in as a Schedule Coordinator
