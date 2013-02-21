@@ -22,6 +22,10 @@ class CourseOfferingEdit < BasePage
   action(:final_exam_option_none) { |b| b.frm.radio(value: "NONE").set; b.loading.wait_while_present }
 
   element(:delivery_formats_table) { |b| b.frm.div(id: "KS-CourseOfferingEdit-FormatOfferingSubSection").table }
+
+  element(:cross_listed_co_check_boxes) { |b| b.frm.dvi(id:"KS-COEditListed-Checkbox-Group")}
+  element(:cross_listed_co_check_box) { |b| b.checkbox(id: "KS-COEditListed-Checkbox-Group_control_0") }
+
   FORMAT_COLUMN = 0
   GRADE_ROSTER_LEVEL_COLUMN = 1
   FINAL_EXAM_COLUMN = 2
