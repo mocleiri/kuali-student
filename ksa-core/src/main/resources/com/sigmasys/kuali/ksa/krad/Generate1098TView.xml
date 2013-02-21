@@ -163,7 +163,11 @@
 							</bean>
 							
 							<!-- Generate Document button -->
-							<bean parent="Uif-SecondaryActionButton-Small" p:actionLabel="Generate Document" p:actionScript="alert('Generate 1098T Report');"/>
+							<bean parent="Uif-SecondaryActionButton-Small" p:actionLabel="Generate Document" p:methodToCall="generate1098TForm"
+								p:onClickScript="writeHiddenToForm('userId', '@{account.id}'); writeHiddenToForm('pageId', 'Generate1098TViewPage');"/>
+							<!--bean parent="Uif-LinkField" p:linkText="Generate Document" p:target="_self"
+											p:href="javascript: void(0)"
+											p:onClickScript="jQuery.download('/ksa/uif/generate1098T', 'methodToCall=generate1098TForm', 'GET');"/-->
 						</list>
 					</property>
 				</bean>

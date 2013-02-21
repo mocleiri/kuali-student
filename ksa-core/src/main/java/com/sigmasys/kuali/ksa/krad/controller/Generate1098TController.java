@@ -3,19 +3,21 @@ package com.sigmasys.kuali.ksa.krad.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.krad.web.form.UifFormBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.krad.form.Generate1098TForm;
 import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.model.PersonName;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.ReportService;
 
@@ -23,7 +25,7 @@ import com.sigmasys.kuali.ksa.service.ReportService;
 @Controller
 @RequestMapping(value = "/generate1098T")
 @Transactional
-public class Generate1098TController extends GenericSearchController {
+public class Generate1098TController extends DownloadEnabledController {
 
 	@Autowired
 	private ReportService reportService;
@@ -68,11 +70,25 @@ public class Generate1098TController extends GenericSearchController {
 	 * @param form	Form behind the screen.
 	 * @return		<code>null</code> to stay on the same page. 
 	 */
-	@RequestMapping(method = RequestMethod.GET, params = "methodToCall=generate1098TForm")
-	public ModelAndView generate1098TReport(@ModelAttribute("KualiForm") Generate1098TForm form) {
-		// Start download:
+	@RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, params = "methodToCall=generate1098TForm")
+	public ModelAndView generate1098TReport(@ModelAttribute("KualiForm") Generate1098TForm form, HttpServletResponse response) throws Exception {
+		// Check if the report year has been selected:
+		if (CollectionUtils.isNotEmpty(form.getReportYears())) {
+			// Get the input parameters:
+			int reportYear = Integer.parseInt(form.getReportYears().get(0));
+			String accountId = form.getAccount().getId();
+			
+			// Generate the form:
+			String form1098T = "<a>some text</a>";//reportService.getIrs1098TReportByYear(accountId, reportYear);
+			PersonName name = form.getAccount().getDefaultPersonName();
+			String fileName = String.format("1098T_%s_%s.xml", name.getLastName(), name.getFirstName());
+			String mimeType = "application/xml";
+			
+			// Start download:
+			doDownload(form1098T, fileName, mimeType, response);
+		}
 		
-		return null;
+		return getUIFModelAndView(form);
 	}
 	
 	
