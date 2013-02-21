@@ -489,6 +489,26 @@ class CourseOffering
 
   end
 
+  def delete_co_with_link(args={})
+    should_confirm_delete = false
+    case args[:should_confirm_delete]
+      when true
+        should_confirm_delete = true
+    end
+
+    on ManageCourseOfferings do |page|
+      page.delete_offering
+    end
+    on DeleteCourseOffering do |page|
+      case should_confirm_delete
+        when true
+          page.confirm_delete
+        else
+          page.cancel_delete
+      end
+    end
+  end
+
   def cleanup_all_ao_clusters
     existing_cluster_list = []
     on ManageRegistrationGroups do |page|
