@@ -1,10 +1,8 @@
 @pending
 Feature: delete activity offerings
 
-  CO 10.1: As a Departmental Administrator, I want to delete one or more Activity Offerings associated
-  with a Course Offering so that the specific Activity Offering(s) will no longer be offered for the term.
-  CO 10.2: As a Departmental Administrator, I want to receive confirmation that I have elected to delete
-  Activity Offerings so that I will not accidentally delete Activity Offerings that I intend to keep.
+  CO 24.12, As a user, I want to Delete Activity Offerings from the Manage Course Offerings process
+            by means of a Toolbar Button so I can more easily manage my Course Offerings.
 
   Background:
     Given I am logged in as a Schedule Coordinator
