@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.model.Account;
 
 /**
  * This class serves as a form behind the "Generate 1098T" screen. 
@@ -14,8 +14,6 @@ import com.sigmasys.kuali.ksa.model.*;
 @SuppressWarnings("serial")
 public class Generate1098TForm extends AbstractViewModel {
 
-	private static final String LINE_BREAK = "\n";
-	
 	/**
 	 * Account associated with the 1098T View.
 	 */
@@ -38,63 +36,21 @@ public class Generate1098TForm extends AbstractViewModel {
 	}
 	
 	/**
-	 * Returns a display value for the default address.
+	 * Returns CSS display style of Address Line 2.
 	 * 
-	 * @return Default Address display value.
+	 * @return CSS display style of Address Line 2. 
 	 */
-	public String getDefaultAddressDisplay() {
-		String displayValue = "UNKNOWN";
-		
-		if (account != null) {
-			PostalAddress address = account.getDefaultPostalAddress();
-			
-			if (address != null) {
-				StringBuffer sb = new StringBuffer();
-				
-				// Append street addresses:
-				sb.append(address.getStreetAddress1()).append(LINE_BREAK);
-				
-				if (StringUtils.isNotEmpty(address.getStreetAddress2())) {
-					sb.append(address.getStreetAddress2()).append(LINE_BREAK);
-				}
-				
-				if (StringUtils.isNotEmpty(address.getStreetAddress3())) {
-					sb.append(address.getStreetAddress3()).append(LINE_BREAK);
-				}
-				
-				// Append City, State, Zip Code:
-				sb.append(address.getCity()).append(", ");
-				sb.append(address.getState()).append(" ");
-				sb.append(address.getPostalCode());
-				displayValue = sb.toString();
-			}
-		}
-
-		return displayValue;
+	public String getAddressLine2DisplayStyle() {
+		return (account != null) && (account.getDefaultPostalAddress() != null) && StringUtils.isNotBlank(account.getDefaultPostalAddress().getStreetAddress2()) ? "inline-block" : "none";
 	}
 	
 	/**
-	 * Returns the Default Contact display value.
+	 * Returns CSS display style of Address Line 3.
 	 * 
-	 * @return	Default Contact display value.
+	 * @return CSS display style of Address Line 3. 
 	 */
-	public String getDefaultContactDisplay() {
-		String displayValue = "UNKNOWN";
-		
-		if (account != null) {
-			ElectronicContact contact = account.getDefaultElectronicContact();
-			
-			if (contact != null) {
-				StringBuffer sb = new StringBuffer();
-				
-				// Append contact info:
-				sb.append("Phone: ").append(contact.getPhoneNumber()).append(LINE_BREAK);
-				sb.append("Email: ").append(contact.getEmailAddress());
-				displayValue = sb.toString();
-			}
-		}
-		
-		return displayValue;
+	public String getAddressLine3DisplayStyle() {
+		return (account != null) && (account.getDefaultPostalAddress() != null) && StringUtils.isNotBlank(account.getDefaultPostalAddress().getStreetAddress3()) ? "inline-block" : "none";
 	}
 	
 	public Account getAccount() {
