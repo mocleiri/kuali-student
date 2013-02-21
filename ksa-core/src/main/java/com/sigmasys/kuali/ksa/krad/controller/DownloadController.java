@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * 
  * @author Sergey Godunov
  */
-public abstract class DownloadEnabledController extends GenericSearchController {
+public abstract class DownloadController extends GenericSearchController {
 
     /**
      * Sends content as a String to the ServletResponse output stream.  Typically
