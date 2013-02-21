@@ -2,13 +2,14 @@ class ActivityOfferingMaintenance < ActivityOfferingMaintenanceBase
 
   expected_title /Kuali :: Edit Activity Offering/
 
-  expected_element :activity_code
+  expected_element :mainpage_section
 
   action(:submit) { |b| b.frm.button(text: "submit").click; b.loading.wait_while_present(120) }
   
   element(:activity_code) { |b| b.frm.text_field(name: "document.newMaintainableObject.dataObject.aoInfo.activityCode") }
   element(:total_maximum_enrollment) { |b| b.frm.text_field(id: "maximumEnrollment_control") }
 
+  element(:mainpage_section){|b| b.frm.div(id:"ActivityOfferingEdit-MainPage")}
   element(:actual_delivery_logistics) { |b| b.frm.div(id: "ActivityOffering-DeliveryLogistic-Actuals") }
   element(:revise_actual_delivery_logistics_button) { |b| b.actual_delivery_logistics.link(text: "Revise") }
   action(:revise_actual_delivery_logistics) { |b| b.revise_actual_delivery_logistics_button.click; b.loading.wait_while_present }
@@ -85,7 +86,7 @@ class ActivityOfferingMaintenance < ActivityOfferingMaintenanceBase
   action(:lookup_population_name) { |b| b.seat_pools_table.button(title: "Search Field").click; b.loading.wait_while_present }
   
   element(:add_pool_expiration_milestone) { |b| b.seat_pools_table.rows[1].cells[EXP_MILESTONE_COLUMN].select() }
-
+  element(:add_pool_element) { |b| b.seat_pools_table.rows[1].cells[SEATS_ACTION_COLUMN].button()}
   action(:add_seat_pool) { |b| b.seat_pools_table.rows[1].cells[SEATS_ACTION_COLUMN].button().click; b.loading.wait_while_present }
 
   def remove_seatpool(pop_name)
