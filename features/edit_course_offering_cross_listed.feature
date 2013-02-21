@@ -1,4 +1,4 @@
-@draft
+@pending
 Feature: Create and remove cross-listings
 
   Background:
