@@ -163,7 +163,7 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
     }
 
     private List<String> getTransactionTypeMasksByRoleNames(Set<String> roleNames) {
-        if (roleNames != null && !roleNames.isEmpty()) {
+        if (CollectionUtils.isNotEmpty(roleNames)) {
             if (!transactionTypeMasks.isEmpty()) {
                 List<String> typeMasks = new LinkedList<String>();
                 for (Map.Entry<String, String> roleMask : transactionTypeMasks.entrySet()) {
@@ -225,7 +225,7 @@ public class AccessControlServiceImpl extends GenericPersistenceService implemen
                 return false;
             }
         }
-        return !permissions.isEmpty() && permissionNames.length > 0;
+        return CollectionUtils.isNotEmpty(permissions) && permissionNames.length > 0;
     }
 
     @Override
