@@ -1,4 +1,4 @@
-@draft
+@nightly
 Feature: Department Schedule Coordinator
 
   Background:
