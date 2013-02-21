@@ -14,11 +14,13 @@ When /^I select a course offering containing at least one activity in Draft stat
   on ManageCourseOfferings do |page|
     page.ao_status("A", "Draft").should == true
   end
+
+  @course_offering.search_by_subjectcode
+  on(ManageCourseOfferings).select_aos [@course_offering.course]
  end
 
 And /^I click the Approve toolbar button$/ do
-  @course_offering.search_by_subjectcode
-  on(ManageCourseOfferings).approve_co :code_list => [@course_offering.course]
+  on(ManageCourseOfferings).approve_cos
 end
 
 And /^I cancel the action$/ do
@@ -44,7 +46,7 @@ end
 
 Then /^the course offering is in Planned state$/ do
   on ManageCourseOfferings do |page|
-    page.ao_status("ENGL206", "Planned").should == true
+    page.ao_status(@course_offering.course, "Planned").should == true
   end
  end
 
@@ -56,13 +58,37 @@ And /^its activity offerings are in Approved state$/ do
  end
 
 When /^I select multiple course offerings each containing at least one activity in Draft state$/ do
-pending # express the regexp above with the code you wish you had
+  @course_offering_a = make CourseOffering, :term=>@course_offering.term, :course=>"ENGL222"
+  @course_offering_a.search_by_coursecode
+  on ManageCourseOfferings do |page|
+    page.ao_status("A", "Draft").should == true
+  end
+
+  @course_offering_b = make CourseOffering, :term=>@course_offering.term, :course=>"ENGL301"
+  @course_offering_b.search_by_coursecode
+  on ManageCourseOfferings do |page|
+    page.ao_status("A", "Draft").should == true
+  end
+
+  @course_offering.search_by_subjectcode
+  on(ManageCourseOfferings).select_aos [@course_offering_a.course, @course_offering_b.course]
 end
 
 Then /^the selected course offerings are in Planned state$/ do
-pending # express the regexp above with the code you wish you had
+  on ManageCourseOfferings do |page|
+    page.ao_status(@course_offering_a.course, "Planned").should == true
+    page.ao_status(@course_offering_b.course, "Planned").should == true
+  end
 end
 
 And /^their activity offerings are in Approved state$/ do
-pending # express the regexp above with the code you wish you had
+  @course_offering_a.search_by_coursecode
+  on ManageCourseOfferings do |page|
+    page.check_all_ao_status("Approved").should == true
+  end
+
+  @course_offering_b.search_by_coursecode
+  on ManageCourseOfferings do |page|
+    page.check_all_ao_status("Approved").should == true
+  end
 end

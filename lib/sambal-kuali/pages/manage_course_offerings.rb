@@ -136,12 +136,6 @@ class ManageCourseOfferings < BasePage
     course_title
   end
 
-  def approve_co(args={})
-    co_code_list = args[:code_list]
-    select_aos(co_code_list)
-    approve_cos
-  end
-
   def check_all_ao_status(aoStatus)
     retVal = true
     activity_offering_results_table.rows.each {|row|
