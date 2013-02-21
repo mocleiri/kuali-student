@@ -450,6 +450,21 @@ class CourseOffering
     @course = (post_copy_co_list - pre_copy_co_list).first
   end
 
+  def total_co_list(course_code)
+    co_list = []
+
+    go_to_manage_course_offerings
+    on ManageCourseOfferings do |page|
+      page.term.set @term
+      page.input_code.set course_code
+      page.show
+    end
+    on ManageCourseOfferingList do |page|
+      co_list = page.co_list
+    end
+    co_list
+  end
+
   def delete_co(args={})
 
     should_confirm_delete = false
