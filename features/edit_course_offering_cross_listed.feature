@@ -47,3 +47,9 @@ Feature: Create and remove cross-listings
     And I remove a cross-listed Course Offering
     And I manage the alias Course Offering
     Then the alias Course Offering does not exist
+
+  Scenario: Edit Course Offering to add cross list (Pathway I)
+    When I create a Course Offering
+    And I edit the course offering to add alias
+    And I manage the alias Course Offering
+    Then the alias is indicated as cross-listed with the owner CO
