@@ -78,7 +78,7 @@ public interface PaymentService {
      * in other payment application methods.
      *
      * @param transactions                List of transactions
-     * @param remainingChargesAndPayments List of remaining charge sand payments (out parameter)
+     * @param remainingChargesAndPayments List of remaining charges and payments (out parameter)
      * @return List of generated GL transactions
      */
     @WebMethod(exclude = true)

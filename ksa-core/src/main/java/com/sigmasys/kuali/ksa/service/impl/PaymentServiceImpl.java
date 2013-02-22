@@ -92,7 +92,7 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
      * in other payment application methods.
      *
      * @param transactions          List of transactions
-     * @param remainingTransactions List of remaining charges sand payments (out parameter)
+     * @param remainingTransactions List of remaining chargess and payments (out parameter)
      * @return List of generated GL transactions
      */
     @Override

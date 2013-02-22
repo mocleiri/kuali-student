@@ -401,6 +401,7 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
 
         irs1098T.setFilerStreetAddress1(configService.getParameter(Constants.KSA_1098_FILER_ADDRESS1));
         irs1098T.setFilerStreetAddress2(configService.getParameter(Constants.KSA_1098_FILER_ADDRESS2));
+        irs1098T.setFilerStreetAddress3(configService.getParameter(Constants.KSA_1098_FILER_ADDRESS3));
         irs1098T.setFilerCity(configService.getParameter(Constants.KSA_1098_FILER_CITY));
         irs1098T.setFilerState(configService.getParameter(Constants.KSA_1098_FILER_STATE));
         irs1098T.setFilerPostalCode(configService.getParameter(Constants.KSA_1098_FILER_ZIP));
