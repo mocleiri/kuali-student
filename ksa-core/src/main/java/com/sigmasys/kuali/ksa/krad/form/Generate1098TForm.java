@@ -25,6 +25,11 @@ public class Generate1098TForm extends AbstractViewModel {
 	private List<String> reportYears;
 	
 	/**
+	 * The selected report year.
+	 */
+	private String reportYear;
+	
+	/**
 	 * Error message.
 	 */
 	private String error;
@@ -102,5 +107,13 @@ public class Generate1098TForm extends AbstractViewModel {
 
 	public void setDisplayDownloadLink(boolean displayDownloadLink) {
 		this.displayDownloadLink = displayDownloadLink;
+	}
+
+	public String getReportYear() {
+		return reportYear;
+	}
+
+	public void setReportYear(String reportYear) {
+		this.reportYear = reportYear;
 	}
 }

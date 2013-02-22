@@ -168,7 +168,7 @@
 								
 							<bean parent="Uif-LinkField" p:linkText="Download Document" p:target="_self"
 											p:href="javascript: void(0)"
-											p:onClickScript="jQuery.download('/ksa/uif/generate1098T', 'methodToCall=download1098TForm&amp;userId=@{account.id}')"
+											p:onClickScript="jQuery.download('/ksa/uif/generate1098T', 'methodToCall=download1098TForm&amp;userId=@{account.id}&amp;reportYear=@{reportYear}')"
 											p:style="display: @{downloadLinkDisplayStyle};"/>
 							<bean parent="Uif-MessageField" p:messageText="@{error}"/>
 						</list>

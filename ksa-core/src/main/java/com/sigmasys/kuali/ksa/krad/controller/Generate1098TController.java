@@ -90,22 +90,22 @@ public class Generate1098TController extends DownloadController {
     public ModelAndView generate1098TReport(@ModelAttribute("KualiForm") Generate1098TForm form, HttpServletResponse response) throws Exception {
     	// Error message:
     	String error = null;
+    	String reportYear = null;
     			
         // Check if the report year has been selected:
         if (CollectionUtils.isNotEmpty(form.getReportYears())) {
             // Get the input parameters:
-            int reportYear = Integer.parseInt(form.getReportYears().get(0));
-            String accountId = form.getAccount().getId();
-
+        	reportYear = form.getReportYears().get(0);
+        	
             // Generate the form:
             String form1098T = null;
+            int reportYearInt = Integer.parseInt(reportYear);
+            String accountId = form.getAccount().getId();
             
             try {
-            	form1098T = reportService.generate1098TReportByYear(accountId, reportYear, 4, false);
+            	form1098T = reportService.generate1098TReportByYear(accountId, reportYearInt, 4, false);
             } catch (Exception e) {
-            	error = StringUtils.isNotBlank(e.getMessage()) ? e.getMessage() 
-            			: ((e.getCause() != null) && StringUtils.isNotBlank(e.getCause().getMessage()) 
-            					? e.getCause().getMessage() : "Error generating form 1098T. See log file for details.");
+            	error = getExceptionMessage(e, "Error generating form 1098T. See log file for details.");
             }
 
             // If a report was generated successfully, write it into a file:
@@ -113,7 +113,7 @@ public class Generate1098TController extends DownloadController {
 	            // Save the report file:
 	            String reportFileName = generateReportFileName(form);
 	            
-	            writeReportToFile(form1098T, reportFileName);
+//	            writeReportToFile(form1098T, reportFileName);
             }
             
         } else {
@@ -126,6 +126,7 @@ public class Generate1098TController extends DownloadController {
         form.setDisplayDownloadLink(StringUtils.isBlank(error));
         form.setError(error);
         form.setReportYears(new ArrayList<String>());
+        form.setReportYear(reportYear);
 
         return getUIFModelAndView(form);
     }
@@ -139,10 +140,22 @@ public class Generate1098TController extends DownloadController {
      * @return					Nothing to stay on the same page.
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=download1098TForm")
-    public ModelAndView download1098TForm(@ModelAttribute("KualiForm") Generate1098TForm form, HttpServletResponse response) throws Exception {
+    public ModelAndView download1098TForm(@ModelAttribute("KualiForm") Generate1098TForm form, HttpServletResponse response, @RequestParam("reportYear") String reportYear) throws Exception {
     	// Read the report file:
     	String reportFileName = generateReportFileName(form);
-    	String form1098T = readReportFromFile(reportFileName, true);
+//    	String form1098T = readReportFromFile(reportFileName, true);
+    	String form1098T = null;
+    	String error = null;
+    	
+    	// Get the form from the ReportService:
+    	try {
+    		String accountId = form.getAccount().getId();
+    		int reportYearInt = Integer.parseInt(reportYear);
+    		
+    		form1098T = reportService.getIrs1098TReportByYear(accountId, reportYearInt);
+    	} catch (Exception e) {
+    		error = String.format("<h2>Error obtaining form 1098T from the persistent store.</h2><br><h4>%s</h4>", getExceptionMessage(e, "Contact your administrator for details."));
+    	}
 
     	// If the form content is available, start download:
     	if (StringUtils.isNotEmpty(form1098T)) {
@@ -152,7 +165,7 @@ public class Generate1098TController extends DownloadController {
     		// Write an error message into the HTTP response:
     		PrintWriter out = response.getWriter();
     		
-    		out.println("<h2>Requested 1098T form is no longer available.</h2><br><h4>Click Back on your browser and regenerate the 1098T form.</h4>");
+    		out.println(error);
     	}
     	
     	return null;
@@ -254,5 +267,17 @@ public class Generate1098TController extends DownloadController {
         String fileName = String.format("1098T_%s_%s.xml", name.getLastName(), name.getFirstName());
         
         return fileName;
+    }
+    
+    /**
+     * Extracts the message from a Throwable. If the message is missing, checks the cause Throwable.
+     * 
+     * @param t	Throwable to get its or its cause's message.
+     * @return	Error message.
+     */
+    private static String getExceptionMessage(Throwable t, String defaultMessage) {
+    	return StringUtils.isNotBlank(t.getMessage()) ? t.getMessage() 
+    			: ((t.getCause() != null) && StringUtils.isNotBlank(t.getCause().getMessage()) 
+    					? t.getCause().getMessage() : defaultMessage);
     }
 }
