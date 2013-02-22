@@ -13,9 +13,16 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.kuali.rice.kim.api.identity.IdentityService;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.kim.api.identity.PersonService;
+import org.kuali.rice.kim.api.identity.principal.Principal;
 import org.kuali.rice.kim.api.services.KimApiServiceLocator;
+import org.kuali.rice.kim.impl.identity.entity.EntityBo;
+import org.kuali.rice.kim.impl.identity.name.EntityNameBo;
+import org.kuali.rice.kim.impl.identity.principal.PrincipalBo;
+import org.kuali.rice.krad.service.BusinessObjectService;
+import org.kuali.rice.krad.service.KRADServiceLocator;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +36,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import javax.persistence.Query;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -755,5 +763,79 @@ public class AccountServiceImpl extends GenericPersistenceService implements Acc
 
         return query.getResultList();
     }
+
+
+    private PrincipalBo getPrincipalBo(String principalId) {
+        BusinessObjectService boService = KRADServiceLocator.getBusinessObjectService();
+        return boService.findByPrimaryKey(PrincipalBo.class, Collections.singletonMap("principalId", principalId));
+    }
+
+    private EntityBo getEntityBo(String entityId) {
+        BusinessObjectService boService = KRADServiceLocator.getBusinessObjectService();
+        return boService.findByPrimaryKey(EntityBo.class, Collections.singletonMap("id", entityId));
+    }
+
+
+    /**
+     * Updates the KSA account in both places - KSA and KIM
+     *
+     * @param account  Account instance to be updated
+     * @param password User password
+     */
+    @Override
+    @Transactional(readOnly = false)
+    public void updateAccount(Account account, String password) {
+
+        if (StringUtils.isBlank(password)) {
+            String errMsg = "Password cannot be empty, Account ID = " + account.getId();
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+
+        if (account.isKimAccount()) {
+
+            IdentityService identityService = KimApiServiceLocator.getIdentityService();
+            BusinessObjectService boService = KRADServiceLocator.getBusinessObjectService();
+
+            Principal principal = identityService.getPrincipal(account.getId());
+            if (principal == null) {
+                String errMsg = "Principal does not exist, Account ID = " + account.getId();
+                logger.error(errMsg);
+                throw new IllegalStateException(errMsg);
+            }
+
+            PrincipalBo principalBo = getPrincipalBo(principal.getPrincipalId());
+            principalBo.setPassword(password);
+
+            // Persisting PrincipalBo
+            boService.save(principalBo);
+
+            final Date currentDate = new Date();
+            final Timestamp timestamp = new Timestamp(currentDate.getTime());
+
+            EntityBo entity = getEntityBo(principal.getEntityId());
+
+            // TODO: Saving only default ones? if not, how to merge their lists and our sets?
+            PersonName personName = account.getDefaultPersonName();
+            if (personName != null) {
+                List<EntityNameBo> names = entity.getNames();
+                if (CollectionUtils.isNotEmpty(names)) {
+                    EntityNameBo name = names.get(0);
+                    name.setDefaultValue(personName.isDefault());
+                    name.setFirstName(personName.getFirstName());
+                    name.setMiddleName(personName.getMiddleName());
+                    name.setLastName(personName.getLastName());
+                    name.setNameChangedDate(timestamp);
+                    name.setNameTitle(personName.getTitle());
+                }
+            }
+
+            // TODO: complete implementation
+
+        }
+
+
+    }
+
 
 }

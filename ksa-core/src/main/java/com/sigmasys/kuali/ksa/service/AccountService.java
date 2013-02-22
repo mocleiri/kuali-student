@@ -173,4 +173,12 @@ public interface AccountService {
      */
     AccountProtectedInfo getAccountProtectedInfo(String userId);
 
+    /**
+     * Updates the KSA account in both places - KSA and KIM
+     *
+     * @param account Account instance to be updated
+     * @param password User password
+     */
+    void updateAccount(Account account, String password);
+
 }
