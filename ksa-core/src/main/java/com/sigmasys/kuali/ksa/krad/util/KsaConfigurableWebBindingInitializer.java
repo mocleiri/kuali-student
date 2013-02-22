@@ -12,11 +12,11 @@ import java.math.BigDecimal;
  * Time: 6:29 PM
  */
 public class KsaConfigurableWebBindingInitializer extends UifConfigurableWebBindingInitializer {
+
     @Override
     public void initBinder(WebDataBinder binder, WebRequest request) {
         super.initBinder(binder, request);
-
-        binder.registerCustomEditor(BigDecimal.class, new KsaCurrencyEditor());
-
+        binder.registerCustomEditor(BigDecimal.class, new CurrencyEditor());
     }
+
 }

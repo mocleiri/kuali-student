@@ -33,9 +33,9 @@ import java.text.ParseException;
  *
  * @author Kuali Rice Team (rice.collab@kuali.org)
  */
-public class KsaCurrencyEditor extends PropertyEditorSupport implements Serializable {
-    private static final long serialVersionUID = 6692868638156609014L;
-    private static Logger LOG = Logger.getLogger(KsaCurrencyEditor.class);
+public class CurrencyEditor extends PropertyEditorSupport implements Serializable {
+
+    private static Logger logger = Logger.getLogger(CurrencyEditor.class);
 
     /**
      * This overridden method ...
@@ -46,26 +46,23 @@ public class KsaCurrencyEditor extends PropertyEditorSupport implements Serializ
     public String getAsText() {
         Object obj = this.getValue();
 
-        //LOG.debug("format '" + obj + "'");
-        if (obj == null)
+        if (obj == null) {
             return null;
+        }
 
         NumberFormat formatter = getCurrencyInstanceUsingParseBigDecimal();
-        String string = null;
 
         try {
             Number number = (Number) obj;
             if (obj instanceof Integer) {
                 formatter.setMaximumFractionDigits(0);
             }
-            string = formatter.format(number.doubleValue());
+            return formatter.format(number.doubleValue());
         } catch (IllegalArgumentException e) {
             throw new FormatException("formatting", RiceKeyConstants.ERROR_CURRENCY, obj.toString(), e);
         } catch (ClassCastException e) {
             throw new FormatException("formatting", RiceKeyConstants.ERROR_CURRENCY, obj.toString(), e);
         }
-
-        return string;
     }
 
     /**
@@ -107,7 +104,7 @@ public class KsaCurrencyEditor extends PropertyEditorSupport implements Serializ
     protected Object convertToObject(String text) {
         BigDecimal value = null;
 
-        LOG.debug("convertToObject '" + text + "'");
+        logger.debug("convertToObject '" + text + "'");
 
         if (text != null) {
             text = text.trim();
@@ -133,6 +130,7 @@ public class KsaCurrencyEditor extends PropertyEditorSupport implements Serializ
                 throw new FormatException("parsing", RiceKeyConstants.ERROR_CURRENCY, text, e);
             }
         }
+
         return value;
     }
 
