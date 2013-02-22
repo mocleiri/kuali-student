@@ -87,11 +87,6 @@ class ManageCourseOfferings < BasePage
     loading.wait_while_present(120)
   end
 
-  def delete_ao(code)
-    target_row(code).checkbox.set
-    delete
-  end
-
   def select_aos(code_list)
     for code in code_list
       if !target_row(code).nil?

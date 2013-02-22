@@ -401,7 +401,7 @@ Given /^I have created two activity offering clusters for a course offering$/ do
 end
 
 Given /^I have created two activity offering clusters and generated registration groups for a course offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"BSCI412")
+  @course_offering = create CourseOffering, :term=>"202001", :create_by_copy=>(make CourseOffering, :course=>"CHEM271")
   @course_offering.manage_registration_groups
   @ao_cluster = make ActivityOfferingCluster
   @course_offering.add_ao_cluster(@ao_cluster)
@@ -409,7 +409,7 @@ Given /^I have created two activity offering clusters and generated registration
   @ao_cluster.generate_reg_groups
   @ao_cluster2 = make ActivityOfferingCluster
   @course_offering.add_ao_cluster(@ao_cluster2)
-  @ao_cluster2.add_unassigned_aos(["C","D"])
+  @ao_cluster2.add_unassigned_aos(["H","I"])
   @ao_cluster2.generate_reg_groups
 end
 

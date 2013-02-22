@@ -14,7 +14,11 @@ class ManageRegistrationGroups < BasePage
   element(:unassigned_ao_table) { |b| b.frm.div(id: /KS-ManageRegistrationGroups-UnassignedActivityOfferingsPerFormatSection/).table() }
 
   def target_unassigned_ao_row(ao_code)
-    unassigned_ao_table.row(text: /\b#{ao_code}\b/)
+    unassigned_ao_table.rows.each do |row|
+      if row.cells[1].text == ao_code
+        return row
+      end
+    end
   end
 
   def select_unassigned_ao_row(ao_code)
