@@ -3,7 +3,6 @@ package com.sigmasys.kuali.ksa.krad.controller;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -89,6 +88,9 @@ public class Generate1098TController extends DownloadController {
      */
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, params = "methodToCall=generate1098TForm")
     public ModelAndView generate1098TReport(@ModelAttribute("KualiForm") Generate1098TForm form, HttpServletResponse response) throws Exception {
+    	// Error message:
+    	String error = null;
+    			
         // Check if the report year has been selected:
         if (CollectionUtils.isNotEmpty(form.getReportYears())) {
             // Get the input parameters:
@@ -96,20 +98,34 @@ public class Generate1098TController extends DownloadController {
             String accountId = form.getAccount().getId();
 
             // Generate the form:
-            String form1098T = "<a>some text</a>";//reportService.getIrs1098TReportByYear(accountId, reportYear);
-            String reportFileName = generateReportFileName(form);
-
-            // Save the report file:
-            writeReportToFile(form1098T, reportFileName);
+            String form1098T = null;
             
-            // Display the download link:
-            form.setDisplayDownloadLink(true);
-            form.setError(null);
-            form.setReportYears(new ArrayList<String>());
+            try {
+            	form1098T = reportService.generate1098TReportByYear(accountId, reportYear, 4, false);
+            } catch (Exception e) {
+            	error = StringUtils.isNotBlank(e.getMessage()) ? e.getMessage() 
+            			: ((e.getCause() != null) && StringUtils.isNotBlank(e.getCause().getMessage()) 
+            					? e.getCause().getMessage() : "Error generating form 1098T. See log file for details.");
+            }
+
+            // If a report was generated successfully, write it into a file:
+            if (StringUtils.isBlank(error)) {
+	            // Save the report file:
+	            String reportFileName = generateReportFileName(form);
+	            
+	            writeReportToFile(form1098T, reportFileName);
+            }
+            
         } else {
-        	form.setDisplayDownloadLink(false);
-    		form.setError("Select a valid report year.");
+        	// Set the error:
+        	error = "Select a valid report year.";
     	}
+        
+        // Set error and download link visibility depending on whether there was an error or not.
+        // Always erase the previous selection of the report year.
+        form.setDisplayDownloadLink(StringUtils.isBlank(error));
+        form.setError(error);
+        form.setReportYears(new ArrayList<String>());
 
         return getUIFModelAndView(form);
     }
