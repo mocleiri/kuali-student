@@ -164,8 +164,13 @@
 							
 							<!-- Generate Document button -->
 							<bean parent="Uif-SecondaryActionButton-Small" p:actionLabel="Generate Document" p:methodToCall="generate1098TForm"
-								p:onClickScript="writeHiddenToForm('userId', '@{account.id}'); writeHiddenToForm('pageId', 'Generate1098TViewPage');"
-								p:successCallback="jQuery.download('/ksa/uif/generate1098T', 'methodToCall=download1098TForm&amp;userId=@{account.id}')"/>
+								p:onClickScript="writeHiddenToForm('userId', '@{account.id}'); writeHiddenToForm('pageId', 'Generate1098TViewPage');"/>
+								
+							<bean parent="Uif-LinkField" p:linkText="Download Document" p:target="_self"
+											p:href="javascript: void(0)"
+											p:onClickScript="jQuery.download('/ksa/uif/generate1098T', 'methodToCall=download1098TForm&amp;userId=@{account.id}')"
+											p:style="display: @{downloadLinkDisplayStyle};"/>
+							<bean parent="Uif-MessageField" p:messageText="@{error}"/>
 						</list>
 					</property>
 				</bean>

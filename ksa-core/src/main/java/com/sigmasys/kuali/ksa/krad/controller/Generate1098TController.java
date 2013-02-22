@@ -1,7 +1,9 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.kuali.rice.krad.web.form.UifFormBase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +32,11 @@ import com.sigmasys.kuali.ksa.service.ReportService;
 @RequestMapping(value = "/generate1098T")
 @Transactional
 public class Generate1098TController extends DownloadController {
+	
+	/**
+	 * The logger.
+	 */
+	private static final Log logger = LogFactory.getLog(Generate1098TController.class);
 
 	/**
 	 * A place to store temporary 1098T report generate files.
@@ -92,8 +101,14 @@ public class Generate1098TController extends DownloadController {
 
             // Save the report file:
             writeReportToFile(form1098T, reportFileName);
+            
+            // Display the download link:
+            form.setDisplayDownloadLink(true);
+            form.setError(null);
+            form.setReportYears(new ArrayList<String>());
         } else {
-    		throw new IllegalArgumentException("Select a report year");
+        	form.setDisplayDownloadLink(false);
+    		form.setError("Select a valid report year.");
     	}
 
         return getUIFModelAndView(form);
@@ -112,9 +127,17 @@ public class Generate1098TController extends DownloadController {
     	// Read the report file:
     	String reportFileName = generateReportFileName(form);
     	String form1098T = readReportFromFile(reportFileName, true);
-    	
-    	// Start download:
-    	doDownload(form1098T, reportFileName, "application/xml", response);
+
+    	// If the form content is available, start download:
+    	if (StringUtils.isNotEmpty(form1098T)) {
+    		// Start download:
+    		doDownload(form1098T, reportFileName, "application/xml", response);
+    	} else {
+    		// Write an error message into the HTTP response:
+    		PrintWriter out = response.getWriter();
+    		
+    		out.println("<h2>Requested 1098T form is no longer available.</h2><br><h4>Click Back on your browser and regenerate the 1098T form.</h4>");
+    	}
     	
     	return null;
     }
@@ -170,14 +193,22 @@ public class Generate1098TController extends DownloadController {
      * @param deleteAfterReading	Whether to delete the file after reading.
      * @return						Contents of the file as String. 
      */
-    private static String readReportFromFile(String fileName, boolean deleteAfterReading) throws Exception {
+    private static String readReportFromFile(String fileName, boolean deleteAfterReading) {
     	// Get the report file and read the contents from it:
     	File file = new File(TEMP_FILE_DIR + fileName);
-    	String form1098T = FileUtils.readFileToString(file);
+    	String form1098T = null;
     	
-    	// Delete after reading if required:
-    	if (deleteAfterReading) {
-    		FileUtils.deleteQuietly(file);
+    	try {
+    		// Read the file contents into a String:
+    		form1098T = FileUtils.readFileToString(file);
+    	} catch (Exception e) {
+    		// Log an error:
+    		logger.error("Error reading from 1098T report file at: " + TEMP_FILE_DIR + fileName);
+    	} finally {
+    		// Delete after reading if required:
+    		if (deleteAfterReading) {
+    			FileUtils.deleteQuietly(file);
+    		}
     	}
     	
     	return form1098T;
