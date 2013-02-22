@@ -204,7 +204,7 @@ public class ReportServiceTest extends GeneralLedgerServiceTest {
     @Test
     public void generateIrs1098TReportsByYear() throws Exception {
 
-        final int year = 2012;
+        final int year = 2011;
 
         List<String> userIds = Arrays.asList("admin", "user1", "user2");
 

@@ -328,6 +328,9 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
     protected com.sigmasys.kuali.ksa.model.Irs1098T create1098TReport(String accountId, Date startDate, Date endDate,
                                                                       int numberOfDisplayedDigits, boolean isTransient) {
 
+        logger.debug("1098T Start date = " + startDate);
+        logger.debug("1098T End date = " + endDate);
+
         final int reportYear = CalendarUtils.getYear(startDate);
         if (reportYear != CalendarUtils.getYear(endDate)) {
             String errMsg = "Start and End dates must have the same year";
