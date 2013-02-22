@@ -1,9 +1,6 @@
 package com.sigmasys.kuali.ksa.service;
 
-import com.sigmasys.kuali.ksa.krad.controller.SearchControllerTest;
-import com.sigmasys.kuali.ksa.krad.controller.SettingsControllerTest;
-import com.sigmasys.kuali.ksa.krad.controller.TemplateControllerTest;
-import com.sigmasys.kuali.ksa.krad.controller.TransactionTypeControllerTest;
+import com.sigmasys.kuali.ksa.krad.controller.*;
 import junit.framework.JUnit4TestAdapter;
 import junit.framework.Test;
 import org.junit.runner.RunWith;
@@ -42,6 +39,7 @@ import org.junit.runners.Suite;
         TemplateControllerTest.class,
         SettingsControllerTest.class,
         SearchControllerTest.class,
+        TransactionControllerTest.class,
         TransactionTypeControllerTest.class,
         AtpServiceTest.class})
 public class ServiceTestSuite extends AbstractServiceTest {
