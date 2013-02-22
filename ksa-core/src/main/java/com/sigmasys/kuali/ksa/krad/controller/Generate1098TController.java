@@ -1,11 +1,13 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.krad.web.form.UifFormBase;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,12 @@ import com.sigmasys.kuali.ksa.service.ReportService;
 @Transactional
 public class Generate1098TController extends DownloadController {
 
+	/**
+	 * A place to store temporary 1098T report generate files.
+	 */
+	private static final String TEMP_FILE_DIR = System.getProperty("user.home") + File.separator;
+	
+	
     @Autowired
     private ReportService reportService;
 
@@ -80,15 +88,35 @@ public class Generate1098TController extends DownloadController {
 
             // Generate the form:
             String form1098T = "<a>some text</a>";//reportService.getIrs1098TReportByYear(accountId, reportYear);
-            PersonName name = form.getAccount().getDefaultPersonName();
-            String fileName = String.format("1098T_%s_%s.xml", name.getLastName(), name.getFirstName());
-            String mimeType = "application/xml";
+            String reportFileName = generateReportFileName(form);
 
-            // Start download:
-            doDownload(form1098T, fileName, mimeType, response);
-        }
+            // Save the report file:
+            writeReportToFile(form1098T, reportFileName);
+        } else {
+    		throw new IllegalArgumentException("Select a report year");
+    	}
 
         return getUIFModelAndView(form);
+    }
+    
+    /**
+     * Invoked on a success callback to download the report form.
+     * 
+     * @param request			HTTP request.
+     * @param response			HTTP response.
+     * @param reportFileName	Report file name.
+     * @return					Nothing to stay on the same page.
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=download1098TForm")
+    public ModelAndView download1098TForm(@ModelAttribute("KualiForm") Generate1098TForm form, HttpServletResponse response) throws Exception {
+    	// Read the report file:
+    	String reportFileName = generateReportFileName(form);
+    	String form1098T = readReportFromFile(reportFileName, true);
+    	
+    	// Start download:
+    	doDownload(form1098T, reportFileName, "application/xml", response);
+    	
+    	return null;
     }
 
 
@@ -133,5 +161,51 @@ public class Generate1098TController extends DownloadController {
             return account;
         }
         throw new IllegalArgumentException("Invalid user ID selected: " + userId);
+    }
+    
+    /**
+     * Reads a 1098T report from a file on the disk.
+     * 
+     * @param fileName				Name of the file containing 1098T report.
+     * @param deleteAfterReading	Whether to delete the file after reading.
+     * @return						Contents of the file as String. 
+     */
+    private static String readReportFromFile(String fileName, boolean deleteAfterReading) throws Exception {
+    	// Get the report file and read the contents from it:
+    	File file = new File(TEMP_FILE_DIR + fileName);
+    	String form1098T = FileUtils.readFileToString(file);
+    	
+    	// Delete after reading if required:
+    	if (deleteAfterReading) {
+    		FileUtils.deleteQuietly(file);
+    	}
+    	
+    	return form1098T;
+    }
+    
+    /**
+     * Writes a 1098T report into a file on the disk.
+     * 
+     * @param form1098T	Contents of a 1098T form to write into a file.
+     * @param fileName	File name under which to write the contents.
+     */
+    private static void writeReportToFile(String form1098T, String fileName) throws Exception {
+    	// Create a temporary file and save the contents into it:
+    	File file = new File(TEMP_FILE_DIR + fileName);
+    	
+    	FileUtils.writeStringToFile(file, form1098T);
+    }
+    
+    /**
+     * Generates a name for a report file.
+     * 
+     * @param form 	A form.
+     * @return		Generated report file name.
+     */
+    private static String generateReportFileName(Generate1098TForm form) {
+    	PersonName name = form.getAccount().getDefaultPersonName();
+        String fileName = String.format("1098T_%s_%s.xml", name.getLastName(), name.getFirstName());
+        
+        return fileName;
     }
 }
