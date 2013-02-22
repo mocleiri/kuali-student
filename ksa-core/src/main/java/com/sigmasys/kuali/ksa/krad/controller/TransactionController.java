@@ -1,6 +1,5 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.krad.form.TransactionForm;
 import com.sigmasys.kuali.ksa.krad.model.TransactionModel;
@@ -12,7 +11,6 @@ import com.sigmasys.kuali.ksa.service.AuditableEntityService;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.kuali.rice.core.api.util.type.KualiDecimal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
 import java.util.*;
 
 @Controller
@@ -39,9 +36,6 @@ public class TransactionController extends GenericSearchController {
 
     @Autowired
     private InformationService informationService;
-
-    @Autowired
-    private ConfigService configService;
 
 
     /**
@@ -92,29 +86,28 @@ public class TransactionController extends GenericSearchController {
 
         // just for the transactions by person page
         String pageId = request.getParameter("pageId");
-        if(pageId == null){
+        if (pageId == null) {
             pageId = "ViewTransactions";
         }
 
         String userId = request.getParameter("userId");
-        if(userId == null){
+        if (userId == null) {
             // Error out here
         }
         form.setAccount(accountService.getFullAccount(userId));
 
-        if("ViewTransactions".equals(pageId)){
+        if ("ViewTransactions".equals(pageId)) {
             form.setAlerts(informationService.getAlerts(userId));
             form.setFlags(informationService.getFlags(userId));
 
             // All transactions
             List<Transaction> transactions = transactionService.getTransactions(userId);
             List<TransactionModel> models = new ArrayList<TransactionModel>(transactions.size());
-            for(Transaction t : transactions){
+            for (Transaction t : transactions) {
                 models.add(new TransactionModel(t));
             }
 
             this.populateRollups(form, models);
-
 
 
         }
@@ -283,7 +276,7 @@ public class TransactionController extends GenericSearchController {
         throw new UserNotFoundException("Cannot find Account by ID = " + accountId);
     }
 
-    private void populateRollups(TransactionForm form, List<TransactionModel> transactions){
+    private void populateRollups(TransactionForm form, List<TransactionModel> transactions) {
         List<TransactionModel> rollUpTransactionModelList = new ArrayList<TransactionModel>();
         List<TransactionModel> unGroupedTransactionModelList = new ArrayList<TransactionModel>();
 
@@ -314,7 +307,7 @@ public class TransactionController extends GenericSearchController {
                     tm.addSubTransaction(t);
                 }
             } else {
-                if(nonRolledUp == null){
+                if (nonRolledUp == null) {
                     Rollup r = new Rollup();
                     r.setName("Other Transactions not in a Roll-up");
 
@@ -325,13 +318,12 @@ public class TransactionController extends GenericSearchController {
             }
         }
 
-        if(nonRolledUp != null){
+        if (nonRolledUp != null) {
             rollUpTransactionModelList.add(nonRolledUp);
         }
 
         form.setRollupTransactions(rollUpTransactionModelList);
         form.setAllTransactions(unGroupedTransactionModelList);
-
 
     }
 
