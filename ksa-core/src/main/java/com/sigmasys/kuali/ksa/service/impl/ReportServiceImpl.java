@@ -359,9 +359,9 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
             throw new IllegalStateException(errMsg);
         }
 
-        String ssnTaxTypeCode = configService.getParameter(Constants.KSA_1098_SSN_TYPE_TYPE);
+        String ssnTaxTypeCode = configService.getParameter(Constants.KSA_1098_SSN_TAX_TYPE);
         if (StringUtils.isBlank(ssnTaxTypeCode)) {
-            String errMsg = "Initial parameter 'ksa.1098.us.ssn.tax.type' must be set";
+            String errMsg = "Initial parameter '" + Constants.KSA_1098_SSN_TAX_TYPE + "' must be set";
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
         }

@@ -5,6 +5,7 @@ import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.util.ContextUtils;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -16,7 +17,7 @@ public class BrmContext implements Serializable {
 
     private Account account;
 
-    private Map<String, Object> parameters;
+    private Map<String, Object> attributes = new HashMap<String, Object>();
 
     public Account getAccount() {
         return account;
@@ -26,12 +27,12 @@ public class BrmContext implements Serializable {
         this.account = account;
     }
 
-    public Map<String, Object> getParameters() {
-        return parameters;
+    public Map<String, Object> getAttributes() {
+        return attributes;
     }
 
-    public void setParameters(Map<String, Object> parameters) {
-        this.parameters = parameters;
+    public void setAttributes(Map<String, Object> attributes) {
+        this.attributes = attributes;
     }
 
     public AccountService getAccountService() {
@@ -48,6 +49,10 @@ public class BrmContext implements Serializable {
 
     public PaymentService getPaymentService() {
         return ContextUtils.getBean(PaymentService.class);
+    }
+
+    public BrmPaymentService getBrmPaymentService() {
+        return ContextUtils.getBean(BrmPaymentService.class);
     }
 
     public FeeManagementService getFeeManagementService() {

@@ -89,12 +89,12 @@ public interface BrmPaymentService {
                             BrmContext context);
 
     /**
-     * Calculates matrix scores for the given transaction lists.
+     * Calculates matrix scores for the given transaction list.
      *
-     * @param inTransactionLists The name(s) of the input transaction list stored in the BRM context
-     * @param context            BRM context
+     * @param inTransactionList The name of the input transaction list stored in the BRM context
+     * @param context           BRM context
      */
-    void calculateMatrixScores(String inTransactionLists, BrmContext context);
+    void calculateMatrixScores(String inTransactionList, BrmContext context);
 
     /**
      * Sorts the given transaction list by transaction matrix score in the specified order.
@@ -106,12 +106,22 @@ public interface BrmPaymentService {
     void sortByMatrixScore(String inTransactionList, boolean order, BrmContext context);
 
     /**
-         * Summarizes the given lists of GL transactions and stores the result in "outTransactionList" list.
-         *
-         * @param inTransactionLists The name(s) of the input transaction list stored in the BRM context
-         * @param outTransactionList The name of the output GL transaction list stored in the BRM context
-         * @param context            BRM context
-         */
+     * Summarizes the given lists of GL transactions and stores the result in "outTransactionList" list.
+     *
+     * @param inTransactionLists The name(s) of the input GL transaction list stored in the BRM context
+     * @param outTransactionList The name of the output GL transaction list stored in the BRM context
+     * @param context            BRM context
+     */
     void summarizeGlTransactions(String inTransactionLists, String outTransactionList, BrmContext context);
+
+    /**
+     * Gets the transaction list for the given parameters and stores the result in "outTransactionList" list.
+     *
+     * @param startDate          Start date
+     * @param endDate            End date
+     * @param outTransactionList The name of the output transaction list stored in the BRM context
+     * @param context            BRM context
+     */
+    void getTransactions(String startDate, String endDate, String outTransactionList, BrmContext context);
 
 }
