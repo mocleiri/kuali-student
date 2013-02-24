@@ -114,9 +114,4 @@ public interface Constants {
     // KSA Transaction constants
     String KSA_TRANSACTION_RECOGNITION_YEAR = "ksa.transaction.recognition.year";
 
-    // KSA Payment constants
-    String KSA_PAYMENT_YEARS = "ksa.payment.years";
-    String KSA_PAYMENT_TAG_FINAID = "ksa.payment.tag.finaid";
-    String KSA_PAYMENT_FINAID_MAX_AMOUNT = "ksa.payment.finaid.max.amount";
-
 }

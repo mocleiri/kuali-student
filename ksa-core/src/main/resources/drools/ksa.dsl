@@ -33,34 +33,31 @@
 # PAYMENT APPLICATION DSL definitions
 
 # LHS definitions
-[when][]Transactions exist = !transactions.isEmpty()
+[when][]Context is initialized = isInitialized()
 
 # RHS definitions
-[then][]Initialize list of transactions "{transactions}" = context.getAttributes().put("{transactions}", new LinkedList<Transaction>());
-[then][]Initialize list of GL transactions "{glTransactions}" = context.getAttributes().put("{glTransactions}", new LinkedList<GlTransaction>());
-[then][]Get list of transactions from "{startDate}" to "{endDate}" and store result in "{transactions}" = context.getBrmPaymentService().getTransactions("{startDate}", "{endDate}", "{transactions}", context);
-[then][]Remove allocations from "{transactions}" and add result to "{glTransactions}" = context.getBrmPaymentService().removeAllocations("{transactions}", "{glTransactions}", context);
-[then][]Allocate reversals for "{transactions}" and add result to "{glTransactions}" = context.getBrmPaymentService().allocateReversals("{transactions}", "{glTransactions}", context);
-[then][]Apply payments for "{transactions}" and add result to "{glTransactions}" = context.getBrmPaymentService().applyPayments("{transactions}", "{glTransactions}", context);
-[then][]Apply payments for "{transactions}" with maximum amount {maxAmount} and add result to "{glTransactions}" = context.getBrmPaymentService().applyPayments(new BigDecimal({amount}), "{transactions}", "{glTransactions}", context);
+[then][]Set global variable "{globalVariable}" to "{attributeValue}" = context.getBrmPaymentService().setGlobalVariableToAttributeValue("{globalVariable}", "{attributeValue}", context);
+[then][]Initialize list of transactions as "{transactions}" = context.getAttributes().put("{transactions}", TransactionUtils.newTransactionList());
+[then][]Initialize list of GL transactions as "{glTransactions}" = context.getAttributes().put("{glTransactions}", TransactionUtils.newGlTransactionList());
+[then][]Get list of transactions from "{startDate}" to "{endDate}", store result in "{transactions}" = context.getBrmPaymentService().getTransactions("{startDate}", "{endDate}", "{transactions}", context);
+[then][]Remove allocations from "{transactions}", add result to "{glTransactions}" = context.getBrmPaymentService().removeAllocations("{transactions}", "{glTransactions}", context);
+[then][]Allocate reversals for "{transactions}", add result to "{glTransactions}" = context.getBrmPaymentService().allocateReversals("{transactions}", "{glTransactions}", context);
+[then][]Apply payments for "{transactions}", add result to "{glTransactions}" = context.getBrmPaymentService().applyPayments("{transactions}", "{glTransactions}", context);
+[then][]Apply payments with maximum amount ${amount} for "{transactions}", add result to "{glTransactions}" = context.getBrmPaymentService().applyPayments(new BigDecimal({amount}), "{transactions}", "{glTransactions}", context);
 [then][]Calculate matrix scores for "{transactions}" = context.getBrmPaymentService().calculateMatrixScores("{transactions}", context);
+[then][]Summarize GL transactions "{glTransactions}" = context.getBrmPaymentService().summarizeGlTransactions("{glTransactions}", context);
+
+# Transaction sorting
 [then][]Sort "{transactions}" by matrix score in ascending order = context.getBrmPaymentService().sortByMatrixScore("{transactions}", true, context);
 [then][]Sort "{transactions}" by matrix score in descending order = context.getBrmPaymentService().sortByMatrixScore("{transactions}", false, context);
-[then][]Get payments from "{transactions}" for {year} year and store result in "{payments}" = context.getBrmPaymentService().filterTransactions(TransactionTypeValue.PAYMENT, {year}, "{transactions}", "{payments}", context);
-[then][]Get payments from "{transactions}" and store result in "{payments}" = context.getBrmPaymentService().filterTransactions(TransactionTypeValue.PAYMENT, "{transactions}", "{payments}", context);
-[then][]Get payments with tag "{tag}" from "{transactions}" for {year} year and store result in "{payments}" = context.getBrmPaymentService().filterTransactions(TransactionTypeValue.PAYMENT, {year}, "{tag}", "{transactions}", "{payments}", context);
-[then][]Get charges from "{transactions}" for {year} year and store result in "{charges}" = context.getBrmPaymentService().filterTransactions(TransactionTypeValue.CHARGE, {year}, "{transactions}", "{charges}", context);
-[then][]Get charges from "{transactions}" and store result in "{charges}" = context.getBrmPaymentService().filterTransactions(TransactionTypeValue.CHARGE, "{transactions}", "{charges}", context);
-[then][]Get charges with tag "{tag}" from "{transactions}" for {year} year and store result in "{charges}" = context.getBrmPaymentService().filterTransactions(TransactionTypeValue.CHARGE, {year}, "{tag}", "{transactions}", "{charges}", context);
-[then][]Summarize GL transactions "{glTransactions1}" and store result in "{glTransactions2}" = context.getBrmPaymentService().summarizeGlTransactions("{glTransactions1}", "{glTransactions2}", context);
+[then][]Sort "{transactions}" by priority in ascending order = context.getBrmPaymentService().sortByPriority("{transactions}", true, context);
+[then][]Sort "{transactions}" by priority in descending order = context.getBrmPaymentService().sortByPriority("{transactions}", false, context);
 
+# Transaction filters
+[then][]Get payments from "{transactions}" for {year} year, store result in "{payments}" = context.getBrmPaymentService().filterTransactions(TransactionTypeValue.PAYMENT, {year}, "{transactions}", "{payments}", context);
+[then][]Get payments from "{transactions}", store result in "{payments}" = context.getBrmPaymentService().filterTransactions(TransactionTypeValue.PAYMENT, "{transactions}", "{payments}", context);
+[then][]Get payments with tag "{tag}" from "{transactions}" for {year} year, store result in "{payments}" = context.getBrmPaymentService().filterTransactions(TransactionTypeValue.PAYMENT, {year}, "{tag}", "{transactions}", "{payments}", context);
+[then][]Get charges from "{transactions}" for {year} year, store result in "{charges}" = context.getBrmPaymentService().filterTransactions(TransactionTypeValue.CHARGE, {year}, "{transactions}", "{charges}", context);
+[then][]Get charges from "{transactions}", store result in "{charges}" = context.getBrmPaymentService().filterTransactions(TransactionTypeValue.CHARGE, "{transactions}", "{charges}", context);
+[then][]Get charges with tag "{tag}" from "{transactions}" for {year} year, store result in "{charges}" = context.getBrmPaymentService().filterTransactions(TransactionTypeValue.CHARGE, {year}, "{tag}", "{transactions}", "{charges}", context);
 
-# Deprecated PA definitions
-[then][]Remove allocations = glTransactions.addAll(context.getTransactionService().removeAllocations(transactions));
-[then][]Allocate reversals = glTransactions.addAll(context.getTransactionService().allocateReversals(transactions));
-[then][]Apply payments = glTransactions.addAll(context.getPaymentService().applyPayments(transactions, remainingTransactions));
-[then][]Apply remaining payments = glTransactions.addAll(context.getPaymentService().applyPayments(remainingTransactions));
-[then][]Calculate matrix scores = TransactionUtils.calculateMatrixScores(remainingTransactions);
-[then][]Sort by matrix score in ascending order = TransactionUtils.orderByMatrixScore(remainingTransactions, true);
-[then][]Sort by matrix score in descending order = TransactionUtils.orderByMatrixScore(remainingTransactions, false);
-[then][]Summarize GL transactions = glTransactions = context.getGeneralLedgerService().summarizeGlTransactions(glTransactions);

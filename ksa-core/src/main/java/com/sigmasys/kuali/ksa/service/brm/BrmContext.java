@@ -18,6 +18,11 @@ public class BrmContext implements Serializable {
     private Account account;
 
     private Map<String, Object> attributes = new HashMap<String, Object>();
+    private Map<String, Object> globalVariables = new HashMap<String, Object>();
+
+    public boolean isInitialized() {
+        return account != null && attributes != null && globalVariables != null;
+    }
 
     public Account getAccount() {
         return account;
@@ -33,6 +38,14 @@ public class BrmContext implements Serializable {
 
     public void setAttributes(Map<String, Object> attributes) {
         this.attributes = attributes;
+    }
+
+    public Map<String, Object> getGlobalVariables() {
+        return globalVariables;
+    }
+
+    public void setGlobalVariables(Map<String, Object> globalVariables) {
+        this.globalVariables = globalVariables;
     }
 
     public AccountService getAccountService() {

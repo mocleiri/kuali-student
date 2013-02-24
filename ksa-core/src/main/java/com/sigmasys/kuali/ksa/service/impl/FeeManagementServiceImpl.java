@@ -72,7 +72,9 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
         Map<String, Object> globalParams = new HashMap<String, Object>();
         globalParams.put("feeBase", feeBase);
 
-        brmService.fireRules(Constants.DROOLS_FM_RULE_SET_NAME, brmContext, globalParams);
+        brmContext.setGlobalVariables(globalParams);
+
+        brmService.fireRules(Constants.DROOLS_FM_RULE_SET_NAME, brmContext);
     }
 
 

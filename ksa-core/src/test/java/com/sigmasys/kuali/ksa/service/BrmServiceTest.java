@@ -61,7 +61,9 @@ public class BrmServiceTest extends AbstractServiceTest {
         Map<String, Object> globalParams = new HashMap<String, Object>();
         globalParams.put("feeBase", feeManagementService.getFeeBase("admin"));
 
-        brmContext = brmService.fireRules(1L, brmContext, globalParams);
+        brmContext.setGlobalVariables(globalParams);
+
+        brmContext = brmService.fireRules(1L, brmContext);
 
         Assert.notNull(brmContext);
         Assert.notNull(brmContext.getAccount());
@@ -82,7 +84,9 @@ public class BrmServiceTest extends AbstractServiceTest {
         Map<String, Object> globalParams = new HashMap<String, Object>();
         globalParams.put("feeBase", feeManagementService.getFeeBase("user1"));
 
-        brmContext = brmService.fireRules("Fee Management", brmContext, globalParams);
+        brmContext.setGlobalVariables(globalParams);
+
+        brmContext = brmService.fireRules("Fee Management", brmContext);
 
         Assert.notNull(brmContext);
         Assert.notNull(brmContext.getAccount());

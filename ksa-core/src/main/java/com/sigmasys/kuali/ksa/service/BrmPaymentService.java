@@ -106,13 +106,39 @@ public interface BrmPaymentService {
     void sortByMatrixScore(String inTransactionList, boolean order, BrmContext context);
 
     /**
-     * Summarizes the given lists of GL transactions and stores the result in "outTransactionList" list.
+     * Sorts the given transaction list by transaction priority in the specified order.
+     *
+     * @param inTransactionList The name of the input transaction list stored in the BRM context
+     * @param order             Indicates ascending order if true and descending otherwise
+     * @param context           BRM context
+     */
+    void sortByPriority(String inTransactionList, boolean order, BrmContext context);
+
+    /**
+     * Sorts the given transaction list by effective date in the specified order.
+     *
+     * @param inTransactionList The name of the input transaction list stored in the BRM context
+     * @param order             Indicates ascending order if true and descending otherwise
+     * @param context           BRM context
+     */
+    void sortByEffectiveDate(String inTransactionList, boolean order, BrmContext context);
+
+    /**
+     * Summarizes the given lists of GL transactions.
      *
      * @param inTransactionLists The name(s) of the input GL transaction list stored in the BRM context
-     * @param outTransactionList The name of the output GL transaction list stored in the BRM context
      * @param context            BRM context
      */
-    void summarizeGlTransactions(String inTransactionLists, String outTransactionList, BrmContext context);
+    void summarizeGlTransactions(String inTransactionLists, BrmContext context);
+
+    /**
+     * Sets the global variable to the BrmContext attribute value.
+     *
+     * @param globalVariableName BRM global variable name
+     * @param attributeName      BRM context attribute name
+     * @param context            BRM context
+     */
+    void setGlobalVariableToAttributeValue(String globalVariableName, String attributeName, BrmContext context);
 
     /**
      * Gets the transaction list for the given parameters and stores the result in "outTransactionList" list.

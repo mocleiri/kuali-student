@@ -5,7 +5,6 @@ import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.service.brm.BrmContext;
 import com.sigmasys.kuali.ksa.service.brm.BrmService;
-import com.sigmasys.kuali.ksa.util.CalendarUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,6 @@ import javax.jws.WebService;
 import java.math.BigDecimal;
 import java.util.*;
 
-import static com.sigmasys.kuali.ksa.util.TransactionUtils.*;
 
 /**
  * Payment service JPA implementation.
@@ -85,106 +83,6 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
     public List<GlTransaction> applyPayments(List<Transaction> transactions, BigDecimal maxAmount) {
         return applyPayments(transactions, maxAmount, true);
     }
-
-    /**
-     * Applies payments (including financial aid) to charges using one parameter as a source list and
-     * second as an output list with remaining charges and payments that can be used
-     * in other payment application methods.
-     *
-     * @param transactions          List of transactions
-     * @param remainingTransactions List of remaining chargess and payments (out parameter)
-     * @return List of generated GL transactions
-     */
-    @Override
-    @WebMethod(exclude = true)
-    @Transactional(readOnly = false)
-    public List<GlTransaction> applyPayments(List<Transaction> transactions, List<Transaction> remainingTransactions) {
-
-        String paramValue = configService.getParameter(Constants.KSA_PAYMENT_FINAID_MAX_AMOUNT);
-        if (org.apache.commons.lang.StringUtils.isBlank(paramValue)) {
-            String errMsg = "Configuration parameter '" + Constants.KSA_PAYMENT_FINAID_MAX_AMOUNT + "' is required";
-            logger.error(errMsg);
-            throw new IllegalStateException(errMsg);
-        }
-
-        final BigDecimal maxAmount = new BigDecimal(paramValue);
-
-        List<GlTransaction> glTransactions = new LinkedList<GlTransaction>();
-
-        Integer[] paymentYears = getPaymentYears();
-
-        Map<Integer, List<Transaction>> transactionsByYears = sortTransactionsByYears(transactions, paymentYears);
-
-        logger.debug("Transactions by years: " + transactionsByYears);
-
-        for (Map.Entry<Integer, List<Transaction>> entry : transactionsByYears.entrySet()) {
-
-            int currentYear = entry.getKey();
-
-            List<Transaction> transactionsForYear = entry.getValue();
-
-            Map<TransactionTypeValue, List<Transaction>> transactionMap = sortTransactionsByTypes(transactionsForYear,
-                    TransactionTypeValue.CHARGE, TransactionTypeValue.PAYMENT);
-
-            List<Transaction> chargesForYear = transactionMap.get(TransactionTypeValue.CHARGE);
-            List<Transaction> paymentsForYear = transactionMap.get(TransactionTypeValue.PAYMENT);
-
-            Map<String, List<Transaction>> finAidPaymentMap = sortTransactionsByTags(transactionsForYear,
-                    Constants.KSA_PAYMENT_TAG_FINAID);
-
-            List<Transaction> finAidPaymentsForYear = finAidPaymentMap.get(Constants.KSA_PAYMENT_TAG_FINAID);
-
-            List<Transaction> chargesAndFinAidPayments = union(chargesForYear, finAidPaymentsForYear);
-
-            glTransactions.addAll(applyPayments(chargesAndFinAidPayments));
-
-            // Applying the rest of financial aid payments to charges for the previous years
-            for (int year : paymentYears) {
-
-                if (currentYear > year) {
-
-                    // Collecting all FinAid payments with non-zero amounts
-                    List<Transaction> remainingFinAidPayments = new LinkedList<Transaction>();
-                    for (Transaction finAidPayment : finAidPaymentsForYear) {
-                        if (finAidPayment.getAmount().compareTo(BigDecimal.ZERO) > 0) {
-                            logger.info("Adding FinAid Payment(id = " + finAidPayment.getId() +
-                                    ", amount = " + finAidPayment.getAmount() +
-                                    ") to the list of remaining FinAid payments...");
-                            remainingFinAidPayments.add(finAidPayment);
-                        }
-                    }
-
-                    logger.info("The number of remaining FinAid payments for " + currentYear + " year is " +
-                            remainingFinAidPayments.size());
-
-                    if (!remainingFinAidPayments.isEmpty()) {
-
-                        Map<TransactionTypeValue, List<Transaction>> chargeMap =
-                                sortTransactionsByTypes(transactionsByYears.get(year), TransactionTypeValue.CHARGE);
-
-                        List<Transaction> chargesForPrevYear = chargeMap.get(TransactionTypeValue.CHARGE);
-
-                        if (chargesForPrevYear != null && !chargesForPrevYear.isEmpty()) {
-                            List<Transaction> finAidTransactions = union(chargesForYear, finAidPaymentsForYear);
-                            glTransactions = applyPayments(finAidTransactions, maxAmount);
-                            logger.info("Generated FinAid GL transactions for " + year + " year: \n" + glTransactions);
-                            glTransactions.addAll(glTransactions);
-                        }
-                    }
-                }
-            }
-
-            // Subtracting financial aid payments from all the payments and store the result
-            remainingTransactions.addAll(subtract(paymentsForYear, finAidPaymentsForYear));
-
-            // Adding charges to remaining payments
-            remainingTransactions.addAll(chargesForYear);
-
-        }
-
-        return glTransactions;
-    }
-
 
     /**
      * This method takes the list that has been manipulated by the other payment application filters.
@@ -304,63 +202,18 @@ public class PaymentServiceImpl extends GenericPersistenceService implements Pay
             throw new UserNotFoundException(errMsg);
         }
 
-        Integer[] paymentYears = getPaymentYears();
-
-        logger.info("Payment years: " + Arrays.toString(paymentYears));
-
-        int minYear = paymentYears[paymentYears.length - 1];
-        int maxYear = paymentYears[0];
-
-        Date startDate = CalendarUtils.getFirstDateOfYear(minYear);
-        Date endDate = CalendarUtils.getLastDateOfYear(maxYear);
-
-        List<Transaction> transactions = transactionService.getTransactions(userId, startDate, endDate);
-
-        List<Transaction> remainingTransactions = new LinkedList<Transaction>();
-
-        List<GlTransaction> glTransactions = new LinkedList<GlTransaction>();
-
         // Calling BrmService with payment application rules
         BrmContext brmContext = new BrmContext();
         brmContext.setAccount(account);
 
         Map<String, Object> globalParams = new HashMap<String, Object>();
-        globalParams.put("transactions", transactions);
-        globalParams.put("remainingTransactions", remainingTransactions);
-        globalParams.put("glTransactions", glTransactions);
+        globalParams.put("resultList", new LinkedList<GlTransaction>());
 
-        brmService.fireRules(Constants.DROOLS_PA_RULE_SET_NAME, brmContext, globalParams);
+        brmContext.setGlobalVariables(globalParams);
 
-        return (List<GlTransaction>) globalParams.get("glTransactions");
+        brmService.fireRules(Constants.DROOLS_PA_RULE_SET_NAME, brmContext);
+
+        return (List<GlTransaction>) globalParams.get("resultList");
     }
-
-    /**
-     * Returns the arrays of payment years used in paymentApplication() method.
-     *
-     * @return an int array of years
-     */
-    @Override
-    public Integer[] getPaymentYears() {
-
-        String paramValue = configService.getParameter(Constants.KSA_PAYMENT_YEARS);
-        if (!StringUtils.hasText(paramValue)) {
-            String errMsg = "Configuration parameter '" + Constants.KSA_PAYMENT_YEARS + "' is required";
-            logger.error(errMsg);
-            throw new IllegalStateException(errMsg);
-        }
-
-        String[] parts = paramValue.split(",");
-
-        List<Integer> listOfYears = new ArrayList<Integer>(parts.length);
-        for (String part : parts) {
-            listOfYears.add(Integer.valueOf(part));
-        }
-
-        Collections.sort(listOfYears, Collections.reverseOrder());
-
-        return listOfYears.toArray(new Integer[parts.length]);
-
-    }
-
 
 }

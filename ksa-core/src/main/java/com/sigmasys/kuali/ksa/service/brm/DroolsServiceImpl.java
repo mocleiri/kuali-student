@@ -125,9 +125,10 @@ public class DroolsServiceImpl implements BrmService {
         }
     }
 
-    private <T> T fireRules(KnowledgeBase knowledgeBase, T droolsContext, Map<String, Object> globalParams) {
+    private <T extends BrmContext> T fireRules(KnowledgeBase knowledgeBase, T droolsContext) {
         try {
             StatelessKnowledgeSession session = knowledgeBase.newStatelessKnowledgeSession();
+            Map<String, Object> globalParams = droolsContext.getGlobalVariables();
             if (globalParams != null) {
                 for (Map.Entry<String, Object> entry : globalParams.entrySet()) {
                     session.setGlobal(entry.getKey(), entry.getValue());
@@ -188,23 +189,13 @@ public class DroolsServiceImpl implements BrmService {
     // ------------------------   PUBLIC METHOD DEFINITIONS -----------------------------------------------------
 
     @Override
-    public <T> T fireRules(String ruleSetName, T brmContext, Map<String, Object> globalParams) {
-        return fireRules(getKnowledgeBase(getRuleSet(ruleSetName)), brmContext, globalParams);
+    public <T extends BrmContext> T fireRules(String ruleSetName, T brmContext) {
+        return fireRules(getKnowledgeBase(getRuleSet(ruleSetName)), brmContext);
     }
 
     @Override
-    public <T> T fireRules(String ruleSetName, T brmContext) {
-        return fireRules(getKnowledgeBase(getRuleSet(ruleSetName)), brmContext, null);
-    }
-
-    @Override
-    public <T> T fireRules(Long ruleSetId, T brmContext, Map<String, Object> globalParams) {
-        return fireRules(getKnowledgeBase(getRuleSet(ruleSetId)), brmContext, globalParams);
-    }
-
-    @Override
-    public <T> T fireRules(Long ruleSetId, T brmContext) {
-        return fireRules(getKnowledgeBase(getRuleSet(ruleSetId)), brmContext, null);
+    public <T extends BrmContext> T fireRules(Long ruleSetId, T brmContext) {
+        return fireRules(getKnowledgeBase(getRuleSet(ruleSetId)), brmContext);
     }
 
     @Override

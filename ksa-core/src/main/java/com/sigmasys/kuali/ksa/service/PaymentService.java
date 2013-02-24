@@ -73,18 +73,6 @@ public interface PaymentService {
     List<GlTransaction> applyPayments(List<Transaction> transactions);
 
     /**
-     * Applies payments (including financial aid) to charges using one parameter as a source list and
-     * second as an output list with remaining charges and payments that can be used
-     * in other payment application methods.
-     *
-     * @param transactions                List of transactions
-     * @param remainingChargesAndPayments List of remaining charges and payments (out parameter)
-     * @return List of generated GL transactions
-     */
-    @WebMethod(exclude = true)
-    List<GlTransaction> applyPayments(List<Transaction> transactions, List<Transaction> remainingChargesAndPayments);
-
-    /**
      * Calls the rules set for payment application.
      * Many other services can be used and will be useful to payment application,
      * including a direct creation of an allocation if needed.
@@ -97,13 +85,5 @@ public interface PaymentService {
      * @return List of generated GL transactions
      */
     List<GlTransaction> paymentApplication(String userId);
-
-    /**
-     * Returns the arrays of payment years used in paymentApplication() method.
-     *
-     * @return an int array of years
-     */
-    Integer[] getPaymentYears();
-
 
 }

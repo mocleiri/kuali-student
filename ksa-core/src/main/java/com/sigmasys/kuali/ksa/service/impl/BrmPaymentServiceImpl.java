@@ -82,6 +82,7 @@ public class BrmPaymentServiceImpl extends GenericPersistenceService implements 
                             logger.error(errMsg);
                             throw new IllegalArgumentException(errMsg);
                         }
+                        logger.debug("BrmContext: Account ID = " + context.getAccount().getId());
                         if (context.getAttributes() == null) {
                             String errMsg = "BRM context parameters map cannot be null";
                             logger.error(errMsg);
@@ -121,9 +122,11 @@ public class BrmPaymentServiceImpl extends GenericPersistenceService implements 
                     logger.error(errMsg);
                     throw new IllegalStateException(errMsg);
                 }
-            } else {
-                resultList.addAll(items);
             }
+            if (listNamesArray.length == 1) {
+               return items;
+            }
+            resultList.addAll(items);
         }
         return resultList;
     }
@@ -275,17 +278,45 @@ public class BrmPaymentServiceImpl extends GenericPersistenceService implements 
     }
 
     /**
-     * Summarizes the given lists of GL transactions and stores the result in "outTransactionList" list.
+     * Sorts the given transaction list by transaction priority in the specified order.
+     *
+     * @param inTransactionList The name of the input transaction list stored in the BRM context
+     * @param order             Indicates ascending order if true and descending otherwise
+     * @param context           BRM context
+     */
+    @Override
+    public void sortByPriority(String inTransactionList, boolean order, BrmContext context) {
+        List<Transaction> transactions = toList(inTransactionList, context, false);
+        transactions = TransactionUtils.orderByPriority(transactions, order);
+        context.getAttributes().put(inTransactionList, transactions);
+    }
+
+    /**
+     * Sorts the given transaction list by effective date in the specified order.
+     *
+     * @param inTransactionList The name of the input transaction list stored in the BRM context
+     * @param order             Indicates ascending order if true and descending otherwise
+     * @param context           BRM context
+     */
+    @Override
+    public void sortByEffectiveDate(String inTransactionList, boolean order, BrmContext context) {
+        List<Transaction> transactions = toList(inTransactionList, context, false);
+        transactions = TransactionUtils.orderByEffectiveDate(transactions, order);
+        context.getAttributes().put(inTransactionList, transactions);
+    }
+
+
+    /**
+     * Summarizes the given lists of GL transactions.
      *
      * @param inTransactionLists The name(s) of the input GL transaction list stored in the BRM context
-     * @param outTransactionList The name of the output GL transaction list stored in the BRM context
      * @param context            BRM context
      */
     @Override
-    public void summarizeGlTransactions(String inTransactionLists, String outTransactionList, BrmContext context) {
+    public void summarizeGlTransactions(String inTransactionLists, BrmContext context) {
         List<GlTransaction> glTransactions = toList(inTransactionLists, context, false);
         glTransactions = glService.summarizeGlTransactions(glTransactions);
-        toList(outTransactionList, context, true).addAll(glTransactions);
+        context.getAttributes().put(inTransactionLists, glTransactions);
     }
 
     /**
@@ -304,11 +335,23 @@ public class BrmPaymentServiceImpl extends GenericPersistenceService implements 
             Date toDate = dateFormat.parse(endDate);
             String userId = context.getAccount().getId();
             List<Transaction> transactions = transactionService.getTransactions(userId, fromDate, toDate);
-            toList(outTransactionList, context, true).addAll(transactions);
+            context.getAttributes().put(outTransactionList, transactions);
         } catch (ParseException pe) {
             logger.error("Date format is incorrect: " + pe.getMessage(), pe);
             throw new IllegalArgumentException("Date format is incorrect: " + pe.getMessage(), pe);
         }
+    }
+
+    /**
+     * Sets the global variable to the BrmContext attribute value.
+     *
+     * @param globalVariableName BRM global variable name
+     * @param attributeName      BRM context attribute name
+     * @param context            BRM context
+     */
+    public void setGlobalVariableToAttributeValue(String globalVariableName, String attributeName, BrmContext context) {
+        Object attributeValue = context.getAttributes().get(attributeName);
+        context.getGlobalVariables().put(globalVariableName, attributeValue);
     }
 
 }

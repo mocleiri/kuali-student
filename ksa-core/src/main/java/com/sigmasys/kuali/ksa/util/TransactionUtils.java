@@ -253,6 +253,10 @@ public class TransactionUtils {
         return orderTransactions(transactions, new MatrixScoreComparator(), ascending);
     }
 
+    public static List<Transaction> orderByPriority(List<Transaction> transactions, boolean ascending) {
+        return orderTransactions(transactions, new PriorityComparator(), ascending);
+    }
+
     public static List<Transaction> reverseOrder(List<Transaction> transactions) {
         Collections.reverse(transactions);
         return transactions;
@@ -426,36 +430,65 @@ public class TransactionUtils {
         return transactionMap;
     }
 
-}
-
-
-class EffectiveDateComparator implements Comparator<Transaction> {
-    @Override
-    public int compare(Transaction t1, Transaction t2) {
-        return t1.getEffectiveDate().compareTo(t2.getEffectiveDate());
+    // Needed by Drools
+    public static List<Transaction> newTransactionList() {
+        return new LinkedList<Transaction>();
     }
+
+    // Needed by Drools
+    public static List<GlTransaction> newGlTransactionList() {
+        return new LinkedList<GlTransaction>();
+    }
+
+    // ------------- Private classes for internal usage -------------------------------------
+    private static class EffectiveDateComparator implements Comparator<Transaction> {
+        @Override
+        public int compare(Transaction t1, Transaction t2) {
+            return t1.getEffectiveDate().compareTo(t2.getEffectiveDate());
+        }
+    }
+
+    private static class AmountComparator implements Comparator<Transaction> {
+        @Override
+        public int compare(Transaction t1, Transaction t2) {
+            return t1.getAmount().compareTo(t2.getAmount());
+        }
+    }
+
+    private static class PriorityComparator implements Comparator<Transaction> {
+        @Override
+        public int compare(Transaction t1, Transaction t2) {
+            TransactionType transactionType1 = t1.getTransactionType();
+            TransactionType transactionType2 = t2.getTransactionType();
+            if (transactionType1.getPriority() != null && transactionType2.getPriority() != null) {
+                return transactionType1.getPriority().compareTo(transactionType2.getPriority());
+            } else if (transactionType1.getPriority() != null && transactionType2.getPriority() == null) {
+                return 1;
+            } else if (transactionType1.getPriority() == null && transactionType2.getPriority() != null) {
+                return -1;
+            }
+            return 0;
+        }
+    }
+
+    private static class UnallocatedAmountComparator implements Comparator<Transaction> {
+        @Override
+        public int compare(Transaction t1, Transaction t2) {
+            return getUnallocatedAmount(t1).compareTo(getUnallocatedAmount(t2));
+        }
+    }
+
+    private static class MatrixScoreComparator implements Comparator<Transaction> {
+        @Override
+        public int compare(Transaction t1, Transaction t2) {
+            Integer matrixScore1 = (t1.getMatrixScore() != null) ? t1.getMatrixScore() : 0;
+            Integer matrixScore2 = (t2.getMatrixScore() != null) ? t2.getMatrixScore() : 0;
+            return matrixScore1.compareTo(matrixScore2);
+        }
+    }
+
+
 }
 
-class AmountComparator implements Comparator<Transaction> {
-    @Override
-    public int compare(Transaction t1, Transaction t2) {
-        return t1.getAmount().compareTo(t2.getAmount());
-    }
-}
 
-class UnallocatedAmountComparator implements Comparator<Transaction> {
-    @Override
-    public int compare(Transaction t1, Transaction t2) {
-        return getUnallocatedAmount(t1).compareTo(getUnallocatedAmount(t2));
-    }
-}
-
-class MatrixScoreComparator implements Comparator<Transaction> {
-    @Override
-    public int compare(Transaction t1, Transaction t2) {
-        Integer matrixScore1 = (t1.getMatrixScore() != null) ? t1.getMatrixScore() : 0;
-        Integer matrixScore2 = (t2.getMatrixScore() != null) ? t2.getMatrixScore() : 0;
-        return matrixScore1.compareTo(matrixScore2);
-    }
-}
 
