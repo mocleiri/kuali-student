@@ -129,27 +129,39 @@ Insert into KSSA_RULE (ID, NAME, RULE_TYPE_ID_FK, PRIORITY, HEADER, LHS, RHS) va
 (99, 'Payment Application Rule', 3, 0, null, '(Context is initialized)',
 '
 Initialize list of GL transactions as "glTransactions"
+
 Get list of transactions from "01/01/2011" to "12/31/2012", store result in "transactions"
+
 Allocate reversals for "transactions", add result to "glTransactions"
+
 Get payments from "transactions", store result in "allPayments"
 Get charges from "transactions", store result in "allCharges"
-Sort "allCharges" by priority in ascending order
+Sort "allCharges" by effective date in ascending order
+
 Get payments from "allPayments" for 2011 year, store result in "payments2011"
 Get payments from "allPayments" for 2012 year, store result in "payments2012"
+
 Get charges from "allCharges" for 2011 year, store result in "charges2011"
 Sort "charges2011" by priority in ascending order
+
 Get charges from "allCharges" for 2012 year, store result in "charges2012"
 Sort "charges2012" by priority in ascending order
+
 Get payments with tag "FinAid" from "allPayments" for 2011 year, store result in "finaidPayments2011"
 Get payments with tag "FinAid" from "allPayments" for 2012 year, store result in "finaidPayments2012"
+
 Apply payments for "finaidPayments2011, charges2011", add result to "glTransactions"
 Apply payments for "finaidPayments2012, charges2012", add result to "glTransactions"
 Apply payments with maximum amount $200 for "finaidPayments2012, allCharges", add result to "glTransactions"
 Apply payments with maximum amount $200 for "finaidPayments2011, allCharges", add result to "glTransactions"
+
 Calculate matrix scores for "transactions"
 Sort "transactions" by matrix score in ascending order
+
 Apply payments for "transactions", add result to "glTransactions"
+
 Summarize GL transactions "glTransactions"
+
 Set global variable "resultList" to "glTransactions"
 ')!
 

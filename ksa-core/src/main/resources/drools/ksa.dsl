@@ -52,6 +52,8 @@
 [then][]Sort "{transactions}" by matrix score in descending order = context.getBrmPaymentService().sortByMatrixScore("{transactions}", false, context);
 [then][]Sort "{transactions}" by priority in ascending order = context.getBrmPaymentService().sortByPriority("{transactions}", true, context);
 [then][]Sort "{transactions}" by priority in descending order = context.getBrmPaymentService().sortByPriority("{transactions}", false, context);
+[then][]Sort "{transactions}" by effective date in ascending order = context.getBrmPaymentService().sortByEffectiveDate("{transactions}", true, context);
+[then][]Sort "{transactions}" by effective date in descending order = context.getBrmPaymentService().sortByEffectiveDate("{transactions}", false, context);
 
 # Transaction filters
 [then][]Get payments from "{transactions}" for {year} year, store result in "{payments}" = context.getBrmPaymentService().filterTransactions(TransactionTypeValue.PAYMENT, {year}, "{transactions}", "{payments}", context);
