@@ -44,6 +44,8 @@ class ManageCourseOfferings < BasePage
   action(:approve_co_confirm_action) { |b| b.approve_co_popup_div.checkbox(index: 0).click; b.loading.wait_while_present }
   action(:approve_co_cancel_action) { |b| b.approve_co_popup_div.checkbox(index: 1).click; b.loading.wait_while_present }
 
+  action(:add_activity){ |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-AO").click; b.loading.wait_while_present}
+
   AO_CODE = 1
   AO_STATUS = 2
   AO_TYPE = 3
