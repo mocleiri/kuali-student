@@ -47,7 +47,7 @@ public abstract class AbstractGlBreakdown implements Identifiable {
         this.glAccount = glAccount;
     }
 
-    @Column(name = "BREAKDOWN")
+    @Column(name = "BREAKDOWN", precision = 19, scale = 10)
     public BigDecimal getBreakdown() {
         return breakdown;
     }

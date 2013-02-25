@@ -842,8 +842,8 @@ public class RefundServiceImpl extends GenericPersistenceService implements Refu
             achReference = refundGroup;
 
             // Get the new Rollup:
-            String achRoolupCode = configService.getParameter(Constants.REFUND_ACH_GROUP_ROLLUP);
-            Rollup achRollup = getAuditableEntityByCode(achRoolupCode, Rollup.class);
+            String achRollupCode = configService.getParameter(Constants.REFUND_ACH_GROUP_ROLLUP);
+            Rollup achRollup = getAuditableEntityByCode(achRollupCode, Rollup.class);
 
             // Sum all due Refunds into one Ach transmission and perform refund:
             for (Refund dueRefund : allDueRefunds) {
