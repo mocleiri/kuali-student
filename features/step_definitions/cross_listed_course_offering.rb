@@ -1,5 +1,5 @@
 When /^I create a cross-listed Course Offering$/ do
-  @suffix_with_cl = "AFT#{random_alphanums(2)}"
+  @suffix_with_cl = "AFT#{random_alphanums(2)}".upcase
   @suffix_without_cl = "NOCL"
   @source_term = "201201"
   @cross_listed_co_code = "WMST255"
@@ -57,7 +57,7 @@ And /^I manage the alias Course Offering$/ do
 
   on ManageCourseOfferings do |page|
     page.term.set @source_term
-    page.input_code.set @cross_listed_co_code
+    page.input_code.set "#{@cross_listed_co_code}#{@suffix_with_cl}"
     page.show
   end
 end
@@ -83,7 +83,7 @@ And /^I manage the owner Course Offering$/ do
 
   on ManageCourseOfferings do |page|
     page.term.set @source_term
-    page.input_code.set @catalogue_course_code
+    page.input_code = "#{@catalogue_course_code}#{@suffix_with_cl}"
     page.show
   end
 end
@@ -122,7 +122,7 @@ Then /^the owner course offering is indicated as cross-listed with the alias CO$
   @course_offering.search_by_subj=false
   @course_offering.manage
 
-  expect_result = "Crosslisted as: #{@suffix_with_cl}"
+  expect_result = "Crosslisted as: #{@cross_listed_co_code}#{@suffix_with_cl}"
   course_details = @course_offering.cross_listed_co_data(@course)
   cross_listed_in_page = course_details.include? expect_result
   cross_listed_in_page.should == true
