@@ -14,7 +14,7 @@ Then /^I do not have access to add or edit seat pools$/ do
 end
 
 When /^I navigate to the edit activity offering logistics schedule page for a course in my department$/ do
-  @course_offering = make CourseOffering, :course=>"ENGL362", :term=>"201512"
+  @course_offering = make CourseOffering, :course=>"ENGL362", :term=>"201612"
   @course_offering.search_by_coursecode
   on ManageCourseOfferings do |page|
     page.edit("A")
