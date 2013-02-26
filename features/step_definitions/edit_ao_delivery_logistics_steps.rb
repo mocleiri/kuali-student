@@ -35,20 +35,13 @@ Then /^the AO's delivery logistics shows the new schedule$/ do
     page.days_for_actual_delivery_logistics_row(1).should == "M T W H F S U"
   end
 end
-When /^I navigate to the edit activity offering logistics schedule page$/ do
-  @course_offering = make CourseOffering, :course=>"ENGL362", :term=>"201612"
-  @course_offering.search_by_coursecode
-  on ManageCourseOfferings do |page|
-    page.edit("A")
-  end
+
+Then /^I have access to revise delivery logistics$/ do
   on ActivityOfferingMaintenance do |page|
     page.revise_actual_delivery_logistics
   end
-end
-
-Then /^I have access to view the schedule$/ do
   on ActivityOfferingLogistics do |page|
-    page.cancel_btn_element.present?.should == true
+    page.cancel_element.present?.should == true
     page.cancel
   end
 end
