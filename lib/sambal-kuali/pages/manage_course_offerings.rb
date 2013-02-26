@@ -45,6 +45,8 @@ class ManageCourseOfferings < BasePage
   action(:approve_co_cancel_action) { |b| b.approve_co_popup_div.checkbox(index: 1).click; b.loading.wait_while_present }
 
   action(:add_activity){ |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-AO").click; b.loading.wait_while_present}
+  action(:draft_activity){ |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Draft-AO").click; b.loading.wait_while_present}
+  action(:approve_activity){ |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Approve-AO").click; b.loading.wait_while_present}
 
   AO_CODE = 1
   AO_STATUS = 2
@@ -143,5 +145,26 @@ class ManageCourseOfferings < BasePage
       end
     }
     retVal
+  end
+
+  def click_toolbar_button(button)
+      case(button)
+        when 'Add Activity Offering'
+          add_activity
+        when 'Approve Activity Offering'
+          approve_activity
+        when 'Set as Draft'
+          draft_activity
+        when 'Delete Activity Offering'
+          delete_aos
+        when 'Add Course'
+          add_course
+        when 'Approve'
+          approve_cos
+        when 'Delete'
+          delete_cos
+        else
+          raise "undefined button."
+      end
   end
 end

@@ -8,7 +8,7 @@ Background:
   Given I am logged in as admin
 
 Scenario: Add Activity Offering via toolbar button
-  When I manage a single course offering
+  Given I manage a single course offering
   And I prepare Activity Offering data
-  And I click the Add Activity Offering button
+  When I click the "Add Activity Offering" toolbar button
   Then the Activity Offering should be added to the list
