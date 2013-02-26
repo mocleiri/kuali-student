@@ -52,12 +52,20 @@ public interface BrmPersistenceService {
     List<RuleSet> getRuleSets();
 
     /**
-     * Retrieves a rule from the persistence store by the given ID
+     * Retrieves a rule from the persistence store by ID
      *
      * @param id Rule identifier
      * @return Rule instance
      */
     Rule getRule(Long id);
+
+    /**
+     * Retrieves a rule from the persistence store by name
+     *
+     * @param name Rule name
+     * @return Rule instance
+     */
+    Rule getRule(String name);
 
     /**
      * Adds rules to a rule set, throws IllegalsRulesException if any rule is invalid.

@@ -42,7 +42,7 @@ public abstract class AbstractRuleEntity implements Identifiable {
         this.id = id;
     }
 
-    @Column(name = "NAME", length = 128, nullable = false)
+    @Column(name = "NAME", length = 128, nullable = false, unique = true)
     public String getName() {
         return name;
     }
