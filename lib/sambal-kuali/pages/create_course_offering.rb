@@ -28,10 +28,12 @@ class CreateCourseOffering < BasePage
 
   action(:create_from_existing_offering_tab) { |b| b.frm.link(text: /Create from Existing Offering/).click; b.loading.wait_while_present }
   action(:configure_course_offering_copy_toggle) { |b| b.frm.link(id: "KS-ExistingOffering-ConfigureCopySubSection_toggle").click }
+  element(:configure_course_offering_copy_element) { |b| b.frm.link(id: "KS-ExistingOffering-ConfigureCopySubSection_toggle") }
   element(:exclude_instructor_checkbox) { |b| b.frm.label(text: /Exclude instructor information/) }
   action(:select_exclude_instructor_checkbox) { |b| b.exclude_instructor_checkbox.wait_until_present; b.exclude_instructor_checkbox.click }
   action(:create_from_existing_offering_copy_submit) { |b| b.create_from_existing_offering_copy_button.click; b.loading.wait_while_present }
   element(:growl_message) { |b| b.div(text: /Course offering .* has been successfully created/) }
+  element(:auth_error) { |b| b.div(text: /You are not authorized to create/) }
 
   element(:create_from_existing_offering_copy_button) { |b| b.frm.link(text: /Copy/) }
   element(:delivery_format_add_element) {|b| b.frm.delivery_formats_table.rows[1].cells[ACTIONS_COLUMN].button(text: "add")  }

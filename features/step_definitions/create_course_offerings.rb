@@ -1,9 +1,9 @@
-When /^I designate a valid term and Catalog Course Code$/ do
-  @course_offering = make CourseOffering, :course => "CHEM132", :grade_format => "Lab", :delivery_format => "Lab"
+When /^I navigate to create course offerings and designate a valid term and Catalog Course Code$/ do
+  @course_offering = make CourseOffering, :term=> "201312", :course => "CHEM132", :grade_format => "Lab", :delivery_format => "Lab"
   @course_offering.create_by_search
 end
 
-When /^I designate a valid term and Catalog Course Code for lecture formats$/ do
+When /^I navigate to create course offerings and designate a valid term and Catalog Course Code for lecture formats$/ do
   @course_offering = make CourseOffering, :course => "ENGL310", :grade_format => "Quiz", :delivery_format => "Lecture/Quiz"
   @course_offering.create_by_search
 end

@@ -36,3 +36,30 @@ When /^I navigate to manage course offerings for a course in my department $/ do
   @course_offering = make CourseOffering, :course=>"ENGL346", :term=>"201612"
   @course_offering.search_by_coursecode
 end
+
+Then /^I do not have access to create the course offering$/ do
+   on CreateCourseOffering do |page|
+     page.auth_error.present?.should == true
+   end
+end
+
+When /^I navigate to create course offerings and designate a valid term and Catalog Course Code not in my department$/ do
+  @course_offering = make CourseOffering, :term=> "201312", :course => "CHEM132"
+  @course_offering.create_by_search
+end
+
+When /^I navigate to create course offerings and designate a valid term and Catalog Course Code in my department$/ do
+  @course_offering = make CourseOffering, :term=> "201312", :course => "ENGL310"
+  @course_offering.create_by_search
+end
+Then /^I have access to create the course offering from catalog$/ do
+  on CreateCourseOffering do |page|
+   page.suffix.present?.should == true
+  end
+end
+When /^I have access to create the course from an existing offering$/ do
+  on CreateCourseOffering do |page|
+    page.create_from_existing_offering_tab
+    page.configure_course_offering_copy_element.present?.should == true
+  end
+end
