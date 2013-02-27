@@ -167,4 +167,16 @@ class ManageCourseOfferings < BasePage
           raise "undefined button."
       end
   end
+
+  def check_aos_status(aoStatus, aos)
+    retVal = true
+    aos.each { |code|
+    if(!ao_status(code, aoStatus))
+      retVal = false
+      break
+    end
+    }
+    retVal
+  end
+
 end
