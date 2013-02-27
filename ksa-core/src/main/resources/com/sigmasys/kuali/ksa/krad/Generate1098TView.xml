@@ -142,7 +142,7 @@
 		<property name="headerText" value="Generate 1098T"/>
 		<property name="items">
 			<list>
-				<bean parent="Uif-MessageField" p:messageText="Select a period or periods for which to generate a 1098T XML document. Multiple consecutive items can be selected by clicking one item and [Shift] clicking another. Nonconsecutive items can be selected by [Control] clicking items."/>
+				<bean parent="Uif-MessageField" p:messageText="Select a period for which to generate a 1098T XML document."/>
 				<bean parent="Uif-VerticalBoxSection">
 					<property name="items">
 						<list>
@@ -150,9 +150,9 @@
 							<bean parent="Uif-Disclosure-VerticalBoxSection">
 								<property name="items">
 									<list>
-										<bean parent="Uif-InputField-LabelTop" p:propertyName="reportYears" p:label="Period" p:fieldLabel.renderColon="false">
+										<bean id="reportYearSelectControl" parent="Uif-InputField-LabelTop" p:propertyName="reportYears" p:label="Period" p:fieldLabel.renderColon="false">
 											<property name="control">
-												<bean parent="Uif-MultiSelectControl" p:width="100%" p:size="5" p:multiple="false"/>
+												<bean parent="Uif-DropdownControl" p:width="100%"	/>
 											</property>
 											<property name="optionsFinder">
 												<bean class="com.sigmasys.kuali.ksa.krad.util.Generate1098TReportYearKeyValuesFinder"/>
@@ -163,14 +163,7 @@
 							</bean>
 							
 							<!-- Generate Document button -->
-							<bean parent="Uif-SecondaryActionButton-Small" p:actionLabel="Generate Document" p:methodToCall="generate1098TForm"
-								p:onClickScript="writeHiddenToForm('userId', '@{account.id}'); writeHiddenToForm('pageId', 'Generate1098TViewPage');"/>
-								
-							<bean parent="Uif-LinkField" p:linkText="Download Document" p:target="_self"
-											p:href="javascript: void(0)"
-											p:onClickScript="jQuery.download('/ksa/uif/generate1098T', 'methodToCall=download1098TForm&amp;userId=@{account.id}&amp;reportYear=@{reportYear}')"
-											p:style="display: @{downloadLinkDisplayStyle};"/>
-							<bean parent="Uif-MessageField" p:messageText="@{error}"/>
+							<bean parent="Uif-SecondaryActionButton-Small" p:actionLabel="Generate Document" p:actionScript="onGenerate1098TClick('@{account.id}')"/>
 						</list>
 					</property>
 				</bean>

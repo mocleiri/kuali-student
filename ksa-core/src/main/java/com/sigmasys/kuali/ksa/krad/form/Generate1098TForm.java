@@ -24,21 +24,6 @@ public class Generate1098TForm extends AbstractViewModel {
 	 */
 	private List<String> reportYears;
 	
-	/**
-	 * The selected report year.
-	 */
-	private String reportYear;
-	
-	/**
-	 * Error message.
-	 */
-	private String error;
-	
-	/**
-	 * Whether to display download link.
-	 */
-	private boolean displayDownloadLink;
-	
 
 	/**
 	 * Returns the page header, which defaults to the Account holder's name.
@@ -68,15 +53,6 @@ public class Generate1098TForm extends AbstractViewModel {
 		return (account != null) && (account.getDefaultPostalAddress() != null) && StringUtils.isNotBlank(account.getDefaultPostalAddress().getStreetAddress3()) ? "inline-block" : "none";
 	}
 	
-	/**
-	 * Returns CSS display style of the report download link.
-	 * 
-	 * @return CSS display style of the report download link.
-	 */
-	public String getDownloadLinkDisplayStyle() {
-		return displayDownloadLink ? "inline-block" : "none";
-	}
-	
 	public Account getAccount() {
 		return account;
 	}
@@ -91,29 +67,5 @@ public class Generate1098TForm extends AbstractViewModel {
 
 	public void setReportYears(List<String> reportYears) {
 		this.reportYears = reportYears;
-	}
-
-	public String getError() {
-		return error;
-	}
-
-	public void setError(String error) {
-		this.error = error;
-	}
-
-	public boolean isDisplayDownloadLink() {
-		return displayDownloadLink;
-	}
-
-	public void setDisplayDownloadLink(boolean displayDownloadLink) {
-		this.displayDownloadLink = displayDownloadLink;
-	}
-
-	public String getReportYear() {
-		return reportYear;
-	}
-
-	public void setReportYear(String reportYear) {
-		this.reportYear = reportYear;
 	}
 }

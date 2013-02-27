@@ -1,14 +1,12 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
-import java.io.File;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,6 +23,7 @@ import com.sigmasys.kuali.ksa.model.Account;
 import com.sigmasys.kuali.ksa.model.PersonName;
 import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.ReportService;
+import com.sigmasys.kuali.ksa.util.CalendarUtils;
 
 
 @Controller
@@ -36,11 +35,6 @@ public class Generate1098TController extends DownloadController {
 	 * The logger.
 	 */
 	private static final Log logger = LogFactory.getLog(Generate1098TController.class);
-
-	/**
-	 * A place to store temporary 1098T report generate files.
-	 */
-	private static final String TEMP_FILE_DIR = System.getProperty("user.home") + File.separator;
 	
 	
     @Autowired
@@ -79,57 +73,6 @@ public class Generate1098TController extends DownloadController {
 
         return getUIFModelAndView(form);
     }
-
-    /**
-     * Invoked to generate a 1098T report and start download.
-     *
-     * @param form Form behind the screen.
-     * @return        <code>null</code> to stay on the same page.
-     */
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, params = "methodToCall=generate1098TForm")
-    public ModelAndView generate1098TReport(@ModelAttribute("KualiForm") Generate1098TForm form, HttpServletResponse response) throws Exception {
-    	// Error message:
-    	String error = null;
-    	String reportYear = null;
-    			
-        // Check if the report year has been selected:
-        if (CollectionUtils.isNotEmpty(form.getReportYears())) {
-            // Get the input parameters:
-        	reportYear = form.getReportYears().get(0);
-        	
-            // Generate the form:
-            String form1098T = null;
-            int reportYearInt = Integer.parseInt(reportYear);
-            String accountId = form.getAccount().getId();
-            
-            try {
-            	form1098T = reportService.generate1098TReportByYear(accountId, reportYearInt, 4, false);
-            } catch (Exception e) {
-            	error = getExceptionMessage(e, "Error generating form 1098T. See log file for details.");
-            }
-
-            // If a report was generated successfully, write it into a file:
-            if (StringUtils.isBlank(error)) {
-	            // Save the report file:
-	            String reportFileName = generateReportFileName(form);
-	            
-//	            writeReportToFile(form1098T, reportFileName);
-            }
-            
-        } else {
-        	// Set the error:
-        	error = "Select a valid report year.";
-    	}
-        
-        // Set error and download link visibility depending on whether there was an error or not.
-        // Always erase the previous selection of the report year.
-        form.setDisplayDownloadLink(StringUtils.isBlank(error));
-        form.setError(error);
-        form.setReportYears(new ArrayList<String>());
-        form.setReportYear(reportYear);
-
-        return getUIFModelAndView(form);
-    }
     
     /**
      * Invoked on a success callback to download the report form.
@@ -140,26 +83,25 @@ public class Generate1098TController extends DownloadController {
      * @return					Nothing to stay on the same page.
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=download1098TForm")
-    public ModelAndView download1098TForm(@ModelAttribute("KualiForm") Generate1098TForm form, HttpServletResponse response, @RequestParam("reportYear") String reportYear) throws Exception {
+    public ModelAndView download1098TForm(@ModelAttribute("KualiForm") Generate1098TForm form, HttpServletResponse response, @RequestParam("reportYear") int reportYear) throws Exception {
     	// Read the report file:
-    	String reportFileName = generateReportFileName(form);
-//    	String form1098T = readReportFromFile(reportFileName, true);
     	String form1098T = null;
     	String error = null;
+    	String accountId = form.getAccount().getId();
     	
     	// Get the form from the ReportService:
     	try {
-    		String accountId = form.getAccount().getId();
-    		int reportYearInt = Integer.parseInt(reportYear);
-    		
-    		form1098T = reportService.getIrs1098TReportByYear(accountId, reportYearInt);
+    		form1098T = reportService.generate1098TReportByYear(accountId, reportYear, 4, false);
     	} catch (Exception e) {
-    		error = String.format("<h2>Error obtaining form 1098T from the persistent store.</h2><br><h4>%s</h4>", getExceptionMessage(e, "Contact your administrator for details."));
+    		error = String.format("<h2>Error generating form 1098T. See log file for details.</h2><p><h4>%s</h4>", getExceptionMessage(e, "Contact your administrator for details."));
+    		logger.error(error, e);
     	}
 
     	// If the form content is available, start download:
     	if (StringUtils.isNotEmpty(form1098T)) {
     		// Start download:
+    		String reportFileName = generateReportFileName(form);
+    		
     		doDownload(form1098T, reportFileName, "application/xml", response);
     	} else {
     		// Write an error message into the HTTP response:
@@ -186,10 +128,8 @@ public class Generate1098TController extends DownloadController {
             form.setAccount(account);
         }
 
-        // Set the Reporting Years if needed:
-        if (CollectionUtils.isEmpty(form.getReportYears())) {
-            form.setReportYears(new ArrayList<String>());
-        }
+        // Set the report year to the current year:
+        form.setReportYears(Arrays.asList(String.valueOf(CalendarUtils.getYear(new Date()))));
     }
 
     /**
@@ -213,47 +153,6 @@ public class Generate1098TController extends DownloadController {
             return account;
         }
         throw new IllegalArgumentException("Invalid user ID selected: " + userId);
-    }
-    
-    /**
-     * Reads a 1098T report from a file on the disk.
-     * 
-     * @param fileName				Name of the file containing 1098T report.
-     * @param deleteAfterReading	Whether to delete the file after reading.
-     * @return						Contents of the file as String. 
-     */
-    private static String readReportFromFile(String fileName, boolean deleteAfterReading) {
-    	// Get the report file and read the contents from it:
-    	File file = new File(TEMP_FILE_DIR + fileName);
-    	String form1098T = null;
-    	
-    	try {
-    		// Read the file contents into a String:
-    		form1098T = FileUtils.readFileToString(file);
-    	} catch (Exception e) {
-    		// Log an error:
-    		logger.error("Error reading from 1098T report file at: " + TEMP_FILE_DIR + fileName);
-    	} finally {
-    		// Delete after reading if required:
-    		if (deleteAfterReading) {
-    			FileUtils.deleteQuietly(file);
-    		}
-    	}
-    	
-    	return form1098T;
-    }
-    
-    /**
-     * Writes a 1098T report into a file on the disk.
-     * 
-     * @param form1098T	Contents of a 1098T form to write into a file.
-     * @param fileName	File name under which to write the contents.
-     */
-    private static void writeReportToFile(String form1098T, String fileName) throws Exception {
-    	// Create a temporary file and save the contents into it:
-    	File file = new File(TEMP_FILE_DIR + fileName);
-    	
-    	FileUtils.writeStringToFile(file, form1098T);
     }
     
     /**
