@@ -51,17 +51,14 @@ public class RulesController extends GenericSearchController {
 
         RulesForm rulesForm = new RulesForm();
 
-        List<String> ruleNames;
-        if ( StringUtils.isNotBlank(ruleSetName) ) {
-           rulesForm.initRuleNameFinder(brmPersistenceService.getRuleNames(ruleSetName));
-        } else {
-           ruleNames = brmPersistenceService.getRuleNames();
-        }
+        List<String> ruleNames = StringUtils.isNotBlank(ruleSetName) ?
+                brmPersistenceService.getRuleNames(ruleSetName) : brmPersistenceService.getRuleNames();
 
-        // TODO
-
+        rulesForm.initRuleNameFinder(ruleNames);
+        rulesForm.setRuleSetName(ruleSetName);
         rulesForm.setAddStatusMessage("");
         rulesForm.setEditStatusMessage("");
+
         return rulesForm;
     }
 

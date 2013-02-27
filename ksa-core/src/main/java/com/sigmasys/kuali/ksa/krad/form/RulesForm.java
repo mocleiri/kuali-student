@@ -19,6 +19,7 @@ public class RulesForm extends AbstractViewModel {
 
     private Long ruleId;
     private String ruleName;
+    private String ruleSetName;
     private Integer rulePriority;
     private String ruleLhs;
     private String ruleRhs;
@@ -122,5 +123,13 @@ public class RulesForm extends AbstractViewModel {
 
     public void setAddStatusMessage(String addStatusMessage) {
         this.addStatusMessage = addStatusMessage;
+    }
+
+    public String getRuleSetName() {
+        return ruleSetName;
+    }
+
+    public void setRuleSetName(String ruleSetName) {
+        this.ruleSetName = ruleSetName;
     }
 }
