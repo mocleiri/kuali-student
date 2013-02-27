@@ -86,3 +86,7 @@ end
 When /^I am in working on a term in "Open" SOC state$/ do
   @term_for_test = Rollover::OPEN_SOC_TERM
 end
+
+When /^I am in working on a term in "Final Edits" SOC state$/ do
+  @term_for_test = Rollover::FINAL_EDITS_SOC_TERM
+end

@@ -312,7 +312,7 @@ class CourseOffering
 
   def view_course_details
     on ManageCourseOfferingList do |page|
-      page.view_course_offering @course
+      page.view_course_offering @course.upcase
     end
   end
 
@@ -593,8 +593,21 @@ class DeliveryFormat
   def select_random_delivery_formats
     on CreateCourseOffering do  |page|
       selected_options = page.add_random_delivery_format
-      @format = selected_options[:del_format]
-      @grade_format = selected_options[:grade_format]
+      if selected_options[:del_format] == "Lab"
+         @format = "Lab Only"
+      elsif selected_options[:del_format] == "Lecture"
+         @format = "Lecture Only"
+      else
+         @format = selected_options[:del_format]
+      end
+
+      if selected_options[:grade_format] == "Course"
+        @grade_format = "Course Offering"
+      else
+        @grade_format = selected_options[:grade_format]
+      end
+
+
       @final_exam_driver = selected_options[:final_exam_driver]
       return selected_options
     end
