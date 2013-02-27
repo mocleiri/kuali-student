@@ -82,3 +82,7 @@ Then /^the rollover can be released to departments$/ do
   @rollover.release_to_depts
   #TODO validation
 end
+
+When /^I am in working on a term in "Open" SOC state$/ do
+  @term_for_test = Rollover::OPEN_SOC_TERM
+end

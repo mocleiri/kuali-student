@@ -49,9 +49,14 @@ class ManageCourseOfferingList < BasePage
   end
 
   def copy(co_code)
-    target_row(co_code).link(text: "Copy").click
+    copy_link(co_code).click
     loading.wait_while_present(220)
   end
+
+  def copy_link(co_code)
+    target_row(co_code).link(text: "Copy")
+  end
+
 
   def edit(co_code)
     target_row(co_code).link(text: "Edit").click

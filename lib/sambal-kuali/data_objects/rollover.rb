@@ -21,6 +21,16 @@ class Rollover
   attr_accessor :source_term,
                 :target_term
 
+  SOC_STATES_SOURCE_TERM = "201212"
+
+  PUBLISHED_SOC_TERM = "201512"
+  FINAL_EDITS_SOC_TERM = "201612"
+  OPEN_SOC_TERM = "201712"
+  DRAFT_SOC_TERM = "201812"
+
+  MAIN_TEST_TERM_SOURCE = "201201"
+  MAIN_TEST_TERM_TARGET = "202001"
+
   # provides default data:
   #  defaults = {
   #    :source_term=>"201201",

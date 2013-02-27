@@ -32,9 +32,43 @@ Then /^I do not have access to edit the course offering$/ do
   end
 end
 
-When /^I navigate to manage course offerings for a course in my department $/ do
+When /^I manage course offerings for a course in my department$/ do
   @course_offering = make CourseOffering, :course=>"ENGL346", :term=>"201612"
   @course_offering.search_by_coursecode
+end
+
+
+#When /^I manage course offerings for a subject code in my department$/ do
+#  @term_for_test = Rollover::OPEN_SOC_TERM unless @term_for_test != nil
+#  @course_offering = make CourseOffering, :course=>"ENGL346", :term=>@term_for_test
+#  @course_offering.search_by_coursecode
+#end
+
+
+Then /^I can view course offering details$/ do
+  on ManageCourseOfferingList do |page|
+    page.copy_link(@course_offering.course).present?.should == false
+  end
+end
+
+Then /^I can add new course offerings$/ do
+
+end
+
+Then /^I can approve course offerings for scheduling$/ do
+
+end
+
+Then /^I can delete course offerings$/ do
+
+end
+
+Then /^I can edit course offerings$/ do
+
+end
+
+Then /^I can copy course offerings$/ do
+
 end
 
 Then /^I do not have access to create the course offering$/ do
@@ -62,4 +96,5 @@ When /^I have access to create the course from an existing offering$/ do
     page.create_from_existing_offering_tab
     page.configure_course_offering_copy_element.present?.should == true
   end
+
 end
