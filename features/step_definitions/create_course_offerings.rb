@@ -1,10 +1,10 @@
 When /^I designate a valid term and Catalog Course Code$/ do
-  @course_offering = make CourseOffering, :term=> "201201", :course => "CHEM132", :grade_format => "Lab", :delivery_format => "Lab"
+  @course_offering = make CourseOffering, :term=> "201612", :course => "CHEM132", :grade_format => "Lab", :delivery_format => "Lab"
   @course_offering.create_by_search
 end
 
 When /^I designate a valid term and Catalog Course Code for lecture formats$/ do
-  @course_offering = make CourseOffering, :term=> "201201", :course => "ENGL310", :grade_format => "Quiz", :delivery_format => "Lecture/Quiz"
+  @course_offering = make CourseOffering, :term=> "201612", :course => "ENGL310", :grade_format => "Quiz", :delivery_format => "Lecture/Quiz"
   @course_offering.create_by_search
 end
 
@@ -33,5 +33,4 @@ Then /^the new Course Offering should be displayed in the list of available offe
   on ManageCourseOfferings do |page|
     page.error_message_course_not_found.should_not be_present
   end
-  #@course_offering.delete_co :should_delete_from_subj_code_view=>false, :should_confirm_delete=>true
 end
