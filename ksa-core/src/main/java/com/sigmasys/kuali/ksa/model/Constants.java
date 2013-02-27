@@ -96,6 +96,7 @@ public interface Constants {
 
     // 1098T Report constants
     String KSA_1098_SSN_TAX_TYPE = "ksa.1098.us.ssn.tax.type";
+    String KSA_1098_SSN_DISPLAY_DIGITS = "ksa.1098.us.ssn.display.digits";
     String KSA_1098_FILER_NAME = "ksa.1098.filer.name";
     String KSA_1098_FILER_ADDRESS1 = "ksa.1098.filer.address1";
     String KSA_1098_FILER_ADDRESS2 = "ksa.1098.filer.address2";

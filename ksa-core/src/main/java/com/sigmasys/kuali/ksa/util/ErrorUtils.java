@@ -29,7 +29,7 @@ public class ErrorUtils {
             }
         }
         String message = buffer.toString();
-        logger.error("ErrorInterceptor: " + message, t);
+        logger.error("ErrorUtils: " + message, t);
         return (t != null && message.trim().isEmpty()) ? t.toString() : message;
     }
 

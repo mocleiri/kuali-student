@@ -111,6 +111,7 @@ insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.tag.amount.billed', 'Bil
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.tag.insurance.refund', 'InsRef1098');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.tag.grants', 'Scholarship1098');
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.us.ssn.tax.type', 'SSN');
+insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.1098.us.ssn.display.digits', '4');
 
 -- Refund constants
 insert into KSSA_CONFIG (NAME, VALUE) values ('ksa.refund.ach.bank.type', 'ACH');

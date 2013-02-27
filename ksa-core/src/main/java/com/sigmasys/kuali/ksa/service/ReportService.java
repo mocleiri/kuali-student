@@ -55,7 +55,7 @@ public interface ReportService {
     String generateGeneralLedgerReport(String glAccountId, Date startDate, Date endDate);
 
     /**
-     * An overloaded version of the <code>prepare1098TReport</code> method that produces a partial year federal 1098T form.
+     * An overloaded version of the <code>generate1098TReport</code> method that produces a partial year federal 1098T form.
      *
      * @param accountId               ID of an account for which to produce the report.
      * @param startDate               Payments and Refunds tracking start date.
@@ -72,7 +72,7 @@ public interface ReportService {
      * Returns an XML representation of a complete year federal 1098T form. Note that many of the parameters for producing a correct 1098T
      * must be established in the system preferences, and transactions must carry the appropriate tags in order to be counted correctly.
      * <br>
-     * <code>ssnMask<code> is the number of final digits of the social security number that will be stored in the local record.
+     * <code>numberOfDisplayedDigits<code> is the number of final digits of the social security number that will be stored in the local record.
      * The XML file produced will contain the entire social security number, and it is imperative that the institution provide appropriate controls over this data.<br>
      * If <code>isTransient</code> is passed as true, then the system will not keep a record of the produced 1098T.
      * This option is ONLY to be used if the 1098T is being used to verify previous year's data, as the system does in order to complete the current year's return.
@@ -87,6 +87,21 @@ public interface ReportService {
      * @see Irs1098T
      */
     String generate1098TReportByYear(String accountId, int year, int numberOfDisplayedDigits, boolean isTransient);
+
+    /**
+     * Returns an XML representation of a complete year federal 1098T form. Note that many of the parameters for producing a correct 1098T
+     * must be established in the system preferences, and transactions must carry the appropriate tags in order to be counted correctly.
+     * <br>
+     *
+     * @param accountId   ID of an account for which to produce the report.
+     * @param year        Tax year.
+     * @param isTransient Whether to keep the record of the produces 1098T
+     * @return String representation of an IRS 1098T form.
+     * @see Irs1098T
+     */
+    @WebMethod(exclude = true)
+    String generate1098TReportByYear(String accountId, int year, boolean isTransient);
+
 
     /**
      * Looks for an existing IRS 1098T report in the KSA database and returns the result in XML format.

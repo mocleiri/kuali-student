@@ -621,6 +621,30 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         return generate1098TReport(accountId, firstDate, lastDate, numberOfDisplayedDigits, isTransient);
     }
 
+    /**
+     * Returns an XML representation of a complete year federal 1098T form. Note that many of the parameters for producing a correct 1098T
+     * must be established in the system preferences, and transactions must carry the appropriate tags in order to be counted correctly.
+     * <br>
+     *
+     * @param accountId   ID of an account for which to produce the report.
+     * @param year        Tax year.
+     * @param isTransient Whether to keep the record of the produces 1098T
+     * @return String representation of an IRS 1098T form.
+     * @see Irs1098T
+     */
+    @Override
+    @WebMethod(exclude = true)
+    @Transactional(readOnly = false)
+    public String generate1098TReportByYear(String accountId, int year, boolean isTransient) {
+        String paramValue = configService.getParameter(Constants.KSA_1098_SSN_DISPLAY_DIGITS);
+        if (StringUtils.isBlank(paramValue)) {
+            String errMsg = "Configuration parameter '" + Constants.KSA_1098_SSN_DISPLAY_DIGITS + "' is required";
+            logger.error(errMsg);
+            throw new IllegalStateException(errMsg);
+        }
+        return generate1098TReportByYear(accountId, year, Integer.parseInt(paramValue), isTransient);
+    }
+
     protected com.sigmasys.kuali.ksa.model.Irs1098T create1098TReportByYear(String accountId, int year,
                                                                             int numberOfDisplayedDigits, boolean isTransient) {
         Date firstDate = CalendarUtils.getFirstDateOfYear(year);

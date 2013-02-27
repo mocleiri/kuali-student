@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sigmasys.kuali.ksa.util.ErrorUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -30,13 +31,13 @@ import com.sigmasys.kuali.ksa.util.CalendarUtils;
 @RequestMapping(value = "/generate1098T")
 @Transactional
 public class Generate1098TController extends DownloadController {
-	
-	/**
-	 * The logger.
-	 */
-	private static final Log logger = LogFactory.getLog(Generate1098TController.class);
-	
-	
+
+    /**
+     * The logger.
+     */
+    private static final Log logger = LogFactory.getLog(Generate1098TController.class);
+
+
     @Autowired
     private ReportService reportService;
 
@@ -73,44 +74,43 @@ public class Generate1098TController extends DownloadController {
 
         return getUIFModelAndView(form);
     }
-    
+
     /**
      * Invoked on a success callback to download the report form.
-     * 
-     * @param request			HTTP request.
-     * @param response			HTTP response.
-     * @param reportFileName	Report file name.
-     * @return					Nothing to stay on the same page.
+     *
+     * @param response HTTP response.
+     * @return Nothing to stay on the same page.
      */
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=download1098TForm")
-    public ModelAndView download1098TForm(@ModelAttribute("KualiForm") Generate1098TForm form, HttpServletResponse response, @RequestParam("reportYear") int reportYear) throws Exception {
-    	// Read the report file:
-    	String form1098T = null;
-    	String error = null;
-    	String accountId = form.getAccount().getId();
-    	
-    	// Get the form from the ReportService:
-    	try {
-    		form1098T = reportService.generate1098TReportByYear(accountId, reportYear, 4, false);
-    	} catch (Exception e) {
-    		error = String.format("<h2>Error generating form 1098T. See log file for details.</h2><p><h4>%s</h4>", getExceptionMessage(e, "Contact your administrator for details."));
-    		logger.error(error, e);
-    	}
+    public ModelAndView download1098TForm(@ModelAttribute("KualiForm") Generate1098TForm form, HttpServletResponse response,
+                                          @RequestParam("reportYear") int reportYear) throws Exception {
+        // Read the report file:
+        String form1098T = null;
+        String error = null;
+        String accountId = form.getAccount().getId();
 
-    	// If the form content is available, start download:
-    	if (StringUtils.isNotEmpty(form1098T)) {
-    		// Start download:
-    		String reportFileName = generateReportFileName(form);
-    		
-    		doDownload(form1098T, reportFileName, "application/xml", response);
-    	} else {
-    		// Write an error message into the HTTP response:
-    		PrintWriter out = response.getWriter();
-    		
-    		out.println(error);
-    	}
-    	
-    	return null;
+        // Get the form from the ReportService:
+        try {
+            form1098T = reportService.generate1098TReportByYear(accountId, reportYear, false);
+        } catch (Exception e) {
+            error = String.format("<h2>Error generating form 1098T. See log file for details.</h2><p><h4>%s</h4>",
+                    getExceptionMessage(e, "Contact your administrator for details."));
+            logger.error(error, e);
+        }
+
+        // If the form content is available, start download:
+        if (StringUtils.isNotEmpty(form1098T)) {
+            // Start download:
+            String reportFileName = generateReportFileName(form);
+
+            doDownload(form1098T, reportFileName, "application/xml", response);
+        } else {
+            // Write an error message into the HTTP response:
+            PrintWriter out = response.getWriter();
+            out.println(error);
+        }
+
+        return null;
     }
 
 
@@ -136,9 +136,9 @@ public class Generate1098TController extends DownloadController {
      * Finds an Account with the specified ID.
      *
      * @param userId ID of a user which Account to select.
-     * @throws IllegalArgumentException If <code>userId</code> is null or blank.
      * @return Account with the specified ID.
-     * @throws UserNotFoundException If there is no such Account with the specified ID.
+     * @throws IllegalArgumentException If <code>userId</code> is null or blank.
+     * @throws UserNotFoundException    If there is no such Account with the specified ID.
      */
     private Account findAccount(String userId) {
 
@@ -154,29 +154,29 @@ public class Generate1098TController extends DownloadController {
         }
         throw new IllegalArgumentException("Invalid user ID selected: " + userId);
     }
-    
+
     /**
      * Generates a name for a report file.
-     * 
-     * @param form 	A form.
-     * @return		Generated report file name.
+     *
+     * @param form A form.
+     * @return Generated report file name.
      */
     private static String generateReportFileName(Generate1098TForm form) {
-    	PersonName name = form.getAccount().getDefaultPersonName();
-        String fileName = String.format("1098T_%s_%s.xml", name.getLastName(), name.getFirstName());
-        
-        return fileName;
+        PersonName name = form.getAccount().getDefaultPersonName();
+        return String.format("1098T_%s_%s.xml", name.getLastName(), name.getFirstName());
     }
-    
+
     /**
      * Extracts the message from a Throwable. If the message is missing, checks the cause Throwable.
-     * 
-     * @param t	Throwable to get its or its cause's message.
-     * @return	Error message.
+     *
+     * @param t Throwable to get its or its cause's message.
+     * @return Error message.
      */
     private static String getExceptionMessage(Throwable t, String defaultMessage) {
-    	return StringUtils.isNotBlank(t.getMessage()) ? t.getMessage() 
-    			: ((t.getCause() != null) && StringUtils.isNotBlank(t.getCause().getMessage()) 
-    					? t.getCause().getMessage() : defaultMessage);
+        String errorMessage = ErrorUtils.getMessage(t);
+        if (StringUtils.isBlank(errorMessage)) {
+            errorMessage = defaultMessage;
+        }
+        return errorMessage;
     }
 }
