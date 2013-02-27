@@ -201,4 +201,15 @@ public class BrmPersistenceServiceImpl extends GenericPersistenceService impleme
         return ruleSet;
     }
 
+    /**
+     * Retrieves all existing rule names
+     *
+     * @return a list of rule names
+     */
+    @Override
+    public List<String> getRuleNames() {
+        Query query = em.createQuery("select r.name from Rule r order by r.name asc");
+        return query.getResultList();
+    }
+
 }

@@ -85,4 +85,10 @@ public interface BrmPersistenceService {
      */
     RuleSet deleteRulesFromRuleSet(Long ruleSetId, Long... ruleIds);
 
+    /**
+     * Retrieves all existing rule names
+     * @return a list of rule names
+     */
+    List<String> getRuleNames();
+
 }

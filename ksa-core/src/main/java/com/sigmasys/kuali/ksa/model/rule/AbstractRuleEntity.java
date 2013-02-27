@@ -74,6 +74,7 @@ public abstract class AbstractRuleEntity implements Identifiable {
     public String toString() {
         return getClass().getName() + "{" +
                 "id=" + id +
+                ", header='" + header + '\'' +
                 ", name='" + name + '\'' +
                 ", type=" + type +
                 '}';

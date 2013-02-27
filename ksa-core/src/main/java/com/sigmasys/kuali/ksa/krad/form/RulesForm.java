@@ -17,23 +17,26 @@ import java.util.List;
  */
 public class RulesForm extends AbstractViewModel {
 
-    private String ruleSetId;
-    private String ruleSetBody;
-    private String newRuleSetId;
-    private String newRuleSetBody;
+    private Long ruleId;
+    private String ruleName;
+    private Integer rulePriority;
+    private String ruleLhs;
+    private String ruleRhs;
+    private String ruleType;
+
     private String editStatusMessage;
     private String addStatusMessage;
 
-    private final RuleSetNameFinder ruleSetNameFinder = new RuleSetNameFinder();
+    private final RuleNameFinder ruleNameFinder = new RuleNameFinder();
 
-    private final static class RuleSetNameFinder extends KeyValuesBase {
+    private final static class RuleNameFinder extends KeyValuesBase {
 
         private List<KeyValue> keyValues = Collections.emptyList();
 
-        public void initValues(List<String> ruleSetNames) {
-            keyValues = new ArrayList<KeyValue>(ruleSetNames.size());
-            for (String ruleSetName : ruleSetNames) {
-                keyValues.add(new ConcreteKeyValue(ruleSetName, ruleSetName));
+        protected void initValues(List<String> ruleNames) {
+            keyValues = new ArrayList<KeyValue>(ruleNames.size());
+            for (String ruleName : ruleNames) {
+                keyValues.add(new ConcreteKeyValue(ruleName, ruleName));
             }
         }
 
@@ -49,40 +52,56 @@ public class RulesForm extends AbstractViewModel {
         }
     }
 
-    public String getRuleSetId() {
-        return ruleSetId;
+    public Long getRuleId() {
+        return ruleId;
     }
 
-    public void setRuleSetId(String ruleSetId) {
-        this.ruleSetId = ruleSetId;
+    public void setRuleId(Long ruleId) {
+        this.ruleId = ruleId;
     }
 
-    public String getRuleSetBody() {
-        return ruleSetBody;
+    public String getRuleName() {
+        return ruleName;
     }
 
-    public void setRuleSetBody(String ruleSetBody) {
-        this.ruleSetBody = ruleSetBody;
+    public void setRuleName(String ruleName) {
+        this.ruleName = ruleName;
     }
 
-    public String getNewRuleSetId() {
-        return newRuleSetId;
+    public Integer getRulePriority() {
+        return rulePriority;
     }
 
-    public void setNewRuleSetId(String newRuleSetId) {
-        this.newRuleSetId = newRuleSetId;
+    public void setRulePriority(Integer rulePriority) {
+        this.rulePriority = rulePriority;
     }
 
-    public String getNewRuleSetBody() {
-        return newRuleSetBody;
+    public String getRuleLhs() {
+        return ruleLhs;
     }
 
-    public void setNewRuleSetBody(String newRuleSetBody) {
-        this.newRuleSetBody = newRuleSetBody;
+    public void setRuleLhs(String ruleLhs) {
+        this.ruleLhs = ruleLhs;
     }
 
-    public void initRuleSetNameFinder(List<String> ruleSetNames) {
-        ruleSetNameFinder.initValues(ruleSetNames);
+    public String getRuleRhs() {
+        return ruleRhs;
+    }
+
+    public void setRuleRhs(String ruleRhs) {
+        this.ruleRhs = ruleRhs;
+    }
+
+    public String getRuleType() {
+        return ruleType;
+    }
+
+    public void setRuleType(String ruleType) {
+        this.ruleType = ruleType;
+    }
+
+    public void initRuleNameFinder(List<String> ruleSetNames) {
+        ruleNameFinder.initValues(ruleSetNames);
     }
 
     public String getEditStatusMessage() {
@@ -93,8 +112,8 @@ public class RulesForm extends AbstractViewModel {
         this.editStatusMessage = editStatusMessage;
     }
 
-    public KeyValuesFinder getRuleSetNameFinder() {
-        return ruleSetNameFinder;
+    public KeyValuesFinder getRuleNameFinder() {
+        return ruleNameFinder;
     }
 
     public String getAddStatusMessage() {

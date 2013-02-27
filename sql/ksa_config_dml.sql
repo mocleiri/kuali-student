@@ -147,13 +147,13 @@ Sort "charges2011" by priority in ascending order
 Get charges from "allCharges" for 2012 year, store result in "charges2012"
 Sort "charges2012" by priority in ascending order
 
-Get payments with tag "FinAid" from "allPayments" for 2011 year, store result in "finaidPayments2011"
+Get payments with tag "FinAid" from "allPayments" for 2011 year,         store result in "finaidPayments2011"
 Get payments with tag "FinAid" from "allPayments" for 2012 year, store result in "finaidPayments2012"
 
-Apply payments for "finaidPayments2011, charges2011", add result to "glTransactions"
+Apply payments for "finaidPayments2011, charges2011", add result          to "glTransactions"
 Apply payments for "finaidPayments2012, charges2012", add result to "glTransactions"
 Apply payments with maximum amount $200 for "finaidPayments2012, allCharges", add result to "glTransactions"
-Apply payments with maximum amount $200 for "finaidPayments2011, allCharges", add result to "glTransactions"
+Apply payments with maximum amount $200 for "finaidPayments2011,allCharges", add result to "glTransactions"
 
 Calculate matrix scores for "transactions"
 Sort "transactions" by matrix score in ascending order

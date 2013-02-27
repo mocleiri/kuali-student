@@ -2,13 +2,12 @@ package com.sigmasys.kuali.ksa.krad.controller;
 
 import com.sigmasys.kuali.ksa.exception.InvalidRulesException;
 import com.sigmasys.kuali.ksa.krad.form.RulesForm;
-import com.sigmasys.kuali.ksa.model.rule.RuleSet;
+import com.sigmasys.kuali.ksa.model.rule.Rule;
 import com.sigmasys.kuali.ksa.service.brm.BrmPersistenceService;
 import com.sigmasys.kuali.ksa.service.brm.BrmService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.drools.builder.ResourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,7 +35,7 @@ public class RulesController extends GenericSearchController {
     private BrmPersistenceService brmPersistenceService;
 
 
-    private boolean ruleSetExists(String ruleSetName) {
+    private boolean ruleExists(String ruleSetName) {
         return (ruleSetName != null) && brmPersistenceService.getRuleSet(ruleSetName) != null;
     }
 
@@ -47,8 +46,7 @@ public class RulesController extends GenericSearchController {
     @Override
     protected RulesForm createInitialForm(HttpServletRequest request) {
         RulesForm rulesForm = new RulesForm();
-        // TODO
-        //rulesForm.initRuleSetNameFinder(brmPersistenceService.getRuleIds());
+        rulesForm.initRuleNameFinder(brmPersistenceService.getRuleNames());
         rulesForm.setAddStatusMessage("");
         rulesForm.setEditStatusMessage("");
         return rulesForm;
@@ -70,24 +68,23 @@ public class RulesController extends GenericSearchController {
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=update")
     public ModelAndView update(@ModelAttribute("KualiForm") RulesForm form) {
 
-        String ruleSetId = form.getRuleSetId();
-        String ruleSetBody = form.getRuleSetBody();
-
         // TODO
-        RuleSet ruleSet = new RuleSet();
+        Rule rule = new Rule();
+
+        copyFormToRule(form, rule);
 
         // Validating the rule set content
         //ResourceType resourceType = ruleSetId.equals(brmService.getDslId()) ? ResourceType.DSL : ResourceType.DSLR;
 
         try {
             //brmService.reloadRuleSet(ruleSetId, resourceType);
-            brmPersistenceService.persistRuleSet(ruleSet);
-            form.setEditStatusMessage("Rule Set has been updated");
+            brmPersistenceService.persistRule(rule);
+            form.setEditStatusMessage("Rule has been updated");
         } catch (InvalidRulesException ire) {
             form.setEditStatusMessage(ire.getMessage());
         }
 
-        logger.info("Updated Rule Set => \n" + ruleSetBody);
+        logger.info("Updated Rule => \n" + rule);
 
         return getUIFModelAndView(form);
     }
@@ -99,25 +96,23 @@ public class RulesController extends GenericSearchController {
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=select")
     public ModelAndView select(@ModelAttribute("KualiForm") RulesForm form) {
 
-        String ruleSetId = form.getRuleSetId();
-        if (StringUtils.isBlank(ruleSetId)) {
-            String errMsg = "Rule Set ID must be specified";
+        String ruleName = form.getRuleName();
+        if (StringUtils.isBlank(ruleName)) {
+            String errMsg = "Rule name must be specified";
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
         }
 
-        RuleSet ruleSet = brmPersistenceService.getRuleSet(ruleSetId);
-        if (ruleSet == null) {
-            String errMsg = "Rule Set specified by ID = " + ruleSetId + " does not exist";
+        Rule rule = brmPersistenceService.getRule(ruleName);
+        if (rule == null) {
+            String errMsg = "Rule specified by name '" + ruleName + "' does not exist";
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
         }
 
-        form.setRuleSetId(ruleSetId);
-        // TODO
-        //form.setRuleSetBody(ruleSet.getRules());
+        copyRuleToForm(rule, form);
 
-        logger.info("Selected Rule Set => \n" + ruleSet.getRules());
+        logger.info("Selected Rule => \n" + rule);
 
         return getUIFModelAndView(form);
     }
@@ -129,14 +124,14 @@ public class RulesController extends GenericSearchController {
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=checkExistence")
     public ModelAndView checkExistence(@ModelAttribute("KualiForm") RulesForm form) {
 
-        String ruleSetId = form.getNewRuleSetId();
+        String ruleName = form.getRuleName();
 
-        if (StringUtils.isBlank(ruleSetId)) {
-            String errMsg = "Rule Set ID cannot be empty";
+        if (StringUtils.isBlank(ruleName)) {
+            String errMsg = "Rule name cannot be empty";
             logger.error(errMsg);
             form.setAddStatusMessage(errMsg);
-        } else if (ruleSetExists(ruleSetId)) {
-            form.setAddStatusMessage("Rule with ID = '" + ruleSetId + "' already exists");
+        } else if (ruleExists(ruleName)) {
+            form.setAddStatusMessage("Rule with name '" + ruleName + "' already exists");
         }
 
         return getUIFModelAndView(form);
@@ -149,38 +144,53 @@ public class RulesController extends GenericSearchController {
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=add")
     public ModelAndView add(@ModelAttribute("KualiForm") RulesForm form) {
 
-        String ruleSetId = form.getNewRuleSetId();
+        String ruleName = form.getRuleName();
 
-        if (StringUtils.isBlank(ruleSetId)) {
-
-            String errMsg = "Rule Set ID cannot be empty";
-
+        if (StringUtils.isBlank(ruleName)) {
+            String errMsg = "Rule name cannot be empty";
             logger.error(errMsg);
-
             form.setAddStatusMessage(errMsg);
-
-        } else if (!ruleSetExists(ruleSetId)) {
-
-            String ruleSetBody = form.getNewRuleSetBody();
+        } else if (!ruleExists(ruleName)) {
 
             // TODO
-            RuleSet ruleSet = new RuleSet();
+            Rule rule = new Rule();
+
+            copyFormToRule(form, rule);
 
             try {
-                brmService.validateRuleSet(ruleSet);
-                brmPersistenceService.persistRuleSet(ruleSet);
-                form.setAddStatusMessage("A new Rule Set has been created");
+                //brmService.validateRuleSet(ruleSet);
+                brmPersistenceService.persistRule(rule);
+                form.setAddStatusMessage("A new Rule has been created");
             } catch (InvalidRulesException ire) {
                 form.setAddStatusMessage(ire.getMessage());
             }
 
-            logger.info("Added Rule Set => \n" + ruleSetBody);
+            logger.info("Added Rule => \n" + rule);
 
         } else {
-            form.setAddStatusMessage("Rule with ID = '" + ruleSetId + "' already exists");
+            form.setAddStatusMessage("Rule with ID = '" + ruleName + "' already exists");
         }
 
         return getUIFModelAndView(form);
+    }
+
+    private void copyRuleToForm(Rule rule, RulesForm form) {
+        form.setRuleId(rule.getId());
+        form.setRuleName(rule.getName());
+        form.setRulePriority(rule.getPriority());
+        form.setRuleLhs(rule.getLhs());
+        form.setRuleRhs(rule.getRhs());
+        form.setRuleType(rule.getType().getName());
+    }
+
+    private void copyFormToRule(RulesForm form, Rule rule) {
+          rule.setId(form.getRuleId());
+          rule.setName(form.getRuleName());
+          rule.setPriority(form.getRulePriority());
+          rule.setLhs(form.getRuleLhs());
+          rule.setRhs(form.getRuleRhs());
+          // TODO: get the rule type
+          //rule.setType();
     }
 
 

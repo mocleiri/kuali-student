@@ -124,7 +124,7 @@
                 <bean parent="Uif-HorizontalBoxSection" p:layoutManager.orientation="HORIZONTAL">
                     <property name="items">
                         <list>
-                            <bean parent="Uif-InputField" p:propertyName="ruleSetId"
+                            <bean parent="Uif-InputField" p:propertyName="ruleId"
                                   p:label="Select a rule set for editing"
                                   p:labelPlacement="TOP"
                                   p:width="100"
