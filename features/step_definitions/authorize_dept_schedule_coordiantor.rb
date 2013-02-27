@@ -28,7 +28,7 @@ end
 
 Then /^I do not have access to edit the course offering$/ do
   on ManageCourseOfferings do |page|
-    page.edit_offering_element.present? == false
+    page.edit_offering_element.present?.should == false
   end
 end
 

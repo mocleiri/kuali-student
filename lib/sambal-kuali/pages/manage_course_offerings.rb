@@ -88,7 +88,11 @@ class ManageCourseOfferings < BasePage
   end
 
   def edit(code)
+    begin
     target_row(code).link(text: "Edit").click
+    rescue Timeout::Error => e
+      puts "rescued target_row edit"
+    end
     loading.wait_while_present(120)
   end
 
