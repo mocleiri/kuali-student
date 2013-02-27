@@ -212,4 +212,30 @@ public class BrmPersistenceServiceImpl extends GenericPersistenceService impleme
         return query.getResultList();
     }
 
+    /**
+     * Retrieves rule names for the specified rule set.
+     *
+     * @param ruleSetName Rule Set name
+     * @return a list of rule names
+     */
+    @Override
+    public List<String> getRuleNames(String ruleSetName) {
+        RuleSet ruleSet = getRuleSet("name", ruleSetName);
+        if (ruleSet == null) {
+            String errMsg = "Cannot find Rule Set with name '" + ruleSetName + "'";
+            logger.error(errMsg);
+            throw new IllegalArgumentException(ruleSetName);
+        }
+        Set<Rule> rules = ruleSet.getRules();
+        if (rules != null) {
+            List<String> ruleNames = new ArrayList<String>(rules.size());
+            for (Rule rule : rules) {
+                ruleNames.add(rule.getName());
+            }
+            Collections.sort(ruleNames);
+            return ruleNames;
+        }
+        return Collections.emptyList();
+    }
+
 }

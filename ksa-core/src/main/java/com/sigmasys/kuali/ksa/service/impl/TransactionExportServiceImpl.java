@@ -111,7 +111,7 @@ public class TransactionExportServiceImpl extends GenericPersistenceService impl
 
         accountParts.add(glAccount.substring(0, 2));
         accountParts.add(glAccount.substring(2, 9));
-        accountParts.add(glAccount.substring(8));
+        accountParts.add(glAccount.substring(9));
 
         return accountParts;
     }

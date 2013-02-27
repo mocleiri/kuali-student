@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * A controller for editing KSA Drools rule sets
@@ -35,8 +36,8 @@ public class RulesController extends GenericSearchController {
     private BrmPersistenceService brmPersistenceService;
 
 
-    private boolean ruleExists(String ruleSetName) {
-        return (ruleSetName != null) && brmPersistenceService.getRuleSet(ruleSetName) != null;
+    private boolean ruleExists(String ruleName) {
+        return StringUtils.isNotBlank(ruleName) && brmPersistenceService.getRule(ruleName) != null;
     }
 
 
@@ -45,8 +46,20 @@ public class RulesController extends GenericSearchController {
      */
     @Override
     protected RulesForm createInitialForm(HttpServletRequest request) {
+
+        String ruleSetName = request.getParameter("ruleSetName");
+
         RulesForm rulesForm = new RulesForm();
-        rulesForm.initRuleNameFinder(brmPersistenceService.getRuleNames());
+
+        List<String> ruleNames;
+        if ( StringUtils.isNotBlank(ruleSetName) ) {
+           rulesForm.initRuleNameFinder(brmPersistenceService.getRuleNames(ruleSetName));
+        } else {
+           ruleNames = brmPersistenceService.getRuleNames();
+        }
+
+        // TODO
+
         rulesForm.setAddStatusMessage("");
         rulesForm.setEditStatusMessage("");
         return rulesForm;
@@ -184,13 +197,13 @@ public class RulesController extends GenericSearchController {
     }
 
     private void copyFormToRule(RulesForm form, Rule rule) {
-          rule.setId(form.getRuleId());
-          rule.setName(form.getRuleName());
-          rule.setPriority(form.getRulePriority());
-          rule.setLhs(form.getRuleLhs());
-          rule.setRhs(form.getRuleRhs());
-          // TODO: get the rule type
-          //rule.setType();
+        rule.setId(form.getRuleId());
+        rule.setName(form.getRuleName());
+        rule.setPriority(form.getRulePriority());
+        rule.setLhs(form.getRuleLhs());
+        rule.setRhs(form.getRuleRhs());
+        // TODO: get the rule type
+        //rule.setType();
     }
 
 

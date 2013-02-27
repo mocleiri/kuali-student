@@ -31,7 +31,7 @@ import static org.springframework.util.Assert.notNull;
 public class TransactionExportServiceTest extends AbstractServiceTest {
 
     // GL Account ID must be the size of 12 according to UMD rules
-    private static final String GL_ACCOUNT_ID = "01-0-13112 1326";
+    private static final String GL_ACCOUNT_ID = "01-0-131121 1326";
 
     @Autowired
     private TransactionExportService transactionExportService;
