@@ -15,7 +15,6 @@ Feature: Department Schedule Coordinator Authorization
     When I attempt to edit a course not in my department
     Then I do not have access to edit the course offering
 
-  @wip
   Scenario: Department Schedule Coordinator Carol can access the Manage CO set of pages for COs for her own admin org
     Given I am in working on a term in "Open" SOC state
     When I manage course offerings for a subject code in my department
@@ -26,16 +25,15 @@ Feature: Department Schedule Coordinator Authorization
     And I can edit course offerings
     And I can copy course offerings
 
-  @wip
   Scenario: Department Schedule Coordinator Carol can access the Manage AO set of pages for COs for her own admin org
     Given I am in working on a term in "Open" SOC state
     When I manage a course offering in my department
     Then I can view the activity offering details
     And the next, previous and list all course offering links are enabled
-    And the add new activity button is enabled
-    And the delete activity offering operation is enabled
-    And the edit activity offering operation is enabled
-    And the copy activity offering operation is enabled
+    And I can add a new activity offering
+    And I can delete an activity offering
+    And I can edit an activity offering
+    And I can copy activity offering
 
   Scenario: Department Schedule Coordinator Carol does not have access to create CO's not in her admin org
     Given I am in working on a term in "Open" SOC state

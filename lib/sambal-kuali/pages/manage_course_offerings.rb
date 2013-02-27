@@ -9,6 +9,10 @@ class ManageCourseOfferings < BasePage
 
   element(:error_message_course_not_found) { |b| b.frm.li(class: "uif-errorMessageItem") }
 
+  element(:previous_course_link){ |b| b.frm.link(id: "u186") } # Persistent ID needed!
+  element(:list_all_course_link){ |b| b.frm.link(id: "u189") } # Persistent ID needed!
+  element(:next_course_link){ |b| b.frm.link(id: "u192") }     # Persistent ID needed!
+
   element(:term) { |b| b.frm.text_field(name: "termCode") }
   element(:course_offering_code) { |b| b.frm.radio(value: "courseOfferingCode") }
   element(:subject_code) { |b| b.frm.radio(value: "subjectCode") }
@@ -22,15 +26,13 @@ class ManageCourseOfferings < BasePage
 
   value(:course_title) { |b| b.frm.div(id: "ActivityOfferingResultSection").text }
   element(:edit_offering_element) { |b| b.frm.link(text: "Edit")}
-  action(:edit_offering) { |b| b.frm.link(text: "Edit").click; b.loading.wait_while_present(200) } # Persistent ID needed!
+  action(:edit_offering) { |b| b.frm.link(text: "Edit").click; b.loading.wait_while_present(200) }
 
   element(:format) { |b| b.frm.select(name: "formatIdForNewAO") }
   element(:activity_type) { |b| b.frm.select(name: "activityIdForNewAO") }
   element(:quantity) { |b| b.frm.text_field(name: "noOfActivityOfferings") }
   element(:create_co_button)   { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-CO") }
 
-  action(:add) { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-AO").click; b.loading.wait_while_present }
-  action(:delete_aos) { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Delete-AO").click; b.loading.wait_while_present }
 
   action(:delete_cos) { b|b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Delete-CO").click; b.loading.wait_while_present }
   
@@ -44,9 +46,17 @@ class ManageCourseOfferings < BasePage
   action(:approve_co_confirm_action) { |b| b.approve_co_popup_div.checkbox(index: 0).click; b.loading.wait_while_present }
   action(:approve_co_cancel_action) { |b| b.approve_co_popup_div.checkbox(index: 1).click; b.loading.wait_while_present }
 
-  action(:add_activity){ |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-AO").click; b.loading.wait_while_present}
+  action(:add) { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-AO").click; b.loading.wait_while_present } #TODO duplicate
+  element(:add_activity_button){ |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-AO") }
+  action(:add_activity){ |b| b.add_activity_button.click; b.loading.wait_while_present}
+
   action(:draft_activity){ |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Draft-AO").click; b.loading.wait_while_present}
-  action(:approve_activity){ |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Approve-AO").click; b.loading.wait_while_present}
+
+  element(:approve_activity_button){ |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Approve-AO")}
+  action(:approve_activity){ |b| b.approve_activity_button.click; b.loading.wait_while_present}
+
+  action(:delete_aos_button) { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Delete-AO") }
+  action(:delete_aos) { |b| b.delete_aos_button.click; b.loading.wait_while_present }
 
   AO_CODE = 1
   AO_STATUS = 2
@@ -61,8 +71,12 @@ class ManageCourseOfferings < BasePage
   action(:go) { |b| b.frm.button(text: "Go").click; b.loading.wait_while_present }
 
   def view_activity_offering(code)
-    activity_offering_results_table.link(text: code).click
+    view_activity_offering_link(code).click
     loading.wait_while_present
+  end
+
+  def view_activity_offering_link(code)
+    activity_offering_results_table.link(text: code)
   end
 
   def target_row(code)
@@ -82,14 +96,22 @@ class ManageCourseOfferings < BasePage
     target_row(code).cells[AO_STATUS].text
   end
 
+  def copy_link(code)
+    target_row(code).link(text: "Copy")
+  end
+
   def copy(code)
-    target_row(code).link(text: "Copy").click
+    copy_link(code).click
     loading.wait_while_present
+  end
+
+  def edit_link(code)
+      target_row(code).link(text: "Edit")
   end
 
   def edit(code)
     begin
-    target_row(code).link(text: "Edit").click
+      edit_link(code).click
     rescue Timeout::Error => e
       puts "rescued target_row edit"
     end
@@ -100,6 +122,14 @@ class ManageCourseOfferings < BasePage
     for code in code_list
       if !target_row(code).nil?
         target_row(code).checkbox.set
+      end
+    end
+  end
+
+  def deselect_aos(code_list)
+    for code in code_list
+      if !target_row(code).nil?
+        target_row(code).checkbox.clear
       end
     end
   end

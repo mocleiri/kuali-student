@@ -9,8 +9,15 @@ class ManageCourseOfferingList < BasePage
   element(:subject_code) { |b| b.frm.co_results_div.h3.span() }
 
   action(:approve_subject_code_for_scheduling) { |b| b.frm.co_results_div.link(id: "KS-CourseOfferingManagement-ApproveSubj").click}
-  action(:create_course_offering) { |b| b.frm.co_results_div.button(text: "Create Course Offering").click; b.loading.wait_while_present } #TODO persistent id
-  action(:delete_cos) { |b|b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Delete-CO").click; b.loading.wait_while_present }
+
+  element(:approve_course_offering_button) { |b| b.frm.co_results_div.button(id: "KS-CourseOfferingManagement-ToolBar-Approve-CO") }
+  action(:approve_course_offering) { |b| b.approve_course_offering_button.click; b.loading.wait_while_present }
+
+  element(:create_course_offering_button) { |b| b.frm.co_results_div.button(id: "KS-CourseOfferingManagement-ToolBar-Add-CO") }
+  action(:create_course_offering) { |b| b.create_course_offering_element.click; b.loading.wait_while_present }
+
+  element(:delete_cos_button) { |b|b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Delete-CO")}
+  action(:delete_cos) { |b|b.delete_cos_button.click; b.loading.wait_while_present }
 
   SELECT_COLUMN = 0
   CO_CODE_COLUMN = 1
@@ -38,8 +45,12 @@ class ManageCourseOfferingList < BasePage
     loading.wait_while_present(300)
   end
 
+  def view_course_offering_link(co_code)
+    course_offering_results_table.link(text: co_code)
+  end
+
   def view_course_offering(co_code)
-    course_offering_results_table.link(text: co_code).click
+    view_course_offering_link(co_code).click
     loading.wait_while_present
   end
 
@@ -57,24 +68,19 @@ class ManageCourseOfferingList < BasePage
     target_row(co_code).link(text: "Copy")
   end
 
-
   def edit(co_code)
-    target_row(co_code).link(text: "Edit").click
+    edit_link(co_code).click
     loading.wait_while_present(120)
   end
+
+  def edit_link(co_code)
+    target_row(co_code).link(text: "Edit")
+  end
+
 
   def manage(co_code)
     target_row(co_code).link(text: "Manage").click
     loading.wait_while_present(120)
-  end
-
-  def delete(co_code)
-    if target_row(co_code).link(text: "Delete").exists?
-      target_row(co_code).link(text: "Delete").click
-      loading.wait_while_present
-    else
-      raise "delete not enabled for course offering code: #{co_code}"
-    end
   end
 
   def co_list
@@ -85,8 +91,14 @@ class ManageCourseOfferingList < BasePage
   end
 
   def select_cos(code_list)
-    for code in code_list
+    code_list.each do |code|
       target_row(code).checkbox.set
+    end
+  end
+
+  def deselect_cos(code_list)
+    code_list.each do |code|
+      target_row(code).checkbox.clear
     end
   end
 end
