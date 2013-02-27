@@ -28,18 +28,8 @@
                                 <list>
                                     <bean parent="Uif-HeaderTwo" p:headerText="@{account.compositeDefaultPersonName}"/>
                                     <bean parent="Uif-InputField" p:propertyName="account.id" p:style="margin-top: 15px;" p:readOnly="@{true}"/>
-                                    <bean parent="Uif-HelpImage" p:source="../images/alert.png" p:style="margin-top: 15px;" p:altText="" p:title="">
-                                        <property name="toolTip">
-                                            <bean parent="Uif-Tooltip" p:tooltipContent="@{alertTooltip}"/>
-                                        </property>
-                                    </bean>
-                                    <bean parent="Uif-InputField" p:propertyName="alertSize" p:style="margin-top: 15px;" p:readOnly="@{true}"/>
-                                    <bean parent="Uif-HelpImage" p:source="../images/flag.png" p:style="margin-top: 15px;" p:altText="" p:title="">
-                                        <property name="toolTip">
-                                            <bean parent="Uif-Tooltip" p:tooltipContent="@{flagTooltip}"/>
-                                        </property>
-                                    </bean>
-                                    <bean parent="Uif-InputField" p:propertyName="flagSize" p:style="margin-top: 15px;" p:readOnly="@{true}"/>
+                                    <ref bean="Ksa-TransactionAlerts"/>
+                                    <ref bean="Ksa-TransactionFlags"/>
 
                                 </list>
                                 </property>

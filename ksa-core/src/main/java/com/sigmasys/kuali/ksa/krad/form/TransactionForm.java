@@ -289,10 +289,10 @@ public class TransactionForm extends AbstractViewModel {
         return alerts;
     }
 
-    public Integer getAlertSize(){
-        if(alerts == null){ return 0; }
-        return alerts.size();
-    }
+    //public Integer getAlertSize(){
+    //    if(alerts == null){ return 0; }
+    //    return alerts.size();
+    //}
 
     public String getAlertTooltip(){
         int itemsPerPage = 4; //Integer.valueOf(configService.getParameter(Constants.QUICKVIEW_INFORMATION_COUNT));
@@ -332,10 +332,10 @@ public class TransactionForm extends AbstractViewModel {
         return flags;
     }
 
-    public Integer getFlagSize(){
-        if(flags == null){ return 0; }
-        return flags.size();
-    }
+    //public Integer getFlagSize(){
+    //    if(flags == null){ return 0; }
+    //    return flags.size();
+    //}
 
     public String getFlagTooltip(){
         int itemsPerPage = 4; //Integer.valueOf(configService.getParameter(Constants.QUICKVIEW_INFORMATION_COUNT));

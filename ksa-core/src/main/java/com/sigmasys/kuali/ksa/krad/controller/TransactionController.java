@@ -92,6 +92,7 @@ public class TransactionController extends GenericSearchController {
             this.populateRollups(form, models);
 
 
+
         }
 
         return getUIFModelAndView(form);
