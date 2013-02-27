@@ -43,8 +43,8 @@ class ManageCourseOfferings < BasePage
   action(:approve_cos){ |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Approve-CO").click; b.loading.wait_while_present}
 
   element(:approve_co_popup_div) { |b| b.div(id: "approveCODialog") }
-  action(:approve_co_confirm_action) { |b| b.approve_co_popup_div.checkbox(index: 0).click; b.loading.wait_while_present }
-  action(:approve_co_cancel_action) { |b| b.approve_co_popup_div.checkbox(index: 1).click; b.loading.wait_while_present }
+  action(:approve_co_confirm_action) { |b| b.approve_co_popup_div.checkbox(index: 0).click; b.loading.wait_while_present(180) }
+  action(:approve_co_cancel_action) { |b| b.approve_co_popup_div.checkbox(index: 1).click; b.loading.wait_while_present(180) }
 
   action(:add) { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-AO").click; b.loading.wait_while_present } #TODO duplicate
   element(:add_activity_button){ |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Add-AO") }
@@ -58,6 +58,17 @@ class ManageCourseOfferings < BasePage
   action(:delete_aos_button) { |b| b.frm.button(id: "KS-CourseOfferingManagement-ToolBar-Delete-AO") }
   action(:delete_aos) { |b| b.delete_aos_button.click; b.loading.wait_while_present }
 
+  def approve_co_confirm
+    puts "exists? #{approve_co_popup_div.checkbox(index: 0).exists?}"
+    approve_co_popup_div.checkbox(index: 0).click
+    loading.wait_while_present(180)
+  end
+
+  def approve_co_cancel
+    puts "exists? #{approve_co_popup_div.checkbox(index: 1).exists?}"
+    approve_co_popup_div.checkbox(index: 1).click
+    loading.wait_while_present(180)
+  end
   AO_CODE = 1
   AO_STATUS = 2
   AO_TYPE = 3
