@@ -17,12 +17,12 @@ Feature: Department Schedule Coordinator Authorization
     When I navigate to manage course offerings for a course offering not in my department
     Then I do not have access to edit the course offering
 
-  @pending
+  @wip
   Scenario: Department Schedule Coordinator Carol can access the Manage CO set of pages for COs for her own admin org
     When I navigate to manage course offerings for a course in my department
     Then I do not have access to edit the course offering
 
-  @wip
+  @pending
   Scenario: Department Schedule Coordinator Carol does not have access to create CO's not in her admin org
     When I navigate to create course offerings and designate a valid term and Catalog Course Code not in my department
     Then I do not have access to create the course offering
