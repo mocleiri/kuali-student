@@ -1,4 +1,4 @@
-@wip
+@pending
 Feature: Set as Draft toolbar button
 
   As a user, I want to Set as Draft Activity Offerings from the Manage Course Offerings process by means of a Toolbar

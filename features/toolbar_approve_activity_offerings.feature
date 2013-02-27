@@ -1,4 +1,4 @@
-@wip
+@pending
 Feature: Approve Activity Offering toolbar button
 
   Background:

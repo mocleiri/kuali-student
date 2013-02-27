@@ -11,6 +11,7 @@ And /^I select an Activity Offering in Approved state$/ do
     @new_ao_list =  orig_ao_list.to_set ^ page.codes_list.to_set
     page.select_aos(@new_ao_list)
     page.approve_activity
+    page.select_aos(@new_ao_list)
   end
 end
 
@@ -28,5 +29,6 @@ And /^I select multiple Activity Offerings in Approved state$/ do
     @new_ao_list =  orig_ao_list.to_set ^ page.codes_list.to_set
     page.select_aos(@new_ao_list)
     page.approve_activity
+    page.select_aos(@new_ao_list)
   end
 end
