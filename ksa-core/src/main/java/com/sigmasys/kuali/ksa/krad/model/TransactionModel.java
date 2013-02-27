@@ -16,6 +16,8 @@ import java.util.Locale;
  */
 public class TransactionModel extends Transaction {
 
+    private Transaction parentTransaction;
+
     private List<TransactionModel> subTransactions;
 
     private TransactionTypeValue transactionTypeValue;
@@ -45,8 +47,8 @@ public class TransactionModel extends Transaction {
 
     private String refundRule;
 
-    // Boolean get method does not work well except as a string
-    private String internal;
+    private List<Memo> memos;
+    private List<Tag> tags;
 
     // Document id as a string
     private String documentId;
@@ -94,6 +96,7 @@ public class TransactionModel extends Transaction {
     }
 
     public TransactionModel(Transaction transaction) {
+        this.parentTransaction = transaction;
         transactionTypeValue = transaction.getTransactionTypeValue();
         // populate TransactionModel's properties from Transaction instance
         setId(transaction.getId());
@@ -299,14 +302,6 @@ public class TransactionModel extends Transaction {
         this.refundRule = refundRule;
     }
 
-    public String getInternal() {
-        return internal;
-    }
-
-    public void setInternal(String internal) {
-        this.internal = internal;
-    }
-
     public String getDocumentId() {
         return documentId;
     }
@@ -495,4 +490,50 @@ public class TransactionModel extends Transaction {
     }
 
 
+    public List<Memo> getMemos() {
+        if(memos == null){
+            this.memos = new ArrayList<Memo>();
+        }
+        return memos;
+    }
+
+    public void setMemos(List<Memo> memos) {
+        this.memos = memos;
+    }
+
+    public Transaction getParentTransaction() {
+        return parentTransaction;
+    }
+
+    public void setParentTransaction(Transaction parentTransaction) {
+        this.parentTransaction = parentTransaction;
+    }
+
+    public String getTransactionDisplayType(){
+        if(parentTransaction == null){
+            return null;
+        }
+
+
+        if(parentTransaction instanceof Payment){
+            return "Credit (Payment)";
+        } else if(parentTransaction instanceof Deferment){
+            return "Credit (Deferment)";
+        } else if(parentTransaction instanceof Credit){
+            return "Credit";
+        } else if(parentTransaction instanceof Charge){
+            return "Debit (Charge)";
+        } else if(parentTransaction instanceof  Debit){
+            return "Debit";
+        }
+        return "Generic";
+    }
+
+    public String getGlEntryGenerated(){
+        return (parentTransaction.isGlEntryGenerated() ? "" : "Not ") + "Generated";
+    }
+
+    public String getInternal(){
+        return parentTransaction.isInternal().toString();
+    }
 }

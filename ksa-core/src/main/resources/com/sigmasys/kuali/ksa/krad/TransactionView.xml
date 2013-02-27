@@ -35,6 +35,7 @@
                                 </property>
                             </bean>
                             <ref bean="transactionDisplay"/>
+
                         </list>
                     </property>
                 </bean>
@@ -78,7 +79,7 @@
         <property name="items">
         <list>
             <bean parent="Uif-HorizontalFieldGroup" p:label="Filter Transactions">
-                <property name="items">
+                <!-- <property name="items">
                     <list>
                         <bean parent="Uif-VerticalBoxSubSection">
                             <property name="items">
@@ -100,14 +101,15 @@
                             </list>
                             </property>
                         </bean>
+
                     </list>
-                </property>
+                </property>-->
             </bean>
             <bean parent="Uif-TabGroup"><property name="items"><list>
             <bean parent="Uif-VerticalBoxSection" p:headerText="Roll-up">
                 <property name="items">
                     <list>
-                        <bean id="rollupList" parent="Uif-TableCollectionSection" p:layoutManager.numberOfColumns="7" p:width="85%">
+                        <bean id="rollupList" parent="Uif-TableCollectionSection" p:layoutManager.numberOfColumns="7">
                             <property name="title" value="Roll-Up"/>
                             <property name="readOnly" value="true"/>
                             <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.krad.model.TransactionModel"/>
@@ -169,7 +171,7 @@
     </bean>
     -->
 
-    <bean id="rollupTransactionList" parent="Uif-TableSubCollection-WithinSection" p:layoutManager.numberOfColumns="4">
+    <bean id="rollupTransactionList" parent="Uif-TableSubCollection-WithinSection" p:layoutManager.numberOfColumns="7">
         <property name="headerText" value="Transactions" />
         <property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.krad.model.TransactionModel" />
         <property name="propertyName" value="subTransactions" />
@@ -192,13 +194,83 @@
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-InputField" p:propertyName="effectiveDate" p:label="Effective"/>
-                <bean parent="Uif-InputField" p:propertyName="transactionType.description" p:label="Description"/>
-                <bean parent="Uif-InputField" p:propertyName="chargeAmount" p:label="Charges" p:width="15%" p:labelPlacement="TOP" p:style="align: right;"/>
-                <bean parent="Uif-InputField" p:propertyName="paymentAmount" p:label="Payments" p:width="15%" p:labelPlacement="TOP" p:align="right"/>
-                <bean parent="Uif-InputField" p:propertyName="defermentAmount" p:label="Deferments" p:width="15%" p:labelPlacement="TOP" p:align="right"/>
-                <bean parent="Uif-InputField" p:propertyName="allocatedAmount" p:label="Allocated" p:width="15%" p:labelPlacement="TOP" p:align="right"/>
-                <bean parent="Uif-InputField" p:propertyName="unallocatedAmount" p:label="Unallocated" p:width="15%" p:labelPlacement="TOP" p:align="right"/>
+                <bean parent="Uif-InputField" p:propertyName="effectiveDate" p:label="Effective" p:style="width: 10%;"/>
+                <bean parent="Uif-HorizontalFieldGroup" p:label="Description" p:style="width: 40%;">
+                    <property name="items">
+                    <list>
+                        <bean parent="Uif-LinkField" p:href="javascript:void(0)" p:onClickScript="showLightboxComponent('transactionDetailLightbox@{#lineSuffix}');" p:linkText="@{#line.transactionType.description}" />
+                        <bean id="transactionDetailLightbox" parent="Uif-VerticalBoxSection" p:layoutManager.orientation="VERTICAL">
+                            <property name="hidden" value="true"/>
+                            <property name="items">
+                                <list>
+                                    <bean parent="Uif-HeaderTwo" p:headerText="Transaction Details"/>
+                                    <ref bean="transactionDetail"/>
+                                </list>
+                            </property>
+                        </bean>
+
+                        <bean parent="Uif-ImageField" p:source="../images/memo.png" p:style="cursor:pointer; float: right;" p:altText="" p:title=""
+                              p:onClickScript="showLightboxComponent('flagLightbox');">
+                            <property name="toolTip">
+                                <bean parent="Uif-Tooltip" p:tooltipContent="Memo: (@{#line.memos.size()}) Click icon to view"/>
+                            </property>
+                        </bean>
+                        <bean parent="Uif-ImageField" p:source="../images/document.png" p:style="cursor:pointer; float: right;" p:altText="" p:title=""
+                              p:onClickScript="showLightboxComponent('flagLightbox');">
+                            <property name="toolTip">
+                                <bean parent="Uif-Tooltip" p:tooltipContent="Document: Click icon to view"/>
+                            </property>
+                        </bean>
+                        <bean parent="Uif-ImageField" p:source="../images/tag.png" p:style="cursor:pointer; float: right;" p:altText="" p:title=""
+                              p:onClickScript="showLightboxComponent('flagLightbox');">
+                            <property name="toolTip">
+                                <bean parent="Uif-Tooltip" p:tooltipContent="Tags: @{#line.tags}"/>
+                            </property>
+                        </bean>
+
+
+                    </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-InputField" p:propertyName="chargeAmount" p:label="Charges" p:style="align: right; width: 10%;"/>
+                <bean parent="Uif-InputField" p:propertyName="paymentAmount" p:label="Payments" p:align="right; width: 10%;"/>
+                <bean parent="Uif-InputField" p:propertyName="defermentAmount" p:label="Deferments" p:align="right; width: 10%;"/>
+                <bean parent="Uif-InputField" p:propertyName="allocatedAmount" p:label="Allocated" p:align="right; width: 10%;"/>
+                <bean parent="Uif-InputField" p:propertyName="unallocatedAmount" p:label="Unallocated" p:align="right; width: 10%;"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="transactionDetail" parent="Uif-VerticalBoxSection">
+        <property name="items">
+            <list>
+                <bean parent="Uif-HorizontalBoxGroup">
+                    <property name="items">
+                        <list>
+
+                            <bean parent="Uif-Disclosure-GridSection"><property name="items"><list>
+                                <bean parent="Uif-InputField" p:propertyName="transactionDisplayType" p:label="Transaction Type"/>
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.status" p:label="Status"/>
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.id" p:label="Transaction ID"/>
+
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.creationDate" p:label="Creation Date"/>
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.effectiveDate" p:label="Effective Date"/>
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.originationDate" p:label="Origination Date"/>
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.recognitionDate" p:label="Recognition Date"/>
+
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.amount" p:label="Amount"/>
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.currency.code" p:label="Currency"/>
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.nativeAmount" p:label="Native Amount"/>
+                            </list></property></bean>
+                            <bean parent="Uif-Disclosure-GridSection"><property name="items"><list>
+                                <bean parent="Uif-InputField" p:propertyName="glEntryGenerated" p:label="General Ledger Entry"/>
+                                <bean parent="Uif-InputField" p:propertyName="internal" p:label="Internal Transaction"/>
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.allocatedAmount" p:label="Allocated Amount"/>
+
+                            </list></property></bean>
+                        </list>
+                    </property>
+                </bean>
             </list>
         </property>
     </bean>
