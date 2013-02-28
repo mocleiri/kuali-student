@@ -23,14 +23,12 @@ Then /^the new Course Offering should contain only the selected delivery formats
   end
 end
 
-And /^I copy a course offering from an existing offering to exclude instructor information$/ do
-  @course_offering = make CourseOffering, :course => "CHEM132", :create_from_existing=>1
+And /^I copy a course offering from an existing offering$/ do
+  @course_offering = make CourseOffering, :term=> "201612", :course => "CHEM132", :create_from_existing=>1
   @course_offering.create
 end
 
 Then /^the new Course Offering should be displayed in the list of available offerings\.$/ do
-  @course_offering.manage
-  on ManageCourseOfferings do |page|
-    page.error_message_course_not_found.should_not be_present
-  end
+  @course_offering.search_by_coursecode
+  @course_offering.view_course_details
 end

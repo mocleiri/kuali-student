@@ -13,9 +13,8 @@ Background:
     And I create a Course Offering with selected Delivery Formats
     Then the new Course Offering should contain only the selected delivery formats
 
-  @pending
   Scenario: Copy existing Course Offering but exclude instructor information
-    When I designate a valid term and Catalog Course Code for lecture formats
-    And I copy a course offering from an existing offering to exclude instructor information
+    When I designate a valid term and Catalog Course Code
+    And I copy a course offering from an existing offering
     Then the new Course Offering should be displayed in the list of available offerings.
 

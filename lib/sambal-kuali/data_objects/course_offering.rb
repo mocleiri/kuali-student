@@ -107,9 +107,7 @@ class CourseOffering
       on CreateCourseOffering do |page|
         page.create_from_existing_offering_tab
         page.configure_course_offering_copy_toggle
-        page.select_exclude_instructor_checkbox
         page.create_from_existing_offering_copy_submit
-        #@course = /Course offering (.+) has been successfully created/.match(page.growl_message.text)[1]
       end
     else
       on CreateCourseOffering do  |page|
