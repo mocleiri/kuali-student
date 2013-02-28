@@ -212,7 +212,7 @@ public class Information extends AccountIdAware implements Identifiable {
     @Transient
     public String getDisplayValue() {
         DateFormat dateFormat = new SimpleDateFormat(Constants.DATE_FORMAT_US);
-        StringBuilder builder = new StringBuilder(dateFormat.format(getCreationDate()));
+        StringBuilder builder = new StringBuilder(dateFormat.format(getEffectiveDate()));
         String text = getText();
         if (StringUtils.isNotEmpty(text)) {
             builder.append(" ");

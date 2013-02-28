@@ -86,9 +86,26 @@ public class TransactionController extends GenericSearchController {
             List<Transaction> transactions = transactionService.getTransactions(userId);
             List<TransactionModel> models = new ArrayList<TransactionModel>(transactions.size());
             for (Transaction t : transactions) {
+
                 TransactionModel m = new TransactionModel(t);
                 m.setMemos(informationService.getMemos(t.getId()));
                 models.add(m);
+
+                // Add appropriate Alerts
+                for(Alert a : form.getAlerts()){
+                    Transaction alertTransaction = a.getTransaction();
+                    if(alertTransaction != null && alertTransaction.getId().equals(t.getId())){
+                        m.addAlert(a);
+                    }
+                }
+
+                // Add appropriate flags
+                for(Flag f : form.getFlags()){
+                    Transaction flagTransaction = f.getTransaction();
+                    if(flagTransaction != null && flagTransaction.getId().equals(t.getId())){
+                        m.addFlag(f);
+                    }
+                }
             }
 
             this.populateRollups(form, models);

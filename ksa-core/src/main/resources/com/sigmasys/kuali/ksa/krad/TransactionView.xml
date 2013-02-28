@@ -178,6 +178,7 @@
         <property name="layoutManager.sequencePropertyName" value="id" />
         <property name="layoutManager.richTable.render" value="true" />
         <property name="layoutManager.renderSequenceField" value="false"/>
+        <property name="style" value="width: 100%;"/>
         <!--<property name="style" value="background: #CCC;"/>-->
         <!--<property name="disclosure.collapseImageSrc" value="../images/alert.png"/>-->
         <!--<property name="layoutManager.columnCalculations">
@@ -222,11 +223,22 @@
                             </property>
                         </bean>
                         <bean parent="Uif-ImageField" p:source="../images/tag.png" p:style="cursor:pointer; float: right;" p:altText="" p:title=""
-                              p:onClickScript="showLightboxComponent('flagLightbox');">
+                              p:onClickScript="showLightboxComponent('tagLightbox@{#lineSuffix}');" p:render="@{#line.tags.size() > 0}">
                             <property name="toolTip">
-                                <bean parent="Uif-Tooltip" p:tooltipContent="Tags: @{#line.tags}"/>
+                                <bean parent="Uif-Tooltip" p:tooltipContent="Tags: @{#line.tagList}"/>
                             </property>
                         </bean>
+                        <bean id="tagLightbox" parent="Uif-VerticalBoxSection" p:layoutManager.orientation="VERTICAL">
+                            <property name="hidden" value="true"/>
+                            <property name="items">
+                                <list>
+                                    <bean parent="Uif-HeaderTwo" p:headerText="Account and Transaction Tags"/>
+                                    <ref bean="tagGroup"/>
+
+                                </list>
+                            </property>
+                        </bean>
+
 
 
                     </list>
@@ -266,11 +278,47 @@
                                 <bean parent="Uif-InputField" p:propertyName="glEntryGenerated" p:label="General Ledger Entry"/>
                                 <bean parent="Uif-InputField" p:propertyName="internal" p:label="Internal Transaction"/>
                                 <bean parent="Uif-InputField" p:propertyName="parentTransaction.allocatedAmount" p:label="Allocated Amount"/>
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.lockedAllocatedAmount" p:label="Locked Allocated"/>
 
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.transactionType.description" p:label="Statement Text"/>
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.rollup.description" p:label="Roll-up"/>
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.generalLedgerType.glAccountId" p:label="General Ledger Type"/>
+                                <bean parent="Uif-InputField" p:propertyName="glOverridden" p:label="Override GL Codes"/>
+                                <bean parent="Uif-InputField" p:propertyName="parentTransaction.transactionType.id.id" p:label="@{#line.transactionDisplayType} Type"/>
                             </list></property></bean>
                         </list>
                     </property>
                 </bean>
+                <ref bean="tagGroup"/>
+                <bean parent="Uif-Disclosure-VerticalBoxSection" >
+                    <property name="headerText" value="Memos"/>
+                    <!-- disclosure fixed in Rice 2.2.1, disabling for now: https://jira.kuali.org/browse/KULRICE-8938 -->
+                    <!--<property name="disclosure.defaultOpen" value="false" />-->
+                    <property name="items">
+                        <list>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Disclosure-VerticalBoxSection" >
+                    <property name="headerText" value="Flags"/>
+                    <!--<property name="disclosure.defaultOpen" value="false" />-->
+                    <property name="items">
+                        <list>
+                            <ref bean="flagLightboxTable"/>
+                        </list>
+                    </property>
+                </bean>
+                <bean parent="Uif-Disclosure-VerticalBoxSection" >
+                    <property name="headerText" value="Alerts"/>
+                    <!--<property name="disclosure.defaultOpen" value="false" />-->
+                    <property name="items">
+                        <list>
+                            <ref bean="alertLightboxTable"/>
+                        </list>
+                    </property>
+                </bean>
+
+
             </list>
         </property>
     </bean>

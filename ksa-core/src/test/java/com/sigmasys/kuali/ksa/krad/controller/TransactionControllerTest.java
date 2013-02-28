@@ -4,10 +4,7 @@ package com.sigmasys.kuali.ksa.krad.controller;
 import com.sigmasys.kuali.ksa.krad.form.TransactionForm;
 import com.sigmasys.kuali.ksa.krad.form.TransactionTypeForm;
 import com.sigmasys.kuali.ksa.krad.model.TransactionModel;
-import com.sigmasys.kuali.ksa.model.GeneralLedgerType;
-import com.sigmasys.kuali.ksa.model.Transaction;
-import com.sigmasys.kuali.ksa.model.TransactionType;
-import com.sigmasys.kuali.ksa.model.TransactionTypeId;
+import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.service.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,6 +34,9 @@ public class TransactionControllerTest extends AbstractServiceTest {
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private InformationService informationService;
 
     private TransactionForm form;
 
@@ -108,4 +108,54 @@ public class TransactionControllerTest extends AbstractServiceTest {
 
     }
 
+    @Test
+    public void getInformations() throws Exception {
+        // Passing request parameters needed to perform get() method
+        // Passing request parameters needed to perform get() method
+        MockHttpServletRequest request = getRequest();
+
+        request.setParameter("userId", userId);
+        request.setParameter("pageId", "ViewTransactions");
+
+        List<Alert> alerts = informationService.getAlerts(userId);
+        List<Flag> flags = informationService.getFlags(userId);
+        //List<Memo> memos = informationService.getMemos(userId);
+        ModelAndView modelAndView = transactionController.get(form, request);
+
+        // Checking assertions
+        Assert.notNull(modelAndView);
+        Assert.notNull(form);
+
+        List<Alert> formAlerts = form.getAlerts();
+        Assert.notNull(alerts);
+        Assert.notNull(formAlerts);
+        for(Alert a : alerts){
+            boolean found = false;
+            for(Alert formA : formAlerts){
+                if(formA.getText().equals(a.getText())){
+                    found = true;
+                    break;
+                }
+
+            }
+            Assert.isTrue(found, a.getText() + " not found in form Alerts");
+        }
+
+        List<Flag> formFlags = form.getFlags();
+        Assert.notNull(flags);
+        Assert.notNull(formFlags);
+        for(Flag f : flags){
+            boolean found = false;
+            for(Flag formF : formFlags){
+                if(formF.getText().equals(f.getText())){
+                    found = true;
+                    break;
+                }
+
+            }
+            Assert.isTrue(found, f.getText() + " not found in form Alerts");
+        }
+
+
+    }
 }

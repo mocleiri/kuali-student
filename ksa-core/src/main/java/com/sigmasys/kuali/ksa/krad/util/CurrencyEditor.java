@@ -93,12 +93,11 @@ public class CurrencyEditor extends PropertyEditorSupport implements Serializabl
 
     /**
      * Converts the string to a
-     * <code>org.kuali.rice.core.api.util.type.KualiDecimal</code> object using the
-     * local currency format.
+     * <code>java.util.BigDecimal</code> object using the local currency format.
      *
-     * @param text
-     *            the text from the UI to convert
-     * @return the <code>org.kuali.rice.core.api.util.type.KualiDecimal</code>
+     * @param text   the text from the UI to convert
+     *
+     * @return the <code>java.util.BigDecimal</code>
      *         object to be set on the bean
      */
     protected Object convertToObject(String text) {

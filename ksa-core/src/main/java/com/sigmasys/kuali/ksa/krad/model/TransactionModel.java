@@ -48,7 +48,12 @@ public class TransactionModel extends Transaction {
     private String refundRule;
 
     private List<Memo> memos;
+
     private List<Tag> tags;
+    private String      tagList;
+
+    private List<Alert> alerts;
+    private List<Flag>  flags;
 
     // Document id as a string
     private String documentId;
@@ -89,8 +94,6 @@ public class TransactionModel extends Transaction {
     private String entryGenerated;
 
     private String allocationLocked;
-
-
     // Constructor
     public TransactionModel() {
     }
@@ -98,6 +101,9 @@ public class TransactionModel extends Transaction {
     public TransactionModel(Transaction transaction) {
         this.parentTransaction = transaction;
         transactionTypeValue = transaction.getTransactionTypeValue();
+
+        this.setTags(transaction.getTags());
+
         // populate TransactionModel's properties from Transaction instance
         setId(transaction.getId());
         setAccountId(transaction.getAccountId());
@@ -536,4 +542,69 @@ public class TransactionModel extends Transaction {
     public String getInternal(){
         return parentTransaction.isInternal().toString();
     }
+
+    public String getGlOverridden(){
+        return parentTransaction.isGlOverridden().toString();
+    }
+
+    public String getTagList(){
+        return tagList;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+
+        if(tags == null || tags.size() == 0){
+            this.tagList = "None";
+            return;
+        }
+
+        StringBuilder tagList = new StringBuilder();
+        boolean first = true;
+        for(Tag tag : tags){
+            if(!first){
+                tagList.append(", ");
+            } else {
+                first = false;
+            }
+            tagList.append(tag.getCode());
+        }
+
+        this.tagList = tagList.toString();
+    }
+
+    public List<Alert> getAlerts() {
+        return alerts;
+    }
+
+    public void setAlerts(List<Alert> alerts) {
+        this.alerts = alerts;
+    }
+
+    public void addAlert(Alert a){
+        if(this.alerts == null){
+            this.alerts = new ArrayList<Alert>();
+        }
+        this.alerts.add(a);
+    }
+
+    public List<Flag> getFlags() {
+        return flags;
+    }
+
+    public void setFlags(List<Flag> flags) {
+        this.flags = flags;
+    }
+
+    public void addFlag(Flag f){
+        if(this.flags == null){
+            this.flags = new ArrayList<Flag>();
+        }
+        this.flags.add(f);
+    }
+
 }

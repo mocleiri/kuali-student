@@ -364,7 +364,7 @@
         </property>
     </bean>
 
-    <bean id="tagGroup" parent="Uif-Disclosure-VerticalBoxSection" p:style="text-decoration:underline">
+    <bean id="tagGroup" parent="Uif-Disclosure-VerticalBoxSection" >
         <property name="headerText" value="Tags"/>
         <property name="items">
             <list>
