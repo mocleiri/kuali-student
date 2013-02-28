@@ -118,12 +118,12 @@ public interface ReportService {
      * @return XML representation of an IRS 1098T form.
      */
     String getIrs1098TReportByYear(String accountId, int year);
-    
+
     /**
-     * Returns a list of previously generated and saved IRS Forms 1098T for a particular account. 
-     * 
-     * @param accountId	ID of an Account for which to return its saved IRS Forms 1098T.
-     * @return			A <code>List</code> of previously generated and saved IRS Forms 1098T.
+     * Returns a list of previously generated and saved IRS Forms 1098T for a particular account.
+     *
+     * @param accountId ID of an Account for which to return its saved IRS Forms 1098T.
+     * @return A <code>List</code> of previously generated and saved IRS Forms 1098T.
      */
     List<com.sigmasys.kuali.ksa.model.Irs1098T> getIrs1098TReportsForAccount(String accountId);
 
@@ -196,13 +196,12 @@ public interface ReportService {
      * @see com.sigmasys.kuali.ksa.jaxb.TransactionReceipt
      */
     String generateTransactionReceipt(Long transactionId);
-    
+
     /**
-     * Converts an IRS form 1098T to XML
-     * 
-     * @param form1098T	Form 1098T.
-     * @return	XML representation of the form.
+     * Converts an IRS 1098T JPA entity to XML
+     *
+     * @param irs1098TId Irs1098T JPA entity ID
+     * @return XML representation of the form.
      */
-    @WebMethod(exclude = true)
-    String convertForm1098TToXml(com.sigmasys.kuali.ksa.model.Irs1098T form1098T);
+    String convertIrs1098TToXml(Long irs1098TId);
 }
