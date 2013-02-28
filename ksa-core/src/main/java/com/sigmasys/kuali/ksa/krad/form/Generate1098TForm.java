@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.model.Irs1098T;
 
 /**
  * This class serves as a form behind the "Generate 1098T" screen. 
@@ -23,6 +24,11 @@ public class Generate1098TForm extends AbstractViewModel {
 	 * A List of reporting years. Multiple selection is allowed. 
 	 */
 	private List<String> reportYears;
+	
+	/**
+	 * Generated Forms 1098T for the search by account.
+	 */
+	private List<Irs1098T> generatedForms1098T;
 	
 
 	/**
@@ -67,5 +73,13 @@ public class Generate1098TForm extends AbstractViewModel {
 
 	public void setReportYears(List<String> reportYears) {
 		this.reportYears = reportYears;
+	}
+
+	public List<Irs1098T> getGeneratedForms1098T() {
+		return generatedForms1098T;
+	}
+
+	public void setGeneratedForms1098T(List<Irs1098T> generatedForms1098T) {
+		this.generatedForms1098T = generatedForms1098T;
 	}
 }
