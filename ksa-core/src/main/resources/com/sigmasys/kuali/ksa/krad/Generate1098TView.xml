@@ -43,13 +43,14 @@
         </property>
 		<property name="items">
             <list merge="true">
-				<!-- The main page -->
+				<!-- Generate 1098T page -->
 				<bean parent="Uif-Page" p:id="Generate1098TViewPage" p:title="Generate 1098T">
 					<property name="headerText" value="@{account.defaultPersonName.displayValue}"/>
 					<property name="items">
                         <list>
 							<ref bean="biographicInformationSection"/>
 							<ref bean="generateReportSection"/>
+							<ref bean="displayGenerated1098TFormsSection"/>
 						</list>
 					</property>
 				</bean>
@@ -58,8 +59,15 @@
 		<property name="formClass" value="com.sigmasys.kuali.ksa.krad.form.Generate1098TForm"/>
 	</bean>
 	
+	
+	<!-- 
+	
+	*********************  Display Demographic Info and Generate 1098T Page    ***********************
+	
+	-->
+	
 	<!-- Account Biographic Information section -->
-	<bean id="biographicInformationSection" parent="Uif-VerticalBoxGroup" p:title="Biographic Information">
+	<bean id="biographicInformationSection" parent="Uif-VerticalBoxGroup" p:title="Biographic Information" p:width="85%">
         <property name="cssClasses">
             <list merge="true">
                 <value>ksa-group-border</value>
@@ -170,5 +178,57 @@
 			</list>
 		</property>
 	</bean>
+	
+	
+	<!-- Display Existing 1098T forms section -->
+	<bean id="displayGenerated1098TFormsSection" parent="Uif-VerticalBoxSection" p:title="Generated IRS Forms 1098T for @{account.defaultPersonName.displayValue}">
+		<property name="headerText" value="Saved 1098T"/>
+		<property name="items">
+			<list>
+				<bean parent="Uif-SecondaryActionButton-Small" p:actionLabel="Display Saved Documents" p:methodToCall="viewGenerated1098TForms"
+					p:onClickScript="writeHiddenToForm('userId', '@{account.id}');"/>
+				
+				<!-- Saved 1098T table -->
+				<bean parent="Uif-Disclosure-TableCollectionSection"
+					  p:layoutManager.numberOfColumns="3"
+					  p:disclosure.render="false"
+					  p:title="Generated IRS Forms 1098T"
+					  p:instructionalText="Generated IRS Forms 1098T for @{account.defaultPersonName.displayValue}."
+					  p:width="85%">
+					<property name="readOnly" value="true"/>
+					<property name="collectionObjectClass" value="com.sigmasys.kuali.ksa.model.Irs1098T"/>
+					<property name="propertyName" value="generatedForms1098T"/>
+					<property name="layoutManager.generateAutoSequence" value="false" />
+					<property name="layoutManager.renderSequenceField" value="false"/>
+					<property name="layoutManager.richTable.render" value="false"/>
+					<property name="layoutManager.applyDefaultCellWidths" value="false"/>
+					<property name="layoutManager.richTable.disableTableSort" value="false"/>
+					<property name="items">
+						<list>
+							<bean parent="Uif-InputField" p:label="Creation Date"
+								  p:propertyName="creationDate" p:width="10%">
+								<property name="control">
+									<bean parent="Uif-TextControl" p:size="50" p:maxLength="20"/>
+								</property>
+							</bean>
+							<bean parent="Uif-InputField" p:label="Report Year"
+								  p:propertyName="formYear"
+								  p:width="30%">
+								<property name="control">
+									<bean parent="Uif-TextControl" p:size="15" p:maxLength="50"/>
+								</property>
+							</bean>
+							<!-- Actions -->
+							<bean parent="Uif-LinkField" p:linkText="View" p:target="_self"
+								  p:align="center" p:width="10%"
+								  p:href="generate1098T?methodToCall=viewGenerated1098TForm&amp;viewId=Generate1098TView&amp;userId=@{account.id}&amp;reportYear=@{#line.formYear}&amp;form1098TId=@{#line.id}"/>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	
 	
 </beans>
