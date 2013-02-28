@@ -8,12 +8,12 @@ Background:
   Given I am logged in as admin
   And term contains COs in Draft state
 
-  Scenario: Approve single Course Offering via Subject Code display toolbar (CANCEL action)
-    When I select a course offering containing at least one activity in Draft state
-    And I click the "Approve" toolbar button
-    And I cancel the action
-    Then the list of courses remains unchanged
-    And Draft activity offerings remain in Draft state
+Scenario: Approve single Course Offering via Subject Code display toolbar (CANCEL action)
+  When I select a course offering containing at least one activity in Draft state
+  And I click the "Approve" toolbar button
+  And I cancel the action
+  Then the list of courses remains unchanged
+  And Draft activity offerings remain in Draft state
 
 Scenario: Approve single Course Offering via Subject Code display toolbar
   When I select a course offering containing at least one activity in Draft state
