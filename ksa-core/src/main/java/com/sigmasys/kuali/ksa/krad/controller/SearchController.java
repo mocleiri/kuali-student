@@ -214,8 +214,6 @@ public class SearchController extends GenericSearchController {
                 transactionModel.setRefundRule(payment.getRefundRule());
             }
 
-            transactionModel.setInternal(t.isInternal() != null ? t.isInternal().toString() : Boolean.FALSE.toString());
-
             transactionModel.setDocumentId(t.getDocument() != null ? t.getDocument().getId().toString() : null);
 
             transactionModel.setGeneralLedgerTypeId(t.getGeneralLedgerType() != null ? t.getGeneralLedgerType().getId().toString() : null);
