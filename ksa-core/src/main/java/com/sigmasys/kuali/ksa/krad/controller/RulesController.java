@@ -3,6 +3,7 @@ package com.sigmasys.kuali.ksa.krad.controller;
 import com.sigmasys.kuali.ksa.exception.InvalidRulesException;
 import com.sigmasys.kuali.ksa.krad.form.RulesForm;
 import com.sigmasys.kuali.ksa.model.rule.Rule;
+import com.sigmasys.kuali.ksa.model.rule.RuleType;
 import com.sigmasys.kuali.ksa.service.brm.BrmPersistenceService;
 import com.sigmasys.kuali.ksa.service.brm.BrmService;
 import org.apache.commons.lang.StringUtils;
@@ -10,6 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +26,7 @@ import java.util.List;
  * @author Michael Ivanov
  */
 @Controller
+@Transactional
 @RequestMapping(value = "/rulesView")
 public class RulesController extends GenericSearchController {
 
@@ -78,17 +81,13 @@ public class RulesController extends GenericSearchController {
     @RequestMapping(method = RequestMethod.POST, params = "methodToCall=update")
     public ModelAndView update(@ModelAttribute("KualiForm") RulesForm form) {
 
-        // TODO
         Rule rule = new Rule();
 
         copyFormToRule(form, rule);
 
-        // Validating the rule set content
-        //ResourceType resourceType = ruleSetId.equals(brmService.getDslId()) ? ResourceType.DSL : ResourceType.DSLR;
-
         try {
-            //brmService.reloadRuleSet(ruleSetId, resourceType);
             brmPersistenceService.persistRule(rule);
+            brmService.refresh();
             form.setEditStatusMessage("Rule has been updated");
         } catch (InvalidRulesException ire) {
             form.setEditStatusMessage(ire.getMessage());
@@ -168,8 +167,8 @@ public class RulesController extends GenericSearchController {
             copyFormToRule(form, rule);
 
             try {
-                //brmService.validateRuleSet(ruleSet);
                 brmPersistenceService.persistRule(rule);
+                brmService.refresh();
                 form.setAddStatusMessage("A new Rule has been created");
             } catch (InvalidRulesException ire) {
                 form.setAddStatusMessage(ire.getMessage());
@@ -199,9 +198,11 @@ public class RulesController extends GenericSearchController {
         rule.setPriority(form.getRulePriority());
         rule.setLhs(form.getRuleLhs());
         rule.setRhs(form.getRuleRhs());
-        // TODO: get the rule type
-        //rule.setType();
+        RuleType ruleType = brmPersistenceService.getRuleType(form.getRuleType());
+        if (ruleType == null) {
+            throw new IllegalStateException("Rule Type with name '" + form.getRuleType() + "' does not exist");
+        }
+        rule.setType(ruleType);
     }
-
 
 }
