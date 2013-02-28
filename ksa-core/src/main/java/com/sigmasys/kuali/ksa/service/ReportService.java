@@ -7,11 +7,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebService;
 
 import com.sigmasys.kuali.ksa.annotation.Url;
+import com.sigmasys.kuali.ksa.jaxb.*;
 import com.sigmasys.kuali.ksa.model.Constants;
-import com.sigmasys.kuali.ksa.jaxb.AccountReport;
-import com.sigmasys.kuali.ksa.jaxb.AgedBalanceReport;
-import com.sigmasys.kuali.ksa.jaxb.FailedTransactionsReport;
-import com.sigmasys.kuali.ksa.jaxb.Irs1098T;
 
 /**
  * This interface represents a collection of useful KSA reporting methods to
@@ -121,6 +118,14 @@ public interface ReportService {
      * @return XML representation of an IRS 1098T form.
      */
     String getIrs1098TReportByYear(String accountId, int year);
+    
+    /**
+     * Returns a list of previously generated and saved IRS Forms 1098T for a particular account. 
+     * 
+     * @param accountId	ID of an Account for which to return its saved IRS Forms 1098T.
+     * @return			A <code>List</code> of previously generated and saved IRS Forms 1098T.
+     */
+    List<com.sigmasys.kuali.ksa.model.Irs1098T> getIrs1098TReportsForAccount(String accountId);
 
     /**
      * Produce an XML aged balance report for the accounts in the list. If <code>ageAccounts</code> is <code>true</code>, then each
@@ -191,4 +196,13 @@ public interface ReportService {
      * @see com.sigmasys.kuali.ksa.jaxb.TransactionReceipt
      */
     String generateTransactionReceipt(Long transactionId);
+    
+    /**
+     * Converts an IRS form 1098T to XML
+     * 
+     * @param form1098T	Form 1098T.
+     * @return	XML representation of the form.
+     */
+    @WebMethod(exclude = true)
+    String convertForm1098TToXml(com.sigmasys.kuali.ksa.model.Irs1098T form1098T);
 }

@@ -1,6 +1,5 @@
 package com.sigmasys.kuali.ksa.service.impl;
 
-import static com.sigmasys.kuali.ksa.jaxb.FailedTransactionsReport.*;
 import static com.sigmasys.kuali.ksa.util.TransactionUtils.getFormattedAmount;
 
 import java.lang.reflect.Method;
@@ -14,10 +13,6 @@ import javax.persistence.Query;
 import javax.persistence.TemporalType;
 import javax.xml.datatype.XMLGregorianCalendar;
 
-import com.sigmasys.kuali.ksa.jaxb.Irs1098T;
-import com.sigmasys.kuali.ksa.jaxb.PostalAddress;
-import com.sigmasys.kuali.ksa.model.*;
-import com.sigmasys.kuali.ksa.model.Account;
 import org.aopalliance.aop.Advice;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -30,12 +25,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sigmasys.kuali.ksa.exception.*;
-import com.sigmasys.kuali.ksa.service.*;
+import com.sigmasys.kuali.ksa.exception.TransactionNotFoundException;
+import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.jaxb.*;
 import com.sigmasys.kuali.ksa.jaxb.AgedBalanceReport.AgedAccountDetail;
+import com.sigmasys.kuali.ksa.jaxb.FailedTransactionsReport.FailureGroup;
 import com.sigmasys.kuali.ksa.jaxb.GeneralLedgerReport.GeneralLedgerReportEntry;
+import com.sigmasys.kuali.ksa.jaxb.Irs1098T;
 import com.sigmasys.kuali.ksa.jaxb.PersonName;
+import com.sigmasys.kuali.ksa.jaxb.PostalAddress;
+import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.model.Account;
+import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.util.*;
 
 /**
@@ -217,15 +218,39 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         com.sigmasys.kuali.ksa.model.Irs1098T newReport = create1098TReport(accountId, startDate, endDate,
                 numberOfDisplayedDigits, isTransient);
 
-        AccountProtectedInfo accountInfo = accountService.getAccountProtectedInfo(accountId);
+        return convertForm1098TToXml(newReport);
+        
+//        AccountProtectedInfo accountInfo = accountService.getAccountProtectedInfo(accountId);
+//        if (accountInfo == null) {
+//            String errMsg = "Cannot find Account Protected Information for Account ID = " + accountId;
+//            logger.error(errMsg);
+//            throw new IllegalStateException(errMsg);
+//        }
+//
+//        return toXml(accountId, accountInfo.getTaxReference(), newReport);
+    }
+
+    /**
+     * Converts an IRS form 1098T to XML
+     * 
+     * @param form1098T	Form 1098T.
+     * @return	XML representation of the form.
+     */
+    @WebMethod(exclude = true)
+	@Override
+	@Transactional
+	public String convertForm1098TToXml(com.sigmasys.kuali.ksa.model.Irs1098T form1098t) {
+		String accountId = form1098t.getAccount().getId();
+		AccountProtectedInfo accountInfo = accountService.getAccountProtectedInfo(accountId);
+		
         if (accountInfo == null) {
             String errMsg = "Cannot find Account Protected Information for Account ID = " + accountId;
             logger.error(errMsg);
             throw new IllegalStateException(errMsg);
         }
-
-        return toXml(accountId, accountInfo.getTaxReference(), newReport);
-    }
+		
+		return toXml(accountId, accountInfo.getTaxReference(), form1098t);
+	}
 
     /**
      * Converts the internal representation of IRS 1098T report (Irs1098T JPA entity) into XML format.
@@ -594,6 +619,21 @@ public class ReportServiceImpl extends GenericPersistenceService implements Repo
         }
         return false;
     }
+
+    /**
+     * Returns a list of previously generated and saved IRS Forms 1098T for a particular account. 
+     * 
+     * @param accountId	ID of an Account for which to return its saved IRS Forms 1098T.
+     * @return A <code>List</code> of previously generated and saved IRS Forms 1098T.
+     */
+	@Override
+	public List<com.sigmasys.kuali.ksa.model.Irs1098T> getIrs1098TReportsForAccount(String accountId) {
+		// Create a query to retrieve all Irs1098T object by Account:
+		String sql = "select f from Irs1098T f where f.account.id = :accountId";
+		Query query = em.createQuery(sql).setParameter("accountId", accountId);
+		
+		return query.getResultList();
+	}
 
     /**
      * Returns an XML representation of a complete year federal 1098T form. Note that many of the parameters for producing a correct 1098T
