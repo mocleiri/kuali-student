@@ -196,7 +196,7 @@
                                               p:href="quickView?methodToCall=get&amp;viewId=QuickView&amp;userId=@{#line.id}"/>
 										<bean parent="Uif-LinkField" p:linkText="Generate 1098T" p:target="_self"
                                               p:align="center" p:width="10%"
-                                              p:href="generate1098T?methodToCall=displayGenerate1098TForm&amp;viewId=Generate1098TView&amp;userId=@{#line.id}"/>
+                                              p:href="generate1098T?methodToCall=display1098TForm&amp;viewId=Generate1098TView&amp;userId=@{#line.id}"/>
                                     </list>
                                 </property>
                             </bean>

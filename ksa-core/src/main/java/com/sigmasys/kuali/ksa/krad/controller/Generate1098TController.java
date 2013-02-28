@@ -64,7 +64,7 @@ public class Generate1098TController extends DownloadController {
      * @param userId ID of the Account displayed.
      * @return ModelAndView to be displayed.
      */
-    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=displayGenerate1098TForm")
+    @RequestMapping(method = RequestMethod.GET, params = "methodToCall=display1098TForm")
     public ModelAndView displayGenerate1098TForm(@ModelAttribute("KualiForm") Generate1098TForm form, @RequestParam("userId") String userId) {
         // Initialize the form if it hasn't been initialized yet:
 //    	initializeForm(form, userId);
