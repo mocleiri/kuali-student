@@ -2,6 +2,7 @@ package com.sigmasys.kuali.ksa.service.brm;
 
 import com.sigmasys.kuali.ksa.model.rule.Rule;
 import com.sigmasys.kuali.ksa.model.rule.RuleSet;
+import com.sigmasys.kuali.ksa.model.rule.RuleType;
 
 import java.util.List;
 
@@ -87,15 +88,31 @@ public interface BrmPersistenceService {
 
     /**
      * Retrieves all existing rule names
+     *
      * @return a list of rule names
      */
     List<String> getRuleNames();
 
     /**
      * Retrieves rule names for the specified rule set.
+     *
      * @param ruleSetName Rule Set name
      * @return a list of rule names
      */
     List<String> getRuleNames(String ruleSetName);
+
+    /**
+     * Retrieves all existing rule types.
+     *
+     * @return a list of rule types.
+     */
+    List<RuleType> getRuleTypes();
+
+    /**
+     * Retrieves a rule type from the persistence store by name
+     *
+     * @return a RuleType instance
+     */
+    RuleType getRuleType(String ruleTypeName);
 
 }

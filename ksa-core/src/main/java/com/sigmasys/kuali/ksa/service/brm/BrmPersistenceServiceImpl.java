@@ -1,8 +1,11 @@
 package com.sigmasys.kuali.ksa.service.brm;
 
 import com.sigmasys.kuali.ksa.exception.InvalidRulesException;
+import com.sigmasys.kuali.ksa.model.Pair;
+import com.sigmasys.kuali.ksa.model.SortOrder;
 import com.sigmasys.kuali.ksa.model.rule.Rule;
 import com.sigmasys.kuali.ksa.model.rule.RuleSet;
+import com.sigmasys.kuali.ksa.model.rule.RuleType;
 import com.sigmasys.kuali.ksa.service.impl.GenericPersistenceService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
@@ -51,9 +54,9 @@ public class BrmPersistenceServiceImpl extends GenericPersistenceService impleme
 
     private RuleSet getRuleSet(String property, Object value) {
         Query query = em.createQuery("select rs from RuleSet rs " +
-                "left outer join fetch rs.type t " +
-                "left outer join fetch rs.rules r " +
-                "where rs." + property + " = :value");
+                " left outer join fetch rs.type t " +
+                " left outer join fetch rs.rules r " +
+                " where rs." + property + " = :value");
         query.setParameter("value", value);
         List<RuleSet> ruleSets = query.getResultList();
         return CollectionUtils.isNotEmpty(ruleSets) ? ruleSets.get(0) : null;
@@ -61,8 +64,8 @@ public class BrmPersistenceServiceImpl extends GenericPersistenceService impleme
 
     private Rule getRule(String property, Object value) {
         Query query = em.createQuery("select r from Rule r " +
-                "left outer join fetch r.type t " +
-                "where r." + property + " = :value");
+                " left outer join fetch r.type t " +
+                " where r." + property + " = :value");
         query.setParameter("value", value);
         List<Rule> rules = query.getResultList();
         return CollectionUtils.isNotEmpty(rules) ? rules.get(0) : null;
@@ -119,7 +122,10 @@ public class BrmPersistenceServiceImpl extends GenericPersistenceService impleme
      */
     @Override
     public List<RuleSet> getRuleSets() {
-        return getEntities(RuleSet.class);
+        Query query = em.createQuery("select rs from RuleSet rs " +
+                " left outer join fetch rs.type t " +
+                " order by rs.name asc");
+        return query.getResultList();
     }
 
     /**
@@ -237,5 +243,27 @@ public class BrmPersistenceServiceImpl extends GenericPersistenceService impleme
         }
         return Collections.emptyList();
     }
+
+    /**
+     * Retrieves all existing rule types.
+     *
+     * @return a list of rule types.
+     */
+    public List<RuleType> getRuleTypes() {
+        return getEntities(RuleType.class, new Pair<String, SortOrder>("name", SortOrder.ASC));
+    }
+
+    /**
+     * Retrieves a rule type from the persistence store by name
+     *
+     * @return a RuleType instance
+     */
+    public RuleType getRuleType(String ruleTypeName) {
+        Query query = em.createQuery("select rt from RuleType rt where rt.name = :name");
+        query.setParameter("name", ruleTypeName);
+        List<RuleType> ruleTypes = query.getResultList();
+        return CollectionUtils.isNotEmpty(ruleTypes) ? ruleTypes.get(0) : null;
+    }
+
 
 }
