@@ -1,13 +1,11 @@
 package com.sigmasys.kuali.ksa.krad.controller;
 
 import java.io.PrintWriter;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sigmasys.kuali.ksa.util.ErrorUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,11 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.krad.form.Generate1098TForm;
-import com.sigmasys.kuali.ksa.model.Account;
-import com.sigmasys.kuali.ksa.model.PersonName;
-import com.sigmasys.kuali.ksa.service.AccountService;
-import com.sigmasys.kuali.ksa.service.ReportService;
+import com.sigmasys.kuali.ksa.model.*;
+import com.sigmasys.kuali.ksa.service.*;
 import com.sigmasys.kuali.ksa.util.CalendarUtils;
+import com.sigmasys.kuali.ksa.util.ErrorUtils;
 
 
 @Controller
@@ -43,6 +40,9 @@ public class Generate1098TController extends DownloadController {
 
     @Autowired
     private AccountService accountService;
+    
+    @Autowired
+    private PersistenceService persistenceService;
 
 
     /**
@@ -70,7 +70,7 @@ public class Generate1098TController extends DownloadController {
     @RequestMapping(method = RequestMethod.GET, params = "methodToCall=displayGenerate1098TForm")
     public ModelAndView displayGenerate1098TForm(@ModelAttribute("KualiForm") Generate1098TForm form, @RequestParam("userId") String userId) {
         // Initialize the form if it hasn't been initialized yet:
-        initializeForm(form, userId);
+//    	initializeForm(form, userId);
 
         return getUIFModelAndView(form);
     }
@@ -112,6 +112,75 @@ public class Generate1098TController extends DownloadController {
 
         return null;
     }
+    
+    /**
+     * Called to display previously generated and saved to the database forms 1098T for the current account.
+     * 
+     * @param form			The backing form.
+     * @return				ModelAndView.
+     * @throws Exception
+     */
+    @RequestMapping(method = RequestMethod.POST, params = "methodToCall=viewGenerated1098TForms")
+    public ModelAndView viewGenerated1098TForms(@ModelAttribute("KualiForm") Generate1098TForm form) throws Exception {
+    	// Get all previously generated forms 1098T for the current account:
+    	String accountId = form.getAccount().getId();
+    	List<Irs1098T> allForms = reportService.getIrs1098TReportsForAccount(accountId);
+    	
+    	// Set the 1098T forms on the form object:
+    	form.setGeneratedForms1098T(allForms);
+    	
+    	return getUIFModelAndView(form);
+    }
+    
+    /**
+     * Invoked to display a single previously generated IRS Form 1098T. 
+     * Starts download of the saved form's content or displays an error on a next page. 
+     * 
+     * @param form		The backing form. 
+     * @param response	HTTP response object.
+     * @param xml		Content of a 1098T form.
+     * @return			<code>null</code> always.
+     * @throws Exception If there are any errors.
+     */
+    @RequestMapping(method = {RequestMethod.POST, RequestMethod.GET}, params = "methodToCall=viewGenerated1098TForm")
+    public ModelAndView viewGenerated1098TForm(@ModelAttribute("KualiForm") Generate1098TForm form, HttpServletResponse response,
+                                          @RequestParam("form1098TId") Long form1098TId, @RequestParam("reportYear") String reportYear) throws Exception {
+    	// Obtain an instance of the Irs1098T form:
+    	Irs1098T form1098T = persistenceService.getEntity(form1098TId, Irs1098T.class);
+    	String xml = null;
+    	String error = null;
+    	
+    	// If the content of a form is valid, start downloading:
+    	if (form1098T != null) {
+    		// Get the report as XML string:
+    		try {
+    			xml = reportService.convertForm1098TToXml(form1098T);
+    		} catch (Exception e) {
+    			logger.error("Error converting an object Irs1098T to XML", e);
+    			error = getExceptionMessage(e, "Error converting an object Irs1098T to XML");
+    		}
+    	} else {
+    		logger.error("Error obtaining IRS form 1098T from the database. Form ID: " + form1098TId);
+    		error = String.format("Error obtaining IRS form 1098T for %s for the tax year %s.", form.getAccount().getDefaultPersonName().getDisplayValue(), reportYear);
+    	}
+    	
+    	// If the XML content is valid, start downloading:
+    	if (StringUtils.isNotBlank(xml)) {
+    		// Get download started:
+    		String reportFileName = generateReportFileName(form);
+    		
+    		doDownload(xml, reportFileName, "application/xml", response);
+    	} else {
+    		// Write an error message into the HTTP response:
+            PrintWriter out = response.getWriter();
+            String personsName = form.getAccount().getDefaultPersonName().getDisplayValue();
+    		String errorMsg = String.format("<h2>Form 1098T for %s for the tax year % is unavailable</h2><p><h4>%s</h4>", personsName, reportYear, error);
+    		
+    		out.println(errorMsg);
+    	}
+    	
+    	return null;
+    }
 
 
     /* *****************************************************************************************************
@@ -152,6 +221,7 @@ public class Generate1098TController extends DownloadController {
 
             return account;
         }
+        
         throw new IllegalArgumentException("Invalid user ID selected: " + userId);
     }
 
