@@ -252,7 +252,8 @@ Then /^the quiz is not listed as an unassigned activity offering$/ do
 end
 
 Given /^I have created the default registration groups for a course offering$/ do
-  @course_offering = create CourseOffering, :term=>"202001", :create_by_copy=>(make CourseOffering, :course=>"BSCI283")
+  #@course_offering = create CourseOffering, :term=>Rollover::OPEN_SOC_TERM, :create_by_copy=>(make CourseOffering, :course=>"BSCI215")
+  @course_offering = make CourseOffering, :term=>Rollover::OPEN_SOC_TERM, :course=>"BSCI215"
   @course_offering.manage_registration_groups
 
   @ao_cluster = make ActivityOfferingCluster,  :is_constrained=>false
@@ -260,6 +261,18 @@ Given /^I have created the default registration groups for a course offering$/ d
   @ao_cluster.generate_unconstrained_reg_groups
   @ao_cluster.assigned_ao_list = @course_offering.ao_list.sort #TODO - should ao_cluster have ref to parent?
 end
+
+Given /^I have created the default registration groups for a catalog course offering$/ do
+  @course_offering = make CourseOffering, :term=>"201212", :course=>"BSCI425"
+  @course_offering.manage_registration_groups
+
+  @ao_cluster = make ActivityOfferingCluster,  :is_constrained=>false
+  @course_offering.add_ao_cluster(@ao_cluster)
+  @ao_cluster.generate_unconstrained_reg_groups
+  @ao_cluster.assigned_ao_list = @course_offering.ao_list.sort #TODO - should ao_cluster have ref to parent?
+end
+
+
 
 Given /^I add two activity offerings to the course offering$/ do
   @course_offering.manage

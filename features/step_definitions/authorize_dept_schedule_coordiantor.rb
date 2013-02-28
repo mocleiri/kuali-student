@@ -133,12 +133,12 @@ end
 
 When /^I attempt to create a course not in my department$/ do
   @course_offering = make CourseOffering, :term=> @term_for_test, :course => "CHEM132"
-  @course_offering.create_by_search
+  @course_offering.start_create_by_search
 end
 
 When /^I attempt to create a course in my department$/ do
   @course_offering = make CourseOffering, :term=> @term_for_test, :course => "ENGL310"
-  @course_offering.create_by_search
+  @course_offering.start_create_by_search
 end
 
 Then /^I have access to create the course offering from catalog$/ do

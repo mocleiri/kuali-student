@@ -4,8 +4,9 @@ When /^I designate a valid term and cross\-listed Catalog Course Code$/ do
   @source_term = "201201"
   @cross_listed_co_code = "WMST255"
   @catalogue_course_code = "ENGL250"
+  #TODO - need to use appropriate course_offering 'create' method
   @course_offering = make CourseOffering, :course => @catalogue_course_code, :suffix => @suffix_with_cl, :delivery_format => "Lecture"
-  @course_offering.create_by_search
+  @course_offering.start_create_by_search
 end
 
 And /^I create a Course Offering with selected cross\-listed Catalog Course Code$/ do

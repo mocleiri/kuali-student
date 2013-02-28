@@ -41,3 +41,7 @@ When /^I create a new course offering in a subsequent term by copying the course
   end
 
 end
+
+When /^I create a new course offering in a subsequent term by copying the catalog course offering$/ do
+  @course_offering_copy = create CourseOffering, :term=> "201712", :course => "BSCI425", :create_from_existing=>@course_offering
+end

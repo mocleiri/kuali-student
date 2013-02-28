@@ -90,7 +90,7 @@ class CourseOffering
         :reg_options => "Pass/Fail Grading",
         :search_by_subj => false,
         :create_by_copy => nil,
-        :create_from_existing => nil
+        :create_from_existing => nil,
     }
     options = defaults.merge(opts)
     set_options(options)
@@ -104,14 +104,14 @@ class CourseOffering
       @activity_offering_cluster_list = @create_by_copy.activity_offering_cluster_list
       @ao_list = @create_by_copy.ao_list
     elsif @create_from_existing != nil
-      on CreateCourseOffering do |page|
-        page.create_from_existing_offering_tab
-        page.configure_course_offering_copy_toggle
-        page.create_from_existing_offering_copy_submit
-      end
-    else
+      @course = create_from_existing_course(@create_from_existing.course, @create_from_existing.term)
+      #deep copy
+      @activity_offering_cluster_list = @create_from_existing.activity_offering_cluster_list
+      @ao_list = @create_from_existing.ao_list
+    else #create from catalog
+      start_create_by_search
       on CreateCourseOffering do  |page|
-        @suffix = random_alphanums.strip
+        @suffix = random_alphanums(5)
         page.suffix.set @suffix
         @course = "#{@course}#{@suffix}"
         delivery_obj = make DeliveryFormat
@@ -299,7 +299,7 @@ class CourseOffering
     end
   end
 
-  def create_by_search
+  def start_create_by_search
     go_to_create_course_offerings
     on CreateCourseOffering do  |page|
       page.target_term.set @term
@@ -425,6 +425,41 @@ class CourseOffering
     expected_unassigned
   end
 
+  def create_from_existing_course(course, term)
+    pre_copy_co_list = []
+    post_copy_co_list = []
+
+    go_to_manage_course_offerings
+    on ManageCourseOfferings do |page|
+      page.term.set @term
+      page.input_code.set course[0,4] #subject code
+      page.show
+    end
+    on ManageCourseOfferingList do |page|
+      pre_copy_co_list = page.co_list
+    end
+
+    start_create_by_search
+    on CreateCourseOffering do |page|
+      page.create_from_existing_offering_tab
+      page.select_copy_for_existing_course(term, course)
+      page.configure_course_offering_copy_toggle
+      #TODO add parms for selecting what to exclude from copy
+    end
+
+    go_to_manage_course_offerings
+    on ManageCourseOfferings do |page|
+      page.term.set @term
+      page.input_code.set course[0,4] #subject code
+      page.show
+    end
+    on ManageCourseOfferingList do |page|
+      post_copy_co_list = page.co_list
+    end
+    (post_copy_co_list - pre_copy_co_list).first
+  end
+  private :create_from_existing_course
+
   def create_co_copy(source_course_code)
     pre_copy_co_list = []
     post_copy_co_list = []
@@ -448,6 +483,7 @@ class CourseOffering
 
     @course = (post_copy_co_list - pre_copy_co_list).first
   end
+  private :create_co_copy
 
   def total_co_list(course_code)
     co_list = []

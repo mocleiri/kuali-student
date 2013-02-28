@@ -1,4 +1,5 @@
 When /^I copy an CO with AOs that have ADLs to a new CO in the different term with RDLs in its AOs$/ do
+  #TODO  use data object e.g. @course_offering = create CourseOffering, :term=> "201612", :course => "CHEM132", :create_from_existing=>(make CourseOffering, :term=> "201201", :course => "CHEM132")
   on CreateCourseOffering do |page|
     page.create_from_existing_offering_tab.click
     page.loading.wait_while_present

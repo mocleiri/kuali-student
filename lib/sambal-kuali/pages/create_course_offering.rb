@@ -31,7 +31,10 @@ class CreateCourseOffering < BasePage
   element(:configure_course_offering_copy_element) { |b| b.frm.link(id: "KS-ExistingOffering-ConfigureCopySubSection_toggle") }
   element(:exclude_instructor_checkbox) { |b| b.frm.label(text: /Exclude instructor information/) }
   action(:select_exclude_instructor_checkbox) { |b| b.exclude_instructor_checkbox.wait_until_present; b.exclude_instructor_checkbox.click }
+
+  #TODO - this button should not exist
   action(:create_from_existing_offering_copy_submit) { |b| b.create_from_existing_offering_copy_button.click; b.loading.wait_while_present }
+
   element(:growl_message) { |b| b.div(text: /Course offering .* has been successfully created/) }
   element(:auth_error) { |b| b.div(text: /You are not authorized to create/) }
 
@@ -46,8 +49,11 @@ class CreateCourseOffering < BasePage
 
   action(:create_from_existing_offering)  { |b| b.frm.link(id: "KS-CourseOffering-LinkSection_CreateFromExistingOffering").click }
   element(:course_offering_existing_table) { |b| b.frm.div(id: "KS-ExistingOffering-ListCOs").table() }
+  #TODO just selects the first row - needs to be deprecated
   element(:course_offering_copy_element) {|b| b.frm.course_offering_existing_table.rows[1].cells[ACTIONS_COLUMN_CO].link(text: "Copy")  }
   action(:course_offering_copy) {|b| b.course_offering_copy_element.click; b.loading.wait_while_present   }
+
+  OFFERED_TERM_COLUMN = 1
   ACTIONS_COLUMN_CO = 5
 
   def add_random_delivery_format
@@ -86,15 +92,13 @@ class CreateCourseOffering < BasePage
     end
   end
 
-  def create_co_from_existing(term, course)
-    target_term.set(term)
-    catalogue_course_code.set(course)
-    show
-    loading.wait_while_present
-
-    create_from_existing_offering
-    loading.wait_while_present
-
-    course_offering_copy
+  def existing_co_target_row(term, course)
+    course_offering_existing_table.row(text: /#{Regexp.escape(course)}[\S\s]#{Regexp.escape(term)}/)
   end
+
+  def select_copy_for_existing_course(term, course)
+    existing_co_target_row(term, course).cells[ACTIONS_COLUMN_CO].link(text: "Copy").click
+    loading.wait_while_present
+  end
+
 end

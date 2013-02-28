@@ -7,6 +7,7 @@ When /^I create two new Course Offerings$/ do
   end
 
   go_to_create_course_offerings
+  #TODO  use data object e.g. @course_offering = create CourseOffering, :term=> "201612", :course => "CHEM132", :create_from_existing=>(make CourseOffering, :term=> "201201", :course => "CHEM132")
   on(CreateCourseOffering).create_co_from_existing "20122", "CHEM142"
 
   #get the new co
