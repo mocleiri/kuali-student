@@ -6,6 +6,8 @@
 
     <param name="app.context.name">ksa</param>
 
+    <param name="krad.url">/ksa/uif</param>
+
     <param name="validate.data.dictionary">true</param>
 
     <param name="load.dictionary.external.messages">false</param>
