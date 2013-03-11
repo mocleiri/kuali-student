@@ -345,12 +345,20 @@
                             <bean parent="Uif-DataField" p:label="Scheduled For"
                                   p:propertyName="courseDetails.courseOfferingInstitutionList"
                                   p:fieldLabel.cssClasses="fl-text-gray myplan-text-normal" p:labelPlacement="LEFT"
-                                  p:escapeHtmlInPropertyValue="false">
+                                  p:escapeHtmlInPropertyValue="false"
+                                  p:render="@{#line.courseDetails.courseOfferingInstitutionList.size() gt 0 ? true : false}">
                                 <property name="propertyEditor" ref="scheduled_terms_list_formatter"/>
                                 <property name="cssClasses">
                                     <list merge="true">
                                         <value>myplan-data-list</value>
                                     </list>
+                                </property>
+                            </bean>
+                            <bean parent="Uif-MessageField" p:label="Scheduled for"
+                                  p:fieldLabel.cssClasses="fl-text-gray myplan-text-normal"
+                                  p:render="@{#line.courseDetails.courseOfferingInstitutionList.size() eq 0 ? true : false}">
+                                <property name="message">
+                                    <bean parent="Uif-Message" p:messageText="Not currently scheduled"/>
                                 </property>
                             </bean>
 
@@ -695,12 +703,20 @@
                             <bean parent="Uif-DataField" p:propertyName="courseDetails.courseOfferingInstitutionList"
                                   p:label="Scheduled For"
                                   p:fieldLabel.cssClasses="fl-text-gray fl-font-size-90 myplan-text-normal"
-                                  p:labelPlacement="LEFT" p:escapeHtmlInPropertyValue="false">
+                                  p:labelPlacement="LEFT" p:escapeHtmlInPropertyValue="false"
+                                  p:render="@{courseDetails.courseOfferingInstitutionList.size() gt 0}">
                                 <property name="propertyEditor" ref="scheduled_terms_list_formatter"/>
                                 <property name="cssClasses">
                                     <list merge="true">
                                         <value>myplan-data-list</value>
                                     </list>
+                                </property>
+                            </bean>
+                            <bean parent="Uif-MessageField" p:label="Scheduled for"
+                                  p:fieldLabel.cssClasses="fl-text-gray myplan-text-normal"
+                                  p:render="@{courseDetails.courseOfferingInstitutionList.size() eq 0 ? true : false}">
+                                <property name="message">
+                                    <bean parent="Uif-Message" p:messageText="Not currently scheduled"/>
                                 </property>
                             </bean>
 
@@ -907,12 +923,20 @@
                             <bean parent="Uif-DataField" p:propertyName="courseDetails.courseOfferingInstitutionList"
                                   p:label="Scheduled For"
                                   p:fieldLabel.cssClasses="fl-text-gray fl-font-size-90 myplan-text-normal"
-                                  p:labelPlacement="LEFT" p:escapeHtmlInPropertyValue="false">
+                                  p:labelPlacement="LEFT" p:escapeHtmlInPropertyValue="false"
+                                  p:render="@{courseDetails.courseOfferingInstitutionList.size() gt 0}">
                                 <property name="propertyEditor" ref="scheduled_terms_list_formatter"/>
                                 <property name="cssClasses">
                                     <list merge="true">
                                         <value>myplan-data-list</value>
                                     </list>
+                                </property>
+                            </bean>
+                            <bean parent="Uif-MessageField" p:label="Scheduled for"
+                                  p:fieldLabel.cssClasses="fl-text-gray myplan-text-normal"
+                                  p:render="@{courseDetails.courseOfferingInstitutionList.size() eq 0 ? true : false}">
+                                <property name="message">
+                                    <bean parent="Uif-Message" p:messageText="Not currently scheduled"/>
                                 </property>
                             </bean>
 
@@ -997,7 +1021,8 @@
                             <bean parent="Uif-DataField" p:propertyName="courseDetails.courseOfferingInstitutionList"
                                   p:label="Scheduled For"
                                   p:fieldLabel.cssClasses="fl-text-gray fl-font-size-90 myplan-text-normal"
-                                  p:labelPlacement="LEFT" p:escapeHtmlInPropertyValue="false">
+                                  p:labelPlacement="LEFT" p:escapeHtmlInPropertyValue="false"
+                                  p:render="@{courseDetails.courseOfferingInstitutionList.size() gt 0}">
                                 <property name="propertyEditor" ref="scheduled_terms_list_formatter"/>
                                 <property name="cssClasses">
                                     <list merge="true">
@@ -1006,6 +1031,13 @@
                                 </property>
                             </bean>
 
+                            <bean parent="Uif-MessageField" p:label="Scheduled for"
+                                  p:fieldLabel.cssClasses="fl-text-gray myplan-text-normal"
+                                  p:render="@{courseDetails.courseOfferingInstitutionList.size() eq 0 ? true : false}">
+                                <property name="message">
+                                    <bean parent="Uif-Message" p:messageText="Not currently scheduled"/>
+                                </property>
+                            </bean>
                             <ref bean="planned_course_quarter_selection"/>
 
                             <!--  Backup checkbox -->
@@ -2864,12 +2896,21 @@
                 <bean parent="Uif-DataField" p:propertyName="courseDetails.courseOfferingInstitutionList"
                       p:label="Scheduled For"
                       p:fieldLabel.cssClasses="fl-text-gray fl-font-size-90 myplan-text-normal" p:labelPlacement="LEFT"
-                      p:escapeHtmlInPropertyValue="false">
+                      p:escapeHtmlInPropertyValue="false"
+                      p:render="@{courseDetails.courseOfferingInstitutionList.size() gt 0}">
                     <property name="propertyEditor" ref="scheduled_terms_list_formatter"/>
                     <property name="cssClasses">
                         <list merge="true">
                             <value>myplan-data-list</value>
                         </list>
+                    </property>
+                </bean>
+
+                <bean parent="Uif-MessageField" p:label="Scheduled for"
+                      p:fieldLabel.cssClasses="fl-text-gray myplan-text-normal"
+                      p:render="@{courseDetails.courseOfferingInstitutionList.size() eq 0 ? true : false}">
+                    <property name="message">
+                        <bean parent="Uif-Message" p:messageText="Not currently scheduled"/>
                     </property>
                 </bean>
 
