@@ -34,12 +34,12 @@ import org.kuali.student.contract.model.validation.DictionaryValidationException
  */
 public class MockImplWriterForOneService {
 
-    private ServiceContractModel model;
-    private ModelFinder finder;
-    private String directory;
-    private String rootPackage;
-    private String servKey;
-    private boolean isR1;
+    protected ServiceContractModel model;
+    protected ModelFinder finder;
+    protected String directory;
+    protected String rootPackage;
+    protected String servKey;
+    protected boolean isR1;
 
     public MockImplWriterForOneService(ServiceContractModel model,
             String directory,

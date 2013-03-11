@@ -37,14 +37,14 @@ import org.kuali.student.contract.model.validation.ServiceContractModelValidator
  */
 public class MockImplWriter {
 
-    private ServiceContractModel model;
-    private String directory;
-    private String rootPackage;
+    protected ServiceContractModel model;
+    protected String directory;
+    protected String rootPackage;
     public static final String ROOT_PACKAGE = "org.kuali.student";
     public static final String LUM_ROOT_PACKAGE = "org.kuali.student.lum";
     public static final String ENROLLMENT_ROOT_PACKAGE = "org.kuali.student.enrollment";
-    private ServicesFilter filter;
-    private boolean isR1;
+    protected ServicesFilter filter;
+    protected boolean isR1;
 
     public MockImplWriter(ServiceContractModel model,
             String directory,
@@ -112,14 +112,14 @@ public class MockImplWriter {
         return errors;
     }
 
-    private List<Service> filterServices() {
+    protected List<Service> filterServices() {
         if (filter == null) {
             return model.getServices();
         }
         return filter.filter(model.getServices());
     }
 
-    private void validate() {
+    protected void validate() {
         Collection<String> errors =
                 new ServiceContractModelValidator(model).validate();
         if (errors.size() > 0) {

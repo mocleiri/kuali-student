@@ -23,17 +23,11 @@ import org.kuali.student.contract.model.ServiceMethodParameter;
 import org.kuali.student.contract.model.XmlType;
 import org.kuali.student.contract.model.util.ModelFinder;
 import org.kuali.student.contract.writer.JavaClassWriter;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import org.kuali.student.contract.writer.service.GetterSetterNameCalculator;
 import org.kuali.student.contract.writer.service.MessageStructureTypeCalculator;
 import org.kuali.student.contract.writer.service.ServiceExceptionWriter;
+
+import java.util.*;
 
 /**
  *
@@ -41,13 +35,70 @@ import org.kuali.student.contract.writer.service.ServiceExceptionWriter;
  */
 public class MockImplServiceWriter extends JavaClassWriter {
 
-    private ServiceContractModel model;
-    private ModelFinder finder;
+    //////////////////////////////
+    // Constants
+    //////////////////////////////
+
+    /**
+     * The standard type of methods used in our Service contract.
+     */
+    protected static enum MethodType {
+
+        VALIDATE,
+        CREATE,
+        CREATE_BULK,
+        ADD,
+        UPDATE,
+        UPDATE_OTHER,
+        DELETE,
+        REMOVE,
+        DELETE_OTHER,
+        GET_CREATE,
+        GET_BY_ID,
+        GET_BY_IDS,
+        RICE_GET_BY_NAMESPACE_AND_NAME,
+        GET_IDS_BY_TYPE,
+        GET_IDS_BY_OTHER,
+        GET_INFOS_BY_OTHER,
+        GET_TYPE,
+        GET_TYPES,
+        UNKNOWN
+    };
+
+    //////////////////////////////
+    // Data Variables
+    //////////////////////////////
+
+    protected ServiceContractModel model;
+    protected ModelFinder finder;
     private String directory;
+    /**
+     * The package name is stored in the service object itself (the package spec kept
+     * moving around so I assumed the actual service name was unique but ran into a problem
+     * when we included rice because they have a StateService  meaning US states and we have
+     * a StateService meaning the state of the object so I added logic to detect rice and
+     * prepend that "RICE." to it
+     */
     private String rootPackage;
-    private String servKey;
-    private List<ServiceMethod> methods;
+
+    /**
+     * Name of the service being operated on.
+     * If it is a RICE service it is prefixed with RICE.
+     * [11:32:18 AM] Norman Wright: short name... I think it gets it by taking the java class SimpleName and stripping off the word "Service" and I think making it lower case.
+     * [11:32:24 AM] Norman Wright: so OrganizationService becomes organization
+     */
+    protected String servKey;
+
+    protected List<ServiceMethod> methods;
+
+    /**
+     * A flag that holds if the service is an R1 service.
+     */
     private boolean isR1;
+
+    //////////////////////////
+    // Constructor
+    //////////////////////////
 
     public MockImplServiceWriter(ServiceContractModel model,
             String directory,
@@ -65,6 +116,16 @@ public class MockImplServiceWriter extends JavaClassWriter {
         this.isR1 = isR1;
     }
 
+    /////////////////////////
+    // Functional Methods
+    /////////////////////////
+
+    /**
+     * Returns the mock implementation package name.
+     * @param servKey
+     * @param rootPackage
+     * @return
+     */
     public static String calcPackage(String servKey, String rootPackage) {
         String pack = rootPackage + ".";
 //        String pack = rootPackage + "." + servKey.toLowerCase() + ".";
@@ -88,6 +149,10 @@ public class MockImplServiceWriter extends JavaClassWriter {
         return pack;
     }
 
+    /**
+     * Checks if this is a RICE service.
+     * @return true if this is a RICE service.
+     */
     private boolean isRice() {
         if (this.servKey.startsWith("RICE.")) {
             return true;
@@ -95,13 +160,16 @@ public class MockImplServiceWriter extends JavaClassWriter {
         return false;
     }
 
-    private static String fixServKey(String servKey) {
+    protected static String fixServKey(String servKey) {
         if (servKey.startsWith("RICE.")) {
             return servKey.substring("RICE.".length());
         }
         return servKey;
     }
 
+    /**
+     * Given the service key (name), returns a calculated class name for the mock impl.
+     */
     public static String calcClassName(String servKey) {
         return GetterSetterNameCalculator.calcInitUpper(fixServKey(servKey) + "ServiceMockImpl");
     }
@@ -110,30 +178,10 @@ public class MockImplServiceWriter extends JavaClassWriter {
         return GetterSetterNameCalculator.calcInitUpper(fixServKey(servKey) + "Service");
     }
 
-    private static enum MethodType {
-
-        VALIDATE,
-        CREATE,
-        CREATE_BULK,
-        ADD,
-        UPDATE,
-        UPDATE_OTHER,
-        DELETE,
-        REMOVE,
-        DELETE_OTHER,
-        GET_CREATE,
-        GET_BY_ID,
-        GET_BY_IDS,
-        RICE_GET_BY_NAMESPACE_AND_NAME,
-        GET_IDS_BY_TYPE,
-        GET_IDS_BY_OTHER,
-        GET_INFOS_BY_OTHER,
-        GET_TYPE,
-        GET_TYPES,
-        UNKNOWN
-    };
-
-    private MethodType calcMethodType(ServiceMethod method) {
+    /**
+     * Analyses the method and returns a MethodType enum that describes what type of method this is.
+     */
+    protected MethodType calcMethodType(ServiceMethod method) {
         if (this.isRice()) {
             if (method.getName().contains("ByNamespaceCodeAndName")) {
                 return MethodType.RICE_GET_BY_NAMESPACE_AND_NAME;
@@ -698,7 +746,7 @@ public class MockImplServiceWriter extends JavaClassWriter {
         return mapName;
     }
 
-    private String calcObjectName(ServiceMethod method) {
+    protected String calcObjectName(ServiceMethod method) {
         if (method.getName().startsWith("create")) {
             return method.getName().substring("create".length());
         }
@@ -864,6 +912,7 @@ public class MockImplServiceWriter extends JavaClassWriter {
         ServiceMethodParameter contextParam = this.findContextParameter(method);
         this.importsAdd(ArrayList.class.getName());
         indentPrintln("List<" + infoName + "> list = new ArrayList<" + infoName + "> ();");
+
         indentPrintln("for (String id: " + idListParam.getName() + ") {");
         if (this.isRice()) {
             indentPrintln("    list.add (this.get" + objectName + "(id));");

@@ -37,6 +37,9 @@ public class GetterSetterNameCalculator {
         this.model = model;
     }
 
+    /**
+     * Returns the name of the getter method.
+     */
     public String calcGetter() {
         if (calcFieldTypeToUse(ms.getType()).equals("Boolean")) {
             if (ms.getShortName().toLowerCase().startsWith("is")) {
@@ -47,6 +50,9 @@ public class GetterSetterNameCalculator {
         return "get" + calcInitUpper(ms.getShortName());
     }
 
+    /**
+     * Returns the name of the setter method.
+     */
     public String calcSetter() {
         if (calcFieldTypeToUse(ms.getType()).equals("Boolean")) {
             if (ms.getShortName().toLowerCase().startsWith("is")) {

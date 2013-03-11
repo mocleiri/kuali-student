@@ -16,7 +16,7 @@
 package org.kuali.student.contract.model;
 
 /**
- *
+ * Represent a parameter in a service operation call.
  * @author nwright
  */
 public class ServiceMethodParameter {

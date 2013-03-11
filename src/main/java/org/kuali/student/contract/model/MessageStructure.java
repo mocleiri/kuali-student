@@ -15,10 +15,8 @@
  */
 package org.kuali.student.contract.model;
 
-import org.kuali.rice.core.api.criteria.QueryByCriteria;
-
 /**
- *
+ * Represents a message structure (dto)
  * @author nwright
  */
 public class MessageStructure {

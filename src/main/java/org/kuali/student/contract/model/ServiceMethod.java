@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * Represents a method in the contract (service).
  * @author nwright
  */
 public class ServiceMethod {
@@ -124,5 +124,19 @@ public class ServiceMethod {
     public void setDeprecated(boolean deprecated) {
         this.deprecated = deprecated;
     }
-    
+
+    @Override
+    public String toString() {
+        return "ServiceMethod{" +
+                "service='" + service + '\'' +
+                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                ", description='" + description + '\'' +
+                ", parameters=" + parameters +
+                ", returnValue=" + returnValue +
+                ", errors=" + errors +
+                ", implNotes='" + implNotes + '\'' +
+                ", deprecated=" + deprecated +
+                '}';
+    }
 }
