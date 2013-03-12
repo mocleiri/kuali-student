@@ -68,7 +68,6 @@ public class DbDiff {
     public void doDiff() {
         List<String> changedTables = findTablesWithChanges(beforeDatabase, afterDatabase);
         Collections.sort(changedTables);
-
         /**
          * Get the columns that make up the primary keys for the tables that have changed.
          * Usually, this is simply ID, but sometimes there isn't a key (e.g. join tables)
@@ -404,11 +403,12 @@ public class DbDiff {
             String tableName = entry.getKey();
             Integer beforeCount = entry.getValue();
             Integer afterCount = afterCounts.get(tableName);
-            if (afterCount > beforeCount) {
+            if ( ! afterCount.equals(beforeCount)) {
+                System.err.println("Table: " + tableName + " Before: " + beforeCount + "  After: " + afterCount);
                 tables.add(tableName);
             }
         }
-        System.err.println(String.format("Examined %s tables. %s contained new rows.", beforeCounts.size(), tables.size()));
+        System.err.println(String.format("Examined %s tables. Row counts changed in %s.", beforeCounts.size(), tables.size()));
         return tables;
     }
 
