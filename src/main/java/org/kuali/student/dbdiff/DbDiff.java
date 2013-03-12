@@ -89,9 +89,10 @@ public class DbDiff {
          * Now, for each table, using the key columns, get the key values for the missing rows.
          */
         for (DbTableMetadata table : tables) {
-              DbResultSet keys = new DbResultSet(table); //  Storage for the keys of the new rows.
-              findKeysForNewRows(beforeDatabase, afterDatabase, keys);
-              output(afterDatabase, keys);
+            DbResultSet addKeys = new DbResultSet(table); //  Storage for the keys of the new rows.
+            DbResultSet deleteKeys =  new DbResultSet(table); //  Storage for the keys of the disappeared rows.
+            findKeysForAddsAndDeletes(beforeDatabase, afterDatabase, addKeys, deleteKeys);
+            output(afterDatabase, addKeys, deleteKeys);
         }
         System.err.println("Done.");
     }
@@ -99,26 +100,36 @@ public class DbDiff {
     /**
      * Outputs the result set for a given table.
      * @param afterDatabase
-     * @param keys
+     * @param addKeys
      */
-    private void output(DbConnection afterDatabase, DbResultSet keys) {
+    private void output(DbConnection afterDatabase, DbResultSet addKeys, DbResultSet deleteKeys) {
         FileOutputStream fileOut = null;
-        String fileName = String.format("%s%s.sql", FILE_OUTPUT_DIRECTORY, keys.getTableMetadata().getTableName());
-        System.err.println(String.format("Writing %s rows to %s", keys.getResults().size(), fileName));
+        String fileName = String.format("%s%s.sql", FILE_OUTPUT_DIRECTORY, addKeys.getTableMetadata().getTableName());
+        System.err.println(String.format("Writing %s inserts and %s deletes to %s",
+                addKeys.getResults().size(), deleteKeys.getResults().size(), fileName));
         try {
             fileOut = new FileOutputStream(fileName);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(String.format("Could not open SQL file: %s", fileName));
         }
 
-        //  Fill in the rest of the data (beyond the key(s)) for each row
-        for (Map.Entry<String, Map<String, String>> row : keys.getResults().entrySet()) {
+        //  Fill in the rest of the data (beyond the key(s)) for each row and output as an SQL insert statement.
+        for (Map.Entry<String, Map<String, String>> row : addKeys.getResults().entrySet()) {
             Map<String, String> columns = row.getValue();
-            populateRowData(afterDatabase, keys.getTableMetadata(), columns);
+            populateRowData(afterDatabase, addKeys.getTableMetadata(), columns);
             try {
-                outputAsSql(keys.getTableMetadata(), columns, fileOut);
+                outputAsSql(addKeys.getTableMetadata(), columns, fileOut);
             } catch (IOException e) {
-                System.err.println(String.format("Failed to write state to file [%s]. %s", fileName, e.getLocalizedMessage()));
+                System.err.println(String.format("Failed to write insert statement to file [%s]. %s", fileName, e.getLocalizedMessage()));
+            }
+        }
+
+        //  Output as an SQL delete statement.
+        for (Map.Entry<String, Map<String, String>> row : deleteKeys.getResults().entrySet()) {
+            try {
+                outputAsSqlDelete(deleteKeys.getTableMetadata(), row.getValue(), fileOut);
+            } catch (IOException e) {
+                System.err.println(String.format("Failed to write delete statement to file [%s]. %s", fileName, e.getLocalizedMessage()));
             }
         }
 
@@ -129,6 +140,35 @@ public class DbDiff {
         } catch (IOException e) {
              System.err.println(String.format("File [%s] did not close gracefully. %s", fileName, e.getLocalizedMessage()));
         }
+    }
+
+    private void outputAsSqlDelete(DbTableMetadata tableMetadata, Map<String,String> columns, FileOutputStream fileOut)
+            throws IOException {
+        //  Put the key columns in alphabetical order.
+        List<DbColumnMetadata> columnsList = new ArrayList(tableMetadata.getKeyColumns());
+        Collections.sort(columnsList);
+
+        //  Create the where clause
+        StringBuilder matchCriteria =  new StringBuilder();
+        for (DbColumnMetadata column : columnsList) {
+            if (matchCriteria.length() != 0) {
+                matchCriteria.append(" AND ");
+            }
+            String value = columns.get(column.getName());
+            String type = column.getType();
+            matchCriteria.append(column.getName())
+                .append("=")
+                .append(String.format(SqlValueEncloser.findFormat(type), value));
+        }
+
+        //  Now build the sql statement
+        StringBuilder sql = new StringBuilder("DELETE FROM ");
+        sql.append(tableMetadata.getTableName())
+            .append(" WHERE ")
+            .append(matchCriteria)
+            .append(" \n/\n");
+
+        fileOut.write(sql.toString().getBytes());
     }
 
     private void outputAsSql(DbTableMetadata tableMetadata, Map<String, String> columns, FileOutputStream fileOut) throws IOException {
@@ -283,11 +323,13 @@ public class DbDiff {
      * Diffs the keys in the before and after table to determine which rows were added.
      * @param beforeDatabase The DB connection for the "before" database.
      * @param afterDatabase  The DB connection for the "before" database.
-     * @param keyResults  Storage for the keys of the new rows.
+     * @param addKeyResults  Storage for the keys of the new rows.
+     * @param deleteKeyResults Storage for keys of deleted rows.
      */
-    private void findKeysForNewRows(DbConnection beforeDatabase, DbConnection afterDatabase, DbResultSet keyResults) {
-        DbResultSet beforeKeys = new DbResultSet(keyResults.getTableMetadata());
-        DbResultSet afterKeys = new DbResultSet(keyResults.getTableMetadata());
+    private void findKeysForAddsAndDeletes(DbConnection beforeDatabase, DbConnection afterDatabase,
+                                           DbResultSet addKeyResults, DbResultSet deleteKeyResults) {
+        DbResultSet beforeKeys = new DbResultSet(addKeyResults.getTableMetadata());
+        DbResultSet afterKeys = new DbResultSet(addKeyResults.getTableMetadata());
 
         findKeysForTable(beforeDatabase, beforeKeys);
         findKeysForTable(afterDatabase, afterKeys);
@@ -295,7 +337,14 @@ public class DbDiff {
         //  See which keys rows have been added
         for (Map.Entry<String, Map<String, String>> row : afterKeys.getResults().entrySet()) {
             if ( ! beforeKeys.getResults().containsKey(row.getKey())) {
-                keyResults.addResult(row.getKey(), row.getValue());
+                addKeyResults.addResult(row.getKey(), row.getValue());
+            }
+        }
+
+        //  See which keys have been removed.
+        for (Map.Entry<String, Map<String, String>> row : beforeKeys.getResults().entrySet()) {
+            if ( ! afterKeys.getResults().containsKey(row.getKey())) {
+                deleteKeyResults.addResult(row.getKey(), row.getValue());
             }
         }
     }

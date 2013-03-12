@@ -1,10 +1,8 @@
 This is a utility which will compare a "before" database with an "after" database and output SQLs to bring "before" in sync with "after".
 
-Currently, only data that has been added is supported.
+Currently, only inserts and deletes supported. Rows that have been updated will simply be ignored.
 
-Rows that have been deleted and rows that have been updated will simply be ignored.
-Those operations shouldn't be too difficult to support, but I didn't have time to put them in.
-Also, this tool might fit into the Kuali portfolio better as a maven plugin. Didn't have time for that either.
+Also, this tool might fit into the Kuali portfolio better as a maven plugin. Didn't have time for that.
 
 Assumptions:
 * "before" and "after" databases are identical from a schema perspective.
