@@ -23,7 +23,7 @@ import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TimeOfDayInfo", propOrder = {"milliSeconds", "_futureElements"})
-public class TimeOfDayInfo implements TimeOfDay {
+public class TimeOfDayInfo implements TimeOfDay, Serializable {
 
     @XmlElement
     private Long milliSeconds;
