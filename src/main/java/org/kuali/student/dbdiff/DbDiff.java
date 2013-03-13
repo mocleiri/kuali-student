@@ -404,7 +404,6 @@ public class DbDiff {
             Integer beforeCount = entry.getValue();
             Integer afterCount = afterCounts.get(tableName);
             if ( ! afterCount.equals(beforeCount)) {
-                System.err.println("Table: " + tableName + " Before: " + beforeCount + "  After: " + afterCount);
                 tables.add(tableName);
             }
         }
