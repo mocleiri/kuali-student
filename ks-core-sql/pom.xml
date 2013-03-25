@@ -24,7 +24,7 @@
                         </goals>
                         <phase>prepare-package</phase>
                         <configuration>
-                            <location>${metainf.sql.context}</location>
+                            <annotatedClass>${metainf.sql.context}</annotatedClass>
                         </configuration>
                     </execution>
                 </executions>
