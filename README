@@ -1,0 +1,35 @@
+svn-merge-tools
+
+The view-conflict.sh shell script depends on the kdiff3 program being in the path.
+
+
+http://kdiff3.sourceforge.net/
+
+This exists for both linux and Windows.
+
+If running in Windows the program will work in a recent Mingw32 installation:
+http://www.mingw.org
+
+USAGE: <mode: SHOW|VIEW|RESOLVE>
+
+SHOW:
+
+show the file conflicts and then the tree conflicts
+
+VIEW:
+
+show the first file conflict in a kdiff3 merge tool window.
+
+A panel is original, B panel is the inbound change, lower panel is the working copy.
+
+
+RESOLVE:
+
+with no arguments will resolve the first file conflict with 
+
+svn resolve --accept working path/to/file
+
+with the TREE argument will resolve the tree conflict.
+
+[not working yet]
+
