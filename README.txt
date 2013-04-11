@@ -20,3 +20,7 @@ Recipe:
 
 * Run the DbDiff program (possibly changing the hardcoded schema/passwd) and the SQLs will be written to ...
     target/sqls
+
+Dire Warnings:
+
+* !!! Use the ojdbc6 driver. Timestamps are broken with the ojdbc14 driver. !!!
