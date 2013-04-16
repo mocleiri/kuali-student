@@ -67,3 +67,10 @@ git/compare-revs.sh
 	Determines the git commits and then for each of them parses the commit message to extract the revision.
 
 	This can be used to quickly identify the svn revisions for each jira which is useful when we want to exclude or include commits based on a particular jira number.
+
+apply-merge.sh
+--------------
+
+	<source repo URL> <revision(s) to cherry-pick>
+
+	to pass multiple revisions they need to be wrapped in a quoted string like: "123 456 789" to cherry pick revs: 123, 456 and 789 from the source repo URL 
