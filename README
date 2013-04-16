@@ -1,4 +1,22 @@
 svn-merge-tools
+===============
+
+Several helper scripts for performing merges and also to identify the commits of interest.
+
+Script Index:
+
+* view-conflict.sh
+	This provides a way to view the conflicts (both tree and file) and to delegate to kdiff3 for resolving file conflicts.
+
+* git/compare-revs.sh
+
+	This needs to be run in a git repository that mirrors the svn repo and includes the commit meta data (the git-svn-id lines that include the svn revision of the commit.
+
+
+	
+
+view-conflict.sh
+-----------------
 
 The view-conflict.sh shell script depends on the kdiff3 program being in the path.
 
@@ -33,3 +51,19 @@ with the TREE argument will resolve the tree conflict.
 
 [not working yet]
 
+
+git/compare-revs.sh
+-------------------
+
+
+	SHOW <changes in branch> <since branch> [gitk]
+
+	Show the commits in the first branch/commitish specified since the point given.  
+
+	optionally display the results in gitk.
+
+	BY_JIRA <changes in branch> <since branch> [show_headers]
+
+	Determines the git commits and then for each of them parses the commit message to extract the revision.
+
+	This can be used to quickly identify the svn revisions for each jira which is useful when we want to exclude or include commits based on a particular jira number.
