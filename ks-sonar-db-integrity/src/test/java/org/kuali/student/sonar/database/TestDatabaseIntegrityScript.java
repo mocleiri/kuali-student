@@ -106,6 +106,13 @@ public class TestDatabaseIntegrityScript {
                             result.getString("local_column") + " -> " +
                             result.getString("foreign_table")+ "." +
                             result.getString("foreign_column"));
+                } else {
+                    //TODO KSENROLL-6924 execute alter here
+                    System.out.println(fkProcessor.getAlterStmt(result.getString("local_table"),
+                            result.getString("local_column"),
+                            result.getString("foreign_table"),
+                            result.getString("foreign_column")));
+                    //TODO KSENROLL-6924 catch sqlexception here and add to log
                 }
             }
             System.out.println("done");

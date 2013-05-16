@@ -11,6 +11,8 @@ import java.io.InputStream;
  * To change this template use File | Settings | File Templates.
  */
 public class FKProcessesor {
+    public static int fKseq = 0;
+
     public static String getFKSQL(String filename) {
         InputStream is = null;
         String sql = null;
@@ -29,5 +31,14 @@ public class FKProcessesor {
             throw new RuntimeException("error reading file " + filename, e);
         }
         return sql;
+    }
+
+    public static String getAlterStmt(String localTable, String localColumn, String foreignTable, String foreignColumn) {
+        fKseq++;
+
+        return "ALTER TABLE " + localTable +
+                " ADD CONSTRAINT DB_INGRTY_CHK_FK_" + fKseq +
+                " FOREIGN KEY (" + localColumn + ") " +
+                "REFERENCES " + foreignTable + " (" + foreignColumn + " )";
     }
 }
