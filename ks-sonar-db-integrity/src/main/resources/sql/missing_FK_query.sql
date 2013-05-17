@@ -52,7 +52,7 @@ FROM (
             DECODE(
                 column_name,
                 -- standard table prefix patter
-                'RT_DESCR_ID', CONCAT(SUBSTR(table_name, 0, 4),'_RICH_TEXT_T'),
+                'RT_DESCR_ID', CONCAT(SUBSTR(c.table_name, 0, 4),'_RICH_TEXT_T'),
                 'ACTIVITY_OFFERING_ID', 'KSEN_LUI',
                 -- foreign table prefix (e.g. KSEN)
                 'AGENDA_ID', 'KRMS_AGENDA_T',
@@ -87,9 +87,9 @@ FROM (
                 -- standard behavior (kinda)
                 'OWNER_ID',
                 -- enum_table has _T
-                    DECODE(table_name,
+                    DECODE(c.table_name,
                            'KSEM_ENUM_ATTR', 'KSEM_ENUM_T',
-                           REPLACE(table_name, '_ATTR', '')
+                           REPLACE(c.table_name, '_ATTR', '')
                     ),
                 'ACCESS_TYPE_ID', 'KSEN_ROOM_ACCESS_TYPE',
                 'AO_CLUSTER_ID', 'KSEN_CO_AO_CLUSTER',
@@ -120,7 +120,7 @@ FROM (
                 'TARGET_TERM_ID', 'KSEN_ATP',
                 'TERM_ID',
                     DECODE(
-                      table_name,
+                      c.table_name,
                       'KRMS_TERM_PARM_T', 'KRMS_TERM_T',
                       'KRMS_TERM_T', 'KRMS_TERM_T',
                       'KSEN_ATP'
@@ -184,14 +184,14 @@ FROM (
                 'SORT_ORDER_TYPE_ID', 'KSEN_POPULATION_RULE_SOT',
                 -- default behavior
                 -- assume the same table prefix as the source (e.g. 'KSLU_')
-                CONCAT(SUBSTR(table_name, 0, 5),
+                CONCAT(SUBSTR(c.table_name, 0, 5),
                     -- strip related_ from all column name
                     REPLACE(
                       -- strip off _ID and _CD from column name
                       REGEXP_REPLACE(
                         -- detect table prefix
                         DECODE(
-                            SUBSTR(table_name,0,2),
+                            SUBSTR(c.table_name,0,2),
                             'KS', column_name,
                             'KR',
                                 -- rice tables have _T at the end
@@ -203,9 +203,12 @@ FROM (
                     )
                 )
             ) as foreign_table,
-            table_name as local_table
-        FROM user_tab_cols
-        WHERE ( column_name LIKE ('%_ID') OR  column_name LIKE ('%_CD') ) AND
+            c.table_name as local_table
+        FROM user_tab_cols c
+        LEFT JOIN all_tables t
+            ON c.table_name = t.table_name
+        WHERE t.table_name IS NOT NULL AND
+              ( column_name LIKE ('%_ID') OR  column_name LIKE ('%_CD') ) AND
               column_name NOT IN (
                   -- metadata, alternate ids, or codes that don't relate to other tables
                   'OBJ_ID', 'CREATEID', 'UPDATEID', 'LUI_CD', 'ROOM_CD', 'SUFX_CD', 'SUFX_CD', 'BUILDING_CD', 'VER_IND_ID', 'VER_IND_ID',
@@ -222,7 +225,7 @@ FROM (
                   -- used for tracking db version
                   'BUILD_ID'
               ) AND
-              table_name != 'PLAN_TABLE'
+              c.table_name != 'PLAN_TABLE'
         )
     WHERE
       foreign_table != local_table AND
