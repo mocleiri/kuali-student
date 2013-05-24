@@ -1,6 +1,6 @@
 package org.kuali.student.sonar.database.exception;
 
-import org.kuali.student.sonar.database.ForeignKeyConstraint;
+import org.kuali.student.sonar.database.plugin.ForeignKeyConstraint;
 
 /**
  * Created with IntelliJ IDEA.

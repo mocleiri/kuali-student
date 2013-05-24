@@ -4,7 +4,9 @@ import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
 import org.kuali.student.sonar.database.exception.*;
+import org.kuali.student.sonar.database.plugin.ForeignKeyConstraint;
 import org.kuali.student.sonar.database.utility.FKGenerationUtil;
+
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,7 +20,11 @@ import static org.junit.Assert.fail;
  * Date: 5/17/13
  * Time: 12:08 AM
  *
- * Used for yet unhandled FK Relationship exceptions
+ * Runs Database integrity checks by searching for unconstrained FK Relationships.
+ * Finds Problems with the Mappings that are returned by the search.  It then attempts
+ * to create the FK Constraint.  The addConstraint method will throw excetpions if
+ * there are any issues which get handled here by adding to lists of Constraint
+ * Issues.  At the end of the test the report is sent to System.out
  */
 public class TestDatabaseIntegrityScript {
 
@@ -43,7 +49,7 @@ public class TestDatabaseIntegrityScript {
 
             try {
                 //creating connection to Oracle database using JDBC
-                conn = DriverManager.getConnection(url,props);
+                conn = DriverManager.getConnection(url, props);
 
             } catch (SQLException e) {
                 fail("unable to establish connection: " + e.getErrorCode() + " " + e.getMessage());
@@ -108,17 +114,17 @@ public class TestDatabaseIntegrityScript {
         Statement stmt = null;
         // TODO: KSENROLL-6924 create a report structure and move out of test
         // unconstrained foreign key relationships
-        ArrayList<ForeignKeyConstraint> newConstraintList = new ArrayList<>();
+        ArrayList<ForeignKeyConstraint> newConstraintList = new ArrayList<ForeignKeyConstraint>();
         // field mapping issues
-        ArrayList<ForeignKeyConstraint> fmeConstraintList = new ArrayList<>();
+        ArrayList<ForeignKeyConstraint> fmeConstraintList = new ArrayList<ForeignKeyConstraint>();
         // table mapping issues
-        ArrayList<ForeignKeyConstraint> tmeConstraintList = new ArrayList<>();
+        ArrayList<ForeignKeyConstraint> tmeConstraintList = new ArrayList<ForeignKeyConstraint>();
         // column type incompatibility issues
-        ArrayList<ForeignKeyConstraint> cteConstraintList = new ArrayList<>();
+        ArrayList<ForeignKeyConstraint> cteConstraintList = new ArrayList<ForeignKeyConstraint>();
         // orphaned relationships
-        ArrayList<ForeignKeyConstraint> orphConstraintList = new ArrayList<>();
+        ArrayList<ForeignKeyConstraint> orphConstraintList = new ArrayList<ForeignKeyConstraint>();
         // other issues
-        ArrayList<ForeignKeyConstraint> othConstraintList = new ArrayList<>();
+        ArrayList<ForeignKeyConstraint> othConstraintList = new ArrayList<ForeignKeyConstraint>();
 
 
         try {

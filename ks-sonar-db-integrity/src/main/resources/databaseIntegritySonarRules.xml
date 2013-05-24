@@ -1,0 +1,26 @@
+<rules>
+    <!-- Extension written in Java -->
+    <rule>
+        <key>parent.key.missing</key>
+        <name>Parent Keys Exist</name>
+        <description>Records must exist that have references in other tables</description>
+
+        <!-- path to definition -->
+        <configKey>databaseIntegrityRules.xml/parent.key.missing</configKey>
+        <priority>BLOCKER</priority>
+        <!-- Default priority ("severity"). It can be changed while activating the rule in Quality profile -->
+        <!-- Possible values are: INFO, MINOR, MAJOR, CRITICAL, BLOCKER. Default value is MAJOR -->
+        <!--<priority>MAJOR</priority>-->
+    </rule>
+
+
+    <rule>
+        <key>table.mapping</key>
+        <name>Tables must exist for all Constraints</name>
+        <description>Foreign and Local tables must exist AND must be tables (could be a view).  Fixing violations will require modifying missing_FK_query.sql</description>
+
+        <configKey>databaseIntegrityRules.xml/table.mappin</configKey>
+        <priority>CRITICAL</priority>
+
+    </rule>
+</rules>

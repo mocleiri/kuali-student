@@ -1,8 +1,11 @@
-package org.kuali.student.sonar.database;
+package org.kuali.student.sonar.database.plugin;
 
 import org.apache.commons.lang.StringUtils;
 import org.kuali.student.sonar.database.exception.*;
 import org.kuali.student.sonar.database.utility.FKGenerationUtil;
+import org.sonar.api.resources.Language;
+import org.sonar.api.resources.Resource;
+import org.sonar.api.resources.Scopes;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,7 +20,7 @@ import java.sql.Statement;
  *
  * Entity class for managing FK Constraints
  */
-public class ForeignKeyConstraint {
+public class ForeignKeyConstraint extends Resource{
     public String localTable;
     public String localColumn;
     public String foreignTable;
@@ -30,6 +33,8 @@ public class ForeignKeyConstraint {
         this.foreignTable = foreignTable;
         this.foreignColumn = foreignColumn;
         this.constraintName = constraintName;
+
+        this.setKey("foreign.key.constraint.resource");
     }
 
     /** Assumes the resultset contains the field names
@@ -47,6 +52,8 @@ public class ForeignKeyConstraint {
         if (constraintName == null) {
             constraintName = "";
         }
+
+        this.setKey("foreign.key.constraint.resource");
     }
 
     public String toString() {
@@ -124,4 +131,46 @@ public class ForeignKeyConstraint {
 
     }
 
+    @Override
+    public String getName() {
+        return constraintName;
+    }
+
+    @Override
+    public String getLongName() {
+        return constraintName;
+    }
+
+    @Override
+    public String getDescription() {
+        return toString();
+    }
+
+    @Override
+    public Language getLanguage() {
+        return null;  //TODO: implement this
+    }
+
+    @Override
+    public String getScope() {
+        // scope is impex dir so it doesn't try to impex it
+        return Scopes.DIRECTORY;
+    }
+
+    @Override
+    public String getQualifier() {
+        //TODO: figure out what this does and implement it properly
+        // required field for DB
+        return "qualifier";
+    }
+
+    @Override
+    public Resource getParent() {
+        return null;  //TODO: implement this
+    }
+
+    @Override
+    public boolean matchFilePattern(String s) {
+        return false;  //TODO: implement this
+    }
 }

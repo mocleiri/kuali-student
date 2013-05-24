@@ -1,6 +1,6 @@
 package org.kuali.student.sonar.database.utility;
 
-import org.kuali.student.sonar.database.ForeignKeyConstraint;
+import org.kuali.student.sonar.database.plugin.ForeignKeyConstraint;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -88,7 +88,7 @@ public class FKGenerationUtil {
                 "WHERE l.constraint_name LIKE '" + fkPrefix + "%'";
 
         Statement stmt = null;
-        ArrayList<ForeignKeyConstraint> constraintList = new ArrayList<>();
+        ArrayList<ForeignKeyConstraint> constraintList = new ArrayList<ForeignKeyConstraint>();
 
         try {
             stmt= conn.createStatement();
