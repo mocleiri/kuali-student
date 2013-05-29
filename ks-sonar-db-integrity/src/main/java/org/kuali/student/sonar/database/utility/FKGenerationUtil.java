@@ -29,14 +29,14 @@ public class FKGenerationUtil {
      * @param filename the path in the classpath to get the file
      * @return the SQL statement from the file
      */
-    public static String getSqlFromFile(String filename) {
+    public static String getFileContents(String filename, ClassLoader classLoader) {
         InputStream is;
         String sql;
         byte[] b;
 
-        is = ClassLoader.getSystemResourceAsStream(filename);
+        is = classLoader.getResourceAsStream(filename);
         if (is == null) {
-            throw new RuntimeException("error reading file " + filename);
+            throw new RuntimeException("file not found: " + filename);
         }
 
         try {

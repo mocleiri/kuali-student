@@ -1,0 +1,6 @@
+1. place the jar created by this pom in the sonar server's extionsions/plugins directory
+2. restart the server
+3. log in as an administrator (default admin/admin)
+4. enable new rules in profiler (under repository dbi)
+5. add oracle drive to runner lib
+
