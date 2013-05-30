@@ -47,9 +47,9 @@ public class DatabaseIntegritySensor implements Sensor {
         validator = new FKConstraintValidator();
 
         validator.setDbDriver("oracle.jdbc.driver.OracleDriver");
-        validator.setDbUrl("jdbc:oracle:thin:@lsymms-dev.no-ip.org:1521:xe");
-        validator.setDbUser("KSBUNDLED");
-        validator.setDbPassword("KSBUNDLED");
+        validator.setDbUrl("jdbc:oracle:thin:@localhost:1521:xe");
+        validator.setDbUser("JDBCTEST");
+        validator.setDbPassword("JDBCTEST");
 
         initializeJsLint();
 
@@ -123,6 +123,8 @@ public class DatabaseIntegritySensor implements Sensor {
     }
 
     private void saveViolation(String tableMappingRuleKey, ForeignKeyConstraint constraint, SensorContext sensorContext) {
+        LOG.info("SAVING VIOLATION WITH KEY " + tableMappingRuleKey);
+        System.out.println("*****  SAVING VIOLATION WITH KEY " + tableMappingRuleKey + " ***** ");
         Violation violation = Violation.create(
                 ruleFinder.findByKey(
                         DatabseIntegrityRulesRepository.REPOSITORY_KEY,

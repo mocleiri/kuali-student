@@ -23,4 +23,20 @@
         <priority>CRITICAL</priority>
 
     </rule>
+
+    <rule>
+        <key>schemaCompare.MISSING_TABLE</key>
+        <name>Table Missing</name>
+        <description>Table definitions must exist in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/MISSING_TABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+    <rule>
+        <key>schemaCompare.TABLE_DESCRIPTION</key>
+        <name>Table Missing</name>
+        <description>Table comment must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/MISSING_TABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
 </rules>

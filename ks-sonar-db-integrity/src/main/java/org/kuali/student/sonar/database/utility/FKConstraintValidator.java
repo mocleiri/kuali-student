@@ -1,8 +1,11 @@
 package org.kuali.student.sonar.database.utility;
 
+import org.kuali.common.util.LocationUtils;
 import org.kuali.student.sonar.database.exception.*;
 import org.kuali.student.sonar.database.plugin.ForeignKeyConstraint;
+import org.sonar.api.scan.filesystem.PathResolver;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,7 +89,7 @@ public class FKConstraintValidator {
 
     public String getMissing_FK_query_sql_filename() {
         if (missing_FK_query_sql_filename == null) {
-            missing_FK_query_sql_filename = "sql/missing_FK_query.sql";
+            missing_FK_query_sql_filename = "missing_FK_query.sql";
         }
         return missing_FK_query_sql_filename;
     }
@@ -94,7 +97,8 @@ public class FKConstraintValidator {
 
     public FKConstraintReport runFKSQL(ClassLoader classLoader) throws SQLException {
 
-        String sql = FKGenerationUtil.getFileContents(getMissing_FK_query_sql_filename(), classLoader);
+        String sql = LocationUtils.toString(new PathResolver().relativeFile(new File("sql/"), getMissing_FK_query_sql_filename()));
+
         Statement stmt = null;
         ResultSet result = null;
         // TODO: KSENROLL-6924 create a report structure and move out of test
@@ -110,7 +114,7 @@ public class FKConstraintValidator {
 
             result = stmt.executeQuery(sql);
 
-            while(result.next()){
+            while (result.next()) {
                 ForeignKeyConstraint constraint = new ForeignKeyConstraint(result);
                 if (result.getString("owner") == null) {
                     report.addFieldMappingIssue(constraint);
@@ -122,8 +126,12 @@ public class FKConstraintValidator {
         } catch (SQLException e) {
             throw new SQLException("error running missing FK sql. ", e);
         } finally {
-            if (stmt != null) { stmt.close(); }
-            if (result != null) { result.close(); }
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (result != null) {
+                result.close();
+            }
         }
 
         System.out.println("Adding constraints and detecting issues");

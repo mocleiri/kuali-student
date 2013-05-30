@@ -24,32 +24,6 @@ public class FKGenerationUtil {
     private static final String fkPrefix = "DB_INGRTY_CHK_FK_";
 
     /*
-     * Loads the SQL from a resource file.  Assumes a single statement
-     *
-     * @param filename the path in the classpath to get the file
-     * @return the SQL statement from the file
-     */
-    public static String getFileContents(String filename, ClassLoader classLoader) {
-        InputStream is;
-        String sql;
-        byte[] b;
-
-        is = classLoader.getResourceAsStream(filename);
-        if (is == null) {
-            throw new RuntimeException("file not found: " + filename);
-        }
-
-        try {
-            b = new byte[is.available()];
-            is.read(b);
-            sql = new String(b);
-        } catch (IOException e) {
-            throw new RuntimeException("error reading file " + filename, e);
-        }
-        return sql;
-    }
-
-    /*
      * Returns a String to add a FK Constraint base on fkConstraint values.
      * This will generate a FK name based on a static seq and a prefix.
      * Generally you want Constraint names to be meaningful but in this case

@@ -36,15 +36,15 @@ public class TestDatabaseIntegrityScript {
     public void init() {
         validator = new FKConstraintValidator();
         validator.setDbDriver("oracle.jdbc.driver.OracleDriver");
-        validator.setDbUrl("jdbc:oracle:thin:@lsymms-dev.no-ip.org:1521:xe");
-        validator.setDbUser("KSBUNDLED");
-        validator.setDbPassword("KSBUNDLED");
+        validator.setDbUrl("jdbc:oracle:thin:@localhost:1521:xe");
+        validator.setDbUser("JDBCTEST");
+        validator.setDbPassword("JDBCTEST");
     }
 
     @Test
     public void testFKSQL() throws SQLException {
 
-        FKConstraintReport report = validator.runFKSQL();
+        FKConstraintReport report = validator.runFKSQL(Thread.currentThread().getContextClassLoader());
 
         System.out.println("\n****    Done Adding constraints and Detecting Orphaned Data    *****\n");
 
