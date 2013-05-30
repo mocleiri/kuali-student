@@ -2,7 +2,7 @@
   <configuration default="false" name="BSINAS Tomcat 7" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 7">
     <option name="OPEN_IN_BROWSER" value="false" />
     <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/bsinas" />
-    <option name="COMMON_VM_ARGUMENTS" value="-mx1024m -ms512m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512m" />
+    <option name="COMMON_VM_ARGUMENTS" value="-mx1024m -ms512m -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=512m -Dcom.sun.xml.ws.transport.http.client.HttpTransportPipe.dump=true" />
     <option name="UPDATING_POLICY" value="restart-server" />
     <deployment>
       <artifact name="bsinas:war exploded">

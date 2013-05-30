@@ -10,6 +10,6 @@ import com.sigmasys.bsinas.gwt.client.model.ReferenceData;
  */
 public interface GwtBsinasServiceAsync {
 
-    void runEngine(String requestXml, AsyncCallback<String> callback);
+    void runEngine(String requestXml, int year, AsyncCallback<String> callback);
 
 }

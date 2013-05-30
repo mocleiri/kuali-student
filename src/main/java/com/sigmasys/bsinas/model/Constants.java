@@ -1,7 +1,7 @@
 package com.sigmasys.bsinas.model;
 
 /**
- * KSA commonly used constants.
+ * BSINAS commonly used constants.
  *
  * @author Michael Ivanov
  */
@@ -14,7 +14,8 @@ public interface Constants {
     String LOCALE_COUNTRY_PARAM_NAME = "bsinas.locale.country";
 
     // BSINAS parameter names
-    String BSINAS_WSDL_URL_PARAM_NAME = "bsinas.wsdl.url";
+    String BSINAS_2012_WSDL_URL_PARAM_NAME = "bsinas.2012.wsdl.url";
+    String BSINAS_2013_WSDL_URL_PARAM_NAME = "bsinas.2013.wsdl.url";
     String LOGGING_ENABLED_PARAM_NAME = "bsinas.logging.enabled";
 
     // ---------------------------------------------------------------

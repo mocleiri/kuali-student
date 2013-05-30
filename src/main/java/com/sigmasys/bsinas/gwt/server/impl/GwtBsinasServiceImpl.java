@@ -9,8 +9,6 @@ import com.sigmasys.bsinas.service.BsinasService;
 import com.sigmasys.bsinas.util.ErrorUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.collegeboard.inas._2012.input.NeedAnalysisInput;
-import org.collegeboard.inas._2012.output.NeedAnalysisOutput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,11 +30,9 @@ public class GwtBsinasServiceImpl extends AbstractRemoteService implements GwtBs
     private BsinasService bsinasService;
 
     @Override
-    public String runEngine(String inputXml) throws GwtError {
+    public String runEngine(String inputXml, int year) throws GwtError {
         try {
-            NeedAnalysisInput input = bsinasService.fromXml(inputXml, NeedAnalysisInput.class);
-            NeedAnalysisOutput output = bsinasService.runEngine(input);
-            return bsinasService.toXml(output);
+            return bsinasService.runEngine(inputXml, year);
         } catch (Throwable t) {
             logger.error(t.getMessage(), t);
             throw new GwtError(ErrorUtils.getMessage(t));

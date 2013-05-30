@@ -8,6 +8,7 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/com/extjs/gxt/2.2.5-gwt22/gxt-2.2.5-gwt22-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/extjs/gxt/2.2.5-gwt22/gxt-2.2.5-gwt22.jar!/" />
     </SOURCES>
   </library>
 </component>

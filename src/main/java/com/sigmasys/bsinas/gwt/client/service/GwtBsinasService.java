@@ -17,8 +17,9 @@ public interface GwtBsinasService extends RemoteService {
      * Runs NeedAnalysisXmlEngine and returns the result.
      *
      * @param inputXml XML request
+     * @param year Award year
      * @return XML response as java.util.String
      */
-    String runEngine(String inputXml) throws GwtError;
+    String runEngine(String inputXml, int year) throws GwtError;
 
 }
