@@ -48,8 +48,8 @@ public class DatabaseIntegritySensor implements Sensor {
 
         validator.setDbDriver("oracle.jdbc.driver.OracleDriver");
         validator.setDbUrl("jdbc:oracle:thin:@localhost:1521:xe");
-        validator.setDbUser("JDBCTEST");
-        validator.setDbPassword("JDBCTEST");
+        validator.setDbUser("KSAPP");
+        validator.setDbPassword("KSAPP");
 
         initializeJsLint();
 
@@ -93,44 +93,53 @@ public class DatabaseIntegritySensor implements Sensor {
 
         if (report != null) {
             for (ForeignKeyConstraint constraint : report.getFieldMappingIssues()) {
-                System.out.println("FIELD MAPPING ISSUE: Field does not exists (" +
+                LOG.debug("FIELD MAPPING ISSUE: Field does not exists (" +
                         constraint.foreignTable + "." +
                         constraint.foreignColumn + ")");
+                saveViolation(DatabseIntegrityRulesRepository.FIELD_MAPPING_RULE_KEY,
+                        constraint,
+                        sensorContext);
             }
 
             for (ForeignKeyConstraint constraint : report.getTableMappingIssues()) {
+                LOG.debug("TABLE MAPPING ISSUE: " + constraint.toString());
                 saveViolation(DatabseIntegrityRulesRepository.TABLE_MAPPING_RULE_KEY,
-                                constraint,
-                                sensorContext);
+                        constraint,
+                        sensorContext);
             }
 
             for (ForeignKeyConstraint constraint : report.getColumnTypeIncompatabilityIssues()) {
-                System.out.println("COLUMN TYPE INCOMPATIBILITY ISSUE: " +
-                        constraint.toString());
+                LOG.debug("COLUMN TYPE INCOMPATIBILITY ISSUE: " + constraint.toString());
+                saveViolation(DatabseIntegrityRulesRepository.COLUMN_TYPE_RULE_KEY,
+                        constraint,
+                        sensorContext);
             }
 
             for (ForeignKeyConstraint constraint : report.getOrphanedDataIssues()) {
+                LOG.debug("PARENT KEY MISSING: " + constraint.toString());
                 saveViolation(DatabseIntegrityRulesRepository.PARENT_KEY_MISSING_RULE_KEY,
                         constraint,
                         sensorContext);
             }
 
             for (ForeignKeyConstraint constraint : report.getOtherIssues()) {
-                System.out.println("UNHANDLED CONSTRAINT MAPPING ISSUE: " +
-                        constraint.toString() + " (see log for more details)");
+                LOG.debug("UNHANDLED CONSTRAINT MAPPING ISSUE: " + constraint.toString() + " (see log for more details)");
+                saveViolation(DatabseIntegrityRulesRepository.CONSTRAINT_MAPPING_RULE_KEY,
+                        constraint,
+                        sensorContext);
             }
         }
     }
 
     private void saveViolation(String tableMappingRuleKey, ForeignKeyConstraint constraint, SensorContext sensorContext) {
         LOG.info("SAVING VIOLATION WITH KEY " + tableMappingRuleKey);
-        System.out.println("*****  SAVING VIOLATION WITH KEY " + tableMappingRuleKey + " ***** ");
         Violation violation = Violation.create(
                 ruleFinder.findByKey(
                         DatabseIntegrityRulesRepository.REPOSITORY_KEY,
-                        DatabseIntegrityRulesRepository.PARENT_KEY_MISSING_RULE_KEY
+                        tableMappingRuleKey
                 ),
-                constraint);
+                new org.sonar.api.resources.File(FKConstraintValidator.FK_QUERY_PATH, validator.getMissing_FK_query_sql_filename()));
+        violation.setMessage(constraint.toString());
         sensorContext.saveViolation(violation);
     }
 

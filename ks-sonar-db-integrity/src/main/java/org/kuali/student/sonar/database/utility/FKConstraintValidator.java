@@ -26,6 +26,8 @@ public class FKConstraintValidator {
     private String dbPassword;
     private String dbDriver;
 
+    public static final String FK_QUERY_PATH = "sql/";
+
     public String getDbUrl() {
         return dbUrl;
     }
@@ -97,7 +99,7 @@ public class FKConstraintValidator {
 
     public FKConstraintReport runFKSQL(ClassLoader classLoader) throws SQLException {
 
-        String sql = LocationUtils.toString(new PathResolver().relativeFile(new File("sql/"), getMissing_FK_query_sql_filename()));
+        String sql = LocationUtils.toString(new PathResolver().relativeFile(new File(FK_QUERY_PATH), getMissing_FK_query_sql_filename()));
 
         Statement stmt = null;
         ResultSet result = null;

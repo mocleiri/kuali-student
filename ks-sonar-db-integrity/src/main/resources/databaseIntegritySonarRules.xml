@@ -18,25 +18,223 @@
         <key>table.mapping</key>
         <name>Tables must exist for all Constraints</name>
         <description>Foreign and Local tables must exist AND must be tables (could be a view).  Fixing violations will require modifying missing_FK_query.sql</description>
-
-        <configKey>databaseIntegrityRules.xml/table.mappin</configKey>
+        <configKey>databaseIntegrityRules.xml/table.mapping</configKey>
         <priority>CRITICAL</priority>
 
     </rule>
 
     <rule>
-        <key>schemaCompare.MISSING_TABLE</key>
-        <name>Table Missing</name>
-        <description>Table definitions must exist in both KS and DDL schemas</description>
-        <configKey>databaseIntegrityRules.xml/MISSING_TABLE</configKey>
+        <key>field.mapping</key>
+        <name>Field Mapping Issue</name>
+        <description>Field Mapping Issue - Foreign key owner does not exist</description>
+        <configKey>databaseIntegrityRules.xml/field.mapping</configKey>
         <priority>MAJOR</priority>
     </rule>
 
     <rule>
-        <key>schemaCompare.TABLE_DESCRIPTION</key>
-        <name>Table Missing</name>
-        <description>Table comment must be the same in both KS and DDL schemas</description>
-        <configKey>databaseIntegrityRules.xml/MISSING_TABLE</configKey>
+        <key>column.type</key>
+        <name>Incompatible Column Type</name>
+        <description>Column Types are incompatible</description>
+        <configKey>databaseIntegrityRules.xml/column.type</configKey>
         <priority>MAJOR</priority>
     </rule>
+
+    <rule>
+        <key>constraint.mapping</key>
+        <name>Unhandled Constraint Mapping</name>
+        <description>Unhandled constraint mapping issue</description>
+        <configKey>databaseIntegrityRules.xml/constraint.mapping</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+
+    <rule>
+        <key>schemaCompare.table.MISSING_TABLE</key>
+        <name>Table Missing</name>
+        <description>Table definitions must exist in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.table.MISSING_TABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+    <rule>
+        <key>schemaCompare.table.TABLE_DESCRIPTION</key>
+        <name>Same Table Comment</name>
+        <description>Table comment must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.table.MISSING_TABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+    <rule>
+        <key>schemaCompare.table.COLUMN_DATA_TYPE</key>
+        <name>Same Column Data Type</name>
+        <description>Column data type must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.table.COLUMN_DATA_TYPE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>schemaCompare.table.COLUMN_PRIMARY_KEY</key>
+        <name>Same Primary Key Flag</name>
+        <description>Column primary key state be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.table.COLUMN_PRIMARY_KEY</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>schemaCompare.table.COLUMN_NULLABLE</key>
+        <name>Same COLUMN_NULLABLE</name>
+        <description>Column nullable state must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.table.COLUMN_NULLABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>schemaCompare.table.COLUMN_DATA_TYPE_SIZE</key>
+        <name>Same Column Data Type Size</name>
+        <description>Column Data Type Size must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.table.COLUMN_DATA_TYPE_SIZE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>schemaCompare.table.COLUMN_DESCRIPTION</key>
+        <name>Same Column Description</name>
+        <description>Column Description must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.table.MISSING_TABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>schemaCompare.table.COLUMN_DEFAULT_VALUE</key>
+        <name>Same Column Default Value</name>
+        <description>Column Default Value must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.table.MISSING_TABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>schemaCompare.table.MISSING_COLUMN</key>
+        <name>Column Missing</name>
+        <description>Column definitions must exist in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.table.MISSING_TABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>schemaCompare.table.UNIQUE_CONSTRAINT_COLUMNS</key>
+        <name>Same Unique Constraint Columns</name>
+        <description>Unique Constraint Columns must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.table.MISSING_TABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>schemaCompare.table.MISSING_UNIQUE_CONSTRAINT</key>
+        <name>Unique Constraint Missing</name>
+        <description>Unique Constraint must exist in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.table.MISSING_TABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>schemaCompare.table.INDEX_COLUMNS</key>
+        <name>Same Index Columns</name>
+        <description>Index Columns must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.table.MISSING_TABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>schemaCompare.table.INDEX_UNIQUE</key>
+        <name>Same Index Unique</name>
+        <description>Index Unique state must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.table.MISSING_TABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+    <rule>
+        <key>schemaCompare.table.MISSING_INDEX</key>
+        <name>Index Missing</name>
+        <description>Index must exist in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.table.MISSING_TABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+    <rule>
+        <key>schemaCompare.view.MISSING_VIEW</key>
+        <name>View Missing</name>
+        <description>View must exist in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.view.MISSING_VIEW</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+    <rule>
+        <key>schemaCompare.view.QUERY_STRING</key>
+        <name>Same Index Unique</name>
+        <description>Index Unique state must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.view.QUERY_STRING</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+    <rule>
+        <key>schemaCompare.sequence.MISSING_SEQUENCE</key>
+        <name>Sequence Missing</name>
+        <description>Sequence must exist in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.sequence.MISSING_SEQUENCE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+    <rule>
+        <key>schemaCompare.sequence.START_VALUE</key>
+        <name>Same Start Value</name>
+        <description>Start Value must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.sequence.START_VALUE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+    <rule>
+        <key>schemaCompare.foreignKey.MISSING_FOREIGN_KEY</key>
+        <name>Foreign Key Missing</name>
+        <description>Foreign Key must exist in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.foreignKey.MISSING_SEQUENCE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+    <rule>
+        <key>schemaCompare.foreignKey.FOREIGN_TABLE</key>
+        <name>Same Foreign Table</name>
+        <description>Foreign Table must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.foreignKey.FOREIGN_TABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+    <rule>
+        <key>schemaCompare.foreignKey.LOCAL_COLUMNS</key>
+        <name>Same Local Columns</name>
+        <description>Local Columns must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.foreignKey.LOCAL_COLUMNS</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+    <rule>
+        <key>schemaCompare.foreignKey.FOREIGN_COLUMNS</key>
+        <name>Same Foreign Columns</name>
+        <description>Foreign Columns must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.foreignKey.FOREIGN_COLUMNS</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+    <rule>
+        <key>schemaCompare.foreignKey.ON_DELETE</key>
+        <name>Same On Delete Clause</name>
+        <description>On Delete Clause must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.foreignKey.ON_DELETE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+    <rule>
+        <key>schemaCompare.foreignKey.ON_UPDATE</key>
+        <name>Same On Update Clause</name>
+        <description>On Update Clause must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.foreignKey.ON_UPDATE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
+    <rule>
+        <key>schemaCompare.foreignKey.LOCAL_TABLE</key>
+        <name>Same Local Table</name>
+        <description>Local Table must be the same in both KS and DDL schemas</description>
+        <configKey>databaseIntegrityRules.xml/schemaCompare.foreignKey.LOCAL_TABLE</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
 </rules>
