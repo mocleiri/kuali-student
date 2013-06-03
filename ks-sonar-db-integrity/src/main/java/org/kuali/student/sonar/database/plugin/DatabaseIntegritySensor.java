@@ -1,30 +1,28 @@
 package org.kuali.student.sonar.database.plugin;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.xml.bind.JAXBException;
+
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
+import org.kuali.common.jalc.model.compare.SchemaCompareResult;
+import org.kuali.common.jalc.model.compare.TableDifference;
+import org.kuali.common.jalc.model.util.CompareUtils;
 import org.kuali.student.sonar.database.exception.MissingFieldException;
 import org.kuali.student.sonar.database.utility.FKConstraintReport;
 import org.kuali.student.sonar.database.utility.FKConstraintValidator;
+import org.kuali.student.sonar.database.utility.SchemaEqualityValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
-import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.ActiveRule;
-import org.sonar.api.rules.ActiveRuleParam;
-import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
 import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.rules.Violation;
@@ -92,54 +90,76 @@ public class DatabaseIntegritySensor implements Sensor {
         }
 
         if (report != null) {
+            File sqlFileResource = new File(FKConstraintValidator.FK_QUERY_PATH, validator.getMissing_FK_query_sql_filename());
+
             for (ForeignKeyConstraint constraint : report.getFieldMappingIssues()) {
                 LOG.debug("FIELD MAPPING ISSUE: Field does not exists (" +
                         constraint.foreignTable + "." +
                         constraint.foreignColumn + ")");
                 saveViolation(DatabseIntegrityRulesRepository.FIELD_MAPPING_RULE_KEY,
-                        constraint,
-                        sensorContext);
+                        constraint.toString(),
+                        sensorContext, sqlFileResource);
             }
 
             for (ForeignKeyConstraint constraint : report.getTableMappingIssues()) {
                 LOG.debug("TABLE MAPPING ISSUE: " + constraint.toString());
                 saveViolation(DatabseIntegrityRulesRepository.TABLE_MAPPING_RULE_KEY,
-                        constraint,
-                        sensorContext);
+                        constraint.toString(),
+                        sensorContext, sqlFileResource);
             }
 
             for (ForeignKeyConstraint constraint : report.getColumnTypeIncompatabilityIssues()) {
                 LOG.debug("COLUMN TYPE INCOMPATIBILITY ISSUE: " + constraint.toString());
                 saveViolation(DatabseIntegrityRulesRepository.COLUMN_TYPE_RULE_KEY,
-                        constraint,
-                        sensorContext);
+                        constraint.toString(),
+                        sensorContext, sqlFileResource);
             }
 
             for (ForeignKeyConstraint constraint : report.getOrphanedDataIssues()) {
                 LOG.debug("PARENT KEY MISSING: " + constraint.toString());
                 saveViolation(DatabseIntegrityRulesRepository.PARENT_KEY_MISSING_RULE_KEY,
-                        constraint,
-                        sensorContext);
+                        constraint.toString(),
+                        sensorContext, sqlFileResource);
             }
 
             for (ForeignKeyConstraint constraint : report.getOtherIssues()) {
                 LOG.debug("UNHANDLED CONSTRAINT MAPPING ISSUE: " + constraint.toString() + " (see log for more details)");
                 saveViolation(DatabseIntegrityRulesRepository.CONSTRAINT_MAPPING_RULE_KEY,
-                        constraint,
-                        sensorContext);
+                        constraint.toString(),
+                        sensorContext, sqlFileResource);
             }
         }
+
+        SchemaEqualityValidator schemaValidator = new SchemaEqualityValidator();
+        SchemaCompareResult compareResult = null;
+        try {
+            compareResult = schemaValidator.compareSchemas();
+        } catch (JAXBException e) {
+            LOG.error("Could not load schema for comparison: " + e.getMessage(), e);
+        } catch (IOException e) {
+            LOG.error("Could not load schema for comparison: " + e.getMessage(), e);
+        }
+
+        if(compareResult != null) {
+            File xmlSchemaResource = new File(SchemaEqualityValidator.SCHEMA_FOLDER, SchemaEqualityValidator.SCHEMA_1_FILENAME);
+            String keyPrefix = "schemaCompare.table.";
+
+            for (TableDifference t : compareResult.getTableDifferences()) {
+                saveViolation(keyPrefix + t.getType().toString(), CompareUtils.tableDifferenceToString(t), sensorContext, xmlSchemaResource);
+            }
+        }
+
     }
 
-    private void saveViolation(String tableMappingRuleKey, ForeignKeyConstraint constraint, SensorContext sensorContext) {
-        LOG.info("SAVING VIOLATION WITH KEY " + tableMappingRuleKey);
+    private void saveViolation(String ruleKey, String message, SensorContext sensorContext, Resource resource) {
+        LOG.info("SAVING VIOLATION WITH KEY " + ruleKey);
         Violation violation = Violation.create(
                 ruleFinder.findByKey(
                         DatabseIntegrityRulesRepository.REPOSITORY_KEY,
-                        tableMappingRuleKey
+                        ruleKey
                 ),
-                new org.sonar.api.resources.File(FKConstraintValidator.FK_QUERY_PATH, validator.getMissing_FK_query_sql_filename()));
-        violation.setMessage(constraint.toString());
+                resource);
+        violation.setMessage(message);
         sensorContext.saveViolation(violation);
     }
 

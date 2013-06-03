@@ -80,7 +80,7 @@
     </rule>
     <rule>
         <key>schemaCompare.table.COLUMN_NULLABLE</key>
-        <name>Same COLUMN_NULLABLE</name>
+        <name>Same Column Nullable</name>
         <description>Column nullable state must be the same in both KS and DDL schemas</description>
         <configKey>databaseIntegrityRules.xml/schemaCompare.table.COLUMN_NULLABLE</configKey>
         <priority>MAJOR</priority>

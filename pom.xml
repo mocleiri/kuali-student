@@ -13,6 +13,11 @@
     <name>KS Sonar</name>
     <description>KS Sonar Plugins</description>
     <packaging>pom</packaging>
+
+    <properties>
+        <kuali-jalc.version>3.0-SNAPSHOT</kuali-jalc.version>
+    </properties>
+
     <profiles>
         <profile>
             <id>default</id>
@@ -30,6 +35,21 @@
                 <groupId>org.codehaus.sonar</groupId>
                 <artifactId>sonar-plugin-api</artifactId>
                 <version>3.5</version>
+            </dependency>
+            <dependency>
+                <groupId>org.kuali.common</groupId>
+                <artifactId>kuali-util</artifactId>
+                <version>${kuali-util.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.kuali.common</groupId>
+                <artifactId>kuali-jalc-model</artifactId>
+                <version>${kuali-jalc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.kuali.common</groupId>
+                <artifactId>kuali-jalc-producer</artifactId>
+                <version>${kuali-jalc.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

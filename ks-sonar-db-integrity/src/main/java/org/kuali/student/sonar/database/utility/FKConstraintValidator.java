@@ -11,13 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-/**
- * Created with IntelliJ IDEA.
- * User: lsymms
- * Date: 5/28/13
- * Time: 4:28 PM
- * To change this template use File | Settings | File Templates.
- */
 public class FKConstraintValidator {
     private Connection conn;
     private String missing_FK_query_sql_filename;
