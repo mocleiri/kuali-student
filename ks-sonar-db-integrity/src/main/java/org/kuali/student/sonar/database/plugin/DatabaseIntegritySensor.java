@@ -7,9 +7,12 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 
 import org.apache.commons.configuration.Configuration;
-import org.kuali.common.jalc.model.compare.SchemaCompareResult;
-import org.kuali.common.jalc.model.compare.TableDifference;
-import org.kuali.common.jalc.model.util.CompareUtils;
+import org.kuali.common.impex.model.compare.ForeignKeyDifference;
+import org.kuali.common.impex.model.compare.SchemaCompareResult;
+import org.kuali.common.impex.model.compare.SequenceDifference;
+import org.kuali.common.impex.model.compare.TableDifference;
+import org.kuali.common.impex.model.compare.ViewDifference;
+import org.kuali.common.impex.model.util.CompareUtils;
 import org.kuali.student.sonar.database.exception.MissingFieldException;
 import org.kuali.student.sonar.database.utility.FKConstraintReport;
 import org.kuali.student.sonar.database.utility.FKConstraintValidator;
@@ -31,6 +34,10 @@ import org.sonar.api.rules.Violation;
 public class DatabaseIntegritySensor implements Sensor {
 
     private static final Logger LOG = LoggerFactory.getLogger(DatabaseIntegritySensor.class);
+    protected static final String TABLE_KEY_PREFIX = "schemaCompare.table.";
+    protected static final String VIEW_KEY_PREFIX = "schemaCompare.view.";
+    protected static final String SEQUENCE_KEY_PREFIX = "schemaCompare.sequence.";
+    protected static final String FOREIGNKEY_KEY_PREFIX = "schemaCompare.foreignKey.";
 
     private Configuration configuration;
     private RulesProfile rulesProfile;
@@ -51,15 +58,6 @@ public class DatabaseIntegritySensor implements Sensor {
 
         initializeJsLint();
 
-    }
-
-    private boolean isActivated(String ruleKey, List<ActiveRule> rules) {
-        for (ActiveRule rule : rules) {
-            if (ruleKey.equals(rule.getRuleKey())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void analyse(Project project, SensorContext sensorContext) {
@@ -130,28 +128,52 @@ public class DatabaseIntegritySensor implements Sensor {
             }
         }
 
+        findSchemaCompareViolations(sensorContext);
+
+    }
+
+    protected void findSchemaCompareViolations(SensorContext sensorContext) {
         SchemaEqualityValidator schemaValidator = new SchemaEqualityValidator();
-        SchemaCompareResult compareResult = null;
+        SchemaCompareResult schemaCompareResult = null;
+        SchemaCompareResult constraintCompareResult = null;
         try {
-            compareResult = schemaValidator.compareSchemas();
+            schemaCompareResult = schemaValidator.compareSchemas();
+            constraintCompareResult = schemaValidator.compareConstraints();
         } catch (JAXBException e) {
             LOG.error("Could not load schema for comparison: " + e.getMessage(), e);
         } catch (IOException e) {
             LOG.error("Could not load schema for comparison: " + e.getMessage(), e);
         }
 
-        if(compareResult != null) {
-            File xmlSchemaResource = new File(SchemaEqualityValidator.SCHEMA_FOLDER, SchemaEqualityValidator.SCHEMA_1_FILENAME);
-            String keyPrefix = "schemaCompare.table.";
+        if(schemaCompareResult != null) {
+            File xmlSchemaResource = new File(SchemaEqualityValidator.KS_SCHEMA_PATH, SchemaEqualityValidator.KS_SCHEMA_FILENAME);
+            String keyPrefix = TABLE_KEY_PREFIX;
 
-            for (TableDifference t : compareResult.getTableDifferences()) {
+            for (TableDifference t : schemaCompareResult.getTableDifferences()) {
                 saveViolation(keyPrefix + t.getType().toString(), CompareUtils.tableDifferenceToString(t), sensorContext, xmlSchemaResource);
+            }
+
+            keyPrefix = VIEW_KEY_PREFIX;
+            for (ViewDifference v : schemaCompareResult.getViewDifferences()) {
+                saveViolation(keyPrefix + v.getType().toString(), CompareUtils.viewDifferenceToString(v), sensorContext, xmlSchemaResource);
+            }
+
+            keyPrefix = SEQUENCE_KEY_PREFIX;
+            for (SequenceDifference s : schemaCompareResult.getSequenceDifferences()) {
+                saveViolation(keyPrefix + s.getType().toString(), CompareUtils.sequenceDifferenceToString(s), sensorContext, xmlSchemaResource);
             }
         }
 
+        if(constraintCompareResult != null) {
+            File xmlSchemaResource = new File(SchemaEqualityValidator.KS_SCHEMA_PATH, SchemaEqualityValidator.KS_CONSTRAINTS_FILENAME);
+            String keyPrefix = FOREIGNKEY_KEY_PREFIX;
+            for (ForeignKeyDifference f : constraintCompareResult.getForeignKeyDifferences()) {
+                saveViolation(keyPrefix + f.getType(), CompareUtils.foreignKeyDifferenceToString(f), sensorContext, xmlSchemaResource);
+            }
+        }
     }
 
-    private void saveViolation(String ruleKey, String message, SensorContext sensorContext, Resource resource) {
+    protected void saveViolation(String ruleKey, String message, SensorContext sensorContext, Resource resource) {
         LOG.info("SAVING VIOLATION WITH KEY " + ruleKey);
         Violation violation = Violation.create(
                 ruleFinder.findByKey(
@@ -161,21 +183,6 @@ public class DatabaseIntegritySensor implements Sensor {
                 resource);
         violation.setMessage(message);
         sensorContext.saveViolation(violation);
-    }
-
-    protected void analyzeConstraint(ForeignKeyConstraint fkConstraint,SensorContext sensorContext) {
-
-
-        Violation violation = Violation.create(
-                ruleFinder.findByKey(
-                        DatabseIntegrityRulesRepository.REPOSITORY_KEY,
-                        DatabseIntegrityRulesRepository.PARENT_KEY_MISSING_RULE_KEY),
-                fkConstraint);
-
-        sensorContext.saveViolation(violation);
-
-
-
     }
 
     public boolean shouldExecuteOnProject(Project project) {

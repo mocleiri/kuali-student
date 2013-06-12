@@ -18,26 +18,43 @@ package org.kuali.student.sonar.database.utility;
 import java.io.IOException;
 import javax.xml.bind.JAXBException;
 
-import org.kuali.common.jalc.ProducerUtils;
-import org.kuali.common.jalc.model.Schema;
-import org.kuali.common.jalc.model.compare.SchemaCompare;
-import org.kuali.common.jalc.model.compare.SchemaCompareResult;
+import org.kuali.common.impex.ProducerUtils;
+import org.kuali.common.impex.model.Schema;
+import org.kuali.common.impex.model.compare.SchemaCompare;
+import org.kuali.common.impex.model.compare.SchemaCompareResult;
 
 public class SchemaEqualityValidator {
 
-    public static final String SCHEMA_FOLDER = "schemaXml/";
-    public static final String SCHEMA_1_FILENAME = "ks-app-schema.xml";
-    public static final String SCHEMA_1_LABEL = "KSAPP";
-    public static final String SCHEMA_2_FILENAME = "ks-ddl-schema.xml";
-    public static final String SCHEMA_2_LABEL = "DDL";
+    public static final String KS_SCHEMA_PATH = "ks-deployments/ks-dbs/ks-impex/ks-impex-app-db/src/main/resources/";
+
+    public static final String KS_SCHEMA_FILENAME = "ks-impex-app-db-schema.xml";
+    public static final String KS_CONSTRAINTS_FILENAME = "ks-impex-app-db-constraints.xml";
+
+
+    public static final String DDL_SCHEMA_PATH = "ks-deployments/ks-dbs/ks-ddl/src/main/resources/org/kuali/student/db/ks-ddl/";
+    public static final String DDL_SCHEMA_FILENAME = "schema.xml";
+    public static final String DDL_CONSTRAINTS_FILENAME = "constraints.xml";
+
+    public static final String KS_SCHEMA_LABEL = "KSAPP";
+    public static final String DDL_SCHEMA_LABEL = "DDL";
 
     public SchemaCompareResult compareSchemas() throws JAXBException, IOException {
-        Schema schema1 = ProducerUtils.unmarshalSchema(SCHEMA_FOLDER + SCHEMA_1_FILENAME);
-        Schema schema2 = ProducerUtils.unmarshalSchema(SCHEMA_FOLDER + SCHEMA_2_FILENAME);
+        Schema ksSchema = ProducerUtils.unmarshalSchema(KS_SCHEMA_PATH + KS_SCHEMA_FILENAME);
+        Schema ddlSchema = ProducerUtils.unmarshalSchema(DDL_SCHEMA_PATH + DDL_SCHEMA_FILENAME);
 
-        schema1.setName(SCHEMA_1_LABEL);
-        schema2.setName(SCHEMA_2_LABEL);
+        ksSchema.setName(KS_SCHEMA_LABEL);
+        ddlSchema.setName(DDL_SCHEMA_LABEL);
 
-        return new SchemaCompare(schema1, schema2).compare();
+        return new SchemaCompare(ksSchema, ddlSchema).compare();
+    }
+
+    public SchemaCompareResult compareConstraints() throws JAXBException, IOException {
+        Schema ksConstraints = ProducerUtils.unmarshalSchema(KS_SCHEMA_PATH + KS_CONSTRAINTS_FILENAME);
+        Schema ddlConstraints = ProducerUtils.unmarshalSchema(DDL_SCHEMA_PATH + DDL_CONSTRAINTS_FILENAME);
+
+        ksConstraints.setName(KS_SCHEMA_LABEL);
+        ddlConstraints.setName(DDL_SCHEMA_LABEL);
+
+        return new SchemaCompare(ksConstraints, ddlConstraints).compare();
     }
 }

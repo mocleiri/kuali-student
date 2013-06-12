@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <kuali-jalc.version>3.0-SNAPSHOT</kuali-jalc.version>
+        <kuali-impex.version>3.0-SNAPSHOT</kuali-impex.version>
     </properties>
 
     <profiles>
@@ -43,13 +43,13 @@
             </dependency>
             <dependency>
                 <groupId>org.kuali.common</groupId>
-                <artifactId>kuali-jalc-model</artifactId>
-                <version>${kuali-jalc.version}</version>
+                <artifactId>kuali-impex-model</artifactId>
+                <version>${kuali-impex.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.kuali.common</groupId>
-                <artifactId>kuali-jalc-producer</artifactId>
-                <version>${kuali-jalc.version}</version>
+                <artifactId>kuali-impex-producer</artifactId>
+                <version>${kuali-impex.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
