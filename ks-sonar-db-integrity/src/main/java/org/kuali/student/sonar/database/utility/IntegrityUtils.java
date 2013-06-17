@@ -15,7 +15,6 @@
 
 package org.kuali.student.sonar.database.utility;
 
-import java.io.File;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -53,15 +52,15 @@ public class IntegrityUtils {
 
     protected static final String SCHEMA_COMPARE_VALIDATION_APP_SCHEMAFILE_KEY = "kuali.student.sonar.schemacompare.app.schemafile";
 
-    protected static final String SCHEMA_COMPARE_VALIDATION_APP_CONSTRAINTSFILE_KEY = "kuali.student.sonar.schemacompare.constraintsfile";
+    protected static final String SCHEMA_COMPARE_VALIDATION_APP_CONSTRAINTSFILE_KEY = "kuali.student.sonar.schemacompare.app.constraintsfile";
 
-    protected static final String SCHEMA_COMPARE_VALIDATION_DDL_NAME_KEY = "kuali.student.sonar.schemacompare.DDL.name";
+    protected static final String SCHEMA_COMPARE_VALIDATION_DDL_NAME_KEY = "kuali.student.sonar.schemacompare.ddl.name";
 
-    protected static final String SCHEMA_COMPARE_VALIDATION_DDL_PATH_KEY = "kuali.student.sonar.schemacompare.DDL.path";
+    protected static final String SCHEMA_COMPARE_VALIDATION_DDL_PATH_KEY = "kuali.student.sonar.schemacompare.ddl.path";
 
-    protected static final String SCHEMA_COMPARE_VALIDATION_DDL_SCHEMAFILE_KEY = "kuali.student.sonar.schemacompare.DDL.schemafile";
+    protected static final String SCHEMA_COMPARE_VALIDATION_DDL_SCHEMAFILE_KEY = "kuali.student.sonar.schemacompare.ddl.schemafile";
 
-    protected static final String SCHEMA_COMPARE_VALIDATION_DDL_CONSTRAINTSFILE_KEY = "kuali.student.sonar.schemacompare.constraintsfile";
+    protected static final String SCHEMA_COMPARE_VALIDATION_DDL_CONSTRAINTSFILE_KEY = "kuali.student.sonar.schemacompare.ddl.constraintsfile";
 
     public static ForeignKeyValidationContext buildForeignKeyValidationContext(Configuration configuration) throws SQLException {
         ForeignKeyValidationContext context = new ForeignKeyValidationContext();
