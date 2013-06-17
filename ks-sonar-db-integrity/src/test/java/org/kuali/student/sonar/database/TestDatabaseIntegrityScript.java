@@ -8,6 +8,7 @@ import org.kuali.student.sonar.database.plugin.ForeignKeyConstraint;
 import org.kuali.student.sonar.database.utility.FKConstraintReport;
 import org.kuali.student.sonar.database.utility.FKConstraintValidator;
 import org.kuali.student.sonar.database.utility.FKGenerationUtil;
+import org.kuali.student.sonar.database.utility.ForeignKeyValidationContext;
 
 
 import java.sql.*;
@@ -33,12 +34,29 @@ public class TestDatabaseIntegrityScript {
     private FKConstraintValidator validator;
 
     @Before
-    public void init() {
+    public void init() throws SQLException {
         validator = new FKConstraintValidator();
-        validator.setDbDriver("oracle.jdbc.driver.OracleDriver");
-        validator.setDbUrl("jdbc:oracle:thin:@localhost:1521:xe");
-        validator.setDbUser("JDBCTEST");
-        validator.setDbPassword("JDBCTEST");
+
+        ForeignKeyValidationContext context = new ForeignKeyValidationContext();
+        context.setSkip(false);
+        context.setQueryFileName("missing_FK_query.sql");
+        context.setQueryFilePath("sql/");
+
+        // attempt to load the driver class to ensure it is in the classpath
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Unable to find DB Driver Class", e);
+        }
+
+        // populate properties for creating connection to the database
+        Properties props = new Properties();
+        props.setProperty("user", "JDBCTEST");
+        props.setProperty("password", "JDBCTEST");
+
+
+        // create a connection to the database using JDBC and set it in the context
+        context.setConnection(DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", props));
     }
 
     @Test

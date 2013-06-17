@@ -28,7 +28,7 @@ public class SchemaEqualityValidator {
     public static final String KS_SCHEMA_PATH = "ks-deployments/ks-dbs/ks-impex/ks-impex-app-db/src/main/resources/";
 
     public static final String KS_SCHEMA_FILENAME = "ks-impex-app-db-schema.xml";
-    public static final String KS_CONSTRAINTS_FILENAME = "ks-impex-app-db-constraints.xml";
+    public static final String KS_CONSTRAINTS_FILENAME = "ks-impex-app-db-constraints-schema.xml";
 
 
     public static final String DDL_SCHEMA_PATH = "ks-deployments/ks-dbs/ks-ddl/src/main/resources/org/kuali/student/db/ks-ddl/";
@@ -38,22 +38,22 @@ public class SchemaEqualityValidator {
     public static final String KS_SCHEMA_LABEL = "KSAPP";
     public static final String DDL_SCHEMA_LABEL = "DDL";
 
-    public SchemaCompareResult compareSchemas() throws JAXBException, IOException {
-        Schema ksSchema = ProducerUtils.unmarshalSchema(KS_SCHEMA_PATH + KS_SCHEMA_FILENAME);
-        Schema ddlSchema = ProducerUtils.unmarshalSchema(DDL_SCHEMA_PATH + DDL_SCHEMA_FILENAME);
+    public SchemaCompareResult compareSchemas(SchemaEqualityValidationContext context) throws JAXBException, IOException {
+        Schema ksSchema = ProducerUtils.unmarshalSchema(context.getAppPath() + context.getAppSchemaFilename());
+        Schema ddlSchema = ProducerUtils.unmarshalSchema(context.getDdlPath() + context.getDdlSchemaFilename());
 
-        ksSchema.setName(KS_SCHEMA_LABEL);
-        ddlSchema.setName(DDL_SCHEMA_LABEL);
+        ksSchema.setName(context.getAppSchemaName());
+        ddlSchema.setName(context.getDdlSchemaName());
 
         return new SchemaCompare(ksSchema, ddlSchema).compare();
     }
 
-    public SchemaCompareResult compareConstraints() throws JAXBException, IOException {
-        Schema ksConstraints = ProducerUtils.unmarshalSchema(KS_SCHEMA_PATH + KS_CONSTRAINTS_FILENAME);
-        Schema ddlConstraints = ProducerUtils.unmarshalSchema(DDL_SCHEMA_PATH + DDL_CONSTRAINTS_FILENAME);
+    public SchemaCompareResult compareConstraints(SchemaEqualityValidationContext context) throws JAXBException, IOException {
+        Schema ksConstraints = ProducerUtils.unmarshalSchema(context.getAppPath() + context.getAppConstraintsFilename());
+        Schema ddlConstraints = ProducerUtils.unmarshalSchema(context.getDdlPath() + context.getDdlConstraintsFilename());
 
-        ksConstraints.setName(KS_SCHEMA_LABEL);
-        ddlConstraints.setName(DDL_SCHEMA_LABEL);
+        ksConstraints.setName(context.getAppSchemaName());
+        ddlConstraints.setName(context.getDdlSchemaName());
 
         return new SchemaCompare(ksConstraints, ddlConstraints).compare();
     }
