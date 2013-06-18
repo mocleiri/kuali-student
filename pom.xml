@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <kuali-impex.version>3.0-SNAPSHOT</kuali-impex.version>
+        <kuali-impex.version>3.0.0-SNAPSHOT</kuali-impex.version>
     </properties>
 
     <profiles>
