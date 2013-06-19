@@ -20,23 +20,9 @@ import javax.xml.bind.JAXBException;
 
 import org.kuali.common.impex.ProducerUtils;
 import org.kuali.common.impex.model.Schema;
-import org.kuali.common.impex.model.compare.SchemaCompare;
 import org.kuali.common.impex.model.compare.SchemaCompareResult;
 
 public class SchemaEqualityValidator {
-
-    public static final String KS_SCHEMA_PATH = "ks-deployments/ks-dbs/ks-impex/ks-impex-app-db/src/main/resources/";
-
-    public static final String KS_SCHEMA_FILENAME = "ks-impex-app-db-schema.xml";
-    public static final String KS_CONSTRAINTS_FILENAME = "ks-impex-app-db-constraints-schema.xml";
-
-
-    public static final String DDL_SCHEMA_PATH = "ks-deployments/ks-dbs/ks-ddl/src/main/resources/org/kuali/student/db/ks-ddl/";
-    public static final String DDL_SCHEMA_FILENAME = "schema.xml";
-    public static final String DDL_CONSTRAINTS_FILENAME = "constraints.xml";
-
-    public static final String KS_SCHEMA_LABEL = "KSAPP";
-    public static final String DDL_SCHEMA_LABEL = "DDL";
 
     public SchemaCompareResult compareSchemas(SchemaEqualityValidationContext context) throws JAXBException, IOException {
         Schema ksSchema = ProducerUtils.unmarshalSchema(context.getAppPath() + context.getAppSchemaFilename());
@@ -45,7 +31,7 @@ public class SchemaEqualityValidator {
         ksSchema.setName(context.getAppSchemaName());
         ddlSchema.setName(context.getDdlSchemaName());
 
-        return new SchemaCompare(ksSchema, ddlSchema).compare();
+        return context.getCompareService().compare(ksSchema, ddlSchema);
     }
 
     public SchemaCompareResult compareConstraints(SchemaEqualityValidationContext context) throws JAXBException, IOException {
@@ -55,6 +41,6 @@ public class SchemaEqualityValidator {
         ksConstraints.setName(context.getAppSchemaName());
         ddlConstraints.setName(context.getDdlSchemaName());
 
-        return new SchemaCompare(ksConstraints, ddlConstraints).compare();
+        return context.getCompareService().compare(ksConstraints, ddlConstraints);
     }
 }

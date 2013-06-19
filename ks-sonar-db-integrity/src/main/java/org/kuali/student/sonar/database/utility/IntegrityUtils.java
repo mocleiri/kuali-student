@@ -20,6 +20,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import org.apache.commons.configuration.Configuration;
+import org.kuali.common.impex.model.compare.service.impl.SchemaCompareServiceImpl;
 import org.kuali.common.util.Assert;
 
 public class IntegrityUtils {
@@ -115,6 +116,9 @@ public class IntegrityUtils {
         context.setSkip(configuration.getBoolean(SCHEMA_COMPARE_VALIDATION_SKIP_KEY, DEFAULT_SCHEMA_COMPARE_VALIDATION_SKIP));
 
         if (!context.getSkip()) {
+            // set the instance of the SchemaCompare service to the default
+            context.setCompareService(new SchemaCompareServiceImpl());
+
             // set properties for the KS App schema
             context.setAppSchemaName(configuration.getString(SCHEMA_COMPARE_VALIDATION_APP_NAME_KEY));
             context.setAppPath(configuration.getString(SCHEMA_COMPARE_VALIDATION_APP_PATH_KEY));

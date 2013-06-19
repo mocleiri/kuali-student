@@ -15,6 +15,8 @@
 
 package org.kuali.student.sonar.database.utility;
 
+import org.kuali.common.impex.model.compare.service.SchemaCompareService;
+
 public class SchemaEqualityValidationContext {
     private Boolean skip;
 
@@ -33,6 +35,8 @@ public class SchemaEqualityValidationContext {
     protected String ddlSchemaFilename;
 
     protected String ddlConstraintsFilename;
+
+    protected SchemaCompareService compareService;
 
     public Boolean getSkip() {
         return skip;
@@ -104,5 +108,13 @@ public class SchemaEqualityValidationContext {
 
     public void setDdlSchemaName(String ddlSchemaName) {
         this.ddlSchemaName = ddlSchemaName;
+    }
+
+    public SchemaCompareService getCompareService() {
+        return compareService;
+    }
+
+    public void setCompareService(SchemaCompareService compareService) {
+        this.compareService = compareService;
     }
 }
