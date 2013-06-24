@@ -43,11 +43,11 @@ then
 	CHANGES_IN=$2
 	SINCE=$3
 
-	COMMAND="git log "
+	COMMAND="git log --first-parent "
 
 	if test -n $4
 	then
-		COMMAND=gitk
+		COMMAND="gitk --first-parent "
 	fi
 
 	checkParam $CHANGES_IN
@@ -68,7 +68,7 @@ then
 	checkParam $CHANGES_IN
 	checkParam $SINCE
 
-	JIRAS=$(git log $SINCE..$CHANGES_IN --pretty --format="%H:%an:%s") 
+	JIRAS=$(git log --first-parent $SINCE..$CHANGES_IN --pretty --format="%H:%an:%s") 
 
 	if test ${#SHOW_HEADERS} -gt 0
 	then
