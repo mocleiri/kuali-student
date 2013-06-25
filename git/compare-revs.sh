@@ -68,25 +68,24 @@ then
 	checkParam $CHANGES_IN
 	checkParam $SINCE
 
-	JIRAS=$(git log --first-parent $SINCE..$CHANGES_IN --pretty --format="%H:%an:%s") 
+	JIRAS=$(git log --first-parent $SINCE..$CHANGES_IN --pretty --format="%H?%an?%s?%cD") 
 
 	if test ${#SHOW_HEADERS} -gt 0
 	then
-		echo "#SHA1|JIRA|REV"
+		echo "#SHA1|JIRA|DATE|AUTHOR|REV"
 	fi
 
 	printf "%s" "$JIRAS" | while IFS= read -r LINE
 	do
-		D=$(echo "$LINE" | cut -d' ' -f 1)
 
-		SHA1=$(echo "$D" | cut -d: -f 1)
-		AUTHOR=$(echo "$D" | cut -d: -f 2)
-		JIRA=$(echo "$D" | cut -d: -f 3)
+		SHA1=$(echo "$LINE" | cut -d'?' -f 1)
+		AUTHOR=$(echo "$LINE" | cut -d'?' -f 2)
+		JIRA=$(echo "$LINE" | cut -d'?' -f 3)
+		CDATE=$(echo "$LINE" | cut -d'?' -f 4)
 
 		REV=$(computeRev $SHA1)
 
-		
-		echo "$SHA1|$JIRA|$AUTHOR|$REV"
+		echo "$SHA1|$JIRA|$CDATE|$AUTHOR|$REV"
 	done
 	
 
