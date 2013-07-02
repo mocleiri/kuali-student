@@ -14,10 +14,6 @@
     <description>KS Sonar Plugins</description>
     <packaging>pom</packaging>
 
-    <properties>
-        <kuali-impex.version>3.0.0-SNAPSHOT</kuali-impex.version>
-    </properties>
-
     <profiles>
         <profile>
             <id>default</id>
