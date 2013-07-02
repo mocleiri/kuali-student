@@ -34,10 +34,8 @@ public class FKGenerationUtil {
      * @return the ALTER statment
      */
     public static String getGeneratedAlterStmt(ForeignKeyConstraint fkConstraint) {
-        fKseq++;
-
         return "ALTER TABLE " + fkConstraint.localTable +
-                " ADD CONSTRAINT " + fkPrefix + fKseq +
+                " ADD CONSTRAINT " + fkConstraint.constraintName +
                 " FOREIGN KEY (" + fkConstraint.localColumn + ") " +
                 "REFERENCES " + fkConstraint.foreignTable + " (" + fkConstraint.foreignColumn + " )";
     }
@@ -79,4 +77,10 @@ public class FKGenerationUtil {
     }
 
 
+    public static String getNextConstraintName() {
+        fKseq++;
+
+        String constraintName = fkPrefix + fKseq;
+        return constraintName;
+    }
 }

@@ -1,70 +1,85 @@
 package org.kuali.student.sonar.database.plugin;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.StringReader;
 import java.sql.SQLException;
-import java.util.List;
+
+import javax.xml.bind.JAXBException;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
+import org.kuali.common.impex.model.compare.ForeignKeyDifference;
+import org.kuali.common.impex.model.compare.SchemaCompareResult;
+import org.kuali.common.impex.model.compare.SequenceDifference;
+import org.kuali.common.impex.model.compare.TableDifference;
+import org.kuali.common.impex.model.compare.ViewDifference;
+import org.kuali.common.impex.model.util.CompareUtils;
 import org.kuali.student.sonar.database.exception.MissingFieldException;
+import org.kuali.student.sonar.database.utility.ForeignKeyValidationContext;
 import org.kuali.student.sonar.database.utility.FKConstraintReport;
 import org.kuali.student.sonar.database.utility.FKConstraintValidator;
+import org.kuali.student.sonar.database.utility.IntegrityUtils;
+import org.kuali.student.sonar.database.utility.SchemaEqualityValidationContext;
+import org.kuali.student.sonar.database.utility.SchemaEqualityValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.Sensor;
 import org.sonar.api.batch.SensorContext;
-import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.resources.File;
 import org.sonar.api.resources.Project;
-import org.sonar.api.resources.ProjectFileSystem;
 import org.sonar.api.resources.Resource;
-import org.sonar.api.rules.ActiveRule;
-import org.sonar.api.rules.ActiveRuleParam;
-import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.RuleFinder;
-import org.sonar.api.rules.RuleQuery;
 import org.sonar.api.rules.Violation;
 
 
 public class DatabaseIntegritySensor implements Sensor {
 
     private static final Logger LOG = LoggerFactory.getLogger(DatabaseIntegritySensor.class);
+    protected static final String TABLE_KEY_PREFIX = "schemaCompare.table.";
+    protected static final String VIEW_KEY_PREFIX = "schemaCompare.view.";
+    protected static final String SEQUENCE_KEY_PREFIX = "schemaCompare.sequence.";
+    protected static final String FOREIGNKEY_KEY_PREFIX = "schemaCompare.foreignKey.";
 
-    private Configuration configuration;
-    private RulesProfile rulesProfile;
-    private RuleFinder ruleFinder;
-    private FKConstraintValidator validator;
+    protected static final String KUALI_STUDENT_PROJECT_KEY_PREFIX = "org.kuali.student:student";
+
+    protected Configuration configuration;
+    protected RulesProfile rulesProfile;
+    protected RuleFinder ruleFinder;
+
+    protected ForeignKeyValidationContext foreignKeyValidationContext;
+    protected SchemaEqualityValidationContext schemaEqualityValidationContext;
 
     public DatabaseIntegritySensor(RuleFinder ruleFinder, RulesProfile rulesProfile, Configuration configuration) {
         this.configuration = configuration;
         this.ruleFinder = ruleFinder;
         this.rulesProfile = rulesProfile;
 
-        validator = new FKConstraintValidator();
-
-        validator.setDbDriver("oracle.jdbc.driver.OracleDriver");
-        validator.setDbUrl("jdbc:oracle:thin:@localhost:1521:xe");
-        validator.setDbUser("JDBCTEST");
-        validator.setDbPassword("JDBCTEST");
-
-        initializeJsLint();
-
+        init();
     }
 
-    private boolean isActivated(String ruleKey, List<ActiveRule> rules) {
-        for (ActiveRule rule : rules) {
-            if (ruleKey.equals(rule.getRuleKey())) {
-                return true;
-            }
+    protected void init() {
+        try {
+            foreignKeyValidationContext = IntegrityUtils.buildForeignKeyValidationContext(configuration);
+        } catch (SQLException e) {
+            throw new RuntimeException("Unable to initialize context for DatabaseIntegritySensor", e);
         }
-        return false;
+
+        schemaEqualityValidationContext = IntegrityUtils.buildSchemaEqualityValidationContext(configuration);
     }
 
     public void analyse(Project project, SensorContext sensorContext) {
+        if(!foreignKeyValidationContext.getSkip()) {
+            findForeignKeyViolations(sensorContext);
+        }
+
+        if (!schemaEqualityValidationContext.getSkip()) {
+            findSchemaCompareViolations(sensorContext);
+        }
+    }
+
+    protected void findForeignKeyViolations(SensorContext sensorContext) {
+        FKConstraintValidator validator = new FKConstraintValidator();
+        validator.setContext(foreignKeyValidationContext);
+
         FKConstraintReport report = null;
 
         try {
@@ -76,90 +91,119 @@ public class DatabaseIntegritySensor implements Sensor {
             try {
                 validator.revert();
             } catch (MissingFieldException mfe) {
-                LOG.error("Missing field from constraint " + mfe.getMessage());
+                LOG.error("Missing field from constraint " + mfe.getMessage(), mfe);
                 mfe.printStackTrace();
             } catch (SQLException sqle) {
-                LOG.error("Error reverting FK Constraints " + sqle.getMessage());
+                LOG.error("Error reverting FK Constraints " + sqle.getMessage(), sqle);
                 sqle.printStackTrace();
             } finally {
                 try {
                     validator.closeConn();
                 } catch (SQLException sqle) {
-                    LOG.error("Error reverting FK Constraints " + sqle.getMessage());
+                    LOG.error("Error reverting FK Constraints " + sqle.getMessage(), sqle);
                     sqle.printStackTrace();
                 }
             }
         }
 
         if (report != null) {
+            File sqlFileResource = new File(foreignKeyValidationContext.getQueryFilePath(), foreignKeyValidationContext.getQueryFileName());
+
             for (ForeignKeyConstraint constraint : report.getFieldMappingIssues()) {
-                System.out.println("FIELD MAPPING ISSUE: Field does not exists (" +
+                LOG.debug("FIELD MAPPING ISSUE: Field does not exists (" +
                         constraint.foreignTable + "." +
                         constraint.foreignColumn + ")");
+                saveViolation(DatabseIntegrityRulesRepository.FIELD_MAPPING_RULE_KEY,
+                        constraint.toString(),
+                        sensorContext, sqlFileResource);
             }
 
             for (ForeignKeyConstraint constraint : report.getTableMappingIssues()) {
+                LOG.debug("TABLE MAPPING ISSUE: " + constraint.toString());
                 saveViolation(DatabseIntegrityRulesRepository.TABLE_MAPPING_RULE_KEY,
-                                constraint,
-                                sensorContext);
+                        constraint.toString(),
+                        sensorContext, sqlFileResource);
             }
 
             for (ForeignKeyConstraint constraint : report.getColumnTypeIncompatabilityIssues()) {
-                System.out.println("COLUMN TYPE INCOMPATIBILITY ISSUE: " +
-                        constraint.toString());
+                LOG.debug("COLUMN TYPE INCOMPATIBILITY ISSUE: " + constraint.toString());
+                saveViolation(DatabseIntegrityRulesRepository.COLUMN_TYPE_RULE_KEY,
+                        constraint.toString(),
+                        sensorContext, sqlFileResource);
             }
 
             for (ForeignKeyConstraint constraint : report.getOrphanedDataIssues()) {
+                LOG.debug("PARENT KEY MISSING: " + constraint.toString());
                 saveViolation(DatabseIntegrityRulesRepository.PARENT_KEY_MISSING_RULE_KEY,
-                        constraint,
-                        sensorContext);
+                        constraint.toString(),
+                        sensorContext, sqlFileResource);
             }
 
             for (ForeignKeyConstraint constraint : report.getOtherIssues()) {
-                System.out.println("UNHANDLED CONSTRAINT MAPPING ISSUE: " +
-                        constraint.toString() + " (see log for more details)");
+                LOG.debug("UNHANDLED CONSTRAINT MAPPING ISSUE: " + constraint.toString() + " (see log for more details)");
+                saveViolation(DatabseIntegrityRulesRepository.CONSTRAINT_MAPPING_RULE_KEY,
+                        constraint.toString(),
+                        sensorContext, sqlFileResource);
             }
         }
     }
 
-    private void saveViolation(String tableMappingRuleKey, ForeignKeyConstraint constraint, SensorContext sensorContext) {
-        LOG.info("SAVING VIOLATION WITH KEY " + tableMappingRuleKey);
-        System.out.println("*****  SAVING VIOLATION WITH KEY " + tableMappingRuleKey + " ***** ");
-        Violation violation = Violation.create(
-                ruleFinder.findByKey(
-                        DatabseIntegrityRulesRepository.REPOSITORY_KEY,
-                        DatabseIntegrityRulesRepository.PARENT_KEY_MISSING_RULE_KEY
-                ),
-                constraint);
-        sensorContext.saveViolation(violation);
+    protected void findSchemaCompareViolations(SensorContext sensorContext) {
+        SchemaEqualityValidator schemaEqualityValidator = new SchemaEqualityValidator();
+
+        SchemaCompareResult schemaCompareResult = null;
+        SchemaCompareResult constraintCompareResult = null;
+        try {
+            schemaCompareResult = schemaEqualityValidator.compareSchemas(schemaEqualityValidationContext);
+            constraintCompareResult = schemaEqualityValidator.compareConstraints(schemaEqualityValidationContext);
+        } catch (JAXBException e) {
+            LOG.error("Could not load schema for comparison: " + e.getMessage(), e);
+        } catch (IOException e) {
+            LOG.error("Could not load schema for comparison: " + e.getMessage(), e);
+        }
+
+        if(schemaCompareResult != null) {
+            File xmlSchemaResource = new File(schemaEqualityValidationContext.getAppPath(), schemaEqualityValidationContext.getAppSchemaFilename());
+            String keyPrefix = TABLE_KEY_PREFIX;
+
+            for (TableDifference t : schemaCompareResult.getTableDifferences()) {
+                saveViolation(keyPrefix + t.getType().toString(), CompareUtils.tableDifferenceToString(t), sensorContext, xmlSchemaResource);
+            }
+
+            keyPrefix = VIEW_KEY_PREFIX;
+            for (ViewDifference v : schemaCompareResult.getViewDifferences()) {
+                saveViolation(keyPrefix + v.getType().toString(), CompareUtils.viewDifferenceToString(v), sensorContext, xmlSchemaResource);
+            }
+
+            keyPrefix = SEQUENCE_KEY_PREFIX;
+            for (SequenceDifference s : schemaCompareResult.getSequenceDifferences()) {
+                saveViolation(keyPrefix + s.getType().toString(), CompareUtils.sequenceDifferenceToString(s), sensorContext, xmlSchemaResource);
+            }
+        }
+
+        if(constraintCompareResult != null) {
+            File xmlConstraintResource = new File(schemaEqualityValidationContext.getAppPath(), schemaEqualityValidationContext.getAppConstraintsFilename());
+            String keyPrefix = FOREIGNKEY_KEY_PREFIX;
+            for (ForeignKeyDifference f : constraintCompareResult.getForeignKeyDifferences()) {
+                saveViolation(keyPrefix + f.getType(), CompareUtils.foreignKeyDifferenceToString(f), sensorContext, xmlConstraintResource);
+            }
+        }
     }
 
-    protected void analyzeConstraint(ForeignKeyConstraint fkConstraint,SensorContext sensorContext) {
-
-
+    protected void saveViolation(String ruleKey, String message, SensorContext sensorContext, Resource resource) {
         Violation violation = Violation.create(
                 ruleFinder.findByKey(
                         DatabseIntegrityRulesRepository.REPOSITORY_KEY,
-                        DatabseIntegrityRulesRepository.PARENT_KEY_MISSING_RULE_KEY),
-                fkConstraint);
-
+                        ruleKey
+                ),
+                resource);
+        violation.setMessage(message);
         sensorContext.saveViolation(violation);
-
-
-
     }
 
     public boolean shouldExecuteOnProject(Project project) {
-        //TODO: probably need to enable this
-        //return project.getLanguage().equals(DatabseIntegrityRulesRepository.LANGUAGE_KEY);
-        return true;
-    }
-
-    private void initializeJsLint() {
-        RuleQuery query = RuleQuery.create();
-        query.withRepositoryKey(DatabseIntegrityRulesRepository.REPOSITORY_KEY);
-
-        List<ActiveRule> activeRules = this.rulesProfile.getActiveRules();
+        // return false (that the plugin should not execute for the project) if both contexts are set to skip
+        return !(schemaEqualityValidationContext.getSkip() && foreignKeyValidationContext.getSkip());
     }
 
     @Override

@@ -1,7 +1,5 @@
 package org.kuali.student.sonar.database.plugin;
 
-import org.kuali.student.sonar.database.plugin.ui.ExampleFooter;
-import org.kuali.student.sonar.database.plugin.ui.ExampleRubyWidget;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
 import org.sonar.api.SonarPlugin;
@@ -43,9 +41,6 @@ public final class DatabaseIntegrityPlugin extends SonarPlugin {
                 DatabseIntegrityRulesRepository.class,
 
                 // Batch
-                DatabaseIntegritySensor.class,
-
-                // UI
-                ExampleFooter.class, ExampleRubyWidget.class);
+                DatabaseIntegritySensor.class);
     }
 }

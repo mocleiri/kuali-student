@@ -21,6 +21,8 @@ public class FKConstraintReport {
     private ArrayList<ForeignKeyConstraint> cteFKViolationList;
     // orphaned relationships
     private ArrayList<ForeignKeyConstraint> orphFKViolationList;
+    // fk mapped to a non pk issues
+    private ArrayList<ForeignKeyConstraint> nonPKViolationList;
     // other issues
     private ArrayList<ForeignKeyConstraint> otherFKViolationList;
 
@@ -29,6 +31,7 @@ public class FKConstraintReport {
         tmeFKViolationList = new ArrayList<ForeignKeyConstraint>();
         cteFKViolationList = new ArrayList<ForeignKeyConstraint>();
         orphFKViolationList = new ArrayList<ForeignKeyConstraint>();
+        nonPKViolationList = new ArrayList<ForeignKeyConstraint>();
         otherFKViolationList = new ArrayList<ForeignKeyConstraint>();
     }
 
@@ -46,6 +49,10 @@ public class FKConstraintReport {
 
     public void addOrphanedDataIssue(ForeignKeyConstraint constraint) {
         orphFKViolationList.add(constraint);
+    }
+
+    public void addNonPKMappingIssue(ForeignKeyConstraint constraint) {
+        nonPKViolationList.add(constraint);
     }
 
     public void addOtherIssue(ForeignKeyConstraint constraint) {
@@ -68,8 +75,13 @@ public class FKConstraintReport {
         return orphFKViolationList;
     }
 
+    public ArrayList<ForeignKeyConstraint> getNonPKViolationList() {
+        return nonPKViolationList;
+    }
+
     public List<ForeignKeyConstraint> getOtherIssues() {
         return otherFKViolationList;
     }
+
 
 }

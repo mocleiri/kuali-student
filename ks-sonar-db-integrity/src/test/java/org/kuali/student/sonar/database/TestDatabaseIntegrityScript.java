@@ -3,11 +3,16 @@ package org.kuali.student.sonar.database;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
-import org.kuali.student.sonar.database.exception.*;
+import org.kuali.student.sonar.database.exception.MissingFieldException;
+import org.kuali.student.sonar.database.plugin.DatabseIntegrityRulesRepository;
 import org.kuali.student.sonar.database.plugin.ForeignKeyConstraint;
 import org.kuali.student.sonar.database.utility.FKConstraintReport;
 import org.kuali.student.sonar.database.utility.FKConstraintValidator;
 import org.kuali.student.sonar.database.utility.FKGenerationUtil;
+import org.sonar.api.resources.Resource;
+import org.sonar.api.rules.Rule;
+import org.sonar.api.rules.Violation;
+import org.kuali.student.sonar.database.utility.ForeignKeyValidationContext;
 
 
 import java.sql.*;
@@ -33,12 +38,30 @@ public class TestDatabaseIntegrityScript {
     private FKConstraintValidator validator;
 
     @Before
-    public void init() {
+    public void init() throws SQLException {
         validator = new FKConstraintValidator();
-        validator.setDbDriver("oracle.jdbc.driver.OracleDriver");
-        validator.setDbUrl("jdbc:oracle:thin:@localhost:1521:xe");
-        validator.setDbUser("JDBCTEST");
-        validator.setDbPassword("JDBCTEST");
+
+        ForeignKeyValidationContext context = new ForeignKeyValidationContext();
+        validator.setContext(context);
+        context.setSkip(false);
+        context.setQueryFileName("missing_FK_query.sql");
+        context.setQueryFilePath("sql/");
+
+        // attempt to load the driver class to ensure it is in the classpath
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Unable to find DB Driver Class", e);
+        }
+
+        // populate properties for creating connection to the database
+        Properties props = new Properties();
+        props.setProperty("user", "JDBCTEST");
+        props.setProperty("password", "JDBCTEST");
+
+
+        // create a connection to the database using JDBC and set it in the context
+        context.setConnection(DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", props));
     }
 
     @Test
@@ -75,6 +98,39 @@ public class TestDatabaseIntegrityScript {
             System.out.println("UNHANDLED CONSTRAINT MAPPING ISSUE: " +
                     constraint.toString() + " (see log for more details)");
         }
+
+        System.out.println("\nSUMMARY");
+        if (report.getFieldMappingIssues().size()>0) {
+            System.out.println(report.getFieldMappingIssues().size() + " Field Mapping Issues");
+        }
+        if (report.getTableMappingIssues().size()>0) {
+            System.out.println(report.getTableMappingIssues().size() + " Table Mapping Issues");
+        }
+        if (report.getColumnTypeIncompatabilityIssues().size()>0) {
+            System.out.println(report.getColumnTypeIncompatabilityIssues().size() + " Column Type Issues");
+        }
+        if (report.getOrphanedDataIssues().size()>0) {
+            System.out.println(report.getOrphanedDataIssues().size() + " Orphaned Data Issues");
+        }
+        if (report.getOtherIssues().size()>0) {
+            System.out.println(report.getOtherIssues().size() + " Other Issues");
+        }
+    }
+
+    @Test
+    public void testCreateViolations() {
+        ForeignKeyConstraint constraint = new ForeignKeyConstraint("localTable", "localColumn", "foreignTable", "foreignColumn", "Test Constraint");
+        Violation violation = Violation.create(Rule.create(
+                        DatabseIntegrityRulesRepository.REPOSITORY_KEY,
+                        DatabseIntegrityRulesRepository.PARENT_KEY_MISSING_RULE_KEY,
+                        "RuleTest"),
+                (Resource)constraint);
+        constraint = new ForeignKeyConstraint("localTable2", "localColumn2", "foreignTable2", "foreignColumn2", "Test Constraint2");
+        Violation violation2 = Violation.create(Rule.create(
+                DatabseIntegrityRulesRepository.REPOSITORY_KEY,
+                DatabseIntegrityRulesRepository.FIELD_MAPPING_RULE_KEY,
+                "RuleTest"),
+                (Resource)constraint);
     }
 
     @After

@@ -20,12 +20,13 @@ import java.sql.Statement;
  *
  * Entity class for managing FK Constraints
  */
-public class ForeignKeyConstraint extends Resource{
+public class ForeignKeyConstraint extends Resource {
     public String localTable;
     public String localColumn;
     public String foreignTable;
     public String foreignColumn;
     public String constraintName;
+    public String errorMessage;
 
     public ForeignKeyConstraint(String localTable, String localColumn, String foreignTable, String foreignColumn, String constraintName) {
         this.localTable = localTable;
@@ -68,10 +69,10 @@ public class ForeignKeyConstraint extends Resource{
      * @throws ParentKeysMissingException if there is orphaned data
      * @throws TableMappingException if a table name doesn't exist
      * @throws ColumnTypeIncompatException if field type from local table doesn't match primary key from foreign table
-     * @throws UnknownFKExecption if an unknown error occurs
+     * @throws org.kuali.student.sonar.database.exception.NonPKMappingException if an unknown error occurs
      * @throws SQLException if cursor fails to close
      */
-    public void addFKConstraint(Connection conn) throws ParentKeysMissingException, TableMappingException, ColumnTypeIncompatException, UnknownFKExecption, SQLException {
+    public void addFKConstraint(Connection conn) throws ParentKeysMissingException, TableMappingException, ColumnTypeIncompatException, NonPKMappingException, SQLException, UnknownFKExecption {
 
         Statement stmt = null;
         String alterSQL = FKGenerationUtil.getGeneratedAlterStmt(this);
@@ -88,6 +89,8 @@ public class ForeignKeyConstraint extends Resource{
                     throw new TableMappingException(this);
                 case 2267:
                     throw new ColumnTypeIncompatException(this);
+                case 2270:
+                    throw new NonPKMappingException(this);
                 default:
                     System.out.println("ERROR CREATING FK CONSTRAINT " +
                             this.toString() +
@@ -172,5 +175,14 @@ public class ForeignKeyConstraint extends Resource{
     @Override
     public boolean matchFilePattern(String s) {
         return false;  //TODO: implement this
+    }
+
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

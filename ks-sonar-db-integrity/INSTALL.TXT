@@ -2,5 +2,5 @@
 2. restart the server
 3. log in as an administrator (default admin/admin)
 4. enable new rules in profiler (under repository dbi)
-5. add oracle drive to runner lib
+5. add oracle driver to runner batch command
 
