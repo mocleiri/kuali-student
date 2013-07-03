@@ -2,9 +2,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.kuali.student</groupId>
-        <artifactId>student</artifactId>
-        <version>2.0.0-M7-SNAPSHOT</version>
+        <groupId>org.kuali.pom</groupId>
+        <artifactId>kuali-common</artifactId>
+        <version>3.2.0</version>
     </parent>
 
     <groupId>org.kuali.student.sonar</groupId>
@@ -13,6 +13,15 @@
     <name>KS Sonar</name>
     <description>KS Sonar Plugins</description>
     <packaging>pom</packaging>
+
+    <properties>
+        <oracle.version>11.2.0.2</oracle.version>
+        <oracle.artifactId>ojdbc6_g</oracle.artifactId>
+        <kuali-impex.version>${impex.version}</kuali-impex.version>
+        <ks.core.version>2.0.0-M7-SNAPSHOT</ks.core.version>
+        <sonar-plugin-api.version>3.5</sonar-plugin-api.version>
+        <junit.version>4.11</junit.version>
+    </properties>
 
     <profiles>
         <profile>
@@ -30,7 +39,12 @@
             <dependency>
                 <groupId>org.codehaus.sonar</groupId>
                 <artifactId>sonar-plugin-api</artifactId>
-                <version>3.5</version>
+                <version>${sonar-plugin-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>${oracle.artifactId}</artifactId>
+                <version>${oracle.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.kuali.common</groupId>
@@ -46,6 +60,11 @@
                 <groupId>org.kuali.common</groupId>
                 <artifactId>kuali-impex-producer</artifactId>
                 <version>${kuali-impex.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

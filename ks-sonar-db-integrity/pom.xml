@@ -39,15 +39,8 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.kuali.student.core</groupId>
-            <artifactId>ks-common-test</artifactId>
-            <version>${ks.core.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>${oracle.artifactId}</artifactId>
-            <version>${oracle.version}</version>
         </dependency>
         <dependency>
             <groupId>org.kuali.common</groupId>
@@ -60,6 +53,10 @@
         <dependency>
             <groupId>org.kuali.common</groupId>
             <artifactId>kuali-impex-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
 </project>
