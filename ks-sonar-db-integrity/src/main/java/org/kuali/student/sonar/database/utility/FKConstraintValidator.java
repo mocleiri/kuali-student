@@ -56,6 +56,9 @@ public class FKConstraintValidator {
                 ForeignKeyConstraint constraint = new ForeignKeyConstraint(result);
                 constraint.constraintName = FKGenerationUtil.getNextConstraintName();
                 if (result.getString(OWNER_KEY) == null) {
+                    constraint.setErrorMessage("Field does not exists (" +
+                            constraint.foreignTable + "." +
+                            constraint.foreignColumn + ")");
                     report.addFieldMappingIssue(constraint);
                 } else if (result.getString(CONSTRAINT_NAME_KEY) == null) {
                     newConstraintList.add(constraint);
@@ -79,19 +82,22 @@ public class FKConstraintValidator {
             try {
                 constraint.addFKConstraint(context.getConnection());
             } catch (TableMappingException tme) {
-                constraint.setErrorMessage(tme.getMessage());
+                constraint.setErrorMessage("Table not found (" + constraint.foreignTable + ")");
                 report.addTableMappingIssue(constraint);
             } catch (ColumnTypeIncompatException cte) {
-                constraint.setErrorMessage(cte.getMessage());
+                constraint.setErrorMessage("Column types do not match");
                 report.addColumnTypeIncompatabilityIssue(constraint);
             } catch (ParentKeysMissingException pke) {
-                constraint.setErrorMessage(pke.getMessage());
+                constraint.setErrorMessage("Records in " +
+                        constraint.localTable + "." + constraint.localColumn +
+                        " referece IDs that don't exist in " +
+                        constraint.foreignTable + "." + constraint.foreignColumn);
                 report.addOrphanedDataIssue(constraint);
             } catch (NonPKMappingException npke) {
-                constraint.setErrorMessage(npke.getMessage());
+                constraint.setErrorMessage("Foreign Column is not a Primary Key (" +
+                        constraint.foreignTable + "." + constraint.foreignColumn + ")");
                 report.addNonPKMappingIssue(constraint);
             } catch (UnknownFKExecption uFKe) {
-                constraint.setErrorMessage(uFKe.getMessage());
                 report.addOtherIssue(constraint);
             }
         }

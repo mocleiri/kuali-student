@@ -34,6 +34,7 @@ public class ForeignKeyConstraint extends Resource {
         this.foreignTable = foreignTable;
         this.foreignColumn = foreignColumn;
         this.constraintName = constraintName;
+        this.errorMessage = "";
 
         this.setKey("foreign.key.constraint.resource");
     }
@@ -50,6 +51,7 @@ public class ForeignKeyConstraint extends Resource {
         foreignTable = resultSet.getString("foreign_table");
         foreignColumn  = resultSet.getString("foreign_column");
         constraintName = resultSet.getString("constraint_name");
+        this.errorMessage = "";
         if (constraintName == null) {
             constraintName = "";
         }
@@ -58,7 +60,7 @@ public class ForeignKeyConstraint extends Resource {
     }
 
     public String toString() {
-        return  "ConstraintName (" + constraintName + ") " +
+        return  "Error Message:" + errorMessage + " :: ConstraintName (" + constraintName + ") " +
                 localTable + "." + localColumn + " -> " +
                 foreignTable + "." + foreignColumn;
     }
@@ -92,6 +94,7 @@ public class ForeignKeyConstraint extends Resource {
                 case 2270:
                     throw new NonPKMappingException(this);
                 default:
+                    setErrorMessage(e.getMessage());
                     System.out.println("ERROR CREATING FK CONSTRAINT " +
                             this.toString() +
                             "\n   ERROR CODE: " + e.getErrorCode() + " ERROR MESSAGE: " + e.getMessage() +
