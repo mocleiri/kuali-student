@@ -12,6 +12,11 @@
   <description>KS Sonar Plugins</description>
   <packaging>pom</packaging>
   <url>http://${kuali.site.hostname}/student/ks-sonar/${project.version}</url>
+  <scm>
+    <connection>scm:svn:https://svn.kuali.org/repos/student/tools/ks-sonar/trunk</connection>
+    <developerConnection>scm:svn:https://svn.kuali.org/repos/student/tools/ks-sonar/trunk</developerConnection>
+    <url>https://svn.kuali.org/repos/student/tools/ks-sonar/trunk</url>
+  </scm>
   <properties>
     <oracle.version>11.2.0.2</oracle.version>
     <oracle.artifactId>ojdbc6_g</oracle.artifactId>
