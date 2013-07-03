@@ -9,12 +9,11 @@ import org.kuali.student.sonar.database.plugin.ForeignKeyConstraint;
  * Time: 2:33 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NonPKMappingException extends Throwable {
-    ForeignKeyConstraint fkConstraint;
+public class NonPKMappingException extends FKConstraintException {
 
     public NonPKMappingException(ForeignKeyConstraint fkConstraint) {
-        super("Uncategorized Exception when adding constraint: " +
-                fkConstraint.toString());
+        super("Foreign Column is not a primary key or is part of a multi-field primary key: " + fkConstraint.getForeignColumn() +
+                "Constraint: " + fkConstraint.toString());
         this.fkConstraint = fkConstraint;
     }
 }

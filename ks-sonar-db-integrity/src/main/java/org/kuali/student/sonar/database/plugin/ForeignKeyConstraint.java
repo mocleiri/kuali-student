@@ -26,7 +26,7 @@ public class ForeignKeyConstraint extends Resource {
     public String foreignTable;
     public String foreignColumn;
     public String constraintName;
-    public String errorMessage;
+    public Exception exception;
 
     public ForeignKeyConstraint(String localTable, String localColumn, String foreignTable, String foreignColumn, String constraintName) {
         this.localTable = localTable;
@@ -34,7 +34,7 @@ public class ForeignKeyConstraint extends Resource {
         this.foreignTable = foreignTable;
         this.foreignColumn = foreignColumn;
         this.constraintName = constraintName;
-        this.errorMessage = "";
+        this.exception = null;
 
         this.setKey("foreign.key.constraint.resource");
     }
@@ -51,7 +51,6 @@ public class ForeignKeyConstraint extends Resource {
         foreignTable = resultSet.getString("foreign_table");
         foreignColumn  = resultSet.getString("foreign_column");
         constraintName = resultSet.getString("constraint_name");
-        this.errorMessage = "";
         if (constraintName == null) {
             constraintName = "";
         }
@@ -60,9 +59,7 @@ public class ForeignKeyConstraint extends Resource {
     }
 
     public String toString() {
-        return  "Error Message:" + errorMessage + " :: ConstraintName (" + constraintName + ") " +
-                localTable + "." + localColumn + " -> " +
-                foreignTable + "." + foreignColumn;
+        return getLocalColumn() + " -> " + getForeignColumn();
     }
 
     /** Adds the constraint to the local table
@@ -74,7 +71,7 @@ public class ForeignKeyConstraint extends Resource {
      * @throws org.kuali.student.sonar.database.exception.NonPKMappingException if an unknown error occurs
      * @throws SQLException if cursor fails to close
      */
-    public void addFKConstraint(Connection conn) throws ParentKeysMissingException, TableMappingException, ColumnTypeIncompatException, NonPKMappingException, SQLException, UnknownFKExecption {
+    public void addFKConstraint(Connection conn) throws FKConstraintException, SQLException {
 
         Statement stmt = null;
         String alterSQL = FKGenerationUtil.getGeneratedAlterStmt(this);
@@ -94,12 +91,11 @@ public class ForeignKeyConstraint extends Resource {
                 case 2270:
                     throw new NonPKMappingException(this);
                 default:
-                    setErrorMessage(e.getMessage());
                     System.out.println("ERROR CREATING FK CONSTRAINT " +
                             this.toString() +
                             "\n   ERROR CODE: " + e.getErrorCode() + " ERROR MESSAGE: " + e.getMessage() +
                             "   ALTER STMT: " + alterSQL);
-                    throw new UnknownFKExecption(this);
+                    throw new UnknownFKExecption(this, e.getMessage());
             }
         } finally {
             if (stmt != null) { stmt.close(); }
@@ -110,17 +106,17 @@ public class ForeignKeyConstraint extends Resource {
     /** Drops the constraint from the local table
      *
      * @param conn		An active DB connection
-     * @throws MissingFieldException if the constraintName or localTable fields are empty
+     * @throws org.kuali.student.sonar.database.exception.FieldMappingException if the constraintName or localTable fields are empty
      * @throws SQLException if cursor fails to close
      */
-    public void deleteFKConstraint(Connection conn) throws MissingFieldException, SQLException {
+    public void deleteFKConstraint(Connection conn) throws InvalidConstraintException, SQLException {
 
         if (StringUtils.isEmpty(this.constraintName)) {
-            throw new MissingFieldException("constraintName");
+            throw new InvalidConstraintException("constraintName");
         }
 
         if (StringUtils.isEmpty(this.localTable)) {
-            throw new MissingFieldException("localTable");
+            throw new InvalidConstraintException("localTable");
         }
 
         String alterSQL = "ALTER TABLE " + this.localTable + " DROP CONSTRAINT " + this.constraintName;
@@ -181,11 +177,19 @@ public class ForeignKeyConstraint extends Resource {
     }
 
 
-    public String getErrorMessage() {
-        return errorMessage;
+    public Exception getErrorMessage() {
+        return exception;
     }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+    public void setErrorMessage(Exception exception) {
+        this.exception = exception;
+    }
+
+    public Object getLocalColumn() {
+        return localTable + "." + localColumn;
+    }
+
+    public Object getForeignColumn() {
+        return foreignTable + "." + foreignColumn;
     }
 }

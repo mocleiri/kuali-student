@@ -9,7 +9,9 @@ import java.util.List;
 
 import org.kuali.common.util.LocationUtils;
 import org.kuali.student.sonar.database.exception.ColumnTypeIncompatException;
-import org.kuali.student.sonar.database.exception.MissingFieldException;
+import org.kuali.student.sonar.database.exception.FKConstraintException;
+import org.kuali.student.sonar.database.exception.FieldMappingException;
+import org.kuali.student.sonar.database.exception.InvalidConstraintException;
 import org.kuali.student.sonar.database.exception.NonPKMappingException;
 import org.kuali.student.sonar.database.exception.ParentKeysMissingException;
 import org.kuali.student.sonar.database.exception.TableMappingException;
@@ -56,10 +58,7 @@ public class FKConstraintValidator {
                 ForeignKeyConstraint constraint = new ForeignKeyConstraint(result);
                 constraint.constraintName = FKGenerationUtil.getNextConstraintName();
                 if (result.getString(OWNER_KEY) == null) {
-                    constraint.setErrorMessage("Field does not exists (" +
-                            constraint.foreignTable + "." +
-                            constraint.foreignColumn + ")");
-                    report.addFieldMappingIssue(constraint);
+                    report.addException(new FieldMappingException(constraint));
                 } else if (result.getString(CONSTRAINT_NAME_KEY) == null) {
                     newConstraintList.add(constraint);
                 }
@@ -81,31 +80,15 @@ public class FKConstraintValidator {
         for (ForeignKeyConstraint constraint : newConstraintList) {
             try {
                 constraint.addFKConstraint(context.getConnection());
-            } catch (TableMappingException tme) {
-                constraint.setErrorMessage("Table not found (" + constraint.foreignTable + ")");
-                report.addTableMappingIssue(constraint);
-            } catch (ColumnTypeIncompatException cte) {
-                constraint.setErrorMessage("Column types do not match");
-                report.addColumnTypeIncompatabilityIssue(constraint);
-            } catch (ParentKeysMissingException pke) {
-                constraint.setErrorMessage("Records in " +
-                        constraint.localTable + "." + constraint.localColumn +
-                        " referece IDs that don't exist in " +
-                        constraint.foreignTable + "." + constraint.foreignColumn);
-                report.addOrphanedDataIssue(constraint);
-            } catch (NonPKMappingException npke) {
-                constraint.setErrorMessage("Foreign Column is not a Primary Key (" +
-                        constraint.foreignTable + "." + constraint.foreignColumn + ")");
-                report.addNonPKMappingIssue(constraint);
-            } catch (UnknownFKExecption uFKe) {
-                report.addOtherIssue(constraint);
+            } catch (FKConstraintException fkce) {
+                report.addException(fkce);
             }
         }
 
         return report;
     }
 
-    public void revert() throws MissingFieldException, SQLException {
+    public void revert() throws InvalidConstraintException, SQLException {
         List<ForeignKeyConstraint> constraintList = null;
         try {
             constraintList = FKGenerationUtil.getGeneratedFKConstraints(context.getConnection());

@@ -12,7 +12,8 @@ import org.kuali.common.impex.model.compare.SequenceDifference;
 import org.kuali.common.impex.model.compare.TableDifference;
 import org.kuali.common.impex.model.compare.ViewDifference;
 import org.kuali.common.impex.model.util.CompareUtils;
-import org.kuali.student.sonar.database.exception.MissingFieldException;
+import org.kuali.student.sonar.database.exception.FKConstraintException;
+import org.kuali.student.sonar.database.exception.InvalidConstraintException;
 import org.kuali.student.sonar.database.utility.ForeignKeyValidationContext;
 import org.kuali.student.sonar.database.utility.FKConstraintReport;
 import org.kuali.student.sonar.database.utility.FKConstraintValidator;
@@ -90,9 +91,9 @@ public class DatabaseIntegritySensor implements Sensor {
         } finally {
             try {
                 validator.revert();
-            } catch (MissingFieldException mfe) {
-                LOG.error("Missing field from constraint " + mfe.getMessage(), mfe);
-                mfe.printStackTrace();
+            } catch (InvalidConstraintException ice) {
+                LOG.error("Missing field from constraint " + ice.getMessage(), ice);
+                ice.printStackTrace();
             } catch (SQLException sqle) {
                 LOG.error("Error reverting FK Constraints " + sqle.getMessage(), sqle);
                 sqle.printStackTrace();
@@ -109,41 +110,29 @@ public class DatabaseIntegritySensor implements Sensor {
         if (report != null) {
             File sqlFileResource = new File(foreignKeyValidationContext.getQueryFilePath(), foreignKeyValidationContext.getQueryFileName());
 
-            for (ForeignKeyConstraint constraint : report.getFieldMappingIssues()) {
-                LOG.debug("FIELD MAPPING ISSUE: Field does not exists (" +
-                        constraint.foreignTable + "." +
-                        constraint.foreignColumn + ")");
-                saveViolation(DatabseIntegrityRulesRepository.FIELD_MAPPING_RULE_KEY,
-                        constraint.toString(),
-                        sensorContext, sqlFileResource);
+            for (FKConstraintException exception : report.getFieldMappingIssues()) {
+                saveConstraintViolation(DatabseIntegrityRulesRepository.FIELD_MAPPING_RULE_KEY,
+                        exception, sensorContext, sqlFileResource);
             }
 
-            for (ForeignKeyConstraint constraint : report.getTableMappingIssues()) {
-                LOG.debug("TABLE MAPPING ISSUE: " + constraint.toString());
-                saveViolation(DatabseIntegrityRulesRepository.TABLE_MAPPING_RULE_KEY,
-                        constraint.toString(),
-                        sensorContext, sqlFileResource);
+            for (FKConstraintException exception : report.getTableMappingIssues()) {
+                saveConstraintViolation(DatabseIntegrityRulesRepository.TABLE_MAPPING_RULE_KEY,
+                        exception, sensorContext, sqlFileResource);
             }
 
-            for (ForeignKeyConstraint constraint : report.getColumnTypeIncompatabilityIssues()) {
-                LOG.debug("COLUMN TYPE INCOMPATIBILITY ISSUE: " + constraint.toString());
-                saveViolation(DatabseIntegrityRulesRepository.COLUMN_TYPE_RULE_KEY,
-                        constraint.toString(),
-                        sensorContext, sqlFileResource);
+            for (FKConstraintException exception : report.getColumnTypeIncompatabilityIssues()) {
+                saveConstraintViolation(DatabseIntegrityRulesRepository.COLUMN_TYPE_RULE_KEY,
+                        exception, sensorContext, sqlFileResource);
             }
 
-            for (ForeignKeyConstraint constraint : report.getOrphanedDataIssues()) {
-                LOG.debug("PARENT KEY MISSING: " + constraint.toString());
-                saveViolation(DatabseIntegrityRulesRepository.PARENT_KEY_MISSING_RULE_KEY,
-                        constraint.toString(),
-                        sensorContext, sqlFileResource);
+            for (FKConstraintException exception : report.getOrphanedDataIssues()) {
+                saveConstraintViolation(DatabseIntegrityRulesRepository.PARENT_KEY_MISSING_RULE_KEY,
+                        exception, sensorContext, sqlFileResource);
             }
 
-            for (ForeignKeyConstraint constraint : report.getOtherIssues()) {
-                LOG.debug("UNHANDLED CONSTRAINT MAPPING ISSUE: " + constraint.toString() + " (see log for more details)");
-                saveViolation(DatabseIntegrityRulesRepository.CONSTRAINT_MAPPING_RULE_KEY,
-                        constraint.toString(),
-                        sensorContext, sqlFileResource);
+            for (FKConstraintException exception : report.getOtherIssues()) {
+                saveConstraintViolation(DatabseIntegrityRulesRepository.CONSTRAINT_MAPPING_RULE_KEY,
+                        exception, sensorContext, sqlFileResource);
             }
         }
     }
@@ -188,6 +177,11 @@ public class DatabaseIntegritySensor implements Sensor {
                 saveViolation(keyPrefix + f.getType(), CompareUtils.foreignKeyDifferenceToString(f), sensorContext, xmlConstraintResource);
             }
         }
+    }
+
+    protected void saveConstraintViolation(String ruleKey, FKConstraintException fkce, SensorContext sensorContext, Resource resource) {
+        LOG.debug(fkce.getMessage());
+        saveViolation(ruleKey,fkce.getMessage(),sensorContext,resource);
     }
 
     protected void saveViolation(String ruleKey, String message, SensorContext sensorContext, Resource resource) {

@@ -1,5 +1,12 @@
 package org.kuali.student.sonar.database.utility;
 
+import org.kuali.student.sonar.database.exception.ColumnTypeIncompatException;
+import org.kuali.student.sonar.database.exception.FKConstraintException;
+import org.kuali.student.sonar.database.exception.FieldMappingException;
+import org.kuali.student.sonar.database.exception.NonPKMappingException;
+import org.kuali.student.sonar.database.exception.ParentKeysMissingException;
+import org.kuali.student.sonar.database.exception.TableMappingException;
+import org.kuali.student.sonar.database.exception.UnknownFKExecption;
 import org.kuali.student.sonar.database.plugin.ForeignKeyConstraint;
 
 import java.util.ArrayList;
@@ -14,74 +21,88 @@ import java.util.List;
  */
 public class FKConstraintReport {
     // field mapping issues
-    private ArrayList<ForeignKeyConstraint> fmeFKViolationList;
+    private ArrayList<FKConstraintException> fmeFKViolationList;
     // table mapping issues
-    private ArrayList<ForeignKeyConstraint> tmeFKViolationList;
+    private ArrayList<FKConstraintException> tmeFKViolationList;
     // column type incompatibility issues
-    private ArrayList<ForeignKeyConstraint> cteFKViolationList;
+    private ArrayList<FKConstraintException> cteFKViolationList;
     // orphaned relationships
-    private ArrayList<ForeignKeyConstraint> orphFKViolationList;
+    private ArrayList<FKConstraintException> orphFKViolationList;
     // fk mapped to a non pk issues
-    private ArrayList<ForeignKeyConstraint> nonPKViolationList;
+    private ArrayList<FKConstraintException> nonPKViolationList;
     // other issues
-    private ArrayList<ForeignKeyConstraint> otherFKViolationList;
+    private ArrayList<FKConstraintException> otherFKViolationList;
 
     public FKConstraintReport() {
-        fmeFKViolationList = new ArrayList<ForeignKeyConstraint>();
-        tmeFKViolationList = new ArrayList<ForeignKeyConstraint>();
-        cteFKViolationList = new ArrayList<ForeignKeyConstraint>();
-        orphFKViolationList = new ArrayList<ForeignKeyConstraint>();
-        nonPKViolationList = new ArrayList<ForeignKeyConstraint>();
-        otherFKViolationList = new ArrayList<ForeignKeyConstraint>();
+        fmeFKViolationList = new ArrayList<FKConstraintException>();
+        tmeFKViolationList = new ArrayList<FKConstraintException>();
+        cteFKViolationList = new ArrayList<FKConstraintException>();
+        orphFKViolationList = new ArrayList<FKConstraintException>();
+        nonPKViolationList = new ArrayList<FKConstraintException>();
+        otherFKViolationList = new ArrayList<FKConstraintException>();
     }
 
-    public void addFieldMappingIssue(ForeignKeyConstraint constraint) {
-        fmeFKViolationList.add(constraint);
+    public void addFieldMappingIssue(FKConstraintException fkce) {
+        fmeFKViolationList.add(fkce);
     }
 
-    public void addTableMappingIssue(ForeignKeyConstraint constraint) {
-        tmeFKViolationList.add(constraint);
+    public void addTableMappingIssue(FKConstraintException fkce) {
+        tmeFKViolationList.add(fkce);
     }
 
-    public void addColumnTypeIncompatabilityIssue(ForeignKeyConstraint constraint) {
-        cteFKViolationList.add(constraint);
+    public void addColumnTypeIncompatabilityIssue(FKConstraintException fkce) {
+        cteFKViolationList.add(fkce);
     }
 
-    public void addOrphanedDataIssue(ForeignKeyConstraint constraint) {
-        orphFKViolationList.add(constraint);
+    public void addOrphanedDataIssue(FKConstraintException fkce) {
+        orphFKViolationList.add(fkce);
     }
 
-    public void addNonPKMappingIssue(ForeignKeyConstraint constraint) {
-        nonPKViolationList.add(constraint);
+    public void addNonPKMappingIssue(FKConstraintException fkce) {
+        nonPKViolationList.add(fkce);
     }
 
-    public void addOtherIssue(ForeignKeyConstraint constraint) {
-        otherFKViolationList.add(constraint);
+    public void addOtherIssue(FKConstraintException fkce) {
+        otherFKViolationList.add(fkce);
     }
 
-    public List<ForeignKeyConstraint> getFieldMappingIssues(){
+    public List<FKConstraintException> getFieldMappingIssues(){
         return fmeFKViolationList;
     }
 
-    public List<ForeignKeyConstraint> getTableMappingIssues() {
+    public List<FKConstraintException> getTableMappingIssues() {
         return tmeFKViolationList;
     }
 
-    public List<ForeignKeyConstraint> getColumnTypeIncompatabilityIssues() {
+    public List<FKConstraintException> getColumnTypeIncompatabilityIssues() {
         return cteFKViolationList;
     }
 
-    public List<ForeignKeyConstraint> getOrphanedDataIssues() {
+    public List<FKConstraintException> getOrphanedDataIssues() {
         return orphFKViolationList;
     }
 
-    public ArrayList<ForeignKeyConstraint> getNonPKViolationList() {
+    public List<FKConstraintException> getNonPKViolationList() {
         return nonPKViolationList;
     }
 
-    public List<ForeignKeyConstraint> getOtherIssues() {
+    public List<FKConstraintException> getOtherIssues() {
         return otherFKViolationList;
     }
 
-
+    public void addException(FKConstraintException fkce) {
+        if (fkce instanceof ColumnTypeIncompatException) {
+            addColumnTypeIncompatabilityIssue(fkce);
+        } else if (fkce instanceof ParentKeysMissingException) {
+            addOrphanedDataIssue(fkce);
+        } else if (fkce instanceof NonPKMappingException) {
+            addNonPKMappingIssue(fkce);
+        } else if (fkce instanceof FieldMappingException) {
+            addFieldMappingIssue(fkce);
+        } else if (fkce instanceof TableMappingException) {
+            addTableMappingIssue(fkce);
+        } else if (fkce instanceof UnknownFKExecption) {
+            addOtherIssue(fkce);
+        }
+    }
 }

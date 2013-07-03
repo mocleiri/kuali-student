@@ -10,12 +10,14 @@ import org.kuali.student.sonar.database.plugin.ForeignKeyConstraint;
  *
  * Used for yet unhandled FK Relationship exceptions
  */
-public class UnknownFKExecption extends Throwable {
-    ForeignKeyConstraint fkConstraint;
+public class UnknownFKExecption extends FKConstraintException {
+    private String sqlMessage;
 
-    public UnknownFKExecption(ForeignKeyConstraint fkConstraint) {
+    public UnknownFKExecption(ForeignKeyConstraint fkConstraint, String sqlMessage) {
         super("Uncategorized Exception when adding constraint: " +
-                fkConstraint.toString());
+                fkConstraint.toString() + "\n" + sqlMessage + "\n" +
+                "Constraint: " + fkConstraint.toString());
         this.fkConstraint = fkConstraint;
+        this.sqlMessage = sqlMessage;
     }
 }
