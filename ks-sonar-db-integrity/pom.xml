@@ -3,10 +3,10 @@
   <parent>
     <groupId>org.kuali.student</groupId>
     <artifactId>ks-sonar</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
   </parent>
   <artifactId>ks-sonar-db-integrity</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.1</version>
   <name>KS Sonar Database Integrity Plugin</name>
   <description>KS Sonar Database Integrity Plugin</description>
   <packaging>sonar-plugin</packaging>

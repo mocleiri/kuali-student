@@ -7,15 +7,15 @@
   </parent>
   <groupId>org.kuali.student</groupId>
   <artifactId>ks-sonar</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.1</version>
   <name>KS Sonar</name>
   <description>KS Sonar Plugins</description>
   <packaging>pom</packaging>
   <url>http://${kuali.site.hostname}/student/ks-sonar/${project.version}</url>
   <scm>
-    <connection>scm:svn:https://svn.kuali.org/repos/student/tools/ks-sonar/trunk</connection>
-    <developerConnection>scm:svn:https://svn.kuali.org/repos/student/tools/ks-sonar/trunk</developerConnection>
-    <url>https://svn.kuali.org/repos/student/tools/ks-sonar/trunk</url>
+    <connection>scm:svn:https://svn.kuali.org/repos/student/tools/ks-sonar/tags/ks-sonar-0.1</connection>
+    <developerConnection>scm:svn:https://svn.kuali.org/repos/student/tools/ks-sonar/tags/ks-sonar-0.1</developerConnection>
+    <url>https://svn.kuali.org/repos/student/tools/ks-sonar/tags/ks-sonar-0.1</url>
   </scm>
   <properties>
     <oracle.version>11.2.0.2</oracle.version>
