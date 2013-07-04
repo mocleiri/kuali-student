@@ -88,4 +88,7 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+  <modules>
+  	<module>ks-sonar-rule-test</module>
+  </modules>
 </project>
