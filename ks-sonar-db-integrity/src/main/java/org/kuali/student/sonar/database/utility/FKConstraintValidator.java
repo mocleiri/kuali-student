@@ -1,12 +1,14 @@
 package org.kuali.student.sonar.database.utility;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.kuali.common.util.LocationUtils;
 import org.kuali.student.sonar.database.exception.ColumnTypeIncompatException;
 import org.kuali.student.sonar.database.exception.FKConstraintException;
@@ -38,10 +40,18 @@ public class FKConstraintValidator {
         this.context = context;
     }
 
-    public FKConstraintReport runFKSQL(ClassLoader classLoader) throws SQLException {
+    public FKConstraintReport runFKSQL(ClassLoader classLoader) throws SQLException, IOException {
 
-        String sql = LocationUtils.toString(new PathResolver().relativeFile(new File(context.getQueryFilePath()), context.getQueryFileName()));
-
+    	StringBuilder sqlBuilder = new StringBuilder();
+    	
+    	sqlBuilder.append(context.getQueryFilePath());
+    	sqlBuilder.append("/");
+    	sqlBuilder.append(context.getQueryFileName());
+    	
+    	String resource = sqlBuilder.toString();
+    	
+    	String sql = IOUtils.toString(classLoader.getResourceAsStream(resource));
+    	
         Statement stmt = null;
         ResultSet result = null;
         // unconstrained foreign key relationships

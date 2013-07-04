@@ -86,9 +86,12 @@ public class DatabaseIntegritySensor implements Sensor {
         try {
             report = validator.runFKSQL(Thread.currentThread().getContextClassLoader());
         } catch (SQLException sqle) {
-            LOG.error("Error running validator " + sqle.getMessage());
-            sqle.printStackTrace();
-        } finally {
+            LOG.error("Error running validator " + sqle.getMessage(), sqle);
+        }
+        catch (IOException ioe) {
+            LOG.error("Error running validator " + ioe.getMessage(), ioe);
+        } 
+        finally {
             try {
                 validator.revert();
             } catch (InvalidConstraintException ice) {

@@ -1,24 +1,24 @@
 package org.kuali.student.sonar.database;
 
-import org.junit.Before;
+import java.io.File;
+import java.io.IOException;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.kuali.student.sonar.database.exception.FKConstraintException;
-import org.kuali.student.sonar.database.exception.FieldMappingException;
 import org.kuali.student.sonar.database.exception.InvalidConstraintException;
 import org.kuali.student.sonar.database.plugin.DatabseIntegrityRulesRepository;
 import org.kuali.student.sonar.database.plugin.ForeignKeyConstraint;
 import org.kuali.student.sonar.database.utility.FKConstraintReport;
 import org.kuali.student.sonar.database.utility.FKConstraintValidator;
+import org.kuali.student.sonar.database.utility.ForeignKeyValidationContext;
 import org.sonar.api.resources.Resource;
 import org.sonar.api.rules.Rule;
 import org.sonar.api.rules.Violation;
-import org.kuali.student.sonar.database.utility.ForeignKeyValidationContext;
-
-
-import java.sql.*;
-import java.util.Properties;
-import static org.junit.Assert.fail;
 
 /**
  * Created with IntelliJ IDEA.
@@ -45,7 +45,7 @@ public class TestDatabaseIntegrityScript {
         context.setSkip(false);
         context.setQueryFileName("missing_FK_query.sql");
         context.setQueryFilePath("sql/");
-
+        
         // attempt to load the driver class to ensure it is in the classpath
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -64,7 +64,7 @@ public class TestDatabaseIntegrityScript {
     }
 
     @Test
-    public void testFKSQL() throws SQLException {
+    public void testFKSQL() throws SQLException, IOException {
 
         FKConstraintReport report = validator.runFKSQL(Thread.currentThread().getContextClassLoader());
 
