@@ -13,7 +13,7 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  */
-package org.kuali.student.xpath;
+package org.kuali.student.pmd.xpath;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
