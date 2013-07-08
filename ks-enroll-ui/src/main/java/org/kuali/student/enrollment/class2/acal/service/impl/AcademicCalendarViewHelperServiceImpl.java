@@ -127,14 +127,10 @@ public class AcademicCalendarViewHelperServiceImpl extends KSViewHelperServiceIm
             //Events
             List<AcalEventWrapper> events = populateEventWrappers(acalInfo.getId());
             acalForm.setEvents(events);
-            // POC KSENROLL-7698
-            acalForm.setEventsOriginal(new ArrayList<AcalEventWrapper>(events));
 
             //Holiday calendars associated with acal.
             List<HolidayCalendarWrapper> holidayCalendarWrapperList = populateHolidayCalendars(acalInfo.getHolidayCalendarIds());
             acalForm.setHolidayCalendarList(holidayCalendarWrapperList);
-            // POC KSENROLL-7698
-            acalForm.setHolidayCalendarListOriginal(new ArrayList<HolidayCalendarWrapper>(holidayCalendarWrapperList));
 
             //Terms (which in turn builds keydate groups and keydates)
             boolean calculateInstrDays = !holidayCalendarWrapperList.isEmpty();
@@ -271,7 +267,6 @@ public class AcademicCalendarViewHelperServiceImpl extends KSViewHelperServiceIm
                         AcademicTermWrapper subTermWrapper = populateTermWrapper(subTermInfo, isCopy,calculateInstrDays);
                         subTermWrapper.setParentTerm(termInfo.getTypeKey());
                         subTermWrapper.setSubTerm(true);
-                        subTermWrapper.setSubTermLabelUI(CalendarConstants.SUBTERM_LABEL_UI);
                         termWrapper.setHasSubterm(true);
                         termWrapper.getSubterms().add(subTermWrapper);
                         if (!isCopy){
@@ -671,8 +666,7 @@ public class AcademicCalendarViewHelperServiceImpl extends KSViewHelperServiceIm
 
                 if (!CommonUtils.isDateWithinRange(parentTerm.getStartDate(),parentTerm.getEndDate(),term.getStartDate()) ||
                         !CommonUtils.isDateWithinRange(parentTerm.getStartDate(),parentTerm.getEndDate(),term.getEndDate())){
-                    GlobalVariables.getMessageMap().putErrorForSectionId(collectionGroup.getId(), CalendarConstants.MessageKeys.ERROR_TERM_NOT_IN_TERM_RANGE,term.getName(),parentTerm.getName());
-                    return false;
+                    GlobalVariables.getMessageMap().putWarningForSectionId(collectionGroup.getId(), CalendarConstants.MessageKeys.ERROR_TERM_NOT_IN_TERM_RANGE,term.getName(),parentTerm.getName());
                 }
             }
 

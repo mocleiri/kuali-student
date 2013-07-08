@@ -37,6 +37,9 @@ import org.kuali.student.r2.lum.lrc.dto.ResultValuesGroupInfo;
 import org.kuali.student.r2.lum.lrc.service.LRCService;
 import org.kuali.student.r2.lum.util.constants.CluServiceConstants;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -141,23 +144,26 @@ public class CluInformationHelper {
             // Handle Date queries for the course ranges.
             if (membershipQuery.getSearchTypeKey().equals(CluSetRangeHelper.CLU_SEARCH_GENERIC)) {
 
-                //String firstDate = CluSetRangeHelper.getParmValue(membershipQuery.getQueryParamValues(), CluSetRangeHelper.CLU_SEARCH_PARM_DATE1);
-                //String secondDate = CluSetRangeHelper.getParmValue(membershipQuery.getQueryParamValues(), CluSetRangeHelper.CLU_SEARCH_PARM_DATE2);
-
-                Date firstDate = DateFormatters.YEAR_MONTH_DAY_CONCAT_DATE_FORMATTER.parse("20010101");
-                Date secondDate = DateFormatters.YEAR_MONTH_DAY_CONCAT_DATE_FORMATTER.parse("20020201");
-
-                QueryByCriteria.Builder qbcBuilder = QueryByCriteria.Builder.create();
-                qbcBuilder.setPredicates(PredicateFactory.greaterThanOrEqual("effectiveDate", firstDate),
-                        PredicateFactory.lessThanOrEqual("effectiveDate", secondDate));
+                String date1 = CluSetRangeHelper.getParmValue(membershipQuery.getQueryParamValues(), CluSetRangeHelper.CLU_SEARCH_PARM_DATE1);
+                String date2 = CluSetRangeHelper.getParmValue(membershipQuery.getQueryParamValues(), CluSetRangeHelper.CLU_SEARCH_PARM_DATE2);
 
                 try {
+                    QueryByCriteria.Builder qbcBuilder = QueryByCriteria.Builder.create();
+                    qbcBuilder.setPredicates(PredicateFactory.greaterThanOrEqual("effectiveDate", CluSetRangeHelper.sdf.parse(date1)),
+                            PredicateFactory.lessThanOrEqual("effectiveDate", CluSetRangeHelper.sdf.parse(date2)));
+
                     List<CluInfo> cluInfos = this.getCluService().searchForClus(qbcBuilder.build(), ContextUtils.getContextInfo());
 
                     List<CluInformation> cluInformations = new ArrayList<CluInformation>();
                     for (CluInfo cluInfo : cluInfos) {
                         CluInformation cluInformation = new CluInformation(cluInfo.getOfficialIdentifier().getCode(), cluInfo.getOfficialIdentifier().getShortName().toUpperCase(), "");
                         cluInformation.setCluId(cluInfo.getId());
+                        cluInformation.setDescription(cluInfo.getDescr().getPlain());
+                        cluInformation.setState(cluInfo.getStateKey());
+                        cluInformation.setTitle(cluInfo.getOfficialIdentifier().getLongName().toUpperCase());
+                        cluInformation.setShortName(cluInfo.getOfficialIdentifier().getShortName());
+                        cluInformation.setType(cluInfo.getTypeKey());
+                        cluInformation.setVerIndependentId(cluInfo.getVersion().getVersionIndId());
                         cluInformations.add(cluInformation);
                     }
                     return cluInformations;
@@ -172,7 +178,11 @@ public class CluInformationHelper {
 
                 try {
                     SearchResultInfo searchResult = this.getCluService().search(searchRequest, ContextUtils.getContextInfo());
-                    return resolveCluSearchResultSet(searchResult);
+                    if(membershipQuery.getSearchTypeKey().equals(CluSetRangeHelper.LO_SEARCH_LODESC)) {
+                        return resolveLoSearchResults(searchResult);
+                    } else {
+                        return resolveCluSearchResultSet(searchResult);
+                    }
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -223,6 +233,26 @@ public class CluInformationHelper {
                     cluInformation.setVerIndependentId(cell.getValue());
                 } else if (cell.getKey().equals("lu.resultColumn.luOptionalShortName")) {
                     cluInformation.setShortName(cell.getValue());
+                }
+            }
+            clus.add(cluInformation);
+        }
+        return clus;
+    }
+
+    public static List<CluInformation> resolveLoSearchResults(SearchResultInfo searchResult) {
+        List<CluInformation> clus = new ArrayList<CluInformation>();
+        List<SearchResultRowInfo> rows = searchResult.getRows();
+        for (SearchResultRowInfo row : rows) {
+            List<SearchResultCellInfo> cells = row.getCells();
+            CluInformation cluInformation = new CluInformation();
+            for (SearchResultCellInfo cell : cells) {
+                if (cell.getKey().equals("lo.resultColumn.loCluId")) {
+                    cluInformation.setCluId(cell.getValue());
+                } else if (cell.getKey().equals("lo.resultColumn.loCluCode")) {
+                    cluInformation.setCode(cell.getValue());
+                } else if (cell.getKey().equals("lo.resultColumn.loLuOptionalVersionIndId")) {
+                    cluInformation.setVerIndependentId(cell.getValue());
                 }
             }
             clus.add(cluInformation);

@@ -40,38 +40,28 @@ import java.util.Set;
 
 public class FreeFormTextTermResolver implements TermResolver<Boolean> {
 
-    private final static Set<String> prerequisites = new HashSet<String>(1);
-
-    static {
-        prerequisites.add(KSKRMSServiceConstants.CONTEXT_INFO_TERM_NAME);
-    }
-
     @Override
     public Set<String> getPrerequisites() {
-        return prerequisites;
+        return Collections.EMPTY_SET;
     }
 
     @Override
     public String getOutput() {
-        return KSKRMSServiceConstants.FREE_TEXT_TERM_NAME;
+        return KSKRMSServiceConstants.TERM_RESOLVER_FREEFORMTEXT;
     }
 
     @Override
     public Set<String> getParameterNames() {
-        return Collections.singleton(KSKRMSServiceConstants.PERSON_ID_TERM_PROPERTY);
+        return Collections.EMPTY_SET;
     }
 
     @Override
     public int getCost() {
-        // TODO Analyze, though probably not much to check here
-        return 5;
+        return 1;
     }
 
     @Override
     public Boolean resolve(Map<String, Object> resolvedPrereqs, Map<String, String> parameters) throws TermResolutionException {
-        ContextInfo context = (ContextInfo) resolvedPrereqs.get(KSKRMSServiceConstants.CONTEXT_INFO_TERM_NAME);
-        String personId = parameters.get(KSKRMSServiceConstants.PERSON_ID_TERM_PROPERTY);
-
         return true;
     }
 }

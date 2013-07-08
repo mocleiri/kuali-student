@@ -28,7 +28,7 @@
         <!-- Dynamically replace by page-title from parent using JS-onDocumentReadyScript to reflect subject-code.
             ie: from "Course Offerings" to "WMST200"
             This is a work-around, at least until KRAD 2.3-m3 -->
-        <property name="onDocumentReadyScript" value="updateManageCoPageTitle( '@{currentCourseOfferingWrapper.ownerCode}' );" />
+        <property name="onDocumentReadyScript" value="updateViewHeaderText( '@{currentCourseOfferingWrapper.ownerCode}' );" />
 
         <property name="breadcrumbOptions.homewardPathBreadcrumbs">
             <util:list id="KS-Enrollment-HomewardPathBreadcrumbs">
@@ -148,7 +148,7 @@
                                         <bean parent="Uif-ActionLink" p:actionLabel=" | View All Registration Groups (@{rgResultList.size()})"
                                               p:actionScript = "showLightboxComponent('KS-CourseOfferingManagement-AllRegistrationGroupsForACourseOffering', '@{#ConfigProperties['application.url']}');"/>
                                         <bean parent="Uif-Link" p:linkText="| Manage Course Offering Requisites "
-                                              p:href="@{#ConfigProperties['application.url']}/kr-krad/courseOfferingRules?viewTypeName=MAINTENANCE&amp;methodToCall=maintenanceEdit&amp;dataObjectClassName=org.kuali.student.enrollment.class1.krms.dto.CORuleManagementWrapper&amp;viewName=COAgendaManagementView&amp;overrideKeys=refObjectId&amp;refObjectId=@{currentCourseOfferingWrapper.courseOfferingId}"/>
+                                              p:href="@{#ConfigProperties['application.url']}/kr-krad/courseOfferingRules?viewTypeName=MAINTENANCE&amp;methodToCall=maintenanceEdit&amp;dataObjectClassName=org.kuali.student.enrollment.class1.krms.dto.CORuleManagementWrapper&amp;viewName=COAgendaManagementView&amp;overrideKeys=refObjectId&amp;refObjectId=@{currentCourseOfferingWrapper.courseOfferingId}&amp;returnFormKey=@{formKey}"/>
                                     </list>
                                 </property>
                             </bean>

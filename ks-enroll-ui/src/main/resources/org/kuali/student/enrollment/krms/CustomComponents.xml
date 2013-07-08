@@ -34,13 +34,34 @@ limitations under the License.
     <bean id="KRMS-CustomComponent-BoxGroup" parent="Uif-VerticalBoxGroup"/>
 
     <!-- Integer constant Instance components -->
-    <bean id="KRMS-NumberOfCourses-ConstantValue" parent="KRMS-Integer-ConstantValue-Parent"
-          p:label="Number of Courses"/>
+    <bean id="KRMS-NumberOfCourses-ConstantValue" parent="Uif-VerticalBoxSection">
+        <property name="items">
+            <list>
+                <bean parent="KRMS-Integer-ConstantValue-Parent"
+                      p:label="Number of Courses"/>
+            </list>
+        </property>
+    </bean>
 
-    <bean id="KRMS-RepeatCourseNum-ConstantValue" parent="KRMS-Integer-ConstantValue-Parent"
-          p:label="Number of Repeats"/>
+    <bean id="KRMS-RepeatCourseNum-ConstantValue" parent="Uif-VerticalBoxSection">
+        <property name="items">
+            <list>
+                <bean parent="KRMS-Integer-ConstantValue-Parent"
+                      p:label="Number of Repeats"/>
+            </list>
+        </property>
+    </bean>
 
-    <bean id="KRMS-Credits-ConstantValue" parent="KRMS-Integer-ConstantValue-Parent" p:label="Credits"/>
+    <bean id="KRMS-Credits-ConstantValue" parent="Uif-VerticalBoxSection">
+        <property name="items">
+            <list>
+                <bean parent="KRMS-Integer-ConstantValue-Parent"
+                      p:label="Credits">
+                    <property name="maxLength" value="6"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
 
     <bean id="KRMS-Minutes-ConstantValue" parent="KRMS-Integer-ConstantValue-Parent" p:label="Minutes"/>
 
@@ -82,11 +103,13 @@ limitations under the License.
     </bean>
     <bean id="KRMS-SingleCourse-SuggestField" parent="KRMS-SingleCourse-SuggestField-Parent"/>
 
-    <bean id="KRMS-MultiCourse-Section-Parent" parent="Uif-VerticalBoxSection" p:headerText="Courses">
-        <property name="header.headerTagStyle" value="font-size:13px;"/>
-        <property name="instructionalText" value="You may add any combination of courses, dynamic course ranges, or Course sets."/>
+    <bean id="KRMS-MultiCourse-Section-Parent" parent="Uif-VerticalBoxSection">
         <property name="items">
             <list>
+                <bean parent="Uif-HeaderThree" p:headerText="Courses">
+                    <property name="headerTagStyle" value="font-size:13px;"/>
+                </bean>
+                <bean parent="Uif-MessageField" p:messageText="You may add any combination of courses, dynamic course ranges, or Course sets."/>
                 <ref bean="KRMS-MultiCourse-Type-Field"/>
                 <ref bean="KRMS-ApprovedCourseStackedCollectionGroup"/>
                 <ref bean="KRMS-CourseSetStackedCollectionGroup"/>
@@ -396,13 +419,13 @@ limitations under the License.
             <list>
                 <bean parent="Uif-InputField-LabelTop" p:propertyName="proposition.cluSet.rangeHelper.effectiveFrom" p:label="Effective From">
                     <property name="control">
-                        <bean parent="Uif-DateControl" />
+                        <bean parent="Uif-KS-Default-DateControl" />
                     </property>
                 </bean>
 
                 <bean parent="Uif-InputField-LabelTop" p:propertyName="proposition.cluSet.rangeHelper.effectiveTo" p:label="Effective To">
                     <property name="control">
-                        <bean parent="Uif-DateControl" />
+                        <bean parent="Uif-KS-Default-DateControl" />
                     </property>
                 </bean>
 
@@ -523,7 +546,8 @@ limitations under the License.
             </bean>
         </property>-->
         <property name="control">
-            <bean parent="Uif-TextControl" p:size="60" p:disabled="true"/>
+            <bean parent="Uif-TextControl" p:size="60" p:style="background-color: #DDDDDD;width:370px; margin-top:null 2px;"
+                  p:readOnly="true"/>
         </property>
         <property name="quickfinder">
             <bean parent="KRMS-OrgDepartment-QuickFinder"/>

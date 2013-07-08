@@ -826,6 +826,10 @@ textarea,
 */
 input[disabled].acal_term_code{
     background-color: #ffffff;
+    color: #000000;
+    border: none;
+    cursor: text;
+    box-shadow: none;
 }
 
 .ks-uif-hasError{
@@ -851,9 +855,9 @@ div#Uif-ApplicationHeader-Wrapper{
 /*define a gray box as background*/
 .ks-gray-background  {
     background-color: #ebebeb;
-    border:none;                   n
-    width:100%;
+    border:none;
     line-height:15px;
+    padding: 10px;
 }
 .ks-gray-background label {
     line-height:15px;

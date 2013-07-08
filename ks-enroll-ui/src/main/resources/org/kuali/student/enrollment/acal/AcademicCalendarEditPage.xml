@@ -60,12 +60,6 @@ limitations under the License.
                     <property name="label" value="@{academicCalendarInfo.name}"/>
                 </bean>
                 <bean parent="Uif-BreadcrumbItem" p:render="@{newCalendar}">
-                    <property name="label" value="Calendar Search"/>
-                    <property name="url.viewId" value="calendarSearchView"/>
-                    <property name="url.controllerMapping" value="/calendarSearch"/>
-                    <property name="url.methodToCall" value="start"/>
-                </bean>
-                <bean parent="Uif-BreadcrumbItem" p:render="@{newCalendar}">
                     <property name="label" value="Create Academic Calendar"/>
                 </bean>
             </list>
@@ -212,7 +206,7 @@ limitations under the License.
         <property name="layoutManager.applyDefaultCellWidths" value="false" />
         <property name="layoutManager.applyAlternatingRowStyles" value="false" />
         <property name="layoutManager.richTable.render" value="false" />
-        <property name="style" value="padding-left: 10px" />
+<!--        <property name="style" value="padding-left: 10px" />-->
         <property name="layoutManager.actionFieldPrototype">
             <bean parent="Uif-HorizontalFieldGroup" p:align="left" p:required="false" p:label=""/>
         </property>
@@ -230,34 +224,24 @@ limitations under the License.
         </property>-->
         <property name="items">
             <list>
-                <bean parent="Uif-DataField"
-                      p:label=""
-                      p:propertyName="subTermLabelUI" p:valign="middle"/>
+                <bean parent="Uif-MessageField" p:valign="middle" p:messageText="@{#line.isSubTerm()? 'Sub term' : ''}"/>
                 <bean parent="Uif-DataField"
                       p:label="Term"
-                      p:propertyName="termNameForUI" p:style="color:#0000FF;padding-right: 30px" p:valign="middle"/>
+                      p:propertyName="termNameForUI" p:style="padding-right: 30px" p:valign="middle"/>
                 <bean parent="Uif-DataField"
                       p:label="Start Date"
                       p:propertyName="startDate" p:style="padding-right: 30px" p:valign="middle"/>
                 <bean parent="Uif-DataField"
                       p:label="End Date"
                       p:propertyName="endDate" p:style="padding-right: 30px" p:valign="middle"/>
-                <bean parent="Uif-DataField"
-                      p:label="Status"
-                      p:propertyName="status" p:style="padding-right: 30px" p:valign="middle" p:render="@{#line.official}">
-                    <property name="cssClasses">
-                        <list merge="true">
-                            <value>text-lozenge-green-msg</value>
-                        </list>
+                <bean parent="Uif-MessageField" p:label="Status" p:render="@{#line.official}">
+                    <property name="message">
+                        <bean parent="KS-Lozenge-Green-Uif-Message" p:messageText="Official" p:render="@{#line.official}"/>
                     </property>
                 </bean>
-                <bean parent="Uif-DataField"
-                      p:label="Status"
-                      p:propertyName="status" p:style="padding-right: 30px" p:valign="middle" p:render="@{!#line.official}">
-                    <property name="cssClasses">
-                        <list merge="true">
-                            <value>text-lozenge-grey-msg</value>
-                        </list>
+                <bean parent="Uif-MessageField" p:label="Status" p:render="@{!#line.official}">
+                    <property name="message">
+                        <bean parent="KS-Lozenge-Grey-Uif-Message" p:messageText="Draft" p:render="@{!#line.official}"/>
                     </property>
                 </bean>
 
@@ -353,6 +337,11 @@ limitations under the License.
         <property name="addLineLabel.labelText" value=""/>
         <property name="layoutManager.richTable.render" value="false" />
         <property name="layoutManager.applyAlternatingRowStyles" value="false" />
+        <property name="lineActions">
+            <list>
+                <bean parent="Uif-DeleteLineAction" p:methodToCall="deleteAcalEvent"/>
+            </list>
+        </property>
 		<property name="items">
 			<list>
 				<bean parent="Uif-InputField" p:propertyName="eventTypeKey" p:label="Event" p:required="true"
@@ -480,7 +469,7 @@ limitations under the License.
                                     <list>
                                         <!-- DONT DELETE - For now, we're not displaying the hcal edit button as there are some issues with KRAD -->
                                         <!--<bean parent="KS-SubmitActionLink" p:methodToCall="editHolidayCalendar" p:actionLabel="Edit" p:onClickScript="writeHiddenToForm(&quot;actionParameters[selectedLineIndex]&quot;, &quot;@{#index}&quot;);" p:render="@{!#view.readOnly}"/>  -->
-                                        <bean parent="Uif-ActionLink" p:methodToCall="deleteLine" p:actionLabel="Delete" p:ajaxSubmit="true"
+                                        <bean parent="Uif-ActionLink" p:methodToCall="deleteHolidayCalendar" p:actionLabel="Delete" p:ajaxSubmit="true"
                                               p:onClickScript="writeHiddenToForm(&quot;actionParameters[selectedLineIndex]&quot;, &quot;@{#index}&quot;);"
                                               p:actionScript="actionInvokeHandler(this);" p:render="@{!#view.readOnly}"/>
                                     </list>

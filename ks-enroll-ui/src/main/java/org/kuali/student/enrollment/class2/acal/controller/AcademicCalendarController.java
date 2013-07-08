@@ -681,6 +681,47 @@ public class AcademicCalendarController extends UifControllerBase {
 
     }
 
+    @RequestMapping(params = "methodToCall=deleteHolidayCalendar")
+    public ModelAndView deleteHolidayCalendar(@ModelAttribute("KualiForm") AcademicCalendarForm academicCalendarForm, BindingResult result,
+                                           HttpServletRequest request, HttpServletResponse response) {
+
+        String selectedCollectionPath = academicCalendarForm.getActionParamaterValue(UifParameters.SELLECTED_COLLECTION_PATH);
+        if (StringUtils.isBlank(selectedCollectionPath)) {
+            throw new RuntimeException("unable to determine the selected collection path");
+        }
+
+        int selectedLineIndex = KSControllerHelper.getSelectedCollectionLineIndex(academicCalendarForm);
+        HolidayCalendarWrapper calendarDeleted = academicCalendarForm.getHolidayCalendarList().get(selectedLineIndex);
+        if(calendarDeleted.getHolidayCalendarInfo().getId()!=null){
+            academicCalendarForm.setHolidayCalendarDeleted(true);
+        }
+        academicCalendarForm.getHolidayCalendarList().remove(selectedLineIndex);
+
+        return getUIFModelAndView(academicCalendarForm);
+
+    }
+    @RequestMapping(params = "methodToCall=deleteAcalEvent")
+    public ModelAndView deleteAcalEvent(@ModelAttribute("KualiForm") AcademicCalendarForm academicCalendarForm, BindingResult result,
+                                              HttpServletRequest request, HttpServletResponse response) {
+
+        String selectedCollectionPath = academicCalendarForm.getActionParamaterValue(UifParameters.SELLECTED_COLLECTION_PATH);
+        if (StringUtils.isBlank(selectedCollectionPath)) {
+            throw new RuntimeException("unable to determine the selected collection path");
+        }
+
+        int selectedLineIndex = KSControllerHelper.getSelectedCollectionLineIndex(academicCalendarForm);
+        AcalEventWrapper deletedEvent = academicCalendarForm.getEvents().get(selectedLineIndex);
+        if(deletedEvent.getAcalEventInfo().getId()!=null){
+            academicCalendarForm.getEventsToDeleteOnSave().add(deletedEvent);
+        }
+
+        academicCalendarForm.getEvents().remove(selectedLineIndex);
+
+        return getUIFModelAndView(academicCalendarForm);
+
+    }
+
+
     /**
      * Method used to set Acal as official
      */
@@ -1028,13 +1069,13 @@ public class AcademicCalendarController extends UifControllerBase {
     }
 
     /**
-     * Saves changes made to an academic calendar. POC KSENROLL-7698
+     * Saves changes made to an academic calendar.
+     * POC KSENROLL-7698
      *
      * @param academicCalendarForm - Form containing the data from the page.
      * @return The updated calendar after save.
      */
     private AcademicCalendarForm saveAcademicCalendar(AcademicCalendarForm academicCalendarForm){
-        List<String> updatedFields = new ArrayList<String>();
         AcademicCalendarViewHelperService viewHelperService = getAcalViewHelperService(academicCalendarForm);
 
         // Convert Raw UI data and prepare it for save.
@@ -1060,6 +1101,53 @@ public class AcademicCalendarController extends UifControllerBase {
             dirtyFields.add("academicCalendarInfo.holiday");
         }
 
+        // Save the dirty field information
+        academicCalendarForm = saveDirtyFieldChanges(academicCalendarForm, dirtyFields,viewHelperService);
+
+        // Check for new Acal Events and save them
+        academicCalendarForm = saveAcalEvents(academicCalendarForm,viewHelperService);
+
+        // Check for deleted Acal Events and delete them from database
+        deleteAcalEvents(academicCalendarForm,viewHelperService);
+
+        // Check for new terms and save them
+        academicCalendarForm = saveTerms(academicCalendarForm,viewHelperService);
+
+        // Check for deleted terms and delete them from database
+        deleteTerms(academicCalendarForm, viewHelperService);
+
+        // Check keydates in terms
+        for(int i = 0; i < academicCalendarForm.getTermWrapperList().size();i++){
+            // Check for new key dates and save them
+            academicCalendarForm = saveKeyDates(academicCalendarForm,i,viewHelperService);
+
+            // Check for deleted key dates and delete them from database
+            AcademicTermWrapper term = academicCalendarForm.getTermWrapperList().get(i);
+            deleteKeyDates(term, viewHelperService);
+        }
+
+        // Reset values
+        academicCalendarForm.getEventsToDeleteOnSave().clear();
+        academicCalendarForm.setHolidayCalendarDeleted(false);
+        academicCalendarForm.setDirtyFields("");
+        academicCalendarForm.getTermsToDeleteOnSave().clear();
+
+        // Return new form
+        return academicCalendarForm;
+    }
+
+    /**
+     * Cycles through the list of dirty fields, determines what property they correspond to and updates them.
+     * POC KSENROLL-7698
+     *
+     * @param form - View form containing the Calendar information
+     * @param dirtyFields - List of properties that have unsaved information
+     * @param helperService - View Helper service
+     * @return The updated form
+     */
+    private AcademicCalendarForm saveDirtyFieldChanges(AcademicCalendarForm form, List<String>dirtyFields, AcademicCalendarViewHelperService helperService){
+        List<String> updatedFields = new ArrayList<String>();
+
         // Cycle through the dirty field list and save the individual properties.
         for(int i=0;i<dirtyFields.size();i++){
             String field = dirtyFields.get(i);
@@ -1082,19 +1170,22 @@ public class AcademicCalendarController extends UifControllerBase {
             updatedFields.add(field);
 
             // Search for the save process for the field
-            if(field.contains("academicCalendarInfo")){
+            if(field.contains("newCollectionLines")){
+                // Catch known dirty field that are not handled by save
+                continue;
+            }else if(field.contains("academicCalendarInfo")){
 
                 // Save the base Academic calendar info and refresh it in the form
-                AcademicCalendarInfo newAcal = saveAcal(academicCalendarForm.getAcademicCalendarInfo(), academicCalendarForm, viewHelperService);
-                academicCalendarForm.setAcademicCalendarInfo(newAcal);
+                AcademicCalendarInfo newAcal = saveAcal(form.getAcademicCalendarInfo(), form, helperService);
+                form.setAcademicCalendarInfo(newAcal);
 
             } else if(field.contains("events")){
 
                 // Save an individual event and refresh it in the form
                 int index = processFieldIndex(field);
-                AcalEventWrapper event = academicCalendarForm.getEvents().get(index);
-                AcalEventWrapper newEvent = saveAcalEvent(event,academicCalendarForm, viewHelperService);
-                academicCalendarForm.getEvents().set(index, newEvent);
+                AcalEventWrapper event = form.getEvents().get(index);
+                AcalEventWrapper newEvent = saveAcalEvent(event,form, helperService);
+                form.getEvents().set(index, newEvent);
 
             } else if(field.contains("keydates")){
 
@@ -1102,17 +1193,17 @@ public class AcademicCalendarController extends UifControllerBase {
                 int termIndex = processFieldIndex(field.substring(0, field.indexOf(".")));
                 int keyDateGroupIndex = processFieldIndex(field.substring(field.indexOf("."), field.lastIndexOf(".")));
                 int keyDateIndex = processFieldIndex( field.substring(field.lastIndexOf(".")));
-                KeyDateWrapper  keyDateWrapper = academicCalendarForm.getTermWrapperList().get(termIndex).getKeyDatesGroupWrappers().get(keyDateGroupIndex).getKeydates().get(keyDateIndex);
-                KeyDateWrapper newKeyDateWrapper = saveKeyDate(keyDateWrapper, academicCalendarForm.getTermWrapperList().get(termIndex), viewHelperService);
-                academicCalendarForm.getTermWrapperList().get(termIndex).getKeyDatesGroupWrappers().get(keyDateGroupIndex).getKeydates().set(keyDateIndex,newKeyDateWrapper);
+                KeyDateWrapper  keyDateWrapper = form.getTermWrapperList().get(termIndex).getKeyDatesGroupWrappers().get(keyDateGroupIndex).getKeydates().get(keyDateIndex);
+                KeyDateWrapper newKeyDateWrapper = saveKeyDate(keyDateWrapper, form.getTermWrapperList().get(termIndex), helperService);
+                form.getTermWrapperList().get(termIndex).getKeyDatesGroupWrappers().get(keyDateGroupIndex).getKeydates().set(keyDateIndex,newKeyDateWrapper);
 
             } else if(field.contains("termWrapperList")){
 
                 // Save and individual even and refresh it in the form
                 int index = processFieldIndex(field);
-                AcademicTermWrapper term = academicCalendarForm.getTermWrapperList().get(index);
-                AcademicTermWrapper newTerm = saveTerm(term, academicCalendarForm, viewHelperService);
-                academicCalendarForm.getTermWrapperList().set(index,newTerm);
+                AcademicTermWrapper term = form.getTermWrapperList().get(index);
+                AcademicTermWrapper newTerm = saveTerm(term, form, helperService);
+                form.getTermWrapperList().set(index,newTerm);
 
             } else {
                 // Signal that there is an unknown field found.
@@ -1121,73 +1212,12 @@ public class AcademicCalendarController extends UifControllerBase {
                 }
             }
         }
-
-        // Check for new Acal Events and save them
-        for(int i=0;i<academicCalendarForm.getEvents().size();i++){
-            AcalEventWrapper event = academicCalendarForm.getEvents().get(i);
-            if(event.getAcalEventInfo().getId()==null){
-                AcalEventWrapper newEvent = saveAcalEvent(event,academicCalendarForm,viewHelperService);
-                academicCalendarForm.getEvents().set(i,newEvent);
-            }
-        }
-
-        // Check for deleted Acal Events and delete them from database
-        deleteAcalEvents(academicCalendarForm,viewHelperService);
-
-        // Check for new terms and save them
-        List<AcademicTermWrapper> subTermsToSave = new ArrayList<AcademicTermWrapper>();
-        for(int i=0;i<academicCalendarForm.getTermWrapperList().size();i++){
-            AcademicTermWrapper term = academicCalendarForm.getTermWrapperList().get(i);
-            if(term.getTermInfo().getId()==null){
-                if(term.isSubTerm()){
-                    // Subterms require the parent term to exist so wait and save all other terms are saved
-                    subTermsToSave.add(term);
-                } else{
-                    // Save the new term and refresh it in the form
-                    AcademicTermWrapper newTerm = saveTerm(term,academicCalendarForm,viewHelperService);
-                    academicCalendarForm.getTermWrapperList().set(i,newTerm);
-                }
-            }
-        }
-        // Save subterms from before
-        for(int i = 0;i<subTermsToSave.size();i++){
-            int index = academicCalendarForm.getTermWrapperList().indexOf(subTermsToSave.get(i));
-            // Save the new term and refresh it in the form
-            AcademicTermWrapper newTerm = saveTerm(subTermsToSave.get(i),academicCalendarForm,viewHelperService);
-            academicCalendarForm.getTermWrapperList().set(index,newTerm);
-        }
-
-        // Check for deleted terms and delete them from database
-        deleteTerms(academicCalendarForm, viewHelperService);
-
-        // Check for new key dates and save them
-        for(int i = 0; i < academicCalendarForm.getTermWrapperList().size();i++){
-            AcademicTermWrapper term = academicCalendarForm.getTermWrapperList().get(i);
-            for( int j = 0; j<term.getKeyDatesGroupWrappers().size();j++){
-                KeyDatesGroupWrapper keyDateGroup = term.getKeyDatesGroupWrappers().get(j);
-                for(int k = 0; k<keyDateGroup.getKeydates().size();k++){
-                    KeyDateWrapper keyDate = keyDateGroup.getKeydates().get(k);
-                    if(keyDate.getKeyDateInfo().getId() ==  null){
-                        KeyDateWrapper newKeyDate= saveKeyDate(keyDate,term,viewHelperService);
-                        academicCalendarForm.getTermWrapperList().get(i).getKeyDatesGroupWrappers().get(j).getKeydates().set(k,newKeyDate);
-                    }
-                }
-            }
-            // Check for deleted key dates and delete them from database
-            deleteKeyDates(term, viewHelperService);
-        }
-        // Reset values
-        academicCalendarForm.setEventsOriginal(new ArrayList<AcalEventWrapper>(academicCalendarForm.getEvents()));
-        academicCalendarForm.setHolidayCalendarListOriginal(new ArrayList<HolidayCalendarWrapper>(academicCalendarForm.getHolidayCalendarList()));
-        academicCalendarForm.setDirtyFields("");
-        academicCalendarForm.getTermsToDeleteOnSave().clear();
-
-        // Return new form
-        return academicCalendarForm;
+        return form;
     }
 
     /**
-     * Save changes to a calendar or create it if it has not already been saved POC KSENROLL-7698
+     * Save changes to a calendar or create it if it has not already been saved
+     * POC KSENROLL-7698
      *
      * @param acal - Calendar to be saved
      * @param form - View form containing the Calendar information
@@ -1237,7 +1267,43 @@ public class AcademicCalendarController extends UifControllerBase {
     }
 
     /**
-     * Save changes to a term or create it if it has not already been saved POC KSENROLL-7698
+     * Cycles through the list of terms and saves any new terms detected.
+     * POC KSENROLL-7698
+     *
+     * @param form - View form containing the Calendar information
+     * @param helperService - View Helper service
+     * @return The updated form.
+     */
+    private AcademicCalendarForm saveTerms(AcademicCalendarForm form, AcademicCalendarViewHelperService helperService){
+        // Check for new terms and save them
+        List<AcademicTermWrapper> subTermsToSave = new ArrayList<AcademicTermWrapper>();
+        for(int i=0;i<form.getTermWrapperList().size();i++){
+            AcademicTermWrapper term = form.getTermWrapperList().get(i);
+            if(term.getTermInfo().getId()==null){
+                if(term.isSubTerm()){
+                    // Subterms require the parent term to exist so wait and save all other terms are saved
+                    subTermsToSave.add(term);
+                } else{
+                    // Save the new term and refresh it in the form
+                    AcademicTermWrapper newTerm = saveTerm(term,form,helperService);
+                    form.getTermWrapperList().set(i,newTerm);
+                }
+            }
+        }
+        // Save subterms from before
+        for(int i = 0;i<subTermsToSave.size();i++){
+            int index = form.getTermWrapperList().indexOf(subTermsToSave.get(i));
+            // Save the new term and refresh it in the form
+            AcademicTermWrapper newTerm = saveTerm(subTermsToSave.get(i),form,helperService);
+            form.getTermWrapperList().set(index,newTerm);
+        }
+
+        return form;
+    }
+
+    /**
+     * Save changes to a term or create it if it has not already been saved
+     * POC KSENROLL-7698
      *
      * @param termWrapper - The term to be saved
      * @param form - View form containing the Calendar information
@@ -1300,7 +1366,8 @@ public class AcademicCalendarController extends UifControllerBase {
     }
 
     /**
-     * Determines terms that have been deleted in the UI and deletes them from the database POC KSENROLL-7698
+     * Determines terms that have been deleted in the UI and deletes them from the database
+     * POC KSENROLL-7698
      *
      * @param form - View form containing the Calendar information
      * @param helperService - View Helper service
@@ -1320,7 +1387,32 @@ public class AcademicCalendarController extends UifControllerBase {
     }
 
     /**
-     * Save changes to a keydate or create it if it has not already been saved  POC KSENROLL-7698
+     * Cycles through the key date groups and their list of key dates and saves any new keydates detected
+     * POC KSENROLL-7698
+     *
+     * @param form - View form containing the Calendar information
+     * @param termIndex - The index of the term.
+     * @param helperService - View Helper service
+     * @return The updated form.
+     */
+    private AcademicCalendarForm saveKeyDates(AcademicCalendarForm form, int termIndex, AcademicCalendarViewHelperService helperService){
+        AcademicTermWrapper term = form.getTermWrapperList().get(termIndex);
+        for( int j = 0; j<term.getKeyDatesGroupWrappers().size();j++){
+            KeyDatesGroupWrapper keyDateGroup = term.getKeyDatesGroupWrappers().get(j);
+            for(int k = 0; k<keyDateGroup.getKeydates().size();k++){
+                KeyDateWrapper keyDate = keyDateGroup.getKeydates().get(k);
+                if(keyDate.getKeyDateInfo().getId() ==  null){
+                    KeyDateWrapper newKeyDate= saveKeyDate(keyDate,term,helperService);
+                    form.getTermWrapperList().get(termIndex).getKeyDatesGroupWrappers().get(j).getKeydates().set(k,newKeyDate);
+                }
+            }
+        }
+        return form;
+    }
+
+    /**
+     * Save changes to a keydate or create it if it has not already been saved
+     * POC KSENROLL-7698
      *
      * @param keyDateWrapper - KeyDate to be saved
      * @param term - Term containing the key date
@@ -1365,7 +1457,8 @@ public class AcademicCalendarController extends UifControllerBase {
     }
 
     /**
-     * Determines kay dates that have been deleted in the UI and deletes them from the database POC KSENROLL-7698
+     * Determines kay dates that have been deleted in the UI and deletes them from the database
+     * POC KSENROLL-7698
      *
      * @param form - View form containing the Calendar information
      * @param helperService - View Helper service
@@ -1386,7 +1479,27 @@ public class AcademicCalendarController extends UifControllerBase {
     }
 
     /**
-     * Save changes to an event or create it if it has not already been saved POC KSENROLL-7698
+     * Cycles through the list of events and saves any new events detected
+     * POC KSENROLL-7698
+     *
+     * @param form - View form containing the Calendar information
+     * @param helperService - View Helper service
+     * @return The updated form.
+     */
+    private AcademicCalendarForm saveAcalEvents(AcademicCalendarForm form, AcademicCalendarViewHelperService helperService){
+        for(int i=0;i<form.getEvents().size();i++){
+            AcalEventWrapper event = form.getEvents().get(i);
+            if(event.getAcalEventInfo().getId()==null){
+                AcalEventWrapper newEvent = saveAcalEvent(event,form,helperService);
+                form.getEvents().set(i,newEvent);
+            }
+        }
+        return form;
+    }
+
+    /**
+     * Save changes to an event or create it if it has not already been saved
+     * POC KSENROLL-7698
      *
      * @param event - The event to be created
      * @param form - View form containing the Calendar information
@@ -1438,42 +1551,29 @@ public class AcademicCalendarController extends UifControllerBase {
     }
 
     /**
-     * Determines events that have been deleted in the UI and deletes them from the database POC KSENROLL-7698
+     * Determines events that have been deleted in the UI and deletes them from the database
+     * POC KSENROLL-7698
      *
      * @param form - View form containing the Calendar information
      * @param helperService - View Helper service
      */
     private void deleteAcalEvents(AcademicCalendarForm form, AcademicCalendarViewHelperService helperService){
-        if(form.getEventsOriginal()!=null){
-            // Compare entries in the list returned from the UI and the original list from before
-            for(int i=0; i<form.getEventsOriginal().size();i++){
-                AcalEventWrapper original = form.getEventsOriginal().get(i);
-                boolean found = false;
-                for(int j=0;j<form.getEvents().size();j++){
-                    AcalEventWrapper event = form.getEvents().get(j);
-                    if(event.getAcalEventInfo().getId().compareTo(original.getAcalEventInfo().getId())==0){
-                        found=true;
-                        break;
-                    }
+        for(int i=0;i<form.getEventsToDeleteOnSave().size();i++){
+            try{
+                AcalEventWrapper event = form.getEventsToDeleteOnSave().get(i);
+                getAcalService().deleteAcalEvent(event.getAcalEventInfo().getId(),helperService.createContextInfo());
+            }catch(Exception e){
+                if (LOG.isDebugEnabled()){
+                    LOG.error("Delete calendar event has failed - " + e.getMessage());
                 }
-                if(!found){
-                    // If an entry in the original is not found then it has been deleted in the UI
-                    // Delete it from the database
-                    try{
-                        getAcalService().deleteAcalEvent(original.getAcalEventInfo().getId(),helperService.createContextInfo());
-                    }catch(Exception e){
-                        if (LOG.isDebugEnabled()){
-                            LOG.error("Delete calendar event has failed - " + e.getMessage());
-                        }
-                        // TODO: Add Error message for failure to create event
-                    }
-                }
+                // TODO: Add Error message for failure to create event
             }
         }
     }
 
     /**
-     * Finds and returns an array index of a property from its field name POC KSENROLL-7698
+     * Finds and returns an array index of a property from its field name
+     * POC KSENROLL-7698
      *
      * @param field - The property field string in the form propertyName[#]
      * @return The index of the array slot referenced in the property.
@@ -1484,7 +1584,8 @@ public class AcademicCalendarController extends UifControllerBase {
     }
 
     /**
-     * Finds and returns the parent term of a subterm POC KSENROLL-7698
+     * Finds and returns the parent term of a subterm
+     * POC KSENROLL-7698
      *
      * @param acalId - Id of the calendar containing the subterm
      * @param parentTermTypeKey - The type key of the parent term
@@ -1504,7 +1605,8 @@ public class AcademicCalendarController extends UifControllerBase {
     }
 
     /**
-     * Creates a Date object with just date or date and time based on if the event is all day or not POC KSENROLL-7698
+     * Creates a Date object with just date or date and time based on if the event is all day or not
+     * POC KSENROLL-7698
      *
      * @param isAllDay - Whether event is all day or not
      * @param date - The MM/dd/yyyy date
@@ -1520,36 +1622,26 @@ public class AcademicCalendarController extends UifControllerBase {
     }
 
     /**
-     * Determines whether changes were made to the list of Holiday Calendars. POC KSENROLL-7698
+     * Determines whether changes were made to the list of Holiday Calendars.
+     * POC KSENROLL-7698
      *
      * @param form - View form containing the Calendar information
-     * @return True the HolidayCalendarList and HolidayCalendarListOriginal don't match, other wise false.
+     * @return True if changes are detected, other wise false.
      */
     private boolean changesMadeToHCals(AcademicCalendarForm form){
-        // If either are null then this is a new calendar and
-        if(form.getHolidayCalendarList()==null || form.getHolidayCalendarListOriginal()==null)return true;
-        //Determine if holiday calendars have been added or deleted
-        if(form.getHolidayCalendarList().size()!=form.getHolidayCalendarListOriginal().size()) return true;
-        for(int i=0; i<form.getHolidayCalendarListOriginal().size();i++){
-            HolidayCalendarWrapper original = form.getHolidayCalendarListOriginal().get(i);
-            boolean found = false;
-            for(int j=0;j<form.getHolidayCalendarList().size();j++){
-                HolidayCalendarWrapper calendar = form.getHolidayCalendarList().get(j);
-                if(calendar.getHolidayCalendarInfo()==null){
-                    // A new Calendar meaning changes have been made to Holiday Calendar
-                    return true;
-                }
-                if(calendar.getHolidayCalendarInfo().getId()==null){
-                    // A new Calendar meaning changes have been made to Holiday Calendar
-                    return true;
-                }
-                if(calendar.getHolidayCalendarInfo().getId().compareTo(original.getHolidayCalendarInfo().getId())==0){
-                    found=true;
-                    break;
-                }
+
+        // Check if Calendars have been deleted
+        if(form.isHolidayCalendarDeleted())return true;
+
+        // Check for new Calendars
+        for(int j=0;j<form.getHolidayCalendarList().size();j++){
+            HolidayCalendarWrapper calendar = form.getHolidayCalendarList().get(j);
+            if(calendar.getHolidayCalendarInfo()==null){
+                // A new Calendar meaning changes have been made to Holiday Calendar
+                return true;
             }
-            if(!found){
-                // If not found then it has been deleted and changes made to Holiday Calendars
+            if(calendar.getHolidayCalendarInfo().getId()==null){
+                // A new Calendar meaning changes have been made to Holiday Calendar
                 return true;
             }
         }

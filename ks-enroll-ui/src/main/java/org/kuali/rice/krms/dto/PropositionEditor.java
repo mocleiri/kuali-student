@@ -36,6 +36,8 @@ public class PropositionEditor implements PropositionDefinitionContract, Seriali
 
     private static final long serialVersionUID = 1L;
 
+    private static final org.apache.log4j.Logger LOG = org.apache.log4j.Logger.getLogger(PropositionEditor.class);
+
     private String key;
 
     private String id;
@@ -94,6 +96,15 @@ public class PropositionEditor implements PropositionDefinitionContract, Seriali
         this.versionNumber = definition.getVersionNumber();
     }
 
+    public void clear(){
+        this.description = null;
+        this.term = null;
+        this.termParameter = null;
+        for (PropositionParameterEditor parm : this.getParameters()) {
+            parm.clear();
+        }
+    }
+
     public String getKey() {
         return key;
     }
@@ -126,7 +137,13 @@ public class PropositionEditor implements PropositionDefinitionContract, Seriali
     }
 
     public void setDescription(String description) {
+        //Description can only handle 100 characters.
+        if ((description != null) && (description.length()>100)) {
+            description = description.substring(0,97) + "...";
+        }
         this.description = description;
+
+        LOG.info(this.description);
     }
 
     public void setRuleId(String ruleId) {
@@ -280,7 +297,7 @@ public class PropositionEditor implements PropositionDefinitionContract, Seriali
         this.getNaturalLanguage().put(usage, nl);
 
         if (usage.equals(defaultNlKey)){
-            this.setDescription(StringUtils.abbreviate(nl, 99));
+            this.setDescription(nl);
         }
     }
 

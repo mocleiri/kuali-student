@@ -8,8 +8,10 @@ package org.kuali.student.enrollment.class2.courseoffering.util;
  * To change this template use File | Settings | File Templates.
  */
 public class CourseOfferingConstants {
+
     //  Keys for features which are institutionally configurable via config file params
     public final static String CONFIG_PARAM_KEY_SELECTIVE_CROSSLISTING = "kuali.ks.enrollment.options.selective-crosslisting-allowed";
+    public final static String CONFIG_PARAM_KEY_EDIT_ACTIVITY_CODE = "kuali.ks.enrollment.options.edit-activity-offering-allowed";
 
     //Attributes defined in CourseOfferingInfo
     public final static String COURSEOFFERING_ID = "id";
@@ -145,7 +147,6 @@ public class CourseOfferingConstants {
          * These are the confirm dialog bean ids used in Manage CO/AO view.
          */
     public static class ConfirmDialogs{
-        public static final String APRROVE_CO = "approveCODialog";
         public static final String DELETE_COLO_COS = "deletingColocationNotSupportedForMultipleCosDialog";
         public static final String DELETE_ONE_COLO_CO = "deletingColocationNotSupportedForCoDialog";
         public static final String DELETE_COLO_AOS = "deletingColocationNotSupportedForMultipleAosDialog";

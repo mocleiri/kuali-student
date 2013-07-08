@@ -51,9 +51,10 @@
         <!-- Move the add button to the right of the fields -->
         <property name="layoutManager.addLineGroup.layoutManager.style" value="float:left;"/>
         <property name="layoutManager.addLineGroup.footer.style" value="display:inline-block;margin-top:2em;"/>
+        <property name="layoutManager.addLineGroup.id" value="term_section"/>
 
         <property name="layoutManager.lineGroupPrototype">
-            <bean parent="Uif-CollectionVerticalBoxItem">
+            <bean id="term_section" parent="Uif-CollectionVerticalBoxItem">
                 <property name="disclosure.render" value="true"/>
                 <property name="disclosure.defaultOpen" value="false"/>
                 <property name="header">
@@ -67,14 +68,15 @@
                                             <property name="render" value="@{#line.termInfo != null and #line.termInfo.id != null }"/>
                                             <property name="items">
                                                 <list>
-                                                    <bean parent="KS-Lozenge-Green-Uif-Message" p:messageText="Official" p:render="@{#line.official}"/>
-                                                    <bean parent="KS-Lozenge-Grey-Uif-Message" p:messageText="Draft" p:render="@{!#line.official}"/>
+
                                                     <bean id="term_official" parent="Uif-ActionLink" p:methodToCall="makeTermOfficial" p:actionLabel="Make Official"
                                                           p:render="@{!#line.official and !#view.readOnly}"
                                                           p:onClickScript="writeHiddenToForm(&quot;actionParameters[selectedLineIndex]&quot;, &quot;@{#index}&quot;);"  />
                                                     <bean parent="Uif-ActionLink" p:methodToCall="deleteTerm" p:actionLabel="@{#line.isSubTerm()? 'Delete Subterm Draft' : 'Delete Term Draft'}"
                                                           p:onClickScript="writeHiddenToForm(&quot;actionParameters[selectedLineIndex]&quot;, &quot;@{#index}&quot;);"
                                                           p:render="@{!#line.official and !#view.readOnly}"/>
+                                                    <bean parent="KS-Lozenge-Green-Uif-Message" p:messageText="Official" p:render="@{#line.official}"/>
+                                                    <bean parent="KS-Lozenge-Grey-Uif-Message" p:messageText="Draft" p:render="@{!#line.official}"/>
                                                 </list>
                                             </property>
                                         </bean>
@@ -131,6 +133,7 @@
                                     <value>termType</value>
                                 </list>
                             </property>
+                            <property name="queryMethodInvokerConfig"><null/></property>
                             <property name="queryFieldMapping" value="{startDate:startDate,termType:termType}"/>
                             <property name="returnFieldMapping" value="termCode:termCode"/>
                         </bean>
@@ -173,6 +176,7 @@
                                             <property name="attributeQuery">
                                                 <bean parent="Uif-AttributeQueryConfig">
                                                     <property name="queryMethodToCall" value="termInfoAjaxQuery"/>
+                                                    <property name="queryMethodInvokerConfig"><null/></property>
                                                     <property name="queryMethodArgumentFieldList">
                                                         <list>
                                                             <value>startDate</value>
@@ -216,6 +220,7 @@
                                             <property name="attributeQuery">
                                                 <bean parent="Uif-AttributeQueryConfig">
                                                     <property name="queryMethodToCall" value="termInfoAjaxQuery"/>
+                                                    <property name="queryMethodInvokerConfig"><null/></property>
                                                     <property name="queryMethodArgumentFieldList">
                                                         <list>
                                                             <value>startDate</value>
@@ -278,20 +283,22 @@
         <!-- Move the add button to the right of the fields -->
         <property name="layoutManager.addLineGroup.layoutManager.style" value="float:left;"/>
         <property name="layoutManager.addLineGroup.footer.style" value="display:inline-block;margin-top:2em;"/>
+        <property name="layoutManager.addLineGroup.id" value="key_date_grp_section"/>
 
         <property name="layoutManager.addLineGroup.header.render" value="false"/>
         <property name="layoutManager.lineGroupPrototype.validationMessages.displayMessages" value="false"/>
         <property name="layoutManager.lineGroupPrototype.header.headerText" value="@{#line.keyDateGroupNameUI} Key Dates"/>
+        <property name="layoutManager.lineGroupPrototype.id" value="key_date_grp_section"/>
         <property name="addLineActions">
             <list>
                 <!-- Needed to prevent focus from moving to first line and re-validating, which always will cause an error
                 since the first field is a validated dropdown -->
-                <bean parent="Uif-AddLineAction" p:focusOnIdAfterSubmit="SELF"/>
+                <bean parent="Uif-AddLineAction-CapitalButtonLabel" p:focusOnIdAfterSubmit="SELF"/>
             </list>
         </property>
         <property name="lineActions">
             <list>
-                <bean id="key_date_group_delete_button" parent="Uif-SecondaryActionButton-Small" p:methodToCall="deleteKeyDateGroup" p:actionLabel="delete keydate group"/>
+                <bean id="key_date_group_delete_button" parent="Uif-SecondaryActionButton-Small" p:methodToCall="deleteKeyDateGroup" p:actionLabel="Delete keydate group"/>
             </list>
         </property>
         <property name="items">

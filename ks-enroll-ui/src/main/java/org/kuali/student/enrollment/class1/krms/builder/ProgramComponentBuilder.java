@@ -16,12 +16,15 @@
 package org.kuali.student.enrollment.class1.krms.builder;
 
 import org.kuali.rice.core.api.resourceloader.GlobalResourceLoader;
+import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krms.builder.ComponentBuilder;
 import org.kuali.rice.krms.builder.ComponentBuilderUtils;
+import org.kuali.rice.krms.util.PropositionTreeUtil;
 import org.kuali.student.enrollment.class1.krms.dto.CluInformation;
 import org.kuali.student.enrollment.class1.krms.dto.CluSetInformation;
 import org.kuali.student.enrollment.class1.krms.dto.EnrolPropositionEditor;
 import org.kuali.student.enrollment.class1.krms.dto.ProgramCluSetInformation;
+import org.kuali.student.enrollment.class1.krms.util.KSKRMSConstants;
 import org.kuali.student.enrollment.class2.courseoffering.util.CourseOfferingResourceLoader;
 import org.kuali.student.enrollment.class2.population.dto.PopulationWrapper;
 import org.kuali.student.r2.common.util.ContextUtils;
@@ -74,7 +77,7 @@ public class ProgramComponentBuilder implements ComponentBuilder<EnrolPropositio
     @Override
     public void resolveTermParameters(EnrolPropositionEditor propositionEditor, Map<String, String> termParameters) {
         String cluSetId = termParameters.get(KSKRMSServiceConstants.TERM_PARAMETER_TYPE_PROGRAM_CLUSET_KEY);
-        String classStadingId = termParameters.get(KSKRMSServiceConstants.TERM_PARAMETER_TYPE_ClASS_STANDING_KEY);
+        String classStadingId = termParameters.get(KSKRMSServiceConstants.TERM_PARAMETER_TYPE_CLASS_STANDING_KEY);
         if (cluSetId != null) {
             try {
                 ProgramCluSetInformation cluSetInfo = this.getProgramCluSetInformation(cluSetId);
@@ -111,7 +114,7 @@ public class ProgramComponentBuilder implements ComponentBuilder<EnrolPropositio
         }
         if (propositionEditor.getClassStanding() != null){
 
-            termParameters.put(KSKRMSServiceConstants.TERM_PARAMETER_TYPE_ClASS_STANDING_KEY, propositionEditor.getPopulationWrapper().getId());
+            termParameters.put(KSKRMSServiceConstants.TERM_PARAMETER_TYPE_CLASS_STANDING_KEY, propositionEditor.getPopulationWrapper().getId());
         }
 
         return termParameters;
@@ -140,7 +143,13 @@ public class ProgramComponentBuilder implements ComponentBuilder<EnrolPropositio
 
     @Override
     public void validate(EnrolPropositionEditor propositionEditor) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        ProgramCluSetInformation progCluSet = propositionEditor.getProgCluSet();
+        if(progCluSet != null && propositionEditor.getClassStanding() ==null){
+        if(!progCluSet.hasClus() && progCluSet.getCluSets().size()==0 ){
+            String propName = PropositionTreeUtil.getBindingPath(propositionEditor, "programType");
+            GlobalVariables.getMessageMap().putError(propName, KSKRMSConstants.KSKRMS_MSG_ERROR_APPROVED_PROGRAM_REQUIRED);
+        }
+        }
     }
 
     /**
