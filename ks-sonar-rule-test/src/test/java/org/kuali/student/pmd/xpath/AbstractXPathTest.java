@@ -15,10 +15,8 @@
  */
 package org.kuali.student.pmd.xpath;
 
-import java.io.FileReader;
 import java.io.Reader;
 import java.util.Iterator;
-import java.util.List;
 
 import net.sourceforge.pmd.IRuleViolation;
 import net.sourceforge.pmd.PMD;
@@ -28,13 +26,11 @@ import net.sourceforge.pmd.Rule;
 import net.sourceforge.pmd.RuleContext;
 import net.sourceforge.pmd.RuleSet;
 import net.sourceforge.pmd.RuleSets;
-import net.sourceforge.pmd.RuleViolation;
 import net.sourceforge.pmd.SourceType;
 import net.sourceforge.pmd.rules.XPathRule;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.list.GrowthList;
 import org.junit.Assert;
+import org.kuali.student.pmd.AbstractPMDTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +39,7 @@ import org.slf4j.LoggerFactory;
  * @author Kuali Student Team 
  *
  */
-public class AbstractXPathTest {
+public class AbstractXPathTest extends AbstractPMDTest {
     private static final Logger log = LoggerFactory
             .getLogger(AbstractXPathTest.class);
 
@@ -56,21 +52,11 @@ public class AbstractXPathTest {
     
     protected Report processXPath (String xpath, String message, Reader targetStream, SourceType sourceType) throws PMDException {
         
-        PMD pmd = new PMD();
         Rule rule = new XPathRule();
         rule.addProperty("xpath", xpath);
         rule.setMessage(message);
-        RuleSet ruleSet = new RuleSet();
-        ruleSet.addRule(rule);
-
-        Report report = new Report();
-        RuleContext ctx = new RuleContext();
-        ctx.setReport(report);
-        ctx.setSourceCodeFilename("target.dat");
-
-        pmd.processFile(targetStream, new RuleSets(ruleSet), ctx, sourceType);
         
-        return report;
+        return super.processPMDRule(rule, targetStream, sourceType);
 
     }
     
