@@ -56,5 +56,40 @@ public class TestXPathRules  extends AbstractXPathTest {
            
         
     }
+
+    @Test
+    public void testGetFirstElementInAListXPath() throws FileNotFoundException, PMDException {
+        String xpath = "//PrimaryExpression[PrimaryPrefix/Name[ends-with(@Image,'.get')] and " +
+                            "PrimarySuffix/Arguments/ArgumentList[count(*) = 1 and Expression/PrimaryExpression/PrimaryPrefix/Literal[(@Image='0')]] and " +
+                            "count(//MarkerAnnotation/Name[@Image = 'Test']) = 0 and " +
+                            "ancestor::ClassOrInterfaceDeclaration[not(contains(@Image, 'Test'))]" +
+                        "]";
+        String msg =".get(0) should never get called outside of a test unless you know there is 1 and only 1 value or you are purposefully selecting the first element of an ordered list";
+        Report report = super.processXPath(xpath, msg,
+                new FileReader("src/test/resources/GetFirstElement.java"),
+                SourceType.JAVA_16);
+
+        ReportTree vt = report.getViolationTree();
+
+        Assert.assertEquals(2, vt.size());
+
+        report = super.processXPath(xpath, msg,
+                new FileReader("src/test/resources/GetFirstElementTstMethods.java"),
+                SourceType.JAVA_16);
+
+        vt = report.getViolationTree();
+
+        Assert.assertEquals(0, vt.size());
+
+        report = super.processXPath(xpath, msg,
+                new FileReader("src/test/resources/GetFirstElementTestClassWithoutTests.java"),
+                SourceType.JAVA_16);
+
+        vt = report.getViolationTree();
+
+        Assert.assertEquals(0, vt.size());
+
+
+    }
    
 }
