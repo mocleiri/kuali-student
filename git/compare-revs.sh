@@ -5,6 +5,9 @@
 # Note on windows needs to be run within the git mingw window vs the standard
 # mingw window.
 # 
+# this was created to support the pdt api to services api sync merge.
+# its possible it can be combined with the new show-branch.sh script.
+#
 
 usage() {
 	
