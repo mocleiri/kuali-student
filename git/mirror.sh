@@ -1,9 +1,3 @@
-#!/bin/sh
-#
-# Helper to backup the 5 repositories to the mirror
-#
-# requires that a remote called 'mirror' exists.
-#
 cd ks-api
 echo "mirror ks-api changes"
 git push mirror --mirror

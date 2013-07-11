@@ -1,7 +1,3 @@
-#!/bin/sh
-#
-# Used to fetch svn changes for the 5 git repositories
-
 cd ks-api
 echo "fetch ks-api changes"
 git svn fetch --all --log-window-size=1000

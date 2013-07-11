@@ -1,11 +1,3 @@
-#!/bin/sh
-#
-# rebase the current branch in each git repository
-# to the latest revisions from svn
-#
-# only works if the current branch in each repo is tracking the branch that
-# changed.
-
 cd ks-api
 echo "rebase ks-api changes"
 git svn rebase

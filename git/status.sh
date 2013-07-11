@@ -1,9 +1,3 @@
-#!/bin/sh
-#
-# check the status of each of the 5 git repositories
-#
-# this will let you see uncommitted changes that have to be dealt with
-# before things like rebasing can be done.
 cd ks-api
 echo "status ks-api"
 git status

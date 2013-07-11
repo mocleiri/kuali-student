@@ -1,11 +1,5 @@
 #!/bin/bash
-#
-# Used to show the commits that are on a feature branch
-# this was developed to allow us to easily identify which commits 
-# should be replayed onto the new aggreate branches.
-#
-# Note: if a git cherry-pick of these shows no changes it just means that commit
-# is already included in the replay target branch.
+
 	
 usage () {
 	MESSAGE=$1
@@ -60,7 +54,7 @@ show_branch () {
 	echo "=== Feature Branch Commits on $MODULE/$BRANCH relative to $MODULE/$MERGE_BASE_BRANCH ==="
 	MERGE_BASE_SHA1=$(git --git-dir=$MODULE/.git merge-base -a $MODULE/$MERGE_BASE_BRANCH $MODULE/$BRANCH)
 	
-	git --git-dir=$MODULE/.git show-branch --sha1-name --topics --sparse $MERGE_BASE_SHA1 $MODULE/$BRANCH | grep "^\ +\ " | sed 's/^.*\[//' | sed 's/\].*$//' | while read SHA; do git --git-dir=$MODILE/.git log --pretty --format="%H:%an:%ad" --date=iso -n 1 $SHA | sed 's/\ +0000$//'; done;
+	git --git-dir=$MODULE/.git show-branch --sha1-name --topics --sparse $MERGE_BASE_SHA1 $MODULE/$BRANCH | grep "^\ +\ " | sed 's/^.*\[//' | sed 's/\].*$//' | while read SHA; do git --git-dir=$MODULE/.git log --pretty --format="%H:%an:%ad" --date=iso -n 1 $SHA | sed 's/\ +0000$//'; done;
 
 }
 
