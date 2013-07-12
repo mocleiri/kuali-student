@@ -15,7 +15,7 @@
  */
 package org.kuali.student.r2.core.acal.service.impl;
 
-import org.apache.commons.httpclient.util.DateUtil;
+import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.core.api.resourceloader.GlobalResourceLoader;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.util.ContextUtils;
@@ -56,7 +56,7 @@ public class TermCodeGeneratorImpl implements TermCodeGenerator {
             return term.getCode();
         }
 
-        if(term.getTypeKey() == null || term.getTypeKey().equals("")) {
+        if(term.getTypeKey() == null || StringUtils.isBlank(term.getTypeKey())) {
             return null;
         }
 
@@ -71,8 +71,9 @@ public class TermCodeGeneratorImpl implements TermCodeGenerator {
 
         // if the term is not of a type that is handled by the defined formula, return null, since the value for the atp code is undefined at that point
         if(typeCode == null || typeCode.equals("")) {
-            throw new RuntimeException("Error: missing term code attribute. Please configure a type attribute of '" + TypeServiceConstants.ATP_TERM_TYPE_CODE_ATTR +
-                    "' in KSEN_TYPE_ATTTR table. For term type " + term.getTypeKey());
+//            throw new RuntimeException("Error: missing term code attribute. Please configure a type attribute of '" + TypeServiceConstants.ATP_TERM_TYPE_CODE_ATTR +
+//                    "' in KSEN_TYPE_ATTTR table. For term type " + term.getTypeKey());
+            return null;
         }
 
         StringBuilder result = new StringBuilder(DateFormatters.DEFULT_YEAR_FORMATTER.format(term.getStartDate()));

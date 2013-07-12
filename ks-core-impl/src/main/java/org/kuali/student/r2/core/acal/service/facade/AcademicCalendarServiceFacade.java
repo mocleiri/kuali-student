@@ -17,14 +17,18 @@
 package org.kuali.student.r2.core.acal.service.facade;
 
 import org.kuali.student.r2.common.dto.ContextInfo;
+import org.kuali.student.r2.common.dto.StatusInfo;
 import org.kuali.student.r2.common.exceptions.DoesNotExistException;
 import org.kuali.student.r2.common.exceptions.InvalidParameterException;
 import org.kuali.student.r2.common.exceptions.MissingParameterException;
 import org.kuali.student.r2.common.exceptions.OperationFailedException;
 import org.kuali.student.r2.common.exceptions.PermissionDeniedException;
 
+import java.util.List;
+
 /**
- * We expect to replace the void
+ * The facade represents a layer that sits on top of AcademicCalendarServiceImpl to provide additional methods
+ * not supported by the services.  It can also serve as an experimental testbed for new service methods.
  *
  * @author Kuali Student Team
  */
@@ -40,21 +44,74 @@ public interface AcademicCalendarServiceFacade {
             OperationFailedException, DoesNotExistException;
 
     /**
-     * Cascaded version of delete.  (We need to define this more formally).  We don't delete non-official terms
-     * since they could have COs.
-     * @param termId
-     * @param context
+     * Cascaded version of delete. This method will delete the given term and all its sub terms (if any sub term also has
+     * sub terms, they will be deleted as well ) only if all the term/sub terms have the draft state. As long as there is
+     * one term or sub term with the official state, none of the term or sub term in the tree will be deleted.
+     * @param termId The term ID of the term to be deleted
+     * @param context The context info
+     * @return the status of the operation. This must always be true.
      */
-    void deleteTermCascaded(String termId, ContextInfo context) throws
+    StatusInfo deleteTermCascaded(String termId, ContextInfo context) throws
         DoesNotExistException, InvalidParameterException, MissingParameterException, OperationFailedException,
         PermissionDeniedException;
 
     /**
      * deleteCalendarCascaded
-     * @param academicCalendarKey ID for academic calendar
-     * @param context
+     * @param academicCalendarId ID for academic calendar
+     * @param context The context info
      */
-    void deleteCalendarCascaded(String academicCalendarKey, ContextInfo context) throws
+    StatusInfo deleteCalendarCascaded(String academicCalendarId, ContextInfo context) throws
             DoesNotExistException, InvalidParameterException, MissingParameterException,
             OperationFailedException, PermissionDeniedException;
+
+    /**
+     * Determines if a term and its descendants are valid.  The rule for validity is if a term is draft,
+     * its descendant term tree must be draft.  If any terms in the descendant tree is official, then it's
+     * not a valid term (tree).  In particular, this code attempts to find parent-child where parent state
+     * is draft and whose child state  is official.
+     * @param termId The term to verify
+     * @param context The context info
+     * @return true, if term and descendants are valid
+     */
+    boolean validateTerm(String termId, ContextInfo context) throws PermissionDeniedException,
+            MissingParameterException, InvalidParameterException, OperationFailedException, DoesNotExistException;
+
+    /**
+     * Determines if a calendar and its descendants are valid.  The rule for validity is if a calendar is draft,
+     * its descendant tree must be draft.  If any terms in the descendant tree is official, then it's
+     * not a valid.  In particular, this code attempts to find parent-child where parent state is draft and
+     * whose child state is official.
+     * @param acalId The term to verify
+     * @param context The context info
+     * @return true, if term and descendants are valid
+     */
+    boolean validateCalendar(String acalId, ContextInfo context) throws PermissionDeniedException,
+            MissingParameterException, InvalidParameterException, OperationFailedException, DoesNotExistException;
+
+
+
+    /**
+     * Returns related ATP ids for the given parent ATP id
+     * @param termId the parent atp Id
+     * @param context call context
+     * @return related ATP ids for the given parent ATP id
+     * @throws InvalidParameterException
+     * @throws MissingParameterException
+     * @throws OperationFailedException
+     * @throws PermissionDeniedException
+     */
+    public List<String> getIncludedTermidsInTerm(String termId, ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException;
+
+
+    /**
+     * Returns (non subterm) term ids for a given academic calendar
+     * @param acalId
+     * @param context
+     * @return (non subterm) terms for a given academic calendar
+     * @throws InvalidParameterException
+     * @throws MissingParameterException
+     * @throws OperationFailedException
+     * @throws PermissionDeniedException
+     */
+    public List<String> getTermIdsForAcademicCalendar(String acalId, ContextInfo context) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException, DoesNotExistException;
 }

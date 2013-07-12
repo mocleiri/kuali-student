@@ -16,10 +16,15 @@
  */
 package org.kuali.student.common.uif.form;
 
+import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.krad.web.form.UifFormBase;
+import org.kuali.student.common.uif.util.GrowlIcon;
+import org.kuali.student.common.uif.util.KSUifUtils;
+import org.kuali.student.r2.common.dto.MetaInfo;
+import org.kuali.student.r2.common.util.date.DateFormatters;
+import org.kuali.student.r2.common.util.date.KSDateTimeFormatter;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * KS form class that extends UifFormBase. It contains properties that are shared
@@ -28,26 +33,90 @@ import java.util.Map;
  * @author Kuali Student Team
  */
 public class KSUifForm extends UifFormBase {
-    private String homeUrl;
-    private Map<String, Map<String, String>> previousFormsMap;
+
+    MetaInfo meta = new MetaInfo();
+    KSDateTimeFormatter defaultFormatter = DateFormatters.COURSE_OFFERING_VIEW_HELPER_DATE_TIME_FORMATTER;
 
     public KSUifForm() {
         super();
     }
 
-    public String getHomeUrl() {
-        return homeUrl;
+    public MetaInfo getMeta() {
+        return meta;
     }
 
-    public void setHomeUrl(String homeUrl) {
-        this.homeUrl = homeUrl;
+    public void setMeta(MetaInfo meta) {
+        this.meta = meta;
     }
 
-    public Map<String, Map<String, String>> getPreviousFormsMap() {
-        return previousFormsMap;
+    public KSDateTimeFormatter getDefaultFormatter() {
+        return defaultFormatter;
     }
 
-    public void setPreviousFormsMap(Map<String, Map<String, String>> previousFormsMap) {
-        this.previousFormsMap = previousFormsMap;
+    public void setDefaultFormatter(KSDateTimeFormatter defaultFormatter) {
+        this.defaultFormatter = defaultFormatter;
     }
+
+    public String getVersionInd(){
+        if (StringUtils.isEmpty(meta.getVersionInd())){
+            return "";
+        } else {
+            return  meta.getVersionInd();
+        }
+
+    }
+
+    public String getCreateTime(){
+        if(meta.getCreateTime() == null){
+            return "";
+        } else {
+            return getDefaultFormatter().format(meta.getCreateTime());
+        }
+    }
+
+    public String getUpdateTime(){
+        if(meta.getUpdateTime() == null){
+            return "";
+        } else {
+            return getDefaultFormatter().format(meta.getUpdateTime());
+        }
+    }
+
+    public String getCreateId(){
+        if(StringUtils.isEmpty(meta.getCreateId() )){
+            return "";
+        } else {
+            return meta.getCreateId();
+        }
+
+    }
+    public String getUpdateId(){
+        if(StringUtils.isEmpty(meta.getUpdateId() )){
+            return "";
+        } else {
+            return meta.getUpdateId();
+        }
+
+    }
+
+    @Override
+    public void postBind(HttpServletRequest request) {
+
+        String growlMessage = request.getParameter("growl.message");
+        String temp = request.getParameter("growl.message.params");
+        String[] growlMessageParams;
+        if(temp!=null){
+            growlMessageParams = temp.split(",");
+        }
+        else{
+            growlMessageParams=new String[0];
+        }
+
+        if (growlMessage != null) {
+              KSUifUtils.addGrowlMessageIcon(GrowlIcon.SUCCESS, growlMessage, growlMessageParams);
+        }
+
+        super.postBind(request);
+    }
+
 }

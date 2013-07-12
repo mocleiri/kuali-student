@@ -26,13 +26,14 @@
     <bean id="KS-KitchenSink-MessageBox-View-Base" parent="KS-KitchenSink-FormView">
         <property name="dialogs">
             <list>
-                <bean id="dialogButton1" parent="KS-KitchenSink-DialogButtonConfirm"/>
+                <bean id="messageBoxDialog"
+                      parent="KS-KitchenSink-MessageBox-DialogButtonConfirm-parent"/>
             </list>
         </property>
     </bean>
 
-    <!--<bean id="KS-KitchenSink-DialogButtonConfirm" parent="Uif-OK-Cancel-DialogGroup"/>-->
-    <bean id="KS-KitchenSink-DialogButtonConfirm" parent="Uif-DialogGroup">
+    <!--<bean id="KS-KitchenSink-MessageBox-DialogButtonConfirm-parent" parent="Uif-OK-Cancel-DialogGroup"/>-->
+    <bean id="KS-KitchenSink-MessageBox-DialogButtonConfirm-parent" parent="Uif-DialogGroup">
         <property name="header.render" value="false"/>
         <!--<property name="headerText" value="headerText (hidden)"/>-->
         <property name="promptText" value="Did you mean to click on the button?"/>
@@ -71,7 +72,6 @@
                                 <property name="messageText">
                                     <value>
                                         Dialog confirmation popup.
-                                        (Currently doesn't work inside an iframe.)
                                     </value>
                                 </property>
                             </bean>
@@ -194,7 +194,7 @@
           p:breadcrumbs.render="false">
         <property name="items">
             <list>
-                <bean parent="Uif-Page">
+                <bean parent="KS-Uif-Page">
                     <property name="items">
                         <list>
                             <bean parent="Uif-PrimaryActionButton"
@@ -207,7 +207,7 @@
         </property>
         <property name="dialogs">
             <list>
-                <bean id="dialogButton1" parent="Uif-OK-Cancel-DialogGroup"/>
+                <bean id="messageBoxDialog1" parent="Uif-OK-Cancel-DialogGroup"/>
             </list>
         </property>
     </bean>
