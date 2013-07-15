@@ -108,9 +108,9 @@ public class IntegrityUtils {
         return context;
     }
 
-    public static SchemaEqualityValidationContext buildSchemaEqualityValidationContext(Configuration configuration) {
+    public static SchemaValidationContext buildSchemaValidationContext(Configuration configuration) {
         
-        SchemaEqualityValidationContext context = new SchemaEqualityValidationContext();
+        SchemaValidationContext context = new SchemaValidationContext();
 
         // find the property to determine if foreign key validation is skipped
         context.setSkip(configuration.getBoolean(SCHEMA_COMPARE_VALIDATION_SKIP_KEY, DEFAULT_SCHEMA_COMPARE_VALIDATION_SKIP));

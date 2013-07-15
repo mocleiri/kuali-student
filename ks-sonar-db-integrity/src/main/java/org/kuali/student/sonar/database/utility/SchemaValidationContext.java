@@ -17,7 +17,7 @@ package org.kuali.student.sonar.database.utility;
 
 import org.kuali.common.impex.model.compare.service.SchemaCompareService;
 
-public class SchemaEqualityValidationContext {
+public class SchemaValidationContext {
     private Boolean skip;
 
     protected String appSchemaName;

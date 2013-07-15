@@ -16,15 +16,22 @@
 package org.kuali.student.sonar.database.utility;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.JAXBException;
 
 import org.kuali.common.impex.ProducerUtils;
+import org.kuali.common.impex.model.ForeignKey;
+import org.kuali.common.impex.model.Index;
+import org.kuali.common.impex.model.NamedElement;
 import org.kuali.common.impex.model.Schema;
+import org.kuali.common.impex.model.Table;
+import org.kuali.common.impex.model.UniqueConstraint;
 import org.kuali.common.impex.model.compare.SchemaCompareResult;
 
-public class SchemaEqualityValidator {
+public class SchemaValidator {
 
-    public SchemaCompareResult compareSchemas(SchemaEqualityValidationContext context) throws JAXBException, IOException {
+    public SchemaCompareResult compareSchemas(SchemaValidationContext context) throws JAXBException, IOException {
         Schema ksSchema = ProducerUtils.unmarshalSchema(context.getAppPath() + context.getAppSchemaFilename());
         Schema ddlSchema = ProducerUtils.unmarshalSchema(context.getDdlPath() + context.getDdlSchemaFilename());
 
@@ -34,7 +41,7 @@ public class SchemaEqualityValidator {
         return context.getCompareService().compare(ksSchema, ddlSchema);
     }
 
-    public SchemaCompareResult compareConstraints(SchemaEqualityValidationContext context) throws JAXBException, IOException {
+    public SchemaCompareResult compareConstraints(SchemaValidationContext context) throws JAXBException, IOException {
         Schema ksConstraints = ProducerUtils.unmarshalSchema(context.getAppPath() + context.getAppConstraintsFilename());
         Schema ddlConstraints = ProducerUtils.unmarshalSchema(context.getDdlPath() + context.getDdlConstraintsFilename());
 
@@ -42,5 +49,33 @@ public class SchemaEqualityValidator {
         ddlConstraints.setName(context.getDdlSchemaName());
 
         return context.getCompareService().compare(ksConstraints, ddlConstraints);
+    }
+
+    public List<NamedElement> getInvalidNameConstraintsAndIndices(SchemaValidationContext context) throws JAXBException, IOException {
+        Schema ksSchema = ProducerUtils.unmarshalSchema(context.getAppPath() + context.getAppSchemaFilename());
+        Schema ksConstraints = ProducerUtils.unmarshalSchema(context.getAppPath() + context.getAppConstraintsFilename());
+
+        List<NamedElement> results = new ArrayList<NamedElement>();
+
+        for(Table table : ksSchema.getTables()) {
+            for (UniqueConstraint uc : table.getUniqueConstraints()) {
+                if (!uc.getName().startsWith(table.getName())) {
+                    results.add(uc);
+                }
+            }
+            for (Index index : table.getIndices()) {
+                if (!index.getName().startsWith(table.getName())) {
+                    results.add(index);
+                }
+            }
+        }
+
+        for (ForeignKey foreignKey : ksConstraints.getForeignKeys()) {
+            if (!foreignKey.getName().startsWith(foreignKey.getLocalTableName())) {
+                results.add(foreignKey);
+            }
+        }
+
+        return results;
     }
 }

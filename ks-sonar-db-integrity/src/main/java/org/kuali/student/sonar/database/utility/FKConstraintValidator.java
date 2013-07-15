@@ -1,6 +1,6 @@
 package org.kuali.student.sonar.database.utility;
 
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,19 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.kuali.common.util.LocationUtils;
-import org.kuali.student.sonar.database.exception.ColumnTypeIncompatException;
 import org.kuali.student.sonar.database.exception.FKConstraintException;
 import org.kuali.student.sonar.database.exception.FieldMappingException;
 import org.kuali.student.sonar.database.exception.InvalidConstraintException;
-import org.kuali.student.sonar.database.exception.NonPKMappingException;
-import org.kuali.student.sonar.database.exception.ParentKeysMissingException;
-import org.kuali.student.sonar.database.exception.TableMappingException;
-import org.kuali.student.sonar.database.exception.UnknownFKExecption;
 import org.kuali.student.sonar.database.plugin.ForeignKeyConstraint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.sonar.api.scan.filesystem.PathResolver;
 
 public class FKConstraintValidator {
     private static final Logger LOG = LoggerFactory.getLogger(FKConstraintValidator.class);
@@ -40,17 +33,16 @@ public class FKConstraintValidator {
         this.context = context;
     }
 
-    public FKConstraintReport runFKSQL(ClassLoader classLoader) throws SQLException, IOException {
+    public FKConstraintReport runFKSQL() throws SQLException, IOException {
 
     	StringBuilder sqlBuilder = new StringBuilder();
     	
     	sqlBuilder.append(context.getQueryFilePath());
-    	sqlBuilder.append("/");
     	sqlBuilder.append(context.getQueryFileName());
     	
     	String resource = sqlBuilder.toString();
-    	
-    	String sql = IOUtils.toString(classLoader.getResourceAsStream(resource));
+
+    	String sql = IOUtils.toString(new FileInputStream(resource));
     	
         Statement stmt = null;
         ResultSet result = null;
@@ -106,10 +98,13 @@ public class FKConstraintValidator {
             LOG.error("error retrieving generated constraints: " + e.getErrorCode() + " " + e.getMessage(), e);
         }
 
-        LOG.debug("\nDeleting " + constraintList.size() + " FK Constraints");
+        if(constraintList != null) {
 
-        for (ForeignKeyConstraint constraint : constraintList)  {
-            constraint.deleteFKConstraint(context.getConnection());
+            LOG.debug("\nDeleting " + constraintList.size() + " FK Constraints");
+
+            for (ForeignKeyConstraint constraint : constraintList)  {
+                constraint.deleteFKConstraint(context.getConnection());
+            }
         }
     }
 

@@ -270,4 +270,12 @@
         <priority>MAJOR</priority>
     </rule>
 
+    <rule>
+        <key>schemaValidation.constraintName</key>
+        <name>Valid Constraint/Index name</name>
+        <description>Index and Constraint (foreign key and unique) names must start with the name of the table to which they belong.</description>
+        <configKey>databaseIntegrityRules.xml/schemaValidation.constraintName</configKey>
+        <priority>MAJOR</priority>
+    </rule>
+
 </rules>
