@@ -2,25 +2,8 @@ repository tools
 
 require-jira-pre-commit-hook.sh
 
-test-require-jira-pre-commit-hook.sh
+This should be renamed to $REPO/hooks/pre-commit and made executeable.
 
-svnadmin create test-repo
+setup-and-test-jira-pre-commit-hook.sh
 
-svn co file:///path/to/test-repo test-repo-wc
-
-cd test-repo-wc
-
-mkdir -p contrib/CM
-
-echo "test" > contrib/CM/README
-
-svn add contrib/CM/README
-
-svn commit
-
-mkdir -p enrollment/ks-api/trunk
-
-echo "test" >enrollment/ks-api/trunk/README
-
-
-data data data
+This will create a testing repository and apply some commits to make sure that the pre-commit hook is working properly.
