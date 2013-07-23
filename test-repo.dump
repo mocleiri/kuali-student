@@ -1,0 +1,103 @@
+SVN-fs-dump-format-version: 2
+
+UUID: 2350348f-3a3a-4141-90ff-ff508fa102ce
+
+Revision-number: 0
+Prop-content-length: 56
+Content-length: 56
+
+K 8
+svn:date
+V 27
+2013-07-23T19:50:50.362546Z
+PROPS-END
+
+Revision-number: 1
+Prop-content-length: 119
+Content-length: 119
+
+K 10
+svn:author
+V 4
+mike
+K 8
+svn:date
+V 27
+2013-07-23T19:53:13.766581Z
+K 7
+svn:log
+V 20
+commit initial paths
+PROPS-END
+
+Node-path: contrib
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/README
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 5
+Text-content-md5: d8e8fca2dc0f896fd7cb4cb0031ba249
+Text-content-sha1: 4e1243bd22c66e76c2ba9eddc1f91394e57f9f83
+Content-length: 15
+
+PROPS-END
+test
+
+
+Node-path: enrollment
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-api
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-api/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-api/trunk/README
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 5
+Text-content-md5: d8e8fca2dc0f896fd7cb4cb0031ba249
+Text-content-sha1: 4e1243bd22c66e76c2ba9eddc1f91394e57f9f83
+Content-length: 15
+
+PROPS-END
+test
+
+

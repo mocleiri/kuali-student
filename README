@@ -1,0 +1,26 @@
+repository tools
+
+require-jira-pre-commit-hook.sh
+
+test-require-jira-pre-commit-hook.sh
+
+svnadmin create test-repo
+
+svn co file:///path/to/test-repo test-repo-wc
+
+cd test-repo-wc
+
+mkdir -p contrib/CM
+
+echo "test" > contrib/CM/README
+
+svn add contrib/CM/README
+
+svn commit
+
+mkdir -p enrollment/ks-api/trunk
+
+echo "test" >enrollment/ks-api/trunk/README
+
+
+data data data
