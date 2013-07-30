@@ -8,6 +8,16 @@
 # We parse out any KS[A-Z]+[-]?[0-9]+ format jira numbers and then use the
 # REST API on jira.kuali.org to verify that they exist.
 #
+# We also lock down the base directories in the /contrib and /enrollment roots
+# to:
+#
+# prevent moving or deleting the module/{tags,branches,trunk} paths (aggregate
+# is counted as a module)
+#
+# prevent changes to an existing */tags/$tag path.
+#
+# prevent deleting an existing branch but allow it to be moved.
+#
 
 # source the configuration variables
 SVNLOOK_CMD=/usr/bin/svnlook
@@ -40,7 +50,10 @@ is_valid_jira () {
 
 }
 
-parse_line () {
+# extract jira's from the given line in the comment message using $JIRA_EXPRESSION
+# multiple jira's per line turn into mutliple JIRA loops.
+
+parse_commit_message_line () {
 
 	LINE=$1
 
@@ -75,6 +88,7 @@ parse_line () {
 
 
 }
+
 
 REPOS="$1"
 TXN="$2"
@@ -160,7 +174,7 @@ then
         # of all failed jira's only the first one encountered.
         #
         # return 0 for all ok or empty line, 8 if the extracted jira doesn't exist
-        parse_line "$LINE"
+        parse_commit_message_line "$LINE"
    
         R=$?
 

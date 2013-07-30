@@ -30,7 +30,6 @@ test_commit () {
     
     USER=$1
     MESSAGE=$2
-    USE_HOOK=$3
  
     if test -z "$USER"
     then
@@ -53,8 +52,56 @@ test_commit () {
     echo "$COMMITTED"
 }
 
-USE_HOOK=$1
-SHOW_LOG=$2
+test_create_branch_or_tag () {
+    
+    USER=$1
+    MESSAGE=$2
+    # the paths need to be the full repo url's
+    SRC_PATH=$3
+    DST_PATH=$4
+ 
+    if test -z "$USER"
+    then
+        echo "Missing User"
+        exit 1
+    fi
+
+    if test -z "$MESSAGE"
+    then
+        echo "Missing Message"
+        exit 1
+    fi
+
+    $SVN_CMD copy --username $USER -m "$MESSAGE" $3 $4 >/dev/null
+    COMMITTED=$?
+
+
+
+    echo "$COMMITTED"
+}
+
+assert () {
+
+    OK_RESULT=$1
+    ACTUAL_RESULT=$2
+    OK_MSG=$3
+    FAIL_MSG=$4
+
+    
+    if test "$OK_RESULT" == "$ACTUAL_RESULT"
+    then
+        echo "ok: $OK_MSG"
+    else
+        echo "error: $FAIL_MSG"
+        show_log $SHOW_LOG
+        exit 1
+    fi
+    
+    show_log $SHOW_LOG
+
+}
+
+SHOW_LOG=$1
 
 rm -rf $TEST_REPO
 
@@ -71,6 +118,55 @@ $SVN_ADMIN_CMD load ./$TEST_REPO < test-repo.dump
 $SVN_CMD co file://$FULL_PATH/contrib/CM $TEST_CM_WC
 
 cd $TEST_CM_WC
+
+show_log $SHOW_LOG
+
+# test that branches can be created, updated and deleted but that the root aggregate/branches directory can't be removed.
+R=$(test_create_branch_or_tag "jcaddel" "branch for version 1" "file://$FULL_PATH/contrib/CM/aggregate/trunk" "file://$FULL_PATH/contrib/CM/aggregate/branches/1.x")
+
+# we expect to be able to create the branch
+assert "0" "$R" "version 1 branch created" "failed to create version 1 branch"
+
+show_log $SHOW_LOG
+
+# bring in the change from the repo based create branch or tag.
+svn update
+
+echo "version 1 branch" > aggregate/branches/1.x/DATA
+
+R=$(test_commit "jcaddel" "update version 1 branch")
+
+# we expect to be able to update the branch
+assert "0" "$R" "version 1 branch updated" "failed to update version 1 branch"
+
+show_log $SHOW_LOG
+
+# we expect that deleting the branch will fail
+svn rm -r aggregate/branches/1.x
+
+R=$(test_commit "jcaddel" "remove version 1 branch")
+
+assert "1" "$R" "failed to delete version 1 branch" "deleted version 1 branch"
+
+show_log $SHOW_LOG
+
+# clean up failed changes
+svn revert -R .
+
+# we expect to be able to move the branch
+svn mkdir aggregate/branches/archived
+
+svn mv aggregate/branches/1.x aggregate/branches/archived/1.x
+
+R=$(test_commit "jcaddel" "move version 1 branch")
+
+assert "0" "$R" "movd version 1 branch" "failed to move version 1 branch"
+
+show_log $SHOW_LOG
+
+# we expect to not be able to delete the aggregate/branches
+
+# test that updates to existing tags are blocked.
 
 show_log $SHOW_LOG
 
