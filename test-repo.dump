@@ -16,10 +16,6 @@ Revision-number: 1
 Prop-content-length: 119
 Content-length: 119
 
-K 10
-svn:author
-V 4
-mike
 K 8
 svn:date
 V 27
@@ -28,6 +24,10 @@ K 7
 svn:log
 V 20
 commit initial paths
+K 10
+svn:author
+V 4
+mike
 PROPS-END
 
 Node-path: contrib
@@ -99,5 +99,611 @@ Content-length: 15
 
 PROPS-END
 test
+
+
+Revision-number: 2
+Prop-content-length: 136
+Content-length: 136
+
+K 8
+svn:date
+V 27
+2013-07-26T20:02:04.143876Z
+K 7
+svn:log
+V 37
+create aggregate and module structure
+K 10
+svn:author
+V 4
+mike
+PROPS-END
+
+Node-path: contrib/CM/aggregate
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/aggregate/branches
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/aggregate/tags
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/aggregate/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-api
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-api/branches
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-api/tags
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-api/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-core
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-core/branches
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-core/tags
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-core/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-deployments
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-deployments/branches
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-deployments/tags
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-deployments/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-enroll
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-enroll/branches
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-enroll/tags
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-enroll/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-lum
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-lum/branches
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-lum/tags
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/CM/ks-lum/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/aggregate
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/aggregate/branches
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/aggregate/tags
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/aggregate/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-api/branches
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-api/tags
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-core
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-core/branches
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-core/tags
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-core/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-deployments
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-deployments/branches
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-deployments/tags
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-deployments/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-enroll
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-enroll/branches
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-enroll/tags
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-enroll/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-lum
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-lum/branches
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-lum/tags
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: enrollment/ks-lum/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Revision-number: 3
+Prop-content-length: 141
+Content-length: 141
+
+K 8
+svn:date
+V 27
+2013-07-26T20:10:30.548459Z
+K 7
+svn:log
+V 42
+create data into all of the module trunk's
+K 10
+svn:author
+V 4
+mike
+PROPS-END
+
+Node-path: contrib/CM/aggregate/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 30
+Text-content-md5: de425860c76af072618375f2d2235432
+Text-content-sha1: eca2ba946c03ec9008d5ac5543842190adab98e4
+Content-length: 40
+
+PROPS-END
+test data for aggregate trunk
+
+
+Node-path: contrib/CM/ks-api/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 27
+Text-content-md5: 3d8bff6d6130bff49da4335668b815f6
+Text-content-sha1: b538b0ba3f15b153b3c55776c7f668a0f72a24e2
+Content-length: 37
+
+PROPS-END
+test data for ks-api trunk
+
+
+Node-path: contrib/CM/ks-core/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 28
+Text-content-md5: 13c7962cfc87a34b09d5b078c59e3da8
+Text-content-sha1: 37a8832101b4632587e3f1217a26f233d79eed64
+Content-length: 38
+
+PROPS-END
+test data for ks-core trunk
+
+
+Node-path: contrib/CM/ks-deployments/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 35
+Text-content-md5: 9e43708596ba98f5e98f885e85d1fd3b
+Text-content-sha1: d6a22e20306496fbc1c4def63f9dc4f46df95d1e
+Content-length: 45
+
+PROPS-END
+test data for ks-deployments trunk
+
+
+Node-path: contrib/CM/ks-enroll/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 30
+Text-content-md5: 13dc070aa1d3756213ebd250906d983a
+Text-content-sha1: 4c2443586c72eda7bea8c6bb1b39030e57b5075e
+Content-length: 40
+
+PROPS-END
+test data for ks-enroll trunk
+
+
+Node-path: contrib/CM/ks-lum/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 27
+Text-content-md5: c579599d5212062faadafa71a5a34edf
+Text-content-sha1: 09dd8d8a9ac36241d70fa6fe35ddfd39626fd762
+Content-length: 37
+
+PROPS-END
+test data for ks-lum trunk
+
+
+Node-path: enrollment/aggregate/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 30
+Text-content-md5: de425860c76af072618375f2d2235432
+Text-content-sha1: eca2ba946c03ec9008d5ac5543842190adab98e4
+Content-length: 40
+
+PROPS-END
+test data for aggregate trunk
+
+
+Node-path: enrollment/ks-api/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 27
+Text-content-md5: 3d8bff6d6130bff49da4335668b815f6
+Text-content-sha1: b538b0ba3f15b153b3c55776c7f668a0f72a24e2
+Content-length: 37
+
+PROPS-END
+test data for ks-api trunk
+
+
+Node-path: enrollment/ks-core/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 28
+Text-content-md5: 13c7962cfc87a34b09d5b078c59e3da8
+Text-content-sha1: 37a8832101b4632587e3f1217a26f233d79eed64
+Content-length: 38
+
+PROPS-END
+test data for ks-core trunk
+
+
+Node-path: enrollment/ks-deployments/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 35
+Text-content-md5: 9e43708596ba98f5e98f885e85d1fd3b
+Text-content-sha1: d6a22e20306496fbc1c4def63f9dc4f46df95d1e
+Content-length: 45
+
+PROPS-END
+test data for ks-deployments trunk
+
+
+Node-path: enrollment/ks-enroll/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 30
+Text-content-md5: 13dc070aa1d3756213ebd250906d983a
+Text-content-sha1: 4c2443586c72eda7bea8c6bb1b39030e57b5075e
+Content-length: 40
+
+PROPS-END
+test data for ks-enroll trunk
+
+
+Node-path: enrollment/ks-lum/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 27
+Text-content-md5: c579599d5212062faadafa71a5a34edf
+Text-content-sha1: 09dd8d8a9ac36241d70fa6fe35ddfd39626fd762
+Content-length: 37
+
+PROPS-END
+test data for ks-lum trunk
 
 
