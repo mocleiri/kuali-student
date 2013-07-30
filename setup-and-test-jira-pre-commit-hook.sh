@@ -1,8 +1,13 @@
 #!/bin/bash -x
 #
-# setup the test repostitory and working copy directories
+# Author: Kuali Student Team
 #
-# one will be on the contrib/CM path and the other somewhere else.
+# Purpose:
+#
+# To test the require-jira-pre-commit-hook.sh on a dummy repository to make
+# sure that the pre commit restrictions work as intended.
+#
+
 SVN_CMD=/usr/bin/svn
 SVN_ADMIN_CMD=/usr/bin/svnadmin
 
@@ -10,7 +15,7 @@ TEST_REPO="test-repo"
 BASE_DIR=$(pwd)
 FULL_PATH="$BASE_DIR/$TEST_REPO"
 TEST_CM_WC=test-contrib-cm
-TEST_NON_CM_WC=test-ks-api-trunk
+TEST_NON_CM_WC=test-enrollment
 
 show_log() {
 
@@ -78,6 +83,85 @@ test_create_branch_or_tag () {
     echo "$COMMITTED"
 }
 
+
+# do not run this in a sub shell like $()
+test_delete_directory () {
+    
+    TARGET=$1
+    
+    svn rm $TARGET
+
+    R=$(test_commit "jcaddel" "delete $TARGET")
+
+    # we expect this to fail
+
+    if test 1 -eq $R
+    then
+        # commit successfully denied
+        svn revert -R .
+    else
+        # commit succeeded (incorrect)
+        return 1
+    fi
+
+}
+
+# Test all of the project structure paths one at a time to make sure all of
+# them can't be deleted.
+test_prevent_delete_project_structure () {
+
+
+    for module in $(echo "aggregate ks-api ks-core ks-lum ks-enroll ks-deployments" | tr ' ' '\n')
+
+    do
+        test_delete_directory "$module"
+        
+        R=$?
+        
+        if test 1 -eq $R
+        then
+            # deleted the directory
+            return 1
+            break
+        fi
+
+
+        test_delete_directory "$module/tags"
+
+        R=$?
+        
+        if test 1 -eq $R
+        then
+            # deleted the directory
+            return 1
+            break
+        fi
+        
+        test_delete_directory "$module/branches"
+
+        R=$?
+        
+        if test 1 -eq $R
+        then
+            # deleted the directory
+            return 1
+            break
+        fi
+        
+        test_delete_directory "$module/trunk"
+
+        R=$?
+        
+        if test 1 -eq $R
+        then
+            # deleted the directory
+            return 1
+            break
+        fi 
+    done
+
+}
+
 assert () {
 
     OK_RESULT=$1
@@ -121,66 +205,11 @@ show_log $SHOW_LOG
 
 # test that the root project structure directories are protected
 
-svn rm aggregate
+test_prevent_delete_project_structure 
 
-R=$(test_commit "jcaddel" "delete aggregate")
+R=$?
 
-# we expect this to fail
-assert "1" "$R" "failed to delete aggregate" "deleted the aggregate!"
-
-show_log $SHOW_LOG
-
-svn revert -R .
-
-# test that branches can be created, updated and deleted but that the root aggregate/branches directory can't be removed.
-R=$(test_create_branch_or_tag "jcaddel" "branch for version 1" "file://$FULL_PATH/contrib/CM/aggregate/trunk" "file://$FULL_PATH/contrib/CM/aggregate/branches/1.x")
-
-# we expect to be able to create the branch
-assert "0" "$R" "version 1 branch created" "failed to create version 1 branch"
-
-show_log $SHOW_LOG
-
-# bring in the change from the repo based create branch or tag.
-svn update
-
-echo "version 1 branch" > aggregate/branches/1.x/DATA
-
-R=$(test_commit "jcaddel" "update version 1 branch")
-
-# we expect to be able to update the branch
-assert "0" "$R" "version 1 branch updated" "failed to update version 1 branch"
-
-show_log $SHOW_LOG
-
-svn update 
-# we expect that deleting the branch will fail
-svn rm aggregate/branches/1.x
-
-R=$(test_commit "jcaddel" "remove version 1 branch")
-
-assert "1" "$R" "failed to delete version 1 branch" "deleted version 1 branch" 
-
-show_log $SHOW_LOG
-exit 2
-
-
-# clean up failed changes
-svn revert -R .
-
-# we expect to be able to move the branch
-svn mkdir aggregate/branches/archived
-
-svn mv aggregate/branches/1.x aggregate/branches/archived/1.x
-
-R=$(test_commit "jcaddel" "move version 1 branch")
-
-assert "0" "$R" "moved version 1 branch" "failed to move version 1 branch"
-
-show_log $SHOW_LOG
-
-# we expect to not be able to delete the aggregate/branches
-
-# test that updates to existing tags are blocked.
+assert "0" "$R" "failed to remove structural branches" "succeeded in removing structural branches!"
 
 show_log $SHOW_LOG
 
@@ -189,14 +218,8 @@ MULTI_LINE_COMMIT_MSG=$(printf "KSENROLL-123-KSCM-456\nKSFAKE345\nOTHER-123")
 R=$(test_commit "mike" "$MULTI_LINE_COMMIT_MSG")
 
 #KSFAKE345 should fail the test
-if test "0" == "$R"
-then
-    echo "error: commit with a fake jira succeeded!"
-    show_log $SHOW_LOG
-    exit 1
-else
-    echo "ok: commit with a fake jira failed."
-fi
+
+assert "1" "$R" "commit with a fake jira failed" "commit with a fake jira succeeded"
 
 show_log $SHOW_LOG
 
@@ -204,103 +227,63 @@ MULTI_LINE_COMMIT_MSG=$(printf "Some comment\nKSENROLL-1234\n")
 
 R=$(test_commit "mike" "$MULTI_LINE_COMMIT_MSG")
 
-if test "0" == "$R"
-then
-    echo "ok: commit with a valid jira on line 2 of the commit message succeeded!"
-else
-    echo "error: commit with a valid jira failed."
-    show_log $SHOW_LOG
-    exit 1
-fi
-
+assert "0" "$R" "commit with a valid jira on line 2 of the commit message succeeded" "commit with a valid jira failed"
 
 show_log $SHOW_LOG
 
 
 R=$(test_commit "mike" "no jira")
 
-
-if test "1" == "$R"
-then
-    echo "ok: commit without a jira failed as expected"
-else
-    echo "error: commit without a jira succeeded!"
-    exit 1
-fi
+assert "1" "$R" "commit without a jira failed as expected" " commit without a jira succeeded"
 
 show_log $SHOW_LOG
 
 R=$(test_commit "jcaddel" "no jira")
 
 
-if test "1" == "$R"
-then
-    echo "error: commit without a jira but as jcaddel failed!"
-    exit 1
-else
-    echo "ok: commit without a jira but as jcaddel succeeded"
-fi
+assert "0" "$R" "commit without a jira but as jcaddel succeeded" "commit without a jira but as jcaddel failed!"
 
 show_log $SHOW_LOG
 
 R=$(test_commit "mike" "KSENROLL-1234")
 
 
-if test "1" == "$R"
-then
-    echo "error: commit with a jira failed!"
-    exit 1
-else
-    echo "ok: commit with a jira succeeded"
-fi
+assert "0" "$R" "commit with a valid jira succeeded" "commit with a valid jira failed!"
 
 show_log $SHOW_LOG
 
 
 # checkout a working copy off the contrib/CM branch
 cd $BASE_DIR
-svn co file://$FULL_PATH/enrollment/ks-api/trunk $TEST_NON_CM_WC
+svn co file://$FULL_PATH/enrollment $TEST_NON_CM_WC
 cd $TEST_NON_CM_WC
+
+# test that the root project structure directories are protected
+
+test_prevent_delete_project_structure 
+
+R=$?
+
+assert "0" "$R" "failed to remove structural branches" "succeeded in removing structural branches!"
+
+show_log $SHOW_LOG
+
 
 R=$(test_commit "mike" "no jira")
 
-echo "R=$R"
-
-if test "0" == "$R"
-then
-    echo "ok: commit without a jira succeeded as expected"
-else
-    echo "error: commit failed unexpectantly"
-    exit 1
-fi
+assert "0" "$R" "commit without a jira succeeded as expected" " commit without a jira failed"
 
 show_log $SHOW_LOG
 
 R=$(test_commit "jcaddel" "no jira")
 
-
-if test "0" == "$R"
-then
-    echo "ok: commit without a jira succeeded as expected"
-else
-    echo "error: commit failed unexpectantly"
-    exit 1
-fi
-
+assert "0" "$R" "commit without a jira succeeded as expected" "commit without a jira failed"
 
 show_log $SHOW_LOG
 
 R=$(test_commit "mike" "KSENROLL-12345")
 
-
-if test "0" == "$R"
-then
-    echo "ok: commit without a jira succeeded as expected"
-else
-    echo "error: commit failed unexpectantly"
-    exit 1
-fi
-
+assert "0" "$R" "commit with an invalid jira succeeded as expected" "commit with an invalid jira failed"
 
 show_log $SHOW_LOG
 

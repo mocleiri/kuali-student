@@ -107,6 +107,9 @@ is_path_protected () {
 ks-deployments" | tr ' ' '\n')
 
     do
+        # the value used in the comparison may have a trailing /
+        # so we just provision both varients into the test file to be sure
+        # we will match it properly.
         echo "$ROOT_PATH/$module" >> $PP_FILE
         echo "$ROOT_PATH/$module/" >> $PP_FILE
         echo "$ROOT_PATH/$module/tags" >> $PP_FILE
@@ -140,15 +143,6 @@ ks-deployments" | tr ' ' '\n')
                 break
             fi 
 
-        elif test "$MODE" == "U"
-        then 
-            debug "UPDATE - $TARGET"
-            # we only care if the path is in */tags/*
-        elif test "$MODE" == "A"
-        then 
-            debug "ADD - $TARGET"
-            # if the tag didn't exist its ok but if we
-            #  
         fi
     done
 
@@ -196,8 +190,7 @@ then
 
     if test 1 -eq $IS_PROTECTED
     then
-        echo "You attempted to modify a protected location.  See
-https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations"
+        echo "You attempted to modify a protected location.  See https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations"
         exit 1
     fi
 
@@ -230,8 +223,7 @@ https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations"
     # 0 on a match, 1 no match, 2 error (from the grep man page)
     if test "$CONTAINS_JIRAS"  != "0"
     then
-        echo "The Curriculum Management Contribution branch requires valid JIRA's
-         to be referenced in the commit message" >&2
+        echo "The Curriculum Management Contribution branch requires valid JIRA's to be referenced in the commit message" >&2
         exit 1
     fi
 
@@ -284,13 +276,13 @@ else
 
         if test 1 -eq $IS_PROTECTED
         then
-            echo "You attempted to modify a protected location.  See
-https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations"
+            echo "You attempted to modify a protected location.  See https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations"
             exit 1
         fi
     
-    fi    
-    echo "SKIP JIRA Check" >&2
-    exit 0
+    else
+        echo "SKIP JIRA Check" >&2
+        exit 0
+    fi
 fi
 
