@@ -1,4 +1,6 @@
-#!/bin/bash -x
+#!/bin/bash
+#
+# For debugging add a -x option above
 #
 # Author: Kuali Student Team
 #
@@ -11,19 +13,15 @@
 # We also lock down the base directories in the /contrib and /enrollment roots
 # to:
 #
-# prevent moving or deleting the module/{tags,branches,trunk} paths (aggregate
+# prevent deleting the module/{tags,branches,trunk} paths (aggregate
 # is counted as a module)
-#
-# prevent changes to an existing */tags/$tag path.
-#
-# prevent deleting an existing branch but allow it to be moved.
 #
 
 # source the configuration variables
 SVNLOOK_CMD=/usr/bin/svnlook
 WGET_CMD=/usr/bin/wget
 
-ENABLE_DEBUG_MESSAGES=1
+ENABLE_DEBUG_MESSAGES=0
 
 JIRA_EXPRESSION="KS[A-Z]+[-]?[0-9]+"
 # match multiple users like: (user1|user2|user3)
@@ -167,7 +165,7 @@ then
         SVNLOOK_OPTS="$REPOS"
 fi
 
-echo "REPOS=$REPOS" >&2
+debug "REPOS=$REPOS" 
 
 
 # check for changes on a protected path
@@ -190,7 +188,7 @@ then
 
     if test 1 -eq $IS_PROTECTED
     then
-        echo "You attempted to modify a protected location.  See https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations"
+        echo "You attempted to modify a protected location.  See https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations" >2&
         exit 1
     fi
 
@@ -276,7 +274,7 @@ else
 
         if test 1 -eq $IS_PROTECTED
         then
-            echo "You attempted to modify a protected location.  See https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations"
+            echo "You attempted to modify a protected location.  See https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations" >&2
             exit 1
         fi
     

@@ -1,4 +1,6 @@
-#!/bin/bash -x
+#!/bin/bash 
+#
+# For debugging add a -x option above
 #
 # Author: Kuali Student Team
 #
@@ -98,7 +100,7 @@ test_delete_directory () {
     if test 1 -eq $R
     then
         # commit successfully denied
-        svn revert -R .
+        svn revert -R . 2>&1 >/dev/null
     else
         # commit succeeded (incorrect)
         return 1
