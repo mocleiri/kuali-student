@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 #
 # Author: Kuali Student Team
 #
@@ -89,6 +89,70 @@ parse_commit_message_line () {
 
 }
 
+# return 1 if any path on the inbound commit is protected.
+# return 0 where nothing is found to be protected.
+is_path_protected () {
+
+    # do not include a leading /
+    ROOT_PATH=$1
+
+    # Look for Tag Changes
+
+    PP_FILE=/tmp/protected-$RANDOM.dat
+
+    echo "$ROOT_PATH" > $PP_FILE
+    echo "$ROOT_PATH/" > $PP_FILE
+
+    for module in $(echo "aggregate ks-api ks-core ks-lum ks-enroll
+ks-deployments" | tr ' ' '\n')
+
+    do
+        echo "$ROOT_PATH/$module" >> $PP_FILE
+        echo "$ROOT_PATH/$module/" >> $PP_FILE
+        echo "$ROOT_PATH/$module/tags" >> $PP_FILE
+        echo "$ROOT_PATH/$module/tags/" >> $PP_FILE
+        echo "$ROOT_PATH/$module/branches" >> $PP_FILE
+        echo "$ROOT_PATH/$module/branches/" >> $PP_FILE
+        echo "$ROOT_PATH/$module/trunk" >> $PP_FILE
+        echo "$ROOT_PATH/$module/trunk/" >> $PP_FILE
+
+    done
+   
+     
+
+    # Look for branch moves
+    $SVNLOOK_CMD changed $SVNLOOK_OPTS | while read LINE
+    do
+        MODE=$(echo $LINE | awk '{print $1}')
+        TARGET=$(echo $LINE | awk '{print $2}') 
+
+        if test "$MODE" == "D"
+        then 
+            debug "DELETE = $TARGET"
+            # we want to prevent deletes on the repo structure paths
+
+            $(egrep "^$TARGET$" $PP_FILE >/dev/null)
+            R=$?
+            
+            if test 0 -eq $R
+            then
+                return 1 
+                break
+            fi 
+
+        elif test "$MODE" == "U"
+        then 
+            debug "UPDATE - $TARGET"
+            # we only care if the path is in */tags/*
+        elif test "$MODE" == "A"
+        then 
+            debug "ADD - $TARGET"
+            # if the tag didn't exist its ok but if we
+            #  
+        fi
+    done
+
+}
 
 REPOS="$1"
 TXN="$2"
@@ -112,6 +176,9 @@ fi
 echo "REPOS=$REPOS" >&2
 
 
+# check for changes on a protected path
+
+
 
 # return 0 if any of the paths changed in the commit start with contrib/CM.
 $($SVNLOOK_CMD dirs-changed $SVNLOOK_OPTS | egrep "^contrib/CM" >/dev/null)
@@ -122,6 +189,19 @@ debug "IS_CM_CONTRIB=$IS_CM_CONTRIB"
 
 if test 0 -eq $IS_CM_CONTRIB
 then
+
+    # check to make sure no protected directory is being altered.
+    is_path_protected "contrib/CM"
+    IS_PROTECTED=$?
+
+    if test 1 -eq $IS_PROTECTED
+    then
+        echo "You attempted to modify a protected location.  See
+https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations"
+        exit 1
+    fi
+
+    
     # contains a CM contrib path so check for the jira in the commit message.
 
 
@@ -192,7 +272,24 @@ then
     
 else
     # not a CM contrib path
-        
+
+    # return 0 if any of the paths changed in the commit start with /enrollment.
+    $($SVNLOOK_CMD dirs-changed $SVNLOOK_OPTS | egrep "^enrollment" >/dev/null)
+    IS_ENROLLMENT=$?
+
+    if test 0 -eq $IS_ENROLLMENT 
+    then
+        is_path_protected "enrollment"
+        IS_PROTECTED=$?
+
+        if test 1 -eq $IS_PROTECTED
+        then
+            echo "You attempted to modify a protected location.  See
+https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations"
+            exit 1
+        fi
+    
+    fi    
     echo "SKIP JIRA Check" >&2
     exit 0
 fi

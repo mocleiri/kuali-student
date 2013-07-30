@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash -x
 #
 # setup the test repostitory and working copy directories
 #
@@ -46,8 +46,6 @@ test_commit () {
     echo "data data data" >> README
     $SVN_CMD commit --username $USER -m "$MESSAGE" >/dev/null
     COMMITTED=$?
-
-
 
     echo "$COMMITTED"
 }
@@ -121,6 +119,19 @@ cd $TEST_CM_WC
 
 show_log $SHOW_LOG
 
+# test that the root project structure directories are protected
+
+svn rm aggregate
+
+R=$(test_commit "jcaddel" "delete aggregate")
+
+# we expect this to fail
+assert "1" "$R" "failed to delete aggregate" "deleted the aggregate!"
+
+show_log $SHOW_LOG
+
+svn revert -R .
+
 # test that branches can be created, updated and deleted but that the root aggregate/branches directory can't be removed.
 R=$(test_create_branch_or_tag "jcaddel" "branch for version 1" "file://$FULL_PATH/contrib/CM/aggregate/trunk" "file://$FULL_PATH/contrib/CM/aggregate/branches/1.x")
 
@@ -141,14 +152,17 @@ assert "0" "$R" "version 1 branch updated" "failed to update version 1 branch"
 
 show_log $SHOW_LOG
 
+svn update 
 # we expect that deleting the branch will fail
-svn rm -r aggregate/branches/1.x
+svn rm aggregate/branches/1.x
 
 R=$(test_commit "jcaddel" "remove version 1 branch")
 
-assert "1" "$R" "failed to delete version 1 branch" "deleted version 1 branch"
+assert "1" "$R" "failed to delete version 1 branch" "deleted version 1 branch" 
 
 show_log $SHOW_LOG
+exit 2
+
 
 # clean up failed changes
 svn revert -R .
@@ -160,7 +174,7 @@ svn mv aggregate/branches/1.x aggregate/branches/archived/1.x
 
 R=$(test_commit "jcaddel" "move version 1 branch")
 
-assert "0" "$R" "movd version 1 branch" "failed to move version 1 branch"
+assert "0" "$R" "moved version 1 branch" "failed to move version 1 branch"
 
 show_log $SHOW_LOG
 
