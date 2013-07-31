@@ -41,7 +41,7 @@ debug () {
 is_valid_jira () {
 
     JIRA=$1
-    $WGET_CMD "https://jira.kuali.org/rest/api/2/issue/$JIRA?fields=summary" 2> /dev/null > /dev/null
+    $WGET_CMD -O /dev/null "https://jira.kuali.org/rest/api/2/issue/$JIRA?fields=summary" 2> /dev/null > /dev/null
     RET_VAL=$?
     
     return $RET_VAL
