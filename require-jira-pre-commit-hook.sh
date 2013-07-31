@@ -101,7 +101,7 @@ is_path_protected () {
     echo "$ROOT_PATH" > $PP_FILE
     echo "$ROOT_PATH/" > $PP_FILE
 
-    for module in $(echo "aggregate ks-api ks-core ks-lum ks-enroll
+    for module in $(echo "aggregate ks-ap ks-api ks-core ks-lum ks-enroll
 ks-deployments" | tr ' ' '\n')
 
     do
@@ -137,6 +137,7 @@ ks-deployments" | tr ' ' '\n')
             
             if test 0 -eq $R
             then
+                # trying to delete a protected path so fail
                 return 1 
                 break
             fi 
@@ -144,6 +145,11 @@ ks-deployments" | tr ' ' '\n')
         fi
     done
 
+    if test 0 -eq $ENABLE_DEBUG_MESSAGES
+    then
+        # if not in debug mode delete the file
+        rm $PP_FILE
+    fi
 }
 
 REPOS="$1"
@@ -188,7 +194,7 @@ then
 
     if test 1 -eq $IS_PROTECTED
     then
-        echo "You attempted to modify a protected location.  See https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations" >2&
+        echo "You attempted to modify a protected location.  See https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations" >&2
         exit 1
     fi
 
