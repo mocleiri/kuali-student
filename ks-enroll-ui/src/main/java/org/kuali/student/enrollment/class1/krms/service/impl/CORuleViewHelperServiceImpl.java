@@ -26,18 +26,12 @@ import org.kuali.rice.krms.dto.RuleEditor;
 import org.kuali.rice.krms.dto.TermEditor;
 import org.kuali.rice.krms.dto.TermParameterEditor;
 import org.kuali.rice.krms.tree.RuleCompareTreeBuilder;
-import org.kuali.rice.krms.tree.RulePreviewTreeBuilder;
-import org.kuali.rice.krms.tree.RuleViewTreeBuilder;
 import org.kuali.rice.krms.tree.node.CompareTreeNode;
 import org.kuali.rice.krms.util.PropositionTreeUtil;
-import org.kuali.student.core.krms.dto.KSPropositionEditor;
 import org.kuali.student.core.krms.tree.KSRuleCompareTreeBuilder;
-import org.kuali.student.core.krms.tree.KSRulePreviewTreeBuilder;
-import org.kuali.student.core.krms.tree.KSRuleViewTreeBuilder;
-import org.kuali.student.enrollment.class1.krms.dto.EnrolPropositionEditor;
+import org.kuali.student.lum.lu.ui.krms.dto.LUPropositionEditor;
 import org.kuali.student.enrollment.class1.krms.tree.CORuleCompareTreeBuilder;
-import org.kuali.student.enrollment.class1.krms.tree.EnrolRulePreviewTreeBuilder;
-import org.kuali.student.enrollment.class1.krms.tree.EnrolRuleViewTreeBuilder;
+import org.kuali.student.lum.lu.ui.krms.service.impl.LURuleViewHelperServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +40,7 @@ import java.util.Map;
  *
  * @author Kuali Student Team
  */
-public class CORuleViewHelperServiceImpl extends EnrolRuleViewHelperServiceImpl {
+public class CORuleViewHelperServiceImpl extends LURuleViewHelperServiceImpl {
 
     private KSRuleCompareTreeBuilder compareTreeBuilder;
 
@@ -56,7 +50,7 @@ public class CORuleViewHelperServiceImpl extends EnrolRuleViewHelperServiceImpl 
      */
     @Override
     public Class<? extends PropositionEditor> getPropositionEditorClass() {
-        return EnrolPropositionEditor.class;
+        return LUPropositionEditor.class;
     }
 
     /**
@@ -68,7 +62,7 @@ public class CORuleViewHelperServiceImpl extends EnrolRuleViewHelperServiceImpl 
      * @throws Exception
      */
     @Override
-    public Tree<CompareTreeNode, String> buildCompareTree(RuleEditor original, RuleEditor compare) throws Exception {
+    public Tree<CompareTreeNode, String> buildCompareTree(RuleEditor original, RuleEditor compare) {
 
         //Set the original nl if not already exists.
         checkNaturalLanguageForTree(original);

@@ -37,6 +37,7 @@ import org.kuali.student.enrollment.class2.acal.form.AcademicCalendarForm;
 import org.kuali.student.enrollment.class2.acal.service.AcademicCalendarViewHelperService;
 import org.kuali.student.enrollment.class2.acal.util.CalendarConstants;
 import org.kuali.student.enrollment.class2.acal.util.CommonUtils;
+import org.kuali.student.enrollment.common.util.EnrollConstants;
 import org.kuali.student.r2.common.dto.RichTextInfo;
 import org.kuali.student.r2.common.dto.StatusInfo;
 import org.kuali.student.r2.common.exceptions.VersionMismatchException;
@@ -380,9 +381,9 @@ public class AcademicCalendarController extends UifControllerBase {
         if (statusInfo.getIsSuccess()){
             // If delete successful, populate growl message parameters and redirect to the search page.
             Properties urlParameters = new Properties();
-            urlParameters.put(CalendarConstants.GROWL_TITLE,"");
-            urlParameters.put(CalendarConstants.GROWL_MESSAGE, CalendarConstants.MessageKeys.INFO_ACADEMIC_CALENDAR_DELETED);
-            urlParameters.put(CalendarConstants.GROWL_MESSAGE_PARAMS,acalForm.getAcademicCalendarInfo().getName());
+            urlParameters.put(EnrollConstants.GROWL_TITLE,"");
+            urlParameters.put(EnrollConstants.GROWL_MESSAGE, CalendarConstants.MessageKeys.INFO_ACADEMIC_CALENDAR_DELETED);
+            urlParameters.put(EnrollConstants.GROWL_MESSAGE_PARAMS,acalForm.getAcademicCalendarInfo().getName());
             return redirectToSearch(acalForm,request,urlParameters);
         } else {
             GlobalVariables.getMessageMap().putInfo(KRADConstants.GLOBAL_MESSAGES, CalendarConstants.MessageKeys.ERROR_DELETING, acalForm.getAcademicCalendarInfo().getName(),statusInfo.getMessage());
@@ -469,7 +470,14 @@ public class AcademicCalendarController extends UifControllerBase {
             academicCalendarForm.setMakeOfficialIsSubterm(termWrapper.isSubTerm());
             if(termWrapper.getParentTermInfo()!=null){
                 academicCalendarForm.setMakeOfficialParentTermName(termWrapper.getParentTermInfo().getName());
+                academicCalendarForm.setOfficialParentTerm(false);
+                for(AcademicTermWrapper term : academicCalendarForm.getTermWrapperList()){
+                    if(term.getTermInfo().getId().equals(termWrapper.getParentTermInfo().getId())){
+                        academicCalendarForm.setOfficialParentTerm(term.isOfficial());
+                    }
+                }
             }
+
             //redirect back to client to display lightbox
             return showDialog(dialog, academicCalendarForm, request, response);
         }else{
@@ -488,7 +496,15 @@ public class AcademicCalendarController extends UifControllerBase {
                 academicCalendarForm.setMakeOfficialIsSubterm(termWrapper.isSubTerm());
                 if(termWrapper.getParentTermInfo()!=null){
                     academicCalendarForm.setMakeOfficialParentTermName(termWrapper.getParentTermInfo().getName());
+                    academicCalendarForm.setOfficialParentTerm(false);
+                    for(AcademicTermWrapper term : academicCalendarForm.getTermWrapperList()){
+                        if(term.getTermInfo().getId().equals(termWrapper.getParentTermInfo().getId())){
+                            academicCalendarForm.setOfficialParentTerm(term.isOfficial());
+                        }
+                    }
                 }
+
+
                 //redirect back to client to display lightbox
                 return showDialog(dialog, academicCalendarForm, request, response);
             }
@@ -934,11 +950,9 @@ public class AcademicCalendarController extends UifControllerBase {
             try{
                 term.setInstructionalDays(getAcalService().getInstructionalDaysForTerm(term.getTermInfo().getId(), viewHelperService.createContextInfo()));
             }catch (Exception ex){
-                // If the save fails message user
-                if (LOG.isDebugEnabled()){
-                    LOG.error("Save Academic calendar failed - " + ex.getMessage());
-                }
-                GlobalVariables.getMessageMap().putError(KRADConstants.GLOBAL_MESSAGES, CalendarConstants.MessageKeys.ERROR_ACAL_SAVE_FAILED);
+                // If the lookup fails message user
+                LOG.error("Unable to load instructional days",ex);
+                GlobalVariables.getMessageMap().putError(KRADConstants.GLOBAL_MESSAGES, CalendarConstants.MessageKeys.ERROR_CALCULATING_INSTRUCTIONAL_DAYS, term.getStartDate().toString(), term.getEndDate().toString());
             }
         }
 
@@ -1242,11 +1256,12 @@ public class AcademicCalendarController extends UifControllerBase {
         keyDate.setTypeKey(keyDateWrapper.getKeyDateType());
         keyDate.setName(keyDateWrapper.getKeyDateNameUI());
         keyDate.setIsAllDay(keyDateWrapper.isAllDay());
+        keyDate.setIsDateRange(keyDateWrapper.isDateRange());
         keyDate.setStartDate(getDateInfoForKeyDate(keyDateWrapper.isAllDay(),keyDateWrapper.getStartDate(),keyDateWrapper.getStartTime(),keyDateWrapper.getStartTimeAmPm()));
-        if(keyDateWrapper.isDateRange()){
+        if (keyDateWrapper.isDateRange()){
             keyDate.setEndDate(getDateInfoForKeyDate(keyDateWrapper.isAllDay(),keyDateWrapper.getEndDate(),keyDateWrapper.getEndTime(),keyDateWrapper.getEndTimeAmPm()));
-        }else{
-            keyDate.setEndDate(getDateInfoForKeyDate(keyDateWrapper.isAllDay(),keyDateWrapper.getStartDate(),keyDateWrapper.getStartTime(),keyDateWrapper.getStartTimeAmPm()));
+        } else{
+            keyDate.setEndDate(null);
         }
 
         // Save Key date to database
@@ -1324,11 +1339,12 @@ public class AcademicCalendarController extends UifControllerBase {
         eventInfo.setDescr(rti);
         eventInfo.setTypeKey(event.getEventTypeKey());
         eventInfo.setIsAllDay(event.isAllDay());
+        eventInfo.setIsDateRange(event.isDateRange());
         eventInfo.setStartDate(getDateInfoForKeyDate(event.isAllDay(),event.getStartDate(),event.getStartTime(),event.getStartTimeAmPm()));
         if(event.isDateRange()){
             eventInfo.setEndDate(getDateInfoForKeyDate(event.isAllDay(),event.getEndDate(),event.getEndTime(),event.getEndTimeAmPm()));
         } else{
-            eventInfo.setEndDate(getDateInfoForKeyDate(event.isAllDay(),event.getStartDate(),event.getEndTime(),event.getEndTimeAmPm()));
+            eventInfo.setEndDate(null);
         }
         // If calendar is official event is too
         if (!form.isOfficialCalendar()){
@@ -1480,19 +1496,13 @@ public class AcademicCalendarController extends UifControllerBase {
     /**
      * Override of the Krad lightbox return function to allow for returning to the controller without a redirect.
      * Redirect causes a page refresh.
-     *
-     * @param form
-     * @param result
-     * @param request
-     * @param response
-     * @return
      */
     @Override
     @RequestMapping(params = "methodToCall=returnFromLightbox")
     public ModelAndView returnFromLightbox(@ModelAttribute("KualiForm") UifFormBase form, BindingResult result,
                                            HttpServletRequest request, HttpServletResponse response) {
 
-        String newMethodToCall = "";
+        String newMethodToCall;
 
         // Save user responses from dialog
         DialogManager dm = form.getDialogManager();
@@ -1508,21 +1518,25 @@ public class AcademicCalendarController extends UifControllerBase {
 
         // KSENROLL Code Start
         form.setMethodToCall(newMethodToCall);
-        // Attempt to return to the controller method directly
-        for(Method m:this.getClass().getMethods()) {
+
+        // Attempt to return to the controller method directly using reflection (look for the matching methodToCall)
+        for (Method m : this.getClass().getMethods()) {
             RequestMapping a = m.getAnnotation(RequestMapping.class);
-            if(a!=null){
-                String[] annotationsParams= a.params();
-                for(String param : annotationsParams){
-                    if(param.contains("methodToCall="+newMethodToCall)){
-                        try{
-                            return (ModelAndView) m.invoke(this,form,result,request,response);
-                        }catch(IllegalAccessException iae){
-                            LOG.error("Reflection Invocation failed",iae);
-                        }catch(InvocationTargetException ite){
-                            LOG.error("Reflection Invocation failed",ite);
-                        }catch(IllegalArgumentException iae){
-                            LOG.error("Reflection Invocation failed",iae);
+            if (a != null) {
+                String[] annotationsParams = a.params();
+                for (String param : annotationsParams) {
+                    if (param.contains("methodToCall=" + newMethodToCall)) {
+                        try {
+                            return (ModelAndView) m.invoke(this, form, result, request, response);
+                        } catch (IllegalAccessException iae) {
+                            LOG.error("Reflection Invocation failed", iae);
+                            throw new RuntimeException("Error using reflection in returnFromLightbox", iae);
+                        } catch (InvocationTargetException ite) {
+                            LOG.error("Reflection Invocation failed", ite);
+                            throw new RuntimeException("Error using reflection in returnFromLightbox", ite);
+                        } catch (IllegalArgumentException iae) {
+                            LOG.error("Reflection Invocation failed", iae);
+                            throw new RuntimeException("Error using reflection in returnFromLightbox", iae);
                         }
                     }
                 }

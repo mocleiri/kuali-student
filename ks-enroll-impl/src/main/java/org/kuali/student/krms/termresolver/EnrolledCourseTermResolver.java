@@ -17,15 +17,19 @@ package org.kuali.student.krms.termresolver;
 
 import org.kuali.rice.krms.api.engine.TermResolutionException;
 import org.kuali.rice.krms.api.engine.TermResolver;
+import org.kuali.student.enrollment.courseoffering.dto.CourseOfferingInfo;
+import org.kuali.student.enrollment.courseoffering.dto.RegistrationGroupInfo;
+import org.kuali.student.enrollment.courseoffering.infc.CourseOffering;
 import org.kuali.student.enrollment.courseoffering.service.CourseOfferingService;
+import org.kuali.student.enrollment.courseregistration.dto.CourseRegistrationInfo;
 import org.kuali.student.enrollment.courseregistration.dto.RegistrationRequestInfo;
 import org.kuali.student.enrollment.courseregistration.dto.RegistrationRequestItemInfo;
 import org.kuali.student.enrollment.courseregistration.service.CourseRegistrationService;
 import org.kuali.student.krms.util.KSKRMSExecutionUtil;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.core.constants.KSKRMSServiceConstants;
-import org.kuali.student.r2.lum.clu.service.CluService;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -33,13 +37,20 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Return true if student is enrolled for course.
+ * Return true if student has an unsubmitted registration request that includes
+ * the given course or if the student is currently enrolled for the given course.
+ *
+ * Example rule statement:
+ * 1) Must be concurrently enrolled in all courses from <courses>
+ *
+ * @author Kuali Student Team
  */
 public class EnrolledCourseTermResolver implements TermResolver<Boolean> {
 
     private CourseRegistrationService courseRegistrationService;
     private CourseOfferingService courseOfferingService;
-    private CluService cluService;
+
+    private TermResolver<List<String>> cluIdsTermResolver;
 
     @Override
     public Set<String> getPrerequisites() {
@@ -61,8 +72,7 @@ public class EnrolledCourseTermResolver implements TermResolver<Boolean> {
 
     @Override
     public int getCost() {
-        // TODO Analyze, though probably not much to check here
-        return 1;
+        return 5;
     }
 
     @Override
@@ -73,27 +83,38 @@ public class EnrolledCourseTermResolver implements TermResolver<Boolean> {
 
         try {
             //Retrieve the version independent clu id.
-            String cluId = parameters.get(KSKRMSServiceConstants.TERM_PARAMETER_TYPE_CLU_KEY);
+            List<String> courseIds = this.getCluIdsTermResolver().resolve(resolvedPrereqs, parameters);
+
             //First check in the students current registration requests
-            List<RegistrationRequestInfo> regRequests = courseRegistrationService.getUnsubmittedRegistrationRequestsByRequestorAndTerm(personId, termId, context) ;
+            List<String> regGroupIds = new ArrayList<String>();
+            List<RegistrationRequestInfo> regRequests = this.getCourseRegistrationService().getUnsubmittedRegistrationRequestsByRequestorAndTerm(personId, termId, context) ;
             for(RegistrationRequestInfo request : regRequests){
                 for(RegistrationRequestItemInfo regItem : request.getRegistrationRequestItems()){
-                    //How to get the COs for regGroupID?
+                    if(regItem.getExistingRegistrationGroupId()!=null){
+                        regGroupIds.remove(regItem.getExistingRegistrationGroupId());
+                    }
+                    regGroupIds.add(regItem.getNewRegistrationGroupId());
                 }
             }
 
+            //Check to see if one of the course version is in the registration request.
+            for(String regGroupId : regGroupIds){
+                RegistrationGroupInfo regGroup = this.getCourseOfferingService().getRegistrationGroup(regGroupId, context);
+                CourseOfferingInfo courseOffering = this.getCourseOfferingService().getCourseOffering(regGroup.getCourseOfferingId(), context);
+                if(courseIds.contains(courseOffering.getCourseId())){
+                    return true;
+                }
+            }
 
-            //If not found, retrieve the students academic record and check for active registrations
-//            List<CourseRegistrationInfo> regInfoList = courseRegistrationService.getCourseRegistrationsByStudent(personId, context);
-//            for(CourseRegistrationInfo registration : regInfoList){
-//                //We need the course offering to retrieve the courseid in order to retrieve the original course
-//                CourseOffering courseOffering = this.courseOfferingService.getCourseOffering(registration.getCourseOfferingId(), context);
-//                CluInfo clu = this.cluService.getClu(courseOffering.getCourseId(), context);
-//                //If the version independent id is in the list is the same as parm, return true
-//                if (cluId.equals(clu.getVersion().getVersionIndId())){
-//                    return true;
-//                }
-//            }
+            //Also check for already enrolled but not yet completed courses.
+            List<CourseRegistrationInfo> recordInfoList = this.getCourseRegistrationService().getCourseRegistrationsByStudent(personId, context);
+            for(CourseRegistrationInfo studentRecord : recordInfoList){
+                CourseOffering courseOffering = this.getCourseOfferingService().getCourseOffering(studentRecord.getCourseOfferingId(), context);
+                if(courseIds.contains(courseOffering.getCourseId())){
+                    return true;
+                }
+            }
+
         } catch (Exception e) {
             KSKRMSExecutionUtil.convertExceptionsToTermResolutionException(parameters, e, this);
         }
@@ -117,12 +138,12 @@ public class EnrolledCourseTermResolver implements TermResolver<Boolean> {
         this.courseOfferingService = courseOfferingService;
     }
 
-    public CluService getCluService() {
-        return cluService;
+    public TermResolver<List<String>> getCluIdsTermResolver() {
+        return cluIdsTermResolver;
     }
 
-    public void setCluService(CluService cluService) {
-        this.cluService = cluService;
+    public void setCluIdsTermResolver(TermResolver<List<String>> cluIdsTermResolver) {
+        this.cluIdsTermResolver = cluIdsTermResolver;
     }
 
 }

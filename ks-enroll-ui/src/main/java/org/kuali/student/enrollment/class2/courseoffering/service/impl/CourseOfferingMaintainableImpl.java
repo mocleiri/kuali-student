@@ -87,7 +87,11 @@ public abstract class CourseOfferingMaintainableImpl extends MaintainableImpl im
                     }
                     activityName.append(activityType.getName()+"/");
                 }
-                return StringUtils.removeEnd(activityName.toString(),"/");
+                if (format.getActivities().size() == 1){
+                    return StringUtils.removeEnd(activityName.toString(),"/") + " Only";
+                } else {
+                    return StringUtils.removeEnd(activityName.toString(),"/");
+                }
             }
         }
         return StringUtils.EMPTY;
@@ -103,12 +107,7 @@ public abstract class CourseOfferingMaintainableImpl extends MaintainableImpl im
             if (document.getNewMaintainableObject().getDataObject() instanceof CourseOfferingEditWrapper){
                 CourseOfferingEditWrapper wrapper = (CourseOfferingEditWrapper)document.getNewMaintainableObject().getDataObject();
 
-                for (FormatOfferingWrapper foWrapper : wrapper.getFormatOfferingList()){
-                    foWrapper.getRenderHelper().setNewRow(false);
-                    if (StringUtils.isBlank(foWrapper.getFormatOfferingInfo().getName())){
-                        foWrapper.getFormatOfferingInfo().setName(getFormatName(foWrapper,wrapper.getCourse()));
-                    }
-                }
+                populateFormatNames(wrapper);
 
                 FormatOfferingWrapper newFoWrapper = new FormatOfferingWrapper();
                 newFoWrapper.getRenderHelper().setNewRow(true);
@@ -330,8 +329,9 @@ public abstract class CourseOfferingMaintainableImpl extends MaintainableImpl im
                 alternateCodes = ((CourseOfferingEditWrapper)wrapper).getAlternateCourseCodesSuffixStripped();
             }
             for (String alternateCode : alternateCodes) {
+                String alternateCourseCodesSuffixStripped = StringUtils.stripEnd(alternateCode,coInfo.getCourseNumberSuffix());
                 for (CourseCrossListingInfo crossInfo : wrapper.getCourse().getCrossListings()) {
-                    if (StringUtils.equals(crossInfo.getCode(),alternateCode)) {
+                    if (StringUtils.equals(crossInfo.getCode(),alternateCourseCodesSuffixStripped)) {
                         CourseOfferingCrossListingInfo crossListingInfo = new CourseOfferingCrossListingInfo();
                         crossListingInfo.setCode(crossInfo.getCode());
                         crossListingInfo.setCourseNumberSuffix(crossInfo.getCourseNumberSuffix());
@@ -357,6 +357,24 @@ public abstract class CourseOfferingMaintainableImpl extends MaintainableImpl im
                 coInfo.getCrossListings().add(crossListingInfo);
             }
         }
+    }
+
+    public void populateFormatNames(CourseOfferingWrapper coWrapper){
+
+        if (!(coWrapper instanceof CourseOfferingEditWrapper)){
+            throw new RuntimeException("Invalid CourseOffering wrapper.");
+        }
+
+        CourseOfferingEditWrapper editWrapper = (CourseOfferingEditWrapper)coWrapper;
+        for (FormatOfferingWrapper foWrapper : editWrapper.getFormatOfferingList()){
+            if (StringUtils.isBlank(foWrapper.getFormatOfferingInfo().getName())){
+                foWrapper.getFormatOfferingInfo().setName(getFormatName(foWrapper,editWrapper.getCourse()));
+            }
+            if (StringUtils.isNotBlank(foWrapper.getFormatId())){
+                foWrapper.getRenderHelper().setNewRow(false);
+            }
+        }
+
     }
 
     protected TypeService getTypeService() {

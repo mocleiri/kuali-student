@@ -53,17 +53,14 @@ public class AcademicRecordServiceClass2MockImpl implements
 
     //Mock datastructures
     private Map<String, GPAInfo> gpasMap = new LinkedHashMap<String, GPAInfo>();
-    private Map<String, String> creditsMap = new LinkedHashMap<String, String>();
     private List<StudentCourseRecordInfo> courseRecordInfoList = new ArrayList<StudentCourseRecordInfo>();        //to be replaced with studentToCourseRecordsMap
     private Map<String, LoadInfo> loadsMap = new LinkedHashMap<String, LoadInfo>();
-    private Map<String, StudentProgramRecordInfo> studentProgramRecordsMap = new LinkedHashMap<String, StudentProgramRecordInfo>();
     private Map<String, StudentCredentialRecordInfo> studentCredentialRecordsMap = new LinkedHashMap<String, StudentCredentialRecordInfo>();
     private Map<String, StudentTestScoreRecordInfo> studentTestScoreRecordsMap = new LinkedHashMap<String, StudentTestScoreRecordInfo>();
 
     private Map<String, List<StudentCourseRecordInfo>> studentToCourseRecordsMap = new HashMap<String, List<StudentCourseRecordInfo>>();
-
+    private Map<String, List<StudentProgramRecordInfo>> studentToProgramRecordsMap = new LinkedHashMap<String, List<StudentProgramRecordInfo>>();
     private Map<String, List<StudentCourseRecordInfo>> termToCourseRecordsMap = new HashMap<String, List<StudentCourseRecordInfo>>();
-
     private Set<StudentCourseRecordInfo> studentCourseRecordsSet = new HashSet<StudentCourseRecordInfo>();
 
     // this is a bit of a hack until the record can contain the course id directly
@@ -88,10 +85,9 @@ public class AcademicRecordServiceClass2MockImpl implements
         studentCourseRecordsSet.clear();
 
         gpasMap.clear();
-        creditsMap.clear();
         courseRecordInfoList.clear();
         loadsMap.clear();
-        studentProgramRecordsMap.clear();
+        studentToProgramRecordsMap.clear();
         studentCredentialRecordsMap.clear();
         studentTestScoreRecordsMap.clear();
     }
@@ -129,6 +125,27 @@ public class AcademicRecordServiceClass2MockImpl implements
         }
 
         termCourseList.add(courseRecord);
+    }
+
+    /**
+     * Store a program record for the term specified.  The caller is responsible for filling in the object correctly.
+     *
+     * @param studentId    the student who completed the course
+     * @param programId       the id of the program
+     * @param programRecord the course record itself.
+     */
+    public void storeStudentProgramRecord(String studentId, String programId, StudentProgramRecordInfo programRecord) {
+
+        // link to student
+        List<StudentProgramRecordInfo> studentProgramList = studentToProgramRecordsMap.get(studentId);
+
+        if (studentProgramList == null) {
+            studentProgramList = new ArrayList<StudentProgramRecordInfo>();
+            studentToProgramRecordsMap.put(studentId, studentProgramList);
+        }
+
+        studentProgramList.add(programRecord);
+
     }
 
     /* (non-Javadoc)
@@ -304,7 +321,14 @@ public class AcademicRecordServiceClass2MockImpl implements
             throws DoesNotExistException, InvalidParameterException,
             MissingParameterException, OperationFailedException,
             PermissionDeniedException {
-        return Collections.singletonList(studentProgramRecordsMap.get("1"));
+
+        List<StudentProgramRecordInfo> resultsList = new ArrayList<StudentProgramRecordInfo>();
+
+        if (!studentToProgramRecordsMap.keySet().contains(personId))
+            throw new DoesNotExistException("No program records for student Id = " + personId);
+
+        return studentToProgramRecordsMap.get(personId);
+
     }
 
     /* (non-Javadoc)
@@ -359,7 +383,12 @@ public class AcademicRecordServiceClass2MockImpl implements
             throws DoesNotExistException, InvalidParameterException,
             MissingParameterException, OperationFailedException,
             PermissionDeniedException {
-        return creditsMap.get("credits1");
+        Integer credits = 0;
+        List<StudentCourseRecordInfo> records = studentToCourseRecordsMap.get(personId);
+        for (StudentCourseRecordInfo studentCourseRecordInfo : records) {
+            credits += Integer.parseInt(studentCourseRecordInfo.getCreditsEarned());
+        }
+        return String.valueOf(credits);
     }
 
     /* (non-Javadoc)
@@ -373,7 +402,12 @@ public class AcademicRecordServiceClass2MockImpl implements
             throws DoesNotExistException, InvalidParameterException,
             MissingParameterException, OperationFailedException,
             PermissionDeniedException {
-        return creditsMap.get("credits3");
+        Integer credits = 0;
+        List<StudentCourseRecordInfo> records = studentToCourseRecordsMap.get(personId);
+        for (StudentCourseRecordInfo studentCourseRecordInfo : records) {
+            credits += Integer.parseInt(studentCourseRecordInfo.getCreditsEarned());
+        }
+        return String.valueOf(credits);
     }
 
     /* (non-Javadoc)
@@ -389,31 +423,22 @@ public class AcademicRecordServiceClass2MockImpl implements
             throws DoesNotExistException, InvalidParameterException,
             MissingParameterException, OperationFailedException,
             PermissionDeniedException {
-        return creditsMap.get("credits2");
+        Integer credits = 0;
+        List<StudentCourseRecordInfo> records = studentToCourseRecordsMap.get(personId);
+        for (StudentCourseRecordInfo studentCourseRecordInfo : records) {
+            credits += Integer.parseInt(studentCourseRecordInfo.getCreditsEarned());
+        }
+        return String.valueOf(credits);
     }
 
-    // TODO: Make this data part of the KRMSEnrollmentEligibilityDataLoader
     private void createDataForTermResolvers() {
-        //StudentProgramRecordInfo
-        StudentProgramRecordInfo programRecord = new StudentProgramRecordInfo();
-        programRecord.setProgramId("mock.id.program1");
-        programRecord.setProgramTitle("Program One");
-        programRecord.setProgramCode("MP101");
-        programRecord.setProgramTypeKey("mock.program.type.graduate");
-        Calendar cal = Calendar.getInstance();
-        cal.set(2012, Calendar.JANUARY, 1);
-        programRecord.setAdmittedDate(cal.getTime().toString());
-        programRecord.setCreditsEarned("2");
-        programRecord.setClassStanding("14");
-        studentProgramRecordsMap.put("1", programRecord);
-
         //StudentCredentialRecordInfo
         StudentCredentialRecordInfo credentialRecord = new StudentCredentialRecordInfo();
         credentialRecord.setProgramId("mock.id.program1");
         credentialRecord.setProgramCode("MP101");
         credentialRecord.setProgramTitle("Program One");
         credentialRecord.setAwardingInstitution("Mock University of Kuali");
-        cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();
         cal.set(2012, Calendar.JANUARY, 1);
         credentialRecord.setDateAdmitted(cal.getTime());
         cal.set(2012, Calendar.NOVEMBER, 20);
@@ -463,11 +488,6 @@ public class AcademicRecordServiceClass2MockImpl implements
         load.setLoadLevelTypeKey("mock.TypeKey.MediumLoad");
         load.setTotalCredits("4");
         loadsMap.put("mediumLoad", load);
-
-        //Credits
-        creditsMap.put("credits1", "1");
-        creditsMap.put("credits2", "2");
-        creditsMap.put("credits3", "3");
 
     }
 

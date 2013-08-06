@@ -31,7 +31,7 @@
         <!-- Dynamically replace by page-title from parent using JS-onDocumentReadyScript to reflect subject-code and long-description.
             ie: from "Course Offerings" to "WMST: Women's Studies"
             This is a work-around, at least until KRAD 2.3-m3 -->
-        <property name="onDocumentReadyScript" value="updateViewHeaderText( '@{subjectCode}: @{subjectCodeDescription}' );" />
+        <property name="onDocumentReadyScript" value="updateViewHeaderText( '@{subjectCode}: @{subjectCodeDescription}' ); resetHeaderPosition('KS-CourseOffering-View-ContextBar-PlaceHolder');" />
 
         <property name="breadcrumbOptions.homewardPathBreadcrumbs">
             <list>
@@ -142,13 +142,13 @@
                 <bean parent="KS-Uif-DataField-Simple"
                       p:label="GRADING"
                       p:propertyName="courseOfferingGradingOptionDisplay"/>
-                <bean name="enableApproveButton" parent="KS-Uif-InputField-Simple" p:propertyName="enableApproveButton"/>
-                <bean name="enableSuspendButton" parent="KS-Uif-InputField-Simple" p:propertyName="enableSuspendButton"/>
-                <bean name="enableCancelButton" parent="KS-Uif-InputField-Simple" p:propertyName="enableCancelButton"/>
-                <bean name="enableReinstateButton" parent="KS-Uif-InputField-Simple" p:propertyName="enableReinstateButton" />
-                <bean name="enableDeleteButton" parent="KS-Uif-InputField-Simple" p:propertyName="enableDeleteButton" />
-                <bean name="enableCopyCOActionLink" parent="KS-Uif-InputField-Simple" p:propertyName="enableCopyCOActionLink" />
-                <bean name="enableEditCOActionLink" parent="KS-Uif-InputField-Simple" p:propertyName="enableEditCOActionLink" />
+                <bean name="enableApproveButton" parent="KS-Uif-DataField-Simple" p:label="enableApproveButton" p:propertyName="enableApproveButton"/>
+                <bean name="enableSuspendButton" parent="KS-Uif-DataField-Simple" p:label="enableSuspendButton" p:propertyName="enableSuspendButton"/>
+                <bean name="enableCancelButton" parent="KS-Uif-DataField-Simple" p:label="enableCancelButton" p:propertyName="enableCancelButton"/>
+                <bean name="enableReinstateButton" parent="KS-Uif-DataField-Simple" p:label="enableReinstateButton" p:propertyName="enableReinstateButton" />
+                <bean name="enableDeleteButton" parent="KS-Uif-DataField-Simple" p:label="enableDeleteButton" p:propertyName="enableDeleteButton" />
+                <bean name="enableCopyCOActionLink" parent="KS-Uif-DataField-Simple" p:label="enableCopyCOActionLink" p:propertyName="enableCopyCOActionLink" />
+                <bean name="enableEditCOActionLink" parent="KS-Uif-DataField-Simple" p:label="enableEditCOActionLink" p:propertyName="enableEditCOActionLink" />
             </list>
         </property>
         <property name="layoutManager.richTable.hiddenColumns">

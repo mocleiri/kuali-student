@@ -25,6 +25,7 @@ import javax.annotation.Resource;
 import org.joda.time.DateTime;
 import org.kuali.student.common.test.mock.data.AbstractMockServicesAwareDataLoader;
 import org.kuali.student.enrollment.academicrecord.dto.StudentCourseRecordInfo;
+import org.kuali.student.enrollment.academicrecord.dto.StudentProgramRecordInfo;
 import org.kuali.student.enrollment.class2.academicrecord.service.impl.AcademicRecordServiceClass2MockImpl;
 import org.kuali.student.enrollment.class2.courseoffering.service.impl.CourseOfferingServiceTestDataUtils;
 import org.kuali.student.enrollment.courseoffering.dto.CourseOfferingInfo;
@@ -84,21 +85,30 @@ public class KRMSEnrollmentEligibilityDataLoader extends AbstractMockServicesAwa
 
     @Resource
     private AtpService atpService;
+
+    public static final Date START_WINTER_TERM_DATE = new DateTime().withDate(2012, 1, 1).toDate();
+    public static final Date END_WINTER_TERM_DATE = new DateTime().withDate(2012, 3, 31).toDate();
     
-    public static final Date START_SPRING_TERM_DATE = new DateTime().withDate(2012, 5, 1).toDate();
-    public static final Date END_SPRING_TERM_DATE = new DateTime().withDate(2012, 8, 29).toDate();
+    public static final Date START_SPRING_TERM_DATE = new DateTime().withDate(2012, 4, 1).toDate();
+    public static final Date END_SPRING_TERM_DATE = new DateTime().withDate(2012, 6, 30).toDate();
+
+    public static final Date START_SUMMER_TERM_DATE = new DateTime().withDate(2012, 7, 1).toDate();
+    public static final Date END_SUMMER_TERM_DATE = new DateTime().withDate(2012, 9, 30).toDate();
     
-    public static final Date START_FALL_TERM_DATE = new DateTime().withDate(2012, 9, 1).toDate();
-    public static final Date END_FALL_TERM_DATE = new DateTime().withDate(2012, 12, 29).toDate();
+    public static final Date START_FALL_TERM_DATE = new DateTime().withDate(2012, 10, 1).toDate();
+    public static final Date END_FALL_TERM_DATE = new DateTime().withDate(2012, 12, 31).toDate();
     
     public static final String STUDENT_ONE_ID = "student1";
     public static final String STUDENT_TWO_ID = "student2";
+    public static final String STUDENT_THREE_ID = "student3";
     
     public static final String FAKE_COURSE_ID = "course1";
     public static final String FAKE_COURSE2_ID = "course2";
     public static final String FAKE_COURSE3_ID = "course3";
 
+    private AtpInfo winterAtpInfo;
     private AtpInfo springAtpInfo;
+    private AtpInfo summerAtpInfo;
     private AtpInfo fallAtpInfo;
 
     public ContextInfo contextInfo = null;
@@ -116,23 +126,31 @@ public class KRMSEnrollmentEligibilityDataLoader extends AbstractMockServicesAwa
      */
     @Override
     protected void initializeData() throws Exception {
-        
-        springAtpInfo = atpService.createAtp(AtpServiceConstants.ATP_SPRING_TYPE_KEY, createTerm (AtpServiceConstants.ATP_SPRING_TYPE_KEY, START_SPRING_TERM_DATE, END_SPRING_TERM_DATE, "Spring 2012"), context);
-        
-        fallAtpInfo = atpService.createAtp(AtpServiceConstants.ATP_FALL_TYPE_KEY, createTerm (AtpServiceConstants.ATP_FALL_TYPE_KEY, START_FALL_TERM_DATE, END_FALL_TERM_DATE, "Fall 2012"), context);
-     
-        
+
+        winterAtpInfo = atpService.createAtp(AtpServiceConstants.ATP_WINTER_TYPE_KEY, createTerm (AtpServiceConstants.ATP_WINTER_TYPE_KEY,
+                START_WINTER_TERM_DATE, END_WINTER_TERM_DATE, "Winter 2012"), context);
+        springAtpInfo = atpService.createAtp(AtpServiceConstants.ATP_SPRING_TYPE_KEY, createTerm (AtpServiceConstants.ATP_SPRING_TYPE_KEY,
+                START_SPRING_TERM_DATE, END_SPRING_TERM_DATE, "Spring 2012"), context);
+        summerAtpInfo = atpService.createAtp(AtpServiceConstants.ATP_SUMMER_TYPE_KEY, createTerm (AtpServiceConstants.ATP_SUMMER_TYPE_KEY,
+                START_SUMMER_TERM_DATE, END_SUMMER_TERM_DATE, "Summer 2012"), context);
+        fallAtpInfo = atpService.createAtp(AtpServiceConstants.ATP_FALL_TYPE_KEY, createTerm (AtpServiceConstants.ATP_FALL_TYPE_KEY,
+                START_FALL_TERM_DATE, END_FALL_TERM_DATE, "Fall 2012"), context);
     }
     
+    public String getWinterTermId() {
+        return winterAtpInfo.getId();
+    }
+
     public String getSpringTermId() {
         return springAtpInfo.getId();
     }
+
+    public String getSummerTermId() {
+        return summerAtpInfo.getId();
+    }
     
     public String getFallTermId() {
-        
         return fallAtpInfo.getId();
-        
-        
     }
     
     /**
@@ -177,10 +195,37 @@ public class KRMSEnrollmentEligibilityDataLoader extends AbstractMockServicesAwa
         courseRecord.setAdministrativeGradeScaleKey("1");
         courseRecord.setCalculatedGradeValue("3.0");
         courseRecord.setCalculatedGradeScaleKey("1");
+
+        courseRecord.setCreditsEarned("3");
         
         return courseRecord;
         
     }
+
+    /**
+     * Helper to create a new StudentProgramRecordInfo object built using the provided details.
+     *
+     * @param studentId the student that completed the program
+     * @param program the program
+     * @return the non-saved new course record built using the provided details
+     * @throws DoesNotExistException the term does not exist
+     * @throws InvalidParameterException the
+     * @throws MissingParameterException
+     * @throws OperationFailedException
+     * @throws PermissionDeniedException
+     */
+    public StudentProgramRecordInfo createStudentProgramRecord(String studentId, CluInfo program) throws DoesNotExistException, OperationFailedException {
+
+        StudentProgramRecordInfo programRecord = new StudentProgramRecordInfo();
+
+        programRecord.setProgramId(program.getId());
+        programRecord.setProgramCode(program.getOfficialIdentifier().getCode());
+        programRecord.setProgramTitle(program.getOfficialIdentifier().getLongName());
+
+        return programRecord;
+
+    }
+
     /**
      * Store a new CourseRecord for the student in the term given.
      * @param studentId
@@ -204,6 +249,18 @@ public class KRMSEnrollmentEligibilityDataLoader extends AbstractMockServicesAwa
         }
         
         recordService.storeStudentCourseRecord(studentId, termId, courseId, courseRecord);
+    }
+
+    /**
+     * Store a new ProgramRecord for the student in the term given.
+     * @param studentId
+     * @param programId
+     * @param programRecord
+     * @throws DoesNotExistException if the term does not exist.
+     * @throws OperationFailedException  if an exception occurs that prevents the execution of the method.
+     */
+    public void storeStudentProgramRecord (String studentId, String programId, StudentProgramRecordInfo programRecord) throws DoesNotExistException, OperationFailedException {
+        recordService.storeStudentProgramRecord(studentId, programId, programRecord);
     }
 
     private AtpInfo createTerm(String atpSpringTypeKey, Date startDate, Date endDate, String name) {
@@ -269,7 +326,7 @@ public class KRMSEnrollmentEligibilityDataLoader extends AbstractMockServicesAwa
 
     public CourseOffering getCourseOffering(String courseId, String termId) throws Exception {
         CourseInfo course = this.getCourse(courseId);
-        String coId = "CO:" + course.getId();
+        String coId = "CO:" + course.getId() + ":" + termId;
         CourseOfferingInfo courseOffering = null;
         try {
             courseOffering = courseOfferingService.getCourseOffering(coId, contextInfo);
@@ -279,6 +336,7 @@ public class KRMSEnrollmentEligibilityDataLoader extends AbstractMockServicesAwa
             courseOffering.setId(coId);
             courseOffering = courseOfferingService.createCourseOffering(course.getId(), termId, LuiServiceConstants.COURSE_OFFERING_TYPE_KEY,
                     courseOffering, new ArrayList<String>(), contextInfo);
+            courseOffering.getUnitsContentOwnerOrgIds().add("ORG1");
             RegistrationGroupInfo regGroup = new RegistrationGroupInfo();
             regGroup.setCourseOfferingId(courseOffering.getId());
             regGroup.setTypeKey("atype");
@@ -304,6 +362,10 @@ public class KRMSEnrollmentEligibilityDataLoader extends AbstractMockServicesAwa
 
             return courseService.createCourse(course, contextInfo);
         }
+    }
+
+    public CluInfo getProgram(String programId) throws Exception {
+        return cluService.getClu(programId, contextInfo);
     }
 
     public RegistrationGroupInfo getRegistrationGroup(String courseId, String termId) throws Exception {

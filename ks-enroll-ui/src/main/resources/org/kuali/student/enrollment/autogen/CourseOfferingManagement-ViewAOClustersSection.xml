@@ -58,10 +58,10 @@
                 <bean parent="Uif-Label" p:labelText="&#160;&#160;|&#160;&#160;" p:renderColon="false" />
                 <bean parent="Uif-Label" p:labelText="@{#line.formatNameForDisplay}"  p:renderColon="false" />
                 <bean parent="Uif-NavigationActionLink"  p:actionLabel="Rename"
-                      p:onClickScript="writeHiddenToForm(&quot;actionParameters[selectedLineIndex]&quot;, &quot;@{#index}&quot;); writeHiddenToForm(&quot;actionParameters[selectedCollectionPath]&quot;, &quot;clusterResultList&quot;); toggleAddAOCButton(&quot;renameAOCButton&quot;,&quot;privateClusterNameForRename_control&quot;);"
+                      p:onClickScript="jQuery('#privateClusterNameForRename_control').val('@{#line.aoCluster.privateName}'); jQuery('#publishedClusterNameForRename_control').val('@{#line.aoCluster.name}');writeHiddenToForm(&quot;actionParameters[selectedLineIndex]&quot;, &quot;@{#index}&quot;); writeHiddenToForm(&quot;actionParameters[selectedCollectionPath]&quot;, &quot;clusterResultList&quot;); toggleAddAOCButton(&quot;renameAOCButton&quot;,&quot;privateClusterNameForRename_control&quot;);"
                       p:actionScript="openPopupContent(e,'KS-CourseOfferingManagement-RenameAOCPopupForm',{align:'right',tail:{align:'right'}});" p:style="float:right"
-                p:successCallback="jQuery('div[id=KS-CourseOfferingManagement-RenameAOCPopupForm]:gt(0)').detach();"
-                p:errorCallback="jQuery('div[id=KS-CourseOfferingManagement-RenameAOCPopupForm]:gt(0)').detach();"
+                      p:successCallback="jQuery('div[id=KS-CourseOfferingManagement-RenameAOCPopupForm]:gt(0)').detach();"
+                      p:errorCallback="jQuery('div[id=KS-CourseOfferingManagement-RenameAOCPopupForm]:gt(0)').detach();"
                       p:componentSecurity.performActionAuthz="true" p:actionEvent="renameCluster"/>
                 <!--<bean parent="Uif-Label" p:labelText="&#160;&#160;|&#160;&#160;" p:renderColon="false" p:style="float:right"/>-->
                 <!-- jQuery('input.required[value=]').removeClass('required'); work-around added to stop a problem where form validation was preventing delete from working -->
@@ -77,7 +77,6 @@
 
     <bean id="KS-CourseOfferingManagement-RenameAOCPopupForm" parent="Uif-VerticalBoxSection">
         <property name="hidden" value="true"/>
-
         <property name="style" value="margin-bottom:0;padding-left:10px;padding-right:10px;"/>
         <property name="items">
             <list>
@@ -178,15 +177,16 @@
                 <bean parent="Uif-MessageField"
                       p:label="INSTRUCTOR"
                       p:messageText="@{#line.instructorDisplayNames}" />
-                <bean name="enableApproveButton" parent="KS-Uif-InputField-Simple" p:propertyName="enableApproveButton"/>
-                <bean name="enableDraftButton" parent="KS-Uif-InputField-Simple" p:propertyName="enableDraftButton"/>
-                <bean name="enableSuspendButton" parent="KS-Uif-InputField-Simple" p:propertyName="enableSuspendButton"/>
-                <bean name="enableCancelButton" parent="KS-Uif-InputField-Simple" p:propertyName="enableCancelButton"/>
-                <bean name="enableReinstateButton" parent="KS-Uif-InputField-Simple" p:propertyName="enableReinstateButton" />
-                <bean name="enableDeleteButton" parent="KS-Uif-InputField-Simple" p:propertyName="enableDeleteButton" />
-                <bean name="enableCopyAOActionLink" parent="KS-Uif-InputField-Simple" p:propertyName="enableCopyAOActionLink" />
-                <bean name="enableEditAOActionLink" parent="KS-Uif-InputField-Simple" p:propertyName="enableEditAOActionLink" />
-                <bean name="enableMoveToButton" parent="KS-Uif-InputField-Simple" p:propertyName="enableMoveToButton" />
+                <bean name="enableApproveButton" parent="KS-Uif-DataField-Simple" p:label="enableApproveButton" p:propertyName="enableApproveButton"/>
+                <bean name="enableDraftButton" parent="KS-Uif-DataField-Simple" p:label="enableDraftButton"  p:propertyName="enableDraftButton"/>
+                <bean name="enableSuspendButton" parent="KS-Uif-DataField-Simple" p:label="enableSuspendButton" p:propertyName="enableSuspendButton"/>
+                <bean name="enableCancelButton" parent="KS-Uif-DataField-Simple" p:label="enableCancelButton"  p:propertyName="enableCancelButton"/>
+                <bean name="enableReinstateButton" parent="KS-Uif-DataField-Simple" p:label="enableReinstateButton"  p:propertyName="enableReinstateButton" />
+                <bean name="enableDeleteButton" parent="KS-Uif-DataField-Simple"  p:label="enableDeleteButton" p:propertyName="enableDeleteButton" />
+                <bean name="enableCopyAOActionLink" parent="KS-Uif-DataField-Simple"  p:label="enableCopyAOActionLink" p:propertyName="enableCopyAOActionLink" />
+                <bean name="enableEditAOActionLink" parent="KS-Uif-DataField-Simple"  p:label="enableEditAOActionLink" p:propertyName="enableEditAOActionLink" />
+                <bean name="enableMoveToButton" parent="KS-Uif-DataField-Simple"  p:label="enableMoveToButton" p:propertyName="enableMoveToButton" />
+                <bean name="requisiteLink" parent="KS-Uif-DataField-Simple"  p:label="requisiteLink" p:propertyName="requisiteLink" />
             </list>
         </property>
 
@@ -201,6 +201,7 @@
                 <value>enableCopyAOActionLink</value>
                 <value>enableEditAOActionLink</value>
                 <value>enableMoveToButton</value>
+                <value>requisiteLink</value>
             </set>
         </property>
 
@@ -214,7 +215,8 @@
                 <bean parent="Uif-NavigationActionLink" p:methodToCall="edit" p:actionLabel="Edit"
                       p:render="@{#line.isEnableEditAOActionLink()}" p:actionEvent="editAOonManageAOsPage">
                 </bean>
-                <bean parent="Uif-NavigationActionLink" p:methodToCall="manageAORules" p:actionLabel="Manage AO Requisites " p:render="@{#line.requisiteLink}"/>
+                <bean parent="Uif-NavigationActionLink" p:methodToCall="manageAORules" p:actionLabel="Activity Offering Requisites "
+                      p:render="@{#line.isRequisiteLink()}" p:actionEvent="requisiteAOLink"/>
                 <!--</list>-->
                     <!--</property>-->
                 <!--</bean>-->
@@ -239,7 +241,7 @@
         <property name="layoutManager.richTable.templateOptions">
             <map merge="true">
                 <entry key="sDom" value="rtip"/>
-                <entry key="aaSorting" value="[[ 0, 'asc' ]]"/>
+                <entry key="aaSorting" value="[[0, 'asc']]"/>
                 <entry key="bPaginate" value="false"/>
                 <entry key="bAutoWidth" value="false"/>
             </map>

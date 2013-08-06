@@ -17,17 +17,10 @@ package org.kuali.student.krms.termresolver;
 
 import org.kuali.rice.krms.api.engine.TermResolutionException;
 import org.kuali.rice.krms.api.engine.TermResolver;
-import org.kuali.student.enrollment.courseoffering.infc.CourseOffering;
-import org.kuali.student.enrollment.courseoffering.service.CourseOfferingService;
-import org.kuali.student.enrollment.courseregistration.dto.CourseRegistrationInfo;
-import org.kuali.student.enrollment.courseregistration.service.CourseRegistrationService;
 import org.kuali.student.krms.util.KSKRMSExecutionUtil;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.core.constants.KSKRMSServiceConstants;
-import org.kuali.student.r2.lum.clu.dto.CluInfo;
-import org.kuali.student.r2.lum.clu.service.CluService;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -41,12 +34,13 @@ import java.util.Set;
  * courseCodes from the courseSetId.
  *
  * The studentId is passed as a resolvedPrereq.
+ *
+ * @author Kuali Student Team
  */
 public class NumberOfEnrolledCoursesTermResolver implements TermResolver<Integer> {
 
-    private CourseRegistrationService courseRegistrationService;
-    private CourseOfferingService courseOfferingService;
-    private CluService cluService;
+    private TermResolver<List<String>> cluIdsInCluSetTermResolver;
+    private TermResolver<Boolean> enrolledCourseTermResolver;
 
     @Override
     public Set<String> getPrerequisites() {
@@ -78,20 +72,11 @@ public class NumberOfEnrolledCoursesTermResolver implements TermResolver<Integer
         String personId = (String) resolvedPrereqs.get(KSKRMSServiceConstants.TERM_PREREQUISITE_PERSON_ID);
 
         try {
-            //Retrieve the list of cluIds from the cluset.
-            String cluSetId = parameters.get(KSKRMSServiceConstants.TERM_PARAMETER_TYPE_CLUSET_KEY);
-            List<String> cluIds = new ArrayList<String>();    //Create new list so that we can remove the once that are already checked.
-            cluIds.addAll(this.cluService.getAllCluIdsInCluSet(cluSetId, context));
-
-            //Retrieve the students academic record.
-            List<CourseRegistrationInfo> recordInfoList = courseRegistrationService.getCourseRegistrationsByStudent(personId, context);
-            for(CourseRegistrationInfo studentRecord : recordInfoList){
-                //We need the course offering to retrieve the courseid in order to retrieve the original course
-                CourseOffering courseOffering = this.courseOfferingService.getCourseOffering(studentRecord.getCourseOfferingId(), context);
-                CluInfo clu = this.cluService.getClu(courseOffering.getCourseId(), context);
-                //If the version independent id is in the list, remove it and increment the counter.
-                if (cluIds.contains(clu.getVersion().getVersionIndId())){
-                    cluIds.remove(clu.getVersion().getVersionIndId());
+            ////Retrieve the list of cluIds from the cluset.
+            List<String> versionIndIds = this.getCluIdsInCluSetTermResolver().resolve(resolvedPrereqs, parameters);
+            for(String versionIndId : versionIndIds){
+                parameters.put(KSKRMSServiceConstants.TERM_PARAMETER_TYPE_CLU_KEY, versionIndId);
+                if(this.getEnrolledCourseTermResolver().resolve(resolvedPrereqs, parameters)){
                     counter++;
                 }
             }
@@ -102,27 +87,19 @@ public class NumberOfEnrolledCoursesTermResolver implements TermResolver<Integer
         return counter;
     }
 
-    public CourseRegistrationService getCourseRegistrationService() {
-        return courseRegistrationService;
+    public TermResolver<List<String>> getCluIdsInCluSetTermResolver() {
+        return cluIdsInCluSetTermResolver;
     }
 
-    public void setCourseRegistrationService(CourseRegistrationService courseRegistrationService) {
-        this.courseRegistrationService = courseRegistrationService;
+    public void setCluIdsInCluSetTermResolver(TermResolver<List<String>> cluIdsInCluSetTermResolver) {
+        this.cluIdsInCluSetTermResolver = cluIdsInCluSetTermResolver;
     }
 
-    public CourseOfferingService getCourseOfferingService() {
-        return courseOfferingService;
+    public TermResolver<Boolean> getEnrolledCourseTermResolver() {
+        return enrolledCourseTermResolver;
     }
 
-    public void setCourseOfferingService(CourseOfferingService courseOfferingService) {
-        this.courseOfferingService = courseOfferingService;
-    }
-
-    public CluService getCluService() {
-        return cluService;
-    }
-
-    public void setCluService(CluService cluService) {
-        this.cluService = cluService;
+    public void setEnrolledCourseTermResolver(TermResolver<Boolean> enrolledCourseTermResolver) {
+        this.enrolledCourseTermResolver = enrolledCourseTermResolver;
     }
 }

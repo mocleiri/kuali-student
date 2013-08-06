@@ -1,5 +1,6 @@
 package org.kuali.student.enrollment.class2.courseoffering.controller;
 
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.core.api.resourceloader.GlobalResourceLoader;
 import org.kuali.rice.kim.api.identity.Person;
@@ -13,8 +14,8 @@ import org.kuali.rice.krad.web.controller.MaintenanceDocumentController;
 import org.kuali.rice.krad.web.form.DocumentFormBase;
 import org.kuali.rice.krad.web.form.MaintenanceDocumentForm;
 import org.kuali.rice.krad.web.form.UifFormBase;
+import org.kuali.student.common.uif.form.KSUifMaintenanceDocumentForm;
 import org.kuali.student.common.uif.util.KSControllerHelper;
-import org.kuali.student.enrollment.class2.acal.util.CalendarConstants;
 import org.kuali.student.enrollment.class2.courseoffering.dto.CourseOfferingContextBar;
 import org.kuali.student.enrollment.class2.courseoffering.dto.CourseOfferingEditWrapper;
 import org.kuali.student.enrollment.class2.courseoffering.dto.FormatOfferingWrapper;
@@ -22,6 +23,7 @@ import org.kuali.student.enrollment.class2.courseoffering.dto.OrganizationInfoWr
 import org.kuali.student.enrollment.class2.courseoffering.service.impl.CourseOfferingEditMaintainableImpl;
 import org.kuali.student.enrollment.class2.courseoffering.util.CourseOfferingConstants;
 import org.kuali.student.enrollment.class2.courseoffering.util.CourseOfferingResourceLoader;
+import org.kuali.student.enrollment.common.util.EnrollConstants;
 import org.kuali.student.enrollment.courseoffering.dto.CourseOfferingInfo;
 import org.kuali.student.enrollment.courseoffering.dto.CreditOptionInfo;
 import org.kuali.student.enrollment.courseofferingset.dto.SocInfo;
@@ -36,6 +38,7 @@ import org.kuali.student.r2.common.util.constants.LuiServiceConstants;
 import org.kuali.student.r2.common.util.date.DateFormatters;
 import org.kuali.student.r2.core.acal.dto.TermInfo;
 import org.kuali.student.r2.core.acal.service.AcademicCalendarService;
+import org.kuali.student.r2.core.class1.search.CourseOfferingManagementSearchImpl;
 import org.kuali.student.r2.core.class1.state.service.StateService;
 import org.kuali.student.r2.core.class1.type.service.TypeService;
 import org.kuali.student.r2.core.constants.StateServiceConstants;
@@ -79,29 +82,9 @@ public class CourseOfferingBaseController extends MaintenanceDocumentController 
     private transient StateService stateService;
     private transient OrganizationService organizationService;
 
-    /**
-     * Initial method called when requesting a new view instance.
-     *
-     */
     @Override
-    public ModelAndView start(@ModelAttribute("KualiForm") UifFormBase form, BindingResult result,
-                              HttpServletRequest request, HttpServletResponse response) {
-        MaintenanceDocumentForm maintenanceForm = (MaintenanceDocumentForm) form;
-        setupMaintenance(maintenanceForm, request, KRADConstants.MAINTENANCE_NEW_ACTION);
-        if (form.getView() != null) {
-            String methodToCall = request.getParameter(KRADConstants.DISPATCH_REQUEST_PARAMETER);
-
-            // check if creating CO and populate the form
-            String createCO = request.getParameter(CourseOfferingConstants.CREATE_COURSEOFFERING);
-            if (createCO != null && createCO.equals("true")) {
-                populateCreateCourseOfferingForm(maintenanceForm, request);
-            }
-            // done with creating CO
-
-            checkViewAuthorization(form, methodToCall);
-       }
-
-       return getUIFModelAndView(maintenanceForm);
+    protected MaintenanceDocumentForm createInitialForm(HttpServletRequest request) {
+        return new KSUifMaintenanceDocumentForm();
     }
 
     @Override
@@ -138,63 +121,112 @@ public class CourseOfferingBaseController extends MaintenanceDocumentController 
 
         super.route(form, result, request, response);
 
-        // don't navigate back to different screens if there are errors.
-        if (GlobalVariables.getMessageMap().hasErrors()) {
-            if (((MaintenanceDocumentForm)form).getDocument().getNewMaintainableObject().getDataObject() instanceof CourseOfferingEditWrapper){
-                CourseOfferingEditMaintainableImpl viewHelper = (CourseOfferingEditMaintainableImpl)KSControllerHelper.getViewHelperService(form);
-                //Make the format type drop down readonly.. otherwise, we run into display issue when the server returns back error
-                CourseOfferingEditWrapper dataObject = (CourseOfferingEditWrapper)((MaintenanceDocumentForm)form).getDocument().getNewMaintainableObject().getDataObject();
-                for (FormatOfferingWrapper foWrapper : dataObject.getFormatOfferingList()){
-                    foWrapper.getRenderHelper().setNewRow(false);
-                    if (StringUtils.isBlank(foWrapper.getFormatOfferingInfo().getName())){
-                        foWrapper.getFormatOfferingInfo().setName(viewHelper.getFormatName(foWrapper,dataObject.getCourse()));
-                    }
-                }
-            }
-            return getUIFModelAndView(form);
+        if( GlobalVariables.getMessageMap().hasErrors() ) {
+            return handleRouteForErrors( form );
         }
+
+        if( this instanceof CourseOfferingCreateController ) {
+            return handleRouteForCoCreate( form );
+        }
+
+        return handleRouteForCoEdit(form);
+    }
+
+    /* Returns a ModelAndView for the route()-method to return to original view if there were errors.
+     * Should only be called if there are indeed errors.
+     */
+    private ModelAndView handleRouteForErrors( DocumentFormBase form ) {
+
+        assert ( GlobalVariables.getMessageMap().hasErrors() );
+
+        if (((MaintenanceDocumentForm)form).getDocument().getNewMaintainableObject().getDataObject() instanceof CourseOfferingEditWrapper){
+            CourseOfferingEditMaintainableImpl viewHelper = (CourseOfferingEditMaintainableImpl)KSControllerHelper.getViewHelperService(form);
+            //Make the format type drop down readonly.. otherwise, we run into display issue when the server returns back error
+            CourseOfferingEditWrapper dataObject = (CourseOfferingEditWrapper)((MaintenanceDocumentForm)form).getDocument().getNewMaintainableObject().getDataObject();
+            viewHelper.populateFormatNames(dataObject);
+        }
+
+        return getUIFModelAndView(form);    // because there were errors, return a MAV to re-nav back to
+    }
+
+    /* Returns a ModelAndView for the route()-method to return a new view if we are creating a CO */
+    private ModelAndView handleRouteForCoCreate( DocumentFormBase form ) {
+
+        assert( this instanceof CourseOfferingCreateController );
 
         Properties urlParameters = new Properties();
 
-        if (!(this instanceof CourseOfferingCreateController))   {
-            CourseOfferingEditWrapper dataObject = (CourseOfferingEditWrapper)((MaintenanceDocumentForm)form).getDocument().getNewMaintainableObject().getDataObject();
-            urlParameters.put(CalendarConstants.GROWL_MESSAGE, CourseOfferingConstants.COURSE_OFFERING_EDIT_SUCCESS);
-            urlParameters.put(CalendarConstants.GROWL_MESSAGE_PARAMS,dataObject.getCourseOfferingCode());
+        CourseOfferingEditWrapper dataObject = (CourseOfferingEditWrapper)((MaintenanceDocumentForm)form).getDocument().getNewMaintainableObject().getDataObject();
 
-            String url;
-            if (!form.getReturnLocation().contains("methodToCall=")){ //This happens when we display a list of COs and then user click on Manage action
-                url = form.getReturnLocation() + "&methodToCall=show";
-            } else {
-                url = form.getReturnLocation().replaceFirst("methodToCall=[a-zA-Z0-9]+","methodToCall=show");
-            }
-            form.setReturnLocation(url);
+        urlParameters.put(EnrollConstants.GROWL_MESSAGE, CourseOfferingConstants.COURSE_OFFERING_CREATE_SUCCESS);
+        urlParameters.put(EnrollConstants.GROWL_MESSAGE_PARAMS, dataObject.getCourseOfferingCode());
+
+        urlParameters.put(KRADConstants.DISPATCH_REQUEST_PARAMETER, "show");
+        urlParameters.put("termCode", dataObject.getTerm().getCode());
+        if (dataObject.getCourseOfferingInfo().getCourseNumberSuffix() != null && !StringUtils.isBlank(dataObject.getCourseOfferingInfo().getCourseNumberSuffix())) {
+            urlParameters.put("inputCode", dataObject.getCourseOfferingInfo().getCourseOfferingCode().concat(dataObject.getCourseOfferingInfo().getCourseNumberSuffix()));
         } else {
-            CourseOfferingEditWrapper dataObject = (CourseOfferingEditWrapper)((MaintenanceDocumentForm)form).getDocument().getNewMaintainableObject().getDataObject();
-
-            urlParameters.put(CalendarConstants.GROWL_MESSAGE, CourseOfferingConstants.COURSE_OFFERING_CREATE_SUCCESS);
-            urlParameters.put(CalendarConstants.GROWL_MESSAGE_PARAMS, dataObject.getCourseOfferingCode());
-
-            urlParameters.put(KRADConstants.DISPATCH_REQUEST_PARAMETER, "show");
-            urlParameters.put("termCode", dataObject.getTerm().getCode());
-            if (dataObject.getCourseOfferingInfo().getCourseNumberSuffix() != null && !StringUtils.isBlank(dataObject.getCourseOfferingInfo().getCourseNumberSuffix())) {
-                urlParameters.put("inputCode", dataObject.getCourseOfferingInfo().getCourseOfferingCode().concat(dataObject.getCourseOfferingInfo().getCourseNumberSuffix()));
-            } else {
-                urlParameters.put("inputCode", dataObject.getCourseOfferingInfo().getCourseOfferingCode());
-            }
-            urlParameters.put("viewId",CourseOfferingConstants.MANAGE_CO_VIEW_ID);
-            urlParameters.put("pageId",CourseOfferingConstants.MANAGE_THE_CO_PAGE);
-            urlParameters.put("withinPortal","false");
-
-            return super.performRedirect(form, CourseOfferingConstants.MANAGE_CO_CONTROLLER_PATH, urlParameters);
+            urlParameters.put("inputCode", dataObject.getCourseOfferingInfo().getCourseOfferingCode());
         }
+        urlParameters.put("viewId",CourseOfferingConstants.MANAGE_CO_VIEW_ID);
+        urlParameters.put("pageId",CourseOfferingConstants.MANAGE_THE_CO_PAGE);
+        urlParameters.put("withinPortal","false");
 
-        // clear current form from session
-        GlobalVariables.getUifFormManager().removeSessionForm(form);
-
-        return performRedirect(form, form.getReturnLocation(), urlParameters);
+        return super.performRedirect(form, CourseOfferingConstants.MANAGE_CO_CONTROLLER_PATH, urlParameters);
     }
 
-    private void populateCreateCourseOfferingForm(MaintenanceDocumentForm form, HttpServletRequest request) {
+    /* Returns a ModelAndView for the route()-method to return a new view if we are editing a CO */
+    private ModelAndView handleRouteForCoEdit( DocumentFormBase form ) {
+
+        assert ( !(this instanceof CourseOfferingCreateController) );
+
+        String urlToRedirectTo = "";
+        Properties urlParameters = new Properties();
+
+        GlobalVariables.getUifFormManager().removeSessionForm(form);    // clear current form from session
+
+        // create a Growl-message
+        CourseOfferingEditWrapper dataObject = (CourseOfferingEditWrapper)((MaintenanceDocumentForm)form).getDocument().getNewMaintainableObject().getDataObject();
+        urlParameters.put(EnrollConstants.GROWL_MESSAGE, CourseOfferingConstants.COURSE_OFFERING_EDIT_SUCCESS);
+        urlParameters.put(EnrollConstants.GROWL_MESSAGE_PARAMS, dataObject.getCourseOfferingCode());
+
+        // determine which url to redirect to
+        String returnLocationFromForm = form.getReturnLocation();
+        if( StringUtils.contains( returnLocationFromForm,"viewId=courseOfferingManagementView" )
+                || StringUtils.contains( returnLocationFromForm,"pageId=manageTheCourseOfferingPage" ) )
+        {
+            if ( !returnLocationFromForm.contains("methodToCall=") ) {
+                // This happens when we display a list of COs and then user click on Manage action
+                form.getViewRequestParameters().put(CourseOfferingManagementSearchImpl.SearchParameters.IS_EXACT_MATCH_CO_CODE_SEARCH, Boolean.TRUE.toString());
+            }
+            else {
+                form.getViewRequestParameters().put(CourseOfferingManagementSearchImpl.SearchParameters.IS_EXACT_MATCH_CO_CODE_SEARCH, Boolean.FALSE.toString());
+                //urlToRedirectTo = returnLocationFromForm.replaceFirst("methodToCall=[a-zA-Z0-9]+","methodToCall=show");
+            }
+            urlToRedirectTo = returnLocationFromForm.replaceFirst("methodToCall=[a-zA-Z0-9]+","methodToCall=show");
+        }
+        else {
+            urlToRedirectTo = returnLocationFromForm;
+        }
+
+        // special handling if navigating to a specific CO
+        String loadNewCO = form.getActionParameters().get( "coId" );
+        if( StringUtils.isNotBlank( loadNewCO ) ) {
+
+            urlParameters.put( KRADConstants.DISPATCH_REQUEST_PARAMETER, KRADConstants.Maintenance.METHOD_TO_CALL_EDIT );
+            urlParameters.put( "courseOfferingInfo.id", loadNewCO );
+            urlParameters.put( KRADConstants.DATA_OBJECT_CLASS_ATTRIBUTE, CourseOfferingEditWrapper.class.getName() );
+            urlParameters.put( UifConstants.UrlParams.SHOW_HOME, BooleanUtils.toStringTrueFalse(false) );
+
+            urlParameters.put( "returnLocation", urlToRedirectTo );
+
+            urlToRedirectTo = "courseOffering";
+        }
+
+        return performRedirect(form, urlToRedirectTo, urlParameters);
+    }
+
+    protected void populateCreateCourseOfferingForm(MaintenanceDocumentForm form, HttpServletRequest request) {
 
         try {
             ContextInfo contextInfo = ContextUtils.createDefaultContextInfo();
@@ -213,6 +245,8 @@ public class CourseOfferingBaseController extends MaintenanceDocumentController 
             //3. set formatOfferingList
             formObject.setFormatOfferingList(new ArrayList<FormatOfferingWrapper>());
             FormatOfferingWrapper defaultFO = new FormatOfferingWrapper();
+           // defaultFO.setFormatInfo(courseInfo.getFormats().get(0));
+            defaultFO.setFormatId(courseInfo.getFormats().get(0).getId());
             defaultFO.getRenderHelper().setNewRow(true);
             formObject.getFormatOfferingList().add(defaultFO);
 
@@ -410,6 +444,42 @@ public class CourseOfferingBaseController extends MaintenanceDocumentController 
         DocumentFormBase documentForm = (DocumentFormBase) form;
         performWorkflowAction(documentForm, UifConstants.WorkflowAction.CANCEL, false);
 
+        String urlToRedirectTo = "";
+        Properties urlParameters = new Properties();
+
+        // determine which url to redirect to
+        String returnLocationFromForm = form.getReturnLocation();
+        if( StringUtils.contains( returnLocationFromForm,"viewId=courseOfferingManagementView" )
+                || StringUtils.contains( returnLocationFromForm,"pageId=manageTheCourseOfferingPage" ) )
+        {
+            if ( !returnLocationFromForm.contains("methodToCall=") ) {  // This happens when we display a list of COs and then user click on Manage action
+                form.getViewRequestParameters().put(CourseOfferingManagementSearchImpl.SearchParameters.IS_EXACT_MATCH_CO_CODE_SEARCH, Boolean.TRUE.toString());
+            }
+            else {
+                form.getViewRequestParameters().put(CourseOfferingManagementSearchImpl.SearchParameters.IS_EXACT_MATCH_CO_CODE_SEARCH, Boolean.FALSE.toString());
+            }
+            urlToRedirectTo = returnLocationFromForm.replaceFirst("methodToCall=[a-zA-Z0-9]+","methodToCall=show");
+        }
+        else {
+            urlToRedirectTo = returnLocationFromForm;
+        }
+
+        String loadNewCO = form.getActionParameters().get( "coId" );
+        if( StringUtils.isNotBlank( loadNewCO ) ) {
+
+            urlParameters.put( KRADConstants.DISPATCH_REQUEST_PARAMETER, KRADConstants.Maintenance.METHOD_TO_CALL_EDIT );
+            urlParameters.put( "courseOfferingInfo.id", loadNewCO );
+            urlParameters.put( KRADConstants.DATA_OBJECT_CLASS_ATTRIBUTE, CourseOfferingEditWrapper.class.getName() );
+            urlParameters.put( UifConstants.UrlParams.SHOW_HOME, BooleanUtils.toStringTrueFalse(false) );
+
+            urlParameters.put( "returnLocation", urlToRedirectTo );
+
+            urlToRedirectTo = "courseOffering";
+            GlobalVariables.getUifFormManager().removeSessionForm(form);
+            return performRedirect(form, urlToRedirectTo, urlParameters);
+        }
+
+        form.setReturnLocation( urlToRedirectTo );
         return back(form,result,request,response);
     }
 

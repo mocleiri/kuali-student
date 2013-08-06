@@ -17,6 +17,7 @@
 package org.kuali.student.enrollment.class2.courseoffering.dto;
 
 import org.apache.commons.lang.StringUtils;
+import org.kuali.rice.core.api.util.KeyValue;
 import org.kuali.student.enrollment.courseoffering.dto.CourseOfferingInfo;
 import org.kuali.student.enrollment.courseoffering.dto.CreditOptionInfo;
 import org.kuali.student.enrollment.courseoffering.dto.OfferingInstructorInfo;
@@ -71,6 +72,9 @@ public class CourseOfferingEditWrapper extends CourseOfferingWrapper {
 
     private RenderHelper renderHelper;
 
+    //this field is used for CO inquiry page to display all associated AOs
+    private List<ActivityOfferingWrapper> aoWrapperList;
+
     public CourseOfferingEditWrapper(){
         formatOfferingList = new ArrayList<FormatOfferingWrapper>();
         studentRegOptions = new ArrayList<String>();
@@ -81,6 +85,7 @@ public class CourseOfferingEditWrapper extends CourseOfferingWrapper {
         renderHelper = new RenderHelper();
         FormatOfferingWrapper defaultFO = new FormatOfferingWrapper();
         formatOfferingList.add(defaultFO);
+        aoWrapperList = new ArrayList<ActivityOfferingWrapper>();
     }
 
     public CourseOfferingEditWrapper(CourseOfferingInfo info){
@@ -352,16 +357,62 @@ public class CourseOfferingEditWrapper extends CourseOfferingWrapper {
         this.renderHelper = renderHelper;
     }
 
-    public class RenderHelper implements Serializable{
+    public class RenderHelper implements Serializable {
+
+        private String selectedCoCode;
+        private CourseOfferingInfo nextCO;
+        private CourseOfferingInfo prevCO;
+        private List<KeyValue> relatedCOs;
 
         protected RenderHelper(){
+            relatedCOs = new ArrayList<KeyValue>();
         }
+
 
         public boolean isShowFormatAddButton() {
             return getFormatOfferingList().size() < getCourse().getFormats().size();
         }
 
+        public void setSelectedCoCode( String selectedCoCode ) {
+            this.selectedCoCode = selectedCoCode;
+        }
+
+        public String getSelectedCoCode() {
+            return this.selectedCoCode;
+        }
+
+        public void setPrevCO( CourseOfferingInfo prevCO ) {
+            this.prevCO = prevCO;
+        }
+
+        public CourseOfferingInfo getPrevCO() {
+            return this.prevCO;
+        }
+
+        public void setNextCO( CourseOfferingInfo nextCO ) {
+            this.nextCO = nextCO;
+        }
+
+        public CourseOfferingInfo getNextCO() {
+            return this.nextCO;
+        }
+
+        public void setRelatedCOs( List<KeyValue> relatedCOs ) {
+            this.relatedCOs = relatedCOs;
+        }
+
+        public List<KeyValue> getRelatedCOs() {
+            return this.relatedCOs;
+        }
+
     }
 
+    public List<ActivityOfferingWrapper> getAoWrapperList() {
+        return aoWrapperList;
+    }
+
+    public void setAoWrapperList(List<ActivityOfferingWrapper> aoWrapperList) {
+        this.aoWrapperList = aoWrapperList;
+    }
 }
 

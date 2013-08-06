@@ -33,7 +33,7 @@ limitations under the License.
     </bean>
 
     <bean id="EnrolRuleManagementWrapper" parent="RuleManagementWrapper-parentBean">
-        <property name="dataObjectClass" value="org.kuali.student.enrollment.class1.krms.dto.EnrolRuleManagementWrapper"/>
+        <property name="dataObjectClass" value="org.kuali.student.lum.lu.ui.krms.dto.LURuleManagementWrapper"/>
     </bean>
 
     <bean id="AORuleManagementWrapper" parent="EnrolRuleManagementWrapper">
@@ -41,7 +41,7 @@ limitations under the License.
     </bean>
 
     <bean id="EnrolRuleEditor" parent="RuleEditor-parentBean">
-        <property name="dataObjectClass" value="org.kuali.student.enrollment.class1.krms.dto.EnrolRuleEditor"/>
+        <property name="dataObjectClass" value="org.kuali.student.lum.lu.ui.krms.dto.LURuleEditor"/>
     </bean>
 
     <bean id="KSAO-AgendaManagement-View" parent="KS-CourseOffering-MaintenanceViewWithTermContextBarPlaceholder">
@@ -49,6 +49,7 @@ limitations under the License.
         <property name="dataObjectClassName" value="org.kuali.student.enrollment.class1.krms.dto.AORuleManagementWrapper"/>
         <property name="viewHelperServiceClass"
                   value="org.kuali.student.enrollment.class1.krms.service.impl.AORuleViewHelperServiceImpl"/>
+        <property name="headerText" value="@{#dp.cluDescription}"/>
         <property name="items">
             <list>
                 <bean id="KSAO-AgendaMaintenance-Page" parent="KSAO-AgendaMaintenance-Page-parent"/>
@@ -58,10 +59,10 @@ limitations under the License.
         <property name="dialogs">
             <list>
                 <bean id="viewCluAndCoRuleLightBox" parent="KRMS-CompareRule">
-                    <property name="headerText" value="View CLU and CO Rules"/>
+                    <property name="headerText" value="View Catalog and Course Offering Rules"/>
                 </bean>
                 <bean id="compareCluCoAndAoRuleLightBox" parent="KRMS-AoCompareRule">
-                    <property name="headerText" value="Compare CO, CLU and AO Rules"/>
+                    <property name="headerText" value="Compare Course Offering, Catalog and Activity Offering Rules"/>
                 </bean>
                 <bean id="courseRangeLookup" parent="KRMS-CourseRangeResult-Lookup"/>
                 <bean id="warningMessagedYesNo" parent="KRMS-WarningMessagedYesNo"/>
@@ -90,20 +91,17 @@ limitations under the License.
                 </bean>
             </list>
         </property>
-        <property name="singlePageView" value="false"/>
-        <property name="unifiedHeader" value="false"/>
-        <property name="entryPageId" value="KSAO-AgendaMaintenance-Page"/>
-        <property name="header.cssClasses">
-            <list >
-                <value>ks-borderBottom4</value>
-            </list>
+
+        <property name="authorizer">
+            <bean class="org.kuali.student.enrollment.class1.krms.view.KSKRMSViewAuthorizer"/>
         </property>
+
+        <property name="singlePageView" value="false"/>
+        <property name="entryPageId" value="KSAO-AgendaMaintenance-Page"/>
         <property name="additionalScriptFiles">
             <list>
-                <value>krms/scripts/agendaTree.js</value>
-                <value>ks-enroll/scripts/ruleStudentTree.js</value>
+                <value>ks-enroll/scripts/ruleMaintenance.js</value>
                 <value>krms/scripts/requiredAlerts.js</value>
-                <value>ks-enroll/scripts/disableStudentButtons.js</value>
                 <value>krms/scripts/countdownInputs.js</value>
             </list>
         </property>
@@ -115,10 +113,9 @@ limitations under the License.
     </bean>
 
     <bean name="KSAO-AgendaMaintenance-Page-parent" parent="KRMS-AgendaMaintenance-Page-Parent">
-        <property name="headerText" value="@{#dp.cluDescription}"/>
+        <property name="headerText" value="Activity Offering Requisites"/>
         <property name="items">
             <list>
-                <bean parent="Uif-HeaderFour" p:headerText="Activity Offering Requisites"/>
                 <bean parent="KRMS-AgendaMaintenance-DisclosureLinks"/>
                 <bean parent="KRMS-AgendaManage-Section" class="org.kuali.student.enrollment.class1.krms.util.ActivityOfferingAgendaSection">
                     <property name="rulePrototype">
@@ -194,10 +191,15 @@ limitations under the License.
     <bean id="KSAO-RuleEdit-Links" parent="KRMS-RuleEdit-Links">
         <property name="items">
             <list>
-                <bean parent="KS-Uif-ActionLink" p:actionLabel="View CLU and CO Rule" p:methodToCall="viewCoAndCluRules"/>
+                <bean parent="KS-Uif-ActionLink" p:actionLabel="Compare" p:methodToCall="compareRules">
+                    <property name="toolTip">
+                        <bean parent="Uif-Tooltip" p:tooltipContent="Compare Course Offering, Catalog and Activity Offering Rules"/>
+                    </property>
+                </bean>
+                <bean parent="KS-Uif-ActionLink" p:actionLabel="View Catalog and Course Offering Rule" p:methodToCall="viewCoAndCluRules"/>
                 <bean parent="KS-Uif-ActionLink" p:actionLabel="Edit Rule" p:methodToCall="goToRuleView"/>
                 <bean parent="KS-Uif-ActionLink" p:actionLabel="Delete Rule" p:methodToCall="deleteRuleStatements"/>
-                <bean parent="KS-Uif-ActionLink" p:actionLabel="Revert to CO" p:methodToCall="deleteRule"/>
+                <bean parent="KS-Uif-ActionLink" p:actionLabel="Revert to Course Offering" p:methodToCall="deleteRule"/>
             </list>
         </property>
     </bean>
@@ -205,7 +207,7 @@ limitations under the License.
     <bean id="KSAO-RuleView-Links" parent="KRMS-RuleView-Links">
         <property name="items">
             <list>
-                <bean parent="KS-Uif-ActionLink" p:actionLabel="View CLU and CO Rule" p:methodToCall="viewCoAndCluRules"/>
+                <bean parent="KS-Uif-ActionLink" p:actionLabel="View Catalog and Course Offering Rule" p:methodToCall="viewCoAndCluRules"/>
             </list>
         </property>
     </bean>
@@ -213,7 +215,7 @@ limitations under the License.
     <bean id="KSAO-RuleCopyEdit-Links" parent="KRMS-RuleView-Links">
         <property name="items">
             <list>
-                <bean parent="KS-Uif-ActionLink" p:actionLabel="Copy and  Edit CO Rule" p:methodToCall="copyEditCoRule"/>
+                <bean parent="KS-Uif-ActionLink" p:actionLabel="Copy and  Edit Course Offering Rule" p:methodToCall="copyEditCoRule"/>
             </list>
         </property>
     </bean>
@@ -257,7 +259,7 @@ limitations under the License.
                 </property>
             </bean>
         </property>
-        <property name="collectionObjectClass" value="org.kuali.student.enrollment.class1.krms.dto.CluGroup" />
+        <property name="collectionObjectClass" value="org.kuali.student.lum.lu.ui.krms.dto.CluGroup" />
         <property name="items">
             <list>
                 <bean parent="Uif-MessageField" p:messageText="@{#line.title}" p:render="@{#line.showTitle}"/>
@@ -304,7 +306,7 @@ limitations under the License.
     </bean>
 
     <bean id="KSAO-ListItems-SubGroup" parent="Uif-TableCollectionGroup" p:renderAddLine="false">
-        <property name="collectionObjectClass" value="org.kuali.student.enrollment.class1.krms.dto.CluCore" />
+        <property name="collectionObjectClass" value="org.kuali.student.lum.lu.ui.krms.dto.CluCore" />
         <property name="propertyName" value="clus" />
         <property name="collectionLookup.quickfinderAction.render" value="false" />
         <property name="layoutManager">
@@ -324,11 +326,11 @@ limitations under the License.
     </bean>
 
     <bean name="KSAO-RuleMaintenance-Page-Parent" parent="KRMS-RuleMaintenance-Page-Parent">
-        <property name="headerText" value="@{#dp.cluDescription}"/>
+        <property name="headerText" value="@{#dp.ruleEditor.dummy == true ? 'Add' : 'Edit'} @{#dp.ruleEditor.ruleTypeInfo.description}"/>
         <property name="breadcrumbOptions.breadcrumbOverrides">
             <list>
                 <bean parent="Uif-BreadcrumbItem">
-                    <property name="label" value="Course Offering Requisites"/>
+                    <property name="label" value="Activity Offering Requisites"/>
                     <property name="url.controllerMapping" value="/courseOfferingRules"/>
                     <property name="url.viewType" value="MAINTENANCE"/>
                     <property name="url.methodToCall" value="maintenanceEdit"/>
@@ -350,7 +352,6 @@ limitations under the License.
         </property>
         <property name="items">
             <list>
-                <bean parent="Uif-HeaderFour" p:headerText="@{#dp.ruleEditor.dummy == true ? 'Add' : 'Edit'} @{#dp.ruleEditor.ruleTypeInfo.description}"/>
                 <ref bean="KSAO-Rules-ManageSection"/>
             </list>
         </property>
@@ -387,7 +388,7 @@ limitations under the License.
         <property name="items">
             <list>
                 <ref bean="KRMS-RuleHeader-Section"/>
-                <bean id="KSAO-RulePreview-ActionLinks" parent="KSAO-RulePreview-Links" p:style="float: right"/>
+                <bean id="KSAO-RulePreview-ActionLinks" parent="KSAO-RulePreview-Links" p:style="float: right; margin-right: 120px;"/>
             </list>
         </property>
     </bean>
@@ -397,7 +398,7 @@ limitations under the License.
             <list>
                 <bean parent="KS-Uif-ActionLink" p:actionLabel="Compare" p:methodToCall="compareRules">
                     <property name="toolTip">
-                        <bean parent="Uif-Tooltip" p:tooltipContent="Compare CO, CLU and AO Rules"/>
+                        <bean parent="Uif-Tooltip" p:tooltipContent="Compare Course Offering, Catalog and Activity Offering Rules"/>
                     </property>
                 </bean>
             </list>
@@ -429,7 +430,7 @@ limitations under the License.
     <bean id="KSAO-EditWithObject-EditSection" parent="KRMS-EditWithObject-EditSection-parent">
         <property name="items">
             <list>
-                <bean parent="KSAO-EditWithObject-EditGroup"/>
+                <ref bean="KSAO-EditWithObject-EditGroup"/>
             </list>
         </property>
     </bean>
@@ -446,7 +447,6 @@ limitations under the License.
     </bean>
 
     <bean id="KSAO-EditRule-ToolbarSection" parent="KS-Uif-HorizontalBoxSection-ToolbarSection">
-        <property name="onDocumentReadyScript" value="loadControlsInit();"/>
         <property name="items">
             <list>
 
@@ -522,7 +522,7 @@ limitations under the License.
     <bean id="KSAO-LogicPreview-Tree" parent="KRMS-LogicPreview-Tree">
         <property name="items">
             <list>
-                <bean parent="KSAO-PreviewTree-Section"/>
+                <ref bean="KSAO-PreviewTree-Section"/>
             </list>
         </property>
     </bean>
@@ -566,7 +566,7 @@ limitations under the License.
                         <bean parent="Uif-FooterBase">
                             <property name="items">
                                 <list>
-                                    <bean parent="KS-Uif-ActionLink" p:actionLabel="Close"
+                                    <bean parent="KS-Uif-PrimaryActionButton" p:actionLabel="Close"
                                           p:actionScript="jQuery.fancybox.close();"/>
                                 </list>
                             </property>

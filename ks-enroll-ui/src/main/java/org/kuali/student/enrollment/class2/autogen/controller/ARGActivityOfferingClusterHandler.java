@@ -45,10 +45,14 @@ import org.kuali.student.enrollment.courseoffering.dto.FormatOfferingInfo;
 import org.kuali.student.enrollment.courseoffering.service.CourseOfferingService;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.util.ContextUtils;
+import org.kuali.student.r2.core.class1.search.CourseOfferingManagementSearchImpl;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Properties;
+
 
 /**
  * This class is used by the ARGCourseOfferingManagementController to handle AO Cluster operations
@@ -228,6 +232,12 @@ public class ARGActivityOfferingClusterHandler {
 
     public static ARGCourseOfferingManagementForm createNewCluster(ARGCourseOfferingManagementForm theForm) throws Exception {
 
+        /* Indicate that the search used to redraw the page after this operation completes should use an exact
+         * match of the course code rather than the usual "like" criteria. Otherwise, if the course code matches multiple
+         * items (e.g. CHEM100, CHEM100A, CHEM100B) then the Manage multiple COs page will be displayed rather than Manage
+         * individual CO page. */
+        theForm.getViewRequestParameters().put(CourseOfferingManagementSearchImpl.SearchParameters.IS_EXACT_MATCH_CO_CODE_SEARCH, Boolean.TRUE.toString());
+
         String growlPrivateName;
         String growlPublicName;
 
@@ -281,6 +291,30 @@ public class ARGActivityOfferingClusterHandler {
             aoClusterWrapper.setClusterNameForDisplay("Forget to set cluster?");
 
             aoClusterWrapperList.add(aoClusterWrapper);
+            // KSENROLL-6506 Added below, the sorting on FormatOfferingID and Private name of the Cluster.
+            if(aoClusterWrapperList.size() > 1){
+                Collections.sort(aoClusterWrapperList, new Comparator<ActivityOfferingClusterWrapper>() {
+                    @Override
+                    public int compare(ActivityOfferingClusterWrapper obj1, ActivityOfferingClusterWrapper obj2) {
+
+                        int formatOfferingComparison = obj1.getAoCluster().getFormatOfferingId().compareTo(obj2.getAoCluster().getFormatOfferingId());
+                        if (formatOfferingComparison == 0)
+                        {
+                            int nameComparison = obj1.getAoCluster().getPrivateName().compareToIgnoreCase(obj2.getAoCluster().getPrivateName());
+                            int formatComparison = obj1.getFormatNameForDisplay().compareToIgnoreCase(obj2.getFormatNameForDisplay());
+                            if(formatComparison==0){
+                                return nameComparison;
+                            } else {
+                                return formatComparison;
+                            }
+                        } else{
+                            return formatOfferingComparison;
+                        }
+
+                    }
+                });
+            }
+
             theForm.setClusterResultList(aoClusterWrapperList);
             theForm.setPrivateClusterNamePopover("");
             theForm.setPublishedClusterNamePopover("");
@@ -292,7 +326,7 @@ public class ARGActivityOfferingClusterHandler {
             return theForm;
         }
 
-        GlobalVariables.getMessageMap().addGrowlMessage("", "cluster.created", growlPrivateName, growlPublicName );
+        GlobalVariables.getMessageMap().addGrowlMessage("", CourseOfferingConstants.CLUSTER_CREATE_SUCCESS, growlPrivateName, growlPublicName );
 
         return theForm;
     }

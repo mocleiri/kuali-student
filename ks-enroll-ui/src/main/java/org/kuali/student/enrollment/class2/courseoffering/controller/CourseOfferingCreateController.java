@@ -21,29 +21,31 @@ import org.kuali.rice.core.api.criteria.Predicate;
 import org.kuali.rice.core.api.criteria.PredicateFactory;
 import org.kuali.rice.core.api.criteria.QueryByCriteria;
 import org.kuali.rice.core.api.resourceloader.GlobalResourceLoader;
-import org.kuali.rice.core.api.util.RiceKeyConstants;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.uif.UifConstants;
 import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADConstants;
 import org.kuali.rice.krad.web.form.MaintenanceDocumentForm;
-import org.kuali.student.common.uif.util.GrowlIcon;
+import org.kuali.rice.krad.web.form.UifFormBase;
 import org.kuali.student.common.uif.util.KSControllerHelper;
-import org.kuali.student.common.uif.util.KSUifUtils;
 import org.kuali.student.enrollment.class2.courseoffering.dto.CourseOfferingContextBar;
 import org.kuali.student.enrollment.class2.courseoffering.dto.CourseOfferingCreateWrapper;
 import org.kuali.student.enrollment.class2.courseoffering.dto.CourseOfferingEditWrapper;
-import org.kuali.student.enrollment.class2.courseoffering.dto.ExistingCourseOffering;
 import org.kuali.student.enrollment.class2.courseoffering.dto.JointCourseWrapper;
+import org.kuali.student.enrollment.class2.courseoffering.service.CreateSocViewHelperService;
 import org.kuali.student.enrollment.class2.courseoffering.service.impl.CourseOfferingCreateMaintainableImpl;
+import org.kuali.student.enrollment.class2.courseoffering.service.impl.DefaultOptionKeysService;
+import org.kuali.student.enrollment.class2.courseoffering.service.impl.DefaultOptionKeysServiceImpl;
 import org.kuali.student.enrollment.class2.courseoffering.util.CourseOfferingConstants;
 import org.kuali.student.enrollment.class2.courseoffering.util.CourseOfferingResourceLoader;
 import org.kuali.student.enrollment.class2.courseoffering.util.CourseOfferingViewHelperUtil;
 import org.kuali.student.enrollment.class2.courseoffering.util.ManageSocConstants;
+import org.kuali.student.enrollment.common.util.EnrollConstants;
 import org.kuali.student.enrollment.courseoffering.dto.CourseOfferingInfo;
 import org.kuali.student.enrollment.courseoffering.service.CourseOfferingService;
 import org.kuali.student.enrollment.courseofferingset.dto.SocInfo;
 import org.kuali.student.enrollment.courseofferingset.dto.SocRolloverResultItemInfo;
+import org.kuali.student.enrollment.courseofferingset.service.CourseOfferingSetService;
 import org.kuali.student.r2.common.constants.CommonServiceConstants;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.util.ContextUtils;
@@ -72,22 +74,24 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.namespace.QName;
-
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Properties;
 
 import static org.kuali.rice.core.api.criteria.PredicateFactory.equal;
-import org.kuali.student.enrollment.class2.courseoffering.service.impl.DefaultOptionKeysService;
-import org.kuali.student.enrollment.class2.courseoffering.service.impl.DefaultOptionKeysServiceImpl;
 
 
 /**
  * This is the controller class what handles all the requests (actions) from the <i>'create course offering'</i> ui.
  * <p>
- *      Wireframes at {@link http://ux.ks.kuali.org.s3.amazonaws.com/wireframes/ENR/Course_Offering/v17/start.html} and
- *      {@link http://ux.ks.kuali.org.s3.amazonaws.com/wireframes/ENR/Complex%20Course%20Offerings/Sandbox/start.html}
+ *      Wireframes at <a href="http://ux.ks.kuali.org.s3.amazonaws.com/wireframes/ENR/Course_Offering/v17/start.html">
+ *          http://ux.ks.kuali.org.s3.amazonaws.com/wireframes/ENR/Course_Offering/v17/start.html</a> and
+ *
+ *       <a href="http://ux.ks.kuali.org.s3.amazonaws.com/wireframes/ENR/Complex%20Course%20Offerings/Sandbox/start.html">
+ *           http://ux.ks.kuali.org.s3.amazonaws.com/wireframes/ENR/Complex%20Course%20Offerings/Sandbox/start.html</a>
  * </p>
  *
  * @see CourseOfferingCreateWrapper
@@ -103,6 +107,7 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
     private CourseOfferingService courseOfferingService;
     private transient SearchService searchService;
     private transient TypeService typeService;
+    private transient CourseOfferingSetService socService;
 
     private String getGradingOption(String gradingOptionId) throws Exception {
         String gradingOption = "";
@@ -122,6 +127,73 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
             defaultOptionKeysService = new DefaultOptionKeysServiceImpl();
         }
         return this.defaultOptionKeysService;
+    }
+
+    /**
+     * Initial method called when requesting a new view instance.
+     *
+     */
+    @Override
+    public ModelAndView start(@ModelAttribute("KualiForm") UifFormBase form, BindingResult result,
+                              HttpServletRequest request, HttpServletResponse response) {
+        MaintenanceDocumentForm maintenanceForm = (MaintenanceDocumentForm) form;
+        setupMaintenance(maintenanceForm, request, KRADConstants.MAINTENANCE_NEW_ACTION);
+        ContextInfo contextInfo = ContextUtils.createDefaultContextInfo();
+
+        if (form.getView() != null) {
+            String methodToCall = request.getParameter(KRADConstants.DISPATCH_REQUEST_PARAMETER);
+
+            // check if creating CO and populate the form
+            String createCO = request.getParameter(CourseOfferingConstants.CREATE_COURSEOFFERING);
+            if (createCO != null && createCO.equals("true")) {
+                populateCreateCourseOfferingForm(maintenanceForm, request);
+            }
+            // done with creating CO
+            String pageId = request.getParameter("pageId");
+            if(pageId !=null && pageId.equals("courseOfferingCopyPage")){
+                Object selectedObject =  maintenanceForm.getDocument().getNewMaintainableObject().getDataObject();
+                if (selectedObject instanceof CourseOfferingCreateWrapper)  {
+                    CourseOfferingCreateWrapper coCreateWrapper = (CourseOfferingCreateWrapper)selectedObject;
+                    String targetTermCode = request.getParameter("targetTermCode");
+                    if(targetTermCode !=null){
+                        coCreateWrapper.setTargetTermCode(targetTermCode);
+                        TermInfo term = getTerm(targetTermCode);
+                        coCreateWrapper.setTerm(term);
+                    }
+                    String catalogCourseCode = request.getParameter("catalogCourseCode");
+                    if(catalogCourseCode !=null){
+                        coCreateWrapper.setCatalogCourseCode(catalogCourseCode);
+                    }
+                    String coId = request.getParameter("courseOfferingId");
+                    if(coId != null){
+                        try {
+                            // configure context bar
+                            SocInfo soc = getMainSocForTerm(coCreateWrapper.getTerm(), contextInfo);
+                            coCreateWrapper.setSocInfo(soc);
+                            coCreateWrapper.setContextBar(CourseOfferingContextBar.NEW_INSTANCE(coCreateWrapper.getTerm(), coCreateWrapper.getSocInfo(),
+                                    getStateService(), getAcalService(), contextInfo));
+
+                            CourseOfferingInfo theCO = getCourseOfferingService().getCourseOffering(coId, contextInfo);
+                            CourseOfferingEditWrapper coEditWrapper = new CourseOfferingEditWrapper(theCO);
+                            TermInfo termInfo = getAcalService().getTerm(theCO.getTermId(), contextInfo);
+                            coEditWrapper.setTerm(termInfo);
+                            coEditWrapper.setGradingOption(getGradingOption(theCO.getGradingOptionId()));
+                            // To prevent showing the same row twice in the table. It can be caused by pressing F5 key.
+                            if (coCreateWrapper.getExistingTermOfferings().size() == 0) {
+                                coCreateWrapper.getExistingTermOfferings().add(coEditWrapper);
+                            }
+                        }catch(Exception e){
+                            LOG.warn("An Exception occurred but was not handled. ", e);
+                        }
+                    }
+                }
+
+
+            }
+            checkViewAuthorization(form, methodToCall);
+        }
+
+        return getUIFModelAndView(maintenanceForm);
     }
 
     /**
@@ -162,7 +234,7 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
      *
      */
     @RequestMapping(params = "methodToCall=markCourseForJointOffering")
-    public ModelAndView markCourseForJointOffering(@ModelAttribute("KualiForm") MaintenanceDocumentForm form, BindingResult result,
+    public ModelAndView markCourseForJointOffering(@ModelAttribute("KualiForm") MaintenanceDocumentForm form, @SuppressWarnings("unused") BindingResult result,
                 HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         CourseOfferingCreateWrapper wrapper = (CourseOfferingCreateWrapper) form.getDocument().getNewMaintainableObject().getDataObject();
@@ -223,8 +295,8 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
     }
 
     @RequestMapping(params = "methodToCall=continueFromCreate")
-    public ModelAndView continueFromCreate(@ModelAttribute("KualiForm") MaintenanceDocumentForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView continueFromCreate(@ModelAttribute("KualiForm") MaintenanceDocumentForm form, @SuppressWarnings("unused") BindingResult result,
+                              @SuppressWarnings("unused") HttpServletRequest request, @SuppressWarnings("unused") HttpServletResponse response) throws Exception {
 
         CourseOfferingCreateWrapper coWrapper = ((CourseOfferingCreateWrapper) form.getDocument().getNewMaintainableObject().getDataObject());
         String courseCode = coWrapper.getCatalogCourseCode();
@@ -233,11 +305,11 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
         // check if term or course is empty
         if( StringUtils.isBlank(termCode) ) {
 //            GlobalVariables.getMessageMap().putError("document.newMaintainableObject.dataObject.targetTermCode", CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_PARAMETER_IS_REQUIRED, "Term");
-            GlobalVariables.getMessageMap().putError("targetTermCode", CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_PARAMETER_IS_REQUIRED, "Term");
+            GlobalVariables.getMessageMap().putError(KRADConstants.GLOBAL_ERRORS, CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_PARAMETER_IS_REQUIRED, "Term");
         }
         if( StringUtils.isBlank(courseCode) ) {
 //            GlobalVariables.getMessageMap().putError("document.newMaintainableObject.dataObject.catalogCourseCode", CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_PARAMETER_IS_REQUIRED, "Course Code");
-            GlobalVariables.getMessageMap().putError("catalogCourseCode", CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_PARAMETER_IS_REQUIRED, "Course Code");
+            GlobalVariables.getMessageMap().putError(KRADConstants.GLOBAL_ERRORS, CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_PARAMETER_IS_REQUIRED, "Course Code");
         }
         if (GlobalVariables.getMessageMap().getErrorCount() > 0) {
             return getUIFModelAndView(form);
@@ -273,7 +345,7 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
 
             if (!canOpenView) {    // checking authz for course
 //              GlobalVariables.getMessageMap().putError("document.newMaintainableObject.dataObject.catalogCourseCode", CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_COURSE_RESTRICTED, courseCode);
-                GlobalVariables.getMessageMap().putError("catalogCourseCode", CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_COURSE_RESTRICTED, courseCode);
+                GlobalVariables.getMessageMap().putError(KRADConstants.GLOBAL_ERRORS, CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_COURSE_RESTRICTED, courseCode);
                 coWrapper.setAdminOrg(null);
                 coWrapper.setCourse(null);
 
@@ -290,7 +362,7 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
 
                     if(!canOpenViewSoc) {   // check if user authz for the soc
 //                      GlobalVariables.getMessageMap().putError("document.newMaintainableObject.dataObject.targetTermCode", CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_TERM_RESTRICTED);
-                        GlobalVariables.getMessageMap().putError("targetTermCode", CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_TERM_RESTRICTED);
+                        GlobalVariables.getMessageMap().putError(KRADConstants.GLOBAL_ERRORS, CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_TERM_RESTRICTED);
                         coWrapper.setSocInfo(null);
 
                         return getUIFModelAndView(form);
@@ -316,9 +388,8 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
 
                             for (CourseOfferingInfo courseOfferingInfo : courseOfferingInfos) {
                                 if (StringUtils.equals(courseOfferingInfo.getStateKey(), LuiServiceConstants.LUI_CO_STATE_OFFERED_KEY)) {
-                                    ExistingCourseOffering co = new ExistingCourseOffering(courseOfferingInfo);
-                                    co.setCredits(courseOfferingInfo.getCreditCnt());
-                                    co.setGrading(getGradingOption(courseOfferingInfo.getGradingOptionId()));
+                                    CourseOfferingEditWrapper co = new CourseOfferingEditWrapper(courseOfferingInfo);
+                                    co.setGradingOption(getGradingOption(courseOfferingInfo.getGradingOptionId()));
                                     coWrapper.getExistingOfferingsInCurrentTerm().add(co);
                                 }
                             }
@@ -342,13 +413,21 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
                             courseOfferingInfos = getCourseOfferingService().getCourseOfferingsByIds(courseOfferingIds, contextInfo);
 
                             for (CourseOfferingInfo courseOfferingInfo : courseOfferingInfos) {
-                                ExistingCourseOffering co = new ExistingCourseOffering(courseOfferingInfo);
+                                CourseOfferingEditWrapper co = new CourseOfferingEditWrapper(courseOfferingInfo);
                                 TermInfo termInfo = getAcalService().getTerm(courseOfferingInfo.getTermId(), contextInfo);
-                                co.setTermCode(termInfo.getCode());
-                                co.setCredits(courseOfferingInfo.getCreditCnt());
-                                co.setGrading(getGradingOption(courseOfferingInfo.getGradingOptionId()));
+                                co.setTerm(termInfo);
+                                co.setGradingOption(getGradingOption(courseOfferingInfo.getGradingOptionId()));
                                 coWrapper.getExistingTermOfferings().add(co);
                             }
+
+                            //sort existing COs by term code
+                            Collections.sort(coWrapper.getExistingTermOfferings(), new Comparator<CourseOfferingEditWrapper>() {
+                                @Override
+                                public int compare(CourseOfferingEditWrapper co1, CourseOfferingEditWrapper co2) {
+                                    return co2.getTerm().getCode().compareTo(co1.getTerm().getCode());
+                                }
+                            });
+
 
                             CourseOfferingCreateMaintainableImpl maintainable = (CourseOfferingCreateMaintainableImpl)KSControllerHelper.getViewHelperService(form);
                             maintainable.loadCourseJointInfos(coWrapper, form.getViewId());
@@ -366,7 +445,7 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
         } else {
             if (matchingCourses.size() > 1) {
 //              GlobalVariables.getMessageMap().putError("document.newMaintainableObject.dataObject.catalogCourseCode", CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_MULTIPLE_COURSE_MATCHES, courseCode);
-                GlobalVariables.getMessageMap().putError("catalogCourseCode", CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_MULTIPLE_COURSE_MATCHES, courseCode);
+                GlobalVariables.getMessageMap().putError(KRADConstants.GLOBAL_ERRORS, CourseOfferingConstants.COURSEOFFERING_CREATE_ERROR_MULTIPLE_COURSE_MATCHES, courseCode);
             } else if (matchingCourses.isEmpty()) {
                     GlobalVariables.getMessageMap().putError(KRADConstants.GLOBAL_ERRORS, CourseOfferingConstants.ERROR_INVALID_CLU_VERSION, courseCode, termCode);
             }
@@ -376,14 +455,16 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
     }
 
     @RequestMapping(params = "methodToCall=createFromCopy")
-    public ModelAndView createFromCopy(@ModelAttribute("KualiForm") MaintenanceDocumentForm form, BindingResult result,
-                               HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public ModelAndView createFromCopy(@ModelAttribute("KualiForm") MaintenanceDocumentForm form, @SuppressWarnings("unused") BindingResult result,
+         @SuppressWarnings("unused") HttpServletRequest request, @SuppressWarnings("unused") HttpServletResponse response) throws Exception {
 
         CourseOfferingCreateWrapper createWrapper = (CourseOfferingCreateWrapper) form.getDocument().getNewMaintainableObject().getDataObject();
         CourseOfferingInfo existingCO = null;
-        for(int i = 0; i<createWrapper.getExistingTermOfferings().size(); i++){
-            if(createWrapper.getExistingTermOfferings().get(i).isSelected()){
-                existingCO = createWrapper.getExistingTermOfferings().get(i).getCourseOfferingInfo();
+
+        //the first CO that is selected or if there is only one, grab that one
+        for(CourseOfferingEditWrapper eco : createWrapper.getExistingTermOfferings()){
+            if(eco.getIsChecked() || createWrapper.getExistingTermOfferings().size() == 1){
+                existingCO = eco.getCourseOfferingInfo();
                 break;
             }
         }
@@ -425,6 +506,8 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
             }
         }
 
+        //  According to Jira 4353 copy the title from CO instead of CLU. So set the property not to copy from CLU
+        optionKeys.add(CourseOfferingSetServiceConstants.NOT_COURSE_TITLE_OPTION_KEY);
         SocRolloverResultItemInfo item = getCourseOfferingService().rolloverCourseOffering(existingCO.getId(),
                 createWrapper.getTerm().getId(),
                 optionKeys,
@@ -440,6 +523,8 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
         urlParameters.put("viewId",CourseOfferingConstants.MANAGE_CO_VIEW_ID);
         urlParameters.put("pageId",CourseOfferingConstants.MANAGE_THE_CO_PAGE);
         urlParameters.put("withinPortal","false");
+        urlParameters.put(EnrollConstants.GROWL_MESSAGE, CourseOfferingConstants.COURSE_OFFERING_CREATE_SUCCESS);
+        urlParameters.put(EnrollConstants.GROWL_MESSAGE_PARAMS, courseOfferingInfo.getCourseOfferingCode());
 
         return super.performRedirect(form, CourseOfferingConstants.MANAGE_CO_CONTROLLER_PATH, urlParameters);
     }
@@ -529,6 +614,17 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
         return props;
     }
 
+    private SocInfo getMainSocForTerm(TermInfo term, ContextInfo contextInfo) throws Exception {
+        List<String> socIds = getSocService().getSocIdsByTerm(term.getId(), contextInfo);
+        List<SocInfo> socInfos = getSocService().getSocsByIds(socIds, contextInfo);
+        for (SocInfo socInfo: socInfos) {
+            if (socInfo.getTypeKey().equals(CourseOfferingSetServiceConstants.MAIN_SOC_TYPE_KEY)) {
+                return socInfo;
+            }
+        }
+        return null;
+    }
+
     protected TypeService getTypeService() {
         if(typeService == null) {
             typeService = CourseOfferingResourceLoader.loadTypeService();
@@ -549,4 +645,12 @@ public class CourseOfferingCreateController extends CourseOfferingBaseController
         }
         return searchService;
     }
+
+    private CourseOfferingSetService getSocService() {
+        if (socService == null) {
+            socService = CourseOfferingResourceLoader.loadSocService();
+        }
+        return socService;
+    }
+
 }

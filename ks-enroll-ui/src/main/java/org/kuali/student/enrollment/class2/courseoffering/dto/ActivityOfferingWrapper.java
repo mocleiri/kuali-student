@@ -96,11 +96,15 @@ public class ActivityOfferingWrapper implements Serializable{
     private boolean enableCopyAOActionLink = false;
     private boolean enableEditAOActionLink = false;
 
+    //Permission flag for Manage AO Requisite link
+    private boolean requisiteLink = false;
+
     private boolean colocatedAO;
     private List<ColocatedActivity> colocatedActivities;
     private boolean maxEnrollmentShared;
     private boolean hiddenMaxEnrollmentShared;
     private int sharedMaxEnrollment;
+    private boolean hasSeatpools;
 
     private ScheduleRequestSetInfo scheduleRequestSetInfo;
 
@@ -108,6 +112,7 @@ public class ActivityOfferingWrapper implements Serializable{
     private boolean isPartOfColoSetOnLoadAlready;
     private boolean isColocatedOnLoadAlready;
     private boolean isSendRDLsToSchedulerAfterMSE;
+    private boolean isRemovedFromColoSet;
 
     private CourseOfferingContextBar contextBar = CourseOfferingContextBar.NULL_SAFE_INSTANCE;
 
@@ -139,9 +144,6 @@ public class ActivityOfferingWrapper implements Serializable{
      displayed start/end when subterm is changed/choremoved
      */
     private String subTermDatesJsonString;
-
-    //Permission flag for Manage AO Requisite link
-    private boolean requisiteLink;
 
     public ActivityOfferingWrapper(){
         aoInfo = new ActivityOfferingInfo();
@@ -896,6 +898,14 @@ public class ActivityOfferingWrapper implements Serializable{
         this.sharedMaxEnrollment = sharedMaxEnrollment;
     }
 
+    public boolean getHasSeatpools() {
+        return hasSeatpools;
+    }
+
+    public void setHasSeatpools(boolean hasSeatpools) {
+        this.hasSeatpools = hasSeatpools;
+    }
+
     public ScheduleRequestSetInfo getScheduleRequestSetInfo() {
         return scheduleRequestSetInfo;
     }
@@ -1129,5 +1139,22 @@ public class ActivityOfferingWrapper implements Serializable{
 
     public void setRequisiteLink(boolean requisiteLink) {
         this.requisiteLink = requisiteLink;
+    }
+
+    /**
+     * @see #setRemovedFromColoSet(boolean)
+     * @return true if the user breaks the colo set
+     */
+    public boolean isRemovedFromColoSet() {
+        return isRemovedFromColoSet;
+    }
+
+    /**
+     * This flag will be set when the user breaks the AO from the colo set.
+     *
+     * @param removedFromColoSet
+     */
+    public void setRemovedFromColoSet(boolean removedFromColoSet) {
+        isRemovedFromColoSet = removedFromColoSet;
     }
 }

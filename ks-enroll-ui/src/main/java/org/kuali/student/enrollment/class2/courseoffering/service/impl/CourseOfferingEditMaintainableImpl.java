@@ -16,9 +16,11 @@
  */
 package org.kuali.student.enrollment.class2.courseoffering.service.impl;
 
+import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.kuali.rice.core.api.resourceloader.GlobalResourceLoader;
+import org.kuali.rice.core.api.util.ConcreteKeyValue;
 import org.kuali.rice.kim.api.identity.Person;
 import org.kuali.rice.krad.exception.AuthorizationException;
 import org.kuali.rice.krad.maintenance.MaintenanceDocument;
@@ -45,8 +47,11 @@ import org.kuali.student.enrollment.courseoffering.dto.OfferingInstructorInfo;
 import org.kuali.student.enrollment.courseofferingset.dto.SocInfo;
 import org.kuali.student.enrollment.courseofferingset.service.CourseOfferingSetService;
 import org.kuali.student.r2.common.constants.CommonServiceConstants;
-import org.kuali.student.r2.common.dto.AttributeInfo;
 import org.kuali.student.r2.common.dto.ContextInfo;
+import org.kuali.student.r2.common.exceptions.InvalidParameterException;
+import org.kuali.student.r2.common.exceptions.MissingParameterException;
+import org.kuali.student.r2.common.exceptions.OperationFailedException;
+import org.kuali.student.r2.common.exceptions.PermissionDeniedException;
 import org.kuali.student.r2.common.util.ContextUtils;
 import org.kuali.student.r2.common.util.constants.CourseOfferingServiceConstants;
 import org.kuali.student.r2.common.util.constants.CourseOfferingSetServiceConstants;
@@ -55,12 +60,15 @@ import org.kuali.student.r2.common.util.constants.LuiServiceConstants;
 import org.kuali.student.r2.common.util.date.DateFormatters;
 import org.kuali.student.r2.core.acal.dto.TermInfo;
 import org.kuali.student.r2.core.acal.service.AcademicCalendarService;
+import org.kuali.student.r2.core.class1.search.CourseOfferingManagementSearchImpl;
 import org.kuali.student.r2.core.class1.state.service.StateService;
 import org.kuali.student.r2.core.class1.type.service.TypeService;
 import org.kuali.student.r2.core.constants.StateServiceConstants;
 import org.kuali.student.r2.core.constants.TypeServiceConstants;
 import org.kuali.student.r2.core.organization.dto.OrgInfo;
 import org.kuali.student.r2.core.organization.service.OrganizationService;
+import org.kuali.student.r2.core.search.dto.SearchRequestInfo;
+import org.kuali.student.r2.core.search.service.SearchService;
 import org.kuali.student.r2.lum.course.dto.ActivityInfo;
 import org.kuali.student.r2.lum.course.dto.CourseInfo;
 import org.kuali.student.r2.lum.course.dto.FormatInfo;
@@ -96,8 +104,9 @@ public class CourseOfferingEditMaintainableImpl extends CourseOfferingMaintainab
     private transient CourseOfferingSetService courseOfferingSetService;
     private transient TypeService typeService;
     private transient StateService stateService;
+    private transient SearchService searchService;
 
-    //TODO : implement the functionality for Personnel section and its been delayed now since the backend implementation is not yet ready (06/06/2012).
+    //TODO : implement the functionality for Personnel section and its been delayed now since the backend implementation is not yet ready (06/06/2012). KSENROLL-1375
 
     @Override
     public void saveDataObject() {
@@ -306,7 +315,7 @@ public class CourseOfferingEditMaintainableImpl extends CourseOfferingMaintainab
         //Sort the list of credits options by the float value.
         Collections.sort(credits, new Comparator<String>() {
             public int compare(String o1, String o2) {
-                return Float.valueOf(o1).compareTo(Float.valueOf(02));
+                return Float.valueOf(o1).compareTo(Float.valueOf(o2));
             }
         });
         //Find the difference between the first two values to get the increment
@@ -342,10 +351,13 @@ public class CourseOfferingEditMaintainableImpl extends CourseOfferingMaintainab
                             //create a new FO
                             formatOfferingInfo.setStateKey(LuiServiceConstants.LUI_FO_STATE_DRAFT_KEY);
                             formatOfferingInfo.setTypeKey(LuiServiceConstants.FORMAT_OFFERING_TYPE_KEY);
-                            formatOfferingInfo.setName(null);//Clear these out so they are generated nicely
                             formatOfferingInfo.setDescr(null);
                             formatOfferingInfo.setTermId(coInfo.getTermId());
                             formatOfferingInfo.setCourseOfferingId(coInfo.getId());
+                            //We need to set the name to maintain ordinality from CLU. (If we're not setting the name here, service will set the name based on priority order which is not the expected behavior)
+                            if (StringUtils.isBlank(formatOfferingInfo.getName())){
+                                formatOfferingInfo.setName(getFormatName(foWrapper,coEditWrapper.getCourse()));
+                            }
                             if (coInfo.getFinalExamType() != null && !coInfo.getFinalExamType().equals(CourseOfferingConstants.COURSEOFFERING_FINAL_EXAM_TYPE_STANDARD)) {
                                 formatOfferingInfo.setFinalExamLevelTypeKey(null);
                             }
@@ -408,6 +420,12 @@ public class CourseOfferingEditMaintainableImpl extends CourseOfferingMaintainab
                 GlobalVariables.getMessageMap().putErrorForSectionId("KS-CourseOfferingEdit-PersonnelSection", ActivityOfferingConstants.MSG_ERROR_INSTRUCTOR_NOTFOUND, instructorInfo.getPersonId());
                 return false;
             }
+        } else if (addLine instanceof OrganizationInfoWrapper) {
+            OrganizationInfoWrapper org = (OrganizationInfoWrapper) addLine;
+            if(StringUtils.isEmpty(org.getId())) {
+                GlobalVariables.getMessageMap().putErrorForSectionId(collectionGroup.getId(), ActivityOfferingConstants.MSG_ERROR_ORGANIZATION_ID_REQUIRED);
+                return false;
+            }
         }
 
         return super.performAddLineValidation(view, collectionGroup, model, addLine);
@@ -464,13 +482,12 @@ public class CourseOfferingEditMaintainableImpl extends CourseOfferingMaintainab
 
     @Override
     protected void processAfterDeleteLine(View view, CollectionGroup collectionGroup, Object model, int lineIndex) {
-//        if (!(collectionGroup.getPropertyName().equals("seatpools") || collectionGroup.getPropertyName().equals("instructors"))) {
-        if (!(collectionGroup.getPropertyName().endsWith("seatpools") || collectionGroup.getPropertyName().endsWith("instructors"))) {
-            super.processAfterDeleteLine(view, collectionGroup, model, lineIndex);
-        }  else if(collectionGroup.getPropertyName().endsWith("instructors")) {
+
+        MaintenanceDocumentForm maintenanceForm = (MaintenanceDocumentForm) model;
+        MaintenanceDocument document = maintenanceForm.getDocument();
+
+        if(collectionGroup.getPropertyName().endsWith("instructors")) {
             if (model instanceof MaintenanceDocumentForm) {
-                MaintenanceDocumentForm maintenanceForm = (MaintenanceDocumentForm) model;
-                MaintenanceDocument document = maintenanceForm.getDocument();
                 // get the old object's collection
                 Collection<Object> oldCollection = ObjectPropertyUtils.getPropertyValue(document.getOldMaintainableObject().getDataObject(),
                         collectionGroup.getPropertyName());
@@ -478,6 +495,11 @@ public class CourseOfferingEditMaintainableImpl extends CourseOfferingMaintainab
                     super.processAfterDeleteLine(view, collectionGroup, model, lineIndex);
                 }
             }
+        }  else if(collectionGroup.getPropertyName().endsWith("formatOfferingList")) {
+            CourseOfferingEditWrapper coWrapper = (CourseOfferingEditWrapper)document.getNewMaintainableObject().getDataObject();
+            populateFormatNames(coWrapper);
+        } else {
+            super.processAfterDeleteLine(view, collectionGroup, model, lineIndex);
         }
     }
 
@@ -694,8 +716,11 @@ public class CourseOfferingEditMaintainableImpl extends CourseOfferingMaintainab
                 //Cross listing
                 for (CourseOfferingCrossListingInfo crossListingInfo : coInfo.getCrossListings()){
                     formObject.getAlternateCOCodes().add(crossListingInfo.getCode());
-                    formObject.getAlternateCourseCodesSuffixStripped().add(StringUtils.stripEnd(crossListingInfo.getCode(),crossListingInfo.getCourseNumberSuffix()));
+                    formObject.getAlternateCourseCodesSuffixStripped().add(crossListingInfo.getCode());
                 }
+
+                loadNavigationDetails( formObject );
+
                 return formObject;
             }
         }catch (AuthorizationException ae){
@@ -705,6 +730,62 @@ public class CourseOfferingEditMaintainableImpl extends CourseOfferingMaintainab
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    private void loadNavigationDetails( CourseOfferingEditWrapper wrapper ) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        List<CourseOfferingInfo> relatedCOs = searchForRelatedCOs( wrapper );
+        int indexOfCurrentCo = buildListOfRelatedCOsAndReturnIndexOfCurrentCO( wrapper, relatedCOs );
+        wrapper.getRenderHelper().setSelectedCoCode( wrapper.getId() );
+        setPreviousToCurrentCO( wrapper, indexOfCurrentCo, relatedCOs );
+        setNextToCurrentCO( wrapper, indexOfCurrentCo, relatedCOs );
+    }
+
+    private List<CourseOfferingInfo> searchForRelatedCOs( CourseOfferingEditWrapper wrapper ) throws InvalidParameterException, MissingParameterException, OperationFailedException, PermissionDeniedException {
+        List<CourseOfferingInfo> result = new ArrayList<CourseOfferingInfo>();
+
+        SearchRequestInfo searchRequest = new SearchRequestInfo( CourseOfferingManagementSearchImpl.CO_MANAGEMENT_SEARCH.getKey() );
+        searchRequest.addParam( CourseOfferingManagementSearchImpl.SearchParameters.SUBJECT_AREA, wrapper.getCourse().getSubjectArea() );
+        searchRequest.addParam( CourseOfferingManagementSearchImpl.SearchParameters.ATP_ID, wrapper.getTerm().getId() );
+        List<CourseOfferingInfo> relatedCOs = CourseOfferingViewHelperUtil.loadCourseOfferings( getSearchService(), searchRequest );
+        if( relatedCOs != null ) result.addAll( relatedCOs );
+
+        return result;
+    }
+
+    private int buildListOfRelatedCOsAndReturnIndexOfCurrentCO( CourseOfferingEditWrapper currentCO, List<CourseOfferingInfo> relatedCOs ) {
+
+        int indexOfCurrentCo = -1;
+        for( CourseOfferingInfo coInfo : relatedCOs ) {
+
+            // store index of current item if it's the one the user is looking at
+            if( currentCO.getId().equals( coInfo.getId() ) ) {
+                indexOfCurrentCo = relatedCOs.indexOf( coInfo );
+            }
+
+            // store current item in list of related-COs
+            ConcreteKeyValue keyValue = new ConcreteKeyValue();
+            keyValue.setKey( coInfo.getId() );
+            keyValue.setValue( coInfo.getCourseOfferingCode() );
+            currentCO.getRenderHelper().getRelatedCOs().add( keyValue );
+        }
+
+        return indexOfCurrentCo;
+    }
+
+    private void setPreviousToCurrentCO( CourseOfferingEditWrapper currentCO, int indexOfCurrentCO, List<CourseOfferingInfo> relatedCOs ) {
+        CourseOfferingInfo previousCoInfo = new CourseOfferingInfo();
+        if( indexOfCurrentCO > 0 ) {
+            previousCoInfo = relatedCOs.get( indexOfCurrentCO - 1 );
+        }
+        currentCO.getRenderHelper().setPrevCO(previousCoInfo);
+    }
+
+    private void setNextToCurrentCO( CourseOfferingEditWrapper currentCO, int indexOfCurrentCO, List<CourseOfferingInfo> relatedCOs ) {
+        CourseOfferingInfo nextCoInfo = new CourseOfferingInfo();
+        if( indexOfCurrentCO < relatedCOs.size()-1 ) {
+            nextCoInfo = relatedCOs.get( indexOfCurrentCO + 1 );
+        }
+        currentCO.getRenderHelper().setNextCO( nextCoInfo );
     }
 
     private void setTermPropertiesOnFormObject( CourseOfferingEditWrapper formObject, CourseOfferingInfo coInfo, ContextInfo contextInfo ) throws Exception {
@@ -774,6 +855,13 @@ public class CourseOfferingEditMaintainableImpl extends CourseOfferingMaintainab
             stateService = (StateService) GlobalResourceLoader.getService( new QName(StateServiceConstants.NAMESPACE, StateServiceConstants.SERVICE_NAME_LOCAL_PART) );
         }
         return stateService;
+    }
+
+    public SearchService getSearchService() {
+        if (searchService == null) {
+            searchService = (SearchService) GlobalResourceLoader.getService(new QName(CommonServiceConstants.REF_OBJECT_URI_GLOBAL_PREFIX + "search", SearchService.class.getSimpleName()));
+        }
+        return searchService;
     }
 
     private DefaultOptionKeysService defaultOptionKeysService;

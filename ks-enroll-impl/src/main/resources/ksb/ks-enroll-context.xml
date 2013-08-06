@@ -264,6 +264,7 @@
         <property name="acalService" ref="AcademicCalendarService" />
         <property name="coService" ref="CourseOfferingService" />
         <property name="schedulingService" ref="SchedulingService"/>
+        <property name="rolloverAssist" ref="rolloverAssist"/>
     </bean>
 
 
@@ -290,6 +291,7 @@
         <property name="businessLogic" ref="socBusinessLogic" />
         <property name="stateTransitionsHelper" ref="stateTransitionsHelper"/>
         <property name="stateService" ref="stateService"/>
+        <property name="acalService" ref="AcademicCalendarService" />
     </bean>
 
     <bean id="ks.exp.socService" class="org.kuali.rice.ksb.api.bus.support.ServiceBusExporter">
@@ -926,6 +928,22 @@
         </property>
     </bean>
 
+    <!-- For rolling over, colocation, provides mapping from source ScheduleRequestSet to target ScheduleRequestSet -->
+    <bean id="rolloverAssist" class="org.kuali.student.enrollment.class2.courseofferingset.service.facade.RolloverAssistImpl">
+    </bean>
+
+    <bean id="ks.exp.rolloverAssist" class="org.kuali.rice.ksb.api.bus.support.ServiceBusExporter">
+        <property name="serviceDefinition">
+            <bean class="org.kuali.rice.ksb.api.bus.support.JavaServiceDefinition">
+                <property name="service" ref="rolloverAssist" />
+                <property name="serviceInterface" value="org.kuali.student.enrollment.class2.courseofferingset.service.facade.RolloverAssist" />
+                <property name="localServiceName" value="RolloverAssist" />
+                <property name="serviceNameSpaceURI" value="http://student.kuali.org/wsdl/rolloverAssist" />
+                <property name="busSecurity" value="${ks.lum.bus.security}" />
+            </bean>
+        </property>
+    </bean>
+
     <bean id="ActivityOfferingSearchServiceImpl" class="org.kuali.student.r2.core.class1.search.ActivityOfferingSearchServiceImpl">
         <property name="entityManager" ref="enrollEntityManager"/>
     </bean>
@@ -1140,6 +1158,21 @@
             </bean>
         </property>
     </bean>
+
+    <!-- This class is needed to create a different transactional boundary for the ActivityOfferingController class-->
+    <bean id="activityOfferingControllerTransactionHelper" class="org.kuali.student.enrollment.class2.courseoffering.controller.ActivityOfferingControllerTransactionHelper"/>
+    <bean id="ks.exp.activityOfferingControllerTransactionHelper" class="org.kuali.rice.ksb.api.bus.support.ServiceBusExporter">
+        <property name="serviceDefinition">
+            <bean class="org.kuali.rice.ksb.api.bus.support.JavaServiceDefinition">
+                <property name="service" ref="activityOfferingControllerTransactionHelper" />
+                <property name="serviceInterface" value="org.kuali.student.enrollment.class2.courseoffering.controller.ActivityOfferingControllerTransactionHelper"/>
+                <property name="localServiceName" value="ActivityOfferingControllerTransactionHelper" />
+                <property name="serviceNameSpaceURI" value="http://student.kuali.org/wsdl/activityOfferingControllerTransactionHelper" />
+                <property name="busSecurity" value="${ks.core.bus.security}" />
+            </bean>
+        </property>
+    </bean>
+
  </beans>
 
 

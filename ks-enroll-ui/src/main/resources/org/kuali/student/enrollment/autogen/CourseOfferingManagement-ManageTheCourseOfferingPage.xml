@@ -28,7 +28,7 @@
         <!-- Dynamically replace by page-title from parent using JS-onDocumentReadyScript to reflect subject-code.
             ie: from "Course Offerings" to "WMST200"
             This is a work-around, at least until KRAD 2.3-m3 -->
-        <property name="onDocumentReadyScript" value="updateViewHeaderText( '@{currentCourseOfferingWrapper.ownerCode}' );" />
+        <property name="onDocumentReadyScript" value="updateViewHeaderText( '@{currentCourseOfferingWrapper.ownerCode} : @{currentCourseOfferingWrapper.courseOfferingDesc}' ); resetHeaderPosition('KS-CourseOffering-View-ContextBar-PlaceHolder');" />
 
         <property name="breadcrumbOptions.homewardPathBreadcrumbs">
             <util:list id="KS-Enrollment-HomewardPathBreadcrumbs">
@@ -144,7 +144,7 @@
                                         <bean id="delete_co" parent="Uif-ActionLink" p:id="ActivityOfferingResultSection-deleteOneCoWithLink" p:methodToCall="deleteOneCoWithLink" p:actionLabel=" | Delete" p:disabled="@{#parent.readOnly}" p:render = "@{currentCourseOfferingWrapper.stateKey eq 'kuali.lui.state.draft' or currentCourseOfferingWrapper.stateKey eq 'kuali.lui.course.offering.state.draft' or currentCourseOfferingWrapper.stateKey eq 'kuali.lui.course.offering.state.planned'  or currentCourseOfferingWrapper.stateKey eq 'kuali.lui.activity.offering.state.offered' or currentCourseOfferingWrapper.stateKey eq 'kuali.lui.course.offering.state.offered'}" p:componentSecurity.performActionAuthz="true" p:actionEvent="deleteCO" />
                                         <bean parent="Uif-ActionLink" p:actionLabel=" | View All Registration Groups (@{rgResultList.size()})"
                                               p:actionScript = "showLightboxComponent('KS-CourseOfferingManagement-AllRegistrationGroupsForACourseOffering', '@{#ConfigProperties['application.url']}');"/>
-                                        <bean parent="Uif-ActionLink" p:actionLabel="| Manage Course Offering Requisites " p:disabled="@{!requisiteLink}" p:methodToCall="manageCORequisites" />
+                                        <bean parent="Uif-ActionLink" p:actionLabel="| Course Offering Requisites " p:methodToCall="manageCORequisites"/>
                                     </list>
                                 </property>
                             </bean>

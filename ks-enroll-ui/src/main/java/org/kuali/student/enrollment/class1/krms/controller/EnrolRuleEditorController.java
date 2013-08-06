@@ -17,6 +17,7 @@ package org.kuali.student.enrollment.class1.krms.controller;
 
 import org.kuali.rice.krad.uif.UifConstants;
 import org.kuali.rice.krad.uif.UifParameters;
+import org.kuali.rice.krad.util.GlobalVariables;
 import org.kuali.rice.krad.util.KRADConstants;
 import org.kuali.rice.krad.web.form.DocumentFormBase;
 import org.kuali.rice.krad.web.form.MaintenanceDocumentForm;
@@ -27,15 +28,14 @@ import org.kuali.rice.krms.util.AgendaUtilities;
 import org.kuali.rice.krms.util.KRMSConstants;
 import org.kuali.rice.krms.util.PropositionTreeUtil;
 import org.kuali.student.enrollment.class1.krms.dto.CORuleManagementWrapper;
-import org.kuali.student.enrollment.class1.krms.dto.CluSetInformation;
-import org.kuali.student.enrollment.class1.krms.dto.CluSetRangeInformation;
-import org.kuali.student.enrollment.class1.krms.dto.EnrolPropositionEditor;
-import org.kuali.student.enrollment.class1.krms.dto.EnrolRuleEditor;
-import org.kuali.student.enrollment.class1.krms.service.impl.EnrolRuleViewHelperServiceImpl;
+import org.kuali.student.enrollment.class1.krms.util.EnrolKRMSConstants;
+import org.kuali.student.lum.lu.ui.krms.dto.LUPropositionEditor;
+import org.kuali.student.lum.lu.ui.krms.dto.LURuleEditor;
+import org.kuali.student.lum.lu.ui.krms.service.impl.LURuleViewHelperServiceImpl;
 import org.kuali.student.common.uif.util.KSControllerHelper;
-import org.kuali.student.enrollment.class1.krms.util.CluSetRangeHelper;
-import org.kuali.student.enrollment.class1.krms.util.KSKRMSConstants;
-import org.kuali.student.enrollment.class1.krms.util.KSKRMSPermissionHelper;
+import org.kuali.student.lum.lu.ui.krms.dto.CluSetInformation;
+import org.kuali.student.lum.lu.ui.krms.dto.CluSetRangeInformation;
+import org.kuali.student.lum.lu.ui.krms.util.CluSetRangeHelper;
 import org.kuali.student.r2.lum.clu.dto.MembershipQueryInfo;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -61,8 +61,6 @@ public class EnrolRuleEditorController extends RuleEditorController {
                                         HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         setupMaintenance(form, request, KRADConstants.MAINTENANCE_EDIT_ACTION);
-
-        KSKRMSPermissionHelper.processActionPermissionForUser((MaintenanceDocumentForm) form);
 
         return getUIFModelAndView(form);
     }
@@ -110,19 +108,18 @@ public class EnrolRuleEditorController extends RuleEditorController {
      * @param request
      * @param response
      * @return
-     * @throws Exception
      */
     @Override
     @RequestMapping(params = "methodToCall=addRule")
     public ModelAndView addRule(@ModelAttribute("KualiForm") UifFormBase form, @SuppressWarnings("unused") BindingResult result,
-                                @SuppressWarnings("unused") HttpServletRequest request, @SuppressWarnings("unused") HttpServletResponse response) throws Exception {
+                                @SuppressWarnings("unused") HttpServletRequest request, @SuppressWarnings("unused") HttpServletResponse response) {
 
         //Clear the client state on new edit rule.
         form.getClientStateForSyncing().clear();
         MaintenanceDocumentForm document = (MaintenanceDocumentForm) form;
 
         RuleEditor ruleEditor = AgendaUtilities.getSelectedRuleEditor(document);
-        EnrolRuleEditor enrolRuleEditor = new EnrolRuleEditor(ruleEditor.getKey(), true, ruleEditor.getRuleTypeInfo());
+        LURuleEditor enrolRuleEditor = new LURuleEditor(ruleEditor.getKey(), true, ruleEditor.getRuleTypeInfo());
         enrolRuleEditor.setParent(ruleEditor.getParent());
         AgendaUtilities.getRuleWrapper(document).setRuleEditor(enrolRuleEditor);
 
@@ -142,22 +139,21 @@ public class EnrolRuleEditorController extends RuleEditorController {
      * @param request
      * @param response
      * @return
-     * @throws Exception
      */
     @RequestMapping(params="methodToCall=viewCourseRange")
     public ModelAndView viewCourseRange(@ModelAttribute("KualiForm") UifFormBase form, BindingResult result,
-                                             HttpServletRequest request, HttpServletResponse response) throws Exception {
+                                             HttpServletRequest request, HttpServletResponse response) {
 
         MaintenanceDocumentForm document = (MaintenanceDocumentForm) form;
         CORuleManagementWrapper ruleWrapper = (CORuleManagementWrapper) document.getDocument().getNewMaintainableObject().getDataObject();
-        EnrolPropositionEditor proposition = (EnrolPropositionEditor) PropositionTreeUtil.getProposition(ruleWrapper.getRuleEditor());
+        LUPropositionEditor proposition = (LUPropositionEditor) PropositionTreeUtil.getProposition(ruleWrapper.getRuleEditor());
 
         String index = form.getActionParameters().get("selectedIndex");
         if ((proposition.getCluSet() != null) && (proposition.getCluSet().getCluSetRanges()!=null)){
             ruleWrapper.setClusInRange(proposition.getCluSet().getCluSetRanges().get(Integer.valueOf(index)).getClusInRange());
         }
 
-        return showDialog(KSKRMSConstants.KSKRMS_DIALOG_COURSERANGE_LOOKUP, form, request, response);
+        return showDialog(EnrolKRMSConstants.KSKRMS_DIALOG_COURSERANGE_LOOKUP, form, request, response);
      }
 
     /**
@@ -168,14 +164,13 @@ public class EnrolRuleEditorController extends RuleEditorController {
      * @param request
      * @param response
      * @return
-     * @throws Exception
      */
     @RequestMapping(params = "methodToCall=addRange")
     public ModelAndView addRange(@ModelAttribute("KualiForm") UifFormBase form, BindingResult result,
-                                      HttpServletRequest request, HttpServletResponse response) throws Exception {
+                                      HttpServletRequest request, HttpServletResponse response) {
 
-        EnrolRuleEditor rule = (EnrolRuleEditor) getRuleEditor(form);
-        EnrolPropositionEditor prop = (EnrolPropositionEditor) PropositionTreeUtil.getProposition(rule);
+        LURuleEditor rule = (LURuleEditor) getRuleEditor(form);
+        LUPropositionEditor prop = (LUPropositionEditor) PropositionTreeUtil.getProposition(rule);
 
         if(prop.getCluSet()==null){
             prop.setCluSet(new CluSetInformation());
@@ -183,6 +178,10 @@ public class EnrolRuleEditorController extends RuleEditorController {
 
         //Build the membershipquery
         CluSetRangeHelper rangeHelper = prop.getCluSet().getRangeHelper();
+        if(!rangeHelper.validateCourseRange(prop)){
+            return getUIFModelAndView(form);
+        }
+
         MembershipQueryInfo membershipQueryInfo = rangeHelper.buildMembershipQuery();
 
         //Build the cluset range wrapper object
@@ -203,7 +202,7 @@ public class EnrolRuleEditorController extends RuleEditorController {
      * @param form
      * @return
      */
-    protected EnrolRuleViewHelperServiceImpl getViewHelper(UifFormBase form) {
-        return (EnrolRuleViewHelperServiceImpl) KSControllerHelper.getViewHelperService(form);
+    protected LURuleViewHelperServiceImpl getViewHelper(UifFormBase form) {
+        return (LURuleViewHelperServiceImpl) KSControllerHelper.getViewHelperService(form);
     }
 }

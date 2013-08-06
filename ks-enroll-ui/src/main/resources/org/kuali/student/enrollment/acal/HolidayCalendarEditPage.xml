@@ -94,7 +94,7 @@
                                           p:methodToCall="save"
                                           p:actionLabel="Save"  p:performClientSideValidation="true" />
                                     <bean parent="Uif-ActionLink" p:methodToCall="delete"
-                                          p:actionLabel="Delete Calendar Draft"
+                                          p:actionLabel="Delete"
                                           p:render="@{!newCalendar and !officialUI}"/>
                                     <bean parent="Uif-ActionLink" p:actionLabel="Cancel" p:actionScript="stepBrowserBack()"
                                             p:style="float: right  !important;"/>
@@ -184,7 +184,7 @@
                         <bean class="org.kuali.student.enrollment.class2.courseoffering.keyvalue.DummyKeyValue"/>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="startDate" p:label="Start Date" p:required="true">
+                <bean parent="Uif-InputField" p:propertyName="startDate" p:label="Start Date">
                     <property name="control">
                         <bean parent="Uif-KS-Default-DateControl" p:size="9" p:watermarkText="mm/dd/yyyy" />
                     </property>
@@ -194,31 +194,28 @@
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="startTime" p:label="Start Time">
                     <property name="control">
-                        <bean parent="Uif-TextControl" p:size="4" p:watermarkText="hh:mm">
-                            <property name="disabled" value="@{#lp.allDay}"/>
-                        </bean>
+                        <bean parent="Uif-TextControl" p:size="4" p:watermarkText="hh:mm"/>
                     </property>
                     <property name="validCharactersConstraint">
                         <bean parent="TimePatternConstraint" />
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="startTimeAmPm">
-                    <property name="required" value="@{!#lp.allDay and !#empty(#lp.startTime)}"/>
-                    <property name="refreshWhenChangedPropertyNames" value="#lp.startTime"/>
+                <bean parent="Uif-InputField" p:propertyName="startTimeAmPm" p:defaultValue="AM">
+                    <property name="cssClasses">
+                        <list merge="true">
+                            <value>acal_keydate_radiobutton</value>
+                        </list>
+                    </property>
                     <property name="control">
-                        <bean parent="Uif-DropdownControl" p:options-ref="hctime-options">
-                            <property name="disabled" value="@{#lp.allDay or #empty(#lp.startTime)}"/>
+                        <bean parent="Uif-VerticalRadioControl" p:options-ref="hctime-options"
+                              p:refreshWhenChangedPropertyNames="#lp.startTime" p:evaluateDisabledOnKeyUp="true">
+                            <property name="disabled" value="@{#empty(#lp.startTime)}"/>
                         </bean>
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="endDate" p:render="@{!#view.readOnly}"
-                      p:label="End Date">
-                    <property name="required" value="@{#lp.dateRange}"/>
-                    <property name="refreshWhenChangedPropertyNames" value="#lp.dateRange"/>
+                <bean parent="Uif-InputField" p:propertyName="endDate" p:render="@{!#view.readOnly}" p:label="End Date">
                     <property name="control">
-                        <bean parent="Uif-KS-Default-DateControl" p:size="9" p:watermarkText="mm/dd/yyyy">
-                            <property name="disabled" value="@{!#lp.dateRange}"/>
-                        </bean>
+                        <bean parent="Uif-KS-Default-DateControl" p:size="9" p:watermarkText="mm/dd/yyyy"/>
                     </property>
                     <property name="validCharactersConstraint">
                         <bean parent="BasicDatePatternConstraint" />
@@ -226,34 +223,26 @@
                 </bean>
                 <bean parent="Uif-InputField" p:propertyName="endTime" p:label="End Time">
                     <property name="control">
-                        <bean parent="Uif-TextControl" p:size="4" p:watermarkText="hh:mm">
-                            <property name="disabled" value="@{#lp.allDay}"/>
-                        </bean>
+                        <bean parent="Uif-TextControl" p:size="4" p:watermarkText="hh:mm"/>
                     </property>
                     <property name="validCharactersConstraint">
                         <bean parent="TimePatternConstraint" />
                     </property>
                 </bean>
-                <bean parent="Uif-InputField" p:propertyName="endTimeAmPm">
-                    <property name="required" value="@{!#lp.allDay and !#empty(#lp.endTime)}"/>
-                    <property name="refreshWhenChangedPropertyNames" value="#lp.endTime"/>
+                <bean parent="Uif-InputField" p:propertyName="endTimeAmPm" p:defaultValue="AM">
+                    <property name="cssClasses">
+                        <list merge="true">
+                            <value>acal_keydate_radiobutton</value>
+                        </list>
+                    </property>
                     <property name="control">
-                        <bean parent="Uif-DropdownControl" p:options-ref="hctime-options">
-                            <property name="disabled" value="@{#lp.allDay or #empty(#lp.endTime)}"/>
+                        <bean parent="Uif-VerticalRadioControl" p:options-ref="hctime-options"
+                              p:refreshWhenChangedPropertyNames="#lp.endTime" p:evaluateDisabledOnKeyUp="true">
+                            <property name="disabled" value="@{#empty(#lp.endTime)}"/>
                         </bean>
                     </property>
                 </bean>
-	            <bean parent="Uif-InputField" p:propertyName="allDay" p:label="All Day">
-					<property name="control">
-						<bean parent="Uif-CheckboxControl"/>
-					</property>
-				</bean>
-                <bean parent="Uif-InputField" p:propertyName="dateRange" p:label="Date Range">
-					<property name="control">
-						<bean parent="Uif-CheckboxControl"/>
-					</property>
-				</bean>
-				<bean parent="Uif-InputField" p:propertyName="instructional" p:label="Instructional">
+                <bean parent="Uif-InputField" p:propertyName="instructional" p:label="Instructional">
 					<property name="control">
 						<bean parent="Uif-CheckboxControl" />
 					</property>
@@ -272,9 +261,8 @@
     </util:list>
 
     <util:list id="hctime-options">
-        <bean parent="Uif-KeyLabelPair" p:key="" p:value=""/>
-        <bean parent="Uif-KeyLabelPair" p:key="AM" p:value="am"/>
-        <bean parent="Uif-KeyLabelPair" p:key="PM" p:value="pm"/>
+        <bean parent="Uif-KeyLabelPair" p:key="AM" p:value="[css='acal_keydate_radiobutton_label']am[/css]"/>
+        <bean parent="Uif-KeyLabelPair" p:key="PM" p:value="[css='acal_keydate_radiobutton_label']pm[/css]"/>
     </util:list>
 
 </beans>

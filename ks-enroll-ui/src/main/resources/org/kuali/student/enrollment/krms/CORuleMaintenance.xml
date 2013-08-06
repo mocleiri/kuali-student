@@ -33,7 +33,7 @@ limitations under the License.
     </bean>
 
     <bean id="EnrolRuleManagementWrapper" parent="RuleManagementWrapper-parentBean">
-        <property name="dataObjectClass" value="org.kuali.student.enrollment.class1.krms.dto.EnrolRuleManagementWrapper"/>
+        <property name="dataObjectClass" value="org.kuali.student.lum.lu.ui.krms.dto.LURuleManagementWrapper"/>
     </bean>
 
     <bean id="CORuleManagementWrapper" parent="EnrolRuleManagementWrapper">
@@ -41,7 +41,7 @@ limitations under the License.
     </bean>
 
     <bean id="EnrolRuleEditor" parent="RuleEditor-parentBean">
-        <property name="dataObjectClass" value="org.kuali.student.enrollment.class1.krms.dto.EnrolRuleEditor"/>
+        <property name="dataObjectClass" value="org.kuali.student.lum.lu.ui.krms.dto.LURuleEditor"/>
     </bean>
 
     <bean id="KSCO-AgendaManagement-View" parent="KS-CourseOffering-MaintenanceViewWithTermContextBarPlaceholder">
@@ -59,7 +59,7 @@ limitations under the License.
         <property name="dialogs">
             <list>
                 <bean id="compareCluAndCoRuleLightBox" parent="KRMS-CompareRule">
-                    <property name="headerText" value="Compare CLU and CO Rules"/>
+                    <property name="headerText" value="Compare Catalog and Course Offering Rules"/>
                 </bean>
                 <bean id="courseRangeLookup" parent="KRMS-CourseRangeResult-Lookup"/>
                 <bean id="warningMessagedYesNo" parent="KRMS-WarningMessagedYesNo"/>
@@ -119,14 +119,17 @@ limitations under the License.
                 </bean>
             </list>
         </property>
+
+        <property name="authorizer">
+            <bean class="org.kuali.student.enrollment.class1.krms.view.KSKRMSViewAuthorizer"/>
+        </property>
+
         <property name="singlePageView" value="false"/>
         <property name="entryPageId" value="KSCO-AgendaMaintenance-Page"/>
         <property name="additionalScriptFiles">
             <list>
-                <value>krms/scripts/agendaTree.js</value>
-                <value>ks-enroll/scripts/ruleStudentTree.js</value>
+                <value>ks-enroll/scripts/ruleMaintenance.js</value>
                 <value>krms/scripts/requiredAlerts.js</value>
-                <value>ks-enroll/scripts/disableStudentButtons.js</value>
                 <value>krms/scripts/countdownInputs.js</value>
             </list>
         </property>
@@ -206,7 +209,7 @@ limitations under the License.
         <property name="items">
             <list>
                 <bean parent="KSCO-RuleView-Links" p:render="@{#line.dummy and #line.parent != null}"/>
-                <bean parent="KS-Uif-ActionLink" p:actionLabel="Add Rule" p:methodToCall="addRule" p:disabled="@{!#line.permission.addEditRequisite}"
+                <bean parent="KS-Uif-ActionLink" p:actionLabel="Add Rule" p:methodToCall="addRule" p:componentSecurity.performActionAuthz="true" p:actionEvent="addEditRequisite"
                       p:render="@{#actionFlags[#Constants.KUALI_ACTION_CAN_ROUTE]}"/>
             </list>
         </property>
@@ -215,13 +218,13 @@ limitations under the License.
     <bean id="KSCO-RuleEdit-Links" parent="KRMS-RuleEdit-Links">
         <property name="items">
             <list>
-                <bean parent="KS-Uif-ActionLink" p:actionLabel="Compare to Canonical" p:methodToCall="compareRules" p:disabled="@{!#line.permission.compare}">
+                <bean parent="KS-Uif-ActionLink" p:actionLabel="Compare to Catalog" p:methodToCall="compareRules" p:componentSecurity.performActionAuthz="true" p:actionEvent="compare">
                     <property name="toolTip">
-                        <bean parent="Uif-Tooltip" p:tooltipContent="Compare CLU and CO Rules"/>
+                        <bean parent="Uif-Tooltip" p:tooltipContent="Compare Catalog and Course Offering Rules"/>
                     </property>
                 </bean>
-                <bean parent="KS-Uif-ActionLink" p:actionLabel="Edit Rule" p:methodToCall="goToRuleView" p:disabled="@{!#line.permission.addEditRequisite}"/>
-                <bean parent="KS-Uif-ActionLink" p:actionLabel="Delete Rule" p:methodToCall="deleteRule" p:disabled="@{!#line.permission.deleteRequisite}"/>
+                <bean parent="KS-Uif-ActionLink" p:actionLabel="Edit Rule" p:methodToCall="goToRuleView" p:componentSecurity.performActionAuthz="true" p:actionEvent="addEditRequisite"/>
+                <bean parent="KS-Uif-ActionLink" p:actionLabel="Delete Rule" p:methodToCall="deleteRule" p:componentSecurity.performActionAuthz="true" p:actionEvent="deleteRequisite"/>
             </list>
         </property>
     </bean>
@@ -229,9 +232,9 @@ limitations under the License.
     <bean id="KSCO-RuleView-Links" parent="KRMS-RuleView-Links">
         <property name="items">
             <list>
-                <bean parent="KS-Uif-ActionLink" p:actionLabel="Compare to Canonical" p:methodToCall="compareRules" p:disabled="@{!#line.permission.compare}">
+                <bean parent="KS-Uif-ActionLink" p:actionLabel="Compare to Catalog" p:methodToCall="compareRules" p:componentSecurity.performActionAuthz="true" p:actionEvent="compare">
                     <property name="toolTip">
-                        <bean parent="Uif-Tooltip" p:tooltipContent="Compare CLU and CO Rules"/>
+                        <bean parent="Uif-Tooltip" p:tooltipContent="Compare Catalog and Course Offering Rules"/>
                     </property>
                 </bean>
             </list>
@@ -277,7 +280,7 @@ limitations under the License.
                 </property>
             </bean>
         </property>
-        <property name="collectionObjectClass" value="org.kuali.student.enrollment.class1.krms.dto.CluGroup" />
+        <property name="collectionObjectClass" value="org.kuali.student.lum.lu.ui.krms.dto.CluGroup" />
         <property name="items">
             <list>
                 <bean parent="Uif-MessageField" p:messageText="@{#line.title}" p:render="@{#line.showTitle}"/>
@@ -324,7 +327,7 @@ limitations under the License.
     </bean>
 
     <bean id="KSCO-ListItems-SubGroup" parent="Uif-TableCollectionGroup" p:renderAddLine="false">
-        <property name="collectionObjectClass" value="org.kuali.student.enrollment.class1.krms.dto.CluCore" />
+        <property name="collectionObjectClass" value="org.kuali.student.lum.lu.ui.krms.dto.CluCore" />
         <property name="propertyName" value="clus" />
         <property name="collectionLookup.quickfinderAction.render" value="false" />
         <property name="layoutManager">
@@ -414,9 +417,9 @@ limitations under the License.
     <bean id="KSCO-RulePreview-Links" parent="KRMS-RulePreview-Links">
         <property name="items">
             <list>
-                <bean parent="KS-Uif-ActionLink" p:actionLabel="Compare to Canonical" p:methodToCall="compareRules" p:disabled="@{!#dp.ruleEditor.permission.compare}">
+                <bean parent="KS-Uif-ActionLink" p:actionLabel="Compare to Catalog" p:methodToCall="compareRules" p:componentSecurity.performActionAuthz="true" p:actionEvent="compare">
                     <property name="toolTip">
-                        <bean parent="Uif-Tooltip" p:tooltipContent="Compare CLU and CO Rules"/>
+                        <bean parent="Uif-Tooltip" p:tooltipContent="Compare Catalog and Course Offering Rules"/>
                     </property>
                 </bean>
             </list>
@@ -471,8 +474,8 @@ limitations under the License.
                 <bean parent="KS-HorizontalBoxGroup-WithRPadding">
                     <property name="items">
                         <list>
-                            <bean id="KSCO-RuleEditorView-AddButton" parent="KRMS-RuleEditorView-AddButton"/>
-                            <bean parent="KRMS-RuleEditorView-EditButton"/>
+                            <bean parent="KRMS-RuleEditorView-AddButton" p:componentSecurity.performActionAuthz="true" p:actionEvent="addEditGroupRule"/>
+                            <bean parent="KRMS-RuleEditorView-EditButton" p:componentSecurity.performActionAuthz="true" p:actionEvent="addEditGroupRule"/>
                         </list>
                     </property>
                 </bean>
@@ -480,9 +483,9 @@ limitations under the License.
                 <bean parent="KS-HorizontalBoxGroup-WithRPadding">
                     <property name="items">
                         <list>
-                            <bean parent="KRMS-RuleEditorView-GroupButton"/>
-                            <bean parent="KRMS-RuleEditorView-LeftButton"/>
-                            <bean parent="KRMS-RuleEditorView-RightButton"/>
+                            <bean parent="KRMS-RuleEditorView-GroupButton" p:componentSecurity.performActionAuthz="true" p:actionEvent="addEditGroupRule"/>
+                            <bean parent="KRMS-RuleEditorView-LeftButton" p:componentSecurity.performActionAuthz="true" p:actionEvent="moveRule"/>
+                            <bean parent="KRMS-RuleEditorView-RightButton" p:componentSecurity.performActionAuthz="true" p:actionEvent="moveRule"/>
                         </list>
                     </property>
                 </bean>
@@ -490,8 +493,8 @@ limitations under the License.
                 <bean parent="KS-HorizontalBoxGroup-WithRPadding">
                     <property name="items">
                         <list>
-                            <bean parent="KRMS-RuleEditorView-UpButton"/>
-                            <bean parent="KRMS-RuleEditorView-DownButton"/>
+                            <bean parent="KRMS-RuleEditorView-UpButton" p:componentSecurity.performActionAuthz="true" p:actionEvent="moveRule"/>
+                            <bean parent="KRMS-RuleEditorView-DownButton" p:componentSecurity.performActionAuthz="true" p:actionEvent="moveRule"/>
                         </list>
                     </property>
                 </bean>
@@ -499,10 +502,10 @@ limitations under the License.
                 <bean parent="KS-HorizontalBoxGroup-WithRPadding">
                     <property name="items">
                         <list>
-                            <bean parent="KRMS-RuleEditorView-CopyButton"/>
-                            <bean parent="KRMS-RuleEditorView-CutButton"/>
-                            <bean parent="KRMS-RuleEditorView-PasteButton"/>
-                            <bean parent="KRMS-RuleEditorView-DeleteButton"/>
+                            <bean parent="KRMS-RuleEditorView-CopyButton" p:componentSecurity.performActionAuthz="true" p:actionEvent="copyCutRule"/>
+                            <bean parent="KRMS-RuleEditorView-CutButton" p:componentSecurity.performActionAuthz="true" p:actionEvent="copyCutRule"/>
+                            <bean parent="KRMS-RuleEditorView-PasteButton" p:componentSecurity.performActionAuthz="true" p:actionEvent="copyCutRule"/>
+                            <bean parent="KRMS-RuleEditorView-DeleteButton" p:componentSecurity.performActionAuthz="true" p:actionEvent="deleteRule"/>
                         </list>
                     </property>
                 </bean>
@@ -527,7 +530,7 @@ limitations under the License.
         </property>
     </bean>
 
-    <bean id="KSCO-EditWithLogic-TreeGroup" parent="KRMS-EditWithLogic-TreeGroup">
+    <bean id="KSCO-EditWithLogic-TreeGroup" parent="KRMS-EditWithLogic-TreeGroup" p:componentSecurity.editAuthz="true">
         <property name="items">
             <list>
                 <ref bean="KRMS-LogicArea-InputField"/>
@@ -540,7 +543,7 @@ limitations under the License.
     <bean id="KSCO-LogicPreview-Tree" parent="KRMS-LogicPreview-Tree">
         <property name="items">
             <list>
-                <bean parent="KSCO-PreviewTree-Section"/>
+                <ref bean="KSCO-PreviewTree-Section"/>
             </list>
         </property>
     </bean>

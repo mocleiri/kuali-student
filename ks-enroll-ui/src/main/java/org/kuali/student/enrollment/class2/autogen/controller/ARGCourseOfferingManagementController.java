@@ -16,8 +16,11 @@
  */
 package org.kuali.student.enrollment.class2.autogen.controller;
 
+import org.apache.log4j.Logger;
+
 import org.apache.commons.lang.BooleanUtils;
 import org.apache.commons.lang.StringUtils;
+import org.kuali.rice.core.api.util.RiceKeyConstants;
 import org.kuali.rice.krad.uif.UifConstants;
 import org.kuali.rice.krad.uif.UifParameters;
 import org.kuali.rice.krad.util.GlobalVariables;
@@ -31,6 +34,7 @@ import org.kuali.student.enrollment.class2.autogen.form.ARGCourseOfferingManagem
 import org.kuali.student.enrollment.class2.autogen.util.ARGToolbarUtil;
 import org.kuali.student.enrollment.class2.courseoffering.dto.ActivityOfferingClusterWrapper;
 import org.kuali.student.enrollment.class2.courseoffering.dto.ActivityOfferingWrapper;
+import org.kuali.student.enrollment.class2.courseoffering.dto.CourseOfferingCreateWrapper;
 import org.kuali.student.enrollment.class2.courseoffering.dto.CourseOfferingListSectionWrapper;
 import org.kuali.student.enrollment.class2.courseoffering.dto.CourseOfferingWrapper;
 import org.kuali.student.enrollment.class2.courseoffering.dto.RegistrationGroupWrapper;
@@ -39,6 +43,7 @@ import org.kuali.student.enrollment.class2.courseoffering.util.RegistrationGroup
 import org.kuali.student.enrollment.courseoffering.dto.ActivityOfferingClusterInfo;
 import org.kuali.student.enrollment.courseoffering.dto.CourseOfferingInfo;
 import org.kuali.student.r2.common.util.ContextUtils;
+import org.kuali.student.r2.core.class1.search.CourseOfferingManagementSearchImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -59,6 +64,8 @@ import java.util.Properties;
 @Controller
 @RequestMapping(value = "/courseOfferingManagement")
 public class ARGCourseOfferingManagementController extends UifControllerBase {
+
+    private static final Logger LOG = Logger.getLogger(ARGCourseOfferingManagementController.class);
 
     @Override
     protected UifFormBase createInitialForm(HttpServletRequest request) {
@@ -155,6 +162,9 @@ public class ARGCourseOfferingManagementController extends UifControllerBase {
 
         ARGUtil.getViewHelperService(form).loadCourseOfferingsByTermAndCourseCode(form.getTermInfo().getId(), form.getInputCode(), form);
 
+        //turn on authz
+        form.setEditAuthz(ARGUtil.checkEditViewAuthz(form));
+
         if (!form.getCourseOfferingResultList().isEmpty()) {
             if (form.getCourseOfferingResultList().size() > 1) {
                 form.setSubjectCode(form.getCourseOfferingResultList().get(0).getSubjectArea());
@@ -168,9 +178,6 @@ public class ARGCourseOfferingManagementController extends UifControllerBase {
                 return getUIFModelAndView(form, CourseOfferingConstants.MANAGE_THE_CO_PAGE);
             }
         }
-
-        //turn on authz
-        form.setEditAuthz(ARGUtil.checkEditViewAuthz(form));
 
         if (GlobalVariables.getMessageMap().getErrorMessages().isEmpty()) {
             return getUIFModelAndView(form, CourseOfferingConstants.MANAGE_ARG_CO_PAGE);
@@ -276,8 +283,38 @@ public class ARGCourseOfferingManagementController extends UifControllerBase {
 
     @RequestMapping(params = "methodToCall=copyCourseOffering")
     public ModelAndView copyCourseOffering(@ModelAttribute("KualiForm") ARGCourseOfferingManagementForm theForm) throws Exception {
-        ARGCourseOfferingHandler.copyCourseOffering(theForm);
-        return getUIFModelAndView(theForm, CourseOfferingConstants.COPY_CO_PAGE);
+//        ARGCourseOfferingHandler.copyCourseOffering(theForm);
+//        return getUIFModelAndView(theForm, CourseOfferingConstants.COPY_CO_PAGE);
+
+        Object selectedObject = ARGUtil.getSelectedObject(theForm, "Copy"); // Receives edit wrapper, "Copy" for error message.
+        if (selectedObject instanceof CourseOfferingListSectionWrapper) {
+
+            // Get the selected CourseOfferingEditWrapper.
+            CourseOfferingListSectionWrapper coWrapper = (CourseOfferingListSectionWrapper) selectedObject;
+            CourseOfferingInfo courseOfferingInfo = ARGUtil.getCourseOfferingService().getCourseOffering(coWrapper.getCourseOfferingId(), ContextUtils.createDefaultContextInfo());
+
+            int selectedLineIndex = -1;
+            String selectedLine = theForm.getActionParamaterValue(UifParameters.SELECTED_LINE_INDEX);
+            if (StringUtils.isNotBlank(selectedLine)) {
+                selectedLineIndex = Integer.parseInt(selectedLine);
+            }
+            String courseOfferingCode = theForm.getCourseOfferingResultList().get(selectedLineIndex).getCourseOfferingCode();
+
+            Properties urlParameters = new Properties();
+            urlParameters.put(KRADConstants.DISPATCH_REQUEST_PARAMETER, "start");
+//            urlParameters.put(KRADConstants.DISPATCH_REQUEST_PARAMETER, "continueFromCreate");
+            urlParameters.put(KRADConstants.DATA_OBJECT_CLASS_ATTRIBUTE, CourseOfferingCreateWrapper.class.getName());
+            urlParameters.put("pageId", "courseOfferingCopyPage");
+            urlParameters.put("targetTermCode",  theForm.getTermCode());
+            urlParameters.put("catalogCourseCode", courseOfferingCode);
+            urlParameters.put("courseOfferingId", courseOfferingInfo.getId());
+//            urlParameters.put("createFromCatalog", "false");
+            return super.performRedirect(theForm, "courseOfferingCreate", urlParameters);
+        }
+        else {
+            //must be an error
+            return getUIFModelAndView(theForm, CourseOfferingConstants.MANAGE_ARG_CO_PAGE);
+        }
     }
 
 
@@ -317,6 +354,15 @@ public class ARGCourseOfferingManagementController extends UifControllerBase {
      */
     @RequestMapping(params = "methodToCall=cancelDeleteAOs")
     public ModelAndView cancelDeleteAOs(@ModelAttribute("KualiForm") ARGCourseOfferingManagementForm theForm) throws Exception {
+        ARGUtil.reloadTheCourseOfferingWithAOs_RGs_Clusters(theForm);
+        return getUIFModelAndView(theForm, CourseOfferingConstants.MANAGE_THE_CO_PAGE);
+    }
+
+    /*
+     * Method used to refresh Manage CO page (e.g. after edit AO)
+     */
+    @RequestMapping(params = "methodToCall=reloadManageCO")
+    public ModelAndView reloadManageCO(@ModelAttribute("KualiForm") ARGCourseOfferingManagementForm theForm) throws Exception {
         ARGUtil.reloadTheCourseOfferingWithAOs_RGs_Clusters(theForm);
         return getUIFModelAndView(theForm, CourseOfferingConstants.MANAGE_THE_CO_PAGE);
     }
@@ -684,42 +730,66 @@ public class ARGCourseOfferingManagementController extends UifControllerBase {
     }
 
     @RequestMapping(params = "methodToCall=renameAClusterThroughDialog")
-    public ModelAndView renameAClusterThroughDialog(@ModelAttribute("KualiForm") ARGCourseOfferingManagementForm theForm, @SuppressWarnings("unused") BindingResult result,
-                                                    @SuppressWarnings("unused") HttpServletRequest request, @SuppressWarnings("unused") HttpServletResponse response) throws Exception {
+    public ModelAndView renameAClusterThroughDialog(@ModelAttribute("KualiForm") ARGCourseOfferingManagementForm theForm) throws Exception {
 
-        //Test for required entry
-        if (theForm.getPrivateClusterNameForRenamePopover() == null || theForm.getPrivateClusterNameForRenamePopover().isEmpty()) {
+        /* Indicate that the search used to redraw the page after this operation completes should use an exact
+         * match of the course code rather than the usual "like" criteria. Otherwise, if the course code matches multiple
+         * items (e.g. CHEM100, CHEM100A, CHEM100B) then the Manage multiple COs page will be displayed rather than Manage
+         * individual CO page. */
+        theForm.getViewRequestParameters().put(CourseOfferingManagementSearchImpl.SearchParameters.IS_EXACT_MATCH_CO_CODE_SEARCH, Boolean.TRUE.toString());
+
+        //  Test for required private name.
+        String requestedPrivateName = theForm.getPrivateClusterNameForRenamePopover();
+        if (StringUtils.isBlank(requestedPrivateName)) {
             GlobalVariables.getMessageMap().putError("privateClusterNameForRename", RegistrationGroupConstants.MSG_ERROR_CLUSTER_PRIVATE_NAME_IS_NULL);
-
             return getUIFModelAndView(theForm);
         }
 
-        if(ARGUtil._isClusterUniqueWithinCO(theForm, theForm.getCurrentCourseOfferingWrapper().getCourseOfferingId(), theForm.getPrivateClusterNameForRenamePopover())){
-            ARGActivityOfferingClusterHandler.renameAClusterThroughDialog(theForm);
-            ActivityOfferingClusterWrapper selectedClusterWrapper;
+        //  Find the AOClusterWrapper that was changed and add it to the form.
+        ActivityOfferingClusterWrapper selectedClusterWrapper = (ActivityOfferingClusterWrapper) ARGUtil.getSelectedObject(theForm, "Rename Cluster");
+        theForm.setSelectedCluster(selectedClusterWrapper);
 
-            selectedClusterWrapper = (ActivityOfferingClusterWrapper)ARGUtil.getSelectedObject(theForm, "Rename Cluster");
-            theForm.setSelectedCluster(selectedClusterWrapper);
-                selectedClusterWrapper = theForm.getSelectedCluster();
-                if (theForm.getSelectedCluster().getAoCluster().getPrivateName().equalsIgnoreCase(theForm.getPrivateClusterNameForRenamePopover()) || ARGUtil._isClusterUniqueWithinCO(theForm, theForm.getCurrentCourseOfferingWrapper().getCourseOfferingId(), theForm.getPrivateClusterNameForRenamePopover())){
-                    ActivityOfferingClusterInfo aoCluster = selectedClusterWrapper.getAoCluster();
+        String coId = theForm.getCurrentCourseOfferingWrapper().getCourseOfferingId();
+        String currentPrivateName =  theForm.getSelectedCluster().getAoCluster().getPrivateName();
+        String currentName = theForm.getSelectedCluster().getAoCluster().getName();
+        String requestedName = theForm.getPublishedClusterNameForRenamePopover();
 
-                    aoCluster.setPrivateName(theForm.getPrivateClusterNameForRenamePopover());
-                    aoCluster.setName(theForm.getPublishedClusterNameForRenamePopover());
-                    aoCluster = ARGUtil.getCourseOfferingService().updateActivityOfferingCluster(theForm.getFormatOfferingIdForViewRG(),
-                            aoCluster.getId(), aoCluster, ContextUtils.createDefaultContextInfo());
-                    selectedClusterWrapper.setAoCluster(aoCluster);
-                    selectedClusterWrapper.setClusterNameForDisplay("Forget to set cluster?");
-            }
-            theForm.setSelectedCluster(null);
-
-            theForm.setPrivateClusterNameForRenamePopover("");
-            theForm.setPublishedClusterNameForRenamePopover("");
-
-
-        }  else {
+        boolean hasChange = false;
+        //  If the private name has changed then check for uniqueness.
+        if (! StringUtils.equals(currentPrivateName, requestedPrivateName)) {
+            if ( ! ARGUtil._isClusterUniqueWithinCO(theForm, coId, requestedPrivateName)) {
                 GlobalVariables.getMessageMap().putError("privateClusterNameForRename", RegistrationGroupConstants.MSG_ERROR_INVALID_CLUSTER_NAME);
+                return show(theForm);
+            }
+            hasChange = true;
         }
+
+        //  Check for name change
+        if (! hasChange && ! StringUtils.equals(currentName, requestedName)) {
+            hasChange = true;
+        }
+
+        //  If there is a change then save it.
+        if (hasChange) {
+            ActivityOfferingClusterInfo aoCluster = selectedClusterWrapper.getAoCluster();
+            aoCluster.setPrivateName(requestedPrivateName);
+            aoCluster.setName(requestedName);
+            try {
+                aoCluster = ARGUtil.getCourseOfferingService().updateActivityOfferingCluster(aoCluster.getFormatOfferingId(),
+                    aoCluster.getId(), aoCluster, ContextUtils.createDefaultContextInfo());
+                KSUifUtils.addGrowlMessageIcon(GrowlIcon.SUCCESS, CourseOfferingConstants.CLUSTER_RENAME_SUCCESS);
+                selectedClusterWrapper.setAoCluster(aoCluster);
+                selectedClusterWrapper.setClusterNameForDisplay("Forget to set cluster?");
+            } catch(Exception e) {
+                LOG.error("AO Cluster save failed.", e);
+                GlobalVariables.getMessageMap().putError("KS-CourseOfferingManagement-ViewAOClustersSection", RiceKeyConstants.ERROR_CUSTOM, "Save failed: " + e.getLocalizedMessage());
+            }
+        } //  else ... If no changes were made just silently continue.
+
+        theForm.setSelectedCluster(null);
+        theForm.setPrivateClusterNameForRenamePopover("");
+        theForm.setPublishedClusterNameForRenamePopover("");
+
         return show(theForm);
     }
 

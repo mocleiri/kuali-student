@@ -23,10 +23,9 @@ import java.util.List;
 /**
  * @author Kuali Student Team
  */
-public class AORuleManagementWrapper extends EnrolRuleManagementWrapper {
+public class AORuleManagementWrapper extends CORuleManagementWrapper {
 
     private List<AgendaEditor> cluAgendas = new ArrayList<AgendaEditor>();
-
 
     public List<AgendaEditor> getCluAgendas() {
         return cluAgendas;
@@ -35,6 +34,5 @@ public class AORuleManagementWrapper extends EnrolRuleManagementWrapper {
     public void setCluAgendas(List<AgendaEditor> cluAgendas) {
         this.cluAgendas = cluAgendas;
     }
-
 
 }
