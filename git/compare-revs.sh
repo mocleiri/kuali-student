@@ -5,9 +5,9 @@
 # Note on windows needs to be run within the git mingw window vs the standard
 # mingw window.
 # 
-# this was created to support the pdt api to services api sync merge.
-# its possible it can be combined with the new show-branch.sh script.
-#
+# BY_JIRA emits in the confluence wiki table markup, suitable for pasting 
+# into a jira.
+
 
 usage() {
 	
@@ -48,7 +48,7 @@ then
 
 	COMMAND="git log --first-parent "
 
-	if test -n $4
+	if test "$4" == "gitk"
 	then
 		COMMAND="gitk --first-parent "
 	fi
@@ -66,16 +66,30 @@ then
 	CHANGES_IN=$2
 	SINCE=$3
 	SHOW_HEADERS=$4
-	
+
+	FROM_STDIN=$5
 
 	checkParam $CHANGES_IN
 	checkParam $SINCE
 
-	JIRAS=$(git log --first-parent $SINCE..$CHANGES_IN --pretty --format="%H?%an?%s?%cD") 
+
+	JIRAS=""
+
+	if test -z $FROM_STDIN
+	then
+		JIRAS=$(git log --first-parent $SINCE..$CHANGES_IN --pretty --format="%H?%an?%s?%cD") 
+
+	else
+		# Read the sha1's from stdin
+		JIRAS=$(while read SHA
+		do
+			git log -n 1 $SHA --pretty --format="%H?%an?%s?%cD"	
+		done)
+	fi
 
 	if test ${#SHOW_HEADERS} -gt 0
 	then
-		echo "#SHA1|JIRA|DATE|AUTHOR|REV"
+		echo "||SHA1||JIRA||DATE||AUTHOR||REV||"
 	fi
 
 	printf "%s" "$JIRAS" | while IFS= read -r LINE
@@ -83,12 +97,13 @@ then
 
 		SHA1=$(echo "$LINE" | cut -d'?' -f 1)
 		AUTHOR=$(echo "$LINE" | cut -d'?' -f 2)
-		JIRA=$(echo "$LINE" | cut -d'?' -f 3)
+		JIRA=$(echo "$LINE" | cut -d'?' -f 3 | cut -d' ' -f 1)
 		CDATE=$(echo "$LINE" | cut -d'?' -f 4)
 
 		REV=$(computeRev $SHA1)
 
-		echo "$SHA1|$JIRA|$CDATE|$AUTHOR|$REV"
+		echo "|$SHA1|https://jira.kuali.org/browse/$JIRA|$CDATE|$AUTHOR|https://fisheye.kuali.org/changelog/ks?cs=$REV|"
+		
 	done
 	
 
