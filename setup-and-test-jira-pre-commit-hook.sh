@@ -199,6 +199,9 @@ assert () {
 
 SHOW_LOG=$1
 
+# clear the debug logging for each test run
+rm -rf /tmp/debug.log
+
 rm -rf $TEST_REPO
 
 rm -rf $TEST_CM_WC

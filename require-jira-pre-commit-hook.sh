@@ -19,6 +19,7 @@
 
 # source the configuration variables
 SVNLOOK_CMD=/usr/bin/svnlook
+SVN_CMD=/usr/bin/svn
 WGET_CMD=/usr/bin/wget
 
 # do not remove this but toggle 0 (off), 1 (on)
@@ -107,51 +108,85 @@ parse_commit_message_line () {
 # return 0 where nothing is found to be protected.
 is_path_protected () {
 
-    # do not include a leading /
-    ROOT_PATH=$1
-
-    MODULES=$2
-
     PP_FILE=/tmp/protected-$RANDOM.dat
 
     # clean up in case the file already exists
     rm -rf $PP_FILE
+   
+    # instead of hard coding the modules that should be protected we read from
+    # the current repository structure we want to protect:
+    # enrollment/$module
+    # contrib/$module (excluding CM)
+    # contrib/CM/$module
+ 
+    # read existing enrollment modules
+    ENROLLMENT_PATH="enrollment"
 
-    BASE_PATH=""
+    echo "$ENROLLMENT_PATH" >> $PP_FILE
+    echo "$ENROLLMENT_PATH/" >> $PP_FILE
 
-    # for contrib/CM this will protect contrib and contrib/CM
-    for path in $(echo "$ROOT_PATH" | tr '/' '\n')
-    do
-        if test ${#BASE_PATH} -gt 0
-        then
-            BASE_PATH=$BASE_PATH/$path
-        else
-
-            BASE_PATH=$path
-        fi 
-
-        echo "$BASE_PATH" >> $PP_FILE
-        echo "$BASE_PATH/" >> $PP_FILE
-    done
-
-    for module in $(echo "$MODULES" | tr ' ' '\n')
-
+    $SVN_CMD ls file://$REPOS/$ENROLLMENT_PATH | grep "/" | sed 's/\/$//' | while read module 
     do
         # the value used in the comparison may have a trailing /
         # so we just provision both varients into the test file to be sure
         # we will match it properly.
-        echo "$ROOT_PATH/$module" >> $PP_FILE
-        echo "$ROOT_PATH/$module/" >> $PP_FILE
-        echo "$ROOT_PATH/$module/tags" >> $PP_FILE
-        echo "$ROOT_PATH/$module/tags/" >> $PP_FILE
-        echo "$ROOT_PATH/$module/branches" >> $PP_FILE
-        echo "$ROOT_PATH/$module/branches/" >> $PP_FILE
-        echo "$ROOT_PATH/$module/trunk" >> $PP_FILE
-        echo "$ROOT_PATH/$module/trunk/" >> $PP_FILE
+        echo "$ENROLLMENT_PATH/$module" >> $PP_FILE
+        echo "$ENROLLMENT_PATH/$module/" >> $PP_FILE
+        echo "$ENROLLMENT_PATH/$module/tags" >> $PP_FILE
+        echo "$ENROLLMENT_PATH/$module/tags/" >> $PP_FILE
+        echo "$ENROLLMENT_PATH/$module/branches" >> $PP_FILE
+        echo "$ENROLLMENT_PATH/$module/branches/" >> $PP_FILE
+        echo "$ENROLLMENT_PATH/$module/trunk" >> $PP_FILE
+        echo "$ENROLLMENT_PATH/$module/trunk/" >> $PP_FILE
 
     done
-   
-    # look at the changes contained in the inbound commit
+
+    # read existing contrib (not CM) modules
+    CONTRIB_PATH="contrib"
+
+    echo "$CONTRIB_PATH" >> $PP_FILE
+    echo "$CONTRIB_PATH/" >> $PP_FILE
+
+    # exclude CM for now
+    $SVN_CMD ls file://$REPOS/$CONTRIB_PATH | grep "/" | grep -v "CM" | sed 's/\/$//' | while read module 
+    do
+        # the value used in the comparison may have a trailing /
+        # so we just provision both varients into the test file to be sure
+        # we will match it properly.
+        echo "$CONTRIB_PATH/$module" >> $PP_FILE
+        echo "$CONTRIB_PATH/$module/" >> $PP_FILE
+        echo "$CONTRIB_PATH/$module/tags" >> $PP_FILE
+        echo "$CONTRIB_PATH/$module/tags/" >> $PP_FILE
+        echo "$CONTRIB_PATH/$module/branches" >> $PP_FILE
+        echo "$CONTRIB_PATH/$module/branches/" >> $PP_FILE
+        echo "$CONTRIB_PATH/$module/trunk" >> $PP_FILE
+        echo "$CONTRIB_PATH/$module/trunk/" >> $PP_FILE
+
+    done
+
+    # read existing contrib/CM modules
+    CONTRIB_CM_PATH="contrib/CM"
+
+    echo "$CONTRIB_CM_PATH" >> $PP_FILE
+    echo "$CONTRIB_CM_PATH/" >> $PP_FILE
+
+    # exclude CM for now
+    $SVN_CMD ls file://$REPOS/$CONTRIB_CM_PATH | grep "/" | sed 's/\/$//' | while read module 
+    do
+        # the value used in the comparison may have a trailing /
+        # so we just provision both varients into the test file to be sure
+        # we will match it properly.
+        echo "$CONTRIB_CM_PATH/$module" >> $PP_FILE
+        echo "$CONTRIB_CM_PATH/$module/" >> $PP_FILE
+        echo "$CONTRIB_CM_PATH/$module/tags" >> $PP_FILE
+        echo "$CONTRIB_CM_PATH/$module/tags/" >> $PP_FILE
+        echo "$CONTRIB_CM_PATH/$module/branches" >> $PP_FILE
+        echo "$CONTRIB_CM_PATH/$module/branches/" >> $PP_FILE
+        echo "$CONTRIB_CM_PATH/$module/trunk" >> $PP_FILE
+        echo "$CONTRIB_CM_PATH/$module/trunk/" >> $PP_FILE
+
+    done
+
     $SVNLOOK_CMD changed $SVNLOOK_OPTS | while read LINE
     do
 
@@ -192,11 +227,6 @@ is_path_protected () {
 
 }
 
-if test 1 -eq $ENABLE_DEBUG_MESSAGES
-then
-    rm -rf $DEBUG_LOGFILE
-fi
-
 REPOS="$1"
 TXN="$2"
 
@@ -216,7 +246,18 @@ then
         SVNLOOK_OPTS="$REPOS"
 fi
 
-debug "REPOS=$REPOS" 
+debug "STARTING with REPOS=$REPOS" 
+
+# check to make sure no protected directory is being altered.
+IS_PROTECTED=$(is_path_protected)
+
+debug "IS_PROTECTED=$IS_PROTECTED"
+
+if test "1" == "$IS_PROTECTED"
+then
+    echo "You attempted to modify a protected location.  See https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations" >&2
+    exit 1
+fi
 
 # return 0 if any of the paths changed in the commit start with contrib/CM.
 $($SVNLOOK_CMD dirs-changed $SVNLOOK_OPTS | egrep "^contrib/CM" >/dev/null)
@@ -227,21 +268,7 @@ debug "IS_CM_CONTRIB=$IS_CM_CONTRIB"
 
 if test 0 -eq $IS_CM_CONTRIB
 then
-
-    # check to make sure no protected directory is being altered.
-    IS_PROTECTED=$(is_path_protected "contrib/CM" "$CM_MODULES")
-
-    debug "IS_PROTECTED=$IS_PROTECTED"
-
-    if test "1" == "$IS_PROTECTED"
-    then
-        echo "You attempted to modify a protected location.  See https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations" >&2
-        exit 1
-    fi
-
-    
     # contains a CM contrib path so check for the jira in the commit message.
-
 
     # First check if the user is whitelisted and not subject to the valid JIRA constraint.
     $($SVNLOOK_CMD author $SVNLOOK_OPTS | egrep $ALLOWED_USER_EXPRESSION >/dev/null)
@@ -307,24 +334,7 @@ then
 
 else
     # not a CM contrib path
-
-    # return 0 if any of the paths changed in the commit start with /enrollment.
-    $($SVNLOOK_CMD dirs-changed $SVNLOOK_OPTS | egrep "^enrollment" >/dev/null)
-    IS_ENROLLMENT=$?
-
-    if test 0 -eq $IS_ENROLLMENT 
-    then
-        IS_PROTECTED=$(is_path_protected "enrollment" "$ENROLLMENT_MODULES")
-
-        if test "1" == "$IS_PROTECTED"
-        then
-            echo "You attempted to modify a protected location.  See https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations" >&2
-            exit 1
-        fi
-    
-    else
-        echo "SKIP JIRA Check" >&2
-        exit 0
-    fi
+    debug "not a CM contrib path"
+    exit 0
 fi
 

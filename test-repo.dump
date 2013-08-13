@@ -16,6 +16,10 @@ Revision-number: 1
 Prop-content-length: 119
 Content-length: 119
 
+K 8
+svn:date
+V 27
+2013-07-23T19:53:13.766581Z
 K 7
 svn:log
 V 20
@@ -24,10 +28,6 @@ K 10
 svn:author
 V 4
 mike
-K 8
-svn:date
-V 27
-2013-07-23T19:53:13.766581Z
 PROPS-END
 
 Node-path: contrib
@@ -711,6 +711,10 @@ Revision-number: 4
 Prop-content-length: 149
 Content-length: 149
 
+K 8
+svn:date
+V 27
+2013-08-12T16:38:30.096249Z
 K 7
 svn:log
 V 47
@@ -719,13 +723,145 @@ K 10
 svn:author
 V 7
 jcaddel
-K 8
-svn:date
-V 27
-2013-08-12T16:38:30.096249Z
 PROPS-END
 
 Node-path: contrib/CM/ks-enroll
 Node-action: delete
+
+
+Revision-number: 5
+Prop-content-length: 166
+Content-length: 166
+
+K 8
+svn:date
+V 27
+2013-08-13T13:23:45.601461Z
+K 7
+svn:log
+V 64
+replicate student contrib and enrollment project structure paths
+K 10
+svn:author
+V 7
+jcaddel
+PROPS-END
+
+Node-path: enrollment/ks-ap
+Node-kind: dir
+Node-action: add
+Node-copyfrom-rev: 4
+Node-copyfrom-path: enrollment/ks-api
+
+
+Revision-number: 6
+Prop-content-length: 166
+Content-length: 166
+
+K 8
+svn:date
+V 27
+2013-08-13T13:24:00.068304Z
+K 7
+svn:log
+V 64
+replicate student contrib and enrollment project structure paths
+K 10
+svn:author
+V 7
+jcaddel
+PROPS-END
+
+Node-path: contrib/bsinas
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/bsinas/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/bsinas/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 5
+Text-content-md5: 6137cde4893c59f76f005a8123d8e8e6
+Text-content-sha1: c5d84736ba451747dd5f0eb9d17e104f3697ef47
+Content-length: 15
+
+PROPS-END
+data
+
+
+Node-path: contrib/ksa
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/ksa/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/ksa/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 5
+Text-content-md5: 6137cde4893c59f76f005a8123d8e8e6
+Text-content-sha1: c5d84736ba451747dd5f0eb9d17e104f3697ef47
+Content-length: 15
+
+PROPS-END
+data
+
+
+Node-path: contrib/myplan
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/myplan/trunk
+Node-kind: dir
+Node-action: add
+Prop-content-length: 10
+Content-length: 10
+
+PROPS-END
+
+
+Node-path: contrib/myplan/trunk/DATA
+Node-kind: file
+Node-action: add
+Prop-content-length: 10
+Text-content-length: 5
+Text-content-md5: 6137cde4893c59f76f005a8123d8e8e6
+Text-content-sha1: c5d84736ba451747dd5f0eb9d17e104f3697ef47
+Content-length: 15
+
+PROPS-END
+data
 
 
