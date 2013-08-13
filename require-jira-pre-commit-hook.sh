@@ -21,11 +21,26 @@
 SVNLOOK_CMD=/usr/bin/svnlook
 WGET_CMD=/usr/bin/wget
 
+# do not remove this but toggle 0 (off), 1 (on)
 ENABLE_DEBUG_MESSAGES=0
 
+# on success look at this file to find out what happenned
+DEBUG_LOGFILE=/tmp/debug.log
+
+# commits with jira's that match this pattern need to be valid.
+# also the commit needs at least one match like this.
 JIRA_EXPRESSION="KS[A-Z]+[-]?[0-9]+"
+
 # match multiple users like: (user1|user2|user3)
 ALLOWED_USER_EXPRESSION="(jcaddel)"
+
+# /enrollment/$module/{tags,branches,trunk} are protected
+ENROLLMENT_MODULES="aggregate ks-ap ks-api ks-core ks-lum ks-enroll
+ks-deployments"
+
+# /contrib/CM/$module/{tags,branches,trunk} are protected
+CM_MODULES="aggregate ks-api ks-core ks-lum ks-deployments"
+
 
 debug () {
 
@@ -33,11 +48,12 @@ debug () {
         then
                 MSG=$1
                 echo "$MSG" >&2
+                echo "$MSG" >> $DEBUG_LOGFILE
         fi
 }
 
 # Test if the JIRA is valid.
-# return's 0 if it does and 8 if it doesn't.
+# return's 0 if it is valid and 8 if it is not valid.
 is_valid_jira () {
 
     JIRA=$1
@@ -94,15 +110,31 @@ is_path_protected () {
     # do not include a leading /
     ROOT_PATH=$1
 
-    # Look for Tag Changes
+    MODULES=$2
 
     PP_FILE=/tmp/protected-$RANDOM.dat
 
-    echo "$ROOT_PATH" > $PP_FILE
-    echo "$ROOT_PATH/" > $PP_FILE
+    # clean up in case the file already exists
+    rm -rf $PP_FILE
 
-    for module in $(echo "aggregate ks-ap ks-api ks-core ks-lum ks-enroll
-ks-deployments" | tr ' ' '\n')
+    BASE_PATH=""
+
+    # for contrib/CM this will protect contrib and contrib/CM
+    for path in $(echo "$ROOT_PATH" | tr '/' '\n')
+    do
+        if test ${#BASE_PATH} -gt 0
+        then
+            BASE_PATH=$BASE_PATH/$path
+        else
+
+            BASE_PATH=$path
+        fi 
+
+        echo "$BASE_PATH" >> $PP_FILE
+        echo "$BASE_PATH/" >> $PP_FILE
+    done
+
+    for module in $(echo "$MODULES" | tr ' ' '\n')
 
     do
         # the value used in the comparison may have a trailing /
@@ -119,38 +151,51 @@ ks-deployments" | tr ' ' '\n')
 
     done
    
-     
-
-    # Look for branch moves
+    # look at the changes contained in the inbound commit
     $SVNLOOK_CMD changed $SVNLOOK_OPTS | while read LINE
     do
+
         MODE=$(echo $LINE | awk '{print $1}')
         TARGET=$(echo $LINE | awk '{print $2}') 
+
+        debug "MODE=$MODE, TARGET=$TARGET"
 
         if test "$MODE" == "D"
         then 
             debug "DELETE = $TARGET"
             # we want to prevent deletes on the repo structure paths
 
-            $(egrep "^$TARGET$" $PP_FILE >/dev/null)
+            egrep "^$TARGET$" $PP_FILE >/dev/null
             R=$?
-            
+           
+            debug "R=$R"
+ 
             if test 0 -eq $R
             then
                 # trying to delete a protected path so fail
-                return 1 
+                debug "fail delete on a proected path $TARGET"
+                echo "1"
                 break
             fi 
 
         fi
     done
 
+
     if test 0 -eq $ENABLE_DEBUG_MESSAGES
     then
         # if not in debug mode delete the file
         rm $PP_FILE
+    else
+        debug "PROTECTED_FILE = $PP_FILE"
     fi
+
 }
+
+if test 1 -eq $ENABLE_DEBUG_MESSAGES
+then
+    rm -rf $DEBUG_LOGFILE
+fi
 
 REPOS="$1"
 TXN="$2"
@@ -173,11 +218,6 @@ fi
 
 debug "REPOS=$REPOS" 
 
-
-# check for changes on a protected path
-
-
-
 # return 0 if any of the paths changed in the commit start with contrib/CM.
 $($SVNLOOK_CMD dirs-changed $SVNLOOK_OPTS | egrep "^contrib/CM" >/dev/null)
 
@@ -189,10 +229,11 @@ if test 0 -eq $IS_CM_CONTRIB
 then
 
     # check to make sure no protected directory is being altered.
-    is_path_protected "contrib/CM"
-    IS_PROTECTED=$?
+    IS_PROTECTED=$(is_path_protected "contrib/CM" "$CM_MODULES")
 
-    if test 1 -eq $IS_PROTECTED
+    debug "IS_PROTECTED=$IS_PROTECTED"
+
+    if test "1" == "$IS_PROTECTED"
     then
         echo "You attempted to modify a protected location.  See https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations" >&2
         exit 1
@@ -202,7 +243,7 @@ then
     # contains a CM contrib path so check for the jira in the commit message.
 
 
-    # Check if the user is whitelisted and not subject to the valid JIRA constraint.
+    # First check if the user is whitelisted and not subject to the valid JIRA constraint.
     $($SVNLOOK_CMD author $SVNLOOK_OPTS | egrep $ALLOWED_USER_EXPRESSION >/dev/null)
 
     IS_WHITELISTED_USER=$?
@@ -217,7 +258,7 @@ then
 
     # else apply the jira checks
 
-    # First check if there are any candidate matches in the commit message
+    # Check if there are any candidate matches in the commit message
     # Looking at all lines in the message, this catches the no jira in the message case
     $($SVNLOOK_CMD log $SVNLOOK_OPTS | egrep "$JIRA_EXPRESSION" $COMMIT_MSG_FILE >/dev/null)
     CONTAINS_JIRAS=$?
@@ -264,8 +305,6 @@ then
  
     done
 
-    exit 0;
-    
 else
     # not a CM contrib path
 
@@ -275,10 +314,9 @@ else
 
     if test 0 -eq $IS_ENROLLMENT 
     then
-        is_path_protected "enrollment"
-        IS_PROTECTED=$?
+        IS_PROTECTED=$(is_path_protected "enrollment" "$ENROLLMENT_MODULES")
 
-        if test 1 -eq $IS_PROTECTED
+        if test "1" == "$IS_PROTECTED"
         then
             echo "You attempted to modify a protected location.  See https://wiki.kuali.org/display/STUDENTDOC/4.8+Protected+Source+Code+Locations" >&2
             exit 1

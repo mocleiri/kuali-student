@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 #
 # For debugging add a -x option above
 #
@@ -18,6 +18,17 @@ BASE_DIR=$(pwd)
 FULL_PATH="$BASE_DIR/$TEST_REPO"
 TEST_CM_WC=test-contrib-cm
 TEST_NON_CM_WC=test-enrollment
+
+# Copied from the pre-commit hook.
+# remember to keep these in sync with the hook's values.
+#
+# /enrollment/$module/{tags,branches,trunk} are protected
+ENROLLMENT_MODULES="aggregate ks-ap ks-api ks-core ks-lum ks-enroll
+ks-deployments"
+
+# /contrib/CM/$module/{tags,branches,trunk} are protected
+CM_MODULES="aggregate ks-api ks-core ks-lum ks-deployments"
+
 
 show_log() {
 
@@ -112,8 +123,9 @@ test_delete_directory () {
 # them can't be deleted.
 test_prevent_delete_project_structure () {
 
+    MODULES=$1
 
-    for module in $(echo "aggregate ks-api ks-core ks-lum ks-enroll ks-deployments" | tr ' ' '\n')
+    for module in $(echo "$MODULES" | tr ' ' '\n')
 
     do
         test_delete_directory "$module"
@@ -207,7 +219,7 @@ show_log $SHOW_LOG
 
 # test that the root project structure directories are protected
 
-test_prevent_delete_project_structure 
+test_prevent_delete_project_structure "$CM_MODULES"
 
 R=$?
 
@@ -262,7 +274,7 @@ cd $TEST_NON_CM_WC
 
 # test that the root project structure directories are protected
 
-test_prevent_delete_project_structure 
+test_prevent_delete_project_structure $ENROLLMENT_MODULES 
 
 R=$?
 
