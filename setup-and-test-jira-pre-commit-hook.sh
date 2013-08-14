@@ -96,6 +96,25 @@ test_create_branch_or_tag () {
     echo "$COMMITTED"
 }
 
+# do not run this in a sub shell like $()
+test_delete_trunk_data_file () {
+    
+    PREFIX=$1
+    
+    echo "svn rm $PREFIX/trunk/DATA"
+    svn rm $PREFIX/trunk/DATA
+
+    R=$(test_commit "jcaddel" "delete $TARGET")
+
+    # we expect this to succeed
+
+    if test 1 -eq $R
+    then
+        # commit failed (unexpected)
+        return 1
+    fi
+
+}
 
 # do not run this in a sub shell like $()
 test_delete_directory () {
@@ -171,7 +190,21 @@ test_prevent_delete_project_structure () {
             # deleted the directory
             return 1
             break
-        fi 
+        fi
+
+         
+
+        test_delete_trunk_data_file "$module"
+
+         R=$?
+        
+        if test 1 -eq $R
+        then
+            # failed to delete the file
+            return 1
+            break
+        fi
+
     done
 
 }
