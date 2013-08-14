@@ -138,14 +138,58 @@ test_delete_directory () {
 
 }
 
+# do not run this in a sub shell like $()
+test_delete_remote_directory () {
+    
+    TARGET=$1
+    
+    $SVN_CMD rm file://$FULL_PATH/$TARGET --username "jcaddel" -m "delete
+remote directory $TARGET" >/dev/null
+
+    R=$?
+
+    # we expect this to fail
+
+    if test 0 -eq $R
+    then
+        # commit succeeded (incorrect)
+        return 1
+    fi
+
+}
+
 # Test all of the project structure paths one at a time to make sure all of
 # them can't be deleted.
+# return 1 if the directory was deleted
 test_prevent_delete_project_structure () {
 
     MODULES=$1
 
-    for module in $(echo "$MODULES" | tr ' ' '\n')
+    # delete all of the modules in one shot
 
+
+    echo "delete all of the modules in one shot"
+    
+    for module in $(echo "$MODULES" | tr ' ' '\n')
+    do
+        svn rm $module
+    done
+
+    R=$(test_commit "jcaddel" "delete $TARGET")
+
+    # we expect this to fail
+
+    if test 1 -eq $R
+    then
+        # commit successfully denied
+        svn revert -R . 2>&1 >/dev/null
+    else
+        # commit succeeded (incorrect)
+        echo "failed to prevent structural deletions"
+        return 1
+    fi
+
+    for module in $(echo "$MODULES" | tr ' ' '\n')
     do
         test_delete_directory "$module"
         
@@ -245,6 +289,23 @@ $SVN_ADMIN_CMD create $TEST_REPO
 ln -s $BASE_DIR/require-jira-pre-commit-hook.sh $FULL_PATH/hooks/pre-commit
         
 $SVN_ADMIN_CMD load ./$TEST_REPO < test-repo.dump
+
+# make sure contrib is protected
+test_delete_remote_directory "contrib"
+
+R=$?
+
+assert "0" "$R" "failed to remove structural branches" "succeeded in removing structural branches!"
+
+
+# make sure enrollment is protected
+test_delete_remote_directory "enrollment"
+
+R=$?
+
+assert "0" "$R" "failed to remove structural branches" "succeeded in removing structural branches!"
+
+
 
 # checkout a working copy on the contrib/CM branch
 $SVN_CMD co file://$FULL_PATH/contrib/CM $TEST_CM_WC

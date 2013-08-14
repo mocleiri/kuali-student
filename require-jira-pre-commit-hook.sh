@@ -17,10 +17,16 @@
 # is counted as a module)
 #
 
-# source the configuration variables
+# Command Locations
+
 SVNLOOK_CMD=/usr/bin/svnlook
 SVN_CMD=/usr/bin/svn
+
 WGET_CMD=/usr/bin/wget
+
+GREP_CMD=/bin/grep
+EGREP_CMD=/bin/egrep
+SED_CMD=/bin/sed
 
 # do not remove this but toggle 0 (off), 1 (on)
 ENABLE_DEBUG_MESSAGES=0
@@ -79,29 +85,41 @@ parse_commit_message_line () {
 		return 0
 	fi
 
-	echo "$LINE" | grep -Po "((?:$JIRA_EXPRESSION))" | while read JIRA
-    do
+	echo "$LINE" | $GREP_CMD -Po "((?:$JIRA_EXPRESSION))" | 
+    {
+        FAIL=0
+        while read JIRA
+        do
         
-        debug "JIRA=$JIRA"
+            debug "JIRA=$JIRA"
 
-        if test -n "$JIRA"
-        then
-
-        	is_valid_jira "$JIRA"
-                
-            IS_JIRA_VALID=$?
-
-            debug "IS_JIRA_VALID=$IS_JIRA_VALID"
-
-            if test $IS_JIRA_VALID -eq 8
+            if test -n "$JIRA"
             then
-                debug "'$JIRA' is not known to jira.kuali.org"
-                return 1
+    
+                is_valid_jira "$JIRA"
+                
+                IS_JIRA_VALID=$?
+
+                debug "IS_JIRA_VALID=$IS_JIRA_VALID"
+
+                if test $IS_JIRA_VALID -ne 0
+                then
+            
+                    if test $IS_JIRA_VALID -eq 8
+                    then
+                        echo "'$JIRA' is not known to jira.kuali.org" >&2
+                    else
+                        echo "Could not check '$JIRA', jira.kuali.org returned
+$IS_JIRA_VALID.  Is it online?" >&2    
+                    fi
+
+                    FAIL=1
+                fi
             fi
-        fi
-    done
+        done
 
-
+        return $FAIL
+    }
 }
 
 # return 1 if any path on the inbound commit is protected.
@@ -110,8 +128,12 @@ is_path_protected () {
 
     PP_FILE=/tmp/protected-$RANDOM.dat
 
+    ERRORS_FILE=/tmp/$RANDOM.dat
+
     # clean up in case the file already exists
     rm -rf $PP_FILE
+
+    rm -rf $ERRORS_FILE
    
     # instead of hard coding the modules that should be protected we read from
     # the current repository structure we want to protect:
@@ -125,7 +147,7 @@ is_path_protected () {
     echo "$ENROLLMENT_PATH" >> $PP_FILE
     echo "$ENROLLMENT_PATH/" >> $PP_FILE
 
-    $SVN_CMD ls file://$REPOS/$ENROLLMENT_PATH | grep "/" | sed 's/\/$//' | while read module 
+    $SVN_CMD ls file://$REPOS/$ENROLLMENT_PATH | $GREP_CMD "/" | $SED_CMD 's/\/$//' | while read module 
     do
         # the value used in the comparison may have a trailing /
         # so we just provision both varients into the test file to be sure
@@ -148,7 +170,7 @@ is_path_protected () {
     echo "$CONTRIB_PATH/" >> $PP_FILE
 
     # exclude CM for now
-    $SVN_CMD ls file://$REPOS/$CONTRIB_PATH | grep "/" | grep -v "CM" | sed 's/\/$//' | while read module 
+    $SVN_CMD ls file://$REPOS/$CONTRIB_PATH | $GREP_CMD "/" | $GREP_CMD -v "CM" | $SED_CMD 's/\/$//' | while read module 
     do
         # the value used in the comparison may have a trailing /
         # so we just provision both varients into the test file to be sure
@@ -171,7 +193,7 @@ is_path_protected () {
     echo "$CONTRIB_CM_PATH/" >> $PP_FILE
 
     # exclude CM for now
-    $SVN_CMD ls file://$REPOS/$CONTRIB_CM_PATH | grep "/" | sed 's/\/$//' | while read module 
+    $SVN_CMD ls file://$REPOS/$CONTRIB_CM_PATH | $GREP_CMD "/" | $SED_CMD 's/\/$//' | while read module 
     do
         # the value used in the comparison may have a trailing /
         # so we just provision both varients into the test file to be sure
@@ -187,8 +209,12 @@ is_path_protected () {
 
     done
 
-    $SVNLOOK_CMD changed $SVNLOOK_OPTS | while read LINE
-    do
+    $SVNLOOK_CMD changed $SVNLOOK_OPTS | 
+    {
+        FAIL=0
+
+        while read LINE
+        do
 
         MODE=$(echo $LINE | awk '{print $1}')
         TARGET=$(echo $LINE | awk '{print $2}') 
@@ -200,7 +226,7 @@ is_path_protected () {
             debug "DELETE = $TARGET"
             # we want to prevent deletes on the repo structure paths
 
-            egrep "^$TARGET$" $PP_FILE >/dev/null
+            $EGREP_CMD "^$TARGET$" $PP_FILE >/dev/null
             R=$?
            
             debug "R=$R"
@@ -208,14 +234,16 @@ is_path_protected () {
             if test 0 -eq $R
             then
                 # trying to delete a protected path so fail
-                debug "fail delete on a proected path $TARGET"
-                echo "1"
-                break
+                printf "Error Path '$TARGET' is protected\n" >&2 
+                FAIL=1                
             fi 
 
         fi
     done
 
+    echo "$FAIL"
+    
+    }
 
     if test 0 -eq $ENABLE_DEBUG_MESSAGES
     then
@@ -224,7 +252,6 @@ is_path_protected () {
     else
         debug "PROTECTED_FILE = $PP_FILE"
     fi
-
 }
 
 REPOS="$1"
@@ -260,7 +287,7 @@ then
 fi
 
 # return 0 if any of the paths changed in the commit start with contrib/CM.
-$($SVNLOOK_CMD dirs-changed $SVNLOOK_OPTS | egrep "^contrib/CM" >/dev/null)
+$($SVNLOOK_CMD dirs-changed $SVNLOOK_OPTS | $EGREP_CMD "^contrib/CM" >/dev/null)
 
 IS_CM_CONTRIB=$?
 
@@ -271,7 +298,7 @@ then
     # contains a CM contrib path so check for the jira in the commit message.
 
     # First check if the user is whitelisted and not subject to the valid JIRA constraint.
-    $($SVNLOOK_CMD author $SVNLOOK_OPTS | egrep $ALLOWED_USER_EXPRESSION >/dev/null)
+    $($SVNLOOK_CMD author $SVNLOOK_OPTS | $EGREP_CMD $ALLOWED_USER_EXPRESSION >/dev/null)
 
     IS_WHITELISTED_USER=$?
 
@@ -287,7 +314,7 @@ then
 
     # Check if there are any candidate matches in the commit message
     # Looking at all lines in the message, this catches the no jira in the message case
-    $($SVNLOOK_CMD log $SVNLOOK_OPTS | egrep "$JIRA_EXPRESSION" $COMMIT_MSG_FILE >/dev/null)
+    $($SVNLOOK_CMD log $SVNLOOK_OPTS | $EGREP_CMD "$JIRA_EXPRESSION" $COMMIT_MSG_FILE >/dev/null)
     CONTAINS_JIRAS=$?
 
     debug "CONTAINS_JIRAS=$CONTAINS_JIRAS"
@@ -295,7 +322,7 @@ then
     # 0 on a match, 1 no match, 2 error (from the grep man page)
     if test "$CONTAINS_JIRAS"  != "0"
     then
-        echo "The Curriculum Management Contribution branch requires valid JIRA's to be referenced in the commit message" >&2
+        printf "ERROR no jira's found.\nThe Curriculum Management Contribution branch requires valid JIRA's to be referenced in the commit message" >&2
         exit 1
     fi
 
@@ -306,7 +333,9 @@ then
     COMMIT_MSG=$($SVNLOOK_CMD log $SVNLOOK_OPTS) 
     
     debug "echo '$COMMIT_MSG'"
-    
+   
+    INVALID=0
+ 
     for LINE in $COMMIT_MSG
     do
         debug "LINE=$LINE"
@@ -326,11 +355,17 @@ then
 
         if test "$R" != "0"
         then
+            debug "$LINE contains an invalid JIRA"
+
             echo "The Curriculum Management Contribution branch requires valid JIRA's to be referenced in the commit message" >&2
-            exit 1
+            INVALID=1
         fi
  
     done
+
+    debug "any invalid jira's=$INVALID"
+
+    exit $INVALID
 
 else
     # not a CM contrib path
