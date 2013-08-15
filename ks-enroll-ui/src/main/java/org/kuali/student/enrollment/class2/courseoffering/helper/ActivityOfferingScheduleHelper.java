@@ -12,13 +12,22 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  *
+ * Created by venkat on 11/30/12
+ */
+package org.kuali.student.enrollment.class2.courseoffering.helper;
+
+import org.kuali.student.enrollment.class2.courseoffering.dto.ActivityOfferingWrapper;
+import org.kuali.student.r2.common.dto.ContextInfo;
+
+/**
+ * This class //TODO ...
+ *
  * @author Kuali Student Team
  */
+public interface ActivityOfferingScheduleHelper {
 
-package org.kuali.student.enrollment.class2.courseoffering.service;
+    public void loadSchedules(ActivityOfferingWrapper wrapper,ContextInfo defaultContextInfo);
 
-import org.kuali.rice.krad.maintenance.Maintainable;
-
-public interface CourseOfferingMaintainable extends Maintainable {
+    public void saveSchedules(ActivityOfferingWrapper wrapper,ContextInfo defaultContextInfo);
 
 }

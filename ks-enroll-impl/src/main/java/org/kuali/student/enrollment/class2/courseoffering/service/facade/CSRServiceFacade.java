@@ -12,23 +12,19 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  *
- * Created by Charles on 5/7/13
+ * Created by Charles on 8/9/13
  */
-package org.kuali.student.enrollment.class2.courseoffering.service;
+package org.kuali.student.enrollment.class2.courseoffering.service.facade;
+
+import org.kuali.student.r2.common.dto.ContextInfo;
 
 /**
- * This class //TODO ...
+ * Used to do CSR
  *
  * @author Kuali Student Team
  */
-public class AssertException extends Exception {
-    private final String assertType;
-
-    public AssertException(String message, String assertType) {
-        super(message);
-        this.assertType = assertType;
-    }
-    public String getAssertType() {
-        return assertType;
-    }
+public interface CSRServiceFacade {
+    public void cancelActivityOffering(String aoId, ContextInfo context);
+    public void suspendActivityOffering(String aoId, ContextInfo context);
+    public void reinstateActivityOffering(String aoId, ContextInfo context);
 }

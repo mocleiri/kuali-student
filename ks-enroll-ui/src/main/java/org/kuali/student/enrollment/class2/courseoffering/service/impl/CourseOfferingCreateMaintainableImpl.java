@@ -24,6 +24,7 @@ import org.kuali.rice.core.api.util.RiceKeyConstants;
 import org.kuali.rice.kim.api.KimConstants;
 import org.kuali.rice.kim.api.permission.PermissionService;
 import org.kuali.rice.kim.api.services.KimApiServiceLocator;
+import org.kuali.rice.krad.maintenance.Maintainable;
 import org.kuali.rice.krad.maintenance.MaintenanceDocument;
 import org.kuali.rice.krad.uif.util.ObjectPropertyUtils;
 import org.kuali.rice.krad.uif.view.View;
@@ -32,7 +33,6 @@ import org.kuali.rice.krad.util.KRADConstants;
 import org.kuali.student.enrollment.class2.courseoffering.dto.CourseOfferingCreateWrapper;
 import org.kuali.student.enrollment.class2.courseoffering.dto.FormatOfferingWrapper;
 import org.kuali.student.enrollment.class2.courseoffering.dto.JointCourseWrapper;
-import org.kuali.student.enrollment.class2.courseoffering.service.CourseOfferingMaintainable;
 import org.kuali.student.enrollment.class2.courseoffering.service.decorators.PermissionServiceConstants;
 import org.kuali.student.enrollment.class2.courseoffering.util.CourseOfferingConstants;
 import org.kuali.student.enrollment.class2.courseoffering.util.CourseOfferingResourceLoader;
@@ -75,7 +75,7 @@ import java.util.Map;
  *
  * @see org.kuali.student.enrollment.class2.courseoffering.controller.CourseOfferingCreateController
  */
-public class CourseOfferingCreateMaintainableImpl extends CourseOfferingMaintainableImpl implements CourseOfferingMaintainable {
+public class CourseOfferingCreateMaintainableImpl extends CourseOfferingMaintainableImpl implements Maintainable {
 
     private static final Logger LOG = org.apache.log4j.Logger.getLogger(CourseOfferingCreateMaintainableImpl.class);
     private static PermissionService permissionService = getPermissionService();
@@ -653,10 +653,10 @@ public class CourseOfferingCreateMaintainableImpl extends CourseOfferingMaintain
 
         //Then do the search
         SearchRequestInfo request = new SearchRequestInfo("lu.search.courseCodes");
-        request.addParam("lu.queryParam.startsWith.cluCode", catalogCourseCode);
+        request.addParam(CourseInfoByTermLookupableImpl.QueryParamEnum.CODE.getQueryKey(), catalogCourseCode);
         request.addParam("lu.queryParam.luOptionalType", CluServiceConstants.CREDIT_COURSE_LU_TYPE_KEY);
-        request.addParam("lu.queryParam.luOptionalGreaterThanEqualExpirDate", DateFormatters.QUERY_SERVICE_TIMESTAMP_FORMATTER.format(atps.get(0).getStartDate()));
-        request.addParam("lu.queryParam.luOptionalLessThanEqualEffectDate", DateFormatters.QUERY_SERVICE_TIMESTAMP_FORMATTER.format(atps.get(0).getEndDate()));
+        request.addParam(CourseInfoByTermLookupableImpl.QueryParamEnum.TERM_START.getQueryKey(), DateFormatters.QUERY_SERVICE_TIMESTAMP_FORMATTER.format(atps.get(0).getStartDate()));
+        request.addParam(CourseInfoByTermLookupableImpl.QueryParamEnum.TERM_END.getQueryKey(), DateFormatters.QUERY_SERVICE_TIMESTAMP_FORMATTER.format(atps.get(0).getEndDate()));
         request.setSortColumn("lu.resultColumn.cluOfficialIdentifier.cluCode");
         
         SearchResultInfo results = getCluService().search(request, context);
@@ -684,28 +684,6 @@ public class CourseOfferingCreateMaintainableImpl extends CourseOfferingMaintain
         return atpService;
     }
 
-    public class CourseCodeSuggestResults{
-
-        private String catalogCourseCode;
-
-        public CourseCodeSuggestResults() {
-            super();
-        }
-
-        public CourseCodeSuggestResults(String catalogCourseCode) {
-            this();
-            this.catalogCourseCode = catalogCourseCode;
-        }
-
-        public String getCatalogCourseCode() {
-            return catalogCourseCode;
-        }
-
-        public void setCatalogCourseCode(String catalogCourseCode) {
-            this.catalogCourseCode = catalogCourseCode;
-        }
-    }
-
     private static PermissionService getPermissionService() {
         if(permissionService==null){
             permissionService = KimApiServiceLocator.getPermissionService();
@@ -721,7 +699,4 @@ public class CourseOfferingCreateMaintainableImpl extends CourseOfferingMaintain
         return cacheManager;
     }
 
-    public void setCacheManager(CacheManager cacheManager) {
-        this.cacheManager = cacheManager;
-    }
 }
