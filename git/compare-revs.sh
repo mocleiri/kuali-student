@@ -11,10 +11,10 @@
 
 usage() {
 	
-	echo "USAGE: <mode: SHOW | BY_JIRA>"
+	echo "USAGE: <mode: SHOW | BY_JIRA> | BY_JIRA_STDIN"
 	echo "SHOW: <changes in branch> <since branch> [gitk]"
 	echo "gitk: trigger showing of commits in gitk"
-	echo "BY_JIRA: <changes in branch> <since branch> [show_headers]"
+	echo "BY_JIRA: <changes in branch> <since branch> <wiki links: 0 or 1> [stdin ] [show_headers]"
 	exit 1
 }
 checkParam () {
@@ -65,17 +65,17 @@ elif test "$MODE" == "BY_JIRA"
 then
 	CHANGES_IN=$2
 	SINCE=$3
-	SHOW_HEADERS=$4
-
-	FROM_STDIN=$5
+	WIKI_MODE=$4
+	USE_STDIN=$5
+	SHOW_HEADERS=$6
 
 	checkParam $CHANGES_IN
 	checkParam $SINCE
-
+	checkParam $WIKI_MODE
 
 	JIRAS=""
 
-	if test -z $FROM_STDIN
+	if test -z $USE_STDIN
 	then
 		JIRAS=$(git log --first-parent $SINCE..$CHANGES_IN --pretty --format="%H?%an?%s?%cD") 
 
@@ -89,7 +89,12 @@ then
 
 	if test ${#SHOW_HEADERS} -gt 0
 	then
-		echo "||SHA1||JIRA||DATE||AUTHOR||REV||"
+		if test 0 -eq $WIKI_MODE
+		then
+			echo "SHA1::JIRA::DATE::AUTHOR::REV"
+		else
+			echo "||SHA1||JIRA||DATE||AUTHOR||REV||"
+		fi
 	fi
 
 	printf "%s" "$JIRAS" | while IFS= read -r LINE
@@ -102,12 +107,17 @@ then
 
 		REV=$(computeRev $SHA1)
 
-		echo "|$SHA1|https://jira.kuali.org/browse/$JIRA|$CDATE|$AUTHOR|https://fisheye.kuali.org/changelog/ks?cs=$REV|"
+		if test 0 -eq $WIKI_MODE
+		then
+			echo "$SHA1::https://jira.kuali.org/browse/$JIRA::$CDATE::$AUTHOR::https://fisheye.kuali.org/changelog/ks?cs=$REV"
+		else
+			
+			echo "|$SHA1|$JIRA|$CDATE|$AUTHOR|[$REV|https://fisheye.kuali.org/changelog/ks?cs=$REV]|"
+		fi
 		
 	done
 	
 
-	
 else
 	echo "Invalid Mode: $MODE"
 	usage
