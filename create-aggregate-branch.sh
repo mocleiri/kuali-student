@@ -13,20 +13,21 @@ usage () {
 		echo "ERROR: $MSG"
 	fi
 
-	echo "USAGE: <ks-api branch> <aggregate name> <modules> <in_branches:0 or 1>  <commit message> [<target prefix: like sandbox>]"
+	echo "USAGE: <ks-api branch> <aggregate name> <modules> <in_branches:0 or 1>  <commit message> [<source prefix> <target prefix: like sandbox>]"
 	echo "<ks-api branch>: either trunk or branches/some_branch"
 	echo "<aggregate name>: in branches mode this is the name of the branch for each module.  i.e. ks-enroll/brances/aggregate_name"
 	echo "<modules>:non-api based modules to apply"
 	echo "<in_branches>:1 if $module/branches/aggregate_name is the target module location. 0 if $module is the target location. use 0 for sandbox based aggregates."
 	echo "<commit message>: commit message to use"
-	echo "<target_prefix>: optional.  Used if the target path is in the sandbox"
+	echo "<source_prefix>: optional. enrollment or sandbox or contrib/CM"
+	echo "<target_prefix>: optional. enrollment or sandbox or contrib/CM"
 	exit 1
 
 }
 
 SVNMUCC_CMD=svnmucc
 
-SOURCE_PATH="https://svn.kuali.org/repos/student/enrollment"
+REPOSITORY="https://svn.kuali.org/repos/student"
 
 API_SOURCE=$1
 
@@ -64,11 +65,26 @@ then
 fi
 
 
-TARGET_PATH=$6
+SOURCE_PREFIX=$6
 
-if test -z "$TARGET_PATH"
+SOURCE_PATH=""
+
+if test -z "$SOURCE_PREFIX"
 then
-	TARGET_PATH="https://svn.kuali.org/repos/student/enrollment"
+	SOURCE_PATH="$REPOSITORY/enrollment"
+else
+	SOURCE_PATH="$REPOSITORY/$SOURCE_PREFIX"
+fi
+
+TARGET_PREFIX=$7
+
+TARGET_PATH=""
+
+if test -z "$TARGET_PREFIX"
+then
+	TARGET_PATH="$REPOSITORY/enrollment"
+else
+	TARGET_PATH="$REPOSITORY/$TARGET_PREFIX"
 fi
 
 SOURCE_REV=$(svn info https://svn.kuali.org/repos/student | grep Revision: | cut -d: -f 2 | sed 's/^\ //')
