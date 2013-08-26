@@ -293,68 +293,89 @@ a {
 
 /* The background area which extends the full width of the table where the toolbar buttons sit on top of */
 .ks-toolbar {
-    padding-left: 6px;
-    padding-top: 6px;
+    padding: 6px 0 1px 6px;
     background-color: #f1f1f1;
-    height: 54px;
+}
+.ks-toolbar .uif-sectionHeader {
+  margin: 0;
 }
 
-/* Individual Buttons */
-.ks-toolbar button {
-    font-size: 13px;
-    color: black;
-    background-color: #f5f5f5;
-    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
-    background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
-    background-repeat: repeat-x;
-    border: 1px solid #cccccc;
-    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    border-bottom-color: #b3b3b3;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
-    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-    border-radius: 0px;
-    min-width: 98px;
-    height: 48px;
-    padding-left: 0;
-    padding-right: 0;
-    text-align: center;
-    white-space: normal;
+.ks-toolbar button.tree-bar-button {
+  font-size: 13px;
+  color: black;
+  background-color: #f5f5f5;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  border: 1px solid #cccccc;
+  border-left:0;
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  border-bottom-color: #b3b3b3;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffe6e6e6', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 0px;
+  min-width: 98px;
+  height: 48px;
+  padding-left: 0;
+  padding-right: 0;
+  text-align: center;
+  white-space: normal;
+  margin-top: 1.5em;
 }
+.ks-toolbar .uif-horizontalBoxLayout button.tree-bar-button:first-child {
+  border-left: 1px solid #ccc;
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 
+}
 /* Individual Buttons when focused */
-.ks-toolbar button:hover {
-    background: #EBEBEB;
-    background: -moz-linear-gradient(top, #e6e6e6 0%, #e6e6e6 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e6e6e6), color-stop(100%, #e6e6e6));
-    background: -webkit-linear-gradient(top, #e6e6e6 0%,#e6e6e6 100%);
-    background: -o-linear-gradient(top, #e6e6e6 0%, #e6e6e6 100%);
-    background: -ms-linear-gradient(top, #e6e6e6 0%, #e6e6e6 100%);
-    background: linear-gradient(top, #e6e6e6 0%, #e6e6e6 100%);
-    color: black;
-    border: 1px solid #cccccc;
-    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    border-bottom-color: #b3b3b3;
+.ks-toolbar button.tree-bar-button:hover {
+  background: #EBEBEB;
+  background: -moz-linear-gradient(top, #e6e6e6 0%, #e6e6e6 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e6e6e6), color-stop(100%, #e6e6e6));
+  background: -webkit-linear-gradient(top, #e6e6e6 0%, #e6e6e6 100%);
+  background: -o-linear-gradient(top, #e6e6e6 0%, #e6e6e6 100%);
+  background: -ms-linear-gradient(top, #e6e6e6 0%, #e6e6e6 100%);
+  background: linear-gradient(top, #e6e6e6 0%, #e6e6e6 100%);
+  color: black;
+  border: 1px solid #cccccc;
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  border-bottom-color: #b3b3b3;
+  border-left:0;
 }
-
 /* Disabled Buttons and the focus state */
-.ks-toolbar button[disabled], .ks-toolbar button[disabled]:hover {
-    border: 1px solid #cccccc;
-    border-color: #e6e6e6 #e6e6e6 #bfbfbf;
-    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    border-bottom-color: #b3b3b3;
-    border-left: 0px;
-    color: #B0B0B0;
+.ks-toolbar button.tree-bar-button[disabled],
+.ks-toolbar button.tree-bar-button[disabled]:hover {
+  background-color: #f5f5f5;
+  background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
+  background-repeat: repeat-x;
+  border: 1px solid #cccccc;
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  border-bottom-color: #b3b3b3;
+  color: #B0B0B0;
+  border-left:0;
+  cursor:auto;
+}
+.ks-toolbar .uif-horizontalBoxLayout button.tree-bar-button[disabled]:hover:first-child {
+  border-left: 1px solid #cccccc;
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 
 /* When a disabled button becomes active, this class is called to remove the border from the left side */
@@ -382,7 +403,21 @@ a {
 }
 
 .ks-toolbar-group-padded {
+    margin-right: 20px;
+    margin-bottom: 0;
+
+}
+
+.ks-toolbar-group-padded button{
+    margin-right: 0;
+}
+
+.ks-horizontal-box-group-with-right-padding{
     padding-right: 20px;
+}
+
+.ks-horizontal-box-group-with-right-padding button{
+    margin-right: 0;
 }
 /************************************** END TOOLBAR **************************************/
 
@@ -852,15 +887,24 @@ div#Uif-ApplicationHeader-Wrapper{
     left: -100px;
 }
 
-/*define a gray box as background*/
+
+/*define a gray box as background. This is basically the "info grid" styling. */
 .ks-gray-background  {
     background-color: #ebebeb;
-    border:none;
-    line-height:15px;
+    border: none;
     padding: 10px;
 }
-.ks-gray-background label {
-    line-height:15px;
+
+.ks-gray-background table {
+    width: auto !important;
+    border: none;
+}
+
+.ks-gray-background th,
+.ks-gray-background  td {
+    background-color: #ebebeb !important;
+    padding: 1px 6px;
+    border: none;
 }
 
 .ks-no-margins
@@ -969,4 +1013,33 @@ div#Uif-ApplicationHeader-Wrapper{
 .acal_keydate_radiobutton_label {
     font-size: 0.9em;
     font-weight: normal;
+}
+
+/*
+    Appended from ks-jquery.css
+    Possibly not used any longer
+*/
+div.jGrowl div.ERROR div.jGrowl-message {
+  background: url("images/iconError16.png") no-repeat;
+  padding-left: 25px;
+}
+div.jGrowl div.INFORMATION div.jGrowl-message {
+  background: url("images/iconInformation16.png") no-repeat;
+  padding-left: 25px;
+}
+div.jGrowl div.SUCCESS div.jGrowl-message {
+  background: url("images/iconSuccess16.png") no-repeat;
+  padding-left: 25px;
+}
+div.jGrowl div.WARNING div.jGrowl-message {
+  background: url("images/iconWarning16.png") no-repeat;
+  padding-left: 25px;
+}
+
+/* Acal radio buttons for key dates and events */
+.ks_toolbar_popup_action_button {
+    font-size: 12px;
+    height: 25px;
+    margin-top: 2.0em;
+    min-width: 50px;
 }
