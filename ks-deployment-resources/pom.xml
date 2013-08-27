@@ -7,5 +7,11 @@
         <version>2.0.2-cm-SNAPSHOT</version>
     </parent>
     <artifactId>ks-deployment-resources</artifactId>
-    <name>KS Deployment Resourcess</name>
+    <name>KS Deployment Resources</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.kuali.common</groupId>
+            <artifactId>kuali-util</artifactId>
+        </dependency>
+    </dependencies>
 </project>
