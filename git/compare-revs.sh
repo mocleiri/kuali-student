@@ -14,7 +14,7 @@ usage() {
 	echo "USAGE: <mode: SHOW | BY_JIRA> | BY_JIRA_STDIN"
 	echo "SHOW: <changes in branch> <since branch> [gitk]"
 	echo "gitk: trigger showing of commits in gitk"
-	echo "BY_JIRA: <changes in branch> <since branch> <wiki links: 0 or 1> [stdin ] [show_headers]"
+	echo "BY_JIRA: <changes in branch> <since branch> <wiki mode: 0 or 1 (jira) or 2(confluence)> <stdin: 0 or 1 > <show_headers: 0 or 1> <show sha: 0 or 1>"
 	exit 1
 }
 checkParam () {
@@ -68,14 +68,18 @@ then
 	WIKI_MODE=$4
 	USE_STDIN=$5
 	SHOW_HEADERS=$6
+	SHOW_SHA=$7
 
 	checkParam $CHANGES_IN
 	checkParam $SINCE
 	checkParam $WIKI_MODE
+	checkParam $USE_STDIN
+	checkParam $SHOW_HEADERS
+	checkParam $SHOW_SHA
 
 	JIRAS=""
 
-	if test -z $USE_STDIN
+	if test $USE_STDIN -eq 0
 	then
 		JIRAS=$(git log --first-parent $SINCE..$CHANGES_IN --pretty --format="%H?%an?%s?%cD") 
 
@@ -87,13 +91,23 @@ then
 		done)
 	fi
 
-	if test ${#SHOW_HEADERS} -gt 0
+	if test $SHOW_HEADERS -eq 1
 	then
 		if test 0 -eq $WIKI_MODE
 		then
-			echo "SHA1::JIRA::DATE::AUTHOR::REV"
+			if test 1 -eq $SHOW_SHA
+			then
+				echo "SHA1::JIRA::DATE::AUTHOR::REV"
+			else
+				echo "JIRA::DATE::AUTHOR::REV"
+			fi
 		else
-			echo "||SHA1||JIRA||DATE||AUTHOR||REV||"
+			if test 1 -eq $SHOW_SHA
+			then
+				echo "||SHA1||JIRA||DATE||AUTHOR||REV||"
+			else
+				echo "||JIRA||DATE||AUTHOR||REV||"
+			fi
 		fi
 	fi
 
@@ -109,10 +123,29 @@ then
 
 		if test 0 -eq $WIKI_MODE
 		then
-			echo "$SHA1::https://jira.kuali.org/browse/$JIRA::$CDATE::$AUTHOR::https://fisheye.kuali.org/changelog/ks?cs=$REV"
+			if test 1 -eq $SHOW_SHA
+			then
+				echo "$SHA1::https://jira.kuali.org/browse/$JIRA::$CDATE::$AUTHOR::https://fisheye.kuali.org/changelog/ks?cs=$REV"
+			else
+				
+				echo "https://jira.kuali.org/browse/$JIRA::$CDATE::$AUTHOR::https://fisheye.kuali.org/changelog/ks?cs=$REV"
+			fi
 		else
+		
+			FORMATTED_JIRA=$JIRA
 			
-			echo "|$SHA1|$JIRA|$CDATE|$AUTHOR|[$REV|https://fisheye.kuali.org/changelog/ks?cs=$REV]|"
+			if test 2 -eq $WIKI_MODE
+			then
+
+				FORMATTED_JIRA="[$JIRA|https://jira.kuali.org/browse/$JIRA]"	
+			fi
+			
+			if test 1 -eq $SHOW_SHA
+			then
+				echo "|$SHA1|$FORMATTED_JIRA|$CDATE|$AUTHOR|[$REV|https://fisheye.kuali.org/changelog/ks?cs=$REV]|"
+			else
+				echo "|$FORMATTED_JIRA|$CDATE|$AUTHOR|[$REV|https://fisheye.kuali.org/changelog/ks?cs=$REV]|"
+			fi
 		fi
 		
 	done
