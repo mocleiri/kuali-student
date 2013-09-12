@@ -13,11 +13,12 @@ usage () {
 		echo "ERROR: $MSG"
 	fi
 
-	echo "USAGE: <ks-api branch> <aggregate name> <modules> <in_branches:0 or 1>  <commit message> <source revision> [<source prefix> <target prefix: like sandbox>]"
+	echo "USAGE: <ks-api branch> <aggregate name> <modules> <in_branches:0 or 1>  <source branch> <commit message> <source revision> [<source prefix> <target prefix: like sandbox> ]"
 	echo "<ks-api branch>: either trunk or branches/some_branch"
 	echo "<aggregate name>: in branches mode this is the name of the branch for each module.  i.e. ks-enroll/brances/aggregate_name"
 	echo "<modules>:non-api based modules to apply"
 	echo "<in_branches>:1 if $module/branches/aggregate_name is the target module location. 0 if $module is the target location. use 0 for sandbox based aggregates."
+	echo "<source branch>: trunk or branches/source-branch"
 	echo "<commit message>: commit message to use"
 	echo "<source revision>: 0 will find out the current revision. >0 will use the indicated revision."
 	echo "<source_prefix>: optional. enrollment or sandbox or contrib/CM"
@@ -58,21 +59,28 @@ then
 	usage "Missing In branch mode"
 fi
 
-COMMIT_MESSAGE=$5
+SOURCE_BRANCH=$5
+
+if test -z "$SOURCE_BRANCH"
+then
+	usage "Missing Source Branch"
+fi
+
+COMMIT_MESSAGE=$6
 
 if test -z "$COMMIT_MESSAGE"
 then
 	usage "Missing Commit Message"
 fi
 
-SOURCE_REVISION=$6
+SOURCE_REVISION=$7
 
 if test -z "$SOURCE_REVISION"
 then
 	usage "Missing Source Revision"
 fi
 
-SOURCE_PREFIX=$7
+SOURCE_PREFIX=$8
 
 SOURCE_PATH=""
 
@@ -83,7 +91,7 @@ else
 	SOURCE_PATH="$REPOSITORY/$SOURCE_PREFIX"
 fi
 
-TARGET_PREFIX=$8
+TARGET_PREFIX=$9
 
 TARGET_PATH=""
 
@@ -125,7 +133,7 @@ fi
 for M in $MODULES
 do
 	# printf "module = $M"
-	printf "cp $SOURCE_REV $SOURCE_PATH/$M/trunk " >> $CMD_FILE
+	printf "cp $SOURCE_REV $SOURCE_PATH/$M/$SOURCE_BRANCH " >> $CMD_FILE
 
 	if test $IN_BRANCH == "1"
 	then
