@@ -1,0 +1,100 @@
+<html>
+<head>
+<title>Manual</title>
+<style type="text/css">
+body {font-family:Helvetica, Arial, sans-serif; background-color:#FFFFCC; margin:10px;}
+.menu { font-size:95%; font-weight:bold; }
+.footer {font-size:90%;}
+a {color:#000000;}
+</style>
+</head>
+<body>
+<div align="right" class="footer">FAR - Find And Replace</div>
+<hr>
+<div align="center" class="menu">
+<a href="manual01-find.html" class="menu">Find</a>&nbsp;&middot;&nbsp;
+<a href="manual02-replace.html" class="menu">Replace</a>&nbsp;&middot;&nbsp;
+<a href="manual03-rename.html" class="menu">Rename</a>&nbsp;&middot;&nbsp;
+<a href="manual12-files.html" class="menu">File List</a>
+<br>
+<a href="manual11-config.html" class="menu">Configuration</a>&nbsp;&middot;&nbsp;
+<a href="manual13-select.html" class="menu">Selection</a>&nbsp;&middot;&nbsp;
+<a href="manual14-tools.html" class="menu">Tools</a>&nbsp;&middot;&nbsp;
+<a href="regex.html" class="menu">Regular Expressions</a>
+</div>
+<h1>File List and File Menu</h1>
+The file list on the right side of the application shows the results of your search. It also
+allows for various views on the different files. <b>Right click</b> any one file to get the context 
+menu. The context menu and the "File" section of the application menu essentially offer the same operations, 
+but with a subtle difference concerning the respective selection model:<br>
+Operations called from the context menu act on the set of <b>highlighted</b> files (the entries selected by 
+clicking with the mouse). The application menu on the other hand processes the <b>checked</b> files, i.e. 
+the entries selected by virtue of the checkboxes in the first column.
+
+</p><p>
+Context menu and application menu both display the following <i>view</i> options which are made available
+if only a single file is selected:
+<ul>
+<li><b>Edit</b>: Open the file in a simple editor for quick changes.</li>
+<li><b>View</b>: Display the matches of a regular expression from the "Find..." area.</li>
+<li><b>Preview</b>: Preview the result of a replace operation.</li>
+<li><b>Info</b>: Show various file information about the file.</li>
+</ul>
+Each of those views will allow you to specify the <b>encoding</b> (character set) that should
+be used to read and write the file. Unless you change it, the platform default encoding will be used.
+If the actual encoding of a file is incompatible with the default encoding, this may result in 
+"funny characters" or error messages. Note that you can add character sets to the list through 
+the <a href="manual11-config.html">application configuration</a>.
+<p>
+The "View" option is only available if the "Find" tab or the "Replace" tab is selected.
+It will highlight the matches of the regular expression on the respective tab.
+The "Preview" option is only available if the "Replace" tab is selected.
+</p><p>
+If you are running on Java 6 or later, the context menu will display two options to call external
+programs:
+<ul>
+<li><b>Open File</b>: Open the file in the systems default editor.</li>
+<li><b>Open Directory</b>: Open the files directory in the file system browser.</li>
+</ul>
+Linux user should read the note at the bottom of this page.
+</p><p>
+The context menu furthermore offers a "Rename" operation if not more than one file is selected. 
+As you will have guessed, it allows you to change the name of the selected file.
+</p><p>
+In the context menu, as well as in the "File" menu, you will find also the following <i>operational</i> options:
+<ul>
+<li><b>Copy</b>: Copy one or more files to another directory.</li>
+<li><b>Tree Copy</b>: Copy files to another directory together with their directory tree, starting at the base directory.</li>
+<li><b>Move</b>: Move one or more files to another directory.</li>
+<li><b>Delete</b>: Delete one or more files from the hard disk.</li>
+</ul>
+Don't forget that the <b>selection model</b> of context menu and "File" menu is different! If you choose an operational
+option from the context menu, it will operate on the set of <i>hightlighted</i> files that you have selected with the mouse.
+If you choose an operational option from the "File" menu, it will use the set of <i>checked</i> files that you may have selected 
+by clicking the checkboxes of the file list.
+</p><p>
+The tree copy operation may need some more explanation. If the base directory for the find command was c:\base\dir, and
+you tree copy a file  c:\base\dir\subdir\a.file to some other directory c:\elsewhere, it will actually be copied
+to c:\elsewhere\subdir\a.file. That is, tree copy also copies the files relative directory tree.
+</p><p>
+The "File" menu allows also to <b>export</b> the result file list to a file, or 
+to <b>import</b> a list of files for further processing. When exporting a file list,
+the full path of each file is written on a new line. This is also the expected
+format of the input file. However, if a path can not be found, the generated list
+entry will automatically be unselected.
+</p><p>
+At the very bottom of the result file list you will find the number of selected files. 
+By default all files are selected. You will also see an indication at the bottom 
+should there be any errors during a replace or rename operation.
+</p><p>
+<hr>
+Linux User Note: Linux user should be aware that the Java calls to the system desktop have implementation flaws in
+(at least some versions of) JDK 6 for Linux. They might not work properly for some desktop configurations and make
+FAR display obscure error messages such as "Failed to show URI". However, those are JDK bugs beyond my reach and 
+responsibility and a good reason to update to Java 7. This concerns only the Open File and Open Directory option
+from the context menu.
+<p>
+<hr>
+<div align="right" class="footer">FAR - Find And Replace</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Manual</title>
+<style type="text/css">
+body {font-family:Helvetica, Arial, sans-serif; background-color:#FFFFCC; margin:10px;}
+.outlink { color:#0000FF;}
+.menu { font-size:95%; font-weight:bold; }
+.footer {font-size:90%;}
+a {color:#000000;}
+</style>
+</head>
+<body>
+<div align="right" class="footer">FAR - Find And Replace</div>
+<hr>
+<div align="center" class="menu">
+<a href="manual01-find.html" class="menu">Find</a>&nbsp;&middot;&nbsp;
+<a href="manual02-replace.html" class="menu">Replace</a>&nbsp;&middot;&nbsp;
+<a href="manual03-rename.html" class="menu">Rename</a>&nbsp;&middot;&nbsp;
+<a href="manual12-files.html" class="menu">File List</a>
+<br>
+<a href="manual11-config.html" class="menu">Configuration</a>&nbsp;&middot;&nbsp;
+<a href="manual13-select.html" class="menu">Selection</a>&nbsp;&middot;&nbsp;
+<a href="manual14-tools.html" class="menu">Tools</a>&nbsp;&middot;&nbsp;
+<a href="regex.html" class="menu">Regular Expressions</a>
+</div>
+<h1>Configuration</h1>
+You can change some settings at the <i>FAR &gt; Settings</i> menu entry. With the present version you may:
+<ul>
+<li>Change the default character set and add new character encodings. To add a new encoding
+simply type the encoding name (or alias) into the text field of the drop down list. 
+See <span class="outlink">http://www.iana.org/assignments/character-sets</span> 
+for a list of official encodings. 
+Note however that not all those encodings may be available on your machine. FAR will tell you.</li>
+<li>Select the "group reference indicator" that is used for replacement operations with regular expressions.</li>
+<li>Prevent backups. Usually you do <b>not</b> want this. If you unset this flag, you can not undo any
+replacement operation any more. It may be useful in rare cases where you have limited space but a lot of 
+(large) files to change. You will be prompted before any replacement operation if you unselect this.</li>
+<li>Set the directory where backup files are to be stored. This has the same effect as
+the "Backup Directory" field on the "Replace" tab.</li>
+<li>Select the information that should be displayed in the last column of the result table. 
+You may choose between warnings on read-only files, file size and the last modified date,
+or to display nothing at all.</li>
+</ul>
+Any changes to the configuration are immediately effective. Note that the "prevent backup" flag can
+only be unset for the duration of a single session (an invocation of the application). 
+All other configuration values are of course stored on disk when you close the application.
+
+<p>
+<hr>
+<div align="right" class="footer">FAR - Find And Replace</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>Manual</title>
+<style type="text/css">
+body {font-family:Helvetica, Arial, sans-serif; background-color:#FFFFCC; margin:10px;}
+.menu { font-size:95%; font-weight:bold; }
+.footer {font-size:90%;}
+a {color:#000000;}
+</style>
+</head>
+<body>
+<div align="right" class="footer">FAR - Find And Replace</div>
+<hr>
+<div align="center" class="menu">
+<a href="manual01-find.html" class="menu">Find</a>&nbsp;&middot;&nbsp;
+<a href="manual02-replace.html" class="menu">Replace</a>&nbsp;&middot;&nbsp;
+<a href="manual03-rename.html" class="menu">Rename</a>&nbsp;&middot;&nbsp;
+<a href="manual12-files.html" class="menu">File List</a>
+<br>
+<a href="manual11-config.html" class="menu">Configuration</a>&nbsp;&middot;&nbsp;
+<a href="manual13-select.html" class="menu">Selection</a>&nbsp;&middot;&nbsp;
+<a href="manual14-tools.html" class="menu">Tools</a>&nbsp;&middot;&nbsp;
+<a href="regex.html" class="menu">Regular Expressions</a>
+</div>
+<!-- h1>Content</h1>
+<ul>
+<li><a href="manual01-find.html" class="menu">Find</a></li>
+<li><a href="manual02-replace.html" class="menu">Replace</a></li>
+<li><a href="manual03-rename.html" class="menu">Rename</a></li>
+<li><a href="manual12-files.html" class="menu">File List</a></li>
+<li><a href="manual11-config.html" class="menu">Configuration</a></li>
+<li><a href="regex.html" class="menu">Regular Expressions</a></li>
+</ul -->
+<h1>Find</h1>
+FAR has been crafted to find and replace text patterns across multiple
+files in an entire directory tree. The FIND command will always be the first
+command to be executed, since you have to define the set of files to operate 
+on <i>before</i> you may apply any changes.
+<p>
+You can use four types of filters to narrow the set of files you are operating on:
+<ul>
+<li><b>Directory</b>: The "Base Directory" input field shows the directory where the search
+will begin. By default the "include subdirectories" checkbox is selected.</li>
+<li><b>File Name Pattern</b>: You may use simple regular expressions where '*' denotes 
+<i>"any number of characters"</i> and '?' denotes <i>"one character or none"</i>. 
+Furthermore '!' denotes <i>"exactly one character"</i> and '#' denotes 
+<i>"exactly one digit (0-9)"</i>. <br>Thus "*.txt" means
+any file with extension "txt", "my*" means any file that begins with "my" and "#*.!!!" 
+means any file that starts with a digit and has an extension of exactly three characters.<br>
+Multiple simple patterns can be separated with comma (','), e.g. "*.html,*.htm". 
+Simple patterns are not case sensitive.<br>
+If you want to use full regular expressions for the file name pattern, tick the checkbox 
+below the input field.</li>
+<li><b>Content Pattern</b>: You can immediately filter for files that contain a certain text. 
+This text filter uses regular expressions by default (unselect the checkbox to disable).<br>
+Select the "Ignore Case" checkbox, if you do not care whether characters are upper case or lower case.
+This works for both, regular expressions and ordinary text.<br>
+Select the "Exclude matching files" checkbox to find those files that do <i>not</i> contain the
+search pattern.<br>
+The "Wrap Lines" checkbox only concerns the way text is displayed in the text area. It does
+not alter the interpretation of the search text itself.</li>
+<li><b>Manual</b>: You can manually exclude certain files from the result set <i>after</i> the
+search has been run. Simply unselect the checkboxes in the left column of the file list.</li>
+</ul>
+</p><p>
+Note that you can as well select a single file from the "Base Directory" file browser. 
+If you do so, the FIND command will execute immediately, allowing you to quickly pass to the
+next step.
+</p><p>
+Eventually you can <i>import</i> a list of files via the "File" menu. The import
+file must contain absolute pathes, on path per line.
+</p><p>
+<hr>
+<div align="right" class="footer">FAR - Find And Replace</div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>Manual</title>
+<style type="text/css">
+body {font-family:Helvetica, Arial, sans-serif; background-color:#FFFFCC; margin:10px;}
+.menu { font-size:95%; font-weight:bold; }
+.footer {font-size:90%;}
+a {color:#000000;}
+</style>
+</head>
+<body>
+<div align="right" class="footer">FAR - Find And Replace</div>
+<hr>
+<div align="center" class="menu">
+<a href="manual01-find.html" class="menu">Find</a>&nbsp;&middot;&nbsp;
+<a href="manual02-replace.html" class="menu">Replace</a>&nbsp;&middot;&nbsp;
+<a href="manual03-rename.html" class="menu">Rename</a>&nbsp;&middot;&nbsp;
+<a href="manual12-files.html" class="menu">File List</a>
+<br>
+<a href="manual11-config.html" class="menu">Configuration</a>&nbsp;&middot;&nbsp;
+<a href="manual13-select.html" class="menu">Selection</a>&nbsp;&middot;&nbsp;
+<a href="manual14-tools.html" class="menu">Tools</a>&nbsp;&middot;&nbsp;
+<a href="regex.html" class="menu">Regular Expressions</a>
+</div>
+<h1>The Select Menu</h1>
+The "Select" section of the application menu offers a handfull of methods that
+allow to manipulate the set of selected (checked) entries in the file list. 
+Only selected files are subject to replace or rename operations or any other operation
+started from the application menu.
+<p>
+This facility allows you to perform subselects on a set of files in order to narrow
+the selection step-by-step. For instance you may thus look for files containing a keyword A
+but not a keyword B.
+</p><p>
+The available options are:
+<ul>
+<li><b>Select All</b>: Selects all entries.</li>
+<li><b>Select Nothing</b>: Unselects all entries.</li>
+<li><b>Invert Selection</b>: Selects the unselected and vice-versa. Also available from the
+column header of the checkbox column (the black-and-white box)</li>
+<li><b>By Name</b>: Allows to specify a simple pattern or regular expression that matches
+the file names to be selected. Any file name <i>containing</i> the specified expression
+will be selected, unless you request an <i>exact</i> match selecting the respective radio button.</li>
+<li><b>By Content</b>: Allows to specify a regular expression for the file content. This works
+exactly as the respective section on the "Find" tab.</li>
+</ul>
+<hr>
+<div align="right" class="footer">FAR - Find And Replace</div>
+</body>
+</html>
