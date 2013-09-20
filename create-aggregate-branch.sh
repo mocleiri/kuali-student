@@ -194,7 +194,12 @@ fi
 
 for M in $MODULES
 do
-	printf "$M " >> $SVN_EXTERNALS_FILE
+
+	if test "$M" != "aggregate"
+	then
+
+		printf "$M " >> $SVN_EXTERNALS_FILE
+	fi
 
 	# printf "module = $M"
 	printf "cp $SOURCE_REV $SOURCE_PATH/$M/$SOURCE_BRANCH " >> $CMD_FILE
@@ -202,11 +207,18 @@ do
 	if test $IN_BRANCH == "1"
 	then
 		printf "    $TARGET_PATH/$M/branches/$AGGREGATE_NAME " >> $CMD_FILE
-		printf " $TARGET_PATH/$M/branches/$AGGREGATE_NAME\n" >> $SVN_EXTERNALS_FILE
+		if test "$M" != "aggregate"
+		then
+			printf " $TARGET_PATH/$M/branches/$AGGREGATE_NAME\n" >> $SVN_EXTERNALS_FILE
+		fi
 
 	else
 		printf "    $TARGET_PATH/$AGGREGATE_NAME/$M " >> $CMD_FILE
-		printf " $TARGET_PATH/$AGGREGATE_NAME/$M\n" >> $SVN_EXTERNALS_FILE
+		
+		if test "$M" != "aggregate"
+		then
+			printf " $TARGET_PATH/$AGGREGATE_NAME/$M\n" >> $SVN_EXTERNALS_FILE
+		fi
 	fi
 
 done
