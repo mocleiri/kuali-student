@@ -124,6 +124,28 @@ fi
 
 CMD_FILE=/tmp/$RANDOM.dat
 
+SVN_EXTERNALS_FILE=/tmp/externals-$RANDOM.dat
+
+cat <<EOF > $SVN_EXTERNALS_FILE
+#
+# The svn.externals file (indirectly) controls what local directories appear
+# in the checkout, and what actual location inside Subversion they represent
+# (by tying in with the svn:externals property).
+# 
+# This enables development streams to be independently managed and released 
+# while also providing a single spot to perform an aggregated Kuali Student checkout
+# and build.
+#
+# The SVN command for using this file to create SVN external definitions is
+# 
+# svn propset svn:externals -F svn.externals .
+#
+# *** IMPORTANT ***
+# You must rerun the svn propset command (shown above) and commit after editing any of
+# the external paths for the changes to take effect.
+#
+EOF
+
 #echo "CMD_FILE=$CMD_FILE"
 
 printf "$SVNMUCC_CMD " > $CMD_FILE
@@ -158,32 +180,43 @@ fi
 
 printf "cp $SOURCE_REV $SOURCE_PATH/ks-api/$API_SOURCE " >> $CMD_FILE
 
+printf "ks-api " >> $SVN_EXTERNALS_FILE
+
 if test $IN_BRANCH == "1"
 then
 	printf "    $TARGET_PATH/ks-api/branches/$AGGREGATE_NAME " >> $CMD_FILE
+	printf " $TARGET_PATH/ks-api/branches/$AGGREGATE_NAME\n" >> $SVN_EXTERNALS_FILE
 
 else
 	printf "    $TARGET_PATH/$AGGREGATE_NAME/ks-api  " >> $CMD_FILE
+	printf " $TARGET_PATH/$AGGREGATE_NAME/ks-api\n" >> $SVN_EXTERNALS_FILE
 fi
 
 for M in $MODULES
 do
+	printf "$M " >> $SVN_EXTERNALS_FILE
+
 	# printf "module = $M"
 	printf "cp $SOURCE_REV $SOURCE_PATH/$M/$SOURCE_BRANCH " >> $CMD_FILE
 
 	if test $IN_BRANCH == "1"
 	then
 		printf "    $TARGET_PATH/$M/branches/$AGGREGATE_NAME " >> $CMD_FILE
+		printf " $TARGET_PATH/$M/branches/$AGGREGATE_NAME\n" >> $SVN_EXTERNALS_FILE
 
 	else
 		printf "    $TARGET_PATH/$AGGREGATE_NAME/$M " >> $CMD_FILE
+		printf " $TARGET_PATH/$AGGREGATE_NAME/$M\n" >> $SVN_EXTERNALS_FILE
 	fi
 
 done
 
 printf " -m \"$COMMIT_MESSAGE\"" >> $CMD_FILE
 
+printf "\nSVN COMMAND:\n"
 cat $CMD_FILE
+printf "\nSVN EXTERNALS\n"
+cat $SVN_EXTERNALS_FILE
 
 printf "\nApply Change (y/n)"
 
@@ -192,5 +225,38 @@ read command
 if test $command == "y"
 then
 	bash -c $CMD_FILE
-	echo "applied"
+
+	R=$?
+
+	if test 0 -eq $R
+	then
+
+		TARGET_AGGREGATE=""
+
+		if test $IN_BRANCH == "1"
+		then
+			TARGET_AGGREGATE="$TARGET_PATH/aggregate/branches/$AGGREGATE_NAME"
+
+		else
+			TARGET_AGGREGATE="$TARGET_PATH/$AGGREGATE_NAME/aggregate"
+		fi
+
+		WORKING_COPY="/tmp/$RANDOM-aggregate-working-copy"
+
+		rm -rf $WORKING_COPY
+
+		svn co --depth immediates $TARGET_AGGREGATE $WORKING_COPY
+
+		bash -c "cd $WORKING_COPY; cp $SVN_EXTERNALS_FILE svn.externals; svn propset svn:externals -F svn.externals . ; svn commit -m\"$COMMIT_MESSAGE\""
+
+		echo "applied"
+
+		
+	else
+		echo "failed"
+
+	fi
 fi
+
+# now if that worked we should be able to set the svn externals
+
