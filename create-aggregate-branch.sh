@@ -13,7 +13,7 @@ usage () {
 		echo "ERROR: $MSG"
 	fi
 
-	echo "USAGE: <ks-api branch> <aggregate name> <modules> <in_branches:0 or 1>  <source branch> <commit message> <source revision> [<source prefix> <target prefix: like sandbox> ]"
+	echo "USAGE: <ks-api branch> <aggregate name> <modules> <in_branches:0 or 1>  <source branch> <commit message> <source revision> <recreate branches:0 or 1> [<source prefix> <target prefix: like sandbox> ]"
 	echo "<ks-api branch>: either trunk or branches/some_branch"
 	echo "<aggregate name>: in branches mode this is the name of the branch for each module.  i.e. ks-enroll/brances/aggregate_name"
 	echo "<modules>:non-api based modules to apply"
@@ -21,6 +21,7 @@ usage () {
 	echo "<source branch>: trunk or branches/source-branch"
 	echo "<commit message>: commit message to use"
 	echo "<source revision>: 0 will find out the current revision. >0 will use the indicated revision."
+	echo "<recreate branches>:1 will deleted any existing feature branch and replace it with the source branch"
 	echo "<source_prefix>: optional. enrollment or sandbox or contrib/CM"
 	echo "<target_prefix>: optional. enrollment or sandbox or contrib/CM"
 	exit 1
@@ -80,7 +81,14 @@ then
 	usage "Missing Source Revision"
 fi
 
-SOURCE_PREFIX=$8
+REPLACE_EXISTING_BRANCHES=$8
+
+if test -z "$REPLACE_EXISTING_BRANCHES"
+then
+	usage "Missing Replace Existing Branches"
+fi
+
+SOURCE_PREFIX=$9
 
 SOURCE_PATH=""
 
@@ -91,7 +99,7 @@ else
 	SOURCE_PATH="$REPOSITORY/$SOURCE_PREFIX"
 fi
 
-TARGET_PREFIX=$9
+TARGET_PREFIX=${10}
 
 TARGET_PATH=""
 
@@ -119,6 +127,34 @@ CMD_FILE=/tmp/$RANDOM.dat
 #echo "CMD_FILE=$CMD_FILE"
 
 printf "$SVNMUCC_CMD " > $CMD_FILE
+
+if test 1 -eq $REPLACE_EXISTING_BRANCHES
+then
+	printf "rm " >> $CMD_FILE
+
+	if test $IN_BRANCH == "1"
+	then
+		printf "    $TARGET_PATH/ks-api/branches/$AGGREGATE_NAME " >> $CMD_FILE
+
+	else
+		printf "    $TARGET_PATH/$AGGREGATE_NAME/ks-api  " >> $CMD_FILE
+	fi
+
+	for M in $MODULES
+	do
+		printf "rm " >> $CMD_FILE
+
+		if test $IN_BRANCH == "1"
+		then
+			printf "    $TARGET_PATH/$M/branches/$AGGREGATE_NAME " >> $CMD_FILE
+
+		else
+			printf "    $TARGET_PATH/$AGGREGATE_NAME/$M " >> $CMD_FILE
+		fi
+
+	done
+
+fi
 
 printf "cp $SOURCE_REV $SOURCE_PATH/ks-api/$API_SOURCE " >> $CMD_FILE
 
