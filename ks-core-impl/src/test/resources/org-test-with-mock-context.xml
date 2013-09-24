@@ -10,10 +10,22 @@
           class="org.kuali.student.r2.core.organization.service.impl.OrganizationServiceMockImpl">
     </bean>
 
-
     <bean id="organizationDataLoader"
           class="org.kuali.student.r2.core.organization.service.OrganizationServiceDataLoader" autowire="default">
         <property name="orgService" ref="organizationService"/>
     </bean>
+
+    <bean id="orgAuthorizationService" class="org.kuali.student.r2.core.organization.service.decorators.OrganizationServiceAuthorizationDecorator">
+        <property name="nextDecorator" ref="organizationService" />
+        <property name="permissionService"  ref="roleAndPermissionService" />
+    </bean>
+
+    <bean id="organizationPermissionLoader"
+          class="org.kuali.student.r2.core.organization.service.OrgPermissionDataLoader"  autowire="default">
+    </bean>
+
+
+    <bean id="roleAndPermissionService" class="org.kuali.student.kim.permission.mock.RoleAndPermissionServiceMockImpl"/>
+
 </beans>
 

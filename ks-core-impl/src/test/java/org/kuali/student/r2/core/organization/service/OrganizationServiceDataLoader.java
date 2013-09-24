@@ -51,7 +51,7 @@ public class OrganizationServiceDataLoader extends AbstractMockServicesAwareData
 
     private static final Logger LOGGER = KSLog4JConfigurer.getLogger(OrganizationServiceDataLoader.class);
 
-    @Resource
+    @Resource(name = "organizationService")
     private OrganizationService orgService = new OrganizationServiceMockImpl();
 
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
@@ -109,6 +109,28 @@ public class OrganizationServiceDataLoader extends AbstractMockServicesAwareData
         }
     }
 
+    public OrgInfo generateOrg() throws ParseException {
+        OrgInfo orgInfo = new OrgInfo();
+        RichTextInfo shortDescr = new RichTextInfo();
+        shortDescr.setPlain("Description for new OrgInfo ");
+        shortDescr.setFormatted("Description for new OrgInfo ");
+        orgInfo.setShortDescr(shortDescr);
+        RichTextInfo longDescr = new RichTextInfo();
+        longDescr.setPlain("Loooooooooong description for new OrgInfo ");
+        longDescr.setFormatted("Loooooooooong description for new OrgInfo ");
+        orgInfo.setLongDescr(longDescr);
+        orgInfo.setLongName("TestOrgLongName");
+        orgInfo.setShortName("TestOrgShortName");
+        orgInfo.setStateKey(ACTIVE_STATE);
+        orgInfo.setTypeKey(OrganizationServiceConstants.ORGANIZATION_DEPARTMENT_TYPE_KEY);
+        orgInfo.setEffectiveDate(dateFormat.parse("20090101"));
+        orgInfo.setExpirationDate(dateFormat.parse("21001231"));
+        orgInfo.setAttributes(new ArrayList<AttributeInfo>());
+        new AttributeTester().add2ForCreate(orgInfo.getAttributes());
+
+        return orgInfo;
+    }
+
     private void createOrgHierarchies() throws ParseException, DataValidationErrorException, PermissionDeniedException, OperationFailedException, InvalidParameterException, ReadOnlyException, MissingParameterException, DoesNotExistException {
         createOrgHierarchy('A', "1", OrganizationServiceConstants.ORGANIZATION_CAMPUS_TYPE_KEY,
                 ORG_RELATION_ACAD_PARENT_TYPE, ORG_RELATION_ACAD_COLLABORATES_WITH_TYPE);
@@ -140,6 +162,25 @@ public class OrganizationServiceDataLoader extends AbstractMockServicesAwareData
         LOGGER.debug("Creating org hierarchy with ID {}", hierarchyInfo.getId());
 
         orgService.createOrgHierarchy(typeKey, hierarchyInfo,  context);
+    }
+
+    public OrgHierarchyInfo generateOrgHierarchy() throws ParseException {
+        OrgHierarchyInfo hierarchyInfo = new OrgHierarchyInfo();
+        hierarchyInfo.setEffectiveDate(dateFormat.parse("20090101"));
+        hierarchyInfo.setExpirationDate(dateFormat.parse("21001231"));
+        RichTextInfo descr = new RichTextInfo();
+        descr.setPlain("hierarchy plain");
+        descr.setFormatted("Loooooooooong description for new OrgHierarchyInfo");
+        hierarchyInfo.setDescr(descr);
+        hierarchyInfo.setStateKey(ACTIVE_STATE);
+        hierarchyInfo.setAttributes(new ArrayList<AttributeInfo>());
+        new AttributeTester().add2ForCreate(hierarchyInfo.getAttributes());
+
+        hierarchyInfo.setName("Hierarchy");
+        hierarchyInfo.setTypeKey(OrganizationServiceConstants.ORGANIZATION_CAMPUS_TYPE_KEY);
+        hierarchyInfo.setRootOrgId("1");
+
+        return hierarchyInfo;
     }
 
     private void createOrgOrgRelations() throws DoesNotExistException, PermissionDeniedException, ParseException, OperationFailedException, InvalidParameterException, ReadOnlyException, MissingParameterException, DataValidationErrorException {
@@ -187,6 +228,21 @@ public class OrganizationServiceDataLoader extends AbstractMockServicesAwareData
         orgService.createOrgOrgRelation(orgId, relatedOrgId, relationType, info, context);
     }
 
+    public OrgOrgRelationInfo generateOrgOrgRelationInfo() throws ParseException {
+        OrgOrgRelationInfo info = new OrgOrgRelationInfo();
+        info.setOrgId("2");
+        info.setRelatedOrgId("3");
+        info.setTypeKey(ORG_RELATION_ACAD_PARENT_TYPE);
+
+        info.setEffectiveDate(dateFormat.parse("20090101"));
+        info.setExpirationDate(dateFormat.parse("21001231"));
+
+        info.setAttributes(new ArrayList<AttributeInfo>());
+        new AttributeTester().add2ForCreate(info.getAttributes());
+
+        return info;
+    }
+
     private void createOrgPersonRelations() throws ParseException, PermissionDeniedException, DataValidationErrorException, InvalidParameterException, ReadOnlyException, OperationFailedException, MissingParameterException, DoesNotExistException {
         for(int i = 1; i <= 20; i++) {
             OrgPersonRelationInfo info = new OrgPersonRelationInfo();
@@ -219,6 +275,22 @@ public class OrganizationServiceDataLoader extends AbstractMockServicesAwareData
                 orgService.createOrgPersonRelation(String.valueOf(i), String.valueOf(j), ORG_PERSON_RELATION_MEMBER_TYPE, info, context);
             }
         }
+    }
+
+    public OrgPersonRelationInfo generateOrgPersonRelation() throws ParseException {
+        OrgPersonRelationInfo info = new OrgPersonRelationInfo();
+        info.setPersonId("12345679");
+        info.setOrgId("1");
+        info.setEffectiveDate(dateFormat.parse("20090101"));
+        info.setExpirationDate(dateFormat.parse("21001231"));
+
+        info.setAttributes(new ArrayList<AttributeInfo>());
+        new AttributeTester().add2ForCreate(info.getAttributes());
+
+        info.setStateKey(ACTIVE_STATE);
+        info.setTypeKey(ORG_PERSON_RELATION_MEMBER_TYPE);
+
+        return info;
     }
 
     private void createOrgPositionRestrictions() throws DoesNotExistException, PermissionDeniedException, OperationFailedException, InvalidParameterException, AlreadyExistsException, ReadOnlyException, MissingParameterException, DataValidationErrorException {
@@ -261,5 +333,26 @@ public class OrganizationServiceDataLoader extends AbstractMockServicesAwareData
             new AttributeTester().add2ForCreate(info.getAttributes());
             orgService.createOrgPositionRestriction(String.valueOf(i), ORG_PERSON_RELATION_MEMBER_TYPE, info, context);
         }
+    }
+
+    public OrgPositionRestrictionInfo generateOrgPositionRestriction() {
+        OrgPositionRestrictionInfo info = new OrgPositionRestrictionInfo();
+        info.setOrgId("5");
+        info.setOrgPersonRelationTypeKey(ORG_PERSON_RELATION_PRESIDENT_TYPE);
+        info.setMinNumRelations(1);
+        info.setMaxNumRelations(1);
+        RichTextInfo descr = new RichTextInfo();
+        descr.setPlain("Position for President");
+        descr.setFormatted("Position for President (formatted)");
+        info.setDescr(descr);
+        info.setTitle("Mr. President");
+        TimeAmountInfo timeInfo = new TimeAmountInfo();
+        timeInfo.setTimeQuantity(1);
+        timeInfo.setAtpDurationTypeKey(AtpServiceConstants.DURATION_YEAR_TYPE_KEY);
+        info.setStdDuration(timeInfo);
+        info.setAttributes(new ArrayList<AttributeInfo>());
+        new AttributeTester().add2ForCreate(info.getAttributes());
+
+        return info;
     }
 }

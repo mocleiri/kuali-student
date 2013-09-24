@@ -66,7 +66,7 @@ public abstract class TestOrganizationServiceImplConformanceBaseCrud {
 	// SETUP
 	// ====================
 	
-	@Resource
+	@Resource(name = "organizationService")
 	public OrganizationService testService;
 	public OrganizationService getOrganizationService() { return testService; }
 	public void setOrganizationService(OrganizationService service) { testService = service; }

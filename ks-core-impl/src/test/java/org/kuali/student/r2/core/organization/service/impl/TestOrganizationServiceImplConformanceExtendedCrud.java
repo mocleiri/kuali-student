@@ -77,7 +77,7 @@ import static org.junit.Assert.fail;
 public class TestOrganizationServiceImplConformanceExtendedCrud extends TestOrganizationServiceImplConformanceBaseCrud 
 {
 
-    @Resource
+    @Resource(name = "organizationDataLoader")
     protected OrganizationServiceDataLoader dataLoader;
 
 

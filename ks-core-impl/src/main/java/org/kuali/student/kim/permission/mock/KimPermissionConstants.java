@@ -11,6 +11,14 @@ package org.kuali.student.kim.permission.mock;
 public class KimPermissionConstants {
 
     /**
+     * Kim Type IDs
+     * These are used to control the comparison of qualifiers
+     * The default one does a simple match, i.e. no hierarchy checks
+     */
+    public static final String DEFAULT_KIM_TYPE_ID = "0";
+    public static final String KRAD_VIEW_KIM_TYPE_ID = "68";
+
+    /**
      * Namespaces
      */
     public static final String KS_ENROLLMENT_NAMESPACE = "KS-ENRL";
@@ -19,6 +27,12 @@ public class KimPermissionConstants {
     public static final String KUALI_NAMESPACE = "KUALI";
     public static final String KR_WORKFLOW_NAMESPACE = "KR-WKFLW";
     public static final String KR_IDM_NAMESPACE = "KR-IDM";
+
+    /**
+     * Attribute definition
+     */
+    public static final String VIEW_ID_ATTR_DEFINITION = "viewId";
+
     /**
      * org permission templates
      */
