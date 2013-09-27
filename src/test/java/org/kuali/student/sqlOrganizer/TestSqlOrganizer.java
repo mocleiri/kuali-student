@@ -9,9 +9,12 @@ import org.junit.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -27,8 +30,10 @@ import static org.junit.Assert.assertTrue;
 public class TestSqlOrganizer {
     private String subProject;
     private String module;
+    private List<String> unparsableStmts;
 
-    public enum TableModule {
+
+    public enum DatabaseModule {
         // ENUM(module.endsWith)
         RICE("Rice", "rice-sql"),
         KSCM("KS Curriculum Managment", "lum-sql"),
@@ -39,7 +44,7 @@ public class TestSqlOrganizer {
         private final String label;
         private final String endsWith;
 
-        private TableModule(String label, String endsWith) {
+        private DatabaseModule(String label, String endsWith) {
             this.label = label;
             this.endsWith = endsWith;
         }
@@ -79,55 +84,148 @@ public class TestSqlOrganizer {
         return sqlStatements.split("\n\\s*" + "/" + "\\s*" + "(\n|\\Z)");
     }
 
+    @Before
+    public void init() {
+        this.unparsableStmts = new ArrayList<String>();
+    }
+
+    @After
+    public void printSummary() {
+        if (this.unparsableStmts.size() > 0) {
+            System.out.println("\n\nUnparsable Statements");
+            StringBuilder sbStmts = new StringBuilder();
+            for (String stmt : this.unparsableStmts) {
+                sbStmts.append(stmt + "\n/\n");
+            }
+            System.out.println(sbStmts);
+        }
+    }
+
     @Test
-    public void testProcessFiles() throws IOException {
+    public void testUnparsables() throws IOException {
+        processSqlFile("unparsables.sql");
+    }
+
+    @Test
+    public void testEnrollProcessFiles() throws IOException {
         String projectPath = "C:\\data\\development\\intellijProjects\\enr-1.0-aggregate";
         subProject = "ks-enroll";
         module = subProject + "-sql";
+        testProcessFiles(projectPath);
+    }
+
+    @Test
+    public void testLumProcessFiles() throws IOException {
+        String projectPath = "C:\\data\\development\\intellijProjects\\enr-1.0-aggregate";
+        subProject = "ks-lum";
+        module = subProject + "-sql";
+        testProcessFiles(projectPath);
+    }
+
+    @Test
+    public void testCoreProcessFiles() throws IOException {
+        String projectPath = "C:\\data\\development\\intellijProjects\\enr-1.0-aggregate";
+        subProject = "ks-core";
+        module = subProject + "-sql";
+        testProcessFiles(projectPath);
+    }
+
+    @Test
+    public void testRiceProcessFiles() throws IOException {
+        String projectPath = "C:\\data\\development\\intellijProjects\\enr-1.0-aggregate";
+        subProject = "ks-core";
+        module = "ks-rice-sql";
+        testProcessFiles(projectPath);
+    }
+
+
+    private void testProcessFiles(String projectPath) throws IOException {
         String modulePath = projectPath + "\\" + subProject + "\\" + module;
         String resourceListingFile =  modulePath + "\\target\\classes\\META-INF\\org\\kuali\\student\\" + module + "\\oracle\\other.resources";
+
 
         BufferedReader br = new BufferedReader(new FileReader(resourceListingFile));
         String sqlFile;
         while ((sqlFile = br.readLine()) != null) {
-            sqlFile = sqlFile.replace("classpath:",modulePath + "\\src\\main\\resources\\");
+            // use contents of resource file to get list of file names
+            sqlFile = sqlFile.replace("classpath:", modulePath + "\\src\\main\\resources\\");
             processSqlFile(sqlFile);
         }
         br.close();
     }
 
-    public void processSqlFile(String sqlFile) throws IOException {
+    public void processSqlFile(String sqlFile) {
         System.out.println("parsing file: " + sqlFile);
-        String sqlStatments = fileToString(sqlFile);
+        try {
+            processSqlStatements(sqlFile);
+        } catch (IOException e) {
+            System.out.println ("**************************************\n" +
+                                "*         ERROR READING FILE         *\n" +
+                                "**************************************\n" +
+                                "\n");
+            e.printStackTrace();
 
-        processSqlStatements(sqlStatments);
+        }
     }
 
     private String fileToString(String sqlFile) throws IOException {
-        byte[] encoded = Files.readAllBytes(Paths.get(sqlFile));
+        byte[] encoded;
+        try {
+            encoded = Files.readAllBytes(Paths.get(sqlFile));
+        } catch (NoSuchFileException nsfe) {
+            // check resources
+            URL resource = Thread.currentThread().getContextClassLoader().getResource(sqlFile);
+            if (resource == null) {
+                throw new NoSuchFileException("File not found: " + sqlFile);
+            }
+            try {
+                encoded = Files.readAllBytes(Paths.get(resource.toURI()));
+            } catch (URISyntaxException urise) {
+                throw new IOException(urise);
+            }
+        }
         return StandardCharsets.UTF_8.decode(ByteBuffer.wrap(encoded)).toString();
     }
 
-    private void processSqlStatements(String sqlStatments) {
+    // excepts fully qualified paths or
+    private void processSqlStatements(String sqlFile) throws IOException {
+        String sqlStatments = fileToString(sqlFile);
         String[] statements = splitStatements(sqlStatments);
+        Map<DatabaseModule, List<String>> locationMap = new HashMap<DatabaseModule, List<String>>();
         System.out.println("num of statements in file: " + statements.length);
         for (String statement : statements) {
-            Map<TableModule, List> tableReport = new HashMap<TableModule, List>();
+            Map<DatabaseModule, List> tableMap = new HashMap<DatabaseModule, List>();
 
             List<String> tableNames = null;
             try {
                 tableNames = getTableNamesForStatement(statement);
 
                 for (String table : tableNames) {
-                    addItemToReport(tableReport, table);
+                    addItemToTableMap(tableMap, table);
                 }
 
-                String report = getTableReport(tableReport);
-                if (report.length() > 0) {
-                    System.out.println(report);
+                Set<Map.Entry<DatabaseModule,List>> entries = tableMap.entrySet();
+                if (entries.size() == 1) {
+                    Map.Entry<DatabaseModule,List> entry = entries.iterator().next();
+                    if (!tableTypeBelongs(entry.getKey())) {
+                        if (entry.getKey() == DatabaseModule.EXCEPTION) {
+                            List<String> tables = entry.getValue();
+                            System.out.println("Exception mapping table(s) to module: " + tables);
+                        } else {
+                            System.out.println("Stmt moving to: " + entry.getKey().getEndsWith());
+                        }
+                    }
+                } else {
+                    System.out.println("Stmt contains more than one module reference");
                 }
+
+//                String report = getTableReport(tableMap);
+//                if (report.length() > 0) {
+//                    System.out.println(report);
+//                }
             } catch (StandardException e) {
                 System.out.println("Error parsing statement: " + statement);
+                this.unparsableStmts.add(statement);
                 System.out.println(e);  //To change body of catch statement use File | Settings | File Templates.
             }
         }
@@ -151,22 +249,22 @@ public class TestSqlOrganizer {
     }
 
 
-    private String getTableReport(Map<TableModule, List> tableReport) {
-        Set<TableModule> keys = tableReport.keySet();
+    private String getTableReport(Map<DatabaseModule, List> tableMap) {
+        Set<Map.Entry<DatabaseModule,List>> entries = tableMap.entrySet();
         StringBuilder report = new StringBuilder();
-        if (keys.size() == 1) {
-            TableModule key = keys.iterator().next();
-            if (!tableTypeBelongs(key)) {
-                List<String> tables = tableReport.get(key);
+        if (entries.size() == 1) {
+            Map.Entry<DatabaseModule,List> entry = entries.iterator().next();
+            if (!tableTypeBelongs(entry.getKey())) {
+                List<String> tables = entry.getValue();
                 report.append ("statement contains tables that belong in another module. " + tables.toString() + "\n");
             }
-        } else if (keys.size() == 0 ) {
+        } else if (entries.size() == 0 ) {
             report.append ("No table found in statement");
         } else {
             report.append("ERROR statement contains multiple table modules." + "\n");
-            for (TableModule key : keys) {
-                List<String> tables = tableReport.get(key);
-                report.append(key.getLabel() + " " + tables.toString() + "\n");
+            for (Map.Entry<DatabaseModule,List> entry : entries) {
+                List<String> tables = tableMap.get(entry.getKey());
+                report.append(entry.getKey().getLabel() + " " + tables.toString() + "\n");
             }
 
         }
@@ -175,7 +273,7 @@ public class TestSqlOrganizer {
         return report.toString();
     }
 
-    private boolean tableTypeBelongs(TableModule tableType) {
+    private boolean tableTypeBelongs(DatabaseModule tableType) {
         if (module.endsWith(tableType.getEndsWith())) {
             return true;
         }
@@ -183,8 +281,8 @@ public class TestSqlOrganizer {
     }
 
 
-    private void addItemToReport(Map<TableModule, List> tableReport, String table) {
-        TableModule category = getTableModule(table);
+    private void addItemToTableMap(Map<DatabaseModule, List> tableReport, String table) {
+        DatabaseModule category = getTableModule(table);
 
 
         List contents = tableReport.get(category);
@@ -195,17 +293,17 @@ public class TestSqlOrganizer {
         tableReport.put(category,contents);
     }
 
-    private TableModule getTableModule(String table) {
+    private DatabaseModule getTableModule(String table) {
         if (isRiceTable(table)) {
-            return TableModule.RICE;
+            return DatabaseModule.RICE;
         } else if (isCMTable(table)) {
-            return TableModule.KSCM;
+            return DatabaseModule.KSCM;
         } else if (isEnrTable(table)) {
-            return TableModule.KSENR;
+            return DatabaseModule.KSENR;
         } else if (isKSTable(table)) {
-            return TableModule.KSCORE;
+            return DatabaseModule.KSCORE;
         } else {
-            return TableModule.EXCEPTION;
+            return DatabaseModule.EXCEPTION;
         }
 
 
