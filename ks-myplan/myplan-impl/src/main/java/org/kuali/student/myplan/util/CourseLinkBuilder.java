@@ -56,6 +56,10 @@ public class CourseLinkBuilder {
     String courseRegex = "^([A-Z][A-Z &]{2,7}) ([1-9][0-9][0-9])";
     Pattern coursePattern = Pattern.compile(courseRegex);
 
+    // matches "ABC100"
+    String courseNoSpaceRegex = "^([A-Z][A-Z &]{2,7})([1-9][0-9][0-9])";
+    Pattern courseNoSpacePattern = Pattern.compile(courseNoSpaceRegex);
+
     // matches "ABC/XYZ 100"
     String jointRegex = "^([A-Z][A-Z &]{2,7})((/|\\\\)([A-Z][A-Z &]{2,7}))+ ([1-9][0-9][0-9])";
     Pattern jointPattern = Pattern.compile(jointRegex);
@@ -115,6 +119,21 @@ public class CourseLinkBuilder {
 
             // Linkify
             m = coursePattern.matcher(partial);
+            if (m.find()) {
+                int end = nth + m.end();
+                String skipped = line.substring(start, nth);
+                sb.append(skipped);
+                String found = line.substring(nth, end);
+                subject = m.group(1);
+                String num = m.group(2);
+                String link = makeLink(subject, num, found);
+                sb.append(link);
+                nth = start = end;
+                continue;
+            }
+
+            // Linkify
+            m = courseNoSpacePattern.matcher(partial);
             if (m.find()) {
                 int end = nth + m.end();
                 String skipped = line.substring(start, nth);

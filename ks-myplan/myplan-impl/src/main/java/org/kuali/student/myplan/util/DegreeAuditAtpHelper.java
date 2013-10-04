@@ -31,7 +31,14 @@ public class DegreeAuditAtpHelper {
                             AcademicCalendarServiceConstants.SERVICE_NAME_LOCAL_PART));
         }
         return academicCalendarService;
-    }*/
+    }
+
+    public static void setAcademicCalendarService(AcademicCalendarService academicCalendarService) {
+        DegreeAuditAtpHelper.academicCalendarService = academicCalendarService;
+    }
+
+    */
+
 
 
     /*

@@ -3,7 +3,6 @@ package org.kuali.student.myplan.academicplan.service;
 import org.kuali.student.r2.common.constants.CommonServiceConstants;
 import org.kuali.student.r2.common.util.constants.LuServiceConstants;
 
-
 /**
  * kmuthu Don't forget to add comment
  *
