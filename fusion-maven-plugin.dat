@@ -1,0 +1,8 @@
+# module = ks-api branch Path = enrollment/ks-api/branches/CM-KRAD-rice-2.3.0-2 revision = 57245
+ks-api::enrollment_ks-api_branches_CM-KRAD-rice-2.3.0-2::9242336243f7d3ed5c404e06eaa9c80db637e2dd
+# module = ks-core branch Path = enrollment/ks-core/branches/CM-KRAD-rice-2.3.0-2 revision = 57245
+ks-core::enrollment_ks-core_branches_CM-KRAD-rice-2.3.0-2::e6c812f8dab0f7c7e1bb1ea79848f0d471678441
+# module = ks-lum branch Path = enrollment/ks-lum/branches/CM-KRAD-rice-2.3.0-2 revision = 57245
+ks-lum::enrollment_ks-lum_branches_CM-KRAD-rice-2.3.0-2::f32d14b8e2396f49c64c10b6fc90e30df34142e8
+# module = ks-deployments branch Path = enrollment/ks-deployments/branches/CM-KRAD-rice-2.3.0-2 revision = 57245
+ks-deployments::enrollment_ks-deployments_branches_CM-KRAD-rice-2.3.0-2::b2b471823a39f42d4a6d9b704131407aafd4f573
