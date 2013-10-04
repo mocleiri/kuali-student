@@ -144,6 +144,18 @@ public class CommentServiceMapImpl implements MockService, CommentService
 		throw new OperationFailedException ("searchForComments has not been implemented");
 	}
 	
+    @Override
+    public CommentInfo createComment_KRAD(String referenceId, String referenceTypeKey, String commentTypeKey, CommentInfo commentInfo, ContextInfo contextInfo)
+        throws DataValidationErrorException,
+        DoesNotExistException,
+        InvalidParameterException,
+        MissingParameterException,
+        OperationFailedException,
+        PermissionDeniedException,
+        ReadOnlyException {
+        return createComment(referenceId, referenceTypeKey, commentTypeKey, commentInfo, contextInfo);
+    }
+
 	@Override
 	public CommentInfo createComment(String referenceId, String referenceTypeKey, String commentTypeKey, CommentInfo commentInfo, ContextInfo contextInfo)
 		throws DataValidationErrorException
@@ -247,6 +259,17 @@ public class CommentServiceMapImpl implements MockService, CommentService
 	@Override
 	public List<ValidationResultInfo> validateComment(String validationTypeKey, String referenceId,
                                                       String referenceTypeKey, String commentTypeKey, CommentInfo commentInfo, ContextInfo contextInfo)
+		throws DoesNotExistException
+		      ,InvalidParameterException
+		      ,MissingParameterException
+		      ,OperationFailedException
+	{
+		// VALIDATE
+		return new ArrayList<ValidationResultInfo> ();
+	}
+
+	@Override
+	public List<ValidationResultInfo> validateComment_KRAD(String validationTypeKey, CommentInfo commentInfo, ContextInfo contextInfo)
 		throws DoesNotExistException
 		      ,InvalidParameterException
 		      ,MissingParameterException
