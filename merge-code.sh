@@ -2,7 +2,7 @@
 
 # merge-code.sh
 # Written by Orlando Ramirez (orlando.ramirezmartinez@utoronto.ca)
-# Tries to merge code 
+# The script merges code from a temp merge-branch created.
 #
 
 #Define variables
