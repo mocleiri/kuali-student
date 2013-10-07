@@ -7,7 +7,7 @@
 
 #Define variables
 debug=0
-version="1.0.0"
+version="1.0.1"
 
 #Define configuration variables
 
@@ -63,19 +63,24 @@ function exit_error(){
 function check_variables(){
 dbgprint ${FUNCNAME[0]}
 
-echo 1 cf ${CURRENT_FEATURE}
-echo 2 mp ${MERGE_PATH}
-echo 3 t ${TRUNK_PATH}
+dbgprint -c: ${CURRENT_FEATURE}
+dbgprint -m: ${MERGE_PATH}
+dbgprint -t: ${TRUNK_PATH}
 
 if  `svn ls ${CURRENT_FEATURE} > /dev/null 2>&1` ; then
     dbgprint "Variable CURRENT_FEATURE is verified"
     if `svn ls ${TRUNK_PATH} > /dev/null 2>&1` ; then
 	dbgprint "Variable TRUNK_PATH is verified"
+	if [ -z ${MERGE_PATH} ] ; then
+	    exit_error "${FUNCNAME[0]}" 7 "Argument (-m) is missing."
+	else
+	    dbgprint "Variable MERGE_PATH is verified"
+	fi
     else
-	exit_error "${FUNCNAME[0]}" 2 "Svn Trunk (-t) not defined correctly"
+	exit_error "${FUNCNAME[0]}" 2 "Argument (-t) is missing or not defined correctly"
     fi
 else
-    exit_error "${FUNCNAME[0]}" 1 "Svn Current_Feature (-c) not defined correctly"
+    exit_error "${FUNCNAME[0]}" 1 "Argument (-c) is missing or not defined correctly"
 fi
 
 }
@@ -83,6 +88,9 @@ fi
 function clean_repository(){
 dbgprint ${FUNCNAME[0]}
 
+dir_temp=`echo ${MERGE_PATH##*/}`
+
+#check SVN merge directory
 if `svn ls ${MERGE_PATH} > /dev/null 2>&1` ; then
     svn delete ${MERGE_PATH} -m "Deleted merge-test repository"
     if [ $? -ne 0 ]; then
@@ -90,6 +98,13 @@ if `svn ls ${MERGE_PATH} > /dev/null 2>&1` ; then
     fi
 else
     dbgprint "MERGE_PATH repo doesn't exist"
+fi
+
+#check SVN local directory
+if [ -d "$dir_temp" ]; then
+    rm -rf ${dir_temp}
+else
+    dbgprint "The directory: ${dir_temp} does not exist."
 fi
  
 }
@@ -123,8 +138,20 @@ merge_dir=`echo ${MERGE_PATH##*/}`
 cd ${merge_dir}
 
 svn merge -q --non-interactive ${TRUNK_PATH}
-if [ $? -ne 0 ]; then 
+if [ $? -ne 0 ]; then
+    echo " "
+    echo "--- Merge Conflicts ---"
+    echo " " 
     svn status | grep ^C
+    echo " "
+    echo "----------------------"
+    echo " "
+    echo "--- Tree Conflicts ---"
+    echo " " 
+    svn status | grep -A 1 ^!
+    echo " " 
+    echo "----------------------"
+    echo " "
     exit_error "${FUNCNAME[0]}" 6 "Script detected an error while doing the merge. Please check."
 else
     echo "Code Merged"
@@ -137,6 +164,10 @@ shortopts="c:m:t:"
 longopts="current_feature: merge_path: version help debug trunk:"
 args=`getopt -n$0 -u -a -q --options="$shortopts"  --longoptions="$longopts" "h" "$@"`
 set -- $args || usage
+
+if [ $# -eq 2 ]; then
+    usage
+fi
 
 while [ $# -gt 0 ]
 do 
