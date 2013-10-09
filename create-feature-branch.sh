@@ -13,15 +13,16 @@ usage () {
 		echo "ERROR: $MSG"
 	fi
 
-	echo "USAGE: <ks-api branch> <aggregate name> <modules> <in_branches:0 or 1>  <source branch> <commit message> <source revision> <recreate branches:0 or 1> [<source prefix> <target prefix: like sandbox> ]"
-	echo "<ks-api branch>: either trunk or branches/some_branch"
+	echo "USAGE: <ks-api branch> <aggregate name> <modules> <in_branches:0 or 1>  <source branch> <commit message> <source revision> <recreate branches:0 or 1> <apply aggregate svn:externals: 0 or 1> [<source prefix> <target prefix: like sandbox> ]"
+	echo "<ks-api source branch>: either trunk or branches/some_branch"
 	echo "<aggregate name>: in branches mode this is the name of the branch for each module.  i.e. ks-enroll/brances/aggregate_name"
-	echo "<modules>:non-api based modules to apply"
+	echo "<modules>: non-api based modules to apply, none if only api"
 	echo "<in_branches>:1 if $module/branches/aggregate_name is the target module location. 0 if $module is the target location. use 0 for sandbox based aggregates."
 	echo "<source branch>: trunk or branches/source-branch"
 	echo "<commit message>: commit message to use"
 	echo "<source revision>: 0 will find out the current revision. >0 will use the indicated revision."
 	echo "<recreate branches>:1 will deleted any existing feature branch and replace it with the source branch"
+	echo "<apply aggregate svn:externals> 0 will not apply; 1 will apply svn:externals for the modules in the aggregate."
 	echo "<source_prefix>: optional. enrollment or sandbox or contrib/CM"
 	echo "<target_prefix>: optional. enrollment or sandbox or contrib/CM"
 	exit 1
@@ -88,7 +89,16 @@ then
 	usage "Missing Replace Existing Branches"
 fi
 
-SOURCE_PREFIX=$9
+APPLY_AGGREGATE_EXTERNALS=$9
+
+if test -z "$APPLY_AGGREGATE_EXTERNALS"
+then
+	usage "Missing Apply Aggregate Externals Setting"
+fi
+
+
+
+SOURCE_PREFIX=${10}
 
 SOURCE_PATH=""
 
@@ -99,7 +109,7 @@ else
 	SOURCE_PATH="$REPOSITORY/$SOURCE_PREFIX"
 fi
 
-TARGET_PREFIX=${10}
+TARGET_PREFIX=${11}
 
 TARGET_PATH=""
 
@@ -164,6 +174,11 @@ then
 
 	for M in $MODULES
 	do
+		if test "$M" == "none"
+		then
+			continue
+		fi
+
 		printf "rm " >> $CMD_FILE
 
 		if test $IN_BRANCH == "1"
@@ -194,6 +209,10 @@ fi
 
 for M in $MODULES
 do
+	if test "$M" == "none"
+	then
+		continue
+	fi
 
 	if test "$M" != "aggregate"
 	then
@@ -227,8 +246,13 @@ printf " -m \"$COMMIT_MESSAGE\"" >> $CMD_FILE
 
 printf "\nSVN COMMAND:\n"
 cat $CMD_FILE
-printf "\nSVN EXTERNALS\n"
-cat $SVN_EXTERNALS_FILE
+
+if test 1 -eq $APPLY_AGGREGATE_EXTERNALS
+then
+
+	printf "\nSVN EXTERNALS\n"
+	cat $SVN_EXTERNALS_FILE
+fi
 
 printf "\nApply Change (y/n)"
 
@@ -240,29 +264,34 @@ then
 
 	R=$?
 
+
 	if test 0 -eq $R
 	then
-
-		TARGET_AGGREGATE=""
-
-		if test $IN_BRANCH == "1"
+	
+		if test 1 -eq $APPLY_AGGREGATE_EXTERNALS
 		then
-			TARGET_AGGREGATE="$TARGET_PATH/aggregate/branches/$AGGREGATE_NAME"
 
-		else
-			TARGET_AGGREGATE="$TARGET_PATH/$AGGREGATE_NAME/aggregate"
+			TARGET_AGGREGATE=""
+
+			if test $IN_BRANCH == "1"
+			then
+				TARGET_AGGREGATE="$TARGET_PATH/aggregate/branches/$AGGREGATE_NAME"
+
+			else
+				TARGET_AGGREGATE="$TARGET_PATH/$AGGREGATE_NAME/aggregate"
+			fi
+
+			WORKING_COPY="/tmp/$RANDOM-aggregate-working-copy"
+
+			rm -rf $WORKING_COPY
+
+			svn co --depth immediates $TARGET_AGGREGATE $WORKING_COPY
+
+			bash -c "cd $WORKING_COPY; cp $SVN_EXTERNALS_FILE svn.externals; svn propset svn:externals -F svn.externals . ; svn commit -m\"$COMMIT_MESSAGE\""
+
 		fi
 
-		WORKING_COPY="/tmp/$RANDOM-aggregate-working-copy"
-
-		rm -rf $WORKING_COPY
-
-		svn co --depth immediates $TARGET_AGGREGATE $WORKING_COPY
-
-		bash -c "cd $WORKING_COPY; cp $SVN_EXTERNALS_FILE svn.externals; svn propset svn:externals -F svn.externals . ; svn commit -m\"$COMMIT_MESSAGE\""
-
 		echo "applied"
-
 		
 	else
 		echo "failed"
