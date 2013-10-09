@@ -45,6 +45,7 @@ import org.kuali.student.enrollment.coursewaitlist.service.CourseWaitListService
 import org.kuali.student.r2.common.datadictionary.DataDictionaryValidator;
 import org.kuali.student.r2.common.dto.BulkStatusInfo;
 import org.kuali.student.r2.common.dto.ContextInfo;
+import org.kuali.student.r2.common.dto.StatusInfo;
 import org.kuali.student.r2.common.dto.ValidationResultInfo;
 import org.kuali.student.r2.common.exceptions.AlreadyExistsException;
 import org.kuali.student.r2.common.exceptions.DataValidationErrorException;
@@ -61,6 +62,7 @@ import org.kuali.student.r2.common.util.constants.CourseOfferingServiceConstants
 import org.kuali.student.r2.common.util.constants.CourseWaitListServiceConstants;
 import org.kuali.student.r2.common.util.constants.LuiServiceConstants;
 import org.kuali.student.r2.core.acal.dto.TermInfo;
+import org.kuali.student.r2.core.class1.search.ActivityOfferingSearchServiceImpl;
 import org.kuali.student.r2.core.class1.type.dto.TypeInfo;
 import org.kuali.student.r2.core.class1.type.dto.TypeTypeRelationInfo;
 import org.kuali.student.r2.core.class1.type.service.TypeService;
@@ -168,6 +170,35 @@ public class CourseOfferingServiceFacadeImpl implements CourseOfferingServiceFac
     }
 
     @Override
+    public int getAoClusterCountByFoId(String foId, ContextInfo contextInfo) throws MissingParameterException,
+            InvalidParameterException,
+            OperationFailedException,
+            PermissionDeniedException{
+
+        int iRet = 0;
+
+        SearchRequestInfo request = new SearchRequestInfo(ActivityOfferingSearchServiceImpl.AO_CLUSTER_COUNT_BY_FO_SEARCH_KEY);
+
+        request.addParam(ActivityOfferingSearchServiceImpl.SearchParameters.FO_ID, foId);
+
+        SearchResultInfo searchResult = getSearchService().search(request, contextInfo);
+        for (SearchResultRowInfo row : searchResult.getRows()) {
+            for (SearchResultCellInfo cell : row.getCells()) {
+                if (ActivityOfferingSearchServiceImpl.SearchResultColumns.AO_CLUSTER_COUNT.equals(cell.getKey())) {
+                    String aoClusterCount = cell.getValue();
+
+                    if(aoClusterCount != null){
+                        iRet = Integer.valueOf(aoClusterCount);
+                    }
+                }
+            }
+        }
+
+        return iRet;
+
+    }
+
+    @Override
     public ActivityOfferingClusterInfo createDefaultCluster(String foId, ContextInfo context)
             throws PermissionDeniedException,
             MissingParameterException,
@@ -176,10 +207,9 @@ public class CourseOfferingServiceFacadeImpl implements CourseOfferingServiceFac
             DoesNotExistException,
             ReadOnlyException,
             DataValidationErrorException {
-        // TODO: KSENROLL-9931 Would prefer a count method here
-        List<ActivityOfferingClusterInfo> clusters =
-                coService.getActivityOfferingClustersByFormatOffering(foId, context);
-        if (clusters != null && !clusters.isEmpty()) {
+
+        int clusterCount = getAoClusterCountByFoId(foId, context);
+        if (clusterCount != 0 ) {
             throw new OperationFailedException("Cluster already exists");
         }
         FormatOfferingInfo fo = coService.getFormatOffering(foId, context);
@@ -350,12 +380,19 @@ public class CourseOfferingServiceFacadeImpl implements CourseOfferingServiceFac
             //create if Final Exam Driver has been selected for the FO
             TypeInfo typeAO = getTypeService().getType(created.getTypeKey(), context);
             FormatOfferingInfo fo = getCoService().getFormatOffering(aoInfo.getFormatOfferingId(), context);
-            TypeInfo typeFEO = getTypeService().getType(fo.getFinalExamLevelTypeKey(), context);
-            if (typeAO.getName().equals(typeFEO.getName())){
-                this.getExamOfferingServiceFacade().generateFinalExamOfferingForAO(created, aoInfo.getTermId(), examPeriodID, new ArrayList<String>(), context);
+            if (fo.getFinalExamLevelTypeKey() != null) {
+                TypeInfo typeFEO = getTypeService().getType(fo.getFinalExamLevelTypeKey(), context);
+                if (typeAO.getName().equals(typeFEO.getName())){
+                    StatusInfo statusInfo = this.getExamOfferingServiceFacade().generateFinalExamOfferingForAO(created, aoInfo.getTermId(), examPeriodID, new ArrayList<String>(), context);
+                    aoResult.getExamOfferingsGenerated().setSuccess(statusInfo.getIsSuccess());
+                } else {
+                    aoResult.getExamOfferingsGenerated().setSuccess(Boolean.FALSE);
+                }
+            } else {
+                aoResult.getExamOfferingsGenerated().setSuccess(Boolean.FALSE);
             }
-        }else{
-            aoResult.getExamOfferingsGenerated().setSuccess(Boolean.FALSE);
+        } else{
+            aoResult.getExamPeriodStatus().setSuccess(Boolean.FALSE);
         }
 
 
@@ -443,12 +480,19 @@ public class CourseOfferingServiceFacadeImpl implements CourseOfferingServiceFac
             //create if Final Exam Driver has been selected for the FO
             TypeInfo typeAO = getTypeService().getType(copyAoInfo.getTypeKey(), context);
             FormatOfferingInfo fo = getCoService().getFormatOffering(copyAoInfo.getFormatOfferingId(), context);
-            TypeInfo typeFEO = getTypeService().getType(fo.getFinalExamLevelTypeKey(), context);
-            if (typeAO.getName().equals(typeFEO.getName())){
-                this.getExamOfferingServiceFacade().generateFinalExamOfferingForAO(copyAoInfo, copyAoInfo.getTermId(), examPeriodID, new ArrayList<String>(), context);
+            if (fo.getFinalExamLevelTypeKey() != null) {
+                TypeInfo typeFEO = getTypeService().getType(fo.getFinalExamLevelTypeKey(), context);
+                if (typeAO.getName().equals(typeFEO.getName())){
+                    StatusInfo statusInfo = this.getExamOfferingServiceFacade().generateFinalExamOfferingForAO(copyAoInfo, copyAoInfo.getTermId(), examPeriodID, new ArrayList<String>(), context);
+                    aoResult.getExamOfferingsGenerated().setSuccess(statusInfo.getIsSuccess());
+                } else {
+                    aoResult.getExamOfferingsGenerated().setSuccess(Boolean.FALSE);
+                }
+            } else {
+                aoResult.getExamOfferingsGenerated().setSuccess(Boolean.FALSE);
             }
-        }else{
-            aoResult.getExamOfferingsGenerated().setSuccess(Boolean.FALSE);
+        } else{
+            aoResult.getExamPeriodStatus().setSuccess(Boolean.FALSE);
         }
 
         return aoResult;
@@ -566,7 +610,7 @@ public class CourseOfferingServiceFacadeImpl implements CourseOfferingServiceFac
                             courseWaitListInfoNew.setFormatOfferingIds(new ArrayList<String>());
                             courseWaitListInfoNew.getActivityOfferingIds().add(aoId);
                             courseWaitListInfoNew.getFormatOfferingIds().add(foId);
-                            courseWaitListInfoNew = getCourseWaitListService().createCourseWaitList(CourseWaitListServiceConstants.COURSE_WAIT_LIST_WAIT_TYPE_KEY,
+                            getCourseWaitListService().createCourseWaitList(CourseWaitListServiceConstants.COURSE_WAIT_LIST_WAIT_TYPE_KEY,
                                     courseWaitListInfoNew, context);
                         }
                         if (courseWaitListInfo.getFormatOfferingIds().contains(foId)) {
@@ -1126,7 +1170,7 @@ public class CourseOfferingServiceFacadeImpl implements CourseOfferingServiceFac
 
         request.setMaxResults(1);
 
-        SearchResultInfo results = searchService.search(request, context);
+        SearchResultInfo results = getSearchService().search(request, context);
 
         if (results.getRows().size() == 0) {
             // handle the no match case (This probably should never happen but this guards against such a case causing problems)
@@ -1290,5 +1334,13 @@ public class CourseOfferingServiceFacadeImpl implements CourseOfferingServiceFac
 
     public void setExamOfferingServiceFacade(ExamOfferingServiceFacade examOfferingServiceFacade) {
         this.examOfferingServiceFacade = examOfferingServiceFacade;
+    }
+
+    public SearchService getSearchService() {
+        return searchService;
+    }
+
+    public void setSearchService(SearchService searchService) {
+        this.searchService = searchService;
     }
 }
