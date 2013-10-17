@@ -1,10 +1,12 @@
-# module = ks-api branch Path = enrollment/ks-api/branches/KSAP revision = 41042
-ks-api::enrollment_ks-api_branches_KSAP::8da363aab04a01f232b84b5d0b2ef78b8502604d
-# module = ks-core branch Path = enrollment/ks-core/branches/KSAP revision = 41042
-ks-core::enrollment_ks-core_branches_KSAP::43a993da9a6ba3932bd02b777ffeb8d7dc574d40
-# module = ks-lum branch Path = enrollment/ks-lum/branches/KSAP revision = 41042
-ks-lum::enrollment_ks-lum_branches_KSAP::10678dc0884c55a8352287786fbf23368a6d01fc
-# module = ks-enroll branch Path = enrollment/ks-enroll/branches/KSAP revision = 41042
-ks-enroll::enrollment_ks-enroll_branches_KSAP::a6786098260141ee71a6a880d8ba8c210922463e
-# module = ks-deployments branch Path = enrollment/ks-deployments/branches/KSAP revision = 41042
-ks-deployments::enrollment_ks-deployments_branches_KSAP::dc50eae46dfc4962c2b80411437d99b8f6b394d2
+# module = ks-ap branch Path = enrollment/ks-ap/tags/builds/ks-ap-0.8/0.8.0-KSAP/build-4 revision = 58248
+ks-ap::enrollment_ks-ap_tags_builds_ks-ap-0.8_0.8.0-KSAP_build-4::a14a9dd32a7d7b1b20abc7ad8a9bbb2e9615cad9
+# module = ks-api branch Path = enrollment/ks-api/tags/builds/ks-api-2.0/2.0.0-M7-KSAP/build-4 revision = 58248
+ks-api::enrollment_ks-api_tags_builds_ks-api-2.0_2.0.0-M7-KSAP_build-4::b24fd8953ca26349ed63a788a0b6dc0be446d3eb
+# module = ks-core branch Path = enrollment/ks-core/tags/builds/ks-core-2.0/2.0.0-M7-KSAP/build-4 revision = 58248
+ks-core::enrollment_ks-core_tags_builds_ks-core-2.0_2.0.0-M7-KSAP_build-4::3a25a96a9c6ccfbd3cc6a30d12e7dd4860418773
+# module = ks-deployments branch Path = enrollment/ks-deployments/tags/builds/ks-deployments-2.0/2.0.0-M7-KSAP/build-4 revision = 58248
+ks-deployments::enrollment_ks-deployments_tags_builds_ks-deployments-2.0_2.0.0-M7-KSAP_build-4::4236c712f4bb709b7cb26585fc458f1646019118
+# module = ks-enroll branch Path = enrollment/ks-enroll/tags/builds/ks-enroll-1.0/1.0.0-M7-KSAP/build-4 revision = 58248
+ks-enroll::enrollment_ks-enroll_tags_builds_ks-enroll-1.0_1.0.0-M7-KSAP_build-4::328c7ed9899d226ade003023aa486349b705a14e
+# module = ks-lum branch Path = enrollment/ks-lum/tags/builds/ks-lum-2.0/2.0.0-M7-KSAP/build-4 revision = 58248
+ks-lum::enrollment_ks-lum_tags_builds_ks-lum-2.0_2.0.0-M7-KSAP_build-4::9d949984e304d81f999673ec352e0e48746687b2
