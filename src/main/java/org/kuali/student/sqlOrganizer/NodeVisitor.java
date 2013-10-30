@@ -1,6 +1,7 @@
 package org.kuali.student.sqlOrganizer;
 
 import com.akiban.sql.StandardException;
+import com.akiban.sql.parser.AlterTableNode;
 import com.akiban.sql.parser.DMLModStatementNode;
 import com.akiban.sql.parser.FromTable;
 import com.akiban.sql.parser.InsertNode;
@@ -26,6 +27,13 @@ public class NodeVisitor implements Visitor {
         tableNames = new ArrayList<String>();
         node.accept(this);
         return tableNames;
+    }
+
+    public Visitable visit(AlterTableNode alterTableNode) throws StandardException {
+        if (alterTableNode.getObjectName() != null) {
+            tableNames.add(alterTableNode.getObjectName().getTableName().toUpperCase());
+        }
+        return alterTableNode;
     }
 
     public Visitable visit(FromTable fromTable) throws StandardException {

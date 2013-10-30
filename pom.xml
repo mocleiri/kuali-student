@@ -25,6 +25,21 @@
             <artifactId>junit</artifactId>
             <version>4.11</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kuali.common</groupId>
+            <artifactId>kuali-jdbc</artifactId>
+            <version>3.1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kuali.common</groupId>
+            <artifactId>kuali-util</artifactId>
+            <version>4.4.4</version>
+        </dependency>
     </dependencies>
     
 </project>
