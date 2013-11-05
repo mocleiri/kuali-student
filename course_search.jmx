@@ -1725,13 +1725,6 @@ createTable(&apos;u466_line0&apos;, {aoColumnDefs:[{&quot;sType&quot; : &quot;st
                   <stringProp name="Argument.metadata">=</stringProp>
                   <boolProp name="HTTPArgument.use_equals">true</boolProp>
                 </elementProp>
-                <elementProp name="sessionId" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.name">sessionId</stringProp>
-                  <stringProp name="Argument.value">3B559DE5912162F04AE14C9923ECE0AA</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                </elementProp>
                 <elementProp name="flowKey" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">flowKey</stringProp>

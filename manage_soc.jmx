@@ -1078,12 +1078,6 @@
                   <stringProp name="Argument.value"></stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
-                <elementProp name="sessionId" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
-                  <stringProp name="Argument.name">sessionId</stringProp>
-                  <stringProp name="Argument.value">1C043DF623C5D32D1C31E5032C874328</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                </elementProp>
                 <elementProp name="flowKey" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.name">flowKey</stringProp>
