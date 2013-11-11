@@ -13,12 +13,12 @@ usage () {
 		echo "ERROR: $MSG"
 	fi
 
-	echo "USAGE: <ks-api branch> <aggregate name> <modules> <in_branches:0 or 1>  <source branch> <commit message> <source revision> <recreate branches:0 or 1> <apply aggregate svn:externals: 0 or 1> [<source prefix> <target prefix: like sandbox> ]"
+	echo "USAGE: <ks-api branch> <aggregate name> <modules> <in_branches:0 or 1>  <source branches> <commit message> <source revision> <recreate branches:0 or 1> <apply aggregate svn:externals: 0 or 1> [<source prefix> <target prefix: like sandbox> ]"
 	echo "<ks-api source branch>: either trunk or branches/some_branch"
 	echo "<aggregate name>: in branches mode this is the name of the branch for each module.  i.e. ks-enroll/brances/aggregate_name"
 	echo "<modules>: non-api based modules to apply, none if only api"
 	echo "<in_branches>:1 if $module/branches/aggregate_name is the target module location. 0 if $module is the target location. use 0 for sandbox based aggregates."
-	echo "<source branch>: trunk or branches/source-branch"
+	echo "<source branches>: trunk or branches/source-branch or space separated list of module:path elements."
 	echo "<commit message>: commit message to use"
 	echo "<source revision>: 0 will find out the current revision. >0 will use the indicated revision."
 	echo "<recreate branches>:1 will deleted any existing feature branch and replace it with the source branch"
@@ -27,6 +27,44 @@ usage () {
 	echo "<target_prefix>: optional. enrollment or sandbox or contrib/CM"
 	exit 1
 
+}
+
+# Extract the path for the module given.
+
+#
+# input: "module:path <space> module:path" target_module
+#
+# returns the path for the target_module
+#
+extractModulePath () {
+
+	ARGS=$1
+	
+	TARGET_MOD=$2
+
+	
+	echo "$ARGS" | grep ":" 2>&1 >/dev/null
+	R=$?
+
+	
+	if test $R == 1
+	then
+		# no module specified
+		echo "$ARGS"
+	else
+	
+		for P in $ARGS; do
+
+
+			MOD=$(echo "$P" | cut -d: -f 1)
+			MOD_PATH=$(echo "$P" | cut -d: -f 2)
+
+			if test "$MOD" == "$TARGET_MOD"
+			then 
+				echo "$MOD_PATH"
+			fi
+		done
+	fi
 }
 
 SVNMUCC_CMD=svnmucc
@@ -221,7 +259,16 @@ do
 	fi
 
 	# printf "module = $M"
-	printf "cp $SOURCE_REV $SOURCE_PATH/$M/$SOURCE_BRANCH " >> $CMD_FILE
+
+	SOURCE_MOD_BRANCH=$(extractModulePath "$SOURCE_BRANCH" $M)
+
+	if test -z "$SOURCE_MOD_BRANCH"
+	then
+		echo "ERROR: no source branch for module: $M"
+		exit 1;
+	fi
+
+	printf "cp $SOURCE_REV $SOURCE_PATH/$M/$SOURCE_MOD_BRANCH " >> $CMD_FILE
 
 	if test $IN_BRANCH == "1"
 	then
@@ -292,6 +339,8 @@ then
 		fi
 
 		echo "applied"
+
+		echo "REMEMBER to CHANGE the POM Version for the new Aggregate"
 		
 	else
 		echo "failed"
