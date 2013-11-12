@@ -1,4 +1,5 @@
 @pending
+#feature file development in progress
 Feature: Black.Course Search
 
   Background:
@@ -20,4 +21,4 @@ Feature: Black.Course Search
     Then the course should appear in the search results
     And click clear button
     Then  entry should be cleared successfully
-  CCO 2.12A
+  #CCO 2.12A
