@@ -14,7 +14,6 @@ Feature: Black.Course Search
 
   Scenario:  Clear search result
     When I enter the course in the search field
-    Then the course should appear in search results
     And I clear the search entry
     Then the search entry should be cleared
 

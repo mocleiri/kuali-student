@@ -4,6 +4,11 @@ Given /^I am logged in as a Student$/ do
 end
 =end
 
+And /^I am on the KSAP Course Search Page$/ do
+  on KSFunctionalHome do |page|
+    page.course_search_home
+  end
+end
 
 When /^I search for a course$/ do
   on CourseSearch do |page|
@@ -28,15 +33,12 @@ end
 
 
 When /^I enter the course in the search field$/ do
-  pending # express the regexp above with the code you wish you had
+  on CourseSearch do |page|
+    page.course_search "ENGL101"
+end
 end
 
 
-And /^I am on the KSAP Course Search Page$/ do
-  on KSFunctionalHome do |page|
-    page.course_search_home
-  end
-end
 
 
 Then /^the course (.*) appear in search results$/ do |arg|
