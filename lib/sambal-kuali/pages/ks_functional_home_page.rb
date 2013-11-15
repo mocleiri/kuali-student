@@ -1,7 +1,11 @@
 class KSFunctionalHome < BasePage
 
-  page_url "#{$test_site}/kr-krad/launch?methodToCall=start&viewId=ksFunctionalHomeView"
+  page_url "#{$test_site}/portal.do"
   wrapper_elements
+
+  element(:course_search_link) { |b| b.link(text: "KSAP Course Search")}
+  action(:course_search_home) { |b| b.course_search_link.click }
+
 
   element(:enrollment_link) { |b| b.div(id: "KS-StudentHome-Enrollment") }
   action(:enrollment_home) { |b| b.enrollment_home_link.click }
@@ -15,12 +19,17 @@ class KSFunctionalHome < BasePage
   element(:login_button) { |b| b.button(:value=>"Login") }
   #action(:logout) { |b| b.button(value: "Logout").click }
 
+  element(:search_for_course) { |b| b.frm.select(name: "searchQuery") }
+
+
+
   def login_with username, password
     username_field.set username
     password_field.set password
     login_button.click
-    enrollment_link.wait_until_present
-    sleep 5
+    #enrollment_link.wait_until_present
+    course_search_link.wait_until_present
+    sleep 2
   end
 
 
@@ -33,4 +42,6 @@ class KSFunctionalHome < BasePage
     end
     user
   end
+
+
 end
