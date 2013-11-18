@@ -1,18 +1,12 @@
-=begin
-Given /^I am logged in as a Student$/ do
-  pending # express the regexp above with the code you wish you had
-end
-=end
-
 And /^I am on the KSAP Course Search Page$/ do
   on KSFunctionalHome do |page|
     page.course_search_home
   end
 end
 
-When /^I search for a course$/ do
+When /^I search for a course "(.*?)"$/ do |arg|
   on CourseSearch do |page|
-    page.course_search "ENGL101"
+    page.course_search arg
     page.search
   end
 
@@ -41,16 +35,24 @@ end
 
 
 
-Then /^the course (.*) appear in search results$/ do |arg|
+Then /^the course "(.*?)" (.*) appear in search results$/ do |arg1, arg2|
   on CourseSearch do |page|
-    if arg == "should"
-      page.results_list.should include "ENGL101"
+    if arg2 == "should"
+      page.results_list.should include arg1
     else
       begin
-        page.results_list.should_not include "ENGL101"
+        page.results_list.should_not include arg1
       rescue Watir::Exception::UnknownObjectException
         # Implication here is that there were no search results at all.
       end
     end
   end
+end
+
+
+And /^the search results list should be cleared successfully$/ do
+  on CourseSearch do |page|
+        page.results_list == nil
+  end
+
 end
