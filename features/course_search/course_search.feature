@@ -1,5 +1,5 @@
 @pending
-Feature: Black.Course Search
+Feature: BT.Course Search
 
   Background:
     Given I am logged in as a Student
