@@ -3,19 +3,18 @@ Feature: BT.Course Search
 
   Background:
     Given I am logged in as a Student
-    And I am on the KSAP Course Search Page
 
-  Scenario:  Search for a course
-    When I search for a course "ENGL101"
-    Then the course "ENGL101" should appear in search results
+  Scenario: Successfully search for a course and clear search results
+    When I search for a course
+    Then the course should appear in the search results
     And I clear the search entry
-    And the search entry should be cleared
+    And the search entry should be cleared successfully
     And the search results list should be cleared successfully
 
-  Scenario:  Clear search entry
+  Scenario: Clear search entry before searching
     When I enter the course in the search field
     And I clear the search entry
-    Then the search entry should be cleared
+    Then the search entry should be cleared successfully
 
 
 #CCO 2.12A

@@ -1,44 +1,31 @@
-And /^I am on the KSAP Course Search Page$/ do
-  on KSFunctionalHome do |page|
-    page.course_search_home
-  end
+When /^I search for a course$/ do
+  @course_offering = make CourseOffering
+  @course_offering.navigate_to_course_search_home
+  @course_offering.set_search_entry
+  @course_offering.course_search
 end
-
-When /^I search for a course "(.*?)"$/ do |arg|
-  on CourseSearch do |page|
-    page.course_search arg
-    page.search
-  end
-
- end
-
 
 Then /^I clear the search entry$/ do
-  on CourseSearch do |page|
-    page.clear
-  end
+@course_offering.clear_search_entry
+ end
+
+Then /^the search entry should be cleared successfully$/ do
+     @course_offering.verify_search_entry_clear
 end
 
-Then /^the search entry should be cleared$/ do
-  on CourseSearch do |page|
-    page.course_code_clear
-  end
-end
 
 
 When /^I enter the course in the search field$/ do
-  on CourseSearch do |page|
-    page.course_search "ENGL101"
+@course_offering = make CourseOffering
+@course_offering.navigate_to_course_search_home
+@course_offering.set_search_entry
 end
-end
 
 
-
-
-Then /^the course "(.*?)" (.*) appear in search results$/ do |arg1, arg2|
+Then /^the course (.*) appear in the search results$/ do |test_condition|
   on CourseSearch do |page|
-    if arg2 == "should"
-      page.results_list.should include arg1
+    if test_condition == "should"
+      page.results_list.should include @course_offering.course_code
     else
       begin
         page.results_list.should_not include arg1
@@ -51,8 +38,5 @@ end
 
 
 And /^the search results list should be cleared successfully$/ do
-  on CourseSearch do |page|
-        page.results_list == nil
-  end
-
+  @course_offering.verify_search_result_clear
 end

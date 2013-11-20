@@ -14,10 +14,6 @@ class CourseSearch < BasePage
 
   COURSE_CODE = 0
 
-  def course_search ccode
-    search_for_course.set ccode
-    loading.wait_while_present
-  end
 
  def results_list
    list = []
@@ -28,8 +24,5 @@ class CourseSearch < BasePage
    list
  end
 
- def course_code_clear
-    search_for_course.text == ""
- end
 
 end
