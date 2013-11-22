@@ -3,6 +3,18 @@ class BasePage < PageFactory
   class << self
 
     def wrapper_elements
+#KSAP  Elements
+      element(:course_search_home_view) { |b| b.frm.div(id="Uif-Application") }
+      element(:course_search_header) { |b| b.frm.div(id="Uif-ApplicationHeader-Wrapper")}
+      element(:course_search_footer) { |b| b.frm.form(id="kualiForm")  }
+
+
+# KSAP header
+      action(:plan) { |b| b.frm.link(text: "Plan").click }
+      action(:find_courses) { |b| b.frm.link(text: "Find Courses").click }
+      action(:audit_degree) { |b| b.frm.link(text: "Audit Degree").click }
+
+
       element(:logout_el) { |b| b.link(text: "Logout") }
       action(:logout) { |b| b.logged_in_link.click; b.logout_el.click }
 
@@ -23,7 +35,7 @@ class BasePage < PageFactory
     def frame_element
       #element(:frm) { |b| b.frame(id: "iframeportlet") }
       element(:frm) { |b| b } #with iframe removed
-    end
+      end
 
     def green_search_buttons
       action(:search) { |b| b.frm.button(text: "Search").click; b.loading.wait_while_present } # Persistent ID needed!
@@ -48,4 +60,6 @@ class BasePage < PageFactory
       element(:frm_popup) { |b| b.frame(:class=>"fancybox-iframe")}
     end
   end
-end
+  end
+
+
