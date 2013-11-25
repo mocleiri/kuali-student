@@ -341,6 +341,7 @@ then
 		echo "applied"
 
 		echo "REMEMBER to CHANGE the POM Version for the new Aggregate"
+		echo "REMEMBER to CHANGE the SCM path to the aggregate branch.  Use the branch name not the pom version."
 		
 	else
 		echo "failed"
