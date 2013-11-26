@@ -3,7 +3,11 @@
 module Workflows
 
   # Site Navigation helpers...
-
+  def navigate_to_course_search_home
+    on KSFunctionalHome do |page|
+      page.course_search_home
+    end
+  end
 
 
 

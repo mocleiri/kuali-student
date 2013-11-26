@@ -1,7 +1,7 @@
 class CourseSearch < BasePage
 
   page_url "#{$test_site}myplan/course?methodToCall=start&viewId=CourseSearch-FormView"
-  #expected_element :name
+
 
   wrapper_elements
   frame_element
