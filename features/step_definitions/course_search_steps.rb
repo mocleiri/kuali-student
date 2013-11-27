@@ -16,7 +16,7 @@ end
 
 Then /^the search entry should be cleared successfully$/ do
   on CourseSearch do |page|
-       page.search_for_course == ""
+       page.search_for_course.text.should == ""
     end
 
 end
@@ -38,6 +38,6 @@ end
 
 And /^the search results list should be cleared successfully$/ do
   on CourseSearch do |page|
-    page.results_list == ""
+    page.results_list.text.should == ""
   end
 end
