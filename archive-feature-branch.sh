@@ -159,7 +159,7 @@ then
 
 		svn co --depth immediates $ARCHIVED_AGGREGATE_BRANCH $WORKING_COPY
 
-		bash -c "cd $WORKING_COPY; cp $SVN_EXTERNALS_FILE svn.externals; svn propset svn:externals -F svn.externals . ; svn commit -m\"$COMMIT_MESSAGE\""
+		bash -c "cd $WORKING_COPY && cp $SVN_EXTERNALS_FILE svn.externals && svn propset svn:externals -F svn.externals . && svn commit -m\"$COMMIT_MESSAGE\""
 
 	fi
 
