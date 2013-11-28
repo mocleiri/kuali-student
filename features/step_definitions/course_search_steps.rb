@@ -38,6 +38,6 @@ end
 
 And /^the search results list should be cleared successfully$/ do
   on CourseSearch do |page|
-    page.results_list.text.should == ""
+    page.results_list.should == []
   end
 end

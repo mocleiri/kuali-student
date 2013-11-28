@@ -21,6 +21,7 @@ class CourseSearch < BasePage
      list << row[COURSE_CODE].text
    end
    list.delete_if { |item| item == "Code" }
+   list.delete_if {|item| item == "" }
    list
  end
 
