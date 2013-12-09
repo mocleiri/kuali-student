@@ -1,4 +1,4 @@
-@pending
+@nightly
 Feature: BT.Course Search
 
   Background:
