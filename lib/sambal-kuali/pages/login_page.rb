@@ -1,7 +1,6 @@
 class Login < PageFactory
 
-  #page_url "#{$test_site}/portal.do?selectedTab=main"
-  page_url "#{$test_site}/kr-krad/launch?viewId=enrollmentHomeView&methodToCall=start"
+  page_url "#{$test_site}/portal.do?selectedTab=main"
 
   element(:username_field) { |b| b.text_field(:name=>"j_username") }
   element(:password_field) { |b| b.text_field(:name=>"j_password") }

@@ -4,7 +4,7 @@ module Workflows
 
   # Site Navigation helpers...
   def navigate_to_course_search_home
-    on KSFunctionalHome do |page|
+    on KSRicePortal do |page|
       page.course_search_home
     end
   end
@@ -14,7 +14,7 @@ module Workflows
   def log_in(user, pwd)
     current_user = ""
 
-    visit KSFunctionalHome do |page|
+    visit KSRicePortal do |page|
       current_user = page.current_logged_in_user_id
       if current_user == :no_user
         page.login_with user, pwd
