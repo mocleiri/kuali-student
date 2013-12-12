@@ -8,7 +8,7 @@ class CourseOffering
   include Comparable
 
 
-
+  COURSE_ARRAY = 0
   attr_accessor :course_code
 
   # initialize is generally called using TestFactory Foundry .make or .create methods
@@ -16,7 +16,7 @@ class CourseOffering
     @browser = browser
 
     defaults = {
-        :course_code=>"ENGL101"
+        :course_code=>"ENGL"
     }
     options = defaults.merge(opts)
     set_options(options)
@@ -47,6 +47,14 @@ class CourseOffering
     end
   end
 
+  def various_input_option(text)
+    navigate_to_course_search_home
+    on CourseSearch do |page|
+    page.search_for_course.set(text)
+    page.search
+    end
+  end
 
 
-end
+
+  end

@@ -22,8 +22,12 @@ class CourseSearch < BasePage
    end
    list.delete_if { |item| item == "Code" }
    list.delete_if {|item| item == "" }
+   STDERR.puts "array is #{list.inspect}"
    list
  end
 
+ def modified_list
+   results_list
 
+ end
 end
