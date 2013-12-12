@@ -16,7 +16,7 @@ class CourseOffering
     @browser = browser
 
     defaults = {
-        :course_code=>"ENGL"
+        :course_code=>"ENGL101"
     }
     options = defaults.merge(opts)
     set_options(options)

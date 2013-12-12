@@ -16,15 +16,16 @@ Feature: BT.Course Search
     And I clear the search entry
     Then the search entry should be cleared successfully
 
-  @pending
-  #KSAP-241, KSAP-321
-    Scenario Outline: Successfully list any course with search text
+
+    #KSAP-241, KSAP-321
+
+   Scenario Outline: Successfully list any course with search text
     When I search for a course with "<text>" text option
     Then courses containing  "<verify>" text option appears
-    Examples:
-      | text   | verify |
-      | ENGL   | ENGL   |
-      | ENGL1XX| ENGL1|
-      | ENGLISH| ENGL|
+      Examples:
+          | text   | verify |
+          | ENGL   | ENGL   |
+          | ENGL1XX| ENGL1  |
+          | ENGLISH| ENGL   |
 
 
