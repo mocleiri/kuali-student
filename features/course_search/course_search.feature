@@ -19,7 +19,7 @@ Feature: BT.Course Search
 
     #KSAP-241, KSAP-321
 
-   Scenario Outline: Successfully list any course with search text
+   Scenario Outline: CS1.0.1 Successfully list any course with search text
     When I search for a course with "<text>" text option
     Then courses containing  "<verify>" text option appears
       Examples:
