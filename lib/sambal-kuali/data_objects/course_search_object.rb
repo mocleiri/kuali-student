@@ -32,29 +32,18 @@ class CourseOffering
   end
 
 
-  def course_search
+  def course_search (text=@course_code)
     navigate_to_course_search_home
     on CourseSearch do |page|
-    page.search_for_course.set @course_code
+    page.search_for_course.set text
     page.search
     end
   end
-
 
   def clear_search
     on CourseSearch do |page|
       page.clear
     end
   end
-
-  def various_input_option(text)
-    navigate_to_course_search_home
-    on CourseSearch do |page|
-    page.search_for_course.set(text)
-    page.search
-    end
-  end
-
-
 
   end

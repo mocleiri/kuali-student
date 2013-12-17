@@ -26,7 +26,23 @@ class CourseSearch < BasePage
    list
  end
 
- def modified_list
+  def results_list_courses (verify)
+  # on CourseSearch do |page|
+      final= Array.new
+       puts results_list
+      final<<results_list.map! {|x| x.slice(0,4) }
+      final.each {|e| puts e
+      if e.include? (verify)
+        puts true
+      else
+        puts false
+      end
+
+      }
+    end
+
+
+  def modified_list
    results_list
 
  end
