@@ -21,11 +21,11 @@ Feature: BT.Course Search
 
    Scenario Outline: CS1.0.1 Successfully list any course with search text
     When I search for a course with "<text>" text option
-    Then courses containing  "<verify>" text option appears
+    Then courses containing  "<expected>" text option appears
       Examples:
-          | text   | verify |
-          | ENGL   | ENGL   |
-          | ENGL1XX| ENGL1  |
-          | ENGLISH| ENGL   |
+          | text   | expected |
+          | ENGL   | ENGL     |
+          | ENGL1XX| ENGL1    |
+          | ENGLISH| ENGL     |
 
 

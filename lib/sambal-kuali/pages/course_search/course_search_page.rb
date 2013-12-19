@@ -18,27 +18,23 @@ class CourseSearch < BasePage
  def results_list
    list = []
    results_table.rows.each do |row|
-     list << row[COURSE_CODE].text
+   sleep(1)
+   list << row[COURSE_CODE].text
    end
    list.delete_if { |item| item == "Code" }
    list.delete_if {|item| item == "" }
-   STDERR.puts "array is #{list.inspect}"
    list
  end
 
-  def results_list_courses (verify)
-  # on CourseSearch do |page|
-      final= Array.new
-       puts results_list
-      final<<results_list.map! {|x| x.slice(0,4) }
-      final.each {|e| puts e
-      if e.include? (verify)
-        puts true
-      else
-        puts false
-      end
-
-      }
+  def results_list_courses (expected)
+      trimmed_array_list= Array.new
+      results_list
+      if expected == "ENGL"
+        trimmed_array_list<<results_list.map! {|x| x.slice(0,4) }
+        else
+          trimmed_array_list<<results_list.map! {|x| x.slice(0,5) }
+        end
+      trimmed_array_list
     end
 
 

@@ -39,9 +39,9 @@ Then /^the course (.*) appear in the search results$/ do |test_condition|
 end
 
 
-Then /^courses containing  "(.*?)" text option appears$/ do |verify|
+Then /^courses containing  "(.*?)" text option appears$/ do |expected|
   on CourseSearch do |page|
-  page.results_list_courses(verify)
+  page.results_list_courses(expected).each { |e| e.should include (expected) }
   end
   end
 
