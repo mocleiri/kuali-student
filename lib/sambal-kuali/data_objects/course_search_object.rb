@@ -34,6 +34,7 @@ class CourseOffering
 
   def course_search (text=@course_code)
     navigate_to_course_search_home
+    sleep 5
     on CourseSearch do |page|
     page.search_for_course.set text
     page.search
@@ -45,5 +46,7 @@ class CourseOffering
       page.clear
     end
   end
+
+
 
   end

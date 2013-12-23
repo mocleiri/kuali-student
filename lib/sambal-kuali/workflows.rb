@@ -9,6 +9,11 @@ module Workflows
     end
   end
 
+  def navigate_to_course_planner_home
+    on KSRicePortal do |page|
+      page.course_planner_home
+    end
+  end
 
 
   def log_in(user, pwd)
