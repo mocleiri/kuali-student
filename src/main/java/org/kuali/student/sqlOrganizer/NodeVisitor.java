@@ -2,7 +2,12 @@ package org.kuali.student.sqlOrganizer;
 
 import com.akiban.sql.StandardException;
 import com.akiban.sql.parser.AlterTableNode;
+import com.akiban.sql.parser.DDLStatementNode;
 import com.akiban.sql.parser.DMLModStatementNode;
+import com.akiban.sql.parser.DeleteNode;
+import com.akiban.sql.parser.DropIndexNode;
+import com.akiban.sql.parser.DropSequenceNode;
+import com.akiban.sql.parser.DropTableNode;
 import com.akiban.sql.parser.FromTable;
 import com.akiban.sql.parser.InsertNode;
 import com.akiban.sql.parser.Visitable;
@@ -21,15 +26,26 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class NodeVisitor implements Visitor {
+    private boolean onFirst = true;
     private List<String> tableNames;
 
-    public List<String> getTableNames(Visitable node) throws StandardException {
+    private StatementType statementType;
+
+    public void traverse(Visitable node) throws StandardException {
         tableNames = new ArrayList<String>();
         node.accept(this);
+    }
+
+    public List<String> getTableNames() throws StandardException {
         return tableNames;
     }
 
+    public StatementType getStatementType() {
+        return statementType;
+    }
+
     public Visitable visit(AlterTableNode alterTableNode) throws StandardException {
+        setStatementType(StatementType.DDL);
         if (alterTableNode.getObjectName() != null) {
             tableNames.add(alterTableNode.getObjectName().getTableName().toUpperCase());
         }
@@ -43,12 +59,31 @@ public class NodeVisitor implements Visitor {
         return fromTable;
     }
 
+    public Visitable visit(DDLStatementNode node) {
+        setStatementType(StatementType.DDL);
+        return node;
+    }
+
+    public Visitable visit(DMLModStatementNode node) {
+        setStatementType(StatementType.DML);
+        return node;
+    }
+
     // simple insert does not have have FromTable element
     public Visitable visit(InsertNode insertNode) {
+        setStatementType(StatementType.DML);
         if (insertNode.getTargetTableName() != null) {
             tableNames.add(insertNode.getTargetTableName().getTableName().toUpperCase());
         }
         return insertNode;
+    }
+
+    private void setStatementType(StatementType statementType) {
+        // only do this on the parent statement
+        if(onFirst) {
+            this.statementType = statementType;
+            onFirst = false;
+        }
     }
 
     private Method getPolymorphicMethod(Visitable node) {
@@ -74,6 +109,7 @@ public class NodeVisitor implements Visitor {
 
     @Override
     public Visitable visit(Visitable node) throws StandardException {
+
         Method downPolymorphic = getPolymorphicMethod(node);
         if (downPolymorphic != null) {
             try {

@@ -103,9 +103,10 @@ public class TestSqlOrganizer {
     }
 
     public enum DatabaseDataType {
-        REFERENCE("REFERENCE"),
+        STRUCTURE("STRUCTURE"),
         BOOTSTRAP("BOOTSTRAP"),
         MANUAL("MANUAL"),
+        REFERENCE("REFERENCE"),
         EXCEPTION("EXCEPTION"),
         MIGRATION("MIGRATION");
 
@@ -379,7 +380,7 @@ public class TestSqlOrganizer {
                 String cleanStmt = cleanStmt(statement);
 
                 List<String> tableNames = null;
-                    tableNames = getTableNamesForStatement(cleanStmt);
+                    tableNames = getTableNamesForStatement(cleanStmt).getTableNames();
 
                     DatabaseDataType dataType = getDataType(tableNames);
                     DatabaseModule module = getModule(tableNames, defaultModule);
@@ -917,40 +918,50 @@ public class TestSqlOrganizer {
     }
 
 
-    private List<String> getTableNamesForStatement(String statement){
+    private StatementInfo getTableNamesForStatement(String statement){
+        StatementType statementType = null;
         List<String> tableNames = null;
         SQLParser parser = new SQLParser();
         NodeVisitor nodeVisitor = new NodeVisitor();
         try {
             StatementNode stmt = parser.parseStatement(statement);
-            tableNames = nodeVisitor.getTableNames(stmt);
+            nodeVisitor.traverse(stmt);
+            tableNames = nodeVisitor.getTableNames();
+            statementType = nodeVisitor.getStatementType();
+        // sql parser had an issue so run attempt to handle some common scenarios.  the groups are based on the regex
         } catch (StandardException e) {
             tableNames = new ArrayList<String>();
             Matcher matcher = CNSTRT_RENAME_PATTERN.matcher(statement);
             if (matcher.find()) {
+                statementType = StatementType.DDL;
                 tableNames.add(matcher.group(3));
                 tableNames.add(matcher.group(6));
                 tableNames.add(matcher.group(8));
             } else {
                 matcher = NDX_RENAME_PATTERN.matcher(statement);
                 if (matcher.find()){
+                    statementType = StatementType.DDL;
                     tableNames.add(matcher.group(3));
                     tableNames.add(matcher.group(6));
                 } else {
                     matcher = CREATE_SEQ_PATTERN.matcher(statement);
                     if (matcher.find()) {
+                        statementType = StatementType.DDL;
                         tableNames.add(matcher.group(3));
                     } else {
                         matcher = DROP_SEQ_PATTERN.matcher(statement);
                         if (matcher.find()) {
+                            statementType = StatementType.DDL;
                             tableNames.add(matcher.group(3));
                         } else {
                             matcher = CREATE_TABLE_PATTERN.matcher(statement);
                             if (matcher.find()) {
+                                statementType = StatementType.DDL;
                                 tableNames.add(matcher.group(3));
                             } else {
                                 matcher = COMPLEX_DROP_TABLE_PATTERN.matcher(statement);
                                 if (matcher.find()) {
+                                    statementType = StatementType.DDL;
                                     tableNames.add(matcher.group(1));
                                 }
                             }
@@ -969,17 +980,25 @@ public class TestSqlOrganizer {
             }
         }
 
-        return tableNames;
+        StatementInfo statementInfo = new StatementInfo(tableNames, statementType);
+        return statementInfo;
     }
 
 
     private void checkStatement(String statement, int expectedNumTables) {
         System.out.println(statement.trim());
-        List tableNames = null;
-        tableNames = getTableNamesForStatement(statement);
+        StatementInfo statementInfo = getTableNamesForStatement(statement);
 
-        assertTrue(tableNames.size() == expectedNumTables);
-        System.out.println(tableNames.toString()+"\n");
+        assertTrue(statementInfo.getTableNames().size() == expectedNumTables);
+        if (statementInfo.getStatementType() == StatementType.DDL) {
+            System.out.print("Structure");
+        } else if (statementInfo.getStatementType() == StatementType.DML) {
+            System.out.print("Data");
+        } else {
+            System.out.print("Unknown Statement Category");
+        }
+
+        System.out.println(statementInfo.getTableNames().toString()+"\n");
     }
 
 
