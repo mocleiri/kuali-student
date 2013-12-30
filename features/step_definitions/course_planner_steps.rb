@@ -21,20 +21,24 @@ end
 
 
 And /^I view the details of the added course from edit plan item$/ do
-
+@course_offering.edit_plan_item
 end
 
 
 Then /^fixed credit and note details are displayed under the current term$/ do
-pending # express the regexp above with the code you wish you had
+#pending # express the regexp above with the code you wish you had
   #Fixed Credit Course BSCI430
   #Current Term Fall 2013
+  on CoursePlannerPage do |page|
+    page.view_cterm_course_planner_notes should == @course_offering.notes
+  end
 end
 
 Then /^the course should be added to the current term$/ do
 
   on CoursePlannerPage do |page|
     page.growl_text.should include "Course #{@course_offering.course_code} added to plan for Fall 2013"
+    sleep 2
     end
 
 

@@ -26,6 +26,7 @@ class CoursePlanner
     sleep 5
     on CoursePlannerPage do |page|
       page.current_term_add
+      sleep 2
       page.course_code_text.set @course_code
       page.notes.set @notes
       page.add_to_plan
@@ -48,11 +49,21 @@ class CoursePlanner
   end
 
   def edit_plan_item
-    on CoursePlannerPage  do |page|
-      page.course_added_to_current_term
+    on CoursePlannerPage do |page|
+      sleep 2
+      page.course_code_current_term_click
+      page.course_code_current_term_edit_plan_item_click
+      #page.click_on_ccode_current_term
+      #sleep 2
+      #page.edit_plan_item_action
+      sleep 2
+      puts page.view_cterm_course_planner_notes
+
 
     end
 
   end
 
 end
+
+
