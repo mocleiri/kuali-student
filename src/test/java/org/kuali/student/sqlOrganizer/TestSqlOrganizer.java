@@ -379,12 +379,11 @@ public class TestSqlOrganizer {
                 boolean wrongModule = false;
                 String cleanStmt = cleanStmt(statement);
 
-                List<String> tableNames = null;
-                    tableNames = getTableNamesForStatement(cleanStmt).getTableNames();
+                StatementInfo statementInfo = getTableNamesForStatement(cleanStmt);
 
-                    DatabaseDataType dataType = getDataType(tableNames);
-                    DatabaseModule module = getModule(tableNames, defaultModule);
-                    statementBuckets.get(dataType).get(module).append(statement + "\n/\n");
+                DatabaseDataType dataType = getDataType(statementInfo);
+                DatabaseModule module = getModule(statementInfo.getTableNames(), defaultModule);
+                statementBuckets.get(dataType).get(module).append(statement + "\n/\n");
 
             }
             fileReport.append("num of statements in file: " + i + "\n");
@@ -887,19 +886,24 @@ public class TestSqlOrganizer {
 
     }
 
-    private DatabaseDataType getDataType(List<String> tableNames) {
-        Map<DatabaseDataType, Boolean> tableMap = new HashMap<DatabaseDataType, Boolean>();
-        for (String table : tableNames) {
-            addTableToTypeMap(tableMap, table);
+    private DatabaseDataType getDataType(StatementInfo statementInfo) {
+        if (statementInfo.getStatementType() == StatementType.DDL) {
+            return DatabaseDataType.STRUCTURE;
+        } else {
+            List<String> tableNames = statementInfo.getTableNames();
+            Map<DatabaseDataType, Boolean> tableMap = new HashMap<DatabaseDataType, Boolean>();
+            for (String table : tableNames) {
+                addTableToTypeMap(tableMap, table);
+            }
+            if (tableMap.get(DatabaseDataType.MANUAL) != null) {
+                return DatabaseDataType.MANUAL;
+            } else if (tableMap.get(DatabaseDataType.REFERENCE) != null) {
+                return DatabaseDataType.REFERENCE;
+            } else if (tableMap.get(DatabaseDataType.BOOTSTRAP) != null) {
+                return DatabaseDataType.BOOTSTRAP;
+            }
+            return DatabaseDataType.EXCEPTION;
         }
-        if (tableMap.get(DatabaseDataType.MANUAL) != null) {
-            return DatabaseDataType.MANUAL;
-        } else if (tableMap.get(DatabaseDataType.REFERENCE) != null) {
-            return DatabaseDataType.REFERENCE;
-        } else if (tableMap.get(DatabaseDataType.BOOTSTRAP) != null) {
-            return DatabaseDataType.BOOTSTRAP;
-        }
-        return DatabaseDataType.EXCEPTION;
     }
 
     private void addTableToTypeMap(Map<DatabaseDataType, Boolean> tableMap, String table) {

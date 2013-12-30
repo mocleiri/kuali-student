@@ -10,11 +10,6 @@ package org.kuali.student.sqlOrganizer;
 public enum  StatementType {
     // STRUCTURE
     DDL,
-
     // DATA
-    DML,
-    DELETE,
-    INSERT,
-    SELECT,
-    UPDATE
+    DML;
 }
