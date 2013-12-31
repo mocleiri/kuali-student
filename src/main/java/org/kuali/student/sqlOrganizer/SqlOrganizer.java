@@ -36,7 +36,7 @@ public class SqlOrganizer {
     public List<String> unparsableStmts;
     private static final String PROJECT_PATH = "C:\\data\\development\\intellijProjects\\enr-aggregate";
 
-    private static final String OUTPUT_DIR_PATH = "C:\\data\\development\\sql-organizer-output\\";
+    public static final String OUTPUT_DIR_PATH = "C:\\data\\development\\sql-organizer-output\\";
     private static final Pattern CREATE_SEQ_PATTERN = Pattern.compile("\\s*(create|CREATE)\\s*(sequence|SEQUENCE)\\s*(\\w*)");
     private static final Pattern DROP_SEQ_PATTERN = Pattern.compile("\\s*(drop|DROP)\\s*(sequence|SEQUENCE)\\s*(\\w*)");
     private static final Pattern NDX_RENAME_PATTERN = Pattern.compile("\\s*(alter|ALTER)\\s*(index|INDEX)\\s*(\\w*)\\s*(rename|RENAME)\\s*(to|TO)\\s*(\\w*)");
@@ -163,20 +163,6 @@ public class SqlOrganizer {
         }
     }
 
-
-    public static String extractFileName( String filePathName )
-    {
-        if ( filePathName == null )
-            return null;
-
-        int slashPos = filePathName.lastIndexOf( '\\' );
-        if ( slashPos == -1 ) {
-            slashPos = filePathName.lastIndexOf( '/' );
-        }
-
-        return filePathName.substring( slashPos > 0 ? slashPos + 1 : 0 );
-    }
-
     public SqlReader getSqlReader(){
         return new DefaultSqlReader(Delimiter.DEFAULT_DELIMITER, LineSeparator.DEFAULT_VALUE, DefaultSqlReader.DEFAULT_TRIM, new Comments(false));
     }
@@ -184,7 +170,7 @@ public class SqlOrganizer {
 
     // excepts fully qualified paths only at this time
     private void processSqlStatements(String sqlFile) throws IOException {
-        String filename = extractFileName(sqlFile);
+        String filename = DirManipulationUtils.extractFileName(sqlFile);
         String milestone = extractMilestone(sqlFile);
         Map<DatabaseModule, List<String>> locationMap = new HashMap<DatabaseModule, List<String>>();
         SqlReader sqlReader = getSqlReader();
@@ -499,7 +485,7 @@ public class SqlOrganizer {
         StatementType statementType = null;
         List<String> tableNames = null;
         SQLParser parser = new SQLParser();
-        NodeVisitor nodeVisitor = new NodeVisitor();
+        SqlParserNodeVisitor nodeVisitor = new SqlParserNodeVisitor();
         try {
             StatementNode stmt = parser.parseStatement(statement);
             nodeVisitor.traverse(stmt);

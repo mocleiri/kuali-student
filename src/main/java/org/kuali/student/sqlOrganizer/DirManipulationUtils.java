@@ -1,6 +1,10 @@
 package org.kuali.student.sqlOrganizer;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,6 +27,9 @@ public class DirManipulationUtils {
 
     }
 
+    public static String getPathSeperator() {
+        return File.separator;
+    }
 
     public static void deleteDirFiles(File dir) {
         File[] files = dir.listFiles();
@@ -37,6 +44,11 @@ public class DirManipulationUtils {
 
             }
         }
+    }
+
+    public static boolean dirExists(String path) {
+        File dir = new File(path);
+        return dir.exists() && dir.isDirectory();
     }
 
     public static boolean mkDirCascaded(File path) {
@@ -81,4 +93,64 @@ public class DirManipulationUtils {
         System.out.println("deleted directory and it's contents " + dir);
     }
 
+    public static List<String> getOrderedDirPathList(String dirPath) {
+        return convertFileListToPathList(getOrderedDirList(dirPath));
+    }
+
+    private static List<String> convertFileListToPathList(List<File> fileList) {
+        List<String> filePathList = new ArrayList<String>();
+
+        for (File file : fileList) {
+            filePathList.add(file.getPath());
+        }
+
+        return filePathList;
+    }
+
+    public static List<File> getOrderedDirList(String dirPath) {
+        List<File> fileList = getOrderedFileList(dirPath);
+        List<File> dirList = new ArrayList<File>();
+
+        for (File file : fileList) {
+            if (file.isDirectory()) {
+                dirList.add(file);
+            }
+        }
+        return dirList;
+    }
+
+    private static List<File> getOrderedFileList(String dirPath) {
+        File dir = new File(dirPath);
+        List<File> fileList = new ArrayList<File>(Arrays.asList(dir.listFiles()));
+        Collections.sort(fileList);
+        return fileList;
+    }
+
+    public static List<String> getOrderedFilePathList(String dirPath) {
+        return convertFileListToPathList(getOrderedFileList(dirPath));
+    }
+
+    public static String getTargetDir(Class clazz) {
+        return clazz.getProtectionDomain().getCodeSource().getLocation().getPath();
+    }
+
+    public static String extractFileName( String filePathName )
+    {
+        if ( filePathName == null )
+            return null;
+
+        int slashPos = filePathName.lastIndexOf( '\\' );
+        if ( slashPos == -1 ) {
+            slashPos = filePathName.lastIndexOf( '/' );
+        }
+
+        return filePathName.substring( slashPos > 0 ? slashPos + 1 : 0 );
+    }
+
+    public static String appendPath(String startingPath, String additionalSubPath) {
+        if (startingPath.endsWith(getPathSeperator())) {
+            startingPath = startingPath.substring(0,startingPath.length()-1);
+        }
+        return startingPath + getPathSeperator() + additionalSubPath;
+    }
 }

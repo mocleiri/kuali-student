@@ -16,7 +16,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class TestDirManipulations {
-    public static final String TEST_OUTPUT_DIR_PATH = TestDirManipulations.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+    public static final String TEST_OUTPUT_DIR_PATH = DirManipulationUtils.getTargetDir(TestDirManipulations.class);
 
     @Test
     public void testDirManipulations() {

@@ -2,11 +2,11 @@ ALTER TABLE KSEN_LUI_IDENT ADD IDENT_LEVEL varchar2(255)
 /
 ALTER TABLE KSEN_LUI_IDENT ADD ORGID varchar2(255)
 /
---SKIP SQL ORGANIZATION
+
 --String aggregation Function (needed to group formats by the activity types)
 create or replace type vcArray as table of varchar2(4000)
 /
---SKIP SQL ORGANIZATION
+
 create or replace type string_agg_type as object
     (
        data  vcArray,
@@ -32,7 +32,7 @@ create or replace type string_agg_type as object
           return number
 );
 /
---SKIP SQL ORGANIZATION
+
 create or replace type body string_agg_type
    is
 
@@ -85,13 +85,13 @@ create or replace type body string_agg_type
 
    end;
 /
---SKIP SQL ORGANIZATION
+
 CREATE or replace
    FUNCTION stragg(input varchar2 )
    RETURN varchar2
    PARALLEL_ENABLE AGGREGATE USING string_agg_type;
 /
---SKIP SQL ORGANIZATION
+
 --Delete all the duplicated formats that don't have any LUIs attached to them
 DELETE FROM
     KSLU_CLUCLU_RELTN cr
@@ -156,7 +156,7 @@ WHERE
         AND foc=0
     )
 /
---SKIP SQL ORGANIZATION
+
 --Fix formats to point to correct version
 UPDATE KSEN_LUI updatef SET CLU_ID=
 (SELECT

@@ -143,7 +143,7 @@ public class TestSqlOrganizer {
 
     @Test
     public void testGetModule() {
-        ArrayList<String> tableNames = new ArrayList<String>();
+        List<String> tableNames = new ArrayList<String>();
         tableNames.add("KSLU_TABLE1");
         tableNames.add("KSLU_TABLE2");
         tableNames.add("KSLU_TABLE3");

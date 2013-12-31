@@ -24,4 +24,13 @@ public enum DatabaseDataType {
     public String toString() {
         return stringVal;
     }
+
+    public static DatabaseDataType getDatabaseDataType (String dataType) {
+        for (DatabaseDataType dataTypeIter : DatabaseDataType.values()) {
+            if (dataTypeIter.toString().equals(dataType)) {
+                return dataTypeIter;
+            }
+        }
+        return null;
+    }
 }
