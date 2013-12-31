@@ -25,7 +25,7 @@ import java.util.List;
  * Time: 11:32 AM
  * To change this template use File | Settings | File Templates.
  */
-public class NodeVisitor implements Visitor {
+public class SqlParserNodeVisitor implements Visitor {
     private boolean onFirst = true;
     private List<String> tableNames;
 
