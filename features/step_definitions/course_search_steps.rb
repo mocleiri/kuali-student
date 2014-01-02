@@ -10,12 +10,12 @@ When /^I enter the course in the search field$/ do
 end
 When /^I search for a course with "(.*?)" text option$/ do |text|
   @course_offering = make CourseOffering
-   @course_offering.course_search(text)
+  @course_offering.course_search(text)
 end
 
 
 Then /^I clear the search entry$/ do
-@course_offering.clear_search
+  @course_offering.clear_search
 end
 
 Then /^the search entry should be cleared successfully$/ do

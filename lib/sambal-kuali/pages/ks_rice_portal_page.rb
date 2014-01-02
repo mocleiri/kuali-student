@@ -7,7 +7,7 @@ class KSRicePortal < BasePage
   action(:course_search_home) { |b| b.course_search_link.click }
 
 
-  element(:course_planner_link) { |b| b.link(text:"KSAP Planner (v0.75)") }
+  element(:course_planner_link) { |b| b.link(text:"KSAP Planner") }
   action(:course_planner_home) { |b| b.course_planner_link.click }
 
   element(:enrollment_link) { |b| b.div(id: "KS-StudentHome-Enrollment") }
