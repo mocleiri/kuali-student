@@ -17,13 +17,12 @@ import java.math.BigDecimal;
 public interface BrmFeeManagementService {
 
     /**
-     * Executes the rule-based logic to assess fees for the given Account and ATP IDs.
+     * Executes the rule-based logic to assess fees for the specified FeeManagementSession.
      *
-     * @param accountId Account ID
-     * @param atpId     ATP ID
+     * @param sessionId FeeManagementSession ID
      * @return FeeManagementManifest instance
      */
-    FeeManagementManifest assessFees(String accountId, String atpId);
+    FeeManagementSession assessFees(Long sessionId);
 
     /**
      * Compares the value of the Account KeyPair specified by "key" to the given "value".

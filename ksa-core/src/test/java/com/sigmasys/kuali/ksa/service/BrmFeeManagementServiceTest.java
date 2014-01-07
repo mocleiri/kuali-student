@@ -3,8 +3,7 @@ package com.sigmasys.kuali.ksa.service;
 import com.sigmasys.kuali.ksa.config.ConfigService;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.fm.*;
-import com.sigmasys.kuali.ksa.service.brm.BrmContext;
-import com.sigmasys.kuali.ksa.service.brm.BrmService;
+import com.sigmasys.kuali.ksa.service.fm.BrmFeeManagementService;
 import com.sigmasys.kuali.ksa.service.fm.RateService;
 import org.apache.commons.collections.CollectionUtils;
 import org.junit.Test;
@@ -47,47 +46,33 @@ public class BrmFeeManagementServiceTest extends AbstractServiceTest {
     private AccountService accountService;
 
     @Autowired
-    private BrmService brmService;
+    private RateService rateService;
 
     @Autowired
-    private RateService rateService;
+    private BrmFeeManagementService brmFmService;
 
 
     @Test
     public void assesFees() throws Exception {
 
-        String accountId = "admin";
-
-        Account account = accountService.getOrCreateAccount(accountId);
-
         // Create an FM session and manifest:
         FeeManagementSession session = createFmSession(1, true, false, false, false, FeeManagementManifestType.ORIGINAL);
 
         Assert.notNull(session);
+        Assert.notNull(session.getId());
         Assert.notNull(session.getSignups());
         Assert.notEmpty(session.getSignups());
 
         FeeManagementSignup signup = session.getSignups().iterator().next();
 
-        // Calling BrmService with payment application rules
-        BrmContext brmContext = new BrmContext();
-        brmContext.setAccount(account);
-
-        Map<String, Object> globalParams = new HashMap<String, Object>();
-
-        globalParams.put("fmSession", session);
-        globalParams.put("fmSignup", signup);
-
-        brmContext.setGlobalVariables(globalParams);
-
-        brmService.fireRules(Constants.BRM_FM_RULE_SET_NAME_1, brmContext);
-
-        session = (FeeManagementSession) globalParams.get("fmSession");
-        signup = (FeeManagementSignup) globalParams.get("fmSignup");
-
-        Assert.notNull(session);
         Assert.notNull(signup);
 
+        FeeManagementSession updatedSession = brmFmService.assessFees(session.getId());
+
+        Assert.notNull(updatedSession);
+        Assert.notNull(updatedSession.getId());
+
+        Assert.isTrue(session == updatedSession);
     }
 
 

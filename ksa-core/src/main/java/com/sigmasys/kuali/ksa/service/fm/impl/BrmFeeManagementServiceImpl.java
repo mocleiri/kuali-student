@@ -1,9 +1,7 @@
 package com.sigmasys.kuali.ksa.service.fm.impl;
 
-import com.sigmasys.kuali.ksa.exception.UserNotFoundException;
 import com.sigmasys.kuali.ksa.model.*;
 import com.sigmasys.kuali.ksa.model.fm.*;
-import com.sigmasys.kuali.ksa.service.AccountService;
 import com.sigmasys.kuali.ksa.service.InformationService;
 import com.sigmasys.kuali.ksa.service.KeyPairService;
 import com.sigmasys.kuali.ksa.service.atp.AtpService;
@@ -63,9 +61,6 @@ public class BrmFeeManagementServiceImpl extends GenericPersistenceService imple
 
     @Autowired
     private BrmService brmService;
-
-    @Autowired
-    private AccountService accountService;
 
     @Autowired
     private KeyPairService keyPairService;
@@ -191,9 +186,8 @@ public class BrmFeeManagementServiceImpl extends GenericPersistenceService imple
         keyPairService.addKeyPairs(entity, new KeyPair(key, value));
     }
 
-    @SuppressWarnings("unchecked")
     private <T> T getGlobalVariable(BrmContext context, String variableName) {
-        return (T) context.getGlobalVariables().get(variableName);
+        return context.getGlobalVariable(variableName);
     }
 
     private <T> T getRequiredGlobalVariable(BrmContext context, String variableName) {
@@ -511,39 +505,45 @@ public class BrmFeeManagementServiceImpl extends GenericPersistenceService imple
     }
 
     /**
-     * Executes the rule-based logic to assess fees for the given Account and ATP IDs.
+     * Executes the rule-based logic to assess fees for the specified FeeManagementSession.
      *
-     * @param accountId Account ID
-     * @param atpId     ATP ID
+     * @param sessionId FeeManagementSession ID
      * @return FeeManagementManifest instance
      */
     @Override
-    public FeeManagementManifest assessFees(String accountId, String atpId) {
+    public FeeManagementSession assessFees(Long sessionId) {
 
-        Account account = accountService.getFullAccount(accountId);
-        if (account == null) {
-            String errMsg = "Account with ID = " + accountId + " does not exist";
+        FeeManagementSession session = fmService.getFeeManagementSession(sessionId);
+        if (session == null) {
+            String errMsg = "FeeManagementSession with ID = " + sessionId + " does not exist";
             logger.error(errMsg);
-            throw new UserNotFoundException(errMsg);
+            throw new IllegalArgumentException(errMsg);
         }
 
         // Calling BrmService with payment application rules
         BrmContext brmContext = new BrmContext();
-        brmContext.setAccount(account);
+        brmContext.setAccount(session.getAccount());
 
-        Map<String, Object> globalParams = new HashMap<String, Object>();
+        brmContext.setGlobalVariable(FM_SESSION_VAR_NAME, session);
 
-        // TODO: Figure out how to retrieve the FM session by accountId and atpId
-        globalParams.put(FM_SESSION_VAR_NAME, null);
-
-        brmContext.setGlobalVariables(globalParams);
+        // TODO: Uncomment this after the rules have been split into "signup" and "session" rule sets
+        /* brmContext.setGlobalVariable(FM_SIGNUP_VAR_NAME, null);
 
         brmService.fireRules(Constants.BRM_FM_RULE_SET_NAME_1, brmContext);
+        */
 
-        FeeManagementSession session = (FeeManagementSession) globalParams.get(FM_SESSION_VAR_NAME);
+        Set<FeeManagementSignup> signups = session.getIncompleteSignups();
+
+        if (CollectionUtils.isNotEmpty(signups)) {
+            for (FeeManagementSignup signup : signups) {
+                brmContext.setGlobalVariable(FM_SIGNUP_VAR_NAME, signup);
+                // TODO: fire rule sets for individual signups
+                brmService.fireRules(Constants.BRM_FM_RULE_SET_NAME_1, brmContext);
+            }
+        }
 
         // TODO
-        return null;
+        return session;
     }
 
     /**

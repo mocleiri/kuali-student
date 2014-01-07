@@ -157,4 +157,12 @@ public interface FeeManagementService {
                                                       BigDecimal amount,
                                                       boolean isSessionCurrent);
 
+    /**
+     * Returns FeeManagementSession instance by ID from the persistent store.
+     *
+     * @param sessionId FeeManagementSession ID
+     * @return FeeManagementSession instance
+     */
+    FeeManagementSession getFeeManagementSession(Long sessionId);
+
 }

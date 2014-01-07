@@ -217,6 +217,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      * @return FeeManagementSession instance
      */
     @Override
+    @Transactional(readOnly = false)
     public FeeManagementSession processFeeManagementSession(Long feeManagementSessionId) {
         // TODO: Figure out how to invoke the Rules Engine to perform Fee Management and create manifest:
         return null;
@@ -252,6 +253,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      * @return The newly created report object.
      */
     @Override
+    @Transactional(readOnly = false)
     public FeeManagementReportInfo createFeeManagementReport(Long feeManagementSessionId) {
 
         // Find the FM Session:
@@ -423,6 +425,7 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
      * @return FeeManagementManifest instance
      */
     @Override
+    @Transactional(readOnly = false)
     public FeeManagementManifest createFeeManagementManifest(FeeManagementManifestType manifestType,
                                                              FeeManagementManifestStatus manifestStatus,
                                                              String transactionTypeId,
@@ -501,6 +504,31 @@ public class FeeManagementServiceImpl extends GenericPersistenceService implemen
         persistEntity(manifest);
 
         return manifest;
+    }
+
+    /**
+     * Returns FeeManagementSession instance by ID from the persistent store.
+     *
+     * @param sessionId FeeManagementSession ID
+     * @return FeeManagementSession instance
+     */
+    @Override
+    public FeeManagementSession getFeeManagementSession(Long sessionId) {
+
+        Query query = em.createQuery("select s from FeeManagementSession s " +
+                " left outer join fetch s.account " +
+                " left outer join fetch s.prevSession " +
+                " left outer join fetch s.nextSession " +
+                " left outer join fetch s.keyPairs " +
+                " left outer join fetch s.signups " +
+                " left outer join fetch s.manifests " +
+                " where s.id = :sessionId");
+
+        query.setParameter("sessionId", sessionId);
+
+        List<FeeManagementSession> sessions = query.getResultList();
+
+        return CollectionUtils.isNotEmpty(sessions) ? sessions.get(0) : null;
     }
 
 

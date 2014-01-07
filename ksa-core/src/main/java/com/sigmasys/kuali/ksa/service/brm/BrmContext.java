@@ -24,7 +24,6 @@ public class BrmContext implements Serializable {
     private Map<String, Object> globalVariables = new HashMap<String, Object>();
 
 
-
     public boolean isInitialized() {
         return account != null && attributes != null && globalVariables != null;
     }
@@ -38,6 +37,9 @@ public class BrmContext implements Serializable {
     }
 
     public Map<String, Object> getAttributes() {
+        if (attributes == null) {
+            attributes = new HashMap<String, Object>();
+        }
         return attributes;
     }
 
@@ -45,12 +47,33 @@ public class BrmContext implements Serializable {
         this.attributes = attributes;
     }
 
+    public void setAttribute(String name, Object value) {
+        getAttributes().put(name, value);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T getAttribute(String name) {
+        return (T) getAttributes().get(name);
+    }
+
     public Map<String, Object> getGlobalVariables() {
+        if (globalVariables == null) {
+            globalVariables = new HashMap<String, Object>();
+        }
         return globalVariables;
     }
 
     public void setGlobalVariables(Map<String, Object> globalVariables) {
         this.globalVariables = globalVariables;
+    }
+
+    public void setGlobalVariable(String name, Object value) {
+        getGlobalVariables().put(name, value);
+    }
+
+    @SuppressWarnings("unchecked")
+    public <T> T getGlobalVariable(String name) {
+        return (T) getGlobalVariables().get(name);
     }
 
     public AccountService getAccountService() {
