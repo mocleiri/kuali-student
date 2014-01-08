@@ -144,7 +144,7 @@ read command
 
 if test $command == "y"
 then
-	bash -c $CMD_FILE
+	bash $CMD_FILE
 
 	R=$?
 
