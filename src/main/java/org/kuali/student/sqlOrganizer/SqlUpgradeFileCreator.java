@@ -69,47 +69,68 @@ public class SqlUpgradeFileCreator {
                     organizedSqlPath);
             createSqlUpgradeFile(config);
         }
+
+        milestones.clear();
+        milestones.add("RC1");
+        for (DatabaseDataType type : DatabaseDataType.values()) {
+            dataTypes.clear();
+            dataTypes.add(type);
+            ArrayList<DatabaseModule>  modules = new ArrayList<DatabaseModule> ();
+            modules.add(DatabaseModule.RICE);
+            UpgradeCreationConfig config =
+                    new UpgradeCreationConfig(milestones, dataTypes, modules, "RC1.Rice." + type.toString() + ".upgrade.sql", organizedSqlPath);
+            createSqlUpgradeFile(config);
+
+            modules.clear();
+            modules.add(DatabaseModule.KSCORE);
+            modules.add(DatabaseModule.KSCM);
+            modules.add(DatabaseModule.KSENR);
+            config = new UpgradeCreationConfig(milestones, dataTypes, modules, "RC1.Student." + type.toString() + ".upgrade.sql", organizedSqlPath);
+            createSqlUpgradeFile(config);
+        }
     }
 
 
     public static void createSqlUpgradeFile(UpgradeCreationConfig config) {
         List<String> filePaths = getFileListForSqlUpgrade(config);
         PrintWriter out = null;
-        try {
-            out = new PrintWriter(new BufferedWriter(new FileWriter(DirManipulationUtils.appendPath(config.getOrganizedSqlPath(), config.getOuptupFileName()), true)));
-            System.out.println("created file " + config.getOuptupFileName());
-        } catch (IOException e) {
-            System.out.println("error opening file " + config.getOuptupFileName());
-        }
-        out.println("-- Upgrade file info\n" +
-                    "--\n" +
-                    "-- This file is an aggregation of sql files.  They are ordered by milestone, then module then \n" +
-                    "-- filename. When files are out of order it is because the next module is loaded.  Milestone \n" +
-                    "-- and Module precedence is set via the UpgradeCreationConfig or in the case where you're using\n"+
-                    "-- createAllSqlUpgradeFiles the milestone order is based on alphanumeric sort and module order\n" +
-                    "-- is based on the order of the values in\n" +
-                    "-- DatabaseModule\n\n");
-
-        for (String filePath : filePaths) {
-            BufferedReader br = null;
+        if (!filePaths.isEmpty()) {
             try {
-                String sCurrentLine;
-                br = new BufferedReader(new FileReader(filePath));
-                out.println("--\n-- File Header: " + DirManipulationUtils.extractFileName(filePath) + "\n--\n\n");
-                while ((sCurrentLine = br.readLine()) != null) {
-                    out.println(sCurrentLine);
-                }
-                out.println("\n\n");
+                out = new PrintWriter(new BufferedWriter(new FileWriter(DirManipulationUtils.appendPath(config.getOrganizedSqlPath(), config.getOuptupFileName()), true)));
+                System.out.println("created file " + config.getOuptupFileName());
             } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
+                System.out.println("error opening file " + config.getOuptupFileName());
+            }
+            out.println("-- Upgrade file info\n" +
+                        "--\n" +
+                        "-- This file is an aggregation of sql files.  They are ordered by milestone, then module then \n" +
+                        "-- filename. When files are out of order it is because the next module is loaded.  Milestone \n" +
+                        "-- and Module precedence is set via the UpgradeCreationConfig or in the case where you're using\n"+
+                        "-- createAllSqlUpgradeFiles the milestone order is based on alphanumeric sort and module order\n" +
+                        "-- is based on the order of the values in\n" +
+                        "-- DatabaseModule\n\n");
+
+            for (String filePath : filePaths) {
+                BufferedReader br = null;
                 try {
-                    if (br != null)br.close();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+                    String sCurrentLine;
+                    br = new BufferedReader(new FileReader(filePath));
+                    out.println("--\n-- File Header: " + DirManipulationUtils.extractFileName(filePath) + "\n--\n\n");
+                    while ((sCurrentLine = br.readLine()) != null) {
+                        out.println(sCurrentLine);
+                    }
+                    out.println("\n\n");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (br != null)br.close();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
+            out.close();
         }
-        out.close();
     }
 }

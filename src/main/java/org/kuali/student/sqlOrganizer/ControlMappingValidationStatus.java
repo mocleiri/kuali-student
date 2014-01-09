@@ -1,11 +1,7 @@
 package org.kuali.student.sqlOrganizer;
 
 /**
- * Created with IntelliJ IDEA.
- * User: lsymms
- * Date: 12/30/13
- * Time: 3:24 PM
- * To change this template use File | Settings | File Templates.
+ * see: ControlMappingUtils
  */
 public enum ControlMappingValidationStatus {
     VALID("Control properties read succesfully\n"),

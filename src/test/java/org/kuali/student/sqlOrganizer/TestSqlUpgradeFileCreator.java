@@ -20,14 +20,14 @@ public class TestSqlUpgradeFileCreator {
 
     @Test
     public void testGetFileList() {
-        UpgradeCreationConfig config= getConfig();
+        UpgradeCreationConfig config= getTestConfig();
         createTestFiles(config.getOrganizedSqlPath());
         List<String> filePathList = SqlUpgradeFileCreator.getFileListForSqlUpgrade(config);
     }
 
     @Test
     public void testCreateFile() {
-        UpgradeCreationConfig config= getConfig();
+        UpgradeCreationConfig config= getTestConfig();
         createTestFiles(config.getOrganizedSqlPath());
         SqlUpgradeFileCreator.createSqlUpgradeFile(config);
 
@@ -38,7 +38,7 @@ public class TestSqlUpgradeFileCreator {
         SqlUpgradeFileCreator.createAllSqlUpgradeFiles(SqlOrganizer.OUTPUT_DIR_PATH);
     }
 
-    private UpgradeCreationConfig getConfig() {
+    public static UpgradeCreationConfig getTestConfig() {
         List<String> milestones = new ArrayList<String>();
         milestones.add("M8");
         milestones.add("RC1");
