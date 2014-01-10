@@ -7,7 +7,7 @@ class RolloverDetails < BasePage
 
   element(:term) { |b| b.frm.text_field(name: "rolloverTargetTermCode") }
 
-  element(:go_button) { |b| b.frm.button(text: "Go") }
+  element(:go_button) { |b| b.frm.button(text: "Show") }
   action(:go) { |b| b.go_button.click; b.loading.wait_while_present(300) }
 
   element(:rollover_results_div) { |b| b.frm.div(id: "KS-RolloverResultsInfoSection") }
