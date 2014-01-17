@@ -26,7 +26,7 @@ class CourseOffering
     navigate_to_course_planner_home
     sleep 5
     on CoursePlannerPage do |page|
-      page.loading.wait_while_present
+      #page.loading.wait_while_present
       page.current_term_add
       sleep 2
       page.course_code_text.set @course_code
@@ -51,11 +51,21 @@ class CourseOffering
       end
   end
 
-  def edit_plan_item
+  def edit_plan_item_current_term
     on CoursePlannerPage do |page|
       sleep 2
       page.course_code_current_term_click
-      page.course_code_current_term_edit_plan_item_click
+      page.edit_plan_item_click
+      sleep 2
+      puts page.view_notes_popover
+    end
+  end
+
+  def edit_plan_item_future_term
+    on CoursePlannerPage do |page|
+      sleep 2
+      page.course_code_future_term_click
+      page.edit_plan_item_click
       sleep 2
       puts page.view_notes_popover
     end
