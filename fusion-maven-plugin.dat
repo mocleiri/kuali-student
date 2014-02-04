@@ -1,2 +1,12 @@
-# module = ks-ap branch Path = enrollment/ks-ap/branches/CM-KRAD-MERGE revision = 64505
-ks-ap::enrollment_ks-ap_branches_CM-KRAD-MERGE::1eaa7484f447b907f332d1f13976e58610d45e42
+# module = ks-ap branch Path = enrollment/ks-ap/tags/builds/ks-ap-0.8/0.8.0-FR2-M1-cm-krad/build-213 revision = 64524
+ks-ap::enrollment_ks-ap_tags_builds_ks-ap-0.8_0.8.0-FR2-M1-cm-krad_build-213::735b108920bbbf597aec1cdcd3bad5283c2f4015
+# module = ks-api branch Path = enrollment/ks-api/tags/builds/ks-api-2.1/2.1.1-FR2-M1-cm-krad/build-213 revision = 64524
+ks-api::enrollment_ks-api_tags_builds_ks-api-2.1_2.1.1-FR2-M1-cm-krad_build-213::4b30fa0b040c3e1aa8262d7a2a976f0a70d21465
+# module = ks-core branch Path = enrollment/ks-core/tags/builds/ks-core-2.1/2.1.1-FR2-M1-cm-krad/build-213 revision = 64524
+ks-core::enrollment_ks-core_tags_builds_ks-core-2.1_2.1.1-FR2-M1-cm-krad_build-213::b08ad6e8de28cf7e567284be297f75a549c688a2
+# module = ks-deployments branch Path = enrollment/ks-deployments/tags/builds/ks-deployments-2.1/2.1.1-FR2-M1-cm-krad/build-213 revision = 64524
+ks-deployments::enrollment_ks-deployments_tags_builds_ks-deployments-2.1_2.1.1-FR2-M1-cm-krad_build-213::cad66ffc2b1157dcc3b92dfc089e2947e0acdfb7
+# module = ks-enroll branch Path = enrollment/ks-enroll/tags/builds/ks-enroll-0.2/0.2.0-FR2-M1-cm-krad/build-213 revision = 64524
+ks-enroll::enrollment_ks-enroll_tags_builds_ks-enroll-0.2_0.2.0-FR2-M1-cm-krad_build-213::a65ebf9a4df37af34ea2db605e15ddf130759d3a
+# module = ks-lum branch Path = enrollment/ks-lum/tags/builds/ks-lum-2.1/2.1.1-FR2-M1-cm-krad/build-213 revision = 64524
+ks-lum::enrollment_ks-lum_tags_builds_ks-lum-2.1_2.1.1-FR2-M1-cm-krad_build-213::a3e9fd564bb056a60e11c7cbea3e07708ee74650
