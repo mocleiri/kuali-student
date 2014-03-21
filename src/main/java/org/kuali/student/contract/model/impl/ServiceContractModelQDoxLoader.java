@@ -26,6 +26,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.xml.bind.annotation.XmlEnum;
 import java.io.File;
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -325,6 +326,12 @@ public class ServiceContractModelQDoxLoader implements
         if (javaClass.getPackageName().startsWith("com.sigmasys.kuali.ksa.service")) {
             return true;
         }
+        if (javaClass.getPackageName().startsWith("edu.mit.oeit")) {
+            return true;
+        }
+        if (javaClass.getPackageName().startsWith("org.kuali.mobility")) {
+            return true;
+        }
 //  System.out.println ("skipping service because it is not a web service="
 //                      + javaClass.getPackageName () + "." + javaClass.getName ());
         return false;
@@ -394,6 +401,9 @@ public class ServiceContractModelQDoxLoader implements
     private void addXmlTypeAndMessageStructure(JavaClass messageStructureJavaClass,
             String serviceKey) {
         String name = calcType(messageStructureJavaClass);
+        if (name.endsWith("CallbackService")) {
+            return;
+        }
         XmlType xmlType = xmlTypeMap.get(name);
         if (xmlType == null) {
             xmlType = new XmlType();
@@ -663,7 +673,7 @@ public class ServiceContractModelQDoxLoader implements
             ms.setReadOnly(calcReadOnly(getterMethod, setterMethod, beanField));
             ms.setCardinality(this.calcCardinality(messageStructureJavaClass, getterMethod, setterMethod, beanField, shortName));
             ms.setDescription(calcMissing(calcDescription(messageStructureJavaClass, getterMethod, setterMethod,
-                    beanField)));
+                    beanField, shortName)));
             ms.setImplNotes(calcImplementationNotes(getterMethod, setterMethod, beanField));
             ms.setDeprecated(isDeprecated(getterMethod));
             ms.setStatus("???");
@@ -1150,7 +1160,7 @@ public class ServiceContractModelQDoxLoader implements
         if (name != null) {
             return name;
         }
-        name = this.calcNameFromNameEmbeddedInDescription(mainClass, getterMethod, setterMethod, beanField);
+        name = this.calcNameFromNameEmbeddedInDescription(mainClass, getterMethod, setterMethod, beanField, shortName);
         if (name != null) {
             return name;
         }
@@ -1169,9 +1179,9 @@ public class ServiceContractModelQDoxLoader implements
     }
 
     private String calcNameFromNameEmbeddedInDescription(JavaClass mainClass, JavaMethod getterMethod,
-            JavaMethod setterMethod, JavaField beanField) {
+            JavaMethod setterMethod, JavaField beanField, String shortName) {
         String nameDesc = this.calcMethodComment(mainClass, getterMethod, setterMethod,
-                beanField);
+                beanField, shortName);
         String[] parsed = parseNameDesc(nameDesc);
         return parsed[0];
     }
@@ -1198,21 +1208,38 @@ public class ServiceContractModelQDoxLoader implements
     }
 
     private String calcDescription(JavaClass mainClass, JavaMethod getterMethod,
-            JavaMethod setterMethod, JavaField beanField) {
+            JavaMethod setterMethod, JavaField beanField, String shortName) {
         String nameDesc = this.calcMethodComment(mainClass, getterMethod, setterMethod,
-                beanField);
+                beanField, shortName);
         String[] parsed = parseNameDesc(nameDesc);
         return parsed[1];
     }
-
+ 
     private String calcMethodComment(JavaClass mainClass, JavaMethod getterMethod,
             JavaMethod setterMethod,
-            JavaField beanField) {
+            JavaField beanField,
+            String shortName) {
         String desc = null;
         if (getterMethod != null) {
             desc = getterMethod.getComment();
             if (isCommentNotEmpty(desc)) {
                 return desc;
+            }
+//            System.out.println("Searching for superclass to find description for field " + shortName);
+            JavaClass jc = mainClass;
+            while (true) {
+                JavaClass superJc = jc.getSuperJavaClass();
+                if (superJc == null) {
+                    break;
+                }
+                JavaMethod parentGetterMethod = this.findGetterMethod(superJc, shortName);
+                if (parentGetterMethod != null) {
+                    desc = parentGetterMethod.getComment();
+                    if (isCommentNotEmpty(desc)) {
+                        return desc;
+                    }
+                }
+                jc = superJc;
             }
         }
         if (setterMethod != null) {
@@ -1452,20 +1479,21 @@ public class ServiceContractModelQDoxLoader implements
 
     private JavaMethod findGetterMethod(JavaClass msClass, String shortName) {
         for (JavaMethod method : msClass.getMethods(true)) {
-            if (method.getName().equalsIgnoreCase("get" + shortName)) {
+            String methodName = method.getName();
+            if (methodName.equalsIgnoreCase("get" + shortName)) {
                 return method;
             }
-            if (method.getName().toLowerCase().startsWith("is")) {
-                if (method.getName().equalsIgnoreCase("is" + shortName)) {
+            if (methodName.toLowerCase().startsWith("is")) {
+                if (methodName.equalsIgnoreCase("is" + shortName)) {
                     return method;
                 }
                 // shortName already has "is" in it
-                if (method.getName().equalsIgnoreCase(shortName)) {
+                if (methodName.equalsIgnoreCase(shortName)) {
                     return method;
                 }
             }
             // TODO: followup on KimEntityResidencyInfo.getInState
-            if (method.getName().equalsIgnoreCase("getInState") && shortName.equalsIgnoreCase(
+            if (methodName.equalsIgnoreCase("getInState") && shortName.equalsIgnoreCase(
                     "InStateFlag")) {
                 return method;
             }
@@ -1881,6 +1909,9 @@ public class ServiceContractModelQDoxLoader implements
             return false;
         }
         if (javaClass.getName().equals(float.class.getName())) {
+            return false;
+        }
+        if (javaClass.getName().equals(BigDecimal.class.getSimpleName())) {
             return false;
         }
         if (javaClass.getName().equals(Map.class.getName())) {

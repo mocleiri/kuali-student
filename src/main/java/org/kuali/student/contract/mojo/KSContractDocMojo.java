@@ -16,31 +16,19 @@
 package org.kuali.student.contract.mojo;
 
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.maven.artifact.DependencyResolutionRequiredException;
-import org.apache.maven.model.Dependency;
-import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.joda.time.DateTime;
-import org.kuali.student.admin.ui.mojo.KSCreateAdminUiMojo;
 import org.kuali.student.common.mojo.AbstractKSMojo;
 import org.kuali.student.contract.model.ServiceContractModel;
-import org.kuali.student.contract.model.impl.ServiceContractModelCache;
-import org.kuali.student.contract.model.impl.ServiceContractModelPescXsdLoader;
-import org.kuali.student.contract.model.impl.ServiceContractModelQDoxLoader;
 import org.kuali.student.contract.model.util.DateUtility;
 import org.kuali.student.contract.model.util.HtmlContractWriter;
-import org.kuali.student.contract.model.validation.ServiceContractModelValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -87,11 +75,13 @@ public class KSContractDocMojo extends AbstractKSMojo {
     }
     
     
-    private static final String CORE_DIRECTORY = "D:/svn/ks/trunk/ks-api/ks-core-api/src/main";
+    private static final String CORE_DIRECTORY = "D:/svn/ks/ks-api/ks-core-api/src/main";
     // "C:/svn/maven-dictionary-generator/trunk/src/main/java/org/kuali/student/core";
-    private static final String COMMON_DIRECTORY = "D:/svn/ks/trunk/ks-api/ks-common-api/src/main/java";
-    private static final String ENROLL_DIRECTORY = "D:/svn/ks/trunk/ks-api/ks-enroll-api/src/main/java";
-    private static final String LUM_DIRECTORY = "D:/svn/ks/trunk/ks-api/ks-lum-api/src/main/java";
+    private static final String COMMON_DIRECTORY = "D:/svn/ks/ks-api/ks-common-api/src/main/java";
+    private static final String ENROLL_DIRECTORY = "D:/svn/ks/ks-api/ks-enroll-api/src/main/java";
+    private static final String LUM_DIRECTORY = "D:/svn/ks/ks-api/ks-lum-api/src/main/java";
+    private static final String KSAP_API_DIRECTORY = "D:\\svn\\ks\\trunk\\ks-api\\ks-ap-api\\src\\main\\java";
+    private static final String KME_API_DIRECTORY = "D:\\svn\\kplus2\\kme\\bulletin\\api\\src\\main\\java\\org\\kuali\\mobility\\bulletin";
     private static final String KSA_DIRECTORY = "D:/svn/ks/ksa/ksa-core/src/main/java";
     private static final String TEST_SOURCE_DIRECTORY =
             "src/test/java/org/kuali/student/contract/model/test/source";
@@ -111,14 +101,15 @@ public class KSContractDocMojo extends AbstractKSMojo {
     public static void main(String[] args) {
         log.info("execute");
         List<String> srcDirs = new ArrayList<String>();
-//        srcDirs.add(COMMON_DIRECTORY);
-//        srcDirs.add(CORE_DIRECTORY);
-//        srcDirs.add(LUM_DIRECTORY);
-//        srcDirs.add(ENROLL_DIRECTORY);        
+        srcDirs.add(COMMON_DIRECTORY);
+        srcDirs.add(CORE_DIRECTORY);
+        srcDirs.add(LUM_DIRECTORY);
+        srcDirs.add(ENROLL_DIRECTORY);        
 //        srcDirs.add(RICE_KIM_API_DIRECTORY);     
-        srcDirs.add(KSA_DIRECTORY);
-//        srcDirs.add(RICE_CORE_API_DIRECTORY);
-//        srcDirs.add(RICE_KRMS_API_DIRECTORY);
+        srcDirs.add(KSAP_API_DIRECTORY);    
+//        srcDirs.add(KME_API_DIRECTORY);
+        srcDirs.add(RICE_CORE_API_DIRECTORY);
+        srcDirs.add(RICE_KRMS_API_DIRECTORY);
 //        srcDirs.add(TRUNK_ENROLL_IMPL_KRMS_API);
         KSContractDocMojo instance = new KSContractDocMojo();
         Map pluginContext = new HashMap();

@@ -907,7 +907,7 @@ public class MockImplServiceWriter extends JavaClassWriter {
         ServiceMethodParameter idParam = this.findIdParameter(method);
         String mapName = calcMapName(method);
         indentPrintln("if (!this." + mapName + ".containsKey(" + idParam.getName() + ")) {");
-        indentPrintln("   throw new " + this.getOperationFailedException() + "(" + idParam.getName() + ");");
+        indentPrintln("   throw new " + this.getDoesNotExistException() + "(" + idParam.getName() + ");");
         indentPrintln("}");
         String objectName = calcObjectName(method);
         String infoName = objectName;

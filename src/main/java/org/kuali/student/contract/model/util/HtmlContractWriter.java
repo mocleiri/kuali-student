@@ -99,9 +99,14 @@ public class HtmlContractWriter {
                 }
             };
 
+    private String getOtherHomeTag () {
+        return "<a href=\"../dictionarydocs/index.html\">Dictionary Docs Home</a>";
+//        return "";
+    }
     private void writeIndexPage(String projectVersion, String formattedDate) {
         
-        VersionLinesUtility.writeVersionTag(writer, "<a href=\"index.html\">Home</a>", "<a href=\"../dictionarydocs/index.html\">Dictionary Docs Home</a>", projectVersion, formattedDate);
+        String otherHome = this.getOtherHomeTag();
+        VersionLinesUtility.writeVersionTag(writer, "<a href=\"index.html\">Home</a>", otherHome, projectVersion, formattedDate);
         
         writer.writeTag("h1", "Service Contracts");
         
@@ -155,14 +160,28 @@ public class HtmlContractWriter {
 
     private static String calcArea(String implProject) {
         // group all student services together
-        if (implProject.startsWith("org.kuali.student")) {
-            return "Kuali Student Services";
+        if (implProject.startsWith("org.kuali.student.")) {
+            implProject = implProject.substring("org.kuali.student.".length());
+//            return "Kuali Student Services";
         }
         if (implProject.startsWith("org.kuali.")) {
             implProject = implProject.substring("org.kuali.".length());
         }
         if (implProject.contains(".api.")) {
             implProject = implProject.substring(0, implProject.indexOf(".api."));
+        }
+        if (implProject.contains(".api.")) {
+            implProject = implProject.substring(0, implProject.indexOf(".api."));
+        }
+        if (implProject.startsWith("r2.")) {
+            implProject = implProject.substring("r2.".length());
+        }
+        if (implProject.contains(".class1.")) {
+            implProject = implProject.substring(0, implProject.indexOf(".class1.")) + 
+                    implProject.substring(implProject.indexOf(".class1.") + ".class1".length());
+        }
+        if (implProject.endsWith(".service")) {
+            implProject = implProject.substring(0, implProject.length() - ".service".length());
         }
         return implProject;
     }
@@ -199,6 +218,13 @@ public class HtmlContractWriter {
         return name;
     }
 
+    private boolean shouldWriteSubStructure(XmlType st) {
+        if (!st.getPrimitive().equalsIgnoreCase(XmlType.COMPLEX)) {
+            return false;
+        }
+        return true;
+    }
+    
     private void writeSubStructures(XmlType type, Stack<String> stack) {
         boolean first = true;
         for (MessageStructure ms : finder.findMessageStructures(type.getName())) {
@@ -207,7 +233,7 @@ public class HtmlContractWriter {
             	log.error (ms.getType() + " does not exist in the list of types with parents " + calcParents(stack));
             	continue;
             }
-            if (!st.getPrimitive().equalsIgnoreCase(XmlType.COMPLEX)) {
+            if (!shouldWriteSubStructure (st)) {
                 continue;
             }
             if (first) {

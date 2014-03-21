@@ -72,12 +72,16 @@ public class HtmlContractMessageStructureWriter {
         return true;
     }
 
+    private boolean shouldAddDictionaryLink (XmlType xmlType) {
+        return this.isMainMessageStructure(xmlType);
+    }
+    
     public void write(String projectVersion, String formattedDate) {
        
         this.writeStyleSheet();
        
         
-        if (this.isMainMessageStructure(xmlType)) {
+        if (this.shouldAddDictionaryLink(xmlType)) {
         	VersionLinesUtility.writeVersionTag(writer, "<a href=\"index.html\">home</a>", "<a href=\"../dictionarydocs/" + initUpper(xmlType.getName()) + ".html\">dictionary doc</a>", projectVersion, formattedDate);
         }
         else 

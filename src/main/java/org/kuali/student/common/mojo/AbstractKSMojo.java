@@ -115,7 +115,7 @@ public abstract class AbstractKSMojo extends AbstractMojo {
 			throw new RuntimeException("No Source Directories are defined");
 
 		for (String directory : modelSourceDirectories) {
-		
+            
 			DirectoryScanner scanner = new DirectoryScanner(new File (directory));
 			scanner.addFilter(new SuffixFilter(".java"));
 			scanner.scan(new FileVisitor() {

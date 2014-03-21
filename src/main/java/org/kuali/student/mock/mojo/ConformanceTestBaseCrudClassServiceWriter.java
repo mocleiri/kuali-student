@@ -315,19 +315,32 @@ public class ConformanceTestBaseCrudClassServiceWriter extends MockImplServiceWr
         indentPrintln("// code to create actual");
         indentPrintln(dtoObjectName + "Info actual = " + getMethodCallAsString ("create" + dtoObjectName, "= null; // TODO INSERT CODE TO CREATE actual HERE", MethodType.CREATE, dtoObjectName, "expected"));
         indentPrintln("");
+        
+        String testerName = null;
+        String keyOrId = null;
+        if (finder.findMessageStructure(dtoObjectName + "Info", "id") != null) {
+            keyOrId = "Id";
+            if (finder.findMessageStructure(dtoObjectName + "Info", "name") != null) {
+                testerName = "IdEntityTester";
+            } else if (finder.findMessageStructure(dtoObjectName + "Info", "effectiveDate") != null) {
+                testerName = "RelationshipTester";
+            } else {
+                testerName = "IdNamelessEntityTester";
+                // should also detect relationships
+            }
+        } else if (finder.findMessageStructure(dtoObjectName + "Info", "key") != null) {
+            keyOrId = "Key";
+            testerName = "KeyEntityTester";
+        }
 
         // indentPrintln("if (actual.getClass().isAssignableFrom(IdEntityInfo.class))");
-        if (finder.findMessageStructure(dtoObjectName + "Info", "id")!=null) {
+        if (testerName !=null) {
             // openBrace();
             // incrementIndent();
-            indentPrintln("assertNotNull(actual.getId());");
-            indentPrintln("new IdEntityTester().check(expected, actual);");
+            indentPrintln("assertNotNull(actual.get" + keyOrId + "());");
+            indentPrintln("new " + testerName + "().check(expected, actual);");
             // decrementIndent();
             // closeBrace();
-        }
-        else if (finder.findMessageStructure(dtoObjectName + "Info", "key")!=null) {
-            indentPrintln("assertNotNull(actual.getKey());");
-            indentPrintln("new KeyEntityTester().check(expected, actual);");
         }
 
         indentPrintln("");
@@ -342,15 +355,11 @@ public class ConformanceTestBaseCrudClassServiceWriter extends MockImplServiceWr
         indentPrintDecoratedComment("test read");
         indentPrintln("expected = actual;");
         indentPrintln("actual = " + getMethodCallAsString ("get" + dtoObjectName, "null; // TODO INSERT CODE TO GET actual HERE BY CALLING SERVICE OP", MethodType.GET_BY_ID, dtoObjectName, "actual"));
-        if (finder.findMessageStructure(dtoObjectName + "Info", "id")!=null) {
-            indentPrintln("assertEquals(expected.getId(), actual.getId());");
-            indentPrintln("new IdEntityTester().check(expected, actual);");
-        }
-        else if (finder.findMessageStructure(dtoObjectName + "Info", "key")!=null) {
-            indentPrintln("assertEquals(expected.getKey(), actual.getKey());");
-            indentPrintln("new KeyEntityTester().check(expected, actual);");
-        }
 
+        if (testerName !=null) {
+            indentPrintln("assertEquals(expected.get" + keyOrId + "(), actual.get" + keyOrId + "());");
+            indentPrintln("new " + testerName + "().check(expected, actual);");
+        }
 
         indentPrintln("");
 
@@ -393,13 +402,24 @@ public class ConformanceTestBaseCrudClassServiceWriter extends MockImplServiceWr
         indentPrintln("actual = " + getMethodCallAsString ("update" + dtoObjectName, "= null; // TODO INSERT CODE TO CALL UPDATE SERVICE OP HERE", MethodType.UPDATE, dtoObjectName, "expected"));
         indentPrintln("");
         
-        if (finder.findMessageStructure(dtoObjectName + "Info", "id")!=null) {
-            indentPrintln("assertEquals(expected.getId(), actual.getId());");
-            indentPrintln("new IdEntityTester().check(expected, actual);");
+        String testerName = null;
+        String keyOrId = null;
+        if (finder.findMessageStructure(dtoObjectName + "Info", "id") != null) {
+            keyOrId = "Id";
+            if (finder.findMessageStructure(dtoObjectName + "Info", "name") != null) {
+                testerName = "IdEntityTester";
+            } else if (finder.findMessageStructure(dtoObjectName + "Info", "effectiveDate") != null) {
+                testerName = "RelationshipTester";
+            } else {
+                testerName = "IdNamelessEntityTester";
+            }
+        } else if (finder.findMessageStructure(dtoObjectName + "Info", "key") != null) {
+            keyOrId = "Key";
+            testerName = "KeyEntityTester";
         }
-        else if (finder.findMessageStructure(dtoObjectName + "Info", "key")!=null) {
-            indentPrintln("assertEquals(expected.getKey(), actual.getKey());");
-            indentPrintln("new KeyEntityTester().check(expected, actual);");
+        if (testerName !=null) {
+            indentPrintln("assertEquals(expected.get" + keyOrId + "(), actual.get" + keyOrId + "());");
+            indentPrintln("new " + testerName + "().check(expected, actual);");
         }
         indentPrintln("");
         indentPrintln("// METHOD TO INSERT CODE FOR TESTING DTO FIELDS HERE");
@@ -435,16 +455,30 @@ public class ConformanceTestBaseCrudClassServiceWriter extends MockImplServiceWr
         indentPrintln("");
         indentPrintln("expected = actual;");
 
+        String testerName = null;
+        String keyOrId = null;
+        if (finder.findMessageStructure(dtoObjectName + "Info", "id") != null) {
+            keyOrId = "Id";
+            if (finder.findMessageStructure(dtoObjectName + "Info", "name") != null) {
+                testerName = "IdEntityTester";
+            } else if (finder.findMessageStructure(dtoObjectName + "Info", "effectiveDate") != null) {
+                testerName = "RelationshipTester";
+            } else {
+                testerName = "IdNamelessEntityTester";
+            }
+        } else if (finder.findMessageStructure(dtoObjectName + "Info", "key") != null) {
+            keyOrId = "Key";
+            testerName = "KeyEntityTester";
+        }
+        
         indentPrintln("// code to get actual");
         indentPrintln("actual = " + getMethodCallAsString ("get" + dtoObjectName, "null; // TODO INSERT CODE TO GET actual HERE BY CALLING SERVICE OP", MethodType.GET_BY_ID, dtoObjectName, "actual"));
         indentPrintln("");
-        if (finder.findMessageStructure(dtoObjectName + "Info", "id")!=null) {
-            indentPrintln("assertEquals(expected.getId(), actual.getId());");
-            indentPrintln("new IdEntityTester().check(expected, actual);");
-        }
-        else if (finder.findMessageStructure(dtoObjectName + "Info", "key")!=null) {
-            indentPrintln("assertEquals(expected.getKey(), actual.getKey());");
-            indentPrintln("new KeyEntityTester().check(expected, actual);");
+        
+        
+        if (testerName !=null) {
+            indentPrintln("assertEquals(expected.get" + keyOrId + "(), actual.get" + keyOrId + "());");
+            indentPrintln("new " + testerName + "().check(expected, actual);");
         }
         indentPrintln("");
         indentPrintln("// INSERT METHOD CODE FOR TESTING DTO FIELDS HERE");

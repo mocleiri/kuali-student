@@ -106,7 +106,10 @@ public class MessageStructureTypeCalculator {
         if (type.equals("org.kuali.rice.krms.api.repository.typerelation.RelationshipType")) {
             return "String";
         }
-                
+         
+//        if (type.endsWith("Enum")) {
+//            return "Enum";
+//        }       
         throw new DictionaryValidationException("Unknown/unhandled xmlType.primtive value, "
                 + xmlType.getPrimitive()
                 + ", for type " + type);
