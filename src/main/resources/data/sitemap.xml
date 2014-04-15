@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sitemap>
+<!--     <Entries> -->
+<!--         <entryId>1</entryId> -->
+<!--         <title>Administration</title> -->
+<!--         <url>/portal.do</url> -->
+<!--         <parentId>0</parentId> -->
+<!--     </Entries> -->
+<!--     <Entries> -->
+<!--         <entryId>2</entryId> -->
+<!--         <title>Curriculum Management</title> -->
+<!--         <url>/org.kuali.student.lum.lu.ui.main.LUMMain/LUMMain.jsp?view=CURRICULUM_MANAGEMENT</url> -->
+<!--         <parentId>0</parentId> -->
+<!--     </Entries> -->
+<!--     <Entries> -->
+<!--         <entryId>13</entryId> -->
+<!--         <title>Course Search</title> -->
+<!--         <url></url> -->
+<!--         <parentId>2</parentId> -->
+<!--     </Entries> -->
+<!--     <Entries> -->
+<!--         <entryId>14</entryId> -->
+<!--         <title>Course Create</title> -->
+<!--         <url></url> -->
+<!--         <parentId>2</parentId> -->
+<!--     </Entries>     -->
+    <Entries>
+        <entryId>3</entryId>
+        <title>Enrollment</title>
+        <viewXmlFile>EnrollmentHomeView.xml</viewXmlFile>
+        <controllerJavaClass>LaunchCotroller.java</controllerJavaClass>
+        <url>/kr-krad/launch?viewId=enrollmentHomeView&amp;methodToCall=start</url>
+        <parentId>0</parentId>
+    </Entries>
+<!--     <Entries> -->
+<!--         <entryId>4</entryId> -->
+<!--         <title>Sandbox</title> -->
+<!--         <url></url> -->
+<!--         <parentId>1</parentId> -->
+<!--     </Entries> -->
+<!--     <Entries> -->
+<!--         <entryId>5</entryId> -->
+<!--         <title>Permissions</title> -->
+<!--         <url></url> -->
+<!--         <parentId>1</parentId> -->
+<!--     </Entries> -->
+    <Entries>
+        <entryId>6</entryId>
+        <title>Roles</title>
+        <url></url>
+        <parentId>1</parentId>
+    </Entries>
+	<!-- ENROLLMENT START -->
+    <Entries>
+        <entryId>100</entryId>
+        <title>Manage Course Offerings</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Landing Page Action Link</viewType>
+        <viewXmlFile>CourseOfferingManagementView.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingManagementController</controllerJavaClass>
+        <parentId>3</parentId>
+    </Entries>
+	<Entries>
+        <entryId>10010</entryId>
+        <title>Find a Course</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Lookup</viewType>
+        <viewXmlFile>CourseInfoLookupView.xml</viewXmlFile>
+        <controllerJavaClass></controllerJavaClass>
+        <parentId>100</parentId>
+    </Entries>
+	<Entries>
+        <entryId>10020</entryId>
+        <title>Course Offering Inquiry</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Inquiry</viewType>
+        <viewXmlFile>CourseOfferingInquiryView.xml</viewXmlFile>
+        <controllerJavaClass></controllerJavaClass>
+        <parentId>100</parentId>
+    </Entries>
+	<Entries>
+        <entryId>10030</entryId>
+        <title>Copy</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Table Row Action Link</viewType>
+        <viewXmlFile>CourseOfferingCreateMaintenanceView.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingCreateController.java</controllerJavaClass>
+        <parentId>100</parentId>
+    </Entries>
+	<Entries>
+        <entryId>1003010</entryId>
+        <title>Course Offering Inquiry</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>        
+        <viewType>Inquiry</viewType>
+        <viewXmlFile>CourseOfferingInquiryView.xml</viewXmlFile>
+        <controllerJavaClass></controllerJavaClass>
+        <parentId>10030</parentId>
+    </Entries>    
+	<Entries>
+        <entryId>10040</entryId>
+        <title>Edit</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+                <viewType>Table Row Action Link</viewType>
+        <viewXmlFile>CourseOfferingEditMaintenanceView.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingEditController.java</controllerJavaClass>
+        <parentId>100</parentId>
+    </Entries>
+	<Entries>
+        <entryId>1004010</entryId>
+        <title>Course Offering Inquiry</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Inquiry</viewType>
+        <viewXmlFile>CourseOfferingEditMaintenanceView.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingEditController.java</controllerJavaClass>
+        <parentId>10040</parentId>
+    </Entries> 
+
+<!--  Manage  -->
+	<Entries>
+        <entryId>10050</entryId>
+        <title>Manage</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Table Row Action Link</viewType>
+        <viewXmlFile>CourseOfferingManagement-ManageTheCourseOfferingPage.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingManagementController.java</controllerJavaClass>
+        <parentId>100</parentId>
+    </Entries>
+	<Entries>
+        <entryId>1005010</entryId>
+        <title>Find a Course</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Lookup</viewType>
+        <viewXmlFile>CourseInfoLookupView</viewXmlFile>
+        <controllerJavaClass></controllerJavaClass>
+        <parentId>10050</parentId>
+    </Entries>
+	<Entries>
+        <entryId>1005025</entryId>
+        <title>View</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>CourseOfferingManagement-ManageTheCourseOfferingPage.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingManagementController.java</controllerJavaClass>
+        <parentId>10050</parentId>
+    </Entries>    
+	<Entries>
+        <entryId>100502510</entryId>
+        <title>Course Offering Inquiry</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Inquiry</viewType>
+        <viewXmlFile>CourseOfferingInquiry</viewXmlFile>
+        <controllerJavaClass></controllerJavaClass>
+        <parentId>1005025</parentId>
+    </Entries> 
+	<Entries>
+        <entryId>1005020</entryId>
+        <title>Edit</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>CourseOfferingManagement-ManageTheCourseOfferingPage.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingEditController.java</controllerJavaClass>
+        <parentId>10050</parentId>
+    </Entries>  
+	<Entries>
+        <entryId>100502010</entryId>
+        <title>Edit Course Offerings</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType></viewType>
+        <viewXmlFile>CourseOfferingEditMaintenanceView.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingEditController.java</controllerJavaClass>
+        <parentId>1005020</parentId>
+    </Entries>  
+	<Entries>
+        <entryId>1005030</entryId>
+        <title>Delete</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>CourseOfferingManagement-ManageTheCourseOfferingPage.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingManagementController.java</controllerJavaClass>
+        <parentId>10050</parentId>
+    </Entries> 
+    <Entries>
+        <entryId>100503010</entryId>
+        <title>Delete Course Offerings</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType></viewType>
+        <viewXmlFile>CourseOfferingManagement-CoDeleteConfirmationPage.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingManagementController.java</controllerJavaClass>
+        <parentId>1005030</parentId>
+    </Entries> 
+    <Entries>
+        <entryId>1005040</entryId>
+        <title>View All Registration Groups</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>CourseOfferingManagement-ManageTheCourseOfferingPage.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingManagementController.java</controllerJavaClass>
+        <parentId>10050</parentId>
+    </Entries>   
+    <Entries>
+        <entryId>100504010</entryId>
+        <title>Registration Groups</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType></viewType>
+        <viewXmlFile>CourseOfferingManagement-ViewRegistrationGroupsSection.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingManagementController.java</controllerJavaClass>
+        <parentId>1005040</parentId>
+    </Entries>  
+    <Entries>
+        <entryId>1005050</entryId>
+        <title>Course Offering Requisites</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>CORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>CORuleEditorController.java</controllerJavaClass>
+        <parentId>10050</parentId>
+    </Entries>
+    <Entries>
+        <entryId>100505010</entryId>
+        <title>Add Rule</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Section Action Link</viewType>
+        <viewXmlFile>CORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>CORuleEditorController.java</controllerJavaClass>
+        <parentId>1005050</parentId>
+    </Entries>    
+    <Entries>
+        <entryId>10050501010</entryId>
+        <title>Compare to Catalog</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>CORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>CORuleEditorController.java</controllerJavaClass>
+        <parentId>100505010</parentId>
+    </Entries>
+    <Entries>
+        <entryId>10050501020</entryId>
+        <title>Edit Rule</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>CORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>CORuleEditorController.java</controllerJavaClass>
+        <parentId>100505010</parentId>
+    </Entries>
+    <Entries>
+        <entryId>10050501030</entryId>
+        <title>Edit Rule Logic</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>CORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>CORuleEditorController.java</controllerJavaClass>
+        <parentId>100505010</parentId>
+    </Entries>
+    
+    
+    <Entries>
+        <entryId>100505020</entryId>
+        <title>Compare to Catalog</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Section Action Link</viewType>
+        <viewXmlFile>CORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>CORuleEditorController.java</controllerJavaClass>
+        <parentId>1005050</parentId>
+    </Entries>
+    <Entries>
+        <entryId>100505030</entryId>
+        <title>Edit Rule</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Section Action Link</viewType>
+        <viewXmlFile>CORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>CORuleEditorController.java</controllerJavaClass>
+        <parentId>1005050</parentId>
+    </Entries>    
+    <Entries>
+        <entryId>10050503010</entryId>
+        <title>Compare to Catalog</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>CORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>CORuleEditorController.java</controllerJavaClass>
+        <parentId>100505030</parentId>
+    </Entries>
+    <Entries>
+        <entryId>10050503020</entryId>
+        <title>Edit Rule</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>CORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>CORuleEditorController.java</controllerJavaClass>
+        <parentId>100505030</parentId>
+    </Entries>
+    <Entries>
+        <entryId>10050503030</entryId>
+        <title>Edit Rule Logic</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>CORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>CORuleEditorController.java</controllerJavaClass>
+        <parentId>100505030</parentId>
+    </Entries>    
+    <Entries>
+        <entryId>100505040</entryId>
+        <title>Delete Rule</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Section Action Link</viewType>
+        <viewXmlFile>CORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>CORuleEditorController.java</controllerJavaClass>
+        <parentId>1005050</parentId>
+    </Entries>    
+	    
+	<!-- Exam Offerings -->
+    <Entries>
+        <entryId>1005060</entryId>
+        <title>View Exam Offerings</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>CourseOfferingManagement-ManageTheCourseOfferingPage.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingManagementController.java</controllerJavaClass>
+        <parentId>10050</parentId>
+    </Entries>
+    <Entries>
+        <entryId>100506010</entryId>
+        <title>Exam Offerings</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType></viewType>
+        <viewXmlFile>CourseOfferingManagement-ViewExamOfferingsPage.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingManagementController</controllerJavaClass>
+        <parentId>1005060</parentId>
+    </Entries>
+    <Entries>
+        <entryId>1005070</entryId>
+        <title>Delete</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Table Action Link</viewType>
+        <viewXmlFile>CourseOfferingManagement-ViewAOClustersSection.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingManagementController.java</controllerJavaClass>
+        <parentId>10050</parentId>
+    </Entries>
+    <Entries>
+        <entryId>1005080</entryId>
+        <title>Rename</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Table Action Link</viewType>
+        <viewXmlFile>CourseOfferingManagement-ViewAOClustersSection.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingManagementController.java</controllerJavaClass>
+        <parentId>10050</parentId>
+    </Entries>
+   <Entries>
+        <entryId>1005090</entryId>
+        <title>Copy</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Table Row Action Link</viewType>
+        <viewXmlFile>CourseOfferingManagement-ViewAOClustersSection.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingManagementController.java</controllerJavaClass>
+        <parentId>10050</parentId>
+    </Entries>
+    <Entries>
+        <entryId>1005095</entryId>
+        <title>Edit</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Table Row Action Link</viewType>
+        <viewXmlFile>CourseOfferingManagement-ViewAOClustersSection.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingManagementController.java</controllerJavaClass>
+        <parentId>10050</parentId>
+    </Entries>
+    <Entries>
+        <entryId>100509510</entryId>
+        <title>Edit Activity Offering</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType></viewType>
+        <viewXmlFile>ActivityOfferingEditPage.xml</viewXmlFile>
+        <controllerJavaClass>ActivityOfferingController.java</controllerJavaClass>
+        <parentId>1005095</parentId>
+    </Entries>
+    
+   
+   <!-- AO Requisites --> 
+   <Entries>
+   		<entryId>1005085</entryId>
+        <title>Requisites</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Table Row Action Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>10050</parentId>
+    </Entries>   
+    <Entries>
+   		<entryId>100508510</entryId>
+        <title>Add Rule</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Section Action Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>1005085</parentId>
+    </Entries>
+
+    <Entries>
+        <entryId>10050851010</entryId>
+        <title>Compare to Catalog</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>100508510</parentId>
+    </Entries>
+    <Entries>
+        <entryId>10050851020</entryId>
+        <title>Edit Rule</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>100508510</parentId>
+    </Entries>
+    <Entries>
+        <entryId>10050851020</entryId>
+        <title>Edit Rule Logic</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>100508510</parentId>
+    </Entries>  
+    
+    <Entries>
+   		<entryId>100508520</entryId>
+        <title>Compare</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Section Action Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>1005085</parentId>
+    </Entries>
+    <Entries>
+   		<entryId>100508530</entryId>
+        <title>Edit Rule</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Section Action Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>1005085</parentId>
+    </Entries>
+    <Entries>
+        <entryId>10050853010</entryId>
+        <title>Compare to Catalog</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>100508530</parentId>
+    </Entries>
+    <Entries>
+        <entryId>10050853010</entryId>
+        <title>Edit Rule</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>100508530</parentId>
+    </Entries>
+    <Entries>
+        <entryId>10050853010</entryId>
+        <title>Edit Rule Logic</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>100508530</parentId>
+    </Entries>      
+    
+    <Entries>
+   		<entryId>100508540</entryId>
+        <title>Revert to Course Offering</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Section Action Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>1005085</parentId>
+    </Entries>
+    <Entries>
+   		<entryId>100508550</entryId>
+        <title>View Catalog and Course Offering Rule</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Section Action Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>1005085</parentId>
+    </Entries>
+    <Entries>
+   		<entryId>100508560</entryId>
+        <title>Copy and Edit Course Offering Rule</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Section Action Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>1005085</parentId>
+    </Entries>
+
+    <Entries>
+        <entryId>10050856010</entryId>
+        <title>Compare to Catalog</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>100508560</parentId>
+    </Entries>
+    <Entries>
+        <entryId>10050856020</entryId>
+        <title>Edit Rule</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>100508560</parentId>
+    </Entries>
+    <Entries>
+        <entryId>10050856030</entryId>
+        <title>Edit Rule Logic</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>100508560</parentId>
+    </Entries> 
+        
+    <Entries>
+   		<entryId>100508570</entryId>
+        <title>Replace Rule</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Section Action Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>1005085</parentId>
+    </Entries>
+    <Entries>
+   		<entryId>100508580</entryId>
+        <title>Suppress Rule</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Section Action Link</viewType>
+        <viewXmlFile>AORuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>AORuleEditorController.java</controllerJavaClass>
+        <parentId>1005085</parentId>
+    </Entries>
+	<!-- Create Course Offering -->
+    <Entries>
+        <entryId>110</entryId>
+        <title>Create Course Offerings</title>
+        <url>/kr-krad/courseOfferingCreate?methodToCall=start&amp;dataObjectClassName=org.kuali.student.enrollment.class2.courseoffering.dto.CourseOfferingCreateWrappe&amp;hideReturnLink=true&amp;formKey=207f155c-ee98-4b9b-8c62-8a207d7df588&amp;cacheKey=iyusurfb96l2fe7xj4bxjxhnz5&amp;pageId=courseOfferingCreatePage</url>
+        <viewType>Landing Page Action Link</viewType>
+        <viewXmlFile>CourseOfferingCreateMaintenanceView.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingCreateController.java</controllerJavaClass>
+        <parentId>3</parentId>
+    </Entries>
+	<Entries>
+        <entryId>11010</entryId>
+        <title>Find a Course</title>
+                <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Lookup</viewType>
+        <viewXmlFile>CourseInfoLookupView.xml</viewXmlFile>
+        <controllerJavaClass></controllerJavaClass>
+        <parentId>110</parentId>
+    </Entries>
+
+	<!-- Schedule of classes -->
+    <Entries>
+        <entryId>120</entryId>
+        <title>Schedule of Classes</title>
+        <url>/kr-krad/scheduleOfClassesSearch?viewId=scheduleOfClassesSearchView&amp;methodToCall=start&amp;formKey=a54f693a-0d92-4c93-89c9-5cf2e507c7f6&amp;cacheKey=4y6zeurc9txu5m4w73xgivhjmj&amp;pageId=scheduleOfClassesSearchInputPage</url>
+        <viewType>Landing Page Action Link</viewType>
+        <viewXmlFile>ScheduleOfClassesSearchView.xml</viewXmlFile>
+        <controllerJavaClass>ScheduleOfClassesSearchController.java</controllerJavaClass>
+        <parentId>3</parentId>
+    </Entries>	
+    <Entries>
+        <entryId>12010</entryId>
+        <title>Find a Course</title>
+        <url>/kr-krad/scheduleOfClassesSearch?viewId=scheduleOfClassesSearchView&amp;methodToCall=start&amp;formKey=a54f693a-0d92-4c93-89c9-5cf2e507c7f6&amp;cacheKey=4y6zeurc9txu5m4w73xgivhjmj&amp;pageId=scheduleOfClassesSearchInputPage</url>
+        <viewType>Lookup</viewType>
+        <viewXmlFile>CourseInfoLookupView</viewXmlFile>
+        <controllerJavaClass></controllerJavaClass>
+        <parentId>120</parentId>
+    </Entries>	
+	
+	
+	<!-- Calendar -->
+    <Entries>
+        <entryId>130</entryId>
+        <title>Search for Calendar or Term</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Landing Page Action Link</viewType>
+        <viewXmlFile>CalendarSearchView.xml</viewXmlFile>
+        <controllerJavaClass>CalendarSearchController.java</controllerJavaClass>
+        <parentId>3</parentId>
+    </Entries>	
+    <Entries>
+        <entryId>13010</entryId>
+        <title>Create Blank Academic Calendar</title>
+        <url>/kr-krad/academicCalendar?viewId=academicCalendarFlowView&amp;flow=&amp;methodToCall=startNew&amp;formKey=9b024e56-2aa0-4246-8619-a16a09a1d1e0&amp;cacheKey=3i8ngn3rferbpl7i01zw6377m0&amp;pageId=academicCalendarEditPage</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>130</parentId>
+    </Entries>	
+	<Entries>
+        <entryId>1301010</entryId>
+        <title>Calendar</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>13010</parentId>
+    </Entries>
+	<Entries>
+        <entryId>1301020</entryId>
+        <title>Terms</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>13010</parentId>
+    </Entries>
+	
+    <Entries>
+        <entryId>13020</entryId>
+        <title>Create Blank Holiday Calendar</title>
+        <url>/kr-krad/holidayCalendar?viewId=holidayCalendarFlowView&amp;flow=&amp;methodToCall=startNew&amp;formKey=627b2d68-58bf-41fb-91d2-faaf730ca501&amp;cacheKey=6ecezulc723dtt18yzbvwco6fl&amp;pageId=holidayCalendarEditPage</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>HolidayCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>130</parentId>
+    </Entries>	
+    <Entries>
+        <entryId>13030</entryId>
+        <title>View</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Table Row Action Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>130</parentId>
+    </Entries>	
+	<Entries>
+        <entryId>1303010</entryId>
+        <title>Calendar</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>13030</parentId>
+    </Entries>
+	<Entries>
+        <entryId>1303020</entryId>
+        <title>Terms</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>13030</parentId>
+    </Entries>
+	
+	
+    <Entries>
+        <entryId>13040</entryId>
+        <title>Copy</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Sticky Header Action Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>13030</parentId>
+    </Entries>	
+	<Entries>
+        <entryId>1304010</entryId>
+        <title>Calendar</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>13040</parentId>
+    </Entries>
+	<Entries>
+        <entryId>1304020</entryId>
+        <title>Terms</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>13040</parentId>
+    </Entries>
+	
+	
+    <Entries>
+        <entryId>13050</entryId>
+        <title>Edit</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Table Row Action Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>13030</parentId>
+    </Entries>		
+	<Entries>
+        <entryId>1305010</entryId>
+        <title>Calendar</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>13010</parentId>
+    </Entries>
+	<Entries>
+        <entryId>1305020</entryId>
+        <title>Terms</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>13010</parentId>
+    </Entries>	
+	
+	<Entries>
+        <entryId>13060</entryId>
+        <title>Edit</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Table Row Action Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>130</parentId>
+    </Entries>		
+	<Entries>
+        <entryId>1306010</entryId>
+        <title>Calendar</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>13060</parentId>
+    </Entries>
+	<Entries>
+        <entryId>1306020</entryId>
+        <title>Terms</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>13060</parentId>
+    </Entries>
+	<Entries>
+        <entryId>140</entryId>
+        <title>Create Academic Calendar</title>
+        <url>/kr-krad/academicCalendar?viewId=academicCalendarFlowView&amp;methodToCall=startNew</url>
+        <viewType>Landing Page Action Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>3</parentId>
+    </Entries>
+	<Entries>
+        <entryId>14010</entryId>
+        <title>Create Blank Academic Calendar</title>
+        <url>/kr-krad/academicCalendar?viewId=academicCalendarFlowView&amp;methodToCall=startNew</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>140</parentId>
+    </Entries>
+	<Entries>
+        <entryId>1401010</entryId>
+        <title>Calendar</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>14010</parentId>
+    </Entries>
+	<Entries>
+        <entryId>1401020</entryId>
+        <title>Terms</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>14010</parentId>
+    </Entries>
+	
+	<Entries>
+        <entryId>13070</entryId>
+        <title>Copy</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Sticky Header Action Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>130</parentId>
+    </Entries>	
+	<Entries>
+        <entryId>1307010</entryId>
+        <title>Calendar</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>13070</parentId>
+    </Entries>
+	<Entries>
+        <entryId>1307020</entryId>
+        <title>Terms</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Tab Link</viewType>
+        <viewXmlFile>AcademicCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>AcademicCalendarController.java</controllerJavaClass>
+        <parentId>13070</parentId>
+    </Entries>
+
+	<Entries>
+        <entryId>150</entryId>
+        <title>Create Holiday Calendar</title>
+        <url>/kr-krad/holidayCalendar?viewId=holidayCalendarFlowView&amp;flow=&amp;methodToCall=startNew&amp;formKey=627b2d68-58bf-41fb-91d2-faaf730ca501&amp;cacheKey=6ecezulc723dtt18yzbvwco6fl&amp;pageId=holidayCalendarEditPage</url>
+        <viewType>Landing Page Action Link</viewType>
+        <viewXmlFile>HolidayCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>HolidayCalendarController.java</controllerJavaClass>
+        <parentId>3</parentId>
+    </Entries>	
+	<Entries>
+        <entryId>15010</entryId>
+        <title>Create Blank Holiday Calendar</title>
+        <url>/kr-krad/calendarSearch?viewId=calendarSearchView&amp;methodToCall=start</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>HolidayCalendarView.xml</viewXmlFile>
+        <controllerJavaClass>HolidayCalendarController.java</controllerJavaClass>
+        <parentId>150</parentId>
+    </Entries>
+	
+		<!-- Rollover -->
+	<Entries>
+        <entryId>160</entryId>
+        <title>Perform Rollover</title>
+        <url>/kr-krad/courseOfferingRollover?viewId=courseOfferingRolloverManagementView&amp;methodToCall=start</url>
+        <viewType>Landing Page Action Link</viewType>
+        <viewXmlFile>CourseOfferingRolloverManagementView.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingRolloverController.java</controllerJavaClass>
+        <parentId>3</parentId>
+    </Entries>	
+	<Entries>
+        <entryId>170</entryId>
+        <title>View Rollover Details</title>
+        <url>/kr-krad/courseOfferingRollover?viewId=courseOfferingRolloverManagementView&amp;methodToCall=start</url>
+        <viewType>Landing Page Action Link</viewType>
+        <viewXmlFile>CourseOfferingRolloverManagementView.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingRolloverController.java</controllerJavaClass>
+        <parentId>3</parentId>
+    </Entries>	
+
+	<!-- Manage Set of Courses -->
+    <Entries>
+        <entryId>180</entryId>
+        <title>Manage Set of Courses</title>
+        <url>/kr-krad/manageSOC?viewId=ManageSOCView&amp;methodToCall=start</url>
+        <viewType>Landing Page Action Link</viewType>
+        <viewXmlFile>ManageSOCView.xml</viewXmlFile>
+        <controllerJavaClass>ManageSOCController.java</controllerJavaClass>
+        <parentId>3</parentId>
+    </Entries>	
+    <Entries>
+        <entryId>18010</entryId>
+        <title>Manage Course Offering</title>
+        <url>/kr-krad/courseOfferingManagement?viewId=courseOfferingManagementView&amp;methodToCall=start</url>
+        <viewType>Page Action Link</viewType>
+        <viewXmlFile>CourseOfferingManagementView.xml</viewXmlFile>
+        <controllerJavaClass>CourseOfferingManagementController.java</controllerJavaClass>
+        <parentId>180</parentId>
+    </Entries>
+
+	<!-- Manage FInal Exam Matrix -->
+    <Entries>
+        <entryId>190</entryId>
+        <title>Manage Final Exam Matrix</title>
+        <url>/kr-krad/finalExamRules?viewName=FEAgendaManagementView&amp;dataObjectClassName=org.kuali.student.enrollment.class1.krms.dto.FERuleManagementWrapper&amp;methodToCall=start</url>
+        <viewType>Landing Page Action Link</viewType>
+        <viewXmlFile>FERuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>FERuleEditorController.java</controllerJavaClass>
+        <parentId>3</parentId>
+    </Entries>	
+    <Entries>
+        <entryId>19010</entryId>
+        <title>Manage Final Exam Matrix</title>
+        <url>/kr-krad/finalExamRules?viewName=FEAgendaManagementView&amp;dataObjectClassName=org.kuali.student.enrollment.class1.krms.dto.FERuleManagementWrapper&amp;methodToCall=start</url>
+                <viewType>Table Row Action Link</viewType>
+        <viewXmlFile>FERuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>FERuleEditorController.java</controllerJavaClass>
+        <parentId>190</parentId>
+    </Entries>	
+    <Entries>
+        <entryId>19010</entryId>
+        <title>Add</title>
+        <url>/kr-krad/finalExamRules?viewName=FEAgendaManagementView&amp;dataObjectClassName=org.kuali.student.enrollment.class1.krms.dto.FERuleManagementWrapper&amp;methodToCall=start</url>
+                <viewType>Section Action Link</viewType>
+        <viewXmlFile>FERuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>FERuleEditorController.java</controllerJavaClass>
+        <parentId>190</parentId>
+    </Entries>
+    <Entries>
+        <entryId>1901010</entryId>
+        <title>Add Fall Term Matrix Rule</title>
+        <url>/kr-krad/finalExamRules?viewName=FEAgendaManagementView&amp;dataObjectClassName=org.kuali.student.enrollment.class1.krms.dto.FERuleManagementWrapper&amp;methodToCall=start</url>
+                <viewType></viewType>
+        <viewXmlFile>FERuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>FERuleEditorController.java</controllerJavaClass>
+        <parentId>19010</parentId>
+    </Entries>
+    <Entries>
+        <entryId>19020</entryId>
+        <title>Edit</title>
+        <url>/kr-krad/finalExamRules?viewName=FEAgendaManagementView&amp;dataObjectClassName=org.kuali.student.enrollment.class1.krms.dto.FERuleManagementWrapper&amp;methodToCall=start</url>
+                <viewType>Table Row Action Link</viewType>
+        <viewXmlFile>FERuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>FERuleEditorController.java</controllerJavaClass>
+        <parentId>190</parentId>
+    </Entries>
+    <Entries>
+        <entryId>1902010</entryId>
+        <title>Edit Fall Term Matrix Rule</title>
+        <url>/kr-krad/finalExamRules?viewName=FEAgendaManagementView&amp;dataObjectClassName=org.kuali.student.enrollment.class1.krms.dto.FERuleManagementWrapper&amp;methodToCall=start</url>
+                <viewType></viewType>
+        <viewXmlFile>FERuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>FERuleEditorController.java</controllerJavaClass>
+        <parentId>19020</parentId>
+    </Entries>	
+    <Entries>
+        <entryId>19030</entryId>
+        <title>Delete</title>
+        <url>/kr-krad/finalExamRules?viewName=FEAgendaManagementView&amp;dataObjectClassName=org.kuali.student.enrollment.class1.krms.dto.FERuleManagementWrapper&amp;methodToCall=start</url>
+                <viewType>Table Row Action Link</viewType>
+        <viewXmlFile>FERuleMaintenance.xml</viewXmlFile>
+        <controllerJavaClass>FERuleEditorController.java</controllerJavaClass>
+        <parentId>190</parentId>
+    </Entries>
+	
+	<!-- Manage Time Slots -->
+    <Entries>
+        <entryId>200</entryId>
+        <title>Manage Time Slots</title>
+        <url>/kr-krad/timeslot?viewId=timeSlotView&amp;pageId=timeSlotPage&amp;methodToCall=start</url>
+        <viewType>Landing Page Action Link</viewType>
+        <viewXmlFile>TimeSlotView.xml</viewXmlFile>
+        <controllerJavaClass>TimeSlotController.java</controllerJavaClass>
+        <parentId>3</parentId>
+    </Entries>	
+    <Entries>
+        <entryId>20010</entryId>
+        <title>Edit</title>
+        <url>/kr-krad/timeslot?viewId=timeSlotView&amp;pageId=timeSlotPage&amp;methodToCall=start</url>
+        <viewType>Table Row Action Link</viewType>
+        <viewXmlFile>TimeSlotView.xml</viewXmlFile>
+        <controllerJavaClass>TimeSlotController.java</controllerJavaClass>
+        <parentId>200</parentId>
+    </Entries>	
+	
+</Sitemap>
