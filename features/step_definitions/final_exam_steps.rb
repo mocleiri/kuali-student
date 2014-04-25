@@ -1677,6 +1677,7 @@ Then /^the Exam Offerings Slotting info should be populated or left blank depend
         end
       end
     end
+    page.view_exam_offerings
   end
 end
 
