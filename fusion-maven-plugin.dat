@@ -1,12 +1,12 @@
-# module = ks-api branch Path = enrollment/ks-api/branches/2.0.0-Mx revision = 68768
-ks-api::enrollment_ks-api_branches_2.0.0-Mx::14285c83dc8b54aca9498404b292d338297d1ed6
-# module = ks-core branch Path = enrollment/ks-core/trunk revision = 68768
-ks-core::enrollment_ks-core_trunk::b8ca5bd6cf8ebc57e30affa4d8bc547d9283b248
-# module = ks-lum branch Path = enrollment/ks-lum/trunk revision = 68768
-ks-lum::enrollment_ks-lum_trunk::2cd27e08e2c4524feacb885e4c4564473f43b327
-# module = ks-enroll branch Path = enrollment/ks-enroll/trunk revision = 68768
-ks-enroll::enrollment_ks-enroll_trunk::f193c23c8fa608e5b2ead0f8784aeaeab44a32f1
-# module = ks-ap branch Path = enrollment/ks-ap/trunk revision = 68768
-ks-ap::enrollment_ks-ap_trunk::7275be844875713ec9d00f9bf0ab66c7df64ef99
-# module = ks-deployments branch Path = enrollment/ks-deployments/trunk revision = 68768
-ks-deployments::enrollment_ks-deployments_trunk::5d002b65e68e4fcd4be5ea83b3aa87f9ada79a45
+# module = ks-api branch Path = enrollment/ks-api/branches/rice-2.4-mx-upgrade revision = 69620
+ks-api::enrollment_ks-api_branches_rice-2.4-mx-upgrade::a08450bb2a4d37ced1861db2676c1735e5b96b57
+# module = ks-core branch Path = enrollment/ks-core/branches/rice-2.4-mx-upgrade revision = 69620
+ks-core::enrollment_ks-core_branches_rice-2.4-mx-upgrade::d47454726e4b7530f13ed2d8727e4d57207896d1
+# module = ks-lum branch Path = enrollment/ks-lum/branches/rice-2.4-mx-upgrade revision = 69620
+ks-lum::enrollment_ks-lum_branches_rice-2.4-mx-upgrade::b767af2ae43c11548a8d94cdc3b6a29df1cd7606
+# module = ks-enroll branch Path = enrollment/ks-enroll/branches/rice-2.4-mx-upgrade revision = 69620
+ks-enroll::enrollment_ks-enroll_branches_rice-2.4-mx-upgrade::9e95d7b4f64d0a3917ca74bc957f085d7159bf4a
+# module = ks-ap branch Path = enrollment/ks-ap/branches/rice-2.4-mx-upgrade revision = 69620
+ks-ap::enrollment_ks-ap_branches_rice-2.4-mx-upgrade::a3d0d6aa716b9750e8eb51e8508b60e405afa936
+# module = ks-deployments branch Path = enrollment/ks-deployments/branches/rice-2.4-mx-upgrade revision = 69620
+ks-deployments::enrollment_ks-deployments_branches_rice-2.4-mx-upgrade::1aa983869ee19ecf8cceb0418a90dfdf83de53aa
