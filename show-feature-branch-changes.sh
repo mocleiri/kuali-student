@@ -18,8 +18,8 @@ usage () {
 	exit 1
 }
 
-
-BASE_AGGREGATE=https://svn.kuali.org/repos/student/enrollment/aggregate/branches
+REPO="https://svn.kuali.org/repos/student"
+BASE_AGGREGATE=$REPO/enrollment/aggregate/branches
 
 FEATURE_BRANCH=$1
 
@@ -47,15 +47,16 @@ do
 
 		if test "${LINE:0:1}" != "#"
 		then
-			MODULE_NAME=$(echo "$LINE" | cut -d' ' -f 1)
-			MODULE_PATH=$(echo "$LINE" | cut -d' ' -f 3)
+			MODULE_NAME=$(echo "$LINE" | cut -d' ' -f 3)
+			MODULE_PATH=$(echo "$LINE" | cut -d' ' -f 1)
 
 			echo "View Changes on $MODULE_NAME"
 			echo "Use arrow keys to move listing"
 			echo "Use <space> to decend a page at a time"
 			echo "Type q to quit thus listing"
 
-			svn log -v $MODULE_PATH | less
+		
+			svn log -v $REPO/$MODULE_PATH | less
 			
 		fi
 

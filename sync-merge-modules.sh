@@ -143,7 +143,7 @@ then
 
 			if test "${LINE:0:1}" != "#"
 			then
-				M=$(echo "$LINE" | cut -d' ' -f 1)
+				M=$(echo "$LINE" | cut -d' ' -f 2)
 
 				MODULE_BASE_PATH=$(extractModulePath "$MODULE_MERGE_PATHS" "$M")
 

@@ -169,12 +169,15 @@ fi
 TARGET_PREFIX=${11}
 
 TARGET_PATH=""
+EXTERNALS_PATH=""
 
 if test -z "$TARGET_PREFIX"
 then
 	TARGET_PATH="$REPOSITORY/enrollment"
+	EXTERNALS_PATH="^/enrollment"
 else
 	TARGET_PATH="$REPOSITORY/$TARGET_PREFIX"
+	EXTERNALS_PATH="^/$TARGET_PREFIX"
 fi
 
 SOURCE_REV=""
@@ -252,17 +255,20 @@ fi
 
 printf "cp $SOURCE_REV $SOURCE_PATH/ks-api/$API_SOURCE " >> $CMD_FILE
 
-printf "ks-api " >> $SVN_EXTERNALS_FILE
+# for relative externals the external path comes before the file path
+
 
 if test $IN_BRANCH == "1"
 then
 	printf "    $TARGET_PATH/ks-api/branches/$AGGREGATE_NAME " >> $CMD_FILE
-	printf " $TARGET_PATH/ks-api/branches/$AGGREGATE_NAME\n" >> $SVN_EXTERNALS_FILE
+	printf "$EXTERNALS_PATH/ks-api/branches/$AGGREGATE_NAME" >> $SVN_EXTERNALS_FILE
 
 else
 	printf "    $TARGET_PATH/$AGGREGATE_NAME/ks-api  " >> $CMD_FILE
-	printf " $TARGET_PATH/$AGGREGATE_NAME/ks-api\n" >> $SVN_EXTERNALS_FILE
+	printf "$EXTERNALS_PATH/$AGGREGATE_NAME/ks-api" >> $SVN_EXTERNALS_FILE
 fi
+
+printf " ks-api\n" >> $SVN_EXTERNALS_FILE
 
 for M in $MODULES
 do
@@ -271,12 +277,7 @@ do
 		continue
 	fi
 
-	if test "$M" != "aggregate"
-	then
-
-		printf "$M " >> $SVN_EXTERNALS_FILE
-	fi
-
+	
 	# printf "module = $M"
 
 	SOURCE_MOD_BRANCH=$(extractModulePath "$SOURCE_BRANCH" $M)
@@ -294,7 +295,7 @@ do
 		printf "    $TARGET_PATH/$M/branches/$AGGREGATE_NAME " >> $CMD_FILE
 		if test "$M" != "aggregate"
 		then
-			printf " $TARGET_PATH/$M/branches/$AGGREGATE_NAME\n" >> $SVN_EXTERNALS_FILE
+			printf "$EXTERNALS_PATH/$M/branches/$AGGREGATE_NAME" >> $SVN_EXTERNALS_FILE
 		fi
 
 	else
@@ -302,9 +303,16 @@ do
 		
 		if test "$M" != "aggregate"
 		then
-			printf " $TARGET_PATH/$AGGREGATE_NAME/$M\n" >> $SVN_EXTERNALS_FILE
+			printf " $EXTERNALS_PATH/$AGGREGATE_NAME/$M" >> $SVN_EXTERNALS_FILE
 		fi
 	fi
+
+	if test "$M" != "aggregate"
+	then
+
+		printf " $M\n" >> $SVN_EXTERNALS_FILE
+	fi
+
 
 done
 

@@ -120,14 +120,14 @@ do
 
 		if test "${LINE:0:1}" != "#"
 		then
-			M=$(echo "$LINE" | cut -d' ' -f 1)
+			M=$(echo "$LINE" | cut -d' ' -f 2)
 
 			MODULE_BRANCH="$REPOSITORY/enrollment/$M/branches/$AGGREGATE_NAME"
 			ARCHIVED_MODULE_BRANCH="$REPOSITORY/enrollment/$M/branches/inactive/$AGGREGATE_NAME"
 	
 			printf "mv $MODULE_BRANCH $ARCHIVED_MODULE_BRANCH " >> $CMD_FILE
 
-			printf "$M $ARCHIVED_MODULE_BRANCH\n" >> $SVN_EXTERNALS_FILE
+			printf "^/enrollment/$M/branches/inactive/$AGGREGATE_NAME $M\n" >> $SVN_EXTERNALS_FILE
 			
 		fi
 
