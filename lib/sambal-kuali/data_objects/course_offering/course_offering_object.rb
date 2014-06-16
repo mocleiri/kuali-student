@@ -101,6 +101,33 @@ class CourseOffering < DataFactory
     @course <=> other.course
   end
 
+  def exists?
+    go_to_manage_course_offerings
+    on ManageCourseOfferings do |page|
+      page.term.set @term
+      page.input_code.set @course
+      page.show
+      if page.error_list.link.present? and
+          ( page.first_msg =~ /Cannot find any course offering/ or
+            page.first_msg =~ /No term defined/ or
+            page.first_msg =~ /SOC does not exist/)
+        return false
+      end
+    end
+
+    begin
+      on ManageCourseOfferings do |page|
+        page.list_all_course_link.wait_until_present(5)
+        page.list_all_courses
+      end
+    rescue Watir::Wait::TimeoutError
+      #means a list was already returned
+    end
+    on ManageCourseOfferingList do |page|
+      return page.link(id: "manage_co_#{@course}").present?
+    end
+  end
+
   # creates course offering based on class attributes
   def create
     if @create_by_copy != nil
@@ -1043,6 +1070,15 @@ class CourseOffering < DataFactory
       page.term.set term
       page.input_code.set source_course_code[0,4] #subject code + course level (assumes always more than one CO returned)
       page.show
+      #make sure showing list
+      begin
+        on ManageCourseOfferings do |page|
+          page.list_all_course_link.wait_until_present(5)
+          page.list_all_courses
+        end
+      rescue Watir::Wait::TimeoutError
+        #means a list was already returned
+      end
     end
 
     on ManageCourseOfferingList do |page|

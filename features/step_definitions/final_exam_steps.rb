@@ -1540,8 +1540,37 @@ Given /^I create a Course Offering with an AO-driven exam from catalog in a term
 end
 
 Given /^that the Course Offering has an AO-driven exam in a term that uses the FE matrix and has defined final exam period$/ do
-  @original_co = make CourseOffering, :term => "201301", :course => "BSCI361"
-end
+  @original_co = make CourseOffering, :term => Rollover::OPEN_EO_CREATE_TERM, :course => "BSCI361"
+
+  unless @original_co.exists?
+    course_offering = make CourseOffering, :term=> Rollover::OPEN_EO_CREATE_TERM,
+                           :course => "BSCI361",
+                           :suffix => ' ',
+                           :final_exam_driver => "Final Exam Per Activity Offering"
+    course_offering.delivery_format_list[0].format = "Lecture/Discussion"
+    course_offering.delivery_format_list[0].grade_format = "Discussion"
+    course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
+    course_offering.create
+
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture/Discussion", :activity_type => "Lecture"
+    si_obj =  make SchedulingInformationObject, :days => "MW",
+                   :start_time => "02:00", :start_time_ampm => "pm",
+                   :end_time => "03:15", :end_time_ampm => "pm",
+                   :facility => 'PLS', :room => '1130'
+    activity_offering.add_req_sched_info :rsi_obj => si_obj
+
+    #TODO: KSENROLL-13157 problems creating 2nd AO
+    # activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    #                            :format => "Lecture/Discussion", :activity_type => "Discussion"
+    # si_obj =  make SchedulingInformationObject, :days => "W",
+    #                :start_time => "09:00", :start_time_ampm => "am",
+    #                :end_time => "09:50", :end_time_ampm => "am",
+    #                :facility => 'KEY', :room => '0117'
+    # activity_offering.add_req_sched_info :rsi_obj => si_obj
+  end
+
+  end
 
 When /^I create a copy of the Course Offering and decide to exclude all scheduling information$/ do
   @course_offering = create CourseOffering, :create_by_copy => @original_co, :exclude_scheduling => true

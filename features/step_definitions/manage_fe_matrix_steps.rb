@@ -406,6 +406,18 @@ end
 Given /^that the Course Offering has a CO-driven final exam that is marked to use the matrix and exists on the Final Exam Matrix for the term$/ do
   @course_offering = make CourseOffering, :term => Rollover::OPEN_EO_CREATE_TERM, :course => "CHEM131"
 
+  unless @course_offering.exists?
+    course_offering = make CourseOffering, :term=> Rollover::OPEN_EO_CREATE_TERM,
+                            :course => 'CHEM131', :suffix => ' '
+    course_offering.delivery_format_list[0].format = 'Lecture'
+    course_offering.delivery_format_list[0].grade_format = 'Lecture'
+    course_offering.delivery_format_list[0].final_exam_activity = 'Lecture'
+    course_offering.create
+
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering,
+                                :format => 'Lecture Only', :activity_type => 'Lecture'
+  end
+
   @matrix = make FinalExamMatrix, :term_type => "Spring Term"
   @matrix.create_common_rule_matrix_object_for_rsi( @course_offering.course)
 end
@@ -438,6 +450,28 @@ end
 
 Given /^that the Course Offering has a CO-driven final exam that is marked to use the matrix but does not exist on the Final Exam Matrix for the term$/ do
   @course_offering = make CourseOffering, :term => Rollover::OPEN_EO_CREATE_TERM, :course => "CHEM242"
+  unless @course_offering.exists?
+    course_offering = make CourseOffering, :term=> Rollover::OPEN_EO_CREATE_TERM,
+                           :course => "CHEM242",
+                           :suffix => ' ',
+                           :final_exam_driver => "Final Exam Per Course Offering"
+    course_offering.delivery_format_list[0].format = "Lecture/Lab"
+    course_offering.delivery_format_list[0].grade_format = "Lab"
+    course_offering.delivery_format_list[0].final_exam_activity = ""
+    course_offering.create
+
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture/Lab", :activity_type => "Lecture"
+    #TODO: KSENROLL-13157 problems creating 2nd AO
+    # activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    #                            :format => "Lecture/Lab", :activity_type => "Lab"
+    #
+    # si_obj =  make SchedulingInformationObject, :days => "M",
+    #                :start_time => "12:00", :start_time_ampm => "pm",
+    #                :end_time => "02:50", :end_time_ampm => "pm",
+    #                :facility => 'CHM', :room => '1326'
+    # activity_offering.add_req_sched_info :rsi_obj => si_obj
+  end
 end
 
 Then /^the Schedule Information for the Exam Offering should be blank$/ do
@@ -468,7 +502,35 @@ Given /^I encure that the AO's Requested Scheduling Information exists on the Fi
 end
 
 Given /^that the Course Offering has an AO-driven exam that is marked to use the matrix, Requested Scheduling Information for the exam exists on the Final Exam Matrix, and the parent AO of the exam offering has RSI data$/ do
-  @original_co = make CourseOffering, :term => "201301", :course => "HIST111"
+  @original_co = make CourseOffering, :term => Rollover::OPEN_EO_CREATE_TERM, :course => "HIST111"
+
+  unless @original_co.exists?
+    course_offering = make CourseOffering, :term=> Rollover::OPEN_EO_CREATE_TERM,
+                           :course => "HIST111",
+                           :suffix => ' ',
+                           :final_exam_driver => "Final Exam Per Activity Offering"
+    course_offering.delivery_format_list[0].format = "Lecture/Discussion"
+    course_offering.delivery_format_list[0].grade_format = "Discussion"
+    course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
+    course_offering.create
+
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture/Discussion", :activity_type => "Lecture"
+    si_obj =  make SchedulingInformationObject, :days => "MW",
+                   :start_time => "11:00", :start_time_ampm => "am",
+                   :end_time => "11:50", :end_time_ampm => "am",
+                   :facility => 'JMZ', :room => '0220'
+    activity_offering.add_req_sched_info :rsi_obj => si_obj
+
+    #TODO: KSENROLL-13157 problems creating 2nd AO
+    # activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    #                            :format => "Lecture/Discussion", :activity_type => "Discussion"
+    # si_obj =  make SchedulingInformationObject, :days => "W",
+    #                :start_time => "09:00", :start_time_ampm => "am",
+    #                :end_time => "09:50", :end_time_ampm => "am",
+    #                :facility => 'KEY', :room => '0117'
+    # activity_offering.add_req_sched_info :rsi_obj => si_obj
+  end
 
   @matrix = make FinalExamMatrix, :term_type => "Spring Term"
   @matrix.create_standard_rule_matrix_object_for_rsi( "MW at 11:00 AM")
@@ -556,7 +618,27 @@ Given /^there is an Activity Offering that has RSI data but has no ASI data$/ do
 end
 
 Given /^that the Course Offering has an AO-driven exam that is marked to use the matrix and Requested Scheduling Information for the exam does not exist on the Final Exam Matrix$/ do
-  @course_offering = make CourseOffering, :term => Rollover::OPEN_EO_CREATE_TERM, :course => "CHEM395"
+  @original_co = make CourseOffering, :term => Rollover::OPEN_EO_CREATE_TERM, :course => "CHEM395"
+
+  unless @original_co.exists?
+    course_offering = make CourseOffering, :term=> Rollover::OPEN_EO_CREATE_TERM,
+                           :course => "CHEM395",
+                           :suffix => ' ',
+                           :final_exam_driver => "Final Exam Per Activity Offering"
+    course_offering.delivery_format_list[0].format = "Lecture"
+    course_offering.delivery_format_list[0].grade_format = "Lecture"
+    course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
+    course_offering.create
+
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture Only", :activity_type => "Lecture"
+    si_obj =  make SchedulingInformationObject, :days => "T",
+                   :start_time => "10:00", :start_time_ampm => "am",
+                   :end_time => "11:50", :end_time_ampm => "am",
+                   :facility => 'CHM', :room => '1402'
+    activity_offering.add_req_sched_info :rsi_obj => si_obj
+  end
+
 end
 
 Then /^the (?:Requested|Actual) Scheduling Information for the Exam Offering of the AO should be populated$/ do
@@ -592,14 +674,52 @@ Then /^the EO's Scheduling Information for the Exam Offering of the AO should be
 end
 
 Given /^that the Course Offering has one Activity Offering with Requested Scheduling Information that exists on the Final Exam Matrix$/ do
-  @original_co = make CourseOffering, :term => "201301", :course => "ENGL313"
+  @original_co = make CourseOffering, :term => Rollover::OPEN_EO_CREATE_TERM, :course => "ENGL313"
+
+  unless @original_co.exists?
+    course_offering = make CourseOffering, :term=> Rollover::OPEN_EO_CREATE_TERM,
+                           :course => "ENGL313",
+                           :suffix => ' ',
+                           :final_exam_driver => "Final Exam Per Activity Offering"
+    course_offering.delivery_format_list[0].format = "Lecture"
+    course_offering.delivery_format_list[0].grade_format = "Lecture"
+    course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
+    course_offering.create
+
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture Only", :activity_type => "Lecture"
+    si_obj =  make SchedulingInformationObject, :days => "TH",
+                   :start_time => "03:30", :start_time_ampm => "pm",
+                   :end_time => "04:45", :end_time_ampm => "pm",
+                   :facility => 'TWS', :room => '0214'
+    activity_offering.add_req_sched_info :rsi_obj => si_obj
+  end
 
   @matrix = make FinalExamMatrix, :term_type => "Spring Term"
   @matrix.create_standard_rule_matrix_object_for_rsi( "TH at 03:30 PM")
 end
 
 Given /^that the Course Offering has one Activity Offering with Requested Scheduling Information that does not exist on the Final Exam Matrix$/ do
-  @original_co = make CourseOffering, :term => "201301", :course => "ENGL611"
+  @original_co = make CourseOffering, :term => Rollover::OPEN_EO_CREATE_TERM, :course => "ENGL611"
+
+  unless @original_co.exists?
+    course_offering = make CourseOffering, :term=> @calendar.terms[0].term_code,
+                           :course => "ENGL611",
+                           :suffix => ' ',
+                           :final_exam_driver => "Final Exam Per Activity Offering"
+    course_offering.delivery_format_list[0].format = "Lecture"
+    course_offering.delivery_format_list[0].grade_format = "Lecture"
+    course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
+    course_offering.create
+
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture Only", :activity_type => "Lecture"
+    si_obj =  make SchedulingInformationObject, :days => "T",
+                   :start_time => "03:30", :start_time_ampm => "pm",
+                   :end_time => "06:00", :end_time_ampm => "pm",
+                   :facility => 'TWS', :room => '3252'
+    activity_offering.add_req_sched_info :rsi_obj => si_obj
+  end
 end
 
 Given /^I create from catalog a Course Offering with an AO-driven exam that uses the exam matrix in a term with a defined final exam period$/ do
