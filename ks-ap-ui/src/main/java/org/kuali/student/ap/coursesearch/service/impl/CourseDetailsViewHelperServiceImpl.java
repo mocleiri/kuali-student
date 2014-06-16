@@ -1,5 +1,13 @@
 package org.kuali.student.ap.coursesearch.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.commons.lang.StringUtils;
 import org.kuali.rice.core.api.config.property.ConfigContext;
 import org.kuali.rice.krad.uif.UifConstants;
@@ -15,7 +23,6 @@ import org.kuali.student.ap.coursesearch.dataobject.PlannedRegGroupDetailsWrappe
 import org.kuali.student.ap.coursesearch.form.CourseSectionDetailsForm;
 import org.kuali.student.ap.coursesearch.service.CourseDetailsViewHelperService;
 import org.kuali.student.ap.framework.config.KsapFrameworkServiceLocator;
-import org.kuali.student.common.util.security.ContextUtils;
 import org.kuali.student.enrollment.courseoffering.dto.ActivityOfferingInfo;
 import org.kuali.student.enrollment.courseoffering.dto.CourseOfferingInfo;
 import org.kuali.student.enrollment.courseoffering.dto.FormatOfferingInfo;
@@ -37,14 +44,6 @@ import org.kuali.student.r2.core.scheduling.dto.ScheduleComponentInfo;
 import org.kuali.student.r2.core.scheduling.dto.ScheduleInfo;
 import org.kuali.student.r2.core.scheduling.dto.TimeSlotInfo;
 import org.kuali.student.r2.lum.course.dto.CourseInfo;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -374,7 +373,7 @@ public class CourseDetailsViewHelperServiceImpl extends ViewHelperServiceImpl im
     private void updateScheduleToAOWrapperForDisplay(ActivityOfferingDetailsWrapper aoWrapper, Boolean isTBA, String roomId, TimeSlotInfo timeSlot) throws Exception {
         RoomInfo roomInfo = null;
         if (StringUtils.isNotBlank(roomId)) {
-            roomInfo = KsapFrameworkServiceLocator.getRoomService().getRoom(roomId, ContextUtils.createDefaultContextInfo());
+            roomInfo = KsapFrameworkServiceLocator.getRoomService().getRoom(roomId, KsapFrameworkServiceLocator.getContext().getContextInfo());
         }
         updateScheduleToAOWrapperForDisplay(aoWrapper, isTBA, roomInfo, timeSlot);
     }
@@ -403,7 +402,7 @@ public class CourseDetailsViewHelperServiceImpl extends ViewHelperServiceImpl im
         }
 
         if (roomInfo != null && StringUtils.isNotBlank(roomInfo.getBuildingId())) {
-            BuildingInfo buildingInfo = KsapFrameworkServiceLocator.getRoomService().getBuilding(roomInfo.getBuildingId(), ContextUtils.createDefaultContextInfo());
+            BuildingInfo buildingInfo = KsapFrameworkServiceLocator.getRoomService().getBuilding(roomInfo.getBuildingId(), KsapFrameworkServiceLocator.getContext().getContextInfo());
             aoWrapper.setLocation(buildingInfo.getName() + " " + roomInfo.getRoomCode());
 //            aoWrapper.setBuildingName(buildingInfo.getName(),append);
 //            aoWrapper.setRoomName(roomInfo.getRoomCode(),append);
