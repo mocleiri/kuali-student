@@ -1,5 +1,4 @@
-@red_team
-
+@nightly @red_team
 Feature: REG.Time Conflict
 
   CR 9 - As an Administrator, I want the system to validate that there are no time conflicts amongst

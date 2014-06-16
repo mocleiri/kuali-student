@@ -1,4 +1,4 @@
-@nightly
+@nightly @red_team
 Feature: REG.Wait List
 
   As a student I want to add or remove myself from a courses wait list.
