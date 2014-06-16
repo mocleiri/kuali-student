@@ -1790,11 +1790,11 @@ Then /^the Exam Offerings Slotting info should be populated or left blank depend
 end
 
 Given /^I create a Course Offering from catalog with an Alternate Exam that is not found on the matrix in a term with a defined final exam period$/ do
-  @course_offering = create CourseOffering, :term=> "201208", :course => "CHEM242", :final_exam_type => "ALTERNATE"
+  @course_offering = create CourseOffering, :term=> Rollover::PUBLISHED_EO_CREATE_TERM, :course => "CHEM242", :final_exam_type => "ALTERNATE"
 end
 
 Given /^I create a Course Offering from catalog with No Exam that is found on the matrix in a term with a defined final exam period$/ do
-  @course_offering = make CourseOffering, :term=> "201208", :course => "ENGL403", :final_exam_type => "NONE"
+  @course_offering = make CourseOffering, :term=> Rollover::PUBLISHED_EO_CREATE_TERM, :course => "ENGL403", :final_exam_type => "NONE"
 
   @matrix = make FinalExamMatrix
   @matrix.create_common_rule_matrix_object_for_rsi( @course_offering.course)
@@ -1808,11 +1808,11 @@ When /^I edit the Course Offering to use a Standard Exam that is CO-Driven$/ do
 end
 
 Given /^I create a Course Offering from catalog with No Exam that has an AO with RSI data found on the matrix in a term with a defined final exam period$/ do
-  @course_offering = make CourseOffering, :term=> "201208", :course => "ENGL304", :final_exam_type => "NONE"
+  @course_offering = make CourseOffering, :term=> Rollover::PUBLISHED_EO_CREATE_TERM, :course => "ENGL304", :final_exam_type => "NONE"
   @course_offering.delivery_format_list[0].format = "Lecture"
   @course_offering.delivery_format_list[0].grade_format = "Lecture"
 
-  @matrix = make FinalExamMatrix
+  @matrix = make FinalExamMatrix, :term_type => 'Spring Term'
   @matrix.create_standard_rule_matrix_object_for_rsi( "MWF")
 
   @course_offering.create
@@ -1832,10 +1832,10 @@ When /^I edit the Course Offering to use a Standard Exam that is AO-Driven$/ do
 end
 
 Given /^I create a Course Offering from catalog with an Alternate Exam that has an AO with RSI data not found on the matrix in a term with a defined final exam period$/ do
-  @matrix = make FinalExamMatrix
+  @matrix = make FinalExamMatrix, :term_type => 'Spring Term'
   @matrix.create_standard_rule_matrix_object_for_rsi( "F")
 
-  @course_offering = create CourseOffering, :term=> "201208", :course => "CHEM242", :final_exam_type => "ALTERNATE"
+  @course_offering = create CourseOffering, :term=> Rollover::PUBLISHED_EO_CREATE_TERM, :course => "CHEM242", :final_exam_type => "ALTERNATE"
 
   @activity_offering = @course_offering.create_ao :ao_obj => (make ActivityOfferingObject, :format => "Lab/Lecture",
                                                                    :activity_type => "Lab")
@@ -1848,7 +1848,7 @@ Given /^I create a Course Offering from catalog with an Alternate Exam that has 
 end
 
 Given /^I create a Course Offering from catalog with an Alternate Exam that has an AO with no RSI or ASI data$/ do
-  @course_offering = make CourseOffering, :term => "201208", :course => "ENGL250", :final_exam_type => "ALTERNATE"
+  @course_offering = make CourseOffering, :term => Rollover::PUBLISHED_EO_CREATE_TERM, :course => "ENGL250", :final_exam_type => "ALTERNATE"
 
   @course_offering.delivery_format_list[0].format = "Lecture"
   @course_offering.delivery_format_list[0].grade_format = "Lecture"
@@ -1859,7 +1859,7 @@ end
 
 
 Given /^I create a Course Offering from catalog with No Exam that has an AO with no RSI or ASI data$/ do
-  @course_offering = make CourseOffering, :term => "201301", :course => "ENGL250", :final_exam_type => "NONE"
+  @course_offering = make CourseOffering, :term => Rollover::OPEN_EO_CREATE_TERM, :course => "ENGL250", :final_exam_type => "NONE"
 
   @course_offering.delivery_format_list[0].format = "Lecture"
   @course_offering.delivery_format_list[0].grade_format = "Lecture"
@@ -1869,11 +1869,11 @@ Given /^I create a Course Offering from catalog with No Exam that has an AO with
 end
 
 Given /^I create a Course Offering from catalog with No Exam that has an AO with ASI data found on the matrix in a term with a defined final exam period$/ do
-  @course_offering = make CourseOffering, :term=> "201208", :course => "ENGL304", :final_exam_type => "NONE"
+  @course_offering = make CourseOffering, :term=> Rollover::PUBLISHED_EO_CREATE_TERM, :course => "ENGL304", :final_exam_type => "NONE"
   @course_offering.delivery_format_list[0].format = "Lecture"
   @course_offering.delivery_format_list[0].grade_format = "Lecture"
 
-  @matrix = make FinalExamMatrix
+  @matrix = make FinalExamMatrix, :term_type => 'Spring Term'
   @matrix.create_standard_rule_matrix_object_for_rsi( "TH")
 
   @course_offering.create
@@ -1890,10 +1890,10 @@ Given /^I create a Course Offering from catalog with No Exam that has an AO with
 end
 
 Given /^I create a Course Offering from catalog with an Alternate Exam that has an AO with ASI data not found on the matrix in a term with a defined final exam period$/ do
-  @matrix = make FinalExamMatrix
+  @matrix = make FinalExamMatrix, :term_typ => 'Spring Term'
   @matrix.create_standard_rule_matrix_object_for_rsi( "F")
 
-  @course_offering = create CourseOffering, :term=> "201208", :course => "CHEM242", :final_exam_type => "ALTERNATE"
+  @course_offering = create CourseOffering, :term=> Rollover::PUBLISHED_EO_CREATE_TERM, :course => "CHEM242", :final_exam_type => "ALTERNATE"
 
   @activity_offering = @course_offering.create_ao :ao_obj => (make ActivityOfferingObject, :format => "Lab/Lecture",:activity_type => "Lab")
   @course_offering.activity_offering_cluster_list[0].ao_list[0].edit :send_to_scheduler => true
