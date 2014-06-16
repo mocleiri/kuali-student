@@ -453,27 +453,18 @@ Given /^I log in to student registration as (\w+)$/  do |user|
   end
 end
 
-When /^I add courses to my registration cart that would exceed the (spring|summer) term credit limit$/ do  |termType|
+When /^I add courses to my registration cart that would exceed the spring term credit limit$/ do
   # first make sure user's schedule is clear ?? (Dev working on)
-  # then add three or six 3-credit courses and one 4-credit (last one added to cart should fail)
+  # then add six 3-credit courses and one 4-credit (last one added to cart should fail)
   reg_group_code = "1001"
-  course_count = 0
-      case termType
-        when "spring" then
-          course_count = 6
-          term_code = "201101"
-          term_descr = "Spring 2011"
-        when "summer" then
-          course_count = 3    # Don't really know what this value will be -- this is just a guess at this point
-          term_code = "201105"
-          term_descr = "Summer 1 2011"
-      end
-  for i in (0..course_count-1)
+  term_code = "201101"
+  term_descr = "Spring 2011"
+  for i in (0..5)
     @reg_request_engl = make RegistrationRequest, :student_id=>"student2",
-                           :term_code=>term_code,
-                           :term_descr=>term_descr,
-                           :course_code=>"ENGL301",
-                           :reg_group_code=>reg_group_code
+                             :term_code=>term_code,
+                             :term_descr=>term_descr,
+                             :course_code=>"ENGL301",
+                             :reg_group_code=>reg_group_code
     @reg_request_engl.create
     reg_group_code.next!
   end
@@ -482,6 +473,31 @@ When /^I add courses to my registration cart that would exceed the (spring|summe
                       :term_code=>term_code,
                       :term_descr=>term_descr,
                       :course_code=>"WMST469G",
+                      :reg_group_code=>"1001", :course_options => course_options, :modify_course_options => true
+  @reg_request.create
+end
+
+When /^I add courses to my registration cart that would exceed the summer term credit limit$/ do
+  # first make sure user's schedule is clear ?? (Dev working on)
+  # then add two 3-credit courses and one 4-credit (last one added to cart should fail)
+  reg_group_code = "1004"
+  term_code = "201105"
+  term_descr = "Summer I 2012"
+  for i in (0..1)
+    @reg_request_engl = make RegistrationRequest, :student_id=>"student2",
+                             :term_code=>term_code,
+                             :term_descr=>term_descr,
+                             :course_code=>"ENGL101",
+                             :reg_group_code=>reg_group_code,
+                             :course_has_options=>false
+    @reg_request_engl.create
+    reg_group_code.next!
+  end
+  course_options = (make CourseOptions, :credit_option => "4.0")
+  @reg_request = make RegistrationRequest, :student_id=>"student2",
+                      :term_code=>term_code,
+                      :term_descr=>term_descr,
+                      :course_code=>"WMST469M",
                       :reg_group_code=>"1001", :course_options => course_options, :modify_course_options => true
   @reg_request.create
 end
