@@ -1,5 +1,5 @@
 When /^I add courses to my registration cart that would exceed the spring term credit limit$/ do
-  # first make sure user's schedule is clear ?? (Dev working on)
+  # TODO: first make sure user's schedule is clear (using REST call in KSENROLL-13175)
   # then add six 3-credit courses and one 4-credit (last one added to cart should fail)
   reg_group_code = "1001"
   term_code = "201101"
@@ -13,6 +13,10 @@ When /^I add courses to my registration cart that would exceed the spring term c
     @reg_request_engl.create
     reg_group_code.next!
   end
+  # Register for the first six separately, per dev recommendation TODO: register for all at once
+  @reg_request_engl.register
+  sleep 5
+
   course_options = (make CourseOptions, :credit_option => "4.0")
   @reg_request = make RegistrationRequest, :student_id=>"student2",
                       :term_code=>term_code,
