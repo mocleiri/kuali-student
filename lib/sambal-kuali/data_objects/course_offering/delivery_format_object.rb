@@ -89,6 +89,15 @@ class DeliveryFormatObject < DataFactory
 
     @parent_co.edit :defer_save => true if options[:start_edit]
 
+    #ordering of compound format type (eg Lecture/Discussion) is flexible
+    #formats table doesn't include the format, then try reordering
+    if !@format.index('/').nil?
+      if on(CourseOfferingCreateEdit).delivery_format_row(@format).nil?
+        formats = @format.split('/')
+        @format = "#{formats[1]}/#{formats[0]}"
+      end
+    end
+
     if options[:grade_format] != nil
       on(CourseOfferingCreateEdit).edit_grade_roster_level(@format,options[:grade_format])
     end
