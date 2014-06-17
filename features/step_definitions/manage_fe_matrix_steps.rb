@@ -703,7 +703,7 @@ Given /^that the Course Offering has one Activity Offering with Requested Schedu
   @original_co = make CourseOffering, :term => Rollover::OPEN_EO_CREATE_TERM, :course => "ENGL611"
 
   unless @original_co.exists?
-    course_offering = make CourseOffering, :term=> @calendar.terms[0].term_code,
+    course_offering = make CourseOffering, :term=>  Rollover::OPEN_EO_CREATE_TERM,
                            :course => "ENGL611",
                            :suffix => ' ',
                            :final_exam_driver => "Final Exam Per Activity Offering"
