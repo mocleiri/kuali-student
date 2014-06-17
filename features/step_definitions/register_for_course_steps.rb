@@ -80,7 +80,7 @@ When /^I add an? (\w+) course offering to my registration cart$/ do |subj|
       term_code = "201208"
       term_descr = "Fall 2012"
       credit_option = "3.0"
-      course_has_options = false
+      course_has_options = true
     when "HIST" then
       course_code = "HIST111"
       reg_group_code = "1001"
@@ -518,13 +518,16 @@ Then /^I cannot register for another course$/ do
                       :course_code=>"PHYS121",
                       :reg_group_code=>"1001"
   @reg_request_phys.create
+
+  @reg_request_phys.register
+  sleep 3
   on RegistrationCart do |page|
     page.course_code(@reg_request_phys.course_code,@reg_request_phys.reg_group_code).wait_until_present
     page.course_code(@reg_request_phys.course_code,@reg_request_phys.reg_group_code).text.should match /failed/i
   end
 end
 
-And /^I am able to retain the course to re\-submit it$/ do
+And /^I am able to retain the failed course to re\-submit it$/ do
   on RegistrationCart do |page|
     page.keep_in_cart_button(@reg_request.course_code,@reg_request.reg_group_code).wait_until_present
     page.keep_in_cart(@reg_request.course_code,@reg_request.reg_group_code)
