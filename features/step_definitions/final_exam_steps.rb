@@ -795,7 +795,38 @@ When /^I create a Fall Term Exam Period with 2 fewer days than the number of Fin
 end
 
 When /^there is more than one Activity Offering for the Course$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "ENGL301")
+  @original_co = make CourseOffering, :term => Rollover::PUBLISHED_EO_CREATE_TERM, :course => "ENGL301"
+
+  unless @original_co.exists?
+    course_offering = make CourseOffering, :term=> @original_co.term,
+                           :course => @original_co.course,
+                           :suffix => ' ',
+                           :final_exam_driver => "Final Exam Per Activity Offering"
+    course_offering.delivery_format_list[0].format = "Lecture"
+    course_offering.delivery_format_list[0].grade_format = "Lecture"
+    course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
+    course_offering.create
+
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture Only", :activity_type => "Lecture"
+    si_obj =  make SchedulingInformationObject, :days => "MW",
+                   :start_time => "11:00", :start_time_ampm => "am",
+                   :end_time => "12:15", :end_time_ampm => "pm",
+                   :facility => 'TWS', :room => '3132'
+    activity_offering.add_req_sched_info :rsi_obj => si_obj
+
+    #TODO: KSENROLL-13157 problems creating 2nd AO
+    # activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    #                            :format => "Lecture/Discussion", :activity_type => "Discussion"
+    # si_obj =  make SchedulingInformationObject, :days => "W",
+    #                :start_time => "09:00", :start_time_ampm => "am",
+    #                :end_time => "09:50", :end_time_ampm => "am",
+    #                :facility => 'KEY', :room => '0117'
+    # activity_offering.add_req_sched_info :rsi_obj => si_obj
+  end
+
+
+  @course_offering = create CourseOffering, :create_by_copy=> @original_co
 end
 
 When /^I cancel an Activity Offering for a CO with a standard final exam driven by Course Offering$/ do
@@ -813,7 +844,38 @@ When /^I cancel an Activity Offering for a CO with a standard final exam driven 
 end
 
 Given /^that the Lecture AO that drives the exam is not in a cancelled state$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "ENGL301")
+  @original_co = make CourseOffering, :term => Rollover::PUBLISHED_EO_CREATE_TERM, :course => "ENGL301"
+
+  unless @original_co.exists?
+    course_offering = make CourseOffering, :term=> @original_co.term,
+                           :course => @original_co.course,
+                           :suffix => ' ',
+                           :final_exam_driver => "Final Exam Per Activity Offering"
+    course_offering.delivery_format_list[0].format = "Lecture"
+    course_offering.delivery_format_list[0].grade_format = "Lecture"
+    course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
+    course_offering.create
+
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture Only", :activity_type => "Lecture"
+    si_obj =  make SchedulingInformationObject, :days => "MW",
+                   :start_time => "11:00", :start_time_ampm => "am",
+                   :end_time => "12:15", :end_time_ampm => "pm",
+                   :facility => 'TWS', :room => '3132'
+    activity_offering.add_req_sched_info :rsi_obj => si_obj
+
+    #TODO: KSENROLL-13157 problems creating 2nd AO
+    # activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    #                            :format => "Lecture/Discussion", :activity_type => "Discussion"
+    # si_obj =  make SchedulingInformationObject, :days => "W",
+    #                :start_time => "09:00", :start_time_ampm => "am",
+    #                :end_time => "09:50", :end_time_ampm => "am",
+    #                :facility => 'KEY', :room => '0117'
+    # activity_offering.add_req_sched_info :rsi_obj => si_obj
+  end
+
+
+  @course_offering = create CourseOffering, :create_by_copy=> @original_co
   delivery_format_list = []
   delivery_format_list[0] = make DeliveryFormatObject, :format => "Lecture/Discussion", :grade_format => "Course Offering", :final_exam_activity => "Lecture"
 
@@ -823,12 +885,43 @@ Given /^that the Lecture AO that drives the exam is not in a cancelled state$/ d
 end
 
 When /^I cancel a Discussion Activity Offering for a CO with a standard final exam driven by Activity Offering$/ do
-  @activity_offering = make ActivityOfferingObject, :code => "C", :parent_course_offering => @course_offering
+  @activity_offering = make ActivityOfferingObject, :code => "A", :parent_course_offering => @course_offering
   @activity_offering.cancel :navigate_to_page => false
 end
 
 When /^I cancel all Activity Offerings for a CO with a standard final exam driven by Course Offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "ENGL301")
+  @original_co = make CourseOffering, :term => Rollover::PUBLISHED_EO_CREATE_TERM, :course => "ENGL301"
+
+  unless @original_co.exists?
+    course_offering = make CourseOffering, :term=> @original_co.term,
+                           :course => @original_co.course,
+                           :suffix => ' ',
+                           :final_exam_driver => "Final Exam Per Activity Offering"
+    course_offering.delivery_format_list[0].format = "Lecture"
+    course_offering.delivery_format_list[0].grade_format = "Lecture"
+    course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
+    course_offering.create
+
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture Only", :activity_type => "Lecture"
+    si_obj =  make SchedulingInformationObject, :days => "MW",
+                   :start_time => "11:00", :start_time_ampm => "am",
+                   :end_time => "12:15", :end_time_ampm => "pm",
+                   :facility => 'TWS', :room => '3132'
+    activity_offering.add_req_sched_info :rsi_obj => si_obj
+
+    #TODO: KSENROLL-13157 problems creating 2nd AO
+    # activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    #                            :format => "Lecture/Discussion", :activity_type => "Discussion"
+    # si_obj =  make SchedulingInformationObject, :days => "W",
+    #                :start_time => "09:00", :start_time_ampm => "am",
+    #                :end_time => "09:50", :end_time_ampm => "am",
+    #                :facility => 'KEY', :room => '0117'
+    # activity_offering.add_req_sched_info :rsi_obj => si_obj
+  end
+
+
+  @course_offering = create CourseOffering, :create_by_copy=> @original_co
   @course_offering.edit :final_exam_type => "Standard Final Exam",
                                  :final_exam_driver => "Final Exam Per Course Offering"
 
@@ -849,7 +942,37 @@ When /^I reinstate the one or more Activity offerings for the CO$/ do
 end
 
 When /^I cancel all Activity Offerings for a CO with a standard final exam driven by Activity Offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "ENGL301")
+  @original_co = make CourseOffering, :term => Rollover::PUBLISHED_EO_CREATE_TERM, :course => "ENGL301"
+
+  unless @original_co.exists?
+    course_offering = make CourseOffering, :term=> @original_co.term,
+                           :course => @original_co.course,
+                           :suffix => ' ',
+                           :final_exam_driver => "Final Exam Per Activity Offering"
+    course_offering.delivery_format_list[0].format = "Lecture"
+    course_offering.delivery_format_list[0].grade_format = "Lecture"
+    course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
+    course_offering.create
+
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture Only", :activity_type => "Lecture"
+    si_obj =  make SchedulingInformationObject, :days => "MW",
+                   :start_time => "11:00", :start_time_ampm => "am",
+                   :end_time => "12:15", :end_time_ampm => "pm",
+                   :facility => 'TWS', :room => '3132'
+    activity_offering.add_req_sched_info :rsi_obj => si_obj
+
+    #TODO: KSENROLL-13157 problems creating 2nd AO
+    # activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    #                            :format => "Lecture/Discussion", :activity_type => "Discussion"
+    # si_obj =  make SchedulingInformationObject, :days => "W",
+    #                :start_time => "09:00", :start_time_ampm => "am",
+    #                :end_time => "09:50", :end_time_ampm => "am",
+    #                :facility => 'KEY', :room => '0117'
+    # activity_offering.add_req_sched_info :rsi_obj => si_obj
+  end
+
+  @course_offering = create CourseOffering, :create_by_copy=> @original_co
   delivery_format_list = []
   delivery_format_list[0] = make DeliveryFormatObject, :format => "Lecture/Discussion", :grade_format => "Course Offering", :final_exam_activity => "Lecture"
 
