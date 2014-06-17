@@ -34,7 +34,6 @@ Feature: REG.Max Credits
     Then there is a message indicating that I have registered for a credit amount over the credit limit
 
   #KSENROLL-13027
-  @wip
   Scenario: CR 10.7 - Re-submit a course I was previously unable to register for because of credit limits
     Given I log in to student registration as student3
     And I attempt to register for courses that would exceed the summer term credit limit

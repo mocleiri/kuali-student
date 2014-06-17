@@ -39,7 +39,7 @@ When /^I add courses to my registration cart that would exceed the summer term c
     @reg_request_engl.create
   end
   @reg_request_engl.register
-  course_options = (make CourseOptions, :credit_option => "4.0")
+  course_options = (make CourseOptions, :credit_option => "2.0")
   @reg_request = make RegistrationRequest, :student_id=>"student2",
                       :term_code=>term_code,
                       :term_descr=>term_descr,
@@ -82,17 +82,14 @@ end
 
 
 When /^I remove a course from my schedule$/ do
-  steps %{
-    When I view my schedule
-  }
-  p @reg_request_engl
+  visit StudentSchedule
   @reg_request_engl.remove_course("schedule")
 end
 
 Then /^I am able to successfully register for the failed course$/ do
-  p @reg_request
-  steps %{
-    When I view my registration cart
-  }
+  visit RegistrationCart
   @reg_request.register
+  steps %{
+    And there is a message indicating successful registration
+  }
 end
