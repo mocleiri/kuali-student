@@ -163,7 +163,7 @@ class RegistrationRequest < DataFactory
 
         end
 
-        page.credits_selection_div(@course_code, @reg_group_code, options[:context]).wait_until_present
+        page.credits_selection_div(@course_code, @reg_group_code, options[:context]).wait_until_present unless options[:credit_option].nil?
         page.select_credits @course_code, @reg_group_code, options[:credit_option], options[:context] unless options[:credit_option].nil?
         page.select_grading @course_code, @reg_group_code, options[:grading_option], options[:context] unless options[:grading_option].nil?
         page.save_edits @course_code, @reg_group_code, options[:context]
