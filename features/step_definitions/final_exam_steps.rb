@@ -271,13 +271,74 @@ When /^I view the Exam Offerings for a CO created from an existing CO with a sta
 end
 
 Given /^there is an exsiting CO with a Standard Final Exam option$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "ENGL301")
+  @original_co = make CourseOffering, :term => Rollover::PUBLISHED_EO_CREATE_TERM, :course => "ENGL301"
+
+  unless @original_co.exists?
+    course_offering = make CourseOffering, :term=> @original_co.term,
+                           :course => @original_co.course,
+                           :suffix => ' ',
+                           :final_exam_driver => "Final Exam Per Activity Offering"
+    course_offering.delivery_format_list[0].format = "Lecture"
+    course_offering.delivery_format_list[0].grade_format = "Lecture"
+    course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
+    course_offering.create
+
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture Only", :activity_type => "Lecture"
+    si_obj =  make SchedulingInformationObject, :days => "MW",
+                   :start_time => "11:00", :start_time_ampm => "am",
+                   :end_time => "12:15", :end_time_ampm => "pm",
+                   :facility => 'TWS', :room => '3132'
+    activity_offering.add_req_sched_info :rsi_obj => si_obj
+
+    #TODO: KSENROLL-13157 problems creating 2nd AO
+    # activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    #                            :format => "Lecture/Discussion", :activity_type => "Discussion"
+    # si_obj =  make SchedulingInformationObject, :days => "W",
+    #                :start_time => "09:00", :start_time_ampm => "am",
+    #                :end_time => "09:50", :end_time_ampm => "am",
+    #                :facility => 'KEY', :room => '0117'
+    # activity_offering.add_req_sched_info :rsi_obj => si_obj
+  end
+
+
+  @course_offering = create CourseOffering, :create_by_copy=> @original_co
   @activity_offering = make ActivityOfferingObject, :code => "A", :parent_course_offering => @course_offering
   @activity_offering.edit :send_to_scheduler => true
 end
 
 Given /^that Activity Offerings exist for the selected Course Offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "ENGL304")
+  @original_co = make CourseOffering, :term => Rollover::PUBLISHED_EO_CREATE_TERM, :course => "ENGL304"
+
+  unless @original_co.exists?
+    course_offering = make CourseOffering, :term=> @original_co.term,
+                           :course => @original_co.course,
+                           :suffix => ' ',
+                           :final_exam_driver => "Final Exam Per Activity Offering"
+    course_offering.delivery_format_list[0].format = "Lecture/Discussion"
+    course_offering.delivery_format_list[0].grade_format = "Discussion"
+    course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
+    course_offering.create
+
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture/Discussion", :activity_type => "Lecture"
+    si_obj =  make SchedulingInformationObject, :days => "TH",
+                   :start_time => "11:00", :start_time_ampm => "am",
+                   :end_time => "11:50", :end_time_ampm => "am",
+                   :facility => 'TWS', :room => '1100'
+    activity_offering.add_req_sched_info :rsi_obj => si_obj
+
+    #TODO: KSENROLL-13157 problems creating 2nd AO
+    # activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    #                            :format => "Lecture/Discussion", :activity_type => "Discussion"
+    # si_obj =  make SchedulingInformationObject, :days => "W",
+    #                :start_time => "09:00", :start_time_ampm => "am",
+    #                :end_time => "09:50", :end_time_ampm => "am",
+    #                :facility => 'KEY', :room => '0117'
+    # activity_offering.add_req_sched_info :rsi_obj => si_obj
+  end
+
+  @course_offering = create CourseOffering, :create_by_copy=> @original_co
   #setup existing format
   @course_offering.delivery_format_list[0].format = "Lecture/Discussion"
   @activity_offering = make ActivityOfferingObject, :code => "A", :parent_course_offering => @course_offering
