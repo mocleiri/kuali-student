@@ -1,27 +1,25 @@
 When /^I change the final exam period start date to be before the term start date and save$/ do
-  #TODO: this modifies reference data
-  @calendar = make AcademicCalendar, :year => "2012"
+  @calendar = create AcademicCalendar
 
-  term = make AcademicTermObject, :parent_calendar => @calendar, :term => "Fall"
-  @calendar.terms << term
+  term = make AcademicTermObject, :parent_calendar => @calendar,
+              :term => "Fall"
 
-  exam_period = make ExamPeriodObject, :parent_term => term
-  @calendar.terms[0].exam_period = exam_period
+  term.exam_period = make ExamPeriodObject, :parent_term => term
+  @calendar.add_term term
 
-  @calendar.terms[0].exam_period.edit :start_date => "08/15/2012"
+  @calendar.terms[0].exam_period.edit :start_date => "08/15/#{@calendar.year}"
 end
 
 When /^I change the final exam period end date to be after the term end date and save$/ do
-  #TODO: this modifies reference data
-  @calendar = make AcademicCalendar, :year => "2012"
+  @calendar = create AcademicCalendar
 
-  term = make AcademicTermObject, :parent_calendar => @calendar, :term => "Fall"
-  @calendar.terms << term
+  term = make AcademicTermObject, :parent_calendar => @calendar,
+              :term => "Fall"
 
-  exam_period = make ExamPeriodObject, :parent_term => term
-  @calendar.terms[0].exam_period = exam_period
+  term.exam_period = make ExamPeriodObject, :parent_term => term
+  @calendar.add_term term
 
-  @calendar.terms[0].exam_period.edit :start_date => "08/15/2012"
+  @calendar.terms[0].exam_period.edit :end_date => "10/15/#{@calendar.year}"
 end
 
 When /^I add a final exam period to the new academic calender and save$/ do
