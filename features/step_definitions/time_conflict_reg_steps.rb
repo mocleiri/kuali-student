@@ -3,6 +3,7 @@ When /^I attempt to register for two courses whose times conflict$/ do
    When I add a HIST2 course offering to my registration cart
    And I register for the course
   }
+  # Save the first course reg request, because will use it later (to drop course)
   @reg_request_110 = @reg_request
   steps %{
    Then I add a HIST3 course offering to my registration cart
@@ -16,6 +17,7 @@ When /^I attempt to register for a PHYS course and an ENGL course whose times co
     And I register for the course
     Then there is a message indicating successful registration
   }
+  # Save the first course reg request, because will use it later (to drop course)
   @reg_request_phys = @reg_request
   steps %{
     When I add an ENGL5 course offering to my registration cart
