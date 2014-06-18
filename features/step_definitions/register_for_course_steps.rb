@@ -388,6 +388,8 @@ end
 
 Then /^the number of courses and credits I am registered for is correctly updated in my registration cart$/ do
   on RegistrationCart do |page|
+    page.wait_until { page.course_code_message(@reg_request.course_code, @reg_request.reg_group_code).text =~ /success/i }
+    sleep 0.5
     page.schedule_counts.text.downcase.match('for (\d*) course')[1].to_i.should == (@cart_reg_course_count + @updated_cart_course_count)
     page.schedule_counts.text.downcase.match('\((.*) credit')[1].to_f.should == (@cart_reg_credit_count + @updated_cart_credit_count)
   end
