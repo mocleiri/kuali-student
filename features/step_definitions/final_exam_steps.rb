@@ -125,11 +125,8 @@ When /^I create an Academic Calendar and add an official term$/ do
   @calendar = create AcademicCalendar
 
   term = make AcademicTermObject, :parent_calendar => @calendar
+  term.exam_period = make ExamPeriodObject, :parent_term => term
   @calendar.add_term term
-
-  exam_period = make ExamPeriodObject, :parent_term => term
-  @calendar.terms[0].add_exam_period exam_period
-  @calendar.terms[0].save
 
   @calendar.terms[0].make_official
   @manage_soc = make ManageSoc, :term_code => @calendar.terms[0].term_code
@@ -224,9 +221,6 @@ When /^I rollover the term to a new academic term that has no exam period$/ do
   @calendar_target.add_term term_target
 
   @calendar_target.terms[0].make_official
-
-  #@manage_soc = make ManageSoc, :term_code => @calendar.terms[0].term_code
-  #@manage_soc.set_up_soc
 
   @rollover = make Rollover, :target_term => @calendar_target.terms[0].term_code,
                    :source_term => @calendar.terms[0].term_code,
