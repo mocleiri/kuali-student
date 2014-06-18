@@ -2,6 +2,9 @@ When /^I attempt to register for two courses whose times conflict$/ do
   steps %{
    When I add a HIST2 course offering to my registration cart
    And I register for the course
+  }
+  @reg_request_110 = @reg_request
+  steps %{
    Then I add a HIST3 course offering to my registration cart
    And I register for the course
    }
@@ -63,4 +66,8 @@ And /^I register for the ENGL course$/ do
     page.schedule_link.wait_until_present
     page.schedule_link.click
   end
+end
+
+And /^test cleanup - remove the first course from the schedule$/ do
+  @reg_request_110.remove_course("schedule")
 end

@@ -16,6 +16,7 @@ Feature: REG.Time Conflict
     Then there is a message indicating a time conflict
     When I view my schedule
     Then the course is not present in my schedule
+    * test cleanup - remove the first course from the schedule
 
 #KSENROLL-13014
   Scenario: CR 9.7 - Resubmit a registration transaction that failed due to time conflict
