@@ -260,6 +260,7 @@ class CourseSearch < BasePage
 
         puts "Course name =  #{course_name}"
         course_code_result_link(course_code).click
+        sleep 2
         back_to_search_results.wait_until_present
         course_description_text = course_description(course_code).downcase
 
@@ -307,6 +308,7 @@ class CourseSearch < BasePage
         sleep(1)
         course_name = results_table.rows[index].cells[COURSE_NAME].text.downcase
         course_code_result_link(course_code).click
+        sleep 2
         back_to_search_results.wait_until_present
         course_description_text = course_description(course_code).downcase
         back_to_search_results.click
@@ -429,6 +431,7 @@ class CourseSearch < BasePage
     course_name = get_table_row_title(row_number,0).downcase
 
     course_code_result_link(result_code).click
+    sleep 2
     back_to_search_results.wait_until_present
     course_description_text = course_description(result_code).downcase
     back_to_search_results.click
