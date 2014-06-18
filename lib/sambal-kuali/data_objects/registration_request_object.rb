@@ -193,7 +193,13 @@ class RegistrationRequest < DataFactory
     end
   end
 
-  def register
+  def register opts={}
+    defaults = {
+        :do_navigation=>false
+    }
+    options = defaults.merge(opts)
+
+    visit RegistrationCart if options[:do_navigation]
     on RegistrationCart do |page|
       page.wait_until { page.register_button.enabled? }
       page.register

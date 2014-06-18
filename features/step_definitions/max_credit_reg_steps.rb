@@ -91,8 +91,7 @@ When /^I remove a course from my schedule$/ do
 end
 
 Then /^I am able to successfully register for the failed course$/ do
-  visit RegistrationCart
-  @reg_request.register
+  @reg_request.register :do_navigation => true
   steps %{
     And there is a message indicating successful registration
   }
