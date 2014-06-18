@@ -73,6 +73,12 @@ class CourseSearchResults < DataFactory
     end
   end
 
+  def navigate_course_section_page
+    on CourseDetailPage do |page|
+      page.section_details.click
+    end
+  end
+
   def remove_code_from_term
     # navigate_to_course_planner_home
     on CoursePlannerPage do |page|
