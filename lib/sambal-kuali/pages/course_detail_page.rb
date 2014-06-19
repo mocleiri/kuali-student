@@ -29,6 +29,9 @@ class CourseDetailPage < BasePage
   element(:course_term) { |b| b.select(name: "termId") }
   element(:course_note) { |b| b.textarea(name: "courseNote") }
 
+  #50-course description page links
+  element(:section_details){|b|b.div(id:"u11to302").a(id:"ud5rpm1")}
+
 
 
 
