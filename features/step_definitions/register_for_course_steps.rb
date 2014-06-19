@@ -455,7 +455,7 @@ Given /^I log in to student registration as (\w+)$/  do |user|
   end
 end
 
-And /^I am able to retain the failed course to re\-submit it$/ do
+And /^I elect to keep the failed course in my cart$/ do
   on RegistrationCart do |page|
     page.keep_in_cart_button(@reg_request.course_code,@reg_request.reg_group_code).wait_until_present
     page.keep_in_cart(@reg_request.course_code,@reg_request.reg_group_code)

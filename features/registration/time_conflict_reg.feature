@@ -22,8 +22,8 @@ Feature: REG.Time Conflict
   Scenario: CR 9.7 - Resubmit a registration transaction that failed due to time conflict
     When I attempt to register for a PHYS course and an ENGL course whose times conflict
     Then there is a message indicating a time conflict
-    And I am able to retain the failed course to re-submit it
-    And I am able to edit the failed course
+    When I elect to keep the failed course in my cart
+    Then I am able to edit the failed course
     When I remove the PHYS course from my schedule
     And I register for the ENGL course
     Then the course is present in my schedule

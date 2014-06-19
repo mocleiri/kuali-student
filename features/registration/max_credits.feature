@@ -38,6 +38,6 @@ Feature: REG.Max Credits
     Given I log in to student registration as student3
     And I attempt to register for courses that would exceed the summer term credit limit
     Then there is a message indicating that I have registered for a credit amount over the credit limit
-    And I am able to retain the failed course to re-submit it
-    When I remove a course from my schedule
+    When I elect to keep the failed course in my cart
+    And I remove a course from my schedule
     Then I am able to successfully register for the failed course
