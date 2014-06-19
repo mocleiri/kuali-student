@@ -333,8 +333,19 @@ Then /^the Activity Offerings for the copied CO are assigned to the target subte
 
 end
 
-And /^I(?: can)? generate 'bulk' exam offerings for the term$/ do
+And /^I(?: can)? generate 'bulk' exam offerings for the(?: new)? term$/ do
   @manage_soc.create_exam_offerings_soc
+end
+
+And /^I cannot generate 'bulk' exam offerings for the new term$/ do
+  @manage_soc.term_code = @calendar_target.terms[0].term_code
+  @manage_soc.search
+
+  on ManageSocPage do |page|
+    page.create_eos_action
+    page.create_eos_error_popup_msg.should =~ /exam period must exist before exam offerings can be created/
+    page.eos_error_cancel_action
+  end
 end
 
 And /^the exam offerings are successfully generated$/ do

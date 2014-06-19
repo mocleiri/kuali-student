@@ -214,7 +214,7 @@ When /^I create multiple Course Offerings each with a different Exam Driver in t
                       :final_exam_driver => "Final Exam Per Course Offering")
 end
 
-When /^I rollover the term to a new academic term that has no exam period$/ do
+When /^I(?: can)? rollover the term to a new academic term that has no exam period$/ do
   @calendar_target = create AcademicCalendar, :year => @calendar.year.to_i + 1
 
   term_target = make AcademicTermObject, :parent_calendar => @calendar_target
@@ -223,9 +223,10 @@ When /^I rollover the term to a new academic term that has no exam period$/ do
   @calendar_target.terms[0].make_official
 
   @rollover = make Rollover, :target_term => @calendar_target.terms[0].term_code,
-                   :source_term => @calendar.terms[0].term_code,
-                   :exp_success => false, :defer_continue_wo_exams => true
+                   :source_term => @calendar.terms[0].term_code
   @rollover.perform_rollover
+  @rollover.wait_for_rollover_to_complete
+  @rollover.release_to_depts
 end
 
 When /^I rollover the term to a new academic term that has an exam period$/ do
@@ -950,6 +951,14 @@ When /^I add an Exam Period to the term$/ do
 
   @calendar.terms[0].add_exam_period exam_period
   @calendar.terms[0].save
+end
+
+When /^I add an Exam Period to the new term$/ do
+  exam_period = make ExamPeriodObject, :parent_term => @calendar.terms[0], :start_date=>"12/11/#{@calendar.year}",
+                     :end_date=>"12/20/#{@calendar.year}"
+
+  @calendar_target.terms[0].add_exam_period exam_period
+  @calendar_target.terms[0].save
 end
 
 When /^I deselect Exclude Saturday and Exclude Sunday for the Exam Period$/ do

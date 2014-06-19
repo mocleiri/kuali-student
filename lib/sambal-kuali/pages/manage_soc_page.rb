@@ -43,6 +43,10 @@ class ManageSocPage < BasePage
   action(:create_eos_confirm_action) { |b| b.create_eos_confirm_popup_div.span(class: 'ui-button-text',text: 'Create Exam Offerings').click; b.loading.wait_while_present }
   action(:create_eos_cancel_action) { |b| b.create_eos_confirm_popup_div.span(class: 'ui-button-text',text: 'Cancel').click; b.loading.wait_while_present }
 
+  element(:create_eos_error_popup_div) { |b| b.section(id: "errorNoExamPeriodDialog") }
+  value(:create_eos_error_popup_msg) { |b| b.create_eos_error_popup_div.p(class: "uif-message").text }
+  action(:eos_error_cancel_action) { |b| b.create_eos_error_popup_div.span(class: 'ui-button-text',text: 'Cancel').click; b.loading.wait_while_present }
+
   element(:eo_creation_status) { |b| b.div(id: 'eoSlottingStatus').text }
   element(:eo_creation_initiated_date) { |b| b.div(id: 'eoSlottingInitiatedDate').text }
   element(:eo_creation_completed_date) { |b| b.div(id: 'eoSlottingCompleteDate').text }

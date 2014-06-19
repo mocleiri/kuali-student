@@ -9,8 +9,7 @@ Feature: CO.Bulk Create Exam Offerings
 
   Scenario: FE 3.11.1 Verify rollover into a term with no exam period is allowed but Create Exam is not possible until exam period is set
     Given I create an Academic Calendar and add an official term
-    And I create multiple Course Offerings each with a different Exam Driver in the new term
-    And I can rollover the term to a new academic term that has no exam period
-    And I cannot run the bulk Create Exam process
-    When I create the exam period
-    Then I can run the bulk Exam Create process
+    And I rollover the term to a new academic term that has no exam period
+    But I cannot generate 'bulk' exam offerings for the new term
+    When I add an Exam Period to the new term
+    Then I can generate 'bulk' exam offerings for the new term
