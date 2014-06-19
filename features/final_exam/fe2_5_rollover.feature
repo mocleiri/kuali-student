@@ -11,5 +11,6 @@ Feature: CO.FE2-5 Perform Simple Rollover
     Given I create an Academic Calendar and add an official term
     And I have created a Final Exam Period for the term in the newly created Academic Calendar
     When I have multiple Course Offerings each with a different Exam Offering in the source term
-    And I rollover the source term to a new academic term
+    And I rollover the source term to a new academic term with an exam period
+    And I generate 'bulk' exam offerings for the term
     Then all the exam settings and messages are retained after the rollover is completed for the courses that were rolled over

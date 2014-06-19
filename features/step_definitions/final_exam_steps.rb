@@ -167,16 +167,22 @@ When /^I have multiple Course Offerings each with a different Exam Offering in t
   @co_list << co.create
 end
 
-And /^I rollover the source term to a new academic term$/ do
+And /^I rollover the source term to a new academic term with an exam period$/ do
   @calendar_target = create AcademicCalendar, :year => @calendar.year.to_i + 1
 
   term_target = make AcademicTermObject, :parent_calendar => @calendar_target
+
   @calendar_target.add_term term_target
 
+  exam_period = make ExamPeriodObject, :parent_term => term_target,
+                     :start_date=>"12/11/#{@calendar.year}",
+                     :end_date=>"12/20/#{@calendar.year}"
+  @calendar_target.terms[0].add_exam_period exam_period
+
+  @calendar_target.terms[0].save
   @calendar_target.terms[0].make_official
 
-  @manage_soc = make ManageSoc, :term_code => @calendar.terms[0].term_code
-  @manage_soc.set_up_soc
+  @manage_soc = make ManageSoc, :term_code => @calendar_target.terms[0].term_code
 
   @rollover = make Rollover, :target_term => @calendar_target.terms[0].term_code ,
                    :source_term => @calendar.terms[0].term_code,
