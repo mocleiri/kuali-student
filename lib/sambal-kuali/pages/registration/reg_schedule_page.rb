@@ -52,7 +52,7 @@ class StudentSchedule < RegisterForCourseBase
   end
 
   def show_course_details(course_code, reg_group_code, course_status=STATUS_SCHEDULE)
-    sleep 1
+    sleep 2
     toggle_course_details(course_code, reg_group_code, course_status) unless remove_course_button(course_code, reg_group_code, course_status).visible?
   end
 

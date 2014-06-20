@@ -426,7 +426,6 @@ Then /^the number of credits I am registered for and waitlisted for are correctl
 end
 
 Given /^I log in to student registration as (\w+)$/  do |user|
-  puts "I am logged in to student registration as #{user}"
   case user
     when "admin"
       visit RestAdminLogin
@@ -453,6 +452,7 @@ Given /^I log in to student registration as (\w+)$/  do |user|
     when "ELEANORB"
       visit RestELEANORBLogin
   end
+  puts "I am logged in to student registration as #{user}"
 end
 
 And /^I elect to keep the failed course in my cart$/ do
