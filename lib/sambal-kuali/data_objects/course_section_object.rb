@@ -28,15 +28,15 @@ class CourseSectionObject < DataFactory
   def initialize(browser, opts={})
     @browser = browser
     defaults = {
-        :course_detail_header=>"ENGL201 Course Sections",
-        :term_and_course_offering=>"Spring 2014 (1 course offerings)",
-        :course_offering=>"ENGL206 - Shakespeare",
-        :course_description=>"Course description: Wide range of texts, genres, and themes from ancient and medieval Western traditions. Study of cultural, historical, and artistic forces shaping traditions, and the influence and relevance of those traditions to life in twenty-first century.",
+        :course_detail_header=>"ENGL202 Course Sections",
+        :term_and_course_offering=>"Spring 2014 (1 course offering)",
+        :course_offering=>"ENGL202 - Inventing Western Literature: Renaissance to Modern (3 cr)",
+        :course_description=>"Course description: Wide range of texts",
         :activity_offering_code=>"A",
-        :activity_offering_instructor=>"TATE, THOMAS",
-        :activity_offering_days=>"MF",
-        :activity_offering_time=>"12:00 PM - 12:50 PM",
-        :activity_offering_location=>"Undergraduate Library 0109",
+        :activity_offering_instructor=>"ROBINSON, CHARLES",
+        :activity_offering_days=>"MWF",
+        :activity_offering_time=>"11:00 AM - 11:50 AM",
+        :activity_offering_location=>"TWS 0221",
         :activity_offering_seats=>"0/35",
         :activity_offering_additional_details=>" ",
 
