@@ -129,7 +129,8 @@ When /^I create an Academic Calendar and add an official term$/ do
   @calendar.add_term term
 
   @calendar.terms[0].make_official
-  @manage_soc = make ManageSoc, :term_code => @calendar.terms[0].term_code
+  @term_code = @calendar.terms[0].term_code
+  @manage_soc = make ManageSoc, :term_code => @term_code
   @manage_soc.set_up_soc
   @manage_soc.create_exam_offerings_soc
 end
@@ -1829,7 +1830,6 @@ Then /^all the exam settings and messages are retained after the rollover is com
   on(ManageCourseOfferings).edit_course_offering
   on CourseOfferingCreateEdit do |page|
     page.delivery_assessment_warning.should == "Course exam data differs from Catalog."
-    page.new_final_exam_driver_value.should == "No final exam for this offering"
   end
 
   @test_co_list << (make CourseOffering, :term => @calendar_target.terms[0].term_code, :course => @co_list[1].course)
@@ -1837,7 +1837,6 @@ Then /^all the exam settings and messages are retained after the rollover is com
   on(ManageCourseOfferings).edit_course_offering
   on CourseOfferingCreateEdit do |page|
     page.delivery_assessment_warning.should == "Course exam data differs from Catalog."
-    page.new_final_exam_driver_value.should == "Alternate exam for this offering"
   end
 
 
@@ -1849,7 +1848,6 @@ Then /^all the exam settings and messages are retained after the rollover is com
   @test_co_list << (make CourseOffering, :term => @calendar_target.terms[0].term_code, :course => @co_list[3].course)
   @test_co_list[3].manage
   on(ManageCourseOfferings).edit_course_offering
-  on(CourseOfferingCreateEdit).new_final_exam_driver_value.should == "Course Offering"
   on(CourseOfferingCreateEdit).cancel
 end
 

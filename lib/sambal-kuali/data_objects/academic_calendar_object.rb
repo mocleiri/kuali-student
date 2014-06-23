@@ -830,7 +830,7 @@ class ExamPeriodObject < DataFactory
     defaults = {
         :parent_term => nil,
         :start_date => "09/16/#{calendar_year}",
-        :end_date => "09/24/#{calendar_year}",
+        :end_date => "09/26/#{calendar_year}",
         :exclude_saturday => true,
         :exclude_sunday => true,
         :length_ex_weekend => 0 #if not zero, calc start/end dates
