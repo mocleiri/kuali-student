@@ -34,7 +34,6 @@ end
 And /^there is a message indicating that the waitlist is full$/  do
   on RegistrationCart do |page|
     page_status = page.result_status(@reg_request.course_code,@reg_request.reg_group_code)
-    puts "Page status: #{page_status}"
     page_status.should match /waitlist full/i
   end
 end
