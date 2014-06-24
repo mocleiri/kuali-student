@@ -10,6 +10,7 @@ World Foundry
 World StringFactory
 World DateFactory
 World Workflows
+World CoRefData
 
 browser = nil
 headless = nil
