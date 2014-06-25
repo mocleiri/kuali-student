@@ -1,6 +1,8 @@
 class CourseSearch < BasePage
 
-  page_url "#{$test_site}myplan/course?methodToCall=start&viewId=CourseSearch-FormView"
+  #page_url "#{$test_site}myplan/course?methodToCall=start&viewId=CourseSearch-FormView"
+
+  page_url "#{$test_site}/kr-krad/course?methodToCall=start&viewId=CourseSearch-FormView"
 
 
 

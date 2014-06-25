@@ -3,9 +3,15 @@
 module Workflows
 
   # Site Navigation helpers...
+#  def navigate_to_course_search_home
+ #   on KSRicePortal do |page|
+  #    page.course_search_home
+   # end
+  #end
+
   def navigate_to_course_search_home
-    on KSRicePortal do |page|
-      page.course_search_home
+    visit CourseSearch do |page|
+      #page.course_search_home
     end
   end
 
@@ -25,6 +31,8 @@ module Workflows
     on KSFunctionalHome do |page|
       page.ks_maintenance_link.wait_until_present
       page.ks_maintenance
+#      page.login_with "student",""
+      sleep 2
     end
   end
 
