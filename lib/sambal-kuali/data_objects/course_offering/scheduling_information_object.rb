@@ -101,7 +101,7 @@ class SchedulingInformationObject < DataFactory
           sleep 2
         end
 
-        if @start_time != nil
+        if @start_time != nil and @start_time != ''
           page.add_start_time.click
           page.loading.wait_while_present
           page.add_start_time.set @start_time + " " + @start_time_ampm
@@ -110,7 +110,7 @@ class SchedulingInformationObject < DataFactory
           page.loading.wait_while_present
         end
 
-        if @end_time != nil #end time format depends on user privs and admin setting re: approved for non-standard timeslots
+        if @end_time != nil and @end_time != '' #end time format depends on user privs and admin setting re: approved for non-standard timeslots
           approved_for_nonStandard_timeslots = false
           if page.non_std_ts_checkbox.present?
             approved_for_nonStandard_timeslots = page.non_std_ts_checkbox.set?

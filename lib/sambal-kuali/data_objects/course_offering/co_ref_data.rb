@@ -122,23 +122,32 @@ module CoRefData
                    :facility => 'SQH', :room => '1101'
     activity_offering.requested_scheduling_information_list << si_obj
 
+    activity_offering = make ActivityOfferingObject, :parent_course_offering => course_offering,
+                             :format => "Lecture Only", :activity_type => "Lecture"
+
+    course_offering.activity_offering_cluster_list[0].ao_list << activity_offering
+
+    si_obj =  make SchedulingInformationObject, :tba => true, :days => "T",
+                   :start_time => "", :start_time_ampm => "",
+                   :end_time => "", :end_time_ampm => "",
+                   :facility => '', :room => ''
+    activity_offering.requested_scheduling_information_list << si_obj
+
     unless course_offering.exists?
 
       course_offering.suffix = ' '
       course_offering.create
-      activity_offering.create
-      activity_offering.edit :defer_save => true
-      si_obj.create
-      activity_offering.edit :start_edit => false,
-                             :send_to_scheduler => true
 
-      activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
-                                 :format => "Lecture Only", :activity_type => "Lecture"
-      si_obj =  make SchedulingInformationObject, :days => "W",
-                     :start_time => "09:00", :start_time_ampm => "am",
-                     :end_time => "09:50", :end_time_ampm => "am",
-                     :facility => 'KEY', :room => '0117'
-      activity_offering.add_req_sched_info :rsi_obj => si_obj
+      course_offering.activity_offering_cluster_list[0].ao_list.each do |ao|
+
+        ao.create
+
+        ao.edit :defer_save => true
+        ao.requested_scheduling_information_list[0].create
+        ao.edit :start_edit => false,
+                :send_to_scheduler => true
+
+      end
     end
     course_offering
   end
