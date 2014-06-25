@@ -94,7 +94,7 @@ class EoRsiObject < DataFactory
     if options[:exp_success]
       on(ViewExamOfferings).edit_rsi_element(edit_row).wait_until_present
     else
-      sleep 1
+      on(ViewExamOfferings).loading.wait_while_present
       on(ViewExamOfferings).save_edit_element(edit_row).wait_until_present
     end
 
@@ -124,13 +124,8 @@ class EoRsiObject < DataFactory
     on(ViewExamOfferings).override_checkbox(edit_row).clear
     on(ViewExamOfferings).confirm_remove_override
 
-    on(ViewExamOfferings).save_edit(edit_row) unless options[:defer_save]
-    if options[:exp_success]
-      on(ViewExamOfferings).edit_rsi_element(edit_row).wait_until_present
-    else
-      sleep 1
-      on(ViewExamOfferings).save_edit_element(edit_row).wait_until_present
-    end
+    sleep 1
+    on(ViewExamOfferings).edit_rsi_element(edit_row).wait_until_present
 
     update_options(opts) if options[:exp_success]
 

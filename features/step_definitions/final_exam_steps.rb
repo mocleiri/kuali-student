@@ -914,6 +914,8 @@ end
 When /^the error displayed for CO-driven exam offerings RSI is that the start time is invalid$/ do
   on ViewExamOfferings do |page|
     row = page.co_target_row
+    page.save_edit(row)
+    page.loading.wait_while_present
     element = page.rsi_start_time(row)
     element.click
     sleep 1
