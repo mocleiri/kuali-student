@@ -462,15 +462,15 @@ Given /^that the Course Offering has a CO-driven final exam that is marked to us
 
     activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
                                :format => "Lecture/Lab", :activity_type => "Lecture"
-    #TODO: KSENROLL-13157 problems creating 2nd AO
-    # activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
-    #                            :format => "Lecture/Lab", :activity_type => "Lab"
-    #
-    # si_obj =  make SchedulingInformationObject, :days => "M",
-    #                :start_time => "12:00", :start_time_ampm => "pm",
-    #                :end_time => "02:50", :end_time_ampm => "pm",
-    #                :facility => 'CHM', :room => '1326'
-    # activity_offering.add_req_sched_info :rsi_obj => si_obj
+
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture/Lab", :activity_type => "Lab"
+
+    si_obj =  make SchedulingInformationObject, :days => "M",
+                   :start_time => "12:00", :start_time_ampm => "pm",
+                   :end_time => "02:50", :end_time_ampm => "pm",
+                   :facility => 'CHM', :room => '1326'
+    activity_offering.add_req_sched_info :rsi_obj => si_obj
   end
 end
 

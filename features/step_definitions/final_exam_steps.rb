@@ -372,14 +372,13 @@ When /^I view the Exam Offerings for a CO created from an existing CO with multi
     activity_offering.edit :start_edit => false,
                            :send_to_scheduler => true
 
-    #TODO: KSENROLL-13157 problems creating 2nd AO
-    # activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
-    #                            :format => "Lecture/Discussion", :activity_type => "Discussion"
-    # si_obj =  make SchedulingInformationObject, :days => "W",
-    #                :start_time => "09:00", :start_time_ampm => "am",
-    #                :end_time => "09:50", :end_time_ampm => "am",
-    #                :facility => 'KEY', :room => '0117'
-    # activity_offering.add_req_sched_info :rsi_obj => si_obj
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture/Discussion", :activity_type => "Discussion"
+    si_obj =  make SchedulingInformationObject, :days => "W",
+                   :start_time => "09:00", :start_time_ampm => "am",
+                   :end_time => "09:50", :end_time_ampm => "am",
+                   :facility => 'KEY', :room => '0117'
+    activity_offering.add_req_sched_info :rsi_obj => si_obj
   end
 
   @course_offering = create CourseOffering, :term=> @original_co.term, :create_from_existing => @original_co
@@ -399,6 +398,8 @@ Given /^that the CO has two existing AOs and a standard final exam driven by Act
 end
 
 When /^I add two new AOs to the CO and then create a copy of the CO$/ do
+  @course_offering.manage_and_init
+  @course_offering.activity_offering_cluster_list[0].ao_list[0].edit :send_to_scheduler => true
   @add_ao_one = @course_offering.create_ao :ao_obj => (make ActivityOfferingObject, :format => "Lecture Only")
   @add_ao_two = @course_offering.create_ao :ao_obj => (make ActivityOfferingObject, :format => "Lecture Only")
 
@@ -502,14 +503,13 @@ When /^I view the Exam Offerings for a CO in an Open SOC with a standard final e
                    :facility => 'TWS', :room => '1100'
     activity_offering.add_req_sched_info :rsi_obj => si_obj
 
-    #TODO: KSENROLL-13157 problems creating 2nd AO
-    # activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
-    #                            :format => "Lecture/Discussion", :activity_type => "Discussion"
-    # si_obj =  make SchedulingInformationObject, :days => "W",
-    #                :start_time => "09:00", :start_time_ampm => "am",
-    #                :end_time => "09:50", :end_time_ampm => "am",
-    #                :facility => 'KEY', :room => '0117'
-    # activity_offering.add_req_sched_info :rsi_obj => si_obj
+    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+                               :format => "Lecture/Discussion", :activity_type => "Discussion"
+    si_obj =  make SchedulingInformationObject, :days => "W",
+                   :start_time => "09:00", :start_time_ampm => "am",
+                   :end_time => "09:50", :end_time_ampm => "am",
+                   :facility => 'KEY', :room => '0117'
+    activity_offering.add_req_sched_info :rsi_obj => si_obj
   end
 
   @course_offering = create CourseOffering, :create_by_copy=> @original_co
