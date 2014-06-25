@@ -7,7 +7,7 @@ Feature: REG.Register for course
 
   Background:
     Given I am using a mobile screen size
-    Given I am logged in as a Student
+    Given I log in to student registration as student
 
   #CR 1.1 (KSENROLL-11747)  CR 1.3 (KSENROLL-11812)
   Scenario: CR 1.1 I want to enter course information into my list of selections so that I can indicate what I want to register for.
