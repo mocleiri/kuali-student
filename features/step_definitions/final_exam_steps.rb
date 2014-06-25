@@ -1150,6 +1150,7 @@ Then /^the final exam period for the Fall Term is listed when I view the Academi
   on ViewAcademicTerms do |page|
     page.go_to_terms_tab
     page.open_term_section(@calendar.terms[0].term_type)
+    page.term_start_date_element(@calendar.terms[0].term_type).focus
     page.get_exam_start_date( @calendar.terms[0].term_type).should match /12\/11\/#{@calendar.year}/
     page.get_exam_end_date( @calendar.terms[0].term_type).should match /12\/20\/#{@calendar.year}/
   end
@@ -1160,7 +1161,8 @@ Then /^there should be no final exam period for any term in the copy$/ do
   on EditAcademicTerms do |page|
     all_terms.each do |term_name|
       page.open_term_section(term_name)
-      page.final_exam_section( term_name).text.should match /Final Exam Period\nAdd Final Exam Period/
+      page.add_exam_period_btn( term_name).focus
+      page.add_exam_period_btn( term_name).present?.should be_true
     end
     page.cancel
   end

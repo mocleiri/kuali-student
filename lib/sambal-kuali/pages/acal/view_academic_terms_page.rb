@@ -57,6 +57,11 @@ class ViewAcademicTerms < BasePage
     acal_term_list_div.div(id: "term_code_line#{index}").text[/(?<=\n).*/]
   end
 
+  def term_start_date_element(term_type)
+    index = term_index_by_term_type(term_type)
+    acal_term_list_div.div(id: "term_start_date_line#{index}")
+  end
+
   def term_start_date(term_type)
     index = term_index_by_term_type(term_type)
     acal_term_list_div.div(id: "term_start_date_line#{index}").text[/(?<=\n).*/]
@@ -92,8 +97,6 @@ class ViewAcademicTerms < BasePage
     end
     return nil
   end
-
-
 
   KEY_DATE_TYPE_COL = 0
   KEY_DATE_START = 1
