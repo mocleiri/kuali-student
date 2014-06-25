@@ -27,3 +27,4 @@ Feature: REG.Time Conflict
     When I remove the PHYS course from my schedule
     And I register for the ENGL course
     Then the course is present in my schedule
+    Then I log out from student registration

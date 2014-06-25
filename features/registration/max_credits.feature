@@ -35,9 +35,11 @@ Feature: REG.Max Credits
 
   #KSENROLL-13027
   Scenario: CR 10.7 - Re-submit a course I was previously unable to register for because of credit limits
-    Given I log in to student registration as student3
+    When I log in to student registration as student3
     And I attempt to register for courses that would exceed the summer term credit limit
     Then there is a message indicating that I have registered for a credit amount over the credit limit
     When I elect to keep the failed course in my cart
     And I remove a course from my schedule
     Then I am able to successfully register for the failed course
+   # Suspicion that next feature file is failing on login because we are still logged in here, so logout
+    And I log out from student registration
