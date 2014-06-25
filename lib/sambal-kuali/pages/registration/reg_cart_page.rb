@@ -25,7 +25,7 @@ class RegistrationCart < RegisterForCourseBase
   element(:submit_button) { |b| b.button(id: "submit") }
   action(:add_to_cart) { |b| b.submit_button.click }
 
-  element(:credit_count_header) { |b| b.span(id: "credit_count_register_for_header") }
+  element(:credit_count_header) { |b| b.span(id: "header_credits") }
 
   element(:remove_course_button) { |course_code,reg_group_code,b| b.button(id: "remove_#{course_code}_#{reg_group_code}") }
   element(:course_code) { |course_code,reg_group_code,b| b.span(id: "course_code_#{course_code}_#{reg_group_code}") }

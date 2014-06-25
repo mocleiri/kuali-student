@@ -91,9 +91,9 @@ Feature: REG.Register for course
     When I add a BSCI2 course offering to my registration cart
     Then I can view the number of courses and credits I am registered for in my registration cart
     When I register for the course
-    Then the number of courses and credits I am registered for is correctly updated in my registration cart
+    Then the number of credits I am registered for is correctly updated in my registration cart
     When I view my schedule
-    Then the number of courses and credits I am registered for is correctly updated in my schedule
+    Then the number of credits I am registered for is correctly updated in my schedule
     When I remove the BSCI2 course from my schedule
-    Then the number of courses and credits I am registered for is correctly updated in my schedule after the drop
+    Then the number of credits I am registered for is correctly updated in my schedule after the drop
 

@@ -380,33 +380,31 @@ Then /^I can view the number of courses and credits I am registered for in my re
     @updated_cart_credit_count = page.credit_count_title.text.downcase.match('\((.*) credit')[1].to_f
     @updated_cart_credit_count.should == (@orig_cart_credit_count + @reg_request.course_options.credit_option.to_f)
 
-    cart_schedule_counts = page.schedule_counts.text
-    @cart_reg_course_count = cart_schedule_counts.downcase.match('for (\d*) course')[1].to_i
+    cart_schedule_counts = page.credit_count_title.text
+    @cart_reg_course_count = cart_schedule_counts.downcase.match('(\d*) course')[1].to_i
     @cart_reg_credit_count = cart_schedule_counts.downcase.match('\((.*) credit')[1].to_f
   end
 end
 
-Then /^the number of courses and credits I am registered for is correctly updated in my registration cart$/ do
+Then /^the number of credits I am registered for is correctly updated in my registration cart$/ do
   on RegistrationCart do |page|
     page.wait_until { page.course_code_message(@reg_request.course_code, @reg_request.reg_group_code).text =~ /success/i }
     sleep 0.5
-    page.schedule_counts.text.downcase.match('for (\d*) course')[1].to_i.should == (@cart_reg_course_count + @updated_cart_course_count)
-    page.schedule_counts.text.downcase.match('\((.*) credit')[1].to_f.should == (@cart_reg_credit_count + @updated_cart_credit_count)
+    page.credit_count_header.text.downcase.match('(.*) credit')[1].to_f.should == @cart_reg_credit_count
   end
 end
 
-Then /^the number of courses and credits I am registered for is correctly updated in my schedule ?(after the drop)?$/ do  |drop|
+Then /^the number of credits I am registered for is correctly updated in my schedule ?(after the drop)?$/ do  |drop|
   on StudentSchedule do |page|
-    expected_count = @cart_reg_credit_count + @updated_cart_credit_count
     if drop == "after the drop"
       page.user_message_div("schedule").wait_until_present
       page.wait_until { page.user_message("schedule") =~ /drop processing/i }
       page.wait_until { page.user_message("schedule") !~ /drop processing/i }
       credits_to_drop = @reg_request.course_options.credit_option
-      expected_count -= credits_to_drop.to_f
+      @cart_reg_credit_count -= credits_to_drop.to_f
     end
     sleep 1
-    page.reg_credit_count.downcase.match("(.*) credits")[1].to_f.should == expected_count
+    page.reg_credit_count.downcase.match("(.*) credits")[1].to_f.should == @cart_reg_credit_count
   end
 end
 
