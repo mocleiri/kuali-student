@@ -25,7 +25,6 @@ class RegistrationRequest < DataFactory
   CONTEXT_CART = "cart"
   STATUS_SCHEDULE = "schedule"
   STATUS_WAITLIST = "waitlist"
-  SPRING_CREDIT_LIMIT = 21
 
   # provides default data:
   #  defaults = {

@@ -1,4 +1,5 @@
 When /^I add courses to my registration cart that would exceed the spring term credit limit$/ do
+  # Spring credit limit is 20
   # TODO: first make sure user's schedule is clear (using REST call in KSENROLL-13175)
   # then add six 3-credit courses and one 4-credit (last one added to cart should fail)
   reg_group_code = "1001"
@@ -27,10 +28,11 @@ When /^I add courses to my registration cart that would exceed the spring term c
 end
 
 When /^I add courses to my registration cart that would exceed the summer term credit limit$/ do
-  # first make sure user's schedule is clear ?? (Dev working on)
-  # then add two 3-credit courses and one 4-credit (last one added to cart should fail)
+  # Summer credit limit is 8
+  # TODO: first make sure user's schedule is clear (using REST call in KSENROLL-13175)
+  # then add two 3-credit courses and one 2.5-credit (last one added to cart should fail)
   reg_group_code = "1003"
-  term_code = "201105"
+  term_code = "201205"
   term_descr = "Summer I 2012"
   for i in (0..1)
     reg_group_code.next!
