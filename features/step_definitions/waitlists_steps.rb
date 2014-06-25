@@ -267,6 +267,8 @@ Given /^the waitlist configuration is copied to the new course and activity offe
     page.close
   end
 
+  on(ManageCourseOfferingList).loading.wait_while_present #sync after page.close
+
   @course_offering_copy.manage
   on(ManageCourseOfferings).view_activity_offering(@activity_offering.code)
 
