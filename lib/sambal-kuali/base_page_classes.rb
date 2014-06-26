@@ -181,9 +181,8 @@ module CalendarStickyFooter
     }
     options = defaults.merge(opts)
     loading.wait_while_present #solves general sync issues
-    save_button = acal_sticky_footer_div.button(text: "Save")
-    save_button.wait_until_present
-    save_button.click
+    acal_sticky_footer_div.button(text: "Save").wait_until_present
+    acal_sticky_footer_div.button(text: "Save").click #find button on each all to avoid 'Element is no longer attached to the DOM' error
     loading.wait_until_present(60) #UI just hangs here when saving large ACAL
     loading.wait_while_present(60)
     if options[:exp_success] then
