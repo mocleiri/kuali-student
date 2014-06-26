@@ -62,6 +62,10 @@ end
 
 Then /^the new Course Offering should be displayed in the list of available offerings$/ do
   @course_offering.view_course_details
+  on CourseOfferingInquiry do |page|
+    page.close
+  end
+  on(ManageCourseOfferingList).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
 end
 
 And /^the new Course Offering should not contain any instructor information in its activity offerings$/ do
@@ -72,17 +76,16 @@ And /^the new Course Offering should not contain any instructor information in i
 end
 
 And /^the new Course Offering should not contain any scheduling information in its activity offerings$/ do
-  @course_offering.manage_and_init
-  on ManageCourseOfferings do |page|
+  @course_offering.manage
     ao_list = @course_offering.get_ao_list
     ao_list.each do |ao_code|
-      page.view_activity_offering(ao_code.code)
+      on(ManageCourseOfferings).view_activity_offering(ao_code.code)
       on ActivityOfferingInquiry do |page2|
         page2.requested_scheduling_information_days.present?.should be_false
         page2.actual_scheduling_information_days.present?.should be_false
         page2.close
       end
-    end
+      on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
   end
 end
 
