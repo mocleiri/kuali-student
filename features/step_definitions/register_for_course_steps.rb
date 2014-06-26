@@ -379,10 +379,6 @@ Then /^I can view the number of courses and credits I am registered for in my re
     @updated_cart_course_count.should == (@orig_cart_course_count + 1)
     @updated_cart_credit_count = page.credit_count_title.text.downcase.match('\((.*) credit')[1].to_f
     @updated_cart_credit_count.should == (@orig_cart_credit_count + @reg_request.course_options.credit_option.to_f)
-
-    cart_schedule_counts = page.credit_count_title.text
-    @cart_reg_course_count = cart_schedule_counts.downcase.match('(\d*) course')[1].to_i
-    @cart_reg_credit_count = cart_schedule_counts.downcase.match('\((.*) credit')[1].to_f
   end
 end
 
@@ -390,6 +386,7 @@ Then /^the number of credits I am registered for is correctly updated in my regi
   on RegistrationCart do |page|
     page.wait_until { page.course_code_message(@reg_request.course_code, @reg_request.reg_group_code).text =~ /success/i }
     sleep 0.5
+    @cart_reg_credit_count = page.credit_count_header.text.downcase.match('(.*) credit')[1].to_f
     page.credit_count_header.text.downcase.match('(.*) credit')[1].to_f.should == @cart_reg_credit_count
   end
 end
