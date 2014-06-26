@@ -81,6 +81,7 @@ Given /^I can update the processing type to (.*)$/ do |processing_type|
     page.waitlists_processing.should == processing_type
     page.close
   end
+  on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
 end
 
 Then /^I make changes to the default waitlist configuration for one of the activity offerings$/ do
@@ -195,6 +196,7 @@ Given /^the limit waitlist size is successfully updated$/ do
     page.waitlists_max_size.should == @activity_offering.waitlist_config.waitlist_limit_str
     page.close
   end
+  on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
 end
 
 Given /^the allow hold list option is successfully updated$/ do
@@ -205,6 +207,7 @@ Given /^the allow hold list option is successfully updated$/ do
     page.waitlists_allow_holds?.should == @activity_offering.waitlist_config.allow_hold_list
     page.close
   end
+  on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
 end
 
 Given /^I re-enable the waitlists option for the activity offering the modified waitlist configuration is restored$/ do
@@ -229,6 +232,7 @@ Given /^I (?:can )?disable the waitlists option for the activity offering$/ do
     page.waitlists_active?.should be_false
     page.close
   end
+  on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
 end
 
 Given /^the limit waitlist size is successfully updated to unlimited$/ do
@@ -238,6 +242,7 @@ Given /^the limit waitlist size is successfully updated to unlimited$/ do
     page.waitlists_max_size.should == "Unlimited"
     page.close
   end
+  on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
 end
 
 Given /^I manage an activity offering with the waitlist allow hold list option enabled$/ do
@@ -301,6 +306,7 @@ Given /^the waitlists are disabled for the new course and activity offering$/ do
     page.waitlists_active?.should be_false
     page.close
   end
+  on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
 end
 
 Given /^there are two other activity offering with waitlists enabled and no waitlist limit$/ do
@@ -332,6 +338,7 @@ Then /^all three activity offerings have the same waitlist limit size$/ do
       page.waitlists_max_size.should == @activity_offering.waitlist_config.waitlist_limit_str
       page.close
     end
+    on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
   end
 end
 
@@ -368,6 +375,7 @@ Then /activity offerings have the same waitlist configuration$/ do
       page.waitlists_max_size.should == @ao_list[0].waitlist_config.waitlist_limit_str
       page.close
     end
+    on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
   end
 end
 
@@ -386,7 +394,7 @@ Then /^the waitlist configuration is copied to the(?: new)? colocated activity o
     page.waitlists_max_size.should == @ao_list[0].waitlist_config.waitlist_limit_str
     page.close
   end
-
+  on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
 end
 
 Given /^there is an existing course offering with a colocated activity offering \(shared enrolment\) with waitlists enabled$/ do
@@ -412,6 +420,7 @@ Given /^the waitlist configuration is copied to the new activity offering.*$/ do
     page.waitlists_max_size.should == @ao_list[0].waitlist_config.waitlist_limit_str
     page.close
   end
+  on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
 end
 
 When /^I delete one of the colocated activity offerings$/ do
@@ -431,6 +440,7 @@ Then /^the remaining two activity offerings still have the same waitlist configu
       page.waitlists_max_size.should == @ao_list[0].waitlist_config.waitlist_limit_str
       page.close
     end
+    on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
   end
 end
 
@@ -469,6 +479,7 @@ Then /^the remaining activity offering still has the same waitlist configuration
     page.waitlists_max_size.should == @ao_list[0].waitlist_config.waitlist_limit_str
     page.close
   end
+  on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
 end
 
 When /^I deactivate waitlists on the first activity offering$/ do
@@ -488,6 +499,7 @@ Then /^the waitlist configuration for the.*activity offerings? is not changed$/ 
       #page.waitlists_max_size.should == @ao_list[0].waitlist_config.waitlist_limit_str
       page.close
     end
+    on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
   end
 end
 
@@ -516,7 +528,7 @@ When /^I deactivate waitlists at the course offering level for one of the activi
   @ao_list[0].parent_course_offering.edit :waitlist => false
 end
 
-Then /^waitlists is deactived for both activity offerings$/ do
+Then /^waitlists is deactivated for both activity offerings$/ do
   @ao_list.each do |ao|
     ao.parent_course_offering.manage
     on(ManageCourseOfferings).view_activity_offering(ao.code)
@@ -525,6 +537,7 @@ Then /^waitlists is deactived for both activity offerings$/ do
       page.waitlists_active?.should be_false
       page.close
     end
+    on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
   end
 end
 
@@ -554,4 +567,5 @@ When /^the other activity offering still has the default configuration$/ do
     page.waitlists_max_size.should == "Unlimited"
     page.close
   end
+  on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
 end

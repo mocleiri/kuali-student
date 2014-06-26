@@ -97,7 +97,7 @@ Feature: CO.Waitlists Colocation
     And I make changes to the default waitlist configuration for one of the activity offerings
     When I deactivate waitlists at the course offering level for one of the activity offerings
     Then the activity offerings are still colocated
-    And waitlists is deactived for both activity offerings
+    And waitlists is deactivated for both activity offerings
 
   Scenario: WL 1.17.11 Add an activity offering to a colocated-shared enrollment set and ensure that the newly added activity offerring has the shared waitlist settings
     Given I create two colocated activity offerings (shared enrolment) with waitlists enabled
