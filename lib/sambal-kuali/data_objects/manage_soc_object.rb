@@ -99,7 +99,7 @@ class ManageSoc < DataFactory
             page.lock_confirm_action
             sleep 4 #work around for KSENROLL-12946
             page.go_action #work around for KSENROLL-12946
-            sleep 2 #work around for KSENROLL-12946
+            sleep 4 #work around for KSENROLL-12946
             page.term_code.wait_until_present #work around for KSENROLL-12946
             tries =+ 1
           end
@@ -115,7 +115,7 @@ class ManageSoc < DataFactory
             page.final_edit_confirm_action
             sleep 4 #work around for KSENROLL-12946
             page.go_action #work around for KSENROLL-12946
-            sleep 2 #work around for KSENROLL-12946
+            sleep 4 #work around for KSENROLL-12946
             page.term_code.wait_until_present #work around for KSENROLL-12946
             tries += 1
           end
@@ -142,7 +142,7 @@ class ManageSoc < DataFactory
       page.schedule_confirm_action
       sleep 4 #work around for KSENROLL-12946
       page.go_action #work around for KSENROLL-12946
-      sleep 2 #work around for KSENROLL-12946
+      sleep 4 #work around for KSENROLL-12946
       page.term_code.wait_until_present #work around for KSENROLL-12946
       tries += 1
     end
@@ -171,7 +171,7 @@ class ManageSoc < DataFactory
       page.publish_confirm_action
       sleep 4 #work around for KSENROLL-12946
       page.go_action #work around for KSENROLL-12946
-      sleep 2 #work around for KSENROLL-12946
+      sleep 4 #work around for KSENROLL-12946
       page.term_code.wait_until_present #work around for KSENROLL-12946
       tries += 1
     end
@@ -201,7 +201,7 @@ class ManageSoc < DataFactory
       page.create_eos_confirm_action
       sleep 4 #work around for KSENROLL-12946
       page.go_action #work around for KSENROLL-12946
-      sleep 2 #work around for KSENROLL-12946
+      sleep 4 #work around for KSENROLL-12946
       page.term_code.wait_until_present #work around for KSENROLL-12946
 
       tries = 0
