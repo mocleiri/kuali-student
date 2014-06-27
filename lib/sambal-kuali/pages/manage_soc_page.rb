@@ -6,41 +6,96 @@ class ManageSocPage < BasePage
   frame_element
 
   element(:message_element) {|b| b.frm.ul(id: "pageValidationList").li}
+  element(:message_element_by_text) {|msg_text,b| b.frm.ul(id: "pageValidationList").li(text: /#{msg_text}/)}
   value(:message) {|b| b.message_element.text}
   element(:term_code)  { |b| b.frm.text_field(id: "socTermField_control") }
   element(:manage_course_offerings)  { |b| b.frm.a(id: "ManageSOCView-SchedulingDetails-ManageCOButton") }
-  element(:lock_button)  { |b| b.frm.button(id: "ManageSOCView-SchedulingDetails-LockSetButton") }
-  element(:final_edit_button)  { |b| b.frm.button(id: "ManageSOCView-SchedulingDetails-FinalEditButton") }
-  element(:send_to_scheduler_button)  { |b| b.frm.button(id: "ManageSOCView-SchedulingDetails-SendToSchedulerButton") }
-  element(:publish_button)  { |b| b.frm.button(id: "ManageSOCView-SchedulingDetails-PublishButton") }
-  element(:close_button)  { |b| b.frm.button(id: "ManageSOCView-SchedulingDetails-CloseButton") }
 
   action(:go_action) { |b| b.frm.button(id: "socShowButton").click; sleep 2; b.loading.wait_while_present }
-  action(:lock_action) { |b| b.lock_button.click; b.loading.wait_while_present; sleep 1 }
-  action(:final_edit_action) { |b| b.final_edit_button.click; b.loading.wait_while_present; sleep 1 }
-  action(:send_to_scheduler_action) { |b| b.send_to_scheduler_button.click; b.loading.wait_while_present; sleep 1 }
-  action(:publish_action) { |b| b.publish_button.click; b.loading.wait_while_present; sleep 1 }
+
+  element(:lock_button)  { |b| b.frm.button(id: "ManageSOCView-SchedulingDetails-LockSetButton") }
+  def lock_action
+    sleep 1
+    lock_button.wait_until_present
+    lock_button.click
+    loading.wait_while_present
+    sleep 1
+  end
 
   element(:lock_popup_div) { |b| b.section(id: "lockConfirmDialog") }
-  action(:lock_confirm_action) { |b| b.lock_popup_div.span(class: 'ui-button-text',text: 'Lock set').click; b.loading.wait_while_present }
+
+  def lock_confirm_action
+    sleep 1
+    confirm_button = lock_popup_div.span(class: 'ui-button-text',text: 'Lock set')
+    confirm_button.wait_until_present
+    confirm_button.click
+    loading.wait_while_present
+    sleep 1
+    term_code.wait_until_present #synch to parent page
+  end
+
   action(:lock_cancel_action) { |b| b.lock_popup_div.span(class: 'ui-button-text',text: 'Cancel').click; b.loading.wait_while_present }
 
+  element(:send_to_scheduler_button)  { |b| b.frm.button(id: "ManageSOCView-SchedulingDetails-SendToSchedulerButton") }
+  action(:send_to_scheduler_action) { |b| b.send_to_scheduler_button.click; b.loading.wait_while_present; sleep 1 }
   element(:schedule_popup_div) { |b| b.section(id: "massScheduleConfirmDialog") }
-  action(:schedule_confirm_action) { |b| b.schedule_popup_div.span(class: 'ui-button-text',text: 'Send Activities').click; b.loading.wait_while_present }
+
+  def schedule_confirm_action
+    sleep 2
+    confirm_button = schedule_popup_div.span(class: 'ui-button-text',text: 'Send Activities')
+    confirm_button.wait_until_present
+    confirm_button.click
+    loading.wait_while_present
+    sleep 2
+    term_code.wait_until_present #synch to parent page
+  end
   action(:schedule_cancel_action) { |b| b.schedule_popup_div.span(class: 'ui-button-text',text: 'Cancel').click; b.loading.wait_while_present }
 
+  element(:final_edit_button)  { |b| b.frm.button(id: "ManageSOCView-SchedulingDetails-FinalEditButton") }
+  action(:final_edit_action) { |b| b.final_edit_button.click; b.loading.wait_while_present; sleep 1 }
   element(:final_edit_popup_div) { |b| b.section(id: "finalEditConfirmDialog") }
-  action(:final_edit_confirm_action) { |b| b.final_edit_popup_div.span(class: 'ui-button-text',text: 'Allow Final Edits').click; b.loading.wait_while_present }
+
+  def final_edit_confirm_action
+    sleep 2
+    confirm_button = final_edit_popup_div.span(class: 'ui-button-text',text: 'Allow Final Edits')
+    confirm_button.wait_until_present
+    confirm_button.click
+    loading.wait_while_present
+    sleep 2
+    term_code.wait_until_present #synch to parent page
+  end
+
   action(:final_edit_cancel_action) { |b| b.final_edit_popup_div.span(class: 'ui-button-text',text: 'Cancel').click; b.loading.wait_while_present }
 
+  element(:publish_button)  { |b| b.frm.button(id: "ManageSOCView-SchedulingDetails-PublishButton") }
+  action(:publish_action) { |b| b.publish_button.click; b.loading.wait_while_present; sleep 1 }
   element(:publish_popup_div) { |b| b.section(id: "massPublishConfirmDialog") }
-  action(:publish_confirm_action) { |b| b.publish_popup_div.span(class: 'ui-button-text',text: 'Publish Set').click; b.loading.wait_while_present }
+
+  def publish_confirm_action
+    sleep 2
+    confirm_button = publish_popup_div.span(class: 'ui-button-text',text: 'Publish Set')
+    confirm_button.wait_until_present
+    confirm_button.click
+    loading.wait_while_present
+    sleep 2
+    term_code.wait_until_present #synch to parent page
+  end
+
   action(:publish_cancel_action) { |b| b.publish_popup_div.span(class: 'ui-button-text',text: 'Cancel').click; b.loading.wait_while_present }
 
   element(:create_eos_button)  { |b| b.frm.button(id: 'ManageSOCView-CreateEOBulk-SchedulerButton') }
   action(:create_eos_action) { |b| b.create_eos_button.click; b.loading.wait_while_present; sleep 1 }
   element(:create_eos_confirm_popup_div) { |b| b.section(id: "examOfferingConfirmDialog") }
-  action(:create_eos_confirm_action) { |b| b.create_eos_confirm_popup_div.span(class: 'ui-button-text',text: 'Create Exam Offerings').click; b.loading.wait_while_present }
+
+  def create_eos_confirm_action
+    sleep 2
+    confirm_button = create_eos_confirm_popup_div.span(class: 'ui-button-text',text: 'Create Exam Offerings')
+    confirm_button.wait_until_present
+    confirm_button.click
+    loading.wait_while_present
+    sleep 2
+    term_code.wait_until_present #synch to parent page
+  end
   action(:create_eos_cancel_action) { |b| b.create_eos_confirm_popup_div.span(class: 'ui-button-text',text: 'Cancel').click; b.loading.wait_while_present }
 
   element(:create_eos_error_popup_div) { |b| b.section(id: "errorNoExamPeriodDialog") }
@@ -52,6 +107,7 @@ class ManageSocPage < BasePage
   element(:eo_creation_completed_date) { |b| b.div(id: 'eoSlottingCompleteDate').text }
   element(:eo_creation_duration) { |b| b.div(id: 'eoSlottingDuration').text }
 
+  element(:close_button)  { |b| b.frm.button(id: "ManageSOCView-SchedulingDetails-CloseButton") }
   element(:soc_status_table) { |b| b.div(id: "ManageSOCView-StatusHistory-SubSection2").table }
   STATE_COLUMN = 0
   EFFECTIVE_DATE_COLUMN = 1

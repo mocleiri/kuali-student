@@ -53,7 +53,7 @@ class ManageSoc < DataFactory
   # @param curent_state [String] in Lock, FinalEdit, Scedule, Publish, Close
   def check_state_change_button_exists(current_state)
     on ManageSocPage do |page|
-    case(current_state)
+      case(current_state)
         when 'Lock'
           raise "SOC is not enabled for Lock" unless page.lock_button.enabled? and page.soc_status == 'Open'
           raise "Draft Date doesnt exists" unless page.is_date_exists('Draft')
@@ -79,7 +79,7 @@ class ManageSoc < DataFactory
           raise "Published Date doesnt exists" unless page.is_date_exists('Published')
         else
           raise "Your Soc State value must be one of the following:\n'Open', \n'Lock', \n'FinalEdit', \n'Schedule', \n'Publish', 'Close'.\nPlease update your script"
-        end
+      end
     end
   end
 
@@ -90,43 +90,32 @@ class ManageSoc < DataFactory
   #@param new_state [String] in Lock, FinalEdit, Publish, Schedule
   #@param confirm_state_change [String] Yes/No
   def change_action(new_state)
-    on ManageSocPage do |page|
-      case(new_state)
-        when 'Lock'
-          tries = 0
-          while page.lock_button.present? and tries < 3
-            page.lock_action
-            page.lock_confirm_action
-            sleep 4 #work around for KSENROLL-12946
-            page.go_action #work around for KSENROLL-12946
-            sleep 4 #work around for KSENROLL-12946
-            page.term_code.wait_until_present #work around for KSENROLL-12946
-            tries =+ 1
-          end
-          raise "SOC state table not updated to 'Locked'" unless page.soc_status == 'Locked'
-          #page.message_element.wait_until_present
-          #raise "'Set of Courses has been Locked.' not displayed after Lock" unless page.message == 'Set of Courses has been Locked.'
-        when 'Schedule'
-          schedule_soc page
-        when 'FinalEdit'
-          tries = 0
-          while page.final_edit_button.present? and tries < 3
-            page.final_edit_action
-            page.final_edit_confirm_action
-            sleep 4 #work around for KSENROLL-12946
-            page.go_action #work around for KSENROLL-12946
-            sleep 4 #work around for KSENROLL-12946
-            page.term_code.wait_until_present #work around for KSENROLL-12946
-            tries += 1
-          end
-          raise "SOC state table not updated to 'Final Edits'" unless page.soc_status == 'Final Edits'
-          #page.message_element.wait_until_present
-          #raise "Info message text at the top doesnt match" unless page.message == 'Set of Courses has been opened for Final Edits.'
-        when 'Publish'
-          publish_soc page
-        else
-          raise "Your Soc State value must be one of the following:\n'Lock', \n'FinalEdit', \n'Schedule', \n'Publish'.\nPlease update your script"
-      end
+    case(new_state)
+      when 'Lock'
+        on ManageSocPage do |page|
+          page.lock_action
+          page.lock_confirm_action
+        end
+
+        on(ManageSocPage).message_element_by_text('Locked').wait_until_present
+        raise "'Set of Courses has been Locked.' not displayed after Lock" unless on(ManageSocPage).message == 'Set of Courses has been Locked.'
+        raise "SOC state table not updated to 'Locked'" unless on(ManageSocPage).soc_status == 'Locked'
+
+      when 'Schedule'
+        schedule_soc
+      when 'FinalEdit'
+        on ManageSocPage do |page|
+          page.final_edit_action
+          page.final_edit_confirm_action
+        end
+        on(ManageSocPage).message_element_by_text('Final Edits').wait_until_present
+        raise "SOC state table not updated to 'Final Edits'" unless on(ManageSocPage).soc_status == 'Final Edits'
+        raise "Info message text at the top doesnt match" unless on(ManageSocPage).message == 'Set of Courses has been opened for Final Edits.'
+
+      when 'Publish'
+        publish_soc
+      else
+        raise "Your Soc State value must be one of the following:\n'Lock', \n'FinalEdit', \n'Schedule', \n'Publish'.\nPlease update your script"
     end
   end
 
@@ -135,59 +124,53 @@ class ManageSoc < DataFactory
   #
   #@param page(ManageSoc page)
   #@param confirm_state_change [String] Yes/No
-  def schedule_soc(page)
-    tries = 0
-    while page.send_to_scheduler_button.present? and tries < 3
+  def schedule_soc
+    on ManageSocPage do |page|
       page.send_to_scheduler_action
       page.schedule_confirm_action
-      sleep 4 #work around for KSENROLL-12946
-      page.go_action #work around for KSENROLL-12946
-      sleep 4 #work around for KSENROLL-12946
-      page.term_code.wait_until_present #work around for KSENROLL-12946
-      tries += 1
     end
-    tries = 0
-    #page.message_element.wait_until_present
-    raise "Schedule Initiated Date is blank" unless page.schedule_initiated_date != nil
-    #raise "Once schedule started, schedule completed date should say 'Scheduling in progress'" unless page.schedule_completed_date == 'Scheduling in progress'
+
+    on(ManageSocPage).message_element_by_text('sent to Scheduler').wait_until_present
+    raise "Schedule Initiated Date is blank" unless on(ManageSocPage).schedule_initiated_date != nil
+    raise "Once schedule started, schedule completed date should say 'Scheduling in progress'" unless  on(ManageSocPage).schedule_completed_date == 'Scheduling in progress'
     #raise "Schedule duration should have the '(in progress)' text at the end" unless page.schedule_duration =~ /(in progress)/
     #raise "Info message text at the top doesnt match" unless page.message == 'Approved activities were successfully sent to Scheduler.' #work around for KSENROLL-12946
-    until page.final_edit_button.enabled? or tries == 15 do
-      sleep 20
-      tries += 1
-      search
+    tries = 0
+    on ManageSocPage do |page|
+      until page.final_edit_button.enabled? or tries == 15 do
+        sleep 20
+        tries += 1
+        search
+      end
+      raise "Test timed out waiting for Scheduler process" unless page.final_edit_button.enabled?
     end
-    raise "Test timed out waiting for Scheduler process" unless page.final_edit_button.enabled?
   end
 
   #pubilsh soc
   #
   #@param page(ManageSoc page)
   #@param confirm_state_change [String] Yes/No
-  def publish_soc(page)
-    tries = 0
-    while page.publish_button.present? and tries < 3
+  def publish_soc
+    on ManageSocPage do |page|
       page.publish_action
       page.publish_confirm_action
-      sleep 4 #work around for KSENROLL-12946
-      page.go_action #work around for KSENROLL-12946
-      sleep 4 #work around for KSENROLL-12946
-      page.term_code.wait_until_present #work around for KSENROLL-12946
-      tries += 1
     end
-    #raise "SOC status doesnt change to Publishing In Progress" unless page.soc_status == 'Publishing In Progress'
-#    raise "Close button not displayed" unless page.close_button.exists?
-    #raise "Publish Initiated Date is blank" unless page.schedule_initiated_date != nil #work around for KSENROLL-12946
-    #raise "Once publish started, schedule completed date should say 'Publishing in progress'" unless page.publish_completed_date == 'Publishing in progress' #work around for KSENROLL-12946
-    #raise "Publish duration should have the '(in progress)' text at the end" unless page.publish_duration =~ /(in progress)/ #work around for KSENROLL-12946
-    #raise "Publishing In Progress Date is blank" unless page.is_date_exists('Publishing In Progress') #work around for KSENROLL-12946
+    sleep 5
+    raise "SOC status doesnt change to Publishing In Progress" unless on(ManageSocPage).soc_status == 'Publishing In Progress'
+    #    raise "Close button not displayed" unless page.close_button.exists?
+    raise "Publish Initiated Date is blank" unless on(ManageSocPage).schedule_initiated_date != nil #work around for KSENROLL-12946
+    raise "Once publish started, schedule completed date should say 'Publishing in progress'" unless on(ManageSocPage).publish_completed_date == 'Publishing in progress' #work around for KSENROLL-12946
+    raise "Publish duration should have the '(in progress)' text at the end" unless on(ManageSocPage).publish_duration =~ /(in progress)/ #work around for KSENROLL-12946
+    raise "Publishing In Progress Date is blank" unless on(ManageSocPage).is_date_exists('Publishing In Progress') #work around for KSENROLL-12946
     tries = 0
-    until page.soc_status == 'Published' or tries == 15 do
-      sleep 20
-      tries += 1
-      search
+    on ManageSocPage do |page|
+      until page.soc_status == 'Published' or tries == 15 do
+        sleep 20
+        tries += 1
+        search
+      end
+      raise "Test timed out waiting for Publish process" unless page.soc_status == 'Published'
     end
-    raise "Test timed out waiting for Publish process" unless page.soc_status == 'Published'
   end
 
   #create exam offering for soc
@@ -199,19 +182,16 @@ class ManageSoc < DataFactory
     on ManageSocPage do |page|
       page.create_eos_action
       page.create_eos_confirm_action
-      sleep 4 #work around for KSENROLL-12946
-      page.go_action #work around for KSENROLL-12946
-      sleep 4 #work around for KSENROLL-12946
-      page.term_code.wait_until_present #work around for KSENROLL-12946
-
-      tries = 0
-      until page.eo_creation_status == 'Completed' or tries == 100 do
-        sleep 60
-        tries += 1
-        search
-      end
-      raise "Test timed out waiting for Exam Offering creation process" unless page.eo_creation_status == 'Completed'
     end
+
+    tries = 0
+    until on(ManageSocPage).eo_creation_status == 'Completed' or tries == 20 do
+      sleep 30
+      tries += 1
+      search
+    end
+    raise "Test timed out waiting for Exam Offering creation process" unless on(ManageSocPage).eo_creation_status == 'Completed'
+
   end
 
   def verify_schedule_state_changes
