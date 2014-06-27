@@ -4,7 +4,7 @@ When /^I attempt to register for two courses whose times conflict$/ do
    And I register for the course
   }
   # Save the first course reg request, because will use it later (to drop course)
-  @reg_request_110 = @reg_request
+  @reg_request_initial = @reg_request
   steps %{
    Then I add a HIST3 course offering to my registration cart
    And I register for the course
@@ -18,7 +18,7 @@ When /^I attempt to register for a PHYS course and an ENGL course whose times co
     Then there is a message indicating successful registration
   }
   # Save the first course reg request, because will use it later (to drop course)
-  @reg_request_phys = @reg_request
+  @reg_request_initial = @reg_request
   steps %{
     When I add an ENGL5 course offering to my registration cart
     And I register for the course
@@ -29,7 +29,7 @@ end
 And /^there is a message indicating a time conflict$/ do
   on RegistrationCart do |page|
     page_status = page.result_status(@reg_request.course_code, @reg_request.reg_group_code)
-    page_status.should =~ /time conflict/i
+    page_status.should =~ /time conflict \(#{@reg_request_initial.course_code}\)/i
   end
 end
 
@@ -50,7 +50,7 @@ When /^I remove the PHYS course from my schedule$/ do
     page.schedule_link.wait_until_present
     page.schedule_link.click
   end
-  @reg_request_phys.remove_course("schedule")
+  @reg_request_initial.remove_course("schedule")
 end
 
 And /^I register for the ENGL course$/ do
@@ -71,5 +71,5 @@ And /^I register for the ENGL course$/ do
 end
 
 And /^test cleanup - remove the first course from the schedule$/ do
-  @reg_request_110.remove_course("schedule")
+  @reg_request_initial.remove_course("schedule")
 end
