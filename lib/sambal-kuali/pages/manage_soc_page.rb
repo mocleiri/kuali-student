@@ -26,7 +26,7 @@ class ManageSocPage < BasePage
 
   def lock_confirm_action
     sleep 4
-    confirm_button = lock_popup_div.span(class: 'ui-button-text',text: 'Lock set')
+    confirm_button = lock_popup_div.radio(id: /control_0/)
     confirm_button.wait_until_present
     confirm_button.click
     loading.wait_while_present
@@ -42,7 +42,7 @@ class ManageSocPage < BasePage
 
   def schedule_confirm_action
     sleep 4
-    confirm_button = schedule_popup_div.span(class: 'ui-button-text',text: 'Send Activities')
+    confirm_button = schedule_popup_div.radio(id: /control_0/)
     confirm_button.wait_until_present
     confirm_button.click
     loading.wait_while_present
@@ -57,7 +57,7 @@ class ManageSocPage < BasePage
 
   def final_edit_confirm_action
     sleep 4
-    confirm_button = final_edit_popup_div.span(class: 'ui-button-text',text: 'Allow Final Edits')
+    confirm_button = final_edit_popup_div.radio(id: /control_0/)
     confirm_button.wait_until_present
     confirm_button.click
     loading.wait_while_present
@@ -73,7 +73,7 @@ class ManageSocPage < BasePage
 
   def publish_confirm_action
     sleep 4
-    confirm_button = publish_popup_div.span(class: 'ui-button-text',text: 'Publish Set')
+    confirm_button = publish_popup_div.radio(id: /control_0/)
     confirm_button.wait_until_present
     confirm_button.click
     loading.wait_while_present
@@ -89,7 +89,7 @@ class ManageSocPage < BasePage
 
   def create_eos_confirm_action
     sleep 4
-    confirm_button = create_eos_confirm_popup_div.span(class: 'ui-button-text',text: 'Create Exam Offerings')
+    confirm_button = create_eos_confirm_popup_div.radio(id: /control_0/)
     confirm_button.wait_until_present
     confirm_button.click
     loading.wait_while_present
