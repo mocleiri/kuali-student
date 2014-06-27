@@ -15,22 +15,22 @@ class ManageSocPage < BasePage
 
   element(:lock_button)  { |b| b.frm.button(id: "ManageSOCView-SchedulingDetails-LockSetButton") }
   def lock_action
-    sleep 1
+    sleep 4
     lock_button.wait_until_present
     lock_button.click
     loading.wait_while_present
-    sleep 1
+    sleep 4
   end
 
   element(:lock_popup_div) { |b| b.section(id: "lockConfirmDialog") }
 
   def lock_confirm_action
-    sleep 1
+    sleep 4
     confirm_button = lock_popup_div.span(class: 'ui-button-text',text: 'Lock set')
     confirm_button.wait_until_present
     confirm_button.click
     loading.wait_while_present
-    sleep 1
+    sleep 4
     term_code.wait_until_present #synch to parent page
   end
 
@@ -41,12 +41,12 @@ class ManageSocPage < BasePage
   element(:schedule_popup_div) { |b| b.section(id: "massScheduleConfirmDialog") }
 
   def schedule_confirm_action
-    sleep 2
+    sleep 4
     confirm_button = schedule_popup_div.span(class: 'ui-button-text',text: 'Send Activities')
     confirm_button.wait_until_present
     confirm_button.click
     loading.wait_while_present
-    sleep 2
+    sleep 4
     term_code.wait_until_present #synch to parent page
   end
   action(:schedule_cancel_action) { |b| b.schedule_popup_div.span(class: 'ui-button-text',text: 'Cancel').click; b.loading.wait_while_present }
@@ -56,12 +56,12 @@ class ManageSocPage < BasePage
   element(:final_edit_popup_div) { |b| b.section(id: "finalEditConfirmDialog") }
 
   def final_edit_confirm_action
-    sleep 2
+    sleep 4
     confirm_button = final_edit_popup_div.span(class: 'ui-button-text',text: 'Allow Final Edits')
     confirm_button.wait_until_present
     confirm_button.click
     loading.wait_while_present
-    sleep 2
+    sleep 4
     term_code.wait_until_present #synch to parent page
   end
 
@@ -72,12 +72,12 @@ class ManageSocPage < BasePage
   element(:publish_popup_div) { |b| b.section(id: "massPublishConfirmDialog") }
 
   def publish_confirm_action
-    sleep 2
+    sleep 4
     confirm_button = publish_popup_div.span(class: 'ui-button-text',text: 'Publish Set')
     confirm_button.wait_until_present
     confirm_button.click
     loading.wait_while_present
-    sleep 2
+    sleep 4
     term_code.wait_until_present #synch to parent page
   end
 
@@ -88,12 +88,12 @@ class ManageSocPage < BasePage
   element(:create_eos_confirm_popup_div) { |b| b.section(id: "examOfferingConfirmDialog") }
 
   def create_eos_confirm_action
-    sleep 2
+    sleep 4
     confirm_button = create_eos_confirm_popup_div.span(class: 'ui-button-text',text: 'Create Exam Offerings')
     confirm_button.wait_until_present
     confirm_button.click
     loading.wait_while_present
-    sleep 2
+    sleep 4
     term_code.wait_until_present #synch to parent page
   end
   action(:create_eos_cancel_action) { |b| b.create_eos_confirm_popup_div.span(class: 'ui-button-text',text: 'Cancel').click; b.loading.wait_while_present }
