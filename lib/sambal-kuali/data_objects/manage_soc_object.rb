@@ -52,7 +52,12 @@ class ManageSoc < DataFactory
   #
   # @param curent_state [String] in Lock, FinalEdit, Scedule, Publish, Close
   def check_state_change_button_exists(current_state)
+    #TODO: Temporary workaround: wait for process to complete and return to page
+    sleep 90
+    go_to_manage_soc
     on ManageSocPage do |page|
+      page.term_code.set @term_code
+      page.go_action
       case(current_state)
         when 'Lock'
           raise "SOC is not enabled for Lock" unless page.lock_button.enabled? and page.soc_status == 'Open'
@@ -171,14 +176,20 @@ class ManageSoc < DataFactory
       page.publish_action
       page.publish_confirm_action
     end
-    sleep 5
+    #TODO: Temporary workaround: wait for process to initiate and return to page
+    sleep 90
+    go_to_manage_soc
+    on ManageSocPage do |page|
+      page.term_code.set @term_code
+      page.go_action
+    end
     #TODO: Temporary workaround: Added Begin/Rescue because validation message does not always appear. Use until Rice 2.5 handles confirmation dialogs differently
     begin
-      raise "SOC status doesnt change to Publishing In Progress" unless on(ManageSocPage).soc_status == 'Publishing In Progress'
+      raise "SOC status doesnt change to Publishing In Progress" unless on(ManageSocPage).soc_status == 'Publishing In Progress' || on(ManageSocPage).soc_status == 'Published'
       #    raise "Close button not displayed" unless page.close_button.exists?
       raise "Publish Initiated Date is blank" unless on(ManageSocPage).schedule_initiated_date != nil #work around for KSENROLL-12946
-      raise "Once publish started, schedule completed date should say 'Publishing in progress'" unless on(ManageSocPage).publish_completed_date == 'Publishing in progress' #work around for KSENROLL-12946
-      raise "Publish duration should have the '(in progress)' text at the end" unless on(ManageSocPage).publish_duration =~ /(in progress)/ #work around for KSENROLL-12946
+      raise "Once publish started, schedule completed date should say 'Publishing in progress'" if on(ManageSocPage).publish_completed_date == nil #work around for KSENROLL-12946
+      raise "Publish duration should have the '(in progress)' text at the end" if on(ManageSocPage).publish_duration == nil #work around for KSENROLL-12946
       raise "Publishing In Progress Date is blank" unless on(ManageSocPage).is_date_exists('Publishing In Progress') #work around for KSENROLL-12946
     rescue Watir::Wait::TimeoutError
       puts "Publish validation message did not appear."
