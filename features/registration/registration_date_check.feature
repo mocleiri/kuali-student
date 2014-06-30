@@ -20,4 +20,13 @@ Feature: REG.Registration Date Check
     When I attempt to display my registration cart during pre-registration
     Then I can view my registration cart
     And I can add and remove courses from my cart
+    When I attempt to register for the courses
+    Then there is a message indicating that the registration period is not open
 
+  #KSENROLL-13256
+  Scenario: CR 12.2 Verify registration for courses in sub-terms with different reg periods
+    Given I log in to student registration as studenty
+    And I attempt to register for courses for X Term
+    Then there is a message indicating that the registration period is not open
+    When I attempt to register for courses for Y Term
+    Then I am able to successfully register for the courses
