@@ -8,3 +8,5 @@ Given I am logged in as a Student
     When I search for a certain course on course search page
     And I navigate to the Course Section Details page
     Then I should be able to view the section details about the course
+
+

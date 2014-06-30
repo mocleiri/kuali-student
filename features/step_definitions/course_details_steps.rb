@@ -37,14 +37,13 @@ Then(/^I should be able to view the section details about the course$/) do
   on CourseSectionPage do |page|
 
     page.course_detail_header.text.should match /#{@course_section_object.course_detail_header}/
-      page.term_and_course_offering.should == @course_section_object.term_and_course_offering
+    page.term_and_course_offering.should == @course_section_object.term_and_course_offering
     page.course_description.text.should match /#{@course_section_object.course_description}/
-    puts page.course_description.text
-    page.activity_offering_code(0,0,0,0).should match /#{@course_section_object.activity_offering_code}/
-    page.activity_offering_instructor(0,0,0,0).should match /#{@course_section_object.activity_offering_instructor}/
-    page.activity_offering_time(0,0,0,0).should match /#{@course_section_object.activity_offering_time}/
-    page.activity_offering_location(0,0,0,0).should match /#{@course_section_object.activity_offering_location}/
-    page.activity_offering_seats(0,0,0,0).should match /#{@course_section_object.activity_offering_seats}/
+    page.activity_offering_code(0,0,0,0,0).should match /#{@course_section_object.activity_offering_code}/
+    page.activity_offering_instructor(0,0,0,0,0).should match /#{@course_section_object.activity_offering_instructor}/
+    page.activity_offering_time(0,0,0,0,0).should match /#{@course_section_object.activity_offering_time}/
+    page.activity_offering_location(0,0,0,0,0).should match /#{@course_section_object.activity_offering_location}/
+    page.activity_offering_seats(0,0,0,0,0).should match /#{@course_section_object.activity_offering_seats}/
 
   end
 end
