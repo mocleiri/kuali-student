@@ -438,6 +438,14 @@ Given /^I log in to student registration as (\w+)$/  do |user|
       visit RestStudent4Login
     when "student5"
       visit RestStudent5Login
+    when "student6"
+      visit RestStudent6Login
+    when "student7"
+      visit RestStudent7Login
+    when "student8"
+      visit RestStudent8Login
+    when "student9"
+      visit RestStudent9Login
     when "EILEENB"
       visit RestEILEENBLogin
     when "EILEENL"

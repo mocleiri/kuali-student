@@ -25,8 +25,8 @@ Feature: REG.Registration Date Check
 
   #KSENROLL-13256
   Scenario: CR 12.2 Verify registration for courses in sub-terms with different reg periods
-    Given I log in to student registration as studenty
-    And I attempt to register for courses for X Term
+    Given I log in to student registration as student8
+    And I attempt to register for a course for Half Fall 1 2012
     Then there is a message indicating that the registration period is not open
-    When I attempt to register for courses for Y Term
-    Then I am able to successfully register for the courses
+    When I attempt to register for a course for Half Fall 2 2012
+    Then there is a message indicating successful registration

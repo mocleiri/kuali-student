@@ -34,6 +34,30 @@ class RestStudent5Login < PageFactory
 
   end
 
+class RestStudent6Login < PageFactory
+
+  page_url "#{$test_site}/services/DevelopmentLoginClientService/login?userId=student6&password=student6"
+
+  end
+
+class RestStudent7Login < PageFactory
+
+  page_url "#{$test_site}/services/DevelopmentLoginClientService/login?userId=student7&password=student7"
+
+  end
+
+class RestStudent8Login < PageFactory
+
+  page_url "#{$test_site}/services/DevelopmentLoginClientService/login?userId=student8&password=student8"
+
+  end
+
+class RestStudent9Login < PageFactory
+
+  page_url "#{$test_site}/services/DevelopmentLoginClientService/login?userId=student9&password=student9"
+
+  end
+
 class RestMarthaLogin < PageFactory
 
   page_url "#{$test_site}/services/DevelopmentLoginClientService/login?userId=martha&password=martha"
