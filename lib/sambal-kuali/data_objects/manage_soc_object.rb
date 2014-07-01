@@ -129,6 +129,20 @@ class ManageSoc < DataFactory
           raise "SOC state table not updated to 'Locked'" unless on(ManageSocPage).soc_status == 'Locked'
         rescue Watir::Wait::TimeoutError
           puts "Lock validation message did not appear."
+          tries = 0
+          on ManageSocPage do |page|
+            while page.lock_button.exists? and tries <= 3 do
+              page.lock_action
+              page.lock_confirm_action
+              sleep 20
+              tries += 1
+              search
+            end
+          end
+
+          on(ManageSocPage).message_element_by_text('Locked').wait_until_present
+          raise "'Set of Courses has been Locked.' not displayed after Lock" unless on(ManageSocPage).message == 'Set of Courses has been Locked.'
+          raise "SOC state table not updated to 'Locked'" unless on(ManageSocPage).soc_status == 'Locked'
         end
 
       when 'Schedule'
@@ -146,6 +160,20 @@ class ManageSoc < DataFactory
           raise "Info message text at the top doesnt match" unless on(ManageSocPage).message == 'Set of Courses has been opened for Final Edits.'
         rescue Watir::Wait::TimeoutError
           puts "Final Edits validation message did not appear."
+          tries = 0
+          on ManageSocPage do |page|
+            while page.final_edit_button.exists? and tries <= 3 do
+              page.final_edit_action
+              page.final_edit_confirm_action
+              sleep 20
+              tries += 1
+              search
+            end
+          end
+
+          on(ManageSocPage).message_element_by_text('Final Edits').wait_until_present
+          raise "SOC state table not updated to 'Final Edits'" unless on(ManageSocPage).soc_status == 'Final Edits'
+          raise "Info message text at the top doesnt match" unless on(ManageSocPage).message == 'Set of Courses has been opened for Final Edits.'
         end
 
       when 'Publish'
@@ -175,6 +203,22 @@ class ManageSoc < DataFactory
         #raise "Info message text at the top doesnt match" unless page.message == 'Approved activities were successfully sent to Scheduler.' #work around for KSENROLL-12946
     rescue Watir::Wait::TimeoutError
       puts "Send to Scheduler validation message did not appear."
+      tries = 0
+      on ManageSocPage do |page|
+        while page.send_to_scheduler_button.exists? and tries <= 3 do
+          page.send_to_scheduler_action
+          page.send_to_scheduler_confirm_action
+          sleep 20
+          tries += 1
+          search
+        end
+      end
+
+      on(ManageSocPage).message_element_by_text('sent to Scheduler').wait_until_present
+      raise "Schedule Initiated Date is blank" unless on(ManageSocPage).schedule_initiated_date != nil
+      raise "Once schedule started, schedule completed date should say 'Scheduling in progress'" unless  on(ManageSocPage).schedule_completed_date == 'Scheduling in progress'
+      #raise "Schedule duration should have the '(in progress)' text at the end" unless page.schedule_duration =~ /(in progress)/
+      #raise "Info message text at the top doesnt match" unless page.message == 'Approved activities were successfully sent to Scheduler.' #work around for KSENROLL-12946
     end
     tries = 0
     on ManageSocPage do |page|
@@ -195,25 +239,27 @@ class ManageSoc < DataFactory
     on ManageSocPage do |page|
       page.publish_action
       page.publish_confirm_action
+
+      #TODO: Temporary workaround: wait for process to initiate and return to page
+      #sleep 90
+      search
+      #TODO: Temporary workaround: Added Begin/Rescue because validation message does not always appear. Use until Rice 2.5 handles confirmation dialogs differently
+      tries = 0
+      while page.publish_button.exists? and tries <= 3 do
+        page.publish_action
+        page.publish_confirm_action
+        sleep 20
+        tries += 1
+        search
+      end
     end
-    #TODO: Temporary workaround: wait for process to initiate and return to page
-    sleep 90
-    go_to_manage_soc
-    on ManageSocPage do |page|
-      page.term_code.set @term_code
-      page.go_action
-    end
-    #TODO: Temporary workaround: Added Begin/Rescue because validation message does not always appear. Use until Rice 2.5 handles confirmation dialogs differently
-    begin
-      raise "SOC status doesnt change to Publishing In Progress" unless on(ManageSocPage).soc_status == 'Publishing In Progress' || on(ManageSocPage).soc_status == 'Published'
-      #    raise "Close button not displayed" unless page.close_button.exists?
-      raise "Publish Initiated Date is blank" unless on(ManageSocPage).schedule_initiated_date != nil #work around for KSENROLL-12946
-      raise "Once publish started, schedule completed date should say 'Publishing in progress'" if on(ManageSocPage).publish_completed_date == nil #work around for KSENROLL-12946
-      raise "Publish duration should have the '(in progress)' text at the end" if on(ManageSocPage).publish_duration == nil #work around for KSENROLL-12946
-      raise "Publishing In Progress Date is blank" unless on(ManageSocPage).is_date_exists('Publishing In Progress') #work around for KSENROLL-12946
-    rescue Watir::Wait::TimeoutError
-      puts "Publish validation message did not appear."
-    end
+
+    raise "SOC status doesnt change to Publishing In Progress" unless on(ManageSocPage).soc_status == 'Publishing In Progress' or on(ManageSocPage).soc_status == 'Published'
+    #    raise "Close button not displayed" unless page.close_button.exists?
+    raise "Publish Initiated Date is blank" unless on(ManageSocPage).schedule_initiated_date != nil #work around for KSENROLL-12946
+    raise "Once publish started, schedule completed date should say 'Publishing in progress'" if on(ManageSocPage).publish_completed_date == nil #work around for KSENROLL-12946
+    raise "Publish duration should have the '(in progress)' text at the end" if on(ManageSocPage).publish_duration == nil #work around for KSENROLL-12946
+    raise "Publishing In Progress Date is blank" unless on(ManageSocPage).is_date_exists('Publishing In Progress') #work around for KSENROLL-12946
 
     tries = 0
     on ManageSocPage do |page|
@@ -235,6 +281,19 @@ class ManageSoc < DataFactory
     on ManageSocPage do |page|
       page.create_eos_action
       page.create_eos_confirm_action
+
+      #TODO: Temporary workaround: wait for process to initiate and return to page
+      #sleep 90
+      search
+      #TODO: Temporary workaround: Added Begin/Rescue because validation message does not always appear. Use until Rice 2.5 handles confirmation dialogs differently
+      tries = 0
+      while page.create_eos_button.exists? and tries <= 3 do
+        page.create_eos_action
+        page.create_eos_confirm_action
+        sleep 20
+        tries += 1
+        search
+      end
     end
 
     tries = 0
