@@ -54,7 +54,7 @@ class ManageSoc < DataFactory
   def check_state_change_button_exists(current_state)
     #TODO: Temporary workaround: wait for process to complete and return to page
     search
-    tries = 0
+    tries = 1
     on ManageSocPage do |page|
       case(current_state)
         when 'Lock'
@@ -62,10 +62,10 @@ class ManageSoc < DataFactory
           raise "Draft Date doesn't exist" unless page.is_date_exists('Draft')
           raise "Open Date doesn't exist" unless page.is_date_exists('Open')
         when 'FinalEdit'
-          while page.send_to_scheduler_button.exists? and tries <= 3 do
+          while page.send_to_scheduler_button.exists? and tries <= 5 do
             page.send_to_scheduler_action
             sleep 10
-            page.schedule_confirm_action
+            page.schedule_confirm_action if page.schedule_popup_div.visible?
             sleep 20
             tries += 1
             search
@@ -75,10 +75,10 @@ class ManageSoc < DataFactory
           raise "Schedule completed Date is blank" unless page.schedule_completed_date != nil
           raise "Schedule duration is blank" unless page.schedule_duration != nil
         when 'Schedule'
-          while page.lock_button.exists? and tries <= 3 do
+          while page.lock_button.exists? and tries <= 5 do
             page.lock_action
             sleep 10
-            page.lock_confirm_action
+            page.lock_confirm_action if page.lock_popup_div.visible?
             sleep 20
             tries += 1
             search
@@ -88,10 +88,10 @@ class ManageSoc < DataFactory
           raise "SOC is not in Lock state or scheduling state is not completed" unless page.soc_status == 'Locked'
           raise "Locked Date doesnt exists" unless page.is_date_exists('Locked')
         when 'Publish'
-          while page.final_edit_button.exists? and tries <= 3 do
+          while page.final_edit_button.exists? and tries <= 5 do
             page.final_edit_action
             sleep 10
-            page.final_edit_confirm_action
+            page.final_edit_confirm_action if page.final_edit_popup_div.visible?
             sleep 20
             tries += 1
             search
@@ -124,11 +124,11 @@ class ManageSoc < DataFactory
           page.lock_confirm_action
 
           #TODO: Temporary workaround: Added Begin/Rescue because validation message does not always appear. Use until Rice 2.5 handles confirmation dialogs differently
-          tries = 0
-          while page.lock_button.exists? and tries <= 3 do
+          tries = 1
+          while page.lock_button.exists? and tries <= 5 do
             page.lock_action
             sleep 10
-            page.lock_confirm_action
+            page.lock_confirm_action if page.lock_popup_div.visible?
             sleep 20
             tries += 1
             search
@@ -151,11 +151,11 @@ class ManageSoc < DataFactory
           page.final_edit_confirm_action
 
           #TODO: Temporary workaround: Added Begin/Rescue because validation message does not always appear. Use until Rice 2.5 handles confirmation dialogs differently
-          tries = 0
-          while page.final_edit_button.exists? and tries <= 3 do
+          tries = 1
+          while page.final_edit_button.exists? and tries <= 5 do
             page.final_edit_action
             sleep 10
-            page.final_edit_confirm_action
+            page.final_edit_confirm_action if page.final_edit_popup_div.visible?
             sleep 20
             tries += 1
             search
@@ -188,11 +188,11 @@ class ManageSoc < DataFactory
       page.schedule_confirm_action
 
       #TODO: Temporary workaround: Added Begin/Rescue because validation message does not always appear. Use until Rice 2.5 handles confirmation dialogs differently
-      tries = 0
-      while page.send_to_scheduler_button.exists? and tries <= 3 do
+      tries = 1
+      while page.send_to_scheduler_button.exists? and tries <= 5 do
         page.send_to_scheduler_action
         sleep 10
-        page.schedule_confirm_action
+        page.schedule_confirm_action if page.schedule_popup_div.visible?
         sleep 20
         tries += 1
         search
@@ -232,11 +232,11 @@ class ManageSoc < DataFactory
       #TODO: Temporary workaround: wait for process to initiate and return to page
       search
       #TODO: Temporary workaround: Added Begin/Rescue because validation message does not always appear. Use until Rice 2.5 handles confirmation dialogs differently
-      tries = 0
-      while page.publish_button.exists? and tries <= 3 do
+      tries = 1
+      while page.publish_button.exists? and tries <= 5 do
         page.publish_action
         sleep 10
-        page.publish_confirm_action
+        page.publish_confirm_action if page.publish_popup_div.visible?
         sleep 20
         tries += 1
         search
