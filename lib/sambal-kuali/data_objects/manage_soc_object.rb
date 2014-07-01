@@ -54,26 +54,52 @@ class ManageSoc < DataFactory
   def check_state_change_button_exists(current_state)
     #TODO: Temporary workaround: wait for process to complete and return to page
     sleep 90
-    go_to_manage_soc
+    search
+    tries = 0
     on ManageSocPage do |page|
-      page.term_code.set @term_code
-      page.go_action
       case(current_state)
         when 'Lock'
           raise "SOC is not enabled for Lock" unless page.lock_button.enabled? and page.soc_status == 'Open'
-          raise "Draft Date doesnt exists" unless page.is_date_exists('Draft')
-          raise "Open Date doesnt exists" unless page.is_date_exists('Open')
+          raise "Draft Date doesn't exist" unless page.is_date_exists('Draft')
+          raise "Open Date doesn't exist" unless page.is_date_exists('Open')
         when 'FinalEdit'
+          if page.send_to_scheduler_button.exists?
+            while page.send_to_scheduler_button.enabled? and tries <= 3 do
+              page.send_to_scheduler_action
+              page.schedule_confirm_action
+              sleep 20
+              tries += 1
+              search
+            end
+          end
           raise "SOC is not in final edit state" unless page.final_edit_button.enabled? and page.soc_status == 'Locked' and page.soc_scheduling_status == 'Completed'
           raise "Schedule Initiated Date is blank" unless page.schedule_initiated_date != nil
           raise "Schedule completed Date is blank" unless page.schedule_completed_date != nil
           raise "Schedule duration is blank" unless page.schedule_duration != nil
         when 'Schedule'
+          if page.lock_button.exists?
+            while page.lock_button.enabled? and tries <= 3 do
+              page.lock_action
+              page.lock_confirm_action
+              sleep 20
+              tries += 1
+              search
+            end
+          end
           raise "Send to Scheduler action not available" unless page.send_to_scheduler_button.exists? and page.send_to_scheduler_button.enabled?
           raise "Final edit button not exists or disabled" unless page.final_edit_button.disabled?
           raise "SOC is not in Lock state or scheduling state is not completed" unless page.soc_status == 'Locked'
           raise "Locked Date doesnt exists" unless page.is_date_exists('Locked')
         when 'Publish'
+          if page.final_edit_button.exists?
+            while page.final_edit_button.enabled? and tries <= 3 do
+              page.final_edit_action
+              page.final_edit_confirm_action
+              sleep 20
+              tries += 1
+              search
+            end
+          end
           raise "SOC is not in publish state" unless page.publish_button.exists? and page.publish_button.enabled? and page.soc_status == 'Final Edits' and page.soc_scheduling_status == 'Completed'
           raise "Final Edits date doesnt exists" unless page.is_date_exists('Final Edits')
         when 'Close'
