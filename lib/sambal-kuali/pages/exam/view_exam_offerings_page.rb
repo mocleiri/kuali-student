@@ -235,6 +235,7 @@ class ViewExamOfferings < BasePage
   end
 
   def save_edit(row)
+    save_edit_element(row).wait_until_present
     save_edit_element(row).click
     #edit_rsi_element(row).wait_until_present
   end
