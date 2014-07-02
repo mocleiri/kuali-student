@@ -33,7 +33,7 @@ Then /^the new Course Offering should contain only the selected delivery formats
     end
     page.close
   end
-
+  on(ManageCourseOfferingList).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
 end
 
 And /^I create a course offering from an existing offering$/ do
