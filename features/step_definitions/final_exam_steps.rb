@@ -1775,7 +1775,7 @@ end
 
 When /^I create multiple Course Offerings each with different Exam Offerings and Requested Scheduling Information$/ do
   @matrix = make FinalExamMatrix
-  @matrix.create_common_rule_matrix_object_for_rsi( "CHEM242")
+  @matrix.create_common_rule_matrix_object_for_rsi( "CHEM277")
   @matrix.create_common_rule_matrix_object_for_rsi( "PHYS161")
   @matrix.create_standard_rule_matrix_object_for_rsi( "TH")
   @matrix.create_standard_rule_matrix_object_for_rsi( "F")
@@ -1784,7 +1784,7 @@ When /^I create multiple Course Offerings each with different Exam Offerings and
 
   @co_list = []
 
-  @co_list << (create CourseOffering, :term => @calendar.terms[0].term_code, :course => "CHEM242",
+  @co_list << (create CourseOffering, :term => @calendar.terms[0].term_code, :course => "CHEM277",
                       :final_exam_driver => "Final Exam Per Course Offering")
 
   course_offering = make CourseOffering, :term => @calendar.terms[0].term_code, :course => "PHYS161",
