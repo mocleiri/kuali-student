@@ -633,7 +633,6 @@ And /^actual scheduling information for the Suspended activity offering are no l
     page.actual_scheduling_information_days.present?.should be_false
     page.close
   end
-  on(ManageCourseOfferings).loading.wait_while_present #synch to page so subsequent page.visit call does not fail
 end
 
 And /^actual scheduling information for the activity offering are no longer shown$/ do

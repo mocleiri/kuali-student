@@ -7,8 +7,12 @@ class ActivityOfferingInquiry < BasePage
     self.iframe(class: "fancybox-iframe")
   end
 
-  action(:close) { |b| b.frm.button(text: "Close").click; b.loading.wait_while_present }
-
+  element(:close_button_element) { |b| b.frm.button(text: "Close")}
+  def close
+    close_button_element.click
+    loading.wait_while_present
+    @browser.text_field(name: "termCode").wait_until_present #synch to parent page so subsequent .visit call does not fail
+  end
   value(:subterm) { |b| b.frm.div(id: "subterm_name").text }
   value(:subterm_start_date) { |b| b.frm.div(id: "start_end_date").text[/.*(?=-)/].strip }
   value(:subterm_end_date) { |b| b.frm.div(id: "start_end_date").text[/(?<=-).*/].strip }

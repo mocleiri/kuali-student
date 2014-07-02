@@ -20,7 +20,11 @@ class CourseOfferingInquiry < BasePage
   value(:waitlist_state) { |b| b.frm.div(data_label: "Waitlists").p.text == "Active" }
   value(:honors_flag) { |b| b.frm.div(data_label: "Honors Flag").p.text == "YES" }
   element(:close_button_element) { |b| b.frm.div(id: 'KS-CourseOfferingEditWrapper-InquiryView').button(text: "Close")}
-  action(:close) { |b| b.close_button_element.click;b.loading.wait_while_present}
+  def close
+    close_button_element.click
+    loading.wait_while_present
+    @browser.div(id: 'courseOfferingManagementView').header(class: /uif-viewHeader/).h1.span.wait_until_present #synch to parent page so subsequent .visit call does not fail
+  end
   element(:delivery_formats_table) { |b| b.frm.div(id: "KS-CourseOfferingEditWrapper-InquiryView").table(index:1) }
 
   FORMAT_COLUMN = 0
