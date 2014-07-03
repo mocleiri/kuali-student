@@ -23,7 +23,9 @@ class CourseOfferingInquiry < BasePage
   def close
     close_button_element.click
     loading.wait_while_present
-    @browser.div(id: 'courseOfferingManagementView').header(class: /uif-viewHeader/).h1.span.wait_until_present #synch to parent page so subsequent .visit call does not fail
+    # next line doesn't work, parent page field is present? even when dialog is open
+    #@browser.div(id: 'courseOfferingManagementView').header(class: /uif-viewHeader/).h1.span.wait_until_present #synch to parent page so subsequent .visit call does not fail
+    sleep 3
   end
   element(:delivery_formats_table) { |b| b.frm.div(id: "KS-CourseOfferingEditWrapper-InquiryView").table(index:1) }
 

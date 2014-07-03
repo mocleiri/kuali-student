@@ -11,7 +11,9 @@ class ActivityOfferingInquiry < BasePage
   def close
     close_button_element.click
     loading.wait_while_present
-    @browser.text_field(name: "termCode").wait_until_present #synch to parent page so subsequent .visit call does not fail
+    # next line doesn't work, parent page field is present? even when dialog is open
+    # @browser.text_field(name: "termCode").wait_until_present #synch to parent page so subsequent .visit call does not fail
+    sleep 3
   end
   value(:subterm) { |b| b.frm.div(id: "subterm_name").text }
   value(:subterm_start_date) { |b| b.frm.div(id: "start_end_date").text[/.*(?=-)/].strip }
