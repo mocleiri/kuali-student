@@ -905,7 +905,7 @@ When /^the error displayed for AO-driven exam offerings RSI day field is require
     page.rsi_day(row).click
     sleep 1
     popup_text = page.div(id: /jquerybubblepopup/, data_for: "#{page.rsi_day(row).id}").table.text
-    popup_text.should match /Required|Days, start time and end time fields are required/
+    popup_text.should match /Day field is required/
     page.cancel_edit(row)
     page.cancel
   end
@@ -933,7 +933,7 @@ When /^the error displayed for AO-driven exam offerings RSI end time is required
     element.click
     sleep 1
     popup_text = page.div(id: /jquerybubblepopup/, data_for: "#{element.id}").table.text
-    popup_text.should match /Required|Days, start time and end time fields are required/
+    popup_text.should match /End Time field is required/
     page.cancel_edit(row)
     page.cancel
   end
