@@ -78,7 +78,7 @@ function initialize_schema() {
 
   # load bundled schema
   cd ${WORKSPACE}/build-${BUILD_NUMBER}/ks-deployments/ks-dbs/ks-impex/ks-impex-bundled-db
-  mvn initialize -Pdb,oracle -Djdbc.username=KSAFT${BUILD_NUMBER} -Djdbc.username=KSAFT${BUILD_NUMBER}
+  mvn30 initialize -Pdb,oracle -Djdbc.username=KSAFT${BUILD_NUMBER} -Djdbc.username=KSAFT${BUILD_NUMBER}
   if [ $? -gt 0 ]; then
     echo "${FUNCNAME[0]}: mvn initialize failed."
     exit 1;
