@@ -76,6 +76,7 @@ function initialize_schema() {
   ${MVN} $OPT initialize -Pdb,oracle \
     -Doracle.dba.url=jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE \
     -Doracle.dba.username=master \
+    -Doracle.dba.password=${impex.dba.password} \
     -Djdbc.username=KSAFT${BUILD_NUMBER} -Djdbc.username=KSAFT${BUILD_NUMBER}
   if [ $? -gt 0 ]; then
     echo "${FUNCNAME[0]}: mvn initialize failed."
