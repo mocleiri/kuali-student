@@ -57,7 +57,7 @@ function svn_export() {
 
     OPT=""
     if [ $DEBUG -eq 0 ]; then OPT="-q"; fi
-    svn $OPT export $1 $2
+    svn $OPT export --force $1 $2
     if [ $? -gt 0 ]; then
       echo "${FUNCNAME[0]}: svn export failed."
       exit 1;
