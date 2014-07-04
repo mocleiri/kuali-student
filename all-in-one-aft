@@ -5,7 +5,7 @@
 # written by Orlando Ramirez (orlando.ramirezmartinez@utoronto.ca)
 # enhanced by Haroon Rafique (haroon.rafique@kuali.org)
 
-ENR_REPO="https://svn.kuali.org/repos/student/enrollment/aggregate/tags/builds/student-2.1/2.1.1-FR2-M1"
+REPO_PREFIX="https://svn.kuali.org/repos/student/enrollment/ks-deployments/tags/builds/ks-deployments-2.1/2.1.1-FR2-M1/"
 # maven version 3.0 on jenkins
 MVN="mvn30"
 
@@ -53,7 +53,7 @@ function get_latest_stable_build() {
 function svn_export() {
   dbgprint
   if [ "$1" ]; then
-    dbgprint "Checkout repo $1"
+    dbgprint "Exporting repo $1"
 
     OPT=""
     if [ $DEBUG -eq 0 ]; then OPT="-q"; fi
@@ -67,18 +67,12 @@ function svn_export() {
 }
 
 function initialize_schema() {
-  cd ${WORKSPACE}/build-${BUILD_NUMBER}
+  cd ${WORKSPACE}/ks-impex-bundled-db-build-${BUILD_NUMBER}
 
   OPT=""
   if [ $DEBUG -ne 0 ]; then OPT="-X"; fi
-  ${MVN} $OPT clean install -Pimpex-only
-  if [ $? -gt 0 ]; then
-    echo "${FUNCNAME[0]}: mvn clean install failed."
-    exit 1;
-  fi
 
   # load bundled schema
-  cd ${WORKSPACE}/build-${BUILD_NUMBER}/ks-deployments/ks-dbs/ks-impex/ks-impex-bundled-db
   ${MVN} $OPT initialize -Pdb,oracle -Djdbc.username=KSAFT${BUILD_NUMBER} -Djdbc.username=KSAFT${BUILD_NUMBER}
   if [ $? -gt 0 ]; then
     echo "${FUNCNAME[0]}: mvn initialize failed."
@@ -125,7 +119,9 @@ process_args "$@"
 get_latest_stable_build
 
 # export sources from svn repo to specified path
-svn_export "${ENR_REPO}/build-${BUILD_NUMBER}"
+svn_export \
+  ${REPO_PREFIX}/build-${BUILD_NUMBER}/ks-dbs/ks-impex/ks-impex-bundled-db \
+  ${WORKSPACE}/ks-impex-bundled-db-build-${BUILD_NUMBER}
 
 # initialize schema (using impex)
 initialize_schema
