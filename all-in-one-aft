@@ -1,0 +1,133 @@
+#!/bin/bash
+
+# Jenkins script to perform an all in one AFT test
+#
+# written by Orlando Ramirez (orlando.ramirezmartinez@utoronto.ca)
+# enhanced by Haroon Rafique (haroon.rafique@kuali.org)
+
+ENR_REPO="https://svn.kuali.org/repos/student/enrollment/aggregate/tags/builds/student-2.1/2.1.1-FR2-M1"
+
+function usage() {
+  cat <<EOT
+Usage: $ME
+
+    --debug
+        Enable debug messages during execution
+    --help
+        Print this message and exit.
+
+EOT
+    exit 0
+}
+
+
+function dbgprint() {
+  if [ $DEBUG -ne 0 ]; then
+    set +x
+    msg="$(date +%Y-%m-%d-%H:%M):"
+    msg="$msg ${FUNCNAME[1]}: "
+    for arg in $*
+    do
+      msg="$msg $arg"
+    done
+    echo -e "$msg"
+    set -x
+  fi
+}
+
+function get_latest_stable_build() {
+  dbgprint
+
+  OPT=""
+  if [ $DEBUG -eq 0 ]; then
+    OPT="-s"
+  fi
+  BUILD_NUMBER=$(curl $OPT -k https://ci.kuali.org/job/ks-enr-1.0-nightly-build/lastStableBuild/buildNumber)
+  if [ $? -gt 0 ]; then
+    echo "${FUNCNAME[0]}: Could not get the latest stable build number!"
+    exit 1;
+  fi
+  echo "${FUNCNAME[0]}: Latest Stable Build Number found: ${BUILD_NUMBER}"
+}
+
+function svn_export() {
+  dbgprint
+  if [ "$1" ]; then
+    dbgprint "Checkout repo $1"
+
+    OPT=""
+    if [ $DEBUG -eq 0 ]; then
+      OPT="-q"
+    fi
+    svn $OPT export $1 $2
+    if [ $? -gt 0 ]; then
+      echo "${FUNCNAME[0]}: svn export failed."
+      exit 1;
+    fi
+    echo "${FUNCNAME[0]}: svn repo successfully exported"
+  fi
+}
+
+function initialize_schema() {
+  cd ${WORKSPACE}/build-${BUILD_NUMBER}
+  mvn30 clean install -Pimpex-only
+  if [ $? -gt 0 ]; then
+    echo "${FUNCNAME[0]}: mvn clean install failed."
+    exit 1;
+  fi
+
+  # load bundled schema
+  cd ${WORKSPACE}/build-${BUILD_NUMBER}/ks-deployments/ks-dbs/ks-impex/ks-impex-bundled-db
+  mvn initialize -Pdb,oracle -Djdbc.username=KSAFT${BUILD_NUMBER} -Djdbc.username=KSAFT${BUILD_NUMBER}
+  if [ $? -gt 0 ]; then
+    echo "${FUNCNAME[0]}: mvn initialize failed."
+    exit 1;
+  fi
+}
+
+
+function set_debug_mode {
+  let "DEBUG+=1"
+  set -x
+}
+
+function process_args {
+  DEBUG=0
+  BUILD_NUMBER=0
+
+  ARGS=$(getopt --options h --longoptions "help,debug" --name "$ME" -- "$@");
+  if [ $? -ne 0 ]; then usage; fi
+  eval set -- "$ARGS";
+  while true
+  do
+    case "$1" in
+      -h|--help)
+        usage;
+        shift;
+        ;;
+      --debug)
+        set_debug_mode
+        shift;
+        ;;
+      --)
+        shift;
+        break;
+    esac
+  done
+}
+
+ME=$(basename $0)
+
+# process all of our command line arguments
+process_args "$@"
+
+# retrieve latest stable build number
+get_latest_stable_build
+
+# export sources from svn repo to specified path
+svn_export "${ENR_REPO}/build-${BUILD_NUMBER}"
+
+# initialize schema (using impex)
+initialize_schema
+
+# vim: tabstop=2 shiftwidth=2
