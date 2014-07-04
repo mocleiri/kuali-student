@@ -6,6 +6,8 @@
 # enhanced by Haroon Rafique (haroon.rafique@kuali.org)
 
 ENR_REPO="https://svn.kuali.org/repos/student/enrollment/aggregate/tags/builds/student-2.1/2.1.1-FR2-M1"
+# maven version 3.0 on jenkins
+MVN="mvn30"
 
 function usage() {
   cat <<EOT
@@ -70,7 +72,7 @@ function svn_export() {
 
 function initialize_schema() {
   cd ${WORKSPACE}/build-${BUILD_NUMBER}
-  mvn30 clean install -Pimpex-only
+  ${MVN} clean install -Pimpex-only
   if [ $? -gt 0 ]; then
     echo "${FUNCNAME[0]}: mvn clean install failed."
     exit 1;
@@ -78,7 +80,7 @@ function initialize_schema() {
 
   # load bundled schema
   cd ${WORKSPACE}/build-${BUILD_NUMBER}/ks-deployments/ks-dbs/ks-impex/ks-impex-bundled-db
-  mvn30 initialize -Pdb,oracle -Djdbc.username=KSAFT${BUILD_NUMBER} -Djdbc.username=KSAFT${BUILD_NUMBER}
+  ${MVN} initialize -Pdb,oracle -Djdbc.username=KSAFT${BUILD_NUMBER} -Djdbc.username=KSAFT${BUILD_NUMBER}
   if [ $? -gt 0 ]; then
     echo "${FUNCNAME[0]}: mvn initialize failed."
     exit 1;
