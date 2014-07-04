@@ -21,7 +21,7 @@ Feature: CO.Perform Simple Rollover for Exam Offering Scheduling Information
     Given I create an Academic Calendar and add an official term
     And I create multiple Course Offerings in the term
     And I initiate a rollover to create a term in open state
-    And I approve the "ENGL" subject code for scheduling in the target term
-    And I create Exam Matrix rules from which the Exam Offering Slotting info is populated
-    When I advance the SOC state from open to scheduler complete state
+    #And I approve the "ENGL" subject code for scheduling in the target term
+    #And I create Exam Matrix rules from which the Exam Offering Slotting info is populated
+    #When I advance the SOC state from open to scheduler complete state
     Then the Exam Offerings Slotting info should be populated after the Mass Scheduling Event has been triggered

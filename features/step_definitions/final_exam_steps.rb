@@ -2097,8 +2097,8 @@ When /^I initiate a rollover to create a term in open state$/ do
   @calendar_target.terms[0].make_official
 
   @rollover = make Rollover, :target_term => @calendar_target.terms[0].term_code ,
-                   :source_term => @calendar.terms[0].term_code,
-                   :exp_success => false
+                   :source_term => @calendar.terms[0].term_code#,
+                   #:exp_success => false
   @rollover.perform_rollover
   @rollover.wait_for_rollover_to_complete
   @rollover.release_to_depts
