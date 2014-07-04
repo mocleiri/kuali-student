@@ -41,9 +41,7 @@ function get_latest_stable_build() {
   dbgprint
 
   OPT=""
-  if [ $DEBUG -eq 0 ]; then
-    OPT="-s"
-  fi
+  if [ $DEBUG -eq 0 ]; then OPT="-s"; fi
   BUILD_NUMBER=$(curl $OPT -k https://ci.kuali.org/job/ks-enr-1.0-nightly-build/lastStableBuild/buildNumber)
   if [ $? -gt 0 ]; then
     echo "${FUNCNAME[0]}: Could not get the latest stable build number!"
@@ -58,9 +56,7 @@ function svn_export() {
     dbgprint "Checkout repo $1"
 
     OPT=""
-    if [ $DEBUG -eq 0 ]; then
-      OPT="-q"
-    fi
+    if [ $DEBUG -eq 0 ]; then OPT="-q"; fi
     svn $OPT export $1 $2
     if [ $? -gt 0 ]; then
       echo "${FUNCNAME[0]}: svn export failed."
@@ -72,6 +68,7 @@ function svn_export() {
 
 function initialize_schema() {
   cd ${WORKSPACE}/build-${BUILD_NUMBER}
+
   ${MVN} clean install -Pimpex-only
   if [ $? -gt 0 ]; then
     echo "${FUNCNAME[0]}: mvn clean install failed."
@@ -86,7 +83,6 @@ function initialize_schema() {
     exit 1;
   fi
 }
-
 
 function set_debug_mode {
   let "DEBUG+=1"
