@@ -201,6 +201,7 @@ function start_tomcat() {
   dbgprint
 
   # start up tomcat
+  dbgprint ${CATALINA_HOME}/bin/startup.sh
   ${CATALINA_HOME}/bin/startup.sh
 
   # timeout will be exceeded in LIMIT*SLEEP seconds
