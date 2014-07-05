@@ -354,7 +354,7 @@ setup_tomcat
 install_war_artifact
 
 # start tomcat
-start_tomcat
+#start_tomcat
 
 # shutdown tomcat
 #shutdown_tomcat
