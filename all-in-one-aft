@@ -242,7 +242,7 @@ svn_export \
 # export deployment sources from svn repo to specified path
 svn_export \
   ${REPO_PREFIX}/build-${BUILD_NUMBER}/ks-deployment-resources \
-  ${WORKSPACE}/ks-deployment-resources-${BUILD_NUBMER}
+  ${WORKSPACE}/ks-deployment-resources-${BUILD_NUMBER}
 
 # export ks-with-rice-bundled sources from svn repo to specified path
 svn_export \
