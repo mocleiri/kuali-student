@@ -101,7 +101,7 @@ function download_tomcat() {
   fi
 
   # stop building if md5sum does not match
-  echo "f90b100cf51ae0a444bef5acd7b6edb2  /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz" | \
+  echo "aaf541df90a5f6160e43177ba8e6ec1e  /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz" | \
     md5sum -c
   if [ $? -gt 0 ]; then
     echo "${FUNCNAME[0]}: tomcat md5sum failed."
