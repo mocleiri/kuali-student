@@ -250,7 +250,8 @@ function start_tomcat() {
 function run_afts() {
   dbgprint
 
-  ${WORKSPACE}/sambal-trunk/jenkinscucumber \
+  echo "${FUNCNAME[0]}: Running AFTs"
+  ${WORKSPACE}/jenkinscucumber \
     http://localhost:8080 \
     headless_smoke_test_data \
     headless_smoke_test
@@ -322,7 +323,7 @@ svn_export \
 # export sambal sources from svn repo to specified path
 svn_export \
   https://svn.kuali.org/repos/student/test/functional-automation/sambal/trunk \
-  ${WORKSPACE}/sambal-trunk
+  ${WORKSPACE}
 
 # initialize config file
 initialize_config
