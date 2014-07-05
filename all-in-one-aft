@@ -63,6 +63,36 @@ function svn_export() {
   fi
 }
 
+function initialize_config() {
+  dbgprint
+
+  # rice.keystore
+  cp -p \
+    ${WORKSPACE}/ks-with-rice-bundled-${BUILD_NUMBER}/src/main/resources/rice.keystore \
+    /rice.keystore
+
+  # config file in ~/kuali/main/dev
+  mkdir -p ~/kuali/main/dev
+  filepath=src/main/resources/org/kuali/student/ks-deployment-resources/deploy/config
+  cp -p \
+    ${WORKSPACE}/ks-deployment-resources-${BUILD_NUMBER}/${filepath}/ks-with-rice-bundled-config.xml \
+    ~/kuali/main/dev/ks-with-rice-bundled-config.xml
+
+  # do some substitutions
+  sed -i.bak \
+    -e 's#${public.url}#http://localhost:8080#g' \
+    -e "s#\${jdbc.url}#jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE#g" \
+    -e 's#${jdbc.username}#KSAFT${BUILD_NUMBER}#g' \
+    -e 's#${jdbc.password}#KSAFT${BUILD_NUMBER}#g' \
+    -e 's#${jdbc.pool.size.max}#20#g' \
+    -e 's#${keystore.file.default}#/rice.keystore#g' \
+        ~/kuali/main/dev/ks-with-rice-bundled-config.xml
+
+  dbgprint $(cat ~/kuali/main/dev/ks-with-rice-bundled-config.xml)
+
+  echo "${FUNCNAME[0]}: config initialized successfully"
+}
+
 function initialize_schema() {
   dbgprint
   cd ${WORKSPACE}/ks-impex-bundled-db-build-${BUILD_NUMBER}
@@ -204,10 +234,23 @@ get_latest_stable_build
 # hard code build number to 813
 BUILD_NUMBER=813
 
-# export sources from svn repo to specified path
+# export impex sources from svn repo to specified path
 svn_export \
   ${REPO_PREFIX}/build-${BUILD_NUMBER}/ks-dbs/ks-impex/ks-impex-bundled-db \
   ${WORKSPACE}/ks-impex-bundled-db-build-${BUILD_NUMBER}
+
+# export deployment sources from svn repo to specified path
+svn_export \
+  ${REPO_PREFIX}/build-${BUILD_NUMBER}/ks-deployment-resources \
+  ${WORKSPACE}/ks-deployment-resources-${BUILD_NUBMER}
+
+# export ks-with-rice-bundled sources from svn repo to specified path
+svn_export \
+  ${REPO_PREFIX}/build-813/ks-web/ks-with-rice-bundled \
+  ${WORKSPACE}/ks-with-rice-bundled-${BUILD_NUMBER}
+
+# initialize config file
+initialize_config
 
 # initialize schema (using impex)
 #initialize_schema
