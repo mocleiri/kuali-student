@@ -104,7 +104,7 @@ function initialize_schema() {
   ${MVN} initialize -Pdb,oracle \
     -Doracle.dba.url=jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE \
     -Doracle.dba.username=master \
-    -Doracle.dba.password=ENC(eEFVZmL4+y/5KlzDMCt6dGlBKQzXevFp) \
+    -Doracle.dba.password="ENC(eEFVZmL4+y/5KlzDMCt6dGlBKQzXevFp)" \
     -Djdbc.username=KSAFT${BUILD_NUMBER} -Djdbc.username=KSAFT${BUILD_NUMBER}
   set +x
 }
