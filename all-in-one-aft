@@ -215,7 +215,7 @@ function start_tomcat() {
   do
     remaining=$((($LIMIT-$a)*$SLEEP))
     a=$(($a+1))
-    website=$(curl -s -k --max-time 10 http://localhost:8080/login.jsp)
+    website=$(curl -s -k --max-time $SLEEP http://localhost:8080/login.jsp)
     echo $website
     echo $website| grep 'Kuali Student Login'
     if [ $? -eq 0 ]
@@ -224,7 +224,6 @@ function start_tomcat() {
     else
       echo "Tomcat is not up (timeout in $remaining seconds)"
     fi
-    sleep $SLEEP
   done
    
   if [ $a -ge "$LIMIT" ]
