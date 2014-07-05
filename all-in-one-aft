@@ -126,12 +126,14 @@ function extract_tomcat() {
 function install_maven_dependency_plugin() {
   dbgprint
 
+  set -x
   ${MVN} org.apache.maven.plugins:maven-dependency-plugin:2.8:get \
         -Dartifact=org.apache.maven.plugins:maven-dependency-plugin:2.8:jar
   if [ $? -gt 0 ]; then
     echo "${FUNCNAME[0]}: installation of maven dependency plugin failed."
     exit 1
   fi
+  set +x
 
   echo "${FUNCNAME[0]}: installed maven dependency plugin."
 }
