@@ -196,6 +196,74 @@ function install_war_artifact() {
   echo "${FUNCNAME[0]}: installation of war finished."
 }
 
+function start_tomcat() {
+  dbgprint
+
+  # start up tomcat
+  ${CATALINA_HOME}/bin/startup.sh
+
+  # timeout will be exceeded in LIMIT*SLEEP seconds
+  LIMIT=30
+  SLEEP=10
+
+  a=0
+  while [ $a -le "$LIMIT" ]
+  do
+    remaining=$((($LIMIT-$a)*$SLEEP))
+    a=$(($a+1))
+    nc -z localhost 8081 1>/dev/null 2>&1
+    if [ $? -eq 0 ]
+    then
+      break
+    else
+      echo "Tomcat is not up (timeout in $remaining seconds)"
+    fi
+    sleep $SLEEP
+  done
+   
+  if [ $a -ge "$LIMIT" ]
+  then
+    echo "Timeout of $(($LIMIT*$SLEEP)) seconds exceeded"
+    exit 1
+  fi
+
+  echo "${FUNCNAME[0]}: tomcat startup finished."
+}
+
+function shutdown_tomcat() {
+  dbgprint
+
+  # start up tomcat
+  ${CATALINA_HOME}/bin/shutdown.sh
+
+  # timeout will be exceeded in LIMIT*SLEEP seconds
+  LIMIT=30
+  SLEEP=10
+
+  a=0
+  while [ $a -le "$LIMIT" ]
+  do
+    remaining=$((($LIMIT-$a)*$SLEEP))
+    a=$(($a+1))
+    nc -z localhost 8081 1>/dev/null 2>&1
+    if [ $? -ne 0 ]
+    then
+      break
+    else
+      echo "Tomcat is still shutting down (timeout in $remaining seconds)"
+    fi
+    sleep $SLEEP
+  done
+   
+  if [ $a -ge "$LIMIT" ]
+  then
+    echo "Timeout of $(($LIMIT*$SLEEP)) seconds exceeded"
+    exit 1
+  fi
+
+  echo "${FUNCNAME[0]}: tomcat shutdown finished."
+}
+
 function set_debug_mode {
   let "DEBUG+=1"
   set -x
@@ -274,5 +342,11 @@ setup_tomcat
 
 # install war artifact
 install_war_artifact
+
+# start tomcat
+start_tomcat
+
+# shutdown tomcat
+shutdown_tomcat
 
 # vim: tabstop=2 shiftwidth=2
