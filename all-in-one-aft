@@ -73,6 +73,7 @@ function initialize_schema() {
   if [ $DEBUG -ne 0 ]; then OPT="-X"; fi
 
   # load bundled schema
+  set -x
   ${MVN} $OPT initialize -Pdb,oracle \
     -Doracle.dba.url=jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE \
     -Doracle.dba.username=master \
@@ -81,6 +82,7 @@ function initialize_schema() {
     echo "${FUNCNAME[0]}: mvn initialize failed."
     exit 1;
   fi
+  set +x
 }
 
 function set_debug_mode {
