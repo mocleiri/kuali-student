@@ -227,14 +227,14 @@ function start_tomcat() {
   do
     remaining=$((($LIMIT-$a)*$SLEEP))
     a=$(($a+1))
-    website=$(curl -s -k --max-time $SLEEP --connect-timeout $SLEEP http://localhost:8080/login.jsp)
-    echo $website| grep 'Kuali Student Login'
+    nc -z localhost 8080 1>/dev/null 2>&1
     if [ $? -eq 0 ]
     then
       break
     else
       echo "Tomcat is not up (timeout in $remaining seconds)"
     fi
+    sleep $SLEEP
   done
   set -e
    
