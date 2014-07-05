@@ -81,10 +81,12 @@ function initialize_config() {
   # do some substitutions
   sed -i.bak \
     -e 's#${public.url}#http://localhost:8080#g' \
-    -e "s#\${jdbc.url}#jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE#g" \
-    -e 's#${jdbc.username}#KSAFT${BUILD_NUMBER}#g' \
-    -e 's#${jdbc.password}#KSAFT${BUILD_NUMBER}#g' \
+    -e 's#${jdbc.url}#jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE#g' \
+    -e "s#\${jdbc.username}#KSAFT${BUILD_NUMBER}#g" \
+    -e "s#\${jdbc.password}#KSAFT${BUILD_NUMBER}#g" \
     -e 's#${jdbc.pool.size.max}#20#g' \
+    -e 's#${rice.krad.dev.mode}#false#g' \
+    -e 's#${rice.krad.script.cleanup}#false#g' \
     -e 's#${keystore.file.default}#/rice.keystore#g' \
         ~/kuali/main/dev/ks-with-rice-bundled-config.xml
 
