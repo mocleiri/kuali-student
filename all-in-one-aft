@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # Jenkins script to perform an all in one AFT test
 #
@@ -48,10 +48,6 @@ function get_latest_stable_build() {
   OPT=""
   if [ $DEBUG -eq 0 ]; then OPT="-s"; fi
   BUILD_NUMBER=$(curl $OPT -k https://ci.kuali.org/job/ks-enr-1.0-nightly-build/lastStableBuild/buildNumber)
-  if [ $? -gt 0 ]; then
-    echo "${FUNCNAME[0]}: Could not get the latest stable build number!"
-    exit 1;
-  fi
   echo "${FUNCNAME[0]}: Latest Stable Build Number found: ${BUILD_NUMBER}"
 }
 
@@ -63,10 +59,6 @@ function svn_export() {
     OPT=""
     if [ $DEBUG -eq 0 ]; then OPT="-q"; fi
     svn $OPT export --force $1 $2
-    if [ $? -gt 0 ]; then
-      echo "${FUNCNAME[0]}: svn export failed."
-      exit 1;
-    fi
     echo "${FUNCNAME[0]}: svn repo $1 successfully exported"
   fi
 }
@@ -81,10 +73,6 @@ function initialize_schema() {
     -Doracle.dba.url=jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE \
     -Doracle.dba.username=master \
     -Djdbc.username=KSAFT${BUILD_NUMBER} -Djdbc.username=KSAFT${BUILD_NUMBER}
-  if [ $? -gt 0 ]; then
-    echo "${FUNCNAME[0]}: mvn initialize failed."
-    exit 1;
-  fi
   set +x
 }
 
@@ -95,18 +83,10 @@ function download_tomcat() {
 
   wget $OPT -O /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz \
     http://archive.apache.org/dist/tomcat/tomcat-6/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
-  if [ $? -gt 0 ]; then
-    echo "${FUNCNAME[0]}: tomcat download failed."
-    exit 1;
-  fi
 
   # stop building if md5sum does not match
   echo "aaf541df90a5f6160e43177ba8e6ec1e  /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz" | \
     md5sum -c
-  if [ $? -gt 0 ]; then
-    echo "${FUNCNAME[0]}: tomcat md5sum failed."
-    exit 1;
-  fi
   echo "${FUNCNAME[0]}: download tomcat $TOMCAT_VERSION."
 }
 
@@ -116,10 +96,6 @@ function extract_tomcat() {
 
   tar xzf /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz --strip-components=1 \
     -C ${WORKSPACE}/tomcat
-  if [ $? -gt 0 ]; then
-    echo "${FUNCNAME[0]}: tomcat extraction failed."
-    exit 1
-  fi
   echo "${FUNCNAME[0]}: extracted tomcat to ${WORKSPACE}/tomcat."
 }
 
@@ -129,10 +105,6 @@ function install_maven_dependency_plugin() {
   set -x
   ${MVN} org.apache.maven.plugins:maven-dependency-plugin:2.8:get \
         -Dartifact=org.apache.maven.plugins:maven-dependency-plugin:2.8:jar
-  if [ $? -gt 0 ]; then
-    echo "${FUNCNAME[0]}: installation of maven dependency plugin failed."
-    exit 1
-  fi
   set +x
 
   echo "${FUNCNAME[0]}: installed maven dependency plugin."
@@ -141,13 +113,11 @@ function install_maven_dependency_plugin() {
 function install_oracle_driver() {
   dbgprint
 
+  set -x
   ${MVN} org.apache.maven.plugins:maven-dependency-plugin:2.8:copy \
     -Dartifact=com.oracle:ojdbc6_g:11.2.0.2:jar \
     -DoutputDirectory=${WORKSPACE}/tomcat/lib
-  if [ $? -gt 0 ]; then
-    echo "${FUNCNAME[0]}: installation of oracle driver failed."
-    exit 1
-  fi
+  set +x
   echo "${FUNCNAME[0]}: installed oracle driver."
 }
 
@@ -179,10 +149,6 @@ function setup_tomcat() {
   </Service>
 </Server>
 EOT
-  if [ $? -gt 0 ]; then
-    echo "${FUNCNAME[0]}: tomcat setup failed."
-    exit 1
-  fi
   echo "${FUNCNAME[0]}: tomcat setup finished."
 }
 
@@ -223,6 +189,8 @@ process_args "$@"
 
 # retrieve latest stable build number
 get_latest_stable_build
+# hard code build number to 813
+BUILD_NUMBER=813
 
 # export sources from svn repo to specified path
 svn_export \
