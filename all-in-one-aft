@@ -206,12 +206,14 @@ function start_tomcat() {
   LIMIT=30
   SLEEP=10
 
+  # temporarily override immediate exit
+  set +e
   a=0
   while [ $a -le "$LIMIT" ]
   do
     remaining=$((($LIMIT-$a)*$SLEEP))
     a=$(($a+1))
-    nc -z localhost 8081 1>/dev/null 2>&1
+    nc -z localhost 8080 1>/dev/null 2>&1
     if [ $? -eq 0 ]
     then
       break
@@ -226,6 +228,7 @@ function start_tomcat() {
     echo "Timeout of $(($LIMIT*$SLEEP)) seconds exceeded"
     exit 1
   fi
+  set -e
 
   echo "${FUNCNAME[0]}: tomcat startup finished."
 }
@@ -240,12 +243,14 @@ function shutdown_tomcat() {
   LIMIT=30
   SLEEP=10
 
+  # temporarily override immediate exit
+  set +e
   a=0
   while [ $a -le "$LIMIT" ]
   do
     remaining=$((($LIMIT-$a)*$SLEEP))
     a=$(($a+1))
-    nc -z localhost 8081 1>/dev/null 2>&1
+    nc -z localhost 8080 1>/dev/null 2>&1
     if [ $? -ne 0 ]
     then
       break
@@ -260,6 +265,7 @@ function shutdown_tomcat() {
     echo "Timeout of $(($LIMIT*$SLEEP)) seconds exceeded"
     exit 1
   fi
+  set -e
 
   echo "${FUNCNAME[0]}: tomcat shutdown finished."
 }
