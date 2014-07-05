@@ -62,7 +62,7 @@ function svn_export() {
       echo "${FUNCNAME[0]}: svn export failed."
       exit 1;
     fi
-    echo "${FUNCNAME[0]}: svn repo successfully exported"
+    echo "${FUNCNAME[0]}: svn repo $1 successfully exported"
   fi
 }
 
