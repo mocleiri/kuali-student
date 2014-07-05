@@ -247,41 +247,20 @@ function start_tomcat() {
   echo "${FUNCNAME[0]}: tomcat startup finished."
 }
 
+function run_afts() {
+  dbgprint
+
+  ${WORKSPACE}/sambal-trunk/jenkinscucumber \
+    http://localhost:8080 \
+    headless_smoke_test_data \
+    headless_smoke_test
+  echo "${FUNCNAME[0]}: AFTs finished."
+}
+
 function shutdown_tomcat() {
   dbgprint
 
-  set -x
-  # start up tomcat
-  ${CATALINA_HOME}/bin/shutdown.sh
-
-  # timeout will be exceeded in LIMIT*SLEEP seconds
-  LIMIT=30
-  SLEEP=10
-
-  # temporarily override immediate exit
-  set +e
-  a=0
-  while [ $a -le "$LIMIT" ]
-  do
-    remaining=$((($LIMIT-$a)*$SLEEP))
-    a=$(($a+1))
-    nc -z localhost 8080 1>/dev/null 2>&1
-    if [ $? -ne 0 ]
-    then
-      break
-    else
-      echo "Tomcat is still shutting down (timeout in $remaining seconds)"
-    fi
-    sleep $SLEEP
-  done
-   
-  if [ $a -ge "$LIMIT" ]
-  then
-    echo "Timeout of $(($LIMIT*$SLEEP)) seconds exceeded"
-    exit 1
-  fi
-  set -e
-
+  pkill -9 -f catalina
   echo "${FUNCNAME[0]}: tomcat shutdown finished."
 }
 
@@ -340,6 +319,11 @@ svn_export \
   ${REPO_PREFIX}/build-813/ks-web/ks-with-rice-bundled \
   ${WORKSPACE}/ks-with-rice-bundled-${BUILD_NUMBER}
 
+# export sambal sources from svn repo to specified path
+svn_export \
+  https://svn.kuali.org/repos/student/test/functional-automation/sambal/trunk \
+  ${WORKSPACE}/sambal-trunk
+
 # initialize config file
 initialize_config
 
@@ -367,7 +351,10 @@ install_war_artifact
 # start tomcat
 start_tomcat
 
+# run AFTs
+run_afts
+
 # shutdown tomcat
-#shutdown_tomcat
+shutdown_tomcat
 
 # vim: tabstop=2 shiftwidth=2
