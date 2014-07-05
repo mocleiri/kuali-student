@@ -237,6 +237,7 @@ function start_tomcat() {
 function shutdown_tomcat() {
   dbgprint
 
+  set -x
   # start up tomcat
   ${CATALINA_HOME}/bin/shutdown.sh
 
