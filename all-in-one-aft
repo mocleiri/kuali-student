@@ -9,6 +9,11 @@ REPO_PREFIX="https://svn.kuali.org/repos/student/enrollment/ks-deployments/tags/
 # maven version 3.0 on jenkins
 MVN="mvn30"
 
+# tomcat variables
+TOMCAT_VERSION=6.0.40
+CATALINA_HOME=${WORKSPACE}/tomcat
+CATALINA_OPTS="-Xms512m -Xmx4g -XX:MaxPermSize=512m -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -XX:+PrintTenuringDistribution -Xloggc:${WORKSPACE}/tomcat/logs/heap.log -XX:HeapDumpPath=${WORKSPACE}/tomcat/logs -XX:+HeapDumpOnOutOfMemoryError"
+
 function usage() {
   cat <<EOT
 Usage: $ME
@@ -67,14 +72,12 @@ function svn_export() {
 }
 
 function initialize_schema() {
+  dbgprint
   cd ${WORKSPACE}/ks-impex-bundled-db-build-${BUILD_NUMBER}
-
-  OPT=""
-  if [ $DEBUG -ne 0 ]; then OPT="-X"; fi
 
   # load bundled schema
   set -x
-  ${MVN} $OPT initialize -Pdb,oracle \
+  ${MVN} initialize -Pdb,oracle \
     -Doracle.dba.url=jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE \
     -Doracle.dba.username=master \
     -Djdbc.username=KSAFT${BUILD_NUMBER} -Djdbc.username=KSAFT${BUILD_NUMBER}
@@ -83,6 +86,94 @@ function initialize_schema() {
     exit 1;
   fi
   set +x
+}
+
+function download_tomcat() {
+  dbgprint
+  OPT=""
+  if [ $DEBUG -eq 0 ]; then OPT="--no-verbose"; fi
+
+  wget $OPT -O /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz \
+    http://archive.apache.org/dist/tomcat/tomcat-6/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
+
+  # stop building if md5sum does not match
+  echo "f90b100cf51ae0a444bef5acd7b6edb2  /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz" | \
+    md5sum -c
+  echo "${FUNCNAME[0]}: download tomcat $TOMCAT_VERSION."
+}
+
+function extract_tomcat() {
+  dbgprint
+  mkdir -p ${WORKSPACE}/tomcat
+
+  tar xzf /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz --strip-components=1 \
+    -C ${WORKSPACE}/tomcat
+  if [ $? -gt 0 ]; then
+    echo "${FUNCNAME[0]}: tomcat extraction failed."
+    exit 1
+  fi
+  echo "${FUNCNAME[0]}: extracted tomcat to ${WORKSPACE}/tomcat."
+}
+
+function install_maven_dependency_plugin() {
+  dbgprint
+
+  ${MVN} org.apache.maven.plugins:maven-dependency-plugin:2.8:get \
+        -Dartifact=org.apache.maven.plugins:maven-dependency-plugin:2.8:jar
+  if [ $? -gt 0 ]; then
+    echo "${FUNCNAME[0]}: installation of maven dependency plugin failed."
+    exit 1
+  fi
+
+  echo "${FUNCNAME[0]}: installed maven dependency plugin."
+}
+
+function install_oracle_driver() {
+  dbgprint
+
+  ${MVN} org.apache.maven.plugins:maven-dependency-plugin:2.8:copy \
+    -Dartifact=com.oracle:ojdbc6_g:11.2.0.2:jar \
+    -DoutputDirectory=${WORKSPACE}/tomcat/lib
+  if [ $? -gt 0 ]; then
+    echo "${FUNCNAME[0]}: installation of oracle driver failed."
+    exit 1
+  fi
+  echo "${FUNCNAME[0]}: installed oracle driver."
+}
+
+function setup_tomcat() {
+  dbgprint
+
+  rm -rf ${WORKSPACE}/tomcat/webapps/*
+  cat <<EOT > ${WORKSPACE}/tomcat/conf/server.xml
+<?xml version='1.0' encoding='utf-8'?>
+<Server port="8005" shutdown="SHUTDOWN">
+  <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
+  <Listener className="org.apache.catalina.core.JasperListener" />
+  <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
+  <Listener className="org.apache.catalina.mbeans.ServerLifecycleListener" />
+  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+  <Service name="Catalina">
+    <Connector port="8080" protocol="HTTP/1.1" 
+               connectionTimeout="20000" 
+               redirectPort="8443" />
+    <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />
+    <Engine name="Catalina" defaultHost="localhost">
+      <Host name="localhost"  appBase="webapps"
+            unpackWARs="true" autoDeploy="true"
+            xmlValidation="false" xmlNamespaceAware="false">
+        <Context docBase="${WORKSPACE}/tomcat" path="/tomcat"/>
+        <Context docBase="${user.home}" path="/home"/>
+      </Host>
+    </Engine>
+  </Service>
+</Server>
+EOT
+  if [ $? -gt 0 ]; then
+    echo "${FUNCNAME[0]}: tomcat setup failed."
+    exit 1
+  fi
+  echo "${FUNCNAME[0]}: tomcat setup finished."
 }
 
 function set_debug_mode {
@@ -129,6 +220,21 @@ svn_export \
   ${WORKSPACE}/ks-impex-bundled-db-build-${BUILD_NUMBER}
 
 # initialize schema (using impex)
-initialize_schema
+#initialize_schema
+
+# download tomcat
+download_tomcat
+
+# extract tomcat
+extract_tomcat
+
+# install maven dependency plugin
+install_maven_dependency_plugin
+
+# install oracle driver
+install_oracle_driver
+
+# setup tomcat
+setup_tomcat
 
 # vim: tabstop=2 shiftwidth=2
