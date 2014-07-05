@@ -10,7 +10,7 @@ REPO_PREFIX="https://svn.kuali.org/repos/student/enrollment/ks-deployments/tags/
 MVN="mvn30"
 
 # tomcat variables
-TOMCAT_VERSION=6.0.40
+TOMCAT_VERSION=6.0.41
 CATALINA_HOME=${WORKSPACE}/tomcat
 CATALINA_OPTS="-Xms512m -Xmx4g -XX:MaxPermSize=512m -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -XX:+PrintTenuringDistribution -Xloggc:${WORKSPACE}/tomcat/logs/heap.log -XX:HeapDumpPath=${WORKSPACE}/tomcat/logs -XX:+HeapDumpOnOutOfMemoryError"
 
@@ -95,10 +95,18 @@ function download_tomcat() {
 
   wget $OPT -O /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz \
     http://archive.apache.org/dist/tomcat/tomcat-6/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
+  if [ $? -gt 0 ]; then
+    echo "${FUNCNAME[0]}: tomcat download failed."
+    exit 1;
+  fi
 
   # stop building if md5sum does not match
   echo "f90b100cf51ae0a444bef5acd7b6edb2  /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz" | \
     md5sum -c
+  if [ $? -gt 0 ]; then
+    echo "${FUNCNAME[0]}: tomcat md5sum failed."
+    exit 1;
+  fi
   echo "${FUNCNAME[0]}: download tomcat $TOMCAT_VERSION."
 }
 
