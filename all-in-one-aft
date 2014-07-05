@@ -200,11 +200,7 @@ function install_war_artifact() {
 function start_tomcat() {
   dbgprint
 
-  netstat -tanp | grep '8080'
-  ps -fp $(netstat -tanp | grep '8080.*java' | awk '{print $NF}' | cut -f 1 -d '/')
-
   # start up tomcat
-  env
   dbgprint ${CATALINA_HOME}/bin/startup.sh
   ${CATALINA_HOME}/bin/startup.sh
 
