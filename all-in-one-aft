@@ -152,6 +152,18 @@ EOT
   echo "${FUNCNAME[0]}: tomcat setup finished."
 }
 
+function install_war_artifact() {
+  dbgprint
+
+  ${MVN} org.apache.maven.plugins:maven-dependency-plugin:2.8:copy \
+    -Dartifact=org.kuali.student.web:ks-with-rice-bundled:2.1.1-FR2-M1-build-$BUILD_NUMBER:war \
+    -DoutputDirectory=.
+
+  cp -p ks-with-rice-bundled-2.1.1-FR2-M1-build-$BUILD_NUMBER.war \
+    ${WORKSPACE}/tomcat/webapps/ROOT.war
+  echo "${FUNCNAME[0]}: installation of war finished."
+}
+
 function set_debug_mode {
   let "DEBUG+=1"
   set -x
@@ -214,5 +226,8 @@ install_oracle_driver
 
 # setup tomcat
 setup_tomcat
+
+# install war artifact
+install_war_artifact
 
 # vim: tabstop=2 shiftwidth=2
