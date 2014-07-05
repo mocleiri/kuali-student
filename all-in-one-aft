@@ -124,6 +124,18 @@ function download_tomcat() {
 
 function extract_tomcat() {
   dbgprint
+
+  # detect if tomcat is already running
+  # temporarily override immediate exit
+  set +e
+  pgrep -fl catalina
+  # found any processes
+  if [ $? -eq 0 ]; then
+    # kill running catalina process
+    pkill -9 -f catalina
+    rm -rf ${WORKSPACE}/tomcat
+  fi
+  set -e
   mkdir -p ${WORKSPACE}/tomcat
 
   tar xzf /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz --strip-components=1 \
@@ -354,7 +366,7 @@ setup_tomcat
 install_war_artifact
 
 # start tomcat
-#start_tomcat
+start_tomcat
 
 # shutdown tomcat
 #shutdown_tomcat
