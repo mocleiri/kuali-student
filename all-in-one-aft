@@ -200,6 +200,8 @@ function install_war_artifact() {
 function start_tomcat() {
   dbgprint
 
+  netstat -tanp | grep 8080
+
   # start up tomcat
   env
   dbgprint ${CATALINA_HOME}/bin/startup.sh
@@ -357,6 +359,6 @@ install_war_artifact
 start_tomcat
 
 # shutdown tomcat
-shutdown_tomcat
+#shutdown_tomcat
 
 # vim: tabstop=2 shiftwidth=2
