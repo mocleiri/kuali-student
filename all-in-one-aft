@@ -155,7 +155,7 @@ function setup_tomcat() {
   dbgprint
 
   rm -rf ${WORKSPACE}/tomcat/webapps/*
-  cat <<EOT > ${WORKSPACE}/tomcat/conf/server.xml
+  cat > ${WORKSPACE}/tomcat/conf/server.xml <<EOT
 <?xml version='1.0' encoding='utf-8'?>
 <Server port="8005" shutdown="SHUTDOWN">
   <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
