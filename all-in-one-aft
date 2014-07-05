@@ -104,6 +104,7 @@ function initialize_schema() {
   ${MVN} initialize -Pdb,oracle \
     -Doracle.dba.url=jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE \
     -Doracle.dba.username=master \
+    -Doracle.dba.password=ENC(eEFVZmL4+y/5KlzDMCt6dGlBKQzXevFp) \
     -Djdbc.username=KSAFT${BUILD_NUMBER} -Djdbc.username=KSAFT${BUILD_NUMBER}
   set +x
 }
@@ -305,8 +306,6 @@ process_args "$@"
 
 # retrieve latest stable build number
 get_latest_stable_build
-# hard code build number to 813
-BUILD_NUMBER=813
 
 # export impex sources from svn repo to specified path
 svn_export \
@@ -320,7 +319,7 @@ svn_export \
 
 # export ks-with-rice-bundled sources from svn repo to specified path
 svn_export \
-  ${REPO_PREFIX}/build-813/ks-web/ks-with-rice-bundled \
+  ${REPO_PREFIX}/build-${BUILD_NUMBER}/ks-web/ks-with-rice-bundled \
   ${WORKSPACE}/ks-with-rice-bundled-${BUILD_NUMBER}
 
 # export sambal sources from svn repo to specified path
@@ -332,7 +331,7 @@ svn_export \
 initialize_config
 
 # initialize schema (using impex)
-#initialize_schema
+initialize_schema
 
 # download tomcat
 download_tomcat
