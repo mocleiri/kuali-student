@@ -173,7 +173,7 @@ function setup_tomcat() {
             unpackWARs="true" autoDeploy="true"
             xmlValidation="false" xmlNamespaceAware="false">
         <Context docBase="${WORKSPACE}/tomcat" path="/tomcat"/>
-        <Context docBase="${user.home}" path="/home"/>
+        <Context docBase="\${user.home}" path="/home"/>
       </Host>
     </Engine>
   </Service>
