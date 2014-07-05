@@ -215,7 +215,7 @@ function start_tomcat() {
   do
     remaining=$((($LIMIT-$a)*$SLEEP))
     a=$(($a+1))
-    website=$(curl -k --max-time 10 http://localhost:8080/login.jsp)
+    website=$(curl -s -k --max-time 10 http://localhost:8080/login.jsp)
     echo $website
     echo $website| grep 'Kuali Student Login'
     if [ $? -eq 0 ]
