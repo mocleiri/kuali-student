@@ -212,6 +212,7 @@ function start_tomcat() {
 
   # start up tomcat
   dbgprint ${CATALINA_HOME}/bin/startup.sh
+  echo "Staring Tomcat..."
   ${CATALINA_HOME}/bin/startup.sh
 
   # timeout will be exceeded in LIMIT*SLEEP seconds
