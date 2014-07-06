@@ -251,6 +251,7 @@ function run_afts() {
   dbgprint
 
   echo "${FUNCNAME[0]}: Running AFTs"
+  cd ${WORKSPACE}
   ${WORKSPACE}/jenkinscucumber \
     http://localhost:8080 \
     headless_smoke_test_data \
