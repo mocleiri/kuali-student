@@ -255,8 +255,8 @@ function run_afts() {
   cd ${WORKSPACE}
   ${WORKSPACE}/jenkinscucumber \
     http://localhost:8080 \
-    headless_smoke_test_data \
-    headless_smoke_test \
+    headless_data \
+    headless \
     --parallel=true \
     --firefox=27
   echo "${FUNCNAME[0]}: AFTs finished."
