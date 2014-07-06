@@ -129,6 +129,7 @@ function extract_tomcat() {
   pgrep -fl catalina
   # found any processes
   if [ $? -eq 0 ]; then
+    echo "found existing tomcat process. Killing it."
     # kill running catalina process
     pkill -9 -f catalina
     rm -rf ${WORKSPACE}/tomcat
