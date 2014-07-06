@@ -329,9 +329,6 @@ svn_export \
 # initialize config file
 initialize_config
 
-# initialize schema (using impex)
-initialize_schema
-
 # download tomcat
 download_tomcat
 
@@ -349,6 +346,9 @@ setup_tomcat
 
 # install war artifact
 install_war_artifact
+
+# initialize schema (using impex)
+initialize_schema
 
 # start tomcat
 start_tomcat
