@@ -103,6 +103,7 @@ function initialize_schema() {
   set -x
   ${MVN} initialize -Pdb,oracle \
     -Dproperties.decrypt=true \
+    -Dkuali.enc.mode=DECRYPT \
     -Doracle.dba.url=jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE \
     -Doracle.dba.username=master \
     -Doracle.dba.password=eEFVZmL4+y/5KlzDMCt6dGlBKQzXevFp \
