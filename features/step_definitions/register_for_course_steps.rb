@@ -116,6 +116,13 @@ When /^I add an? (\w+) course offering to my registration cart$/ do |subj|
       term_descr = "Fall 2012"
       credit_option = "4.0"
       course_has_options = true
+    when "PHYS3" then
+      course_code = "PHYS161"
+      reg_group_code = "1001"
+      term_code = "201208"
+      term_descr = "Fall 2012"
+      credit_option = "3.0"
+      course_has_options = true
     when "WMST" then
       course_code = "WMST360"
       reg_group_code = "1001"

@@ -15,12 +15,11 @@ Feature: REG.Registration Date Check
     Given I am using a mobile screen size
 
 #KSENROLL-13255
-  Scenario: CR 12.1 Verify pre-registration period allows access to cart
-    Given I log in to student registration as studentx
+  Scenario: CR 12.1 Verify pre-registration period allows access to cart but not registration
+    Given I log in to student registration as student7
     When I attempt to display my registration cart during pre-registration
-    Then I can view my registration cart
-    And I can add and remove courses from my cart
-    When I attempt to register for the courses
+    Then I can add and remove courses from my cart
+    When I attempt to register for the course
     Then there is a message indicating that the registration period is not open
 
   #KSENROLL-13256
