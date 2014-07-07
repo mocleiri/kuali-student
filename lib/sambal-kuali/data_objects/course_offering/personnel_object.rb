@@ -73,7 +73,7 @@ class PersonnelObject < DataFactory
         page.lookup_person
       end
       on PersonnelLookup do |page|
-        page.principal_name.set @id
+        page.principal_name.set @name
         page.search
         page.return_value(@id)
       end
@@ -106,7 +106,18 @@ class PersonnelObject < DataFactory
         page.personnel_table.rows[1].cells[PERSONNEL_INST_EFFORT_COLUMN].text_field.set options[:inst_effort] unless options[:inst_effort].nil?
       end
     else
-      #TODO
+      on CourseOfferingCreateEdit do |page|
+        page.lookup_person
+      end
+      on PersonnelLookup do |page|
+        page.principal_name.set options[:name]
+        page.search
+        page.return_value(options[:id])
+      end
+      on CourseOfferingCreateEdit do |page|
+        page.add_affiliation.select(options[:affiliation])
+        page.add_personnel
+      end
     end
     @parent_obj.save unless options[:defer_save]
     update_options(options)

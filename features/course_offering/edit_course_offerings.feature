@@ -49,6 +49,12 @@ Feature: CO.Edit Course Offerings
     And I add an entry to the personnel section
     Then after I update the course offering the new personnel is present
 
+  Scenario: Edit personnel entry for a course offering
+    Given I edit a course offering
+    And I add an entry to the personnel section
+    When I edit the personnel entry
+    Then the personnel entry is successfully updated
+
 #KSENROLL-1506
   Scenario: Add an administering organization to a course offering
     When I edit a course offering
