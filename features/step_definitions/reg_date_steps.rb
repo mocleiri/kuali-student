@@ -1,21 +1,17 @@
-And /^I attempt to register for (a )?courses? for Half Fall (\d+) (\d+)$/ do |arg1, termHalf, year|
-  term_descr = "Fall #{year}"
-  course_code = ""
-  case year
-    when 2012 then
-      course_code = case termHalf
-                      when 1 then "CHEM105"
-                      when 2 then "CHEM147"
-                    end
-  end
+And /^I attempt to register for a course for Half Fall (\d+) 2012$/ do |termHalf|
+  # the user for this test (student8) is assigned a current time after the close of registration for
+  # Half Fall 1, but should still be able to register for courses in Half Fall 2
+  course_code = case termHalf
+                  when 1 then "CHEM105"
+                  when 2 then "CHEM147"
+                end
   @reg_request = make RegistrationRequest,
-                      :term_descr=>term_descr,
+                      :term_descr=>"Fall 2012",
                       :course_code=>course_code,
                       :reg_group_code=>"1001"
   @reg_request.create
   @reg_request.register
-
-  end
+end
 
 Then /^there is a message indicating that the registration period is not open$/ do
   on RegistrationCart do |page|
