@@ -192,10 +192,9 @@ When /^I edit a course offering$/ do
 end
 
 When /^I add an entry to the personnel section$/ do
-  personnel_list = {}
-  personnel_list[0] = make PersonnelObject, :id=> "admin", :affiliation =>"Instructor"
+  personnel = make PersonnelObject, :id=> "admin", :affiliation =>"Instructor"
 
-  @course_offering.edit :affiliated_person_list => personnel_list, :start_edit => false
+  @course_offering.add_affiliated_person :personnel => personnel, :start_edit => false
 end
 
 Then /^after I update the course offering the new personnel is present$/ do

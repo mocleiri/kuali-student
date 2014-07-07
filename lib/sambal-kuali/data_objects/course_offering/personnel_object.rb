@@ -24,7 +24,8 @@ class PersonnelObject < DataFactory
                 :name,
                 :affiliation,
                 :inst_effort,
-                :parent_ao
+                :context, #can be :course_offering/:activity_offering
+                :parent_obj
 
   # provides default data:
   # defaults = {
@@ -40,7 +41,8 @@ class PersonnelObject < DataFactory
         :id => "admin",
         :name => "admin,admin",
         :affiliation => "Instructor",
-        :inst_effort => 50
+        :inst_effort => 50,
+        :context => :activity_offering
     }
 
     set_options(defaults.merge(opts))
@@ -56,21 +58,36 @@ class PersonnelObject < DataFactory
   PERSONNEL_DELETE_COLUMN      = 4
 
   def create
-    on ActivityOfferingMaintenance do |page|
-      page.add_personnel
-      page.loading.wait_while_present
-      page.add_personnel_id.set @id
-      page.add_personnel_name.set @name
-      page.add_personnel_affiliation.select(@affiliation)
-      page.loading.wait_while_present
-      page.add_personnel_inst_effort.set @inst_effort
+    if @context == :activity_offering
+      on ActivityOfferingMaintenance do |page|
+        page.add_personnel
+        page.loading.wait_while_present
+        page.add_personnel_id.set @id
+        page.add_personnel_name.set @name
+        page.add_personnel_affiliation.select(@affiliation)
+        page.loading.wait_while_present
+        page.add_personnel_inst_effort.set @inst_effort
+      end
+    else
+      on CourseOfferingCreateEdit do |page|
+        page.lookup_person
+      end
+      on PersonnelLookup do |page|
+        page.principal_name.set @id
+        page.search
+        page.return_value(@id)
+      end
+      on CourseOfferingCreateEdit do |page|
+        page.add_affiliation.select(@affiliation)
+        page.add_personnel
+      end
     end
   end
 
   # edits personnel based on values in options hash
   #
   #  @param opts [Hash] key => value for attribute to be updated
-  #TODO: only edits the first row!!!!
+  #TODO: only edits the first row + edit only set up for :activity_offering context!!!!
   def edit opts={}
     on ActivityOfferingMaintenance do |page|
       page.personnel_table.rows[1].cells[PERSONNEL_ID_COLUMN].text_field.set opts[:id] unless opts[:id].nil?

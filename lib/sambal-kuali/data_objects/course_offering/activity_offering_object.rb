@@ -463,7 +463,7 @@ class ActivityOfferingObject < DataFactory
 
   def add_personnel person
     #edit
-    person.parent_ao = self
+    person.parent_obj = self
     person.create
     @personnel_list << person
   end

@@ -66,7 +66,7 @@ class CourseOffering < DataFactory
         :grade_format => "",
         :delivery_format_list => collection('DeliveryFormat') << (make DeliveryFormatObject),
         :honors_flag => false,
-        :affiliated_person_list => {},
+        :affiliated_person_list => collection('Personnel'),
         :admin_org_list => collection('AffiliatedOrg') << (make AffiliatedOrgObject),
         :grade_options => "Letter",
         :reg_options => "Pass/Fail Grading",
@@ -347,24 +347,6 @@ class CourseOffering < DataFactory
           end
         end
       end
-    end
-
-    if options[:affiliated_person_list] != nil
-      options[:affiliated_person_list].values.each do |person|
-        on CourseOfferingCreateEdit do |page|
-          page.lookup_person
-        end
-        on PersonnelLookup do |page|
-          page.principal_name.set person.id
-          page.search
-          page.return_value(person.id)
-        end
-        on CourseOfferingCreateEdit do |page|
-          page.add_affiliation.select(person.affiliation)
-          page.add_personnel
-        end
-      end
-      @affiliated_person_list = options[:affiliated_person_list] if options[:exp_success]
     end
 
     if options[:cross_listed] != nil
@@ -673,6 +655,23 @@ class CourseOffering < DataFactory
     admin_org_obj.create unless options[:config_only]
     admin_org_obj.parent_co = self
     @admin_org_list <<  admin_org_obj
+    save unless options[:defer_save]
+  end
+
+  def add_affiliated_person opts
+    defaults = {
+        :config_only => false,
+        :defer_save => false,
+        :start_edit => true
+    }
+    options = defaults.merge(opts)
+
+    personnel_obj = options[:personnel]
+    edit :defer_save => true  if options[:start_edit]
+    personnel_obj.context = :course_offering
+    personnel_obj.create unless options[:config_only]
+    personnel_obj.parent_obj = self
+    @affiliated_person_list <<  personnel_obj
     save unless options[:defer_save]
   end
 
