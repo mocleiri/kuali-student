@@ -4,6 +4,8 @@ When /^I create a Course Offering with a lecture Delivery Format$/ do
   @course_offering.delivery_format_list[0].grade_format = "Course Offering"
   @course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
   @course_offering.create
+
+  @course_offering.create_ao :navagate_to_page => false
 end
 
 When /^I create a Course Offering with two Delivery Formats$/ do
@@ -18,6 +20,7 @@ When /^I create a Course Offering with two Delivery Formats$/ do
                                                  :final_exam_activity => "Lecture",
                                                  :parent_co => @course_offering)
   @course_offering.create
+  @course_offering.create_ao :navagate_to_page => false
 end
 
 And /^I create a Course Offering with random Delivery Formats$/ do
