@@ -9,7 +9,7 @@ Given I am logged in as a Student
     And I navigate to the Course Section Details page
     Then I should be able to view the section details about the course
 
-
+@wip
   Scenario:Verify that I am able to see the format offerings of a course offering and its associated activity offering so that I can decide what to add to my plan
     When I search for course which has format offerings on the course search page
     And I navigate to the Course Section Details page
