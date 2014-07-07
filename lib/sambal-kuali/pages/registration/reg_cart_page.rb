@@ -16,8 +16,6 @@ class RegistrationCart < RegisterForCourseBase
   element(:keep_in_cart_button) { |course_code,reg_group_code,b| b.button(id: "addBackToCart_#{course_code}_#{reg_group_code}") }
   action(:keep_in_cart) { |course_code,reg_group_code,b| b.keep_in_cart_button(course_code,reg_group_code).click }
 
-  element(:schedule_counts) { |b| b.span(id: "reg_course_count") }
-
   element(:course_code_input) { |b| b.text_field(id: "courseCode") }
   element(:reg_group_code_input) { |b| b.text_field(id: "regCode") }
   element(:add_to_cart_toggle) { |b| b.div(id: "add_to_cart") }

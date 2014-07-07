@@ -108,6 +108,9 @@ Then /^I can verify I am not on the waitlist$/ do
   on StudentSchedule do |page|
     sleep 1
     page.user_message_div("waitlist").wait_until_present
+    if page.user_message("waitlist") =~ /drop processing/i
+      page.wait_until { page.user_message("waitlist") !~ /drop processing/i }
+    end
     page.user_message("waitlist").should include "Removed from waitlist for #{@reg_request.course_code} (#{@reg_request.reg_group_code})"
     page.course_code(@reg_request.course_code, @reg_request.reg_group_code,"waitlist").exists?.should be_false
   end
