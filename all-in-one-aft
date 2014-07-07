@@ -257,6 +257,7 @@ function run_afts() {
     http://localhost:8080 \
     headless_data \
     headless \
+    --threads=4 \
     --parallel=true \
     --firefox=27
   echo "${FUNCNAME[0]}: AFTs finished."
