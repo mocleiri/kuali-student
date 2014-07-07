@@ -87,15 +87,30 @@ class PersonnelObject < DataFactory
   # edits personnel based on values in options hash
   #
   #  @param opts [Hash] key => value for attribute to be updated
-  #TODO: only edits the first row + edit only set up for :activity_offering context!!!!
   def edit opts={}
-    on ActivityOfferingMaintenance do |page|
-      page.personnel_table.rows[1].cells[PERSONNEL_ID_COLUMN].text_field.set opts[:id] unless opts[:id].nil?
-      page.personnel_table.rows[1].cells[PERSONNEL_NAME_COLUMN].text_field.set opts[:name] unless opts[:name].nil?
-      page.personnel_table.rows[1].cells[PERSONNEL_AFFILIATION_COLUMN].select().select(opts[:affiliation]) unless opts[:affiliation].nil?
-      page.personnel_table.rows[1].cells[PERSONNEL_INST_EFFORT_COLUMN].text_field.set opts[:inst_effort] unless opts[:inst_effort].nil?
+    defaults = {
+        :config_only => false,
+        :defer_save => false,
+        :start_edit => true
+    }
+    options = defaults.merge(opts)
+
+    @parent_obj.edit :defer_save => true if options[:start_edit]
+
+    if @context == :activity_offering
+      #TODO: only edits the first row
+      on ActivityOfferingMaintenance do |page|
+        page.personnel_table.rows[1].cells[PERSONNEL_ID_COLUMN].text_field.set options[:id] unless options[:id].nil?
+        page.personnel_table.rows[1].cells[PERSONNEL_NAME_COLUMN].text_field.set options[:name] unless options[:name].nil?
+        page.personnel_table.rows[1].cells[PERSONNEL_AFFILIATION_COLUMN].select().select(options[:affiliation]) unless options[:affiliation].nil?
+        page.personnel_table.rows[1].cells[PERSONNEL_INST_EFFORT_COLUMN].text_field.set options[:inst_effort] unless options[:inst_effort].nil?
+      end
+    else
+      #TODO
     end
-    update_options(opts)
+    @parent_obj.save unless options[:defer_save]
+    update_options(options)
+
   end
 
   def target_row_by_personnel_id

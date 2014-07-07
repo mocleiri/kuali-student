@@ -129,11 +129,8 @@ When /^I jump to an arbitrary AO but cancel the change$/ do
   end
 
 end
-When /^I change Personnel attributes$/ do
-  #TODO: this is the same as add, should edit existing personnel
-  @activity_offering.edit :defer_save => true
-  person = make PersonnelObject, :id => "admin", :name => "admin, admin", :affiliation => "Instructor", :inst_effort => 30
-  @activity_offering.add_personnel person
+When /^I edit Personnel attributes$/ do
+  @activity_offering.personnel_list[0].edit :id => "admin", :name => "admin, admin", :affiliation => "Teaching Assistant", :inst_effort => 30
 end
 
 Then /^the changes of the Personnel attributes are persisted$/ do

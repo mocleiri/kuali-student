@@ -35,8 +35,9 @@ Feature: CO.Edit Activity Offering Attributes
     Then the deleted Personnel line should not be present
 
   Scenario: Edit Activity Offering Personnel attributes
-    When I change Personnel attributes
+    Given I add Personnel attributes
     And I submit the AO changes
+    When I edit Personnel attributes
     Then the changes of the Personnel attributes are persisted
 
   Scenario: Edit Miscellaneous Activity Offering attributes
