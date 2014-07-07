@@ -22,5 +22,15 @@ class CourseSectionPage < BasePage
   value(:activity_offering_select){ |activity_sub_level,activity_level,course_level,course_section_level,format_level,b|b.div(id:"select _line#{course_section_level}_line#{course_level}_line#{format_level}_line#{activity_level}_line#{activity_sub_level}").text}
 
 
+
+
+  #Format Offering Elements
+ # element(:lecture_lab_discussion){|course_code,b|b.}
+
+  action(:lecture_lab_discussion) { |course_code,b| b.div(id: /#{course_code}_formatOfferingOptions/).radio(index:0) }
+  action(:lecture) { |course_code,b| b.div(id: /#{course_code}_formatOfferingOptions/).radio(index:1) }
+  action(:ao_lecture){|course_code,b| b.div(id: /#{course_code}.*activity-offering-lecture/) }
+  action(:ao_discussion){|course_code,b| b.div(id: /#{course_code}.*activity-offering-discussion/) }
+  action(:ao_lab){|course_code,b| b.div(id: /#{course_code}.*activity-offering-lab/) }
 end
 
