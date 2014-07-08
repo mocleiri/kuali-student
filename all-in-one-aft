@@ -6,8 +6,8 @@
 # enhanced by Haroon Rafique (haroon.rafique@kuali.org)
 
 REPO_PREFIX="https://svn.kuali.org/repos/student/enrollment/ks-deployments/tags/builds/ks-deployments-2.1/2.1.1-FR2-M1/"
-# maven version 3.0 on jenkins
-MVN="mvn30"
+# maven version 3.2 on jenkins
+MVN="mvn"
 
 # tomcat variables
 TOMCAT_VERSION=6.0.41
