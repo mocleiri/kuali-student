@@ -1,12 +1,12 @@
 And /^I am editing an AO with RSIs$/ do
   course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term => "201208", :course=>"ENGL211")
-  course_offering.manage_and_init
+  course_offering.initialize_with_actual_values
   @activity_offering = course_offering.get_ao_obj_by_code("A")
 end
 
 And /^I am editing an AO with RSIs in an open term$/ do
   course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term => "201301", :course=>"ENGL211")
-  course_offering.manage_and_init
+  course_offering.initialize_with_actual_values
   @activity_offering = course_offering.get_ao_obj_by_code("A")
 end
 
@@ -141,7 +141,7 @@ When /^I edit an Activity Offering with non-standard time slots (approved|not ap
     course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term => "201301", :course=>"ENGL262")
   end
   @activity_offering = make ActivityOfferingObject, :parent_course_offering => course_offering, :code => 'A'
-  @activity_offering.get_existing_info_from_page
+  @activity_offering.get_actual_values_from_page
 end
 
 Then /^there is a validation error on the EndTime field$/  do

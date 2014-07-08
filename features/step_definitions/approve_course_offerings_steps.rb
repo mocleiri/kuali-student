@@ -5,7 +5,7 @@ end
 
 Given /^I manage a course offering with draft and canceled activity offerings present$/ do
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> "201208", :course => "ENGL221")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @draft_ao = @course_offering.get_ao_obj_by_code("A")
   @canceled_ao = @course_offering.get_ao_obj_by_code("B")
@@ -19,12 +19,12 @@ end
 
 Given /^I manage a course offering with a canceled activity offering present$/ do
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> "201208", :course => "ENGL221")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @activity_offering = @course_offering.get_ao_obj_by_code("A")
   @activity_offering.cancel
   on ManageCourseOfferings do |page|
-    @course_offering.manage_and_init
+    @course_offering.initialize_with_actual_values
     page.loading.wait_while_present
     page.ao_status(@activity_offering.code).should == "Canceled"
   end
@@ -32,7 +32,7 @@ end
 
 Given /^I manage a course offering with a canceled activity offering present in draft SOC state$/ do
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> "202000", :course => "ENGL243")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @activity_offering = @course_offering.get_ao_obj_by_code("A")
   @activity_offering.cancel
@@ -43,7 +43,7 @@ end
 
 Given /^I manage a course offering with multiple canceled activity offerings present in draft SOC state$/ do
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> "202000" , :course => "ENGL243")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @canceled_ao1 = @course_offering.get_ao_obj_by_code("A")
   @canceled_ao2 = @course_offering.get_ao_obj_by_code("B")
@@ -59,7 +59,7 @@ end
 
 Given /^I manage a course offering with canceled and draft activity offerings present in draft SOC state$/ do
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> "202000" , :course => "ENGL243")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @canceled_ao = @course_offering.get_ao_obj_by_code("A")
   #have to put the first in canceled status for the test
@@ -74,7 +74,7 @@ end
 
 Given /^I manage a course offering with suspended and offered activity offerings present in a published SOC state$/ do
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> "201208" , :course => "ENGL212")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @suspended_ao = @course_offering.get_ao_obj_by_code("A")
   @suspended_ao.edit :send_to_scheduler => true
@@ -89,7 +89,7 @@ end
 
 Given /^I suspend two activity offerings in offered status for a course offering in a published SOC state$/ do
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> "201208" , :course => "HIST355")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @draft_ao = @course_offering.get_ao_obj_by_code("A")
   @suspended_ao = create ActivityOfferingObject, :create_by_copy => true,
@@ -112,7 +112,7 @@ end
 
 Given /^I suspend two draft activity offerings for a course offering in a published SOC state$/ do
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> "201208" , :course => "HIST355")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @draft_ao = @course_offering.get_ao_obj_by_code("A")
   @suspended_ao = create ActivityOfferingObject, :create_by_copy => true,
@@ -133,7 +133,7 @@ end
 
 Given /^I manage a course offering with a suspended and a draft activity offering present in a published SOC state$/ do
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> "201208", :course => "HIST232")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @draft_ao = @course_offering.get_ao_obj_by_code("A")
   on ManageCourseOfferings do |page|
@@ -141,7 +141,7 @@ Given /^I manage a course offering with a suspended and a draft activity offerin
     page.loading.wait_while_present
     @suspended_ao = @course_offering.get_ao_obj_by_code("B")
     @suspended_ao.suspend
-    @course_offering.manage_and_init
+    @course_offering.initialize_with_actual_values
     page.loading.wait_while_present
     page.ao_status(@suspended_ao.code).should == "Suspended"
     page.ao_status(@draft_ao.code).should == "Draft"
@@ -418,7 +418,7 @@ end
 Given /^I manage a course offering with a draft activity offering$/ do
   @term_for_test = Rollover::OPEN_SOC_TERM if @term_for_test.nil?
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> @term_for_test, :course => "HIST240")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @activity_offering = @course_offering.get_ao_obj_by_code("A")
   @activity_offering.status.should == "Draft"
@@ -427,7 +427,7 @@ end
 Given /^I manage a course offering with an approved activity offering present$/ do
   @term_for_test = "201208" if @term_for_test.nil?
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> @term_for_test , :course => "ENGL295")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @activity_offering = @course_offering.get_ao_obj_by_code("A")
   @activity_offering.edit :send_to_scheduler => true
@@ -440,7 +440,7 @@ end
  Given /^I manage a course offering with an offered activity offering present$/ do
   @term_for_test = "201208" if @term_for_test.nil?
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> @term_for_test , :course => "ENGL295")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @activity_offering = @course_offering.get_ao_obj_by_code("A")
   @activity_offering.edit :send_to_scheduler => true
@@ -484,7 +484,7 @@ end
 Given /^I manage a course offering with an approved activity offering$/ do
   @term_for_test = Rollover::OPEN_SOC_TERM if @term_for_test.nil?
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> @term_for_test, :course => "ENGL362")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @activity_offering = @course_offering.get_ao_obj_by_code("A")
   @activity_offering.approve :navigate_to_page => false, :send_to_scheduler => true
@@ -501,7 +501,7 @@ end
 Given /^I manage a course offering with an activity offering in canceled status$/ do
   @term_for_test = Rollover::OPEN_SOC_TERM if @term_for_test.nil?
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> @term_for_test, :course => "ENGL362")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @activity_offering = @course_offering.get_ao_obj_by_code("A")
   @activity_offering.cancel :navigate_to_page => false
@@ -511,7 +511,7 @@ end
 
 Given /^there is an existing course offering with an activity offering in canceled status$/ do
   @course_offering = make CourseOffering, :term=> "201208", :course => "ENGL221"
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @activity_offering = @course_offering.get_ao_obj_by_code("B")
 
@@ -540,7 +540,7 @@ end
 
 Given /^I copy a course offering in suspended status$/ do
   course_offering_suspended = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> "201208" , :course => "BSCI121")
-  course_offering_suspended.manage_and_init
+  course_offering_suspended.initialize_with_actual_values
 
   @activity_offering = course_offering_suspended.get_ao_obj_by_code("A")
   @activity_offering.suspend
@@ -607,7 +607,7 @@ end
 Given /^I manage a course offering with a canceled activity offering$/ do
   @term_for_test = Rollover::OPEN_SOC_TERM unless @term_for_test != nil
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> @term_for_test, :course => "ENGL362")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @activity_offering = @course_offering.get_ao_obj_by_code("A")
   @activity_offering.cancel :navigate_to_page => false
@@ -618,7 +618,7 @@ end
 Given /^I manage a course offering with a suspended activity offering$/ do
   @term_for_test = "201208" if @term_for_test.nil?
   @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> @term_for_test, :course => "ENGL222")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @activity_offering = @course_offering.get_ao_obj_by_code("A")
   @activity_offering.suspend :navigate_to_page => false
@@ -844,13 +844,13 @@ And /^I approve the Course Offering for scheduling$/ do
 end
 
 And /^I approve selected Activity Offerings for scheduling$/ do
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   @selected_ao_list =  @course_offering.activity_offering_cluster_list[0].ao_list[0..1]
   @course_offering.approve_ao_list(:ao_obj_list => @selected_ao_list)
 end
 
 Then /^the Activity Offerings of these two COs should be in Approved state$/ do
-  @course_offering_ENGL221.manage_and_init
+  @course_offering_ENGL221.initialize_with_actual_values
   new_cluster_list = @course_offering_ENGL221.activity_offering_cluster_list
   ao_list = @course_offering_ENGL221.get_ao_list
   #ao_list = new_cluster_list[0].ao_list
@@ -859,7 +859,7 @@ Then /^the Activity Offerings of these two COs should be in Approved state$/ do
       page.ao_status(ao.code).should == ActivityOfferingObject::APPROVED_STATUS
     end
   end
-  @course_offering_ENGL202.manage_and_init
+  @course_offering_ENGL202.initialize_with_actual_values
   #new_cluster_list = @course_offering_ENGL202.activity_offering_cluster_list
   ao_list = @course_offering_ENGL202.get_ao_list
   ao_list.each do |ao|
@@ -870,7 +870,7 @@ Then /^the Activity Offerings of these two COs should be in Approved state$/ do
 end
 
 Then /^the Activity Offerings should be in Approved state$/ do
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   @course_offering.get_ao_list.each do |ao|
     on ManageCourseOfferings do |page|
       page.ao_status(ao.code).should == ActivityOfferingObject::APPROVED_STATUS
@@ -889,7 +889,7 @@ end
 
 Given /^I manage a course offering with a colocated activity offering$/ do
   @course_offering = make CourseOffering, :term => "201208", :course => "CHEM441"
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @activity_offering = @course_offering.get_ao_obj_by_code("A")
   @activity_offering.status.should == "Offered"

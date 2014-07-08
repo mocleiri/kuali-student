@@ -1,5 +1,5 @@
 #$test_site = "http://localhost:8081/ks-with-rice-bundled-dev" #Local Env
-$test_site = "http://env2.ks.kuali.org"
+$test_site = "http://env12.ks.kuali.org"
 $test_site = ENV['TEST_SITE'] unless ENV['TEST_SITE'] == nil
 
 $: << File.dirname(__FILE__)+'/../../lib'
@@ -22,6 +22,10 @@ else
 end
 
 Selenium::WebDriver::Firefox::Binary.path = ENV['FIREFOX_PATH'] unless ENV['FIREFOX_PATH'].nil?
+#Selenium::WebDriver::Firefox::Binary.path='C:\PROGRA~2\MOZILL~3\firefox.exe' #ff v22
+Selenium::WebDriver::Firefox::Binary.path='C:\PROGRA~2\MOZILL~1\firefox.exe' #ff v29
+
+#$DEBUG = true
 
 if ENV['HEADLESS']
   require 'headless'
@@ -39,9 +43,10 @@ Before do
     puts "debug  env.rb [#{$env_no}] - browser.nil? #{browser.nil?}"
   end
   @browser = browser
+  @browser.driver.manage.window.maximize
 end
 
-at_exit { browser.close unless browser.nil? }
+#at_exit { browser.close unless browser.nil? }
 
 if ENV['HEADLESS']
   #re-start browser after each failed scenario

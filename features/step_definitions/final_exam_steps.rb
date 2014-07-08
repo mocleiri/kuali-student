@@ -398,7 +398,7 @@ Given /^that the CO has two existing AOs and a standard final exam driven by Act
 end
 
 When /^I add two new AOs to the CO and then create a copy of the CO$/ do
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   @course_offering.activity_offering_cluster_list[0].ao_list[0].edit :send_to_scheduler => true
   @add_ao_one = @course_offering.create_ao :ao_obj => (make ActivityOfferingObject, :format => "Lecture Only")
   @add_ao_two = @course_offering.create_ao :ao_obj => (make ActivityOfferingObject, :format => "Lecture Only")
@@ -552,7 +552,7 @@ Given /^that the CO is set to have exam offerings driven by AO$/ do
 end
 
 When /^I edit the CO to have an Alternate Final Exam$/ do
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @course_offering.edit :final_exam_type => "Alternate Final Assessment"
 end
@@ -568,7 +568,7 @@ When /^I view the Exam Offerings for a CO where the Activity Offering Standard F
 
   @course_offering = create CourseOffering, :create_by_copy=> @original_co
   @course_offering.delivery_format_list[0].format = "Lecture/Discussion"
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 
   @course_offering.edit :final_exam_type => "Alternate Final Assessment"
 
@@ -1071,7 +1071,7 @@ When /^I suspend an Activity Offering for a CO with a standard final exam driven
   @course_offering.edit :final_exam_type => "Standard Final Exam",
                                  :final_exam_driver => "Final Exam Per Course Offering"
 
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   @activity_offering = @course_offering.activity_offering_cluster_list[0].ao_list[0]
   # @course_offering.find_ao_obj_by_code('A')
   @activity_offering.suspend :navigate_to_page => false
@@ -1117,7 +1117,7 @@ When /^I suspend an Activity Offering for a CO with a standard final exam driven
   @course_offering.edit :final_exam_type => "Standard Final Exam",
                                  :final_exam_driver => "Final Exam Per Activity Offering"
 
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   @activity_offering = @course_offering.find_ao_obj_by_code('A')
   @activity_offering.suspend :navigate_to_page => false
 end
@@ -1659,13 +1659,13 @@ end
 
 When /^I create a Course Offering from copy in a term with a defined final exam period that uses the matrix$/ do
   @course_offering = create CourseOffering, :create_by_copy => @original_co
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   @activity_offering = @course_offering.activity_offering_cluster_list[0].ao_list[0]
 end
 
 When /^I create a copy of the initial course offering in a term that uses the FE matrix and has defined final exam period$/ do
   @course_offering = create CourseOffering, :create_by_copy => @original_co
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   @activity_offering = @course_offering.activity_offering_cluster_list[0].ao_list[0]
 end
 
@@ -1713,7 +1713,7 @@ Given /^that the Course Offering has an AO-driven exam in a term that uses the F
 
 When /^I create a copy of the Course Offering and decide to exclude all scheduling information$/ do
   @course_offering = create CourseOffering, :create_by_copy => @original_co, :exclude_scheduling => true
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   @activity_offering = @course_offering.activity_offering_cluster_list[0].ao_list[0]
 end
 
@@ -1881,7 +1881,7 @@ end
 Then /^the Exam Offerings Slotting info should be populated or left blank depending on whether the AO RSI was found on the Exam Matrix$/ do
   @co_list.each do |co|
     test_co = make CourseOffering, :term => @calendar_target.terms[0].term_code, :course => co.course
-    test_co.manage_and_init
+    test_co.initialize_with_actual_values
     if test_co.activity_offering_cluster_list.any? and test_co.course != @co_list[1].course
       on(ManageCourseOfferings).view_exam_offerings
       test_co.activity_offering_cluster_list[0].ao_list.each do |ao|
@@ -2116,7 +2116,7 @@ end
 Then /^the Exam Offerings Slotting info should be populated after the Mass Scheduling Event has been triggered$/ do
   @co_list.each do |co|
     test_co = make CourseOffering, :term => @calendar_target.terms[0].term_code, :course => co.course
-    test_co.manage_and_init
+    test_co.initialize_with_actual_values
     on(ManageCourseOfferings).view_exam_offerings
     if test_co.course != @co_list[0].course
       on ViewExamOfferings do |page|

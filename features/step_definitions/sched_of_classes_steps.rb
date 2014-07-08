@@ -97,7 +97,7 @@ end
 
 When /^I add an Activity Offering in draft status to an existing Course Offering$/ do
   @course_offering = make CourseOffering, :term => "201208", :course=>"ENGL222"
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   @new_ao = @course_offering.create_ao :ao_obj => (make ActivityOfferingObject, :format => "Lecture Only"), :navigate_to_page => false
 end
 

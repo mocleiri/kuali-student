@@ -82,7 +82,7 @@ class ActivityOfferingClusterObject < DataFactory
       end
   end
 
-  def init_existing(cluster_div, parent_co)
+  def initialize_with_actual_values(cluster_div, parent_co)
     on ManageCourseOfferings do |page|
       @parent_course_offering = parent_co
       @private_name = page.cluster_div_private_name(cluster_div)
@@ -91,7 +91,7 @@ class ActivityOfferingClusterObject < DataFactory
 
       ao_rows.each do |ao_row|
         ao_obj_temp = make ActivityOfferingObject
-        ao_obj_temp.init_existing(ao_row, @parent_course_offering, @private_name)
+        ao_obj_temp.initialize_with_actual_values(ao_row, @parent_course_offering, @private_name)
         @ao_list.push(ao_obj_temp)
       end
     end
@@ -193,4 +193,8 @@ end
 
 class ActivityOfferingClusterCollection < CollectionsFactory
   contains ActivityOfferingClusterObject
+
+  def by_private_name(private_name)
+    self.find {|cluster| cluster.private_name == private_name }
+  end
 end

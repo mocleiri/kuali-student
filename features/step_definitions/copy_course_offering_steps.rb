@@ -26,7 +26,7 @@ end
 Then /^the activity offering clusters?, assigned AOs and reg groups are rolled over with the course offering$/ do
   @course_offering_copy = make CourseOffering, :course=>@course_offering.course, :term=>Rollover::ROLLOVER_TEST_TERM_TARGET
   @course_offering_copy.activity_offering_cluster_list = @course_offering.activity_offering_cluster_list.sort
-  @course_offering_copy.manage   #NB, in this case can never be manage_and_init
+  @course_offering_copy.manage   #NB, in this case can never be initialize_with_actual_values
 
   on ManageCourseOfferings do |page|
     clusters = page.cluster_div_list
@@ -44,7 +44,7 @@ end
 Then /^the activity offering scheduling information are copied to the rollover term as requested scheduling information$/ do
   @course_offering_copy = make CourseOffering, :course=>@course_offering.course, :term=>Rollover::ROLLOVER_TEST_TERM_TARGET
 
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   source_activity_offering = @course_offering.find_ao_obj_by_code("G")
   source_activity_offering.requested_scheduling_information_list.size.should_not == 0
 

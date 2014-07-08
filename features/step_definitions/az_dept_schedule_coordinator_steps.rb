@@ -371,7 +371,7 @@ When /^there is an activity in "([^"]*)" status/ do |ao_status|
 end
 
 When /^I have access to delete an activity offering in "([^"]*)" status for the course offering$/ do |aostate|
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   @course_offering.attempt_ao_delete_by_status(aostate).should be_true
 end
 
@@ -703,7 +703,7 @@ end
 When /^there is a course with a co-located SI in my admin org/ do
   step "I am logged in as a Schedule Coordinator"
   @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"ENGL462", :term=>@term_for_test)
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   colocated_ao = make ActivityOfferingObject, :code=> "A",
                       :parent_course_offering => (make CourseOffering, :course => "ENGL295", :term => @term_for_test)
 
@@ -715,7 +715,7 @@ When /^there is a course with a co-located SI in my admin org/ do
 end
 
 Then /^I do not have access to edit the co-located Activity Offering$/ do
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   on ManageCourseOfferings do |page|
     page.edit_link("A").present?.should == false
   end

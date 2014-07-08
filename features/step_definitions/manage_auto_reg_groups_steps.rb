@@ -4,7 +4,7 @@ end
 
 Given /^I have created an additional activity offering cluster for a catalog course offering$/ do
   @course_offering = make CourseOffering, :term=>Rollover::MAIN_TEST_TERM_TARGET, :course=>"CHEM277"
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   ao_cluster = make ActivityOfferingClusterObject
   @course_offering.add_ao_cluster(ao_cluster)
 end
@@ -31,13 +31,13 @@ end
 
 Given /^there are default registration groups for a course offering$/ do
   @course_offering = make CourseOffering, :course=>"CHEM277", :term=>Rollover::OPEN_SOC_TERM
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 end
 
 Given /^I have created an additional activity offering cluster for a course offering$/ do
   @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM277", :term=>Rollover::OPEN_SOC_TERM)
   #@course_offering = make CourseOffering, :course=>"CHEM277A", :term=>Rollover::OPEN_SOC_TERM
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   existing_cluster = @course_offering.activity_offering_cluster_list[0]
   new_ao = @course_offering.copy_ao :ao_code =>  existing_cluster.ao_list[0].code
   new_cluster = make ActivityOfferingClusterObject
@@ -48,7 +48,7 @@ end
 
 Given /^there are default registration groups for a catalog course offering$/ do
   @course_offering = make CourseOffering, :term=>Rollover::SOC_STATES_SOURCE_TERM, :course=>"ENGL245"
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 end
 
 
@@ -108,12 +108,12 @@ end
 
 Given /^I manage registration groups for a new course offering with multiple AO types and only one lecture activity$/ do
   @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM237", :term=>"201301")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 end
 
 Given /^I manage registration groups for a new course offering$/ do
   @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM135", :term=>"201301")
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
 end
 
 Then /^the Activity Offerings are present in the activity offering cluster$/ do

@@ -101,11 +101,12 @@ class ActivityOfferingObject < DataFactory
   def create_simple  opts={}
 
     defaults = {
-        :number_aos_to_create => 1
+        :number_aos_to_create => 1,
+        :navigate_to_page => true
     }
     options = defaults.merge(opts)
 
-    @parent_course_offering.manage
+    @parent_course_offering.manage if options[:navigate_to_page]
 
     on ManageCourseOfferings do |page|
       begin
@@ -183,12 +184,12 @@ class ActivityOfferingObject < DataFactory
     end
   end
 
-  def get_existing_info_from_page
+  def get_actual_values_from_page
     ao_table_row = on(ManageCourseOfferings).target_row(@code)
-    init_existing(ao_table_row, @parent_course_offering, @aoc_private_name)
+    initialize_with_actual_values(ao_table_row, @parent_course_offering, @aoc_private_name)
   end
 
-  def init_existing(ao_table_row, parent_co, cluster_name)
+  def initialize_with_actual_values(ao_table_row, parent_co, cluster_name)
     @code =  ao_table_row.cells[ManageCourseOfferings::AO_CODE].text
     @status = ao_table_row.cells[ManageCourseOfferings::AO_STATUS].text
     @activity_type = ao_table_row.cells[ManageCourseOfferings::AO_TYPE].text
@@ -526,7 +527,7 @@ class ActivityOfferingObject < DataFactory
   #calculates the expected number of seats remaining
   #
   #@return [int] expected number of seats remaining
-  def seats_remaining
+  def expected_seats_remaining
     seats_used = 0
     @seat_pool_list.each do |seat_pool|
       seats_used += seat_pool.seats.to_i
@@ -658,117 +659,7 @@ class ActivityOfferingCollection < CollectionsFactory
 
   contains ActivityOfferingObject
 
-end
-
-# stores test data for creating/editing and validating waitlist data and provides convenience methods for navigation and data entry
-#
-# Waitlist is contained in ActivityOffering
-#
-# class attributes are initialized with default data unless values are explicitly provided
-#
-# Typical usage: (with optional setting of explicit data value in [] )
-#
-# waitlist = make Waitlist, :=> "user1", :affiliation =>"Instructor"
-#
-#create generally called from ActivityOffering/CourseOffering class
-# Note the use of the ruby options hash pattern re: setting attribute values
-class Waitlist < DataFactory
-  include Foundry
-  include DateFactory
-  include StringFactory
-  include Workflows
-
-  #generally set using options hash
-  attr_accessor :enabled,
-                :type, #Confirmation, Automatic, Manual
-                :limit_size, #0 means not enabled
-                :allow_hold_list,
-                :parent_ao
-
-  # provides default data:
-  # defaults = {
-  #    :enabled => false, #must be enabled for parent_course_offering
-  #    :type => "Automatic",
-  #    :limit_size => 0
-  #    :allow_hold_list => false
-  # }
-  # initialize is generally called using TestFactory Foundry .make or .create methods
-  def initialize(browser, opts={})
-    @browser = browser
-
-    defaults = {
-        :enabled => nil,  #true/false/nil (nil means use default config)
-        :type => "Confirmation",  #Automatic, Confirmation, Manual
-        :limit_size => 0,
-        :allow_hold_list => true
-    }
-
-    set_options(defaults.merge(opts))
-  end
-
-  # edits waitlist options based on instance vars
-  #
-  #  @param opts [Hash] key => value for attribute to be updated
-  def edit opts={}
-    defaults = {
-        :defer_save => false,
-        :start_edit => true
-    }
-    options = defaults.merge(opts)
-
-    on(ManageCourseOfferings).edit @parent_ao.code if options[:start_edit]
-
-    if !opts[:enabled].nil?
-      on ActivityOfferingMaintenance do |page|
-        options[:enabled] ? page.waitlist_checkbox.set : page.waitlist_checkbox.clear
-        @enabled = options[:enabled]
-      end
-    end
-
-    #return unless @enabled
-
-    if !options[:type].nil?
-      on ActivityOfferingMaintenance do |page|
-        case options[:type]
-          when "Automatic"
-            page.waitlist_automatic_radio.set
-          when "Confirmation"
-            page.waitlist_confirmation_radio.set
-          when "Manual"
-            page.waitlist_manual_radio.set
-          else
-            raise "error: '#{options[:type]}' waitlist type not found"
-        end
-      end
-    end
-
-    if !options[:limit_size].nil?
-      on ActivityOfferingMaintenance do |page|
-        if options[:limit_size] > 0
-          page.waitlist_limit_checkbox.set
-          page.loading.wait_while_present
-          page.waitlist_limit.set options[:limit_size]
-        else
-          page.waitlist_limit_checkbox.clear
-        end
-      end
-    end
-
-    if !options[:allow_hold_list].nil?
-      on ActivityOfferingMaintenance do |page|
-        options[:allow_hold_list] ? page.waitlist_allow_hold_checkbox.set : page.waitlist_allow_hold_checkbox.clear
-      end
-    end
-
-    set_options(options)
-    @parent_ao.save unless options[:defer_save]
-  end
-
-  def waitlist_limit_str
-    if @limit_size == 0
-      return "Unlimited"
-    else
-      return "Limit to #{@limit_size}"
-    end
+  def by_code(ao_code)
+    self.find {|ao| ao.code == ao_code }
   end
 end

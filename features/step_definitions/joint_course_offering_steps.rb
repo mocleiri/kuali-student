@@ -9,7 +9,7 @@ And /^I attempt to "(delete|delete and cancel)" a joint Course Offering$/ do |de
     should_confirm_delete = true
   end
 
-  @joint_co.manage_and_init
+  @joint_co.initialize_with_actual_values
   @joint_co.delete_co_coc_view :should_confirm_delete=>should_confirm_delete
 
 end
@@ -56,7 +56,7 @@ Then /^The joint course offerings are created.$/ do
     @activity_offering = make ActivityOfferingObject, :format => "Lecture Only"
 
     joint_co.create_list_aos :ao_object => @activity_offering, :number_aos_to_create=>2
-    joint_co.manage_and_init
+    joint_co.initialize_with_actual_values
     total_number = joint_co.get_ao_list.count
     total_number.should == 2
   end

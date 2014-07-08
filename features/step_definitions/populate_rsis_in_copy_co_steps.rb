@@ -4,14 +4,14 @@ When /^I copy an CO with AOs that have ASIs to a new CO in the different term wi
 end
 
 Then /^The new CO and AOs are Successfully created$/ do
-  @course_offering.manage_and_init
+  @course_offering.initialize_with_actual_values
   tgt_activity_offering = @course_offering.get_ao_obj_by_code("A")
   tgt_activity_offering.status.should == ActivityOfferingObject::DRAFT_STATUS
   tgt_activity_offering.requested_scheduling_information_list.size.should_not == 0
 end
 
 And /^The ASIs are Successfully copied to RSIs in the new AOs of the newly created CO$/ do
-  @source_course_offering.manage_and_init
+  @source_course_offering.initialize_with_actual_values
   source_activity_offering = @source_course_offering.get_ao_obj_by_code("A")
   source_activity_offering.actual_scheduling_information_list.size.should_not == 0
 

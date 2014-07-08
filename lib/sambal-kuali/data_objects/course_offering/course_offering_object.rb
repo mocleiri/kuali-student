@@ -410,8 +410,8 @@ class CourseOffering < DataFactory
   end
   private :ensure_in_single_co_view
 
-
-  def manage_and_init
+  #navigates to manage CO page, loads object data from application
+  def initialize_with_actual_values
 
     manage
 
@@ -426,7 +426,7 @@ class CourseOffering < DataFactory
       @activity_offering_cluster_list = []
       cluster_divs.each do |cluster_div|
         temp_aoc = make ActivityOfferingClusterObject
-        temp_aoc.init_existing(cluster_div, self)
+        temp_aoc.initialize_with_actual_values(cluster_div, self)
 
         @activity_offering_cluster_list.push(temp_aoc)
       end
@@ -546,7 +546,7 @@ class CourseOffering < DataFactory
 
     options = defaults.merge(opts)
 
-    manage_and_init
+    initialize_with_actual_values
     ao_obj = make ActivityOfferingObject, :parent_course_offering => self
     on ManageCourseOfferings do |page|
       ao_obj.code = page.select_ao_by_status(options[:ao_status])
@@ -1170,7 +1170,7 @@ class CourseOffering < DataFactory
 
   #TODO - this method is not used
   def reset_ao_clusters
-    #move all aos back first cluster - NB init_existing needs to be run first
+    #move all aos back first cluster - NB initialize_with_actual_values needs to be run first
     @activity_offering_cluster_list[1..-1].each do |cluster|
       puts "reset cluster name: #{cluster.private_name}"
       cluster.move_all_aos_to_another_cluster(@activity_offering_cluster_list[0])
