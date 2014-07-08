@@ -1,0 +1,56 @@
+INSERT INTO KSEN_POPULATION_RULE
+(CREATEID,
+CREATETIME,
+ID,
+NAME,
+OBJ_ID,
+POPULATION_RULE_STATE,
+POPULATION_RULE_TYPE,
+SUPPORTS_GET_MBR_IND,
+UPDATEID,
+UPDATETIME,
+VARIES_BY_TIME_IND,
+VER_NBR)
+VALUES 
+('Admin',
+TO_DATE( '2014-01-01', 'YYYY-MM-DD' ),
+'kuali.population.rule.key.everyone',
+'Everyone',
+SYS_GUID(),
+'kuali.population.population.rule.state.active',
+'kuali.population.rule.type.everyone',
+0,
+'Admin',
+TO_DATE( '2014-01-01', 'YYYY-MM-DD' ),
+0,
+1)
+/
+INSERT INTO KSEN_POPULATION 
+(CREATEID,
+CREATETIME,
+DESCR_FORMATTED,
+DESCR_PLAIN,
+ID,
+NAME,
+OBJ_ID,
+POPULATION_RULE_ID,
+POPULATION_STATE,
+POPULATION_TYPE,
+UPDATEID,
+UPDATETIME,
+VER_NBR)
+VALUES 
+('Admin',
+TO_DATE( '2014-01-01', 'YYYY-MM-DD' ),
+'All students/Everyone',
+'All students/Everyone',
+'kuali.population.student.key.everyone',
+'Everyone',
+SYS_GUID(),
+'kuali.population.rule.key.everyone',
+'kuali.population.population.state.active',
+'kuali.population.type.student',
+'Admin',
+TO_DATE( '2014-01-01', 'YYYY-MM-DD' ),
+1)
+/

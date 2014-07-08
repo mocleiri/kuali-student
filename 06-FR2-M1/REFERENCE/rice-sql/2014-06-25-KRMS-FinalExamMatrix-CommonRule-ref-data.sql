@@ -1,0 +1,43 @@
+--update terms with new course sets
+Update KRMS_TERM_PARM_T set VAL = 'e5f1c380-04f7-c548-e040-007f0101104a'
+Where TERM_ID ='KS-KRMS-TERM-13433'
+and TERM_PARM_ID = 'KS-KRMS-TERM-PARM-13490'
+/
+Update KRMS_TERM_T
+   set TERM_SPEC_ID = 'KS-KRMS-TERM-SPEC-10021',
+       DESC_TXT = 'Matching Course Set Term'
+ Where TERM_ID = 'KS-KRMS-TERM-13425'
+/
+Update KRMS_TERM_PARM_T set NM = 'kuali.term.parameter.type.course.cluSet.id',
+VAL = 'e5f1c380-04f8-c548-e040-007f0101104a'
+Where TERM_ID ='KS-KRMS-TERM-13425'
+and TERM_PARM_ID ='KS-KRMS-TERM-PARM-13472'
+/
+Update KRMS_PROP_T set TYP_ID = (SELECT TYP_ID FROM KRMS_TYP_T WHERE NM = 'kuali.krms.proposition.type.final.exam.courseset')
+Where PROP_ID ='KS-KRMS-PROP-14730'
+and RULE_ID ='KS-KRMS-RULE-12039'
+/
+--new Rule
+Insert into KRMS_RULE_T (ACTV,DESC_TXT,NM,NMSPC_CD,PROP_ID,RULE_ID,TYP_ID,VER_NBR)
+  values ('Y',null,concat(concat('kuali.atp.type.Fall:',(SELECT TYP_ID FROM KRMS_TYP_T WHERE NM = 'kuali.krms.rule.type.final.exam.course.offering.driven')), ':18'),'KS-SYS',null,'KS-KRMS-RULE-12090',(SELECT TYP_ID FROM KRMS_TYP_T WHERE NM = 'kuali.krms.rule.type.final.exam.course.offering.driven'),1)
+/
+INSERT INTO KRMS_AGENDA_ITM_T (AGENDA_ID,AGENDA_ITM_ID,RULE_ID,VER_NBR)
+  VALUES ('KS-KRMS-AGENDA-11924','KS-KRMS-AGENDA-ITM-12083','KS-KRMS-RULE-12090',1)
+/
+UPDATE KRMS_AGENDA_ITM_T set WHEN_FALSE = 'KS-KRMS-AGENDA-ITM-12083' WHERE AGENDA_ITM_ID = 'KS-KRMS-AGENDA-ITM-12082'
+/
+Insert into KRMS_PROP_T (CMPND_OP_CD,DESC_TXT,PROP_ID,RULE_ID,TYP_ID,VER_NBR,DSCRM_TYP_CD,CMPND_SEQ_NO)
+values (null,'Final exam timeslot','KS-KRMS-PROP-14811','KS-KRMS-RULE-12090',(SELECT TYP_ID FROM KRMS_TYP_T WHERE NM = 'kuali.krms.proposition.type.final.exam.courseset'),1,'S',1)
+/
+UPDATE KRMS_RULE_T set PROP_ID = 'KS-KRMS-PROP-14811' where RULE_ID like 'KS-KRMS-RULE-12090'
+/
+Insert into KRMS_PROP_PARM_T (PARM_TYP_CD,PARM_VAL,PROP_ID,PROP_PARM_ID,SEQ_NO,VER_NBR) values ('T','KS-KRMS-TERM-13490','KS-KRMS-PROP-14811','KS-KRMS-PROP-PARM-20462',0,1)
+/
+Insert into KRMS_PROP_PARM_T (PARM_TYP_CD,PARM_VAL,PROP_ID,PROP_PARM_ID,SEQ_NO,VER_NBR) values ('C','true','KS-KRMS-PROP-14811','KS-KRMS-PROP-PARM-20463',1,1)
+/
+Insert into KRMS_PROP_PARM_T (PARM_TYP_CD,PARM_VAL,PROP_ID,PROP_PARM_ID,SEQ_NO,VER_NBR) values ('O','=','KS-KRMS-PROP-14811','KS-KRMS-PROP-PARM-20464',2,1)
+/
+Insert into KRMS_TERM_T (DESC_TXT,TERM_ID,TERM_SPEC_ID,VER_NBR) values ('Matching Course Set Term','KS-KRMS-TERM-13490','KS-KRMS-TERM-SPEC-10021',1)
+/
+Insert into KRMS_TERM_PARM_T (TERM_ID,TERM_PARM_ID,NM,VAL,VER_NBR) values ('KS-KRMS-TERM-13490','KS-KRMS-TERM-PARM-13631','kuali.term.parameter.type.course.cluSet.id','e5f1c380-04f6-c548-e040-007f0101104a',1)
+/
