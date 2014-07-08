@@ -1,4 +1,4 @@
-And /^I attempt to register for a course for Half Fall (\d+) 2012$/ do |termHalf|
+And /^I attempt to register for a course in Half Fall (\d+) 2012$/ do |termHalf|
   # the user for this test (student8) is assigned a current time after the close of registration for
   # Half Fall 1, but should still be able to register for courses in Half Fall 2
   course_code = case termHalf
