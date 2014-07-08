@@ -61,9 +61,11 @@ end
 
 
 And(/^I navigate to the Course Section Details page$/) do
+
   @course_search_result.navigate_course_detail_page
   @course_search_result.navigate_course_section_page
-  #sleep 10
+  sleep 50
+
 end
 
 Then(/^I should be able to view the section details about the course$/) do
@@ -117,4 +119,22 @@ Then(/^I should be able to view the format offerings for the course$/) do
 
 
   end
+end
+
+
+
+When(/^I search for a course with Multiple Activity Offerings$/) do
+  @course_search_result = make CourseSearchResults, :course_code => "CHEM231"
+  @course_section_object=make CourseSectionObject
+  @course_offer_object=make CourseSearchResults
+  @course_search_result.course_search
+  end
+
+
+
+
+Then(/^I should be able to add multiple activity   offerings to my Plan$/) do
+  sleep 10
+  puts "#{@course_offer_object.course_offering_description_list[0].course_term_list[0].courseterm_level}"
+
 end
