@@ -54,11 +54,15 @@ When /^I add courses to my registration cart that would exceed the summer term c
   @reg_request.create
 end
 
-Then /^there is a message indicating that I have registered for a credit amount over the credit limit$/ do
+Then /^there is a message indicating that I have registered for a credit amount over the (\w+) term credit limit$/ do |term|
+  term_max = case term
+               when "spring" then 20
+               when "summer" then 8
+             end
   on RegistrationCart do |page|
     page.course_code(@reg_request.course_code,@reg_request.reg_group_code).wait_until_present
     page_status = page.result_status(@reg_request.course_code,@reg_request.reg_group_code)
-    page_status.should =~ /maximum credit limit/i
+    page_status.should =~ /maximum credit limit \(#{term_max}/i
   end
 end
 

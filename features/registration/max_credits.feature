@@ -24,20 +24,20 @@ Feature: REG.Max Credits
     When I add courses to my registration cart that would exceed the spring term credit limit
     And I attempt to register for the courses
     Then there is a message indicating that registration failed
-    And there is a message indicating that I have registered for a credit amount over the credit limit
+    And there is a message indicating that I have registered for a credit amount over the spring term credit limit
     And I cannot register for another course
 
   #KSENROLL-13024
   Scenario: CR 10.5 - Attempt to register for courses that exceed the summer term credit limit
     When I add courses to my registration cart that would exceed the summer term credit limit
     And I attempt to register for the courses
-    Then there is a message indicating that I have registered for a credit amount over the credit limit
+    Then there is a message indicating that I have registered for a credit amount over the summer term credit limit
 
   #KSENROLL-13027
   Scenario: CR 10.7 - Re-submit a course I was previously unable to register for because of credit limits
     When I log in to student registration as student3
     And I attempt to register for courses that would exceed the summer term credit limit
-    Then there is a message indicating that I have registered for a credit amount over the credit limit
+    Then there is a message indicating that I have registered for a credit amount over the summer term credit limit
     When I elect to keep the failed course in my cart
     And I remove a course from my schedule
     Then I am able to successfully register for the failed course
