@@ -5,9 +5,10 @@
 # written by Orlando Ramirez (orlando.ramirezmartinez@utoronto.ca)
 # enhanced by Haroon Rafique (haroon.rafique@kuali.org)
 
-REPO_PREFIX="https://svn.kuali.org/repos/student/enrollment/ks-deployments/tags/builds/ks-deployments-2.1/2.1.1-FR2-M1/"
+# REPO_PREFIX="https://svn.kuali.org/repos/student/enrollment/ks-deployments/tags/builds/ks-deployments-2.1/2.1.1-FR2-M1/"
 # maven version 3.2 on jenkins
 MVN="mvn"
+AFT_URL="https://svn.kuali.org/repos/student/test/functional-automation/sambal/trunk"
 
 # tomcat variables
 TOMCAT_VERSION=6.0.41
@@ -22,6 +23,12 @@ Usage: $ME
         Enable debug messages during execution
     --help
         Print this message and exit.
+    --tag_url <url of svn tags>
+        required - URL of the deployments directory to pull tags from
+    --build_job_url <url of build job>
+        required - URL for the CI job that creates the tagged builds
+    --aft_url <url for afts>
+        URL for AFT code
 
 EOT
     exit 0
@@ -47,7 +54,7 @@ function get_latest_stable_build() {
 
   OPT=""
   if [ $DEBUG -eq 0 ]; then OPT="-s"; fi
-  BUILD_NUMBER=$(curl $OPT -k https://ci.kuali.org/job/ks-enr-1.0-nightly-build/lastStableBuild/buildNumber)
+  BUILD_NUMBER=$(curl $OPT -k #CI_JOB_URL/lastStableBuild/buildNumber)
   echo "${FUNCNAME[0]}: Latest Stable Build Number found: ${BUILD_NUMBER}"
 }
 
@@ -279,7 +286,7 @@ function process_args {
   DEBUG=0
   BUILD_NUMBER=0
 
-  ARGS=$(getopt --options h --longoptions "help,debug" --name "$ME" -- "$@");
+  ARGS=$(getopt --options h --longoptions "help,debug,tag_url,build_job_url,aft_url" --name "$ME" -- "$@");
   if [ $? -ne 0 ]; then usage; fi
   eval set -- "$ARGS";
   while true
@@ -293,13 +300,36 @@ function process_args {
         set_debug_mode
         shift;
         ;;
+      --tag_url)
+        shift;
+        REPO_PREFIX=$2
+        ;;
+      --build_job_url)
+        shift;
+        CI_JOB_URL=$2
+        ;;
+      --aft_url)
+        shift;
+        AFT_URL=$2
+        ;;
       --)
         shift;
         break;
     esac
   done
-}
+  if [ -z "$REPO_PREFIX" ];
+  then
+    echo "repository url not set"
+    usage;
+  fi
+  
+  if [ -z "$CI_JOB_URL" ];
+  then
+    echo "ci job url not set"
+    usage;
+  fi
 
+}
 ME=$(basename $0)
 
 # process all of our command line arguments
@@ -325,7 +355,7 @@ svn_export \
 
 # export sambal sources from svn repo to specified path
 svn_export \
-  https://svn.kuali.org/repos/student/test/functional-automation/sambal/trunk \
+  $AFT_URL \
   ${WORKSPACE}
 
 # initialize config file
