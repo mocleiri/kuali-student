@@ -1,9 +1,9 @@
-And /^I attempt to register for a course in Half Fall (\d+) 2012$/ do |termHalf|
+And /^I attempt to register for a course in a term whose registration period is (open|closed)$/ do |term_reg_status|
   # the user for this test (student8) is assigned a current time after the close of registration for
-  # Half Fall 1, but should still be able to register for courses in Half Fall 2
-  course_code = case termHalf
-                  when 1 then "CHEM105"
-                  when 2 then "CHEM147"
+  # Half Fall 1 (CHEM105), but should still be able to register for CHEM147 in Half Fall 2
+  course_code = case term_reg_status
+                  when "closed" then "CHEM105"
+                  when "open" then "CHEM147"
                 end
   @reg_request = make RegistrationRequest,
                       :term_descr=>"Fall 2012",
