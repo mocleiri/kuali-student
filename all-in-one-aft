@@ -54,7 +54,7 @@ function get_latest_stable_build() {
 
   OPT=""
   if [ $DEBUG -eq 0 ]; then OPT="-s"; fi
-  BUILD_NUMBER=$(curl $OPT -k #CI_JOB_URL/lastStableBuild/buildNumber)
+  BUILD_NUMBER=$(curl $OPT -k $CI_JOB_URL/lastStableBuild/buildNumber)
   echo "${FUNCNAME[0]}: Latest Stable Build Number found: ${BUILD_NUMBER}"
 }
 
