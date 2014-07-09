@@ -19,15 +19,15 @@ function usage() {
   cat <<EOT
 Usage: $ME
 
-    --debug
+    -d
         Enable debug messages during execution
-    --help
+    -h
         Print this message and exit.
-    --tag_url <url of svn tags>
+    -t <url of svn tags>
         required - URL of the deployments directory to pull tags from
-    --build_job_url <url of build job>
+    -j <url of build job>
         required - URL for the CI job that creates the tagged builds
-    --aft_url <url for afts>
+    -a <url for afts>
         URL for AFT code
 
 EOT
@@ -286,48 +286,43 @@ function process_args {
   DEBUG=0
   BUILD_NUMBER=0
 
-  ARGS=$(getopt --options h --longoptions "help,debug,tag_url,build_job_url,aft_url" --name "$ME" -- "$@");
-  if [ $? -ne 0 ]; then usage; fi
-  eval set -- "$ARGS";
-  while true
+  while getopts h:d:t:j:a flag;
   do
-    case "$1" in
-      -h|--help)
+    case "$flag" in
+      h)
         usage;
-        shift;
         ;;
-      --debug)
+      d)
         set_debug_mode
-        shift;
         ;;
-      --tag_url)
-        shift;
-        REPO_PREFIX=$2
+      t)
+        REPO_PREFIX=$OPTARG
         ;;
-      --build_job_url)
-        shift;
-        CI_JOB_URL=$2
+      j)
+        CI_JOB_URL=$OPTARG
         ;;
-      --aft_url)
-        shift;
-        AFT_URL=$2
+      a)
+        AFT_URL=$OPTARG
         ;;
-      --)
-        shift;
+      ?)
         break;
     esac
   done
+
   if [ -z "$REPO_PREFIX" ];
   then
     echo "repository url not set"
     usage;
   fi
-  
+  echo "tag $REPO_PREFIX"
+
   if [ -z "$CI_JOB_URL" ];
   then
     echo "ci job url not set"
     usage;
   fi
+  echo "job $CI_JOB_URL"
+
 
 }
 ME=$(basename $0)
