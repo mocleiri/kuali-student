@@ -114,7 +114,7 @@ function initialize_schema() {
   # load bundled schema (note: schema name has been uppercased)
   set -x
   ${MVN} initialize -Pdb,oracle \
-    -Doracle.dba.username=master \ 
+    -Doracle.dba.username=master \
     -Doracle.dba.url=jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE \
     -D-Doracle.dba.password=enc--eEFVZmL4+y/5KlzDMCt6dGlBKQzXevFp \
     -Djdbc.username=${SANITIZED_SCHEMA^^} -Djdbc.username=${SANITIZED_SCHEMA^^}
