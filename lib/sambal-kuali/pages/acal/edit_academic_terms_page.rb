@@ -154,7 +154,7 @@ class EditAcademicTerms < BasePage
     return false
   end
 
-  action(:key_date_table) { |term_index, key_date_group_index, b| b.frm.table(id: "key-dates-table_line#{key_date_group_index_line#{term_index}}")}
+  action(:key_date_table) { |term_index, key_date_group_index, b| b.frm.table(id: "key-dates-table_line#{key_date_group_index}_line#{term_index}")}
 
   def key_date_target_row(term_type, key_date_group_type, key_date_type)
     term_index = term_index_by_term_type(term_type)
