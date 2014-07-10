@@ -117,6 +117,7 @@ function initialize_schema() {
     -Doracle.dba.username=master \
     -Doracle.dba.url=jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE \
     -Doracle.dba.password=enc--eEFVZmL4+y/5KlzDMCt6dGlBKQzXevFp \
+    -Dproperties.decrypt=true \
     -Djdbc.username=${SANITIZED_SCHEMA^^} -Djdbc.username=${SANITIZED_SCHEMA^^}
   if [ $DEBUG -eq 0 ]; then set +x; fi
 }
