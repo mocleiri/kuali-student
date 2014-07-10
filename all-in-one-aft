@@ -5,7 +5,6 @@
 # written by Orlando Ramirez (orlando.ramirezmartinez@utoronto.ca)
 # enhanced by Haroon Rafique (haroon.rafique@kuali.org)
 
-# REPO_PREFIX="https://svn.kuali.org/repos/student/enrollment/ks-deployments/tags/builds/ks-deployments-2.1/2.1.1-FR2-M1/"
 # maven version 3.2 on jenkins
 MVN="mvn"
 AFT_URL="https://svn.kuali.org/repos/student/test/functional-automation/sambal/trunk"
@@ -29,6 +28,8 @@ Usage: $ME
         required - URL for the CI job that creates the tagged builds
     -a <url for afts>
         URL for AFT code
+    -p <prefix of artifact version>
+        required - e.g., 2.1.1-FR2-M1 or 2.1.0-FR1, etc.
 
 EOT
     exit 0
@@ -208,11 +209,11 @@ function install_war_artifact() {
 
   set -x
   ${MVN} org.apache.maven.plugins:maven-dependency-plugin:2.8:copy \
-    -Dartifact=org.kuali.student.web:ks-with-rice-bundled:2.1.1-FR2-M1-build-$BUILD_NUMBER:war \
+    -Dartifact=org.kuali.student.web:ks-with-rice-bundled:${ARTIFACT_PREFIX}-build-${BUILD_NUMBER}:war \
     -DoutputDirectory=.
   if [ $DEBUG -eq 0 ]; then set +x; fi
 
-  cp -p ks-with-rice-bundled-2.1.1-FR2-M1-build-$BUILD_NUMBER.war \
+  cp -p ks-with-rice-bundled-${ARTIFACT_PREFIX}-build-${BUILD_NUMBER}.war \
     ${WORKSPACE}/tomcat/webapps/ROOT.war
   echo "${FUNCNAME[0]}: installation of war finished."
 }
@@ -288,7 +289,7 @@ function process_args {
   DEBUG=0
   BUILD_NUMBER=0
 
-  while getopts hdt:j:a: flag;
+  while getopts hdt:j:a:p: flag;
   do
     case "$flag" in
       h)
@@ -307,6 +308,9 @@ function process_args {
       a)
         AFT_URL=$OPTARG
         ;;
+      p)
+        ARTIFACT_PREFIX=$OPTARG
+        ;;
       ?)
         break;
     esac
@@ -314,18 +318,24 @@ function process_args {
 
   if [ -z "$REPO_PREFIX" ];
   then
-    echo "repository url not set"
+    echo "repository url not seti (use -t option)\n"
     usage;
   fi
-  echo "tag $REPO_PREFIX"
+  echo "Repo Prefix: $REPO_PREFIX"
 
   if [ -z "$CI_JOB_URL" ];
   then
-    echo "ci job url not set"
+    echo "ci job url not set (use -j option)\n"
     usage;
   fi
-  echo "job $CI_JOB_URL"
+  echo "CI Job: $CI_JOB_URL"
 
+  if [ -z "$ARTIFACT_PREFIX" ];
+  then
+    echo "artifact prefix not set (use -p option)\n"
+    usage;
+  fi
+  echo "Artifact Prefix: $ARTIFACT_PREFIX"
 
 }
 ME=$(basename $0)
