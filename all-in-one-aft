@@ -86,12 +86,13 @@ function initialize_config() {
     ${WORKSPACE}/ks-deployment-resources-${BUILD_NUMBER}/${filepath}/ks-with-rice-bundled-config.xml \
     ~/kuali/main/dev/ks-with-rice-bundled-config.xml
 
+  SANITIZED_SCHEMA="KSAFT_${ARTIFACT_PREFIX//[^a-zA-z0-9]/_}_${BUILD_NUMBER}"
   # do some substitutions
   sed -i.bak \
     -e 's#${public.url}#http://localhost:8080#g' \
     -e 's#${jdbc.url}#jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE#g' \
-    -e "s#\${jdbc.username}#KSAFT${BUILD_NUMBER}#g" \
-    -e "s#\${jdbc.password}#KSAFT${BUILD_NUMBER}#g" \
+    -e "s#\${jdbc.username}#${SANITIZED_SCHEMA^^}#g" \
+    -e "s#\${jdbc.password}#${SANITIZED_SCHEMA^^}#g" \
     -e 's#${jdbc.pool.size.max}#20#g' \
     -e 's#${rice.krad.dev.mode}#false#g' \
     -e 's#${rice.krad.script.cleanup}#false#g' \
@@ -105,12 +106,13 @@ function initialize_config() {
 
 function initialize_schema() {
   dbgprint
+  SANITIZED_SCHEMA="KSAFT_${ARTIFACT_PREFIX//[^a-zA-z0-9]/_}_${BUILD_NUMBER}"
   cd ${WORKSPACE}/ks-impex-bundled-db-build-${BUILD_NUMBER}
 
   # load bundled schema
   set -x
   ${MVN} initialize -Pdb,oracle,sonar \
-    -Djdbc.username=KSAFT${BUILD_NUMBER} -Djdbc.username=KSAFT${BUILD_NUMBER}
+    -Djdbc.username=${SANITIZED_SCHEMA^^} -Djdbc.username=${SANITIZED_SCHEMA^^}
   if [ $DEBUG -eq 0 ]; then set +x; fi
 }
 
@@ -336,7 +338,6 @@ function process_args {
     usage;
   fi
   echo "Artifact Prefix: $ARTIFACT_PREFIX"
-
 }
 ME=$(basename $0)
 
