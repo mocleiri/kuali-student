@@ -154,7 +154,7 @@ class EditAcademicTerms < BasePage
     return false
   end
 
-  action(:key_date_table) { |term_index, key_date_group_index, b| b.frm.table(id: "key-dates-table_line#{term_index}_line#{key_date_group_index}")}
+  action(:key_date_table) { |term_index, key_date_group_index, b| b.frm.table(id: "key-dates-table_line#{key_date_group_index_line#{term_index}}")}
 
   def key_date_target_row(term_type, key_date_group_type, key_date_type)
     term_index = term_index_by_term_type(term_type)
@@ -178,7 +178,7 @@ class EditAcademicTerms < BasePage
 #  def add_key_date_add_row(term_index,key_date_group);  ;end
 
   #KeyDates
-  action(:key_date_button) { |term_index, key_date_group_index, b| b.frm.div(id: "acal-term-keydates_line#{term_index}_line#{key_date_group_index}").button(text: "Add Key Date")}
+  action(:key_date_button) { |term_index, key_date_group_index, b| b.frm.div(id: "acal-term-keydates_line#{key_date_group_index}_line#{term_index}").button(text: "Add Key Date")}
   action(:key_date_dropdown_addline) { |term_index, key_date_group_index, b| b.key_date_table(term_index, key_date_group_index).rows[-1].select(id: /key_date_type/)}
   action(:key_date_start_date_addline) { |term_index, key_date_group_index, b| b.key_date_table(term_index, key_date_group_index).rows[-1].text_field(id: /key_date_start_date/)}
   action(:key_date_starttime_addline) { |term_index, key_date_group_index, b| b.key_date_table(term_index, key_date_group_index).rows[-1].text_field(id: /key_date_start_time_line/)}
@@ -242,7 +242,7 @@ class EditAcademicTerms < BasePage
   action(:term_start_date) { |term_index,b| b.frm.text_field(id: "term_start_date_line#{term_index}_control") }
   action(:term_end_date) { |term_index,b| b.frm.text_field(id: "term_end_date_line#{term_index}_control") }
 
-  action(:key_date_exist) { |term_index, key_date_group_index, key_date_index, b| b.frm.div(id: "key_date_type_line#{term_index}_line#{key_date_group_index}_line#{key_date_index}").span(index: 0).exists?}
+  action(:key_date_exist) { |term_index, key_date_group_index, key_date_index, b| b.frm.div(id: "key_date_type_line#{key_date_index}_line#{key_date_group_index}_line#{term_index}").span(index: 0).exists?}
 
   action(:get_key_date_group_index) { |group_name, b| b.frm.div(text:"#{group_name}").span(index:0).id}
 
@@ -259,8 +259,8 @@ class EditAcademicTerms < BasePage
   def add_exam_period_btn( term_type); final_exam_section( term_type).button( id: "acal-term-examdates-add_line#{term_index_by_term_type( term_type)}"); end
   def exam_error_message( term_type); final_exam_section( term_type).div( id: /acal-term-examdates_line\d+_messages/).li(class: 'uif-errorMessageItem'); end
   def exam_warning_message( term_type); final_exam_section( term_type).div( id: /acal-term-examdates_line\d+_messages/).li(class: 'uif-warningMessageItem'); end
-  def exclude_saturday_toggle( term_type); final_exam_section( term_type).checkbox( id: "exclude_Saturday_line#{term_index_by_term_type( term_type)}_line0_control"); end
-  def exclude_sunday_toggle( term_type); final_exam_section( term_type).checkbox( id: "exclude_Sunday_line#{term_index_by_term_type( term_type)}_line0_control"); end
+  def exclude_saturday_toggle( term_type); final_exam_section( term_type).checkbox( id: "exclude_Saturday_line0_line#{term_index_by_term_type( term_type)}_control"); end
+  def exclude_sunday_toggle( term_type); final_exam_section( term_type).checkbox( id: "exclude_Sunday_line0_line#{term_index_by_term_type( term_type)}_control"); end
 
   def set_exam_start_date( term_type, date)
     loading.wait_while_present
