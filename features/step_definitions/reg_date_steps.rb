@@ -15,7 +15,7 @@ end
 
 Then /^there is a message indicating that the registration period is not open$/ do
   on RegistrationCart do |page|
-    page.course_code_message(@reg_request.course_code,@reg_request.reg_group_code).text.should =~ /not open/i
+    page.reason_message(@reg_request.course_code,@reg_request.reg_group_code).should =~ /Registration is not currently open/i
   end
 end
 
