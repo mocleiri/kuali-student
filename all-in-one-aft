@@ -286,11 +286,12 @@ function process_args {
   DEBUG=0
   BUILD_NUMBER=0
 
-  while getopts h:d:t:j:a flag;
+  while getopts hdt:j:a: flag;
   do
     case "$flag" in
       h)
         usage;
+        exit
         ;;
       d)
         set_debug_mode
