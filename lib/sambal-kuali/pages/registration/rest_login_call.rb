@@ -82,6 +82,24 @@ class RestEILEENLLogin < PageFactory
 
 end
 
+class RestSONALIKLogin < PageFactory
+
+  page_url "#{$test_site}/services/DevelopmentLoginClientService/login?userId=E.SONALIK&password=E.SONALIK"
+
+end
+
+class RestSOOBLogin < PageFactory
+
+  page_url "#{$test_site}/services/DevelopmentLoginClientService/login?userId=E.SOOB&password=E.SOOB"
+
+end
+
+class RestSTEVENJLogin < PageFactory
+
+  page_url "#{$test_site}/services/DevelopmentLoginClientService/login?userId=E.STEVENJ&password=E.STEVENJ"
+
+end
+
 class RestDMITRYLLogin < PageFactory
 
   page_url "#{$test_site}/services/DevelopmentLoginClientService/login?

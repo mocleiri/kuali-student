@@ -461,6 +461,12 @@ Given /^I log in to student registration as (\w+)$/  do |user|
       visit RestDMITRYLLogin
     when "ELEANORB"
       visit RestELEANORBLogin
+    when "SONALIK"
+      visit RestSONALIKLogin
+    when "SOOB"
+      visit RestSOOBLogin
+    when "STEVENJ"
+      visit RestSTEVENJLogin
   end
   puts "I am logged in to student registration as #{user}"
 end
