@@ -110,7 +110,7 @@ function initialize_schema() {
   set -x
   ${MVN} initialize -Pdb,oracle,sonar \
     -Djdbc.username=KSAFT${BUILD_NUMBER} -Djdbc.username=KSAFT${BUILD_NUMBER}
-  set +x
+  if [ $DEBUG -eq 0 ]; then set +x; fi
 }
 
 function download_tomcat() {
@@ -156,7 +156,7 @@ function install_maven_dependency_plugin() {
   set -x
   ${MVN} org.apache.maven.plugins:maven-dependency-plugin:2.8:get \
         -Dartifact=org.apache.maven.plugins:maven-dependency-plugin:2.8:jar
-  set +x
+  if [ $DEBUG -eq 0 ]; then set +x; fi
 
   echo "${FUNCNAME[0]}: installed maven dependency plugin."
 }
@@ -168,7 +168,7 @@ function install_oracle_driver() {
   ${MVN} org.apache.maven.plugins:maven-dependency-plugin:2.8:copy \
     -Dartifact=com.oracle:ojdbc6_g:11.2.0.2:jar \
     -DoutputDirectory=${WORKSPACE}/tomcat/lib
-  set +x
+  if [ $DEBUG -eq 0 ]; then set +x; fi
   echo "${FUNCNAME[0]}: installed oracle driver."
 }
 
@@ -206,9 +206,11 @@ EOT
 function install_war_artifact() {
   dbgprint
 
+  set -x
   ${MVN} org.apache.maven.plugins:maven-dependency-plugin:2.8:copy \
     -Dartifact=org.kuali.student.web:ks-with-rice-bundled:2.1.1-FR2-M1-build-$BUILD_NUMBER:war \
     -DoutputDirectory=.
+  if [ $DEBUG -eq 0 ]; then set +x; fi
 
   cp -p ks-with-rice-bundled-2.1.1-FR2-M1-build-$BUILD_NUMBER.war \
     ${WORKSPACE}/tomcat/webapps/ROOT.war
