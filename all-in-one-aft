@@ -267,6 +267,9 @@ function run_afts() {
 
   echo "${FUNCNAME[0]}: Running AFTs"
   cd ${WORKSPACE}
+
+  # temporarily override immediate exit
+  set +e
   ${WORKSPACE}/jenkinscucumber \
     http://localhost:8080 \
     headless_data \
@@ -274,6 +277,7 @@ function run_afts() {
     --threads=4 \
     --parallel=true \
     --firefox=27
+  set -e
   echo "${FUNCNAME[0]}: AFTs finished."
 }
 
