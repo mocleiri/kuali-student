@@ -136,7 +136,7 @@ class EditAcademicTerms < BasePage
   #
   #end
 
-  action(:key_date_group_dropdown) { |index, b| b.frm.select(id: "key_date_group_type_line#{index}_add_control")}
+  action(:key_date_group_dropdown) { |index, b| b.frm.select(id: "key_date_group_type_add_line#{index}_control")}
 
 
   action(:key_date_group_add) { |index, b| b.frm.button(id: "acal-term-keydatesgroup_line#{index}_add").click; b.loading.wait_while_present}
