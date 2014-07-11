@@ -1,4 +1,4 @@
-And /^I attempt to register for a course in a term whose registration period is (open|closed)$/ do |term_reg_status|
+And /^I attempt to register for a course in a subterm whose registration period is (open|closed)$/ do |term_reg_status|
   # the user for this test (student8) is assigned a current time after the close of registration for
   # Half Fall 1 (CHEM105), but should still be able to register for CHEM147 in Half Fall 2
   course_code = case term_reg_status
@@ -45,4 +45,33 @@ Then /^I can add and remove courses from my cart$/ do
     Then the course is not present in my cart
     }
     @reg_request = @reg_request_initial
+end
+
+
+Then /^there is a message indicating that registration is unavailable for the term$/ do
+  on RegistrationCart do |page|
+    page.reg_locked_message.text.should =~ /Registration is not currently open/i
+  end
+end
+
+When /^I log in to student registration as a user configured for Fall (\d+)$/ do |year|
+  case year.to_i
+    when 2011 then
+      visit RestMonicafLogin
+      puts "I am logged in to student registration as monicaf"
+    when 2012 then
+      visit RestSOOBLogin
+      puts "I am logged in to student registration as SOOB"
+  end
+end
+
+And /^I attempt to access registration for Fall 2012$/ do
+  # Default term is Fall 2012 so all we need to do is visit the page
+  visit RegistrationCart
+end
+
+Then /^I am able to access registration features$/ do
+  on RegistrationCart do |page|
+    page.reg_locked_message.visible?.should be_false
+  end
 end

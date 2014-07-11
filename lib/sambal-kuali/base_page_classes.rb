@@ -264,6 +264,7 @@ class RegisterForCourseBase < BasePage
   expected_element :cr_header_div
 
   element(:cr_header_div) { |b| b.div(class: "kscr-Header-container ng-scope") }
+  element(:header_term_name) { |b| b.span(id: "header_term_name") }
 
   element(:menu_button) { |b| b.cr_header_div.button(id: "reg_menu_button")}
   action(:menu) { |b| b.menu_button.click }
@@ -273,6 +274,27 @@ class RegisterForCourseBase < BasePage
   element(:cart_link) { |b| b.cr_header_div.link(id: "goToCart") }
   element(:logout_button) { |b| b.cr_header_div.button(id: "logout") }
   action(:logout) { |b| b.logout_button.click }
+
+  element(:reg_locked_message) { |b| b.span(id: "reg_locked_message") }
+
+  def select_term(term)
+    term_select.select(term)
+  end
+end
+
+class LargeFormatRegisterForCourseBase < BasePage
+
+  expected_element :cr_header_div
+
+  element(:cr_header_div) { |b| b.div(class: "kscr-Header-container ng-scope") }
+
+  element(:term_select) { |b| b.select(id: "searchTermDesktop") }
+  element(:user_menu_link) { |b| b.span(id: "header_user") }
+  action(:user_menu) { |b| b.user_menu_link.click }
+  element(:logout_link) { |b| b.li(id:"reg_user_menu_logout") }
+  action(:logout) { |b| b.logout_link.click }
+
+  element(:reg_locked_message) { |b| b.span(id: "reg_locked_message").text }
 
   def select_term(term)
     term_select.select(term)

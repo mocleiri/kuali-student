@@ -25,7 +25,16 @@ Feature: REG.Registration Date Check
   #KSENROLL-13256
   Scenario: CR 12.2 Verify registration for courses in sub-terms with different reg periods
     Given I log in to student registration as STEVENJ
-    And I attempt to register for a course in a term whose registration period is closed
+    And I attempt to register for a course in a subterm whose registration period is closed
     Then there is a message indicating that the registration period is not open
-    When I attempt to register for a course in a term whose registration period is open
+    When I attempt to register for a course in a subterm whose registration period is open
     Then there is a message indicating successful registration
+
+  #KSENROLL-13257
+  Scenario: CR 16.1/CR 17.1 Verify unable to access Reg Cart for a term whose registration period is not open
+    When I log in to student registration as a user configured for Fall 2011
+    And I attempt to access registration for Fall 2012
+    Then there is a message indicating that registration is unavailable for the term
+    When I log in to student registration as a user configured for Fall 2012
+    And I attempt to access registration for Fall 2012
+    Then I am able to access registration features

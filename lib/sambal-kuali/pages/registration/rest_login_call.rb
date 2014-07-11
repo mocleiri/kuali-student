@@ -102,14 +102,24 @@ end
 
 class RestDMITRYLLogin < PageFactory
 
-  page_url "#{$test_site}/services/DevelopmentLoginClientService/login?
-userId=E.DMITRYL&password=E.DMITRYL"
+  page_url "#{$test_site}/services/DevelopmentLoginClientService/login?userId=E.DMITRYL&password=E.DMITRYL"
 
 end
 
 class RestELEANORBLogin < PageFactory
 
-  page_url "#{$test_site}/services/DevelopmentLoginClientService/login?
-userId=B.ELEANORB&password=B.ELEANORB"
+  page_url "#{$test_site}/services/DevelopmentLoginClientService/login?userId=B.ELEANORB&password=B.ELEANORB"
+
+end
+
+class RestMonicafLogin < PageFactory
+
+  page_url "#{$test_site}/services/DevelopmentLoginClientService/login?userId=e.monicaf&password=e.monicaf"
+
+end
+
+class RestNancyfLogin < PageFactory
+
+  page_url "#{$test_site}/services/DevelopmentLoginClientService/login?userId=e.nancyf&password=e.nancyf"
 
 end

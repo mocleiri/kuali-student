@@ -5,7 +5,7 @@ class RegistrationCart < RegisterForCourseBase
   CONTEXT_NEW_ITEM = "newItem"
   CONTEXT_CART = "cart"
 
-  expected_element :credit_count_title
+  expected_element :header_term_name
 
   #element(:item_count) { |b| b.span(id: "course_count") }
   element(:credit_count_title) { |b| b.div(id: "credit_count_title") }
