@@ -17,7 +17,9 @@ class CourseSectionObject < DataFactory
                 :activity_offering_location,
                 :activity_offering_seats,
                 :activity_offering_additional_details,
-                :activity_offering_select
+                :activity_offering_select,
+                :activity_offering_list
+
 
 
 
@@ -40,10 +42,9 @@ class CourseSectionObject < DataFactory
         :activity_offering_seats=>"0/35",
         :activity_offering_additional_details=>" ",
 
-
-
-
     }
+
+
     set_options(defaults.merge(opts))
 
   end

@@ -26,7 +26,8 @@ class CourseSearchResults < DataFactory
                 :subject,
                 :gened_code,
                 :gened_course,
-                :course_level
+                :course_level,
+                :course_offering_description_list
 
   def initialize(browser, opts={})
     @browser = browser
@@ -50,7 +51,15 @@ class CourseSearchResults < DataFactory
         :gened_code=>"DSSP",
         :gened_course=>"General Education: Scholarship in Practice",
         :course_level=> '3',
-        :course_prefix=> 'ENGL'
+        :course_prefix=> 'ENGL',
+        course_offering_description_list:[
+            (make CourseOfferingDescriptionObject, :courseofferingdescription_level => 0),
+            (make CourseOfferingDescriptionObject, :courseofferingdescription_level => 1)
+
+        ]
+
+
+
 
 
     }

@@ -18,17 +18,18 @@ Given I am logged in as a Student
 @wip
 
 
-  Scenario:Verify that  I am able to add Multiple Activity Offerings to my Plan
+  Scenario:Verify that  I am able to see an option to add Multiple Activity Offerings to my Plan
     When I search for a course with Multiple Activity Offerings
     And I navigate to the Course Section Details page
-    Then I should be able to add multiple activity   offerings to my Plan
+    And I select the activity offerings
+    Then I should be able to see an option to add multiple offerings to my plan
 
 
 @wip
-  Scenario:Verify that  I am able to add Single Activity Offering to my Plan
+  Scenario:Verify that  I am able to see an option to add Single Activity Offering to my Plan
     When I search for a course with Single Activity Offering
     And I navigate to the Course Section Details page
-    Then I should be able to add the activity offering to my plan
+    Then I should be able to see an option to add the course to my plan
 
 
 
