@@ -256,6 +256,7 @@ function start_tomcat() {
   if [ $a -ge "$LIMIT" ]
   then
     echo "Timeout of $(($LIMIT*$SLEEP)) seconds exceeded"
+    shutdown_tomcat
     exit 1
   fi
 
