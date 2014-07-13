@@ -184,7 +184,8 @@ function setup_tomcat() {
   cat > ${WORKSPACE}/tomcat/conf/server.xml <<EOT
 <?xml version='1.0' encoding='utf-8'?>
 <Server port="8005" shutdown="SHUTDOWN">
-  <Listener className="org.apache.catalina.security.SecurityListener" />
+  <!-- SecurityListener commented out to allow root to run tomcat -->
+  <!--Listener className="org.apache.catalina.security.SecurityListener" /-->
   <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
   <Listener className="org.apache.catalina.core.JasperListener" />
   <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
