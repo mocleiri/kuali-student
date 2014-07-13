@@ -10,7 +10,7 @@ MVN="mvn"
 AFT_URL="https://svn.kuali.org/repos/student/test/functional-automation/sambal/trunk"
 
 # tomcat variables
-TOMCAT_VERSION=6.0.41
+TOMCAT_VERSION=7.0.54
 export CATALINA_HOME=${WORKSPACE}/tomcat
 export CATALINA_OPTS="-Xms512m -Xmx4g -XX:MaxPermSize=512m -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -XX:+PrintTenuringDistribution -Xloggc:${WORKSPACE}/tomcat/logs/heap.log -XX:HeapDumpPath=${WORKSPACE}/tomcat/logs -XX:+HeapDumpOnOutOfMemoryError"
 
@@ -124,10 +124,10 @@ function download_tomcat() {
   if [ $DEBUG -eq 0 ]; then OPT="--no-verbose"; fi
 
   wget $OPT -O /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz \
-    http://archive.apache.org/dist/tomcat/tomcat-6/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
+    http://archive.apache.org/dist/tomcat/tomcat-7/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
 
   # stop building if md5sum does not match
-  echo "aaf541df90a5f6160e43177ba8e6ec1e  /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz" | \
+  echo "e43771bc8c6a10956495d13300567244  /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz" | \
     md5sum -c
   echo "${FUNCNAME[0]}: download tomcat $TOMCAT_VERSION."
 }
@@ -184,11 +184,13 @@ function setup_tomcat() {
   cat > ${WORKSPACE}/tomcat/conf/server.xml <<EOT
 <?xml version='1.0' encoding='utf-8'?>
 <Server port="8005" shutdown="SHUTDOWN">
+  <!-- SecurityListener commented out to allow root to run tomcat -->
+  <!--Listener className="org.apache.catalina.security.SecurityListener" /-->
   <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" />
   <Listener className="org.apache.catalina.core.JasperListener" />
   <Listener className="org.apache.catalina.core.JreMemoryLeakPreventionListener" />
-  <Listener className="org.apache.catalina.mbeans.ServerLifecycleListener" />
   <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" />
+  <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" />
   <Service name="Catalina">
     <Connector port="8080" protocol="HTTP/1.1" 
                connectionTimeout="20000" 
