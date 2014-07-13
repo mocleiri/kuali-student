@@ -289,7 +289,8 @@ function run_afts() {
 function cleanup_tomcat() {
   dbgprint
 
-  ${CATALINA_HOME}/bin/shutdown.sh -force $(cat $CATALINA_PID) 2>&1
+  # wait 30 seconds while sutting down tomcat, then use force!!
+  ${CATALINA_HOME}/bin/shutdown.sh 30 -force 2>&1
   echo "waiting for Tomcat to exit (PID: $(cat $CATALINA_PID))... "
   wait $(cat $CATALINA_PID)
   echo "${FUNCNAME[0]}: tomcat shutdown finished."
