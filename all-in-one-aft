@@ -13,6 +13,7 @@ AFT_URL="https://svn.kuali.org/repos/student/test/functional-automation/sambal/t
 TOMCAT_VERSION=7.0.54
 export CATALINA_HOME=${WORKSPACE}/tomcat
 export CATALINA_OPTS="-Xms512m -Xmx4g -XX:MaxPermSize=512m -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -XX:+PrintTenuringDistribution -Xloggc:${WORKSPACE}/tomcat/logs/heap.log -XX:HeapDumpPath=${WORKSPACE}/tomcat/logs -XX:+HeapDumpOnOutOfMemoryError"
+export CATALINA_PID=$(mktemp --suffix .ksaft.catalina)
 
 function usage() {
   cat <<EOT
@@ -227,10 +228,11 @@ function install_war_artifact() {
 function start_tomcat() {
   dbgprint
 
+  rm -f $CATALINA_PID
   # start up tomcat
   dbgprint ${CATALINA_HOME}/bin/startup.sh
   echo "Staring Tomcat..."
-  ${CATALINA_HOME}/bin/startup.sh
+  ${CATALINA_HOME}/bin/startup.sh 2>&1
 
   # timeout will be exceeded in LIMIT*SLEEP seconds
   LIMIT=30
@@ -258,7 +260,7 @@ function start_tomcat() {
   if [ $a -ge "$LIMIT" ]
   then
     echo "Timeout of $(($LIMIT*$SLEEP)) seconds exceeded"
-    shutdown_tomcat
+    cleanup_tomcat
     exit 1
   fi
 
@@ -284,10 +286,12 @@ function run_afts() {
   echo "${FUNCNAME[0]}: AFTs finished."
 }
 
-function shutdown_tomcat() {
+function cleanup_tomcat() {
   dbgprint
 
-  pkill -9 -f catalina
+  ${CATALINA_HOME}/bin/shutdown.sh --force 2>&1
+  echo "waiting for Tomcat to exit (PID: $(cat $CATALINA_PID))... "
+  wait $(cat $CATALINA_PID)
   echo "${FUNCNAME[0]}: tomcat shutdown finished."
 }
 
@@ -400,13 +404,18 @@ install_war_artifact
 # initialize schema (using impex)
 initialize_schema
 
+# register the cleanup function as callback to execute when a signal
+# is sent to this process
+trap cleanup_tomcat EXIT INT TERM
+
 # start tomcat
 start_tomcat
 
 # run AFTs
 run_afts
 
-# shutdown tomcat
-shutdown_tomcat
+# process was successful, so reset trap and cleanup normally
+trap - EXIT INT TERM
+cleanup_tomcat
 
 # vim: tabstop=2 shiftwidth=2
