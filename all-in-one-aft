@@ -406,7 +406,7 @@ initialize_schema
 
 # register the cleanup function as callback to execute when a signal
 # is sent to this process
-trap cleanup_tomcat EXIT INT TERM
+trap cleanup_tomcat EXIT SIGINT SIGTERM
 
 # start tomcat
 start_tomcat
@@ -415,7 +415,7 @@ start_tomcat
 run_afts
 
 # process was successful, so reset trap and cleanup normally
-trap - EXIT INT TERM
+trap - EXIT SIGINT SIGTERM
 cleanup_tomcat
 
 # vim: tabstop=2 shiftwidth=2
