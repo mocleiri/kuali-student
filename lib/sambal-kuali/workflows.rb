@@ -103,6 +103,13 @@ module Workflows
     end
   end
 
+  def go_to_admin_registration
+    visit KSMaintenancePortal do |page|
+      page.admin_reg
+    end
+  end
+
+
   def log_in(user, pwd)
     current_user = ""
 
