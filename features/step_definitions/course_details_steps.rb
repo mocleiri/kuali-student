@@ -80,7 +80,7 @@ end
 
 And(/^I navigate to the Course Section Details page$/) do
   @course_search_result.navigate_course_detail_page
-  @course_search_result.navigate_course_section_page
+ # @course_search_result.navigate_course_section_page
   on CourseSectionPage do |page|
   page.course_termlist.wait_until_present
   end

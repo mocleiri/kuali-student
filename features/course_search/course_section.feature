@@ -15,7 +15,6 @@ Given I am logged in as a Student
     And I navigate to the Course Section Details page
     Then I should be able to view the format offerings for the course
 
-@wip
 
 
   Scenario:Verify that  I am able to see an option to add Multiple Activity Offerings to my Plan
@@ -25,7 +24,7 @@ Given I am logged in as a Student
     Then I should be able to see an option to add multiple offerings to my plan
 
 
-@wip
+
   Scenario:Verify that  I am able to see an option to add Single Activity Offering to my Plan
     When I search for a course with Single Activity Offering
     And I navigate to the Course Section Details page
