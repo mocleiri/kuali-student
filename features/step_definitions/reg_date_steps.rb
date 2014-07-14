@@ -50,6 +50,7 @@ end
 
 Then /^there is a message indicating that registration is unavailable for the term$/ do
   on RegistrationCart do |page|
+    page.reg_locked_message.wait_until_present
     page.reg_locked_message.text.should =~ /Registration is not currently open/i
   end
 end
@@ -72,6 +73,7 @@ end
 
 Then /^I am able to access registration features$/ do
   on RegistrationCart do |page|
+    sleep 0.5
     page.reg_locked_message.visible?.should be_false
   end
 end
