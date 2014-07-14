@@ -308,6 +308,7 @@ end
 Then /^I? ?undo the drop action$/ do
   on RegistrationCart do |page|
     @reg_request.undo_remove_from_cart
+    sleep 3
   end
 end
 

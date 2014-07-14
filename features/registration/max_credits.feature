@@ -42,4 +42,4 @@ Feature: REG.Max Credits
     And I remove a course from my schedule
     Then I am able to successfully register for the failed course
    # Suspicion that next feature file is failing on login because we are still logged in here, so logout
-    And I log out from student registration
+    * I log out from student registration
