@@ -37,6 +37,7 @@ class RegistrationCart < RegisterForCourseBase
   element(:ao_type) { |course_code,reg_group_code,index,b| b.span(id: "ao_type_long_#{course_code}_#{reg_group_code}_#{index}").text }
   element(:course_schedule) { |course_code,reg_group_code,ao_index,index,b| b.div(id: "schedule_long_#{course_code}_#{reg_group_code}_#{ao_index}_#{index}").text }
 
+  element(:registering_message) { |b| b.div(id: "registering_message") }
   element(:user_message_div) { |b| b.div(id: "user_message") }
   element(:user_message) { |b| b.user_message_div.text }
   element(:reason_message) { |course_code,reg_group_code,b| b.span(id: "reason_message_#{course_code}_#{reg_group_code}").text }
