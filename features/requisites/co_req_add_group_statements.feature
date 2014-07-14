@@ -1,4 +1,4 @@
-@nightly @blue_team
+@nightly @yellow_team
 Feature: CO.Add Statement and Create Group of CO Requisites
 
   Background:

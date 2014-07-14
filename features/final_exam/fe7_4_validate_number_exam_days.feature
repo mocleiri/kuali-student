@@ -1,4 +1,4 @@
-@nightly @blue_team
+@nightly @yellow_team
 Feature: CO.FE7-4 Validation Message should show if Number of Exam Days is less than Matrix Days
   FE 7.4: As a Central Administrator I want the dates of a new exam period to be validated against the examination
   matrix when I create the exam period so that I do not create an exam period with fewer days than the matrix

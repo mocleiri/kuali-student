@@ -1,4 +1,4 @@
-@nightly @blue_team
+@nightly @yellow_team
 Feature: CO.FE3-13 Update Exam Offerings
   FE 3-13 As a Central Admin I want existing exam offerings to be Cancelled if the CO setting changes
   to "No final Exam" or "Alternative final assessment" after bulk creation and after the SoC is published so that exam

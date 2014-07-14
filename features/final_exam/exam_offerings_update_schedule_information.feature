@@ -1,4 +1,4 @@
-@nightly @blue_team
+@nightly @yellow_team
 Feature: CO.Exam Offerings change when Updating Schedule Information
   FE 5.2 As a Central Administrator I want exam offering requested scheduling information to be updated dynamically
   when I change AO ASIs so that scheduling information remains in line with those of the AO driving the exam and matrix slotting

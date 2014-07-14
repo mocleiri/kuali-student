@@ -1,4 +1,4 @@
-@nightly @blue_team
+@nightly @yellow_team
 Feature: CO.AZ FE2-4 Specific users should not be allowed to change the exam status
   FE 2.4: As a Central Administrator I want the system to be configured to allow only certain users to modify final
   exam settings so that only appropriate staff have the ability to override canonical or copied data

@@ -1,4 +1,4 @@
-@nightly @blue_team
+@nightly @yellow_team
 Feature: CO.Delete Statement or Group of CO Requisites
 
   Background:

@@ -1,4 +1,4 @@
-@nightly @blue_team
+@nightly @yellow_team
 Feature: CO.Change Logical Operators and Order of statement for CO Requisites
 
   Background:

@@ -1,4 +1,4 @@
-@nightly @blue_team
+@nightly @yellow_team
 Feature: CO.Bulk Create Exam Offerings
 
   FE 3.11: As a Central Administrator I want to create exam offerings in bulk at a particular stage in the course scheduling process

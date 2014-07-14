@@ -1,4 +1,4 @@
-@nightly @blue_team
+@nightly @yellow_team
 Feature: CO.Create Exam Offering for Schedule Information
   FE4.7 As a Central Admin I want to slot RSIs for CO driven exams during Create from Catalog as part of the dynamic
   process so that exam offering scheduling requests are consistent with the established exam matrix

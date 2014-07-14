@@ -1,4 +1,4 @@
-@nightly @blue_team
+@nightly @yellow_team
 Feature: CO.Compare to Canonical for CO Requisites
 
   Background:

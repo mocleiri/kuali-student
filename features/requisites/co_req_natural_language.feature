@@ -1,4 +1,4 @@
-@nightly @blue_team
+@nightly @yellow_team
 Feature: CO.Natural Language should always be displayed correctly
 
   Background:

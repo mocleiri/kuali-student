@@ -1,4 +1,4 @@
-@nightly @blue_team
+@nightly @yellow_team
 Feature: CO.Copy or Cut and Paste of CO Requisites
 
   Background:

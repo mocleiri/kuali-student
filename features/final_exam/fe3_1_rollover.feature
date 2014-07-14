@@ -1,4 +1,4 @@
-@nightly @blue_team
+@nightly @yellow_team
 Feature: CO.FE3-1 Perform Simple Rollover to test creation of exam offerings for specific terms
   FE 3.1 As a Central Administrator I want to create exam offerings in bulk at rollover based so that exam offerings
   will be created at an appropriate stage in my institution's scheduling process
