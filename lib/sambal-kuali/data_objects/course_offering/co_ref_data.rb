@@ -29,7 +29,14 @@ module CoRefData
                      :start_time => "09:00", :start_time_ampm => "am",
                      :end_time => "09:50", :end_time_ampm => "am",
                      :facility => 'KEY', :room => '0117'
-      activity_offering.add_req_sched_info :rsi_obj => si_obj
+      activity_offering.add_req_sched_info :rsi_obj => si_obj, :defer_save => true
+      activity_offering.edit :start_edit => false,
+                             :send_to_scheduler => true
+      course_offering.search_by_subjectcode
+    end
+    co_status = on(ManageCourseOfferingList).co_status(original_co.course)
+    if co_status != CourseOffering::OFFERED_STATUS
+      original_co.approve_co
     end
     original_co
   end
@@ -64,7 +71,14 @@ module CoRefData
                      :start_time => "09:00", :start_time_ampm => "am",
                      :end_time => "09:50", :end_time_ampm => "am",
                      :facility => 'KEY', :room => '0117'
-      activity_offering.add_req_sched_info :rsi_obj => si_obj
+      activity_offering.add_req_sched_info :rsi_obj => si_obj, :defer_save => true
+      activity_offering.edit :start_edit => false,
+                             :send_to_scheduler => true
+      course_offering.search_by_subjectcode
+    end
+    co_status = on(ManageCourseOfferingList).co_status(original_co.course)
+    if co_status != CourseOffering::OFFERED_STATUS
+      original_co.approve_co
     end
     original_co
   end
@@ -98,7 +112,14 @@ module CoRefData
                      :start_time => "09:00", :start_time_ampm => "am",
                      :end_time => "09:50", :end_time_ampm => "am",
                      :facility => 'KEY', :room => '0117'
-      activity_offering.add_req_sched_info :rsi_obj => si_obj
+      activity_offering.add_req_sched_info :rsi_obj => si_obj, :defer_save => true
+      activity_offering.edit :start_edit => false,
+                             :send_to_scheduler => true
+      course_offering.search_by_subjectcode
+    end
+    co_status = on(ManageCourseOfferingList).co_status(original_co.course)
+    if co_status != CourseOffering::OFFERED_STATUS
+      original_co.approve_co
     end
     original_co
   end
@@ -148,6 +169,11 @@ module CoRefData
                 :send_to_scheduler => true
 
       end
+      course_offering.search_by_subjectcode
+    end
+    co_status = on(ManageCourseOfferingList).co_status(course_offering.course)
+    if co_status != CourseOffering::OFFERED_STATUS
+      course_offering.approve_co
     end
     course_offering
   end
