@@ -1562,7 +1562,7 @@ Then /^the Exclude Saturday or Exclude Sunday fields should be deselected when v
 end
 
 Then /^the Exam Offering listed in the EO for CO table should be in a ([^"]*) state$/ do |exp_msg|
-  on(ViewExamOfferings).get_eo_by_co_status_text.should == exp_msg
+  on(ViewExamOfferings).get_eo_by_co_status_text.should =~ /#{exp_msg}/
 end
 
 Then /^the Exam Offering table should be in a Canceled state$/ do
