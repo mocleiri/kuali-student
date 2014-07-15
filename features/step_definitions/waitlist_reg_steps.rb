@@ -124,3 +124,8 @@ Then /^I can go to My Schedule and verify I am not on the waitlist$/ do
     page.course_code(@reg_request.course_code, @reg_request.reg_group_code,"waitlist").exists?.should be_false
   end
 end
+
+
+Given /^a waitlisted course exists$/ do
+  pending
+end

@@ -46,6 +46,24 @@ Feature: REG.Wait List
     And I remove myself from the waitlist
     Then I can verify I am not on the waitlist
 
+#KSENROLL-12349
+  @wip
+  Scenario: CR 8.5 Verify the order of waitlisted students is maintained as students are removed
+    Given a waitlisted course exists
+    When a registered student drops the course
+    Then the order of students remaining on the waitlist is adjusted correctly
+    When a student is removed from the waitlist
+    Then the order of students remaining on the waitlist is adjusted correctly
+
+#KSENROLL-12350
+  @wip
+  Scenario: CR 8.6 Verify the number of waitlisted students is maintained as students are added and removed
+    Given a waitlisted course exists
+    When a student is removed from the waitlist
+    Then the number and order of students remaining on the waitlist is adjusted correctly
+    When the same student is added back onto the waitlist
+    Then they are put at the end of the waitlist
+
   #KSENROLL-12351
   Scenario: CR 8.7 I want to edit the parameters of a waitlisted registration group so if I am registered for it I can take it with my preferred options
     When I register for a full CHEM3 course offering and add myself to a waitlist
