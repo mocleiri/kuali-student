@@ -4,7 +4,7 @@ class CourseSectionPage < BasePage
 
   wrapper_elements
   frame_element
-  expected_element :course_detail_header
+  expected_element :course_termlist
 
  #10-Elements in the course section
   element(:course_detail_header) { |b| b.main(id:"coursedetails-page").header(id:"courseCodeTitle")}
@@ -21,6 +21,9 @@ class CourseSectionPage < BasePage
   value(:activity_offering_seats){|coursedesc_level,courseterm_level,formatlist_level,fo_level,ao_level,b|b.div(id:"seats_line#{coursedesc_level}_line#{courseterm_level}_line#{formatlist_level}_line#{fo_level}_line#{ao_level}").text}
   value(:activity_offering_additional_details){|coursedesc_level,courseterm_level,formatlist_level,fo_level,ao_level,b|b.div(id:"additionalDetails_line#{coursedesc_level}_line#{courseterm_level}_line#{formatlist_level}_line#{fo_level}_line#{ao_level}").text}
   value(:activity_offering_select){|coursedesc_level,courseterm_level,formatlist_level,fo_level,ao_level,b|b.div(id:"select_line#{coursedesc_level}_line#{courseterm_level}_line#{formatlist_level}_line#{fo_level}_line#{ao_level}").text}
+  element(:add_plan_link){|coursedesc_level,courseterm_level,formatlist_level,fo_level,ao_level,b|b.div(id:"addPlanLink_line#{coursedesc_level}_line#{courseterm_level}_line#{formatlist_level}_line#{fo_level}_line#{ao_level}")}
+  element(:website){|coursedesc_level,courseterm_level,formatlist_level,fo_level,ao_level,b|b.a(id:"classUrl_line#{coursedesc_level}_line#{courseterm_level}_line#{formatlist_level}_line#{fo_level}_line#{ao_level}")}
+  element(:restrictions){|coursedesc_level,courseterm_level,formatlist_level,fo_level,ao_level,b|b.a(id:"requirementsUrl_line#{coursedesc_level}_line#{courseterm_level}_line#{formatlist_level}_line#{fo_level}_line#{ao_level}")}
   #Checkbox for adding to plan
   element(:activityoffering_checkbox){|coursedesc_level,courseterm_level,formatlist_level,fo_level,ao_level,b|b.checkbox(id:"select_line#{coursedesc_level}_line#{courseterm_level}_line#{formatlist_level}_line#{fo_level}_line#{ao_level}_control")}
   element(:add_to_button_enabled) {|b|b.button(class:"btn btn-primary btn btn-primary uif-boxLayoutHorizontalItem")}
@@ -32,5 +35,7 @@ class CourseSectionPage < BasePage
   action(:ao_discussion){|course_code,b| b.div(id: /#{course_code}.*activity-offering-discussion/) }
   action(:ao_lab){|course_code,b| b.div(id: /#{course_code}.*activity-offering-lab/) }
   element(:course_termlist) {|b|b.div(id:"course-term-list")}
-end
+  element(:term_credit) {|term_credit,b|b.a(id:/#{term_credit}_section_toggle/)}
+  element(:course_variable_credit) {|course_variable_credit,course_code,b|b.a(id:/#{course_variable_credit}_#{course_code}_section_toggle/)}
+  end
 

@@ -18,7 +18,9 @@ class CourseSectionObject < DataFactory
                 :activity_offering_seats,
                 :activity_offering_additional_details,
                 :activity_offering_select,
-                :activity_offering_list
+                :activity_offering_list,
+                :term_credit,
+                :course_variable_credit
 
 
 
@@ -41,6 +43,8 @@ class CourseSectionObject < DataFactory
         :activity_offering_location=>"TWS 0221",
         :activity_offering_seats=>"0/35",
         :activity_offering_additional_details=>" ",
+        :term_credit=>"2014Spring",
+        :course_variable_credit=>"2014Summer1"
 
     }
 

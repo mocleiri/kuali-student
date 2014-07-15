@@ -31,6 +31,15 @@ Given I am logged in as a Student
     Then I should be able to see an option to add the course to my plan
 
 
+  Scenario:Verify that  I am able to see website and restriction links for a course
+    When I search for a course with website and restrictions link
+    And I navigate to the Course Section Details page
+    Then I should be able to see the website and restriction links for the course
 
+
+  Scenario:Verify that  I am able to see an option to add course with variable credits to my Plan
+    When I search for a course with variable credits
+    And I navigate to the Course Section Details page
+    Then I should be able to see an option to add a course with variable credits to my plan
 
 

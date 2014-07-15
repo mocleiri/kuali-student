@@ -52,7 +52,7 @@ class CourseSearchResults < DataFactory
         :gened_course=>"General Education: Scholarship in Practice",
         :course_level=> '3',
         :course_prefix=> 'ENGL',
-        course_offering_description_list:[
+         course_offering_description_list:[
             (make CourseOfferingDescriptionObject, :courseofferingdescription_level => 0),
             (make CourseOfferingDescriptionObject, :courseofferingdescription_level => 1)
 
