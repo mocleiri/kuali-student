@@ -14,7 +14,7 @@ end
 
 Given /^there is an existing course offering with activity offerings that have waitlists enabled$/ do
   @course_offering = make CourseOffering, :course => "ENGL293"
-  @activity_offering = make ActivityOfferingObject, :parent_course_offering => @course_offering, :code => "A"
+  @activity_offering = make ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster, :code => "A"
 end
 
 #Given /^I create a course and activity offering with waitlists enabled$/ do
@@ -30,7 +30,7 @@ Given /^I (?:manage|create)(?: a course)? and? activity offering with waitlists 
     @calendar.terms << term
   end
   @course_offering = create CourseOffering, :term => @calendar.terms[0].term_code, :course => "ENGL300", :waitlists => true
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
 end
 
 Given /^I create a course and activity offering with waitlists disabled$/ do
@@ -40,12 +40,12 @@ Given /^I create a course and activity offering with waitlists disabled$/ do
     @calendar.terms << term
   end
   @course_offering_wl_disabled = create CourseOffering, :term => @calendar.terms[0].term_code, :course => "ENGL300", :waitlist => false
-  @activity_offering_wl_disabled = create ActivityOfferingObject, :parent_course_offering => @course_offering_wl_disabled
+  @activity_offering_wl_disabled = create ActivityOfferingObject, :parent_cluster => @course_offering_wl_disabled.default_cluster
 end
 
 Given /^I (?:manage|create) an activity offering with the limit waitlist size set$/ do
   @course_offering = create CourseOffering, :course => "ENGL300", :waitlists => true
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
   @activity_offering.waitlist_config.edit :enabled => true, :limit_size => 30
 
   on(ManageCourseOfferings).view_activity_offering(@activity_offering.code)
@@ -58,7 +58,7 @@ end
 
 Given /^I manage an activity offering with waitlists processing type set to (.*)$/ do |processing_type|
   @course_offering = create CourseOffering, :course => "ENGL300", :waitlists => true
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
   @activity_offering.waitlist_config.edit :enabled => true, :type => processing_type
 
   on(ManageCourseOfferings).view_activity_offering(@activity_offering.code)
@@ -84,7 +84,7 @@ Given /^I can update the processing type to (.*)$/ do |processing_type|
 end
 
 Then /^I make changes to the default waitlist configuration for one of the activity offerings$/ do
-  @ao_list[0].parent_course_offering.manage
+  @ao_list[0].manage_parent_co
   @ao_list[0].waitlist_config.edit :enabled => true,
                                    :type => "Manual",
                                    :limit_size => 10,
@@ -123,12 +123,12 @@ end
 
 Given /^I add two activity offerings$/ do
   @course_offering.manage
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering
-  @activity_offering2 = create ActivityOfferingObject, :parent_course_offering => @course_offering
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
+  @activity_offering2 = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
 end
 
 Given /^I add an activity offering$/ do
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
 end
 
 Given /^the activity offerings have active waitlists and waitlists have the default configuration$/ do
@@ -242,7 +242,7 @@ end
 
 Given /^I manage an activity offering with the waitlist allow hold list option enabled$/ do
   @course_offering = create CourseOffering, :course => "ENGL300", :waitlists => true
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
   @activity_offering.waitlist_config.edit :enabled => true,
                                           :allow_hold_list => true
 
@@ -305,13 +305,13 @@ Given /^there are two other activity offering with waitlists enabled and no wait
   @ao_list = []
   ["ENGL416","ENGL420"].each do |co_code|
     course_offering = create CourseOffering, :course => co_code, :waitlists => true
-    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering
+    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
     @ao_list << activity_offering
   end
 end
 
 When /^I colocate the activity offering with other two offerings and select shared maximum enrolment$/ do
-  @activity_offering.parent_course_offering.manage
+  @activity_offering.manage_parent_co
   @activity_offering.edit :colocated => true,
                           :colocate_ao_list => @ao_list,
                           :colocate_shared_enrollment => true,
@@ -322,7 +322,7 @@ end
 
 Then /^all three activity offerings have the same waitlist limit size$/ do
   @ao_list.each do |ao|
-    ao.parent_course_offering.manage
+    ao.manage_parent_co
     on(ManageCourseOfferings).view_activity_offering(ao.code)
 
     on ActivityOfferingInquiry do |page|
@@ -341,13 +341,13 @@ Given /^I create three course offerings with one activity offering in each with 
 
   ["ENGL300","WMST300","WMST400"].each do |co_code|
     course_offering = create CourseOffering, :course => co_code, :waitlists => true, :term => @term.term_code
-    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering
+    activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.activity_offering_cluster_list[0]
     @ao_list << activity_offering
   end
 end
 
 Given /^I colocate the three activity offerings \(shared enrolment\)$/ do
-  @ao_list[0].parent_course_offering.manage
+  @ao_list[0].manage_parent_co
   @ao_list[0].edit :colocated => true,
                    :colocate_ao_list => @ao_list[1..2],
                    :colocate_shared_enrollment => true,
@@ -356,7 +356,7 @@ end
 
 Then /activity offerings have the same waitlist configuration$/ do
   @ao_list.each do |ao|
-    ao.parent_course_offering.manage
+    ao.manage_parent_co
     on(ManageCourseOfferings).view_activity_offering(ao.code)
 
     on ActivityOfferingInquiry do |page|
@@ -372,9 +372,9 @@ end
 Then /^the waitlist configuration is copied to the(?: new)? colocated activity offering/ do
   course_offering_target = make CourseOffering, :course => @ao_list[0].parent_course_offering.course,
                                 :term => @term.term_code
-  @activity_offering_copy = make ActivityOfferingObject, :code => @ao_list[0].code, :parent_course_offering => course_offering_target
+  @activity_offering_copy = make ActivityOfferingObject, :code => @ao_list[0].code, :parent_cluster => course_offering_target.default_cluster
 
-  @activity_offering_copy.parent_course_offering.manage
+  @activity_offering_copy.manage_parent_co
   on(ManageCourseOfferings).view_activity_offering(@activity_offering_copy.code)
 
   on ActivityOfferingInquiry do |page|
@@ -391,9 +391,9 @@ Given /^there is an existing course offering with a colocated activity offering 
   @course_offering.manage
 
   @ao_list = []
-  @ao_list << (make ActivityOfferingObject, :code => "A", :parent_course_offering => @course_offering)
+  @ao_list << (make ActivityOfferingObject, :code => "A", :parent_cluster => @course_offering.default_cluster)
   colocated_ao_parent = make CourseOffering, :course => "HIST310", :term => "201208"
-  @ao_list << (make ActivityOfferingObject, :code => "A", :parent_course_offering => colocated_ao_parent, :colocated => true)
+  @ao_list << (make ActivityOfferingObject, :code => "A", :parent_cluster => colocated_ao_parent.default_cluster, :colocated => true)
   @ao_list[0].colocate_ao_list << @ao_list[1]
   on(ManageCourseOfferings).has_colo_icon(@ao_list[0].code).should be_true
 end
@@ -412,13 +412,12 @@ Given /^the waitlist configuration is copied to the new activity offering.*$/ do
 end
 
 When /^I delete one of the colocated activity offerings$/ do
-  @ao_list[0].parent_course_offering.manage
-  @ao_list[0].parent_course_offering.delete_ao :ao_code =>'A'
+  @ao_list[0].delete
 end
 
 Then /^the remaining two activity offerings still have the same waitlist configuration$/ do
   @ao_list[1..2].each do |ao|
-    ao.parent_course_offering.manage
+    ao.manage_parent_co
     on(ManageCourseOfferings).view_activity_offering(ao.code)
 
     on ActivityOfferingInquiry do |page|
@@ -432,31 +431,31 @@ Then /^the remaining two activity offerings still have the same waitlist configu
 end
 
 When /^I delete one of the related course offerings$/ do
-  @ao_list[0].parent_course_offering.manage
+  @ao_list[0].manage_parent_co
   @ao_list[0].parent_course_offering.delete_co_coc_view
 end
 
 Then /^the (?:remaining )?activity offerings.*are still colocated$/ do
   @ao_list[1..2].each do |ao|
-    ao.parent_course_offering.manage
+    ao.manage_parent_co
     on(ManageCourseOfferings).has_colo_icon(ao.code).should be_true
   end
 end
 
 When /^I delete two of the related course offerings$/ do
   @ao_list[0..1].each do |ao|
-    ao.parent_course_offering.manage
+    ao.manage_parent_co
     ao.parent_course_offering.delete_co_coc_view
   end
 end
 
 Then /^the remaining activity offering is no longer colocated$/ do
-  @ao_list[-1].parent_course_offering.manage
+  @ao_list[-1].manage_parent_co
   on(ManageCourseOfferings).has_colo_icon(@ao_list[-1].code).should be_false
 end
 
 Then /^the remaining activity offering still has the same waitlist configuration$/ do
-  @ao_list[2].parent_course_offering.manage
+  @ao_list[2].manage_parent_co
   on(ManageCourseOfferings).view_activity_offering(@ao_list[2].code)
 
   on ActivityOfferingInquiry do |page|
@@ -469,13 +468,13 @@ Then /^the remaining activity offering still has the same waitlist configuration
 end
 
 When /^I deactivate waitlists on the first activity offering$/ do
-  @ao_list[0].parent_course_offering.manage
+  @ao_list[0].manage_parent_co
   @ao_list[0].waitlist_config.edit :enabled => false
 end
 
 Then /^the waitlist configuration for the.*activity offerings? is not changed$/ do
   @ao_list[1..-1].each do |ao|
-    ao.parent_course_offering.manage
+    ao.manage_parent_co
     on(ManageCourseOfferings).view_activity_offering(ao.code)
 
     on ActivityOfferingInquiry do |page|
@@ -497,11 +496,11 @@ Given /^I create two colocated activity offerings \(shared enrolment\) with wait
 
   ["ENGL300","WMST300"].each do |co_code|
     course_offering = create CourseOffering, :course => co_code, :waitlists => true, :term => @term.term_code
-    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering
+    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
     @ao_list << activity_offering
   end
 
-  @ao_list[0].parent_course_offering.manage
+  @ao_list[0].manage_parent_co
   @ao_list[0].edit :colocated => true,
                    :colocate_ao_list => @ao_list[1..1],
                    :colocate_shared_enrollment => true,
@@ -509,13 +508,13 @@ Given /^I create two colocated activity offerings \(shared enrolment\) with wait
 end
 
 When /^I deactivate waitlists at the course offering level for one of the activity offerings$/ do
-  @ao_list[0].parent_course_offering.manage
+  @ao_list[0].manage_parent_co
   @ao_list[0].parent_course_offering.edit :waitlist => false
 end
 
 Then /^waitlists is deactivated for both activity offerings$/ do
   @ao_list.each do |ao|
-    ao.parent_course_offering.manage
+    ao.manage_parent_co
     on(ManageCourseOfferings).view_activity_offering(ao.code)
 
     on ActivityOfferingInquiry do |page|
@@ -527,21 +526,21 @@ end
 
 When /^I add another activity offering to the colocated set$/ do
     course_offering = create CourseOffering, :course => "WMST400", :waitlists => true, :term => @term.term_code
-    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering
+    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
     @ao_list << activity_offering
 
-    @ao_list[0].parent_course_offering.manage
+    @ao_list[0].manage_parent_co
     @ao_list[0].edit :colocated => true,
                      :colocate_ao_list => [activity_offering]
 end
 
 When /^I update the colocation settings to manage enrolments separately$/ do
-  @ao_list[0].parent_course_offering.manage
+  @ao_list[0].manage_parent_co
   @ao_list[0].edit :colocate_shared_enrollment => false, :max_enrollment => @ao_list[0].max_enrollment
 end
 
 When /^the other activity offering still has the default configuration$/ do
-  @ao_list[-1].parent_course_offering.manage
+  @ao_list[-1].manage_parent_co
   on(ManageCourseOfferings).view_activity_offering(@ao_list[-1].code)
 
   on ActivityOfferingInquiry do |page|

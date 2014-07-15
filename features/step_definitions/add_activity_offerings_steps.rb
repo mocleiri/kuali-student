@@ -17,7 +17,7 @@ When /^I copy an AO with Actual Scheduling Information$/ do
 
   @course_offering = create CourseOffering, :create_by_copy => @course_offering_source
   @ao_copy = make ActivityOfferingObject, :code => 'A',
-                    :parent_course_offering => @course_offering
+                    :parent_cluster => @course_offering.default_cluster
 end
 
 When /^I copy an AO with Requested Scheduling Information$/ do
@@ -25,9 +25,7 @@ When /^I copy an AO with Requested Scheduling Information$/ do
   # this AO should have RSIs but no ASIs
   @course_offering_source = @course_offering
   @course_offering_source.initialize_with_actual_values
-  @ao_copy = create ActivityOfferingObject, :create_by_copy => true,
-                    :code => 'A',
-                    :parent_course_offering => @course_offering_source
+  @ao_copy = @course_offering_source.copy_ao :ao_code => 'A'
 end
 
 Then /^the "(ASI|RSI)s" are successfully copied as RSIs in the new AO$/ do |source_scheduling_information_type|
@@ -40,7 +38,7 @@ Then /^the "(ASI|RSI)s" are successfully copied as RSIs in the new AO$/ do |sour
   end
   source_scheduling_information.nil?.should be_false
 
-  #@ao_copy.parent_course_offering.manage
+  #@ao_copy.manage_parent_co
   @ao_copy.edit :defer_save => true
 
   on ActivityOfferingMaintenance do |page|

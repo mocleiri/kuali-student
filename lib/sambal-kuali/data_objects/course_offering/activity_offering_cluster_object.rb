@@ -55,6 +55,10 @@ class ActivityOfferingClusterObject < DataFactory
     }
     options = defaults.merge(opts)
     set_options(options)
+
+    @ao_list.each do |ao|
+      ao.parent_cluster = self
+    end
   end
 
   def <=>(other)
@@ -91,7 +95,7 @@ class ActivityOfferingClusterObject < DataFactory
 
       ao_rows.each do |ao_row|
         ao_obj_temp = make ActivityOfferingObject
-        ao_obj_temp.initialize_with_actual_values(ao_row, @parent_course_offering, @private_name)
+        ao_obj_temp.initialize_with_actual_values(ao_row, self)
         @ao_list.push(ao_obj_temp)
       end
     end
@@ -143,7 +147,7 @@ class ActivityOfferingClusterObject < DataFactory
         page.complete_move_ao
       end
     end
-    @ao_list = []
+    @ao_list = collection('ActivityOffering')
     target_cluster.ao_list << @ao_list
   end
 
@@ -152,13 +156,9 @@ class ActivityOfferingClusterObject < DataFactory
     on ManageCourseOfferings do |page|
       page.remove_cluster(@private_name)
       page.confirm_delete_cluster
-      #begin
-      #  page.cluster_list_item_div(@private_name).wait_while_present(60)
-      #rescue Watir::Exception::UnknownObjectException
-        #ignore
-      #end
     end
-    @ao_list = []
+    @ao_list = collection('ActivityOffering')
+    @parent_course_offering.activity_offering_cluster_list.delete(self)
   end
 
 
@@ -189,12 +189,14 @@ class ActivityOfferingClusterObject < DataFactory
      end
   end
 
+
 end
 
 class ActivityOfferingClusterCollection < CollectionsFactory
   contains ActivityOfferingClusterObject
 
   def by_private_name(private_name)
+    return self[0] if private_name == :default_cluster
     self.find {|cluster| cluster.private_name == private_name }
   end
 end

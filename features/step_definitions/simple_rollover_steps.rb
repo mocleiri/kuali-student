@@ -254,7 +254,7 @@ Then /^the Activity Offerings are assigned to the target subterms$/ do
   @course_offering_target = make CourseOffering, :course => @course_offering.course, :term => @calendar_target.terms[0].term_code
   @course_offering_target.manage
 
-  @activity_offering_target = make ActivityOfferingObject, :code => @activity_offering.code, :parent_course_offering => @course_offering_target
+  @activity_offering_target = make ActivityOfferingObject, :code => @activity_offering.code, :parent_cluster => @course_offering_target.default_cluster
   on ManageCourseOfferings do |page|
     page.has_subterm_icon(@activity_offering_target.code).should == true
     page.view_activity_offering(@activity_offering_target.code)
@@ -271,7 +271,7 @@ Then /^the Activity Offerings are assigned to the target subterms$/ do
     page.cancel
   end
 
-  @activity_offering_target2 = make ActivityOfferingObject, :code => @activity_offering2.code, :parent_course_offering => @course_offering_target
+  @activity_offering_target2 = make ActivityOfferingObject, :code => @activity_offering2.code, :parent_cluster => @course_offering_target.default_cluster
   on ManageCourseOfferings do |page|
     page.has_subterm_icon(@activity_offering_target2.code).should == true
     page.view_activity_offering(@activity_offering_target2.code)
@@ -297,7 +297,7 @@ end
 Then /^the Activity Offerings for the copied CO are assigned to the target subterms$/ do
   @course_offering_copy.manage
 
-  @activity_offering_copy = make ActivityOfferingObject, :code =>"A", :parent_course_offering => @course_offering_copy
+  @activity_offering_copy = make ActivityOfferingObject, :code =>"A", :parent_cluster => @course_offering_copy.default_cluster
   on ManageCourseOfferings do |page|
     page.has_subterm_icon(@activity_offering_copy.code).should == true
     page.view_activity_offering(@activity_offering_copy.code)
@@ -314,7 +314,7 @@ Then /^the Activity Offerings for the copied CO are assigned to the target subte
     page.cancel
   end
 
-  @activity_offering_target2 = make ActivityOfferingObject, :code => "B", :parent_course_offering => @course_offering_target
+  @activity_offering_target2 = make ActivityOfferingObject, :code => "B", :parent_cluster => @course_offering_target.default_cluster
   on ManageCourseOfferings do |page|
     page.has_subterm_icon(@activity_offering_target2.code).should == true
     page.view_activity_offering(@activity_offering_target2.code)

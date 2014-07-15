@@ -53,7 +53,7 @@ When /^I manage a course offering$/ do
   @term_for_test = Rollover::OPEN_SOC_TERM unless @term_for_test != nil
   @course_offering = make CourseOffering, :course=>"CHEM611", :term=>@term_for_test
   @course_offering.manage
-  @activity_offering = make ActivityOfferingObject, :code=>"A", :parent_course_offering => @course_offering
+  @activity_offering = make ActivityOfferingObject, :code=>"A", :parent_cluster => @course_offering.default_cluster
 end
 
 Then /^I have access to delete an activity offering in a "([^"]*)" state$/ do |aostate|
@@ -181,10 +181,9 @@ Then /^I edit the activity offering I do not have access to change the subterm$/
 end
 
 Then /^I have access to suspend an Activity Offering$/ do
+  new_activity_offering = @course_offering.copy_ao :ao_code=> "A"
   on ManageCourseOfferings do |page|
-    #page.select_ao("A")
-    @course_offering.copy_ao :ao_code=> "A"
-    page.select_ao(@course_offering.activity_offering_cluster_list[0].ao_list.last.code)
+    page.select_ao(new_activity_offering.code)
     page.suspend_ao
   end
 
@@ -210,9 +209,9 @@ Then /^I do not have access to suspend an Activity Offering$/ do
 end
 
 Then /^I have access to cancel an Activity Offering$/ do
+  new_course_offering = @course_offering.copy_ao :ao_code=> "A"
   on ManageCourseOfferings do |page|
-    @course_offering.copy_ao :ao_code=> "A"
-    page.select_ao(@course_offering.activity_offering_cluster_list[0].ao_list.last.code)
+    page.select_ao(new_course_offering.code)
     page.cancel_ao
   end
 

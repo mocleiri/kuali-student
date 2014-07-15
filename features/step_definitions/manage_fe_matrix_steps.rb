@@ -414,7 +414,7 @@ Given /^that the Course Offering has a CO-driven final exam that is marked to us
     course_offering.delivery_format_list[0].final_exam_activity = 'Lecture'
     course_offering.create
 
-    activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering,
+    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
                                 :format => 'Lecture Only', :activity_type => 'Lecture'
   end
 
@@ -460,10 +460,10 @@ Given /^that the Course Offering has a CO-driven final exam that is marked to us
     course_offering.delivery_format_list[0].final_exam_activity = ""
     course_offering.create
 
-    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
                                :format => "Lecture/Lab", :activity_type => "Lecture"
 
-    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
                                :format => "Lecture/Lab", :activity_type => "Lab"
 
     si_obj =  make SchedulingInformationObject, :days => "M",
@@ -514,7 +514,7 @@ Given /^that the Course Offering has an AO-driven exam that is marked to use the
     course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
     course_offering.create
 
-    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
                                :format => "Lecture/Discussion", :activity_type => "Lecture"
     si_obj =  make SchedulingInformationObject, :days => "MW",
                    :start_time => "11:00", :start_time_ampm => "am",
@@ -523,7 +523,7 @@ Given /^that the Course Offering has an AO-driven exam that is marked to use the
     activity_offering.add_req_sched_info :rsi_obj => si_obj
 
     #TODO: KSENROLL-13157 problems creating 2nd AO
-    # activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    # activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
     #                            :format => "Lecture/Discussion", :activity_type => "Discussion"
     # si_obj =  make SchedulingInformationObject, :days => "W",
     #                :start_time => "09:00", :start_time_ampm => "am",
@@ -614,7 +614,7 @@ end
 
 Given /^there is an Activity Offering that has RSI data but has no ASI data$/ do
   @activity_offering = @course_offering.activity_offering_cluster_list[0].ao_list[0]
-      # make ActivityOfferingObject, :code => "F", :parent_course_offering => @course_offering
+      # make ActivityOfferingObject, :code => "F", :parent_cluster => @course_offering.default_cluster,
 end
 
 Given /^that the Course Offering has an AO-driven exam that is marked to use the matrix and Requested Scheduling Information for the exam does not exist on the Final Exam Matrix$/ do
@@ -630,7 +630,7 @@ Given /^that the Course Offering has an AO-driven exam that is marked to use the
     course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
     course_offering.create
 
-    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
                                :format => "Lecture Only", :activity_type => "Lecture"
     si_obj =  make SchedulingInformationObject, :days => "T",
                    :start_time => "10:00", :start_time_ampm => "am",
@@ -686,7 +686,7 @@ Given /^that the Course Offering has one Activity Offering with Requested Schedu
     course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
     course_offering.create
 
-    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                                :format => "Lecture Only", :activity_type => "Lecture"
     si_obj =  make SchedulingInformationObject, :days => "TH",
                    :start_time => "03:30", :start_time_ampm => "pm",
@@ -712,7 +712,7 @@ Given /^that the Course Offering has one Activity Offering with Requested Schedu
     course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
     course_offering.create
 
-    activity_offering = create ActivityOfferingObject, :parent_course_offering => course_offering,
+    activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                                :format => "Lecture Only", :activity_type => "Lecture"
     si_obj =  make SchedulingInformationObject, :days => "T",
                    :start_time => "03:30", :start_time_ampm => "pm",

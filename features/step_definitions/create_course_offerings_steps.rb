@@ -97,12 +97,12 @@ And /^I create a Course Offering from catalog with Activity Offerings assigned t
   @course_offering.delivery_format_list[0].final_exam_activity = "Lab"
   @course_offering.create
 
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering,
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
                               :format => "Lab Only", :activity_type => "Lab"
   @activity_offering.edit :subterm => @calendar.terms[0].subterms[0].subterm_type, :defer_save => true
   @activity_offering.add_req_sched_info :rsi_obj => (make SchedulingInformationObject, :days => "MT"), :start_edit => false
 
-  @activity_offering2 = create ActivityOfferingObject,  :parent_course_offering => @course_offering,
+  @activity_offering2 = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
                                :format => "Lab Only", :activity_type => "Lab"
   @activity_offering2.edit :subterm => @calendar.terms[0].subterms[1].subterm_type, :defer_save => true
   @activity_offering2.add_req_sched_info :rsi_obj => (make SchedulingInformationObject, :days => "WF"), :start_edit => false
@@ -120,12 +120,12 @@ And /^I create a Course Offering from catalog with Activity Offerings assigned t
   @course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
   @course_offering.create
 
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering,
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
                               :format => "Lecture Only", :activity_type => "Lecture"
   @activity_offering.edit :subterm => @calendar.terms[0].subterms[0].subterm_type, :defer_save => true
   @activity_offering.add_req_sched_info :rsi_obj => (make SchedulingInformationObject, :days => "MT"), :start_edit => false
 
-  @activity_offering2 = create ActivityOfferingObject,  :parent_course_offering => @course_offering,
+  @activity_offering2 = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
                                :format => "Lecture Only", :activity_type => "Lecture"
   @activity_offering2.edit :subterm => @calendar.terms[0].subterms[1].subterm_type, :defer_save => true
   @activity_offering2.add_req_sched_info :rsi_obj => (make SchedulingInformationObject, :days => "WF"), :start_edit => false
@@ -139,11 +139,11 @@ And /^I create a Course Offering from catalog with Activity Offerings$/ do
   @course_offering.delivery_format_list[0].final_exam_activity = "Lab"
   @course_offering.create
 
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering,
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
                               :format => "Lab Only", :activity_type => "Lab"
   @activity_offering.add_req_sched_info :rsi_obj => (make SchedulingInformationObject, :days => "MT")
 
-  @activity_offering2 = create ActivityOfferingObject,  :parent_course_offering => @course_offering,
+  @activity_offering2 = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
                                :format => "Lab Only", :activity_type => "Lab"
   @activity_offering2.add_req_sched_info :rsi_obj => (make SchedulingInformationObject, :days => "WF")
 end

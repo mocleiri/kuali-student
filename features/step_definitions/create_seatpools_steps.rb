@@ -1,7 +1,7 @@
 When /^I create a seat pool for an activity offering by completing all fields$/ do
   @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
   @course_offering.manage
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :max_enrollment => 100, :defer_save => true
   @activity_offering.add_seat_pool :seat_pool_obj => (make SeatPoolObject),
                                    :start_edit => false,
@@ -34,7 +34,7 @@ end
 When /^I create seat pools for an activity offering and priorities are duplicated and not sequential$/ do
   @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
   @course_offering.manage
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :max_enrollment => 100, :defer_save => true
 
   seatpools = []
@@ -58,7 +58,7 @@ end
 When /^I add a seat pool using a population that is already used for that activity offering$/ do
   @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
   @course_offering.manage
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :max_enrollment => 100, :defer_save => true
 
   seatpools = []
@@ -86,7 +86,7 @@ end
 When /^I add a seat pool without specifying a population$/ do
   @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
   @course_offering.manage
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :max_enrollment => 100, :defer_save => true
   seatpool1 = make SeatPoolObject, :population_name => "", :seats => 10, :priority => 2, :exp_add_succeed => false
   @activity_offering.add_seat_pool :seat_pool_obj => (seatpool1),

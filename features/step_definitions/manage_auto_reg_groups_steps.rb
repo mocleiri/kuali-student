@@ -78,7 +78,7 @@ Then /^I try to rename the second activity offering cluster to the same private 
 end
 
 Then /^I remove the newly created cluster$/ do
-  @course_offering.delete_ao_cluster(@ao_cluster)
+  @ao_cluster.delete
 end
 
 
@@ -151,7 +151,7 @@ When /^I add an Activity Offering$/ do
 end
 
 When /^I update an Activity Offering to have less seats$/ do
-  actvity_offering = make ActivityOfferingObject, :parent_course_offering => @course_offering, :code => 'A'
+  actvity_offering = make ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster, :code => 'A'
   actvity_offering.edit :max_enrollment => 200
 end
 
@@ -162,12 +162,12 @@ Then /^a warning message is displayed stating "([^"]*)"$/ do |msg|
 end
 
 When /^I update an Activity Offering to create a time conflict$/ do
-  actvity_offering = make ActivityOfferingObject, :parent_course_offering => @course_offering, :code => 'B'
+  actvity_offering = make ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster, :code => 'B'
   actvity_offering.edit :rsi_obj => (make SchedulingInformationObject, :days=>"M")
  end
 
 When /^I edit the Activity Offering$/ do
-  @course_offering.edit_ao :ao_code =>"A"
+  @course_offering.find_ao_obj_by_code('A').edit :defer_save => true
 end
 
 When /^I move a lecture activity offering to the new cluster$/ do
@@ -175,5 +175,5 @@ When /^I move a lecture activity offering to the new cluster$/ do
 end
 
 When /^I delete an Activity Offering$/ do
-   @course_offering.delete_ao :ao_code=>"B"
+   @course_offering.get_ao_obj_by_code("B").delete
 end

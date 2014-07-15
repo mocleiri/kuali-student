@@ -26,14 +26,14 @@ When /^I edit an existing activity offering with (\d+) seat pools?$/ do |number|
 
   @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
   @course_offering.manage
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :max_enrollment => 100, :defer_save => true
 
   @activity_offering.add_seat_pool_list :seat_pool_list => pool_list,
                                         :start_edit => false,
                                    :defer_save => false
 
-  @activity_offering.parent_course_offering.manage
+  @activity_offering.manage_parent_co
   @activity_offering.edit :defer_save => true
 end
 
@@ -62,7 +62,7 @@ Then /^the activity offering is updated when saved$/ do
   @activity_offering.resequence_expected_seatpool_priorities()
   @activity_offering.save
   #reopens activity offering in edit mode to recheck everything persisted
-  @activity_offering.parent_course_offering.manage
+  @activity_offering.manage_parent_co
   on ManageCourseOfferings do |page|
     page.edit @activity_offering.code
   end

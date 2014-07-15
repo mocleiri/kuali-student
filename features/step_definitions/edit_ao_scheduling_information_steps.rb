@@ -70,7 +70,7 @@ Then /^the AO's scheduling information shows the new schedule$/ do
 end
 
 Then /^the AO's scheduling information shows the new schedule as TBA$/ do
-  @activity_offering.parent_course_offering.manage
+  @activity_offering.manage_parent_co
   @activity_offering.edit :defer_save => true
 
   sched_info = @activity_offering.requested_scheduling_information_list.by_key('')
@@ -100,7 +100,7 @@ When /^I add RSIs for an AO checking the TBA flag$/ do
 end
 
 And /^I delete the original RSIs$/ do
-  @activity_offering.parent_course_offering.manage
+  @activity_offering.manage_parent_co
   @activity_offering.edit :defer_save => true
   @activity_offering.requested_scheduling_information_list[0].delete
   @activity_offering.save
@@ -140,7 +140,7 @@ When /^I edit an Activity Offering with non-standard time slots (approved|not ap
   else
     course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term => "201301", :course=>"ENGL262")
   end
-  @activity_offering = make ActivityOfferingObject, :parent_course_offering => course_offering, :code => 'A'
+  @activity_offering = make ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster, :code => 'A'
   @activity_offering.get_actual_values_from_page
 end
 

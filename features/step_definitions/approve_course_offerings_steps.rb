@@ -92,12 +92,8 @@ Given /^I suspend two activity offerings in offered status for a course offering
   @course_offering.initialize_with_actual_values
 
   @draft_ao = @course_offering.get_ao_obj_by_code("A")
-  @suspended_ao = create ActivityOfferingObject, :create_by_copy => true,
-                    :code => @draft_ao.code,
-                    :parent_course_offering => @course_offering
-  @suspended_ao2 = create ActivityOfferingObject, :create_by_copy => true,
-                         :code => @draft_ao.code,
-                         :parent_course_offering => @course_offering
+  @suspended_ao = @course_offering.copy_ao :ao_code => @draft_ao.code
+  @suspended_ao2 = @course_offering.copy_ao :ao_code => @draft_ao.code
   @suspended_ao.approve :send_to_scheduler => true
   @suspended_ao2.approve :send_to_scheduler => true
 
@@ -115,12 +111,8 @@ Given /^I suspend two draft activity offerings for a course offering in a publis
   @course_offering.initialize_with_actual_values
 
   @draft_ao = @course_offering.get_ao_obj_by_code("A")
-  @suspended_ao = create ActivityOfferingObject, :create_by_copy => true,
-                         :code => @draft_ao.code,
-                         :parent_course_offering => @course_offering
-  @suspended_ao2 = create ActivityOfferingObject, :create_by_copy => true,
-                          :code => @draft_ao.code,
-                          :parent_course_offering => @course_offering
+  @suspended_ao = @course_offering.copy_ao :ao_code => @draft_ao.code
+  @suspended_ao2 = @course_offering.copy_ao :ao_code => @draft_ao.code
 
   @suspended_ao.suspend
   @suspended_ao2.suspend
@@ -165,7 +157,7 @@ Given /^a new academic term has course and activity offerings in canceled and su
 
   @course_offering_canceled.create
 
-  @activity_offering_canceled = create ActivityOfferingObject, :parent_course_offering => @course_offering_canceled,
+  @activity_offering_canceled = create ActivityOfferingObject, :parent_cluster => @course_offering_canceled.default_cluster,
                                        :activity_type => "Lecture"
   @activity_offering_canceled.cancel
 
@@ -176,7 +168,7 @@ Given /^a new academic term has course and activity offerings in canceled and su
   @course_offering_suspended.delivery_format_list[0].final_exam_activity = "Lecture"
   @course_offering_suspended.create
 
-  @activity_offering_suspended = create ActivityOfferingObject, :parent_course_offering => @course_offering_suspended,
+  @activity_offering_suspended = create ActivityOfferingObject, :parent_cluster => @course_offering_suspended.default_cluster,
                                         :activity_type => "Lecture"
 
   @activity_offering_suspended.approve
@@ -185,7 +177,7 @@ Given /^a new academic term has course and activity offerings in canceled and su
 end
 
 Then /^I am (able|not able) to cancel the activity offering$/ do  |can_cancel|
-  @activity_offering.parent_course_offering.manage
+  @activity_offering.manage_parent_co
   on ManageCourseOfferings do |page|
     page.select_ao(@activity_offering.code)
     if can_cancel == "able"
@@ -198,7 +190,7 @@ Then /^I am (able|not able) to cancel the activity offering$/ do  |can_cancel|
 end
 
 Then /^I am (able|not able) to suspend the activity offering$/ do |can_suspend|
-  @activity_offering.parent_course_offering.manage
+  @activity_offering.manage_parent_co
   on ManageCourseOfferings do |page|
       page.select_ao(@activity_offering.code)
       if can_suspend == "able"
@@ -211,7 +203,7 @@ Then /^I am (able|not able) to suspend the activity offering$/ do |can_suspend|
 end
 
 Then /^I am (able|not able) to reinstate the activity offering$/ do |can_suspend|
-  @activity_offering.parent_course_offering.manage
+  @activity_offering.manage_parent_co
   on ManageCourseOfferings do |page|
     page.select_ao(@activity_offering.code)
     if can_suspend == "able"
@@ -527,7 +519,7 @@ end
 Given /^I copy a course offering in canceled status$/ do
   source_co = create CourseOffering, :create_by_copy => (make CourseOffering, :term=> "201208", :course => "BSCI181")
 
-  source_ao = make ActivityOfferingObject, :code => 'A', :parent_course_offering => source_co
+  source_ao = make ActivityOfferingObject, :code => 'A', :parent_cluster => source_co.default_cluster
   source_ao.cancel
 
   source_co.search_by_subjectcode
@@ -568,7 +560,7 @@ Given /^I create a course offering from catalog with a suspended activity offeri
   @course_offering.delivery_format_list[0].final_exam_activity = "Lab"
   @course_offering.create
 
-  @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering,
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
                               :format => "Lab Only", :activity_type => "Lab"
 
   @activity_offering.suspend :navigate_to_page => false
@@ -592,7 +584,7 @@ And /^actual scheduling information for the activity offering are still shown$/ 
 end
 
 Given /^the actual scheduling information are displayed for the updated activity offering$/ do
-  @activity_offering.parent_course_offering.manage
+  @activity_offering.manage_parent_co
    expected_asi = @activity_offering.requested_scheduling_information_list[0]
   on ManageCourseOfferings do |page|
     page.target_row(@activity_offering.code).cells[ManageCourseOfferings::AO_DAYS].text.should == expected_asi.days
@@ -918,40 +910,6 @@ Then /^I am unable to colocate the activity offering$/ do
   end
 end
 
-#Given /^a new academic term has course and activity offerings in canceled and suspended status$/ do
-#  @calendar = create AcademicCalendar #, :year => "2235", :name => "fSZtG62zfU"
-#  @term = make AcademicTerm, :term_year => @calendar.year
-#  @calendar.add_term(@term)
-#
-#  @manage_soc = make ManageSoc, :term_code => @term.term_code
-#  @manage_soc.set_up_soc
-#  @manage_soc.perform_manual_soc_state_change
-#
-#  delivery_format_list = []
-#  delivery_format_list << (make DeliveryFormatObject, :format => "Lecture", :grade_format => "Lecture", :final_exam_activity => "Lecture")
-#
-#  @course_offering_canceled = create CourseOffering, :term=> @term.term_code,
-#                            :course => "ENGL211",
-#                            :delivery_format_list => delivery_format_list
-#
-#  @activity_offering_canceled = create ActivityOfferingObject, :parent_course_offering => @course_offering_canceled,
-#                              :format => "Lecture Only", :activity_type => "Lecture"
-#  @activity_offering_canceled.save
-#  @activity_offering_canceled.cancel
-#
-#  @course_offering_suspended = create CourseOffering, :term=> @term.term_code,
-#                             :course => "ENGL211",
-#                             :delivery_format_list => delivery_format_list
-#
-#  @activity_offering_suspended = create ActivityOfferingObject, :parent_course_offering => @course_offering_suspended,
-#                                        :format => "Lecture Only", :activity_type => "Lecture"
-#
-#  @activity_offering_suspended.save
-#  @activity_offering_suspended.approve
-#  @manage_soc.advance_soc_from_open_to_final_edits
-#  @activity_offering_suspended.suspend
-#end
-
 Then /^the course and activity offerings in the rollover target term are in draft status$/ do
   @course_offering_suspended_target = make CourseOffering, :term=> @calendar_target.terms[0].term_code,
                                  :course => @course_offering_suspended.course
@@ -995,7 +953,7 @@ Given /^a new academic term has an activity offering in approved status$/ do
     @course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
     @course_offering.create
 
-    @activity_offering = create ActivityOfferingObject, :parent_course_offering => @course_offering,
+    @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
                                          :format => "Lecture Only", :activity_type => "Lecture"
     @activity_offering.approve
 end

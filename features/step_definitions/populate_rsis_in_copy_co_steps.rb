@@ -17,7 +17,7 @@ And /^The ASIs are Successfully copied to RSIs in the new AOs of the newly creat
 
   #now navigate to course offering copy and validate RSIs
   @course_offering.manage
-  @course_offering.edit_ao :ao_code => "A"
+  @course_offering.find_ao_obj_by_code('A').edit :defer_save => true
 
   on ActivityOfferingMaintenance do |page|
     page.actual_sched_info_div.exists?.should == false  #should not be any ASIs

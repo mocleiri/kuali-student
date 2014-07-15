@@ -1,7 +1,7 @@
 When /^I attempt to edit an activity offering for a course offering in my admin org/ do
   @course_offering = make CourseOffering, :course=>"ENGL362" , :term=>@term_for_test
-  @course_offering.manage
-  @course_offering.edit_ao(:ao_code => "A")
+  @course_offering.initialize_with_actual_values
+  @course_offering.get_ao_obj_by_code("A").edit :defer_save => true
 
   on ActivityOfferingMaintenance do |page|
     page.submit_button.enabled?.should == true
@@ -704,8 +704,9 @@ When /^there is a course with a co-located SI in my admin org/ do
   step "I am logged in as a Schedule Coordinator"
   @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"ENGL462", :term=>@term_for_test)
   @course_offering.initialize_with_actual_values
+  colocated_ao_parent = make CourseOffering, :course => "ENGL295", :term => @term_for_test
   colocated_ao = make ActivityOfferingObject, :code=> "A",
-                      :parent_course_offering => (make CourseOffering, :course => "ENGL295", :term => @term_for_test)
+                             :parent_cluster => colocated_ao_parent.default_cluster
 
   @course_offering.activity_offering_cluster_list[0].ao_list[0].edit :colocated => true,
                                                                     :colocate_ao_list => [ colocated_ao ],

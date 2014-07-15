@@ -95,6 +95,15 @@ class CourseOffering < DataFactory
     @delivery_format_list.each do |dl|
       dl.parent_co = self
     end
+    @activity_offering_cluster_list.each do |aoc|
+      aoc.parent_course_offering = self
+    end
+    @affiliated_person_list.each do |person|
+      person.parent_obj = self
+    end
+    @admin_org_list.each do |org|
+      org.parent_co = self
+    end
   end
 
   def <=>(other)
@@ -135,6 +144,9 @@ class CourseOffering < DataFactory
       #deep copy
       @term = @create_by_copy.term
       @activity_offering_cluster_list = @create_by_copy.activity_offering_cluster_list.sort
+      @activity_offering_cluster_list.each do |aoc|
+        aoc.parent_course_offering = self
+      end
     elsif @create_from_existing != nil
       @course = @create_from_existing.course
       #will update @course if suffix added
@@ -190,6 +202,10 @@ class CourseOffering < DataFactory
     ensure_in_single_co_view
 
     return self
+  end
+
+  def default_cluster
+    self.activity_offering_cluster_list[0]
   end
 
   def create_joint_co()
@@ -412,7 +428,6 @@ class CourseOffering < DataFactory
 
   #navigates to manage CO page, loads object data from application
   def initialize_with_actual_values
-
     manage
 
     cluster_divs = []
@@ -421,9 +436,9 @@ class CourseOffering < DataFactory
     end
 
     if cluster_divs.length == 0
-      @activity_offering_cluster_list = []
+      @activity_offering_cluster_list = collection('ActivityOfferingCluster')
     else
-      @activity_offering_cluster_list = []
+      @activity_offering_cluster_list = collection('ActivityOfferingCluster')
       cluster_divs.each do |cluster_div|
         temp_aoc = make ActivityOfferingClusterObject
         temp_aoc.initialize_with_actual_values(cluster_div, self)
@@ -431,11 +446,9 @@ class CourseOffering < DataFactory
         @activity_offering_cluster_list.push(temp_aoc)
       end
     end
-
   end
 
   def capture_crosslist_aliases
-
     # note: we nav to subject-view for this because the course-view does not currently support showing the
     #       SUFFIX of the cross-listed course
     search_by_subjectcode
@@ -503,7 +516,6 @@ class CourseOffering < DataFactory
   # @param opts :co_status =>  "Offered", "Draft" ... [String]
   #             :select_co => true/false
   def check_course_in_status(opts)
-
     defaults = {
         :select_co => false
     }
@@ -529,8 +541,6 @@ class CourseOffering < DataFactory
     end
   end
 
-
-  # work in progress
   # checks to see if an activity offering in the specified state is present, otherwise creates a new activity offering
   # @example
   #  @course_offering.check_activity_offering_in_status(opts)
@@ -539,22 +549,19 @@ class CourseOffering < DataFactory
   # @param :ao_status =>  [String] "Offered", "Draft", "Approved"
   #         :select_ao => true/false
   def check_activity_offering_in_status(opts)
-
     defaults = {
         :select_ao => false
     }
-
     options = defaults.merge(opts)
 
-    initialize_with_actual_values
-    ao_obj = make ActivityOfferingObject, :parent_course_offering => self
+    ao_obj = make ActivityOfferingObject, :parent_cluster => self.default_cluster
     on ManageCourseOfferings do |page|
       ao_obj.code = page.select_ao_by_status(options[:ao_status])
       if ao_obj.code.nil?
         ao_code = ao_obj.create_simple
         ao_obj.code = ao_code[0]
         if options[:ao_status] == ActivityOfferingObject::OFFERED_STATUS
-          approve_ao :ao_obj => ao_obj
+          ao_obj.approve :navigate_to_page => false
         end
       end
       if options[:select_ao] then
@@ -684,24 +691,7 @@ class CourseOffering < DataFactory
     end
   end
 
-  #delete specified activity offering
-  #
-  # @course_offering.delete_ao :ao_code => "A"
-  #
-  #@param  opts [Hash] {:ao_code => "code", :cluster_private_name => "cluster_name", :confirm_delete => true/false}
-  #@returns confirmation_message (from delete confirmation dialog)
-  def delete_ao(opts)
-
-    defaults = {
-        :cluster_private_name => :default_cluster,
-        :confirm_delete => true
-    }
-    options = defaults.merge(opts)
-    options[:code_list] = [options[:ao_code]]
-    delete_ao_list(options)
-  end
-
-  #delete specified activity offerings
+  #delete specified activity offerings (TODO: must all be in the same cluster, although in app can delete in multiple clusters)
   #
   #   @example
   #   @course_offering.delete_ao_list :code_list => ["A","B"]
@@ -716,6 +706,7 @@ class CourseOffering < DataFactory
         :cluster_private_name => :default_cluster,
         :confirm_delete => true
     }
+
     options = defaults.merge(opts)
 
     on ManageCourseOfferings do |page|
@@ -735,7 +726,7 @@ class CourseOffering < DataFactory
 
     #update expected object data
     options[:code_list].each do |ao_code|
-      ao_cluster = get_cluster_obj_by_private_name(options[:cluster_private_name])
+      ao_cluster = self.activity_offering_cluster_list.by_private_name(options[:cluster_private_name])
       ao_obj = get_ao_obj_by_code(ao_code)
       ao_cluster.ao_list.delete(ao_obj)
     end
@@ -751,38 +742,38 @@ class CourseOffering < DataFactory
   # @param opts [Hash] :co_obj_list => [co_obj1, co_obj2, ...]
   # @returns boolean - delete opertion was available
   def attempt_ao_delete_by_status(ao_state, cluster_private_name = :default_cluster)
+    delete_present = false
     on ManageCourseOfferings do |page|
       if page.row_by_status(ao_state, cluster_private_name).exists?
         ao = page.select_ao_by_status(ao_state, cluster_private_name)
         if page.delete_aos_button.enabled?
           page.delete_aos
           on ActivityOfferingConfirmDelete do |page|
-            @delete_present = page.delete_activity_offering_button.present?
+            delete_present = page.delete_activity_offering_button.present?
             page.cancel
           end
           on(ManageCourseOfferings).deselect_ao(ao)
-          return @delete_present
+          return delete_present
         else
           page.deselect_ao(ao)
           return false
         end
       else
-        new_ao = copy_ao :ao_code => "A"
-        page.select_ao(new_ao.code)
+        new_ao = copy_ao :ao_code => 'A', :parent_cluster => self.activity_offering_cluster_list.by_private_name(cluster_private_name)
         if ao_state == ActivityOfferingObject::APPROVED_STATUS
-          page.approve_activity
-          new_ao = page.select_ao_by_status(ao_state)
+          new_ao.approve :navigate_to_page => false
         end
-        if page.delete_aos_button.enabled?
-          page.delete_aos
+        on(ManageCourseOfferings).select_ao(new_ao.code)
+        if on(ManageCourseOfferings).delete_aos_button.enabled?
+          on(ManageCourseOfferings).delete_aos
           on ActivityOfferingConfirmDelete do |page|
-            @delete_present = page.delete_activity_offering_button.present?
+            delete_present = page.delete_activity_offering_button.present?
             page.cancel
           end
-          on(ManageCourseOfferings).deselect_ao(new_ao)
-          return @delete_present
+          on(ManageCourseOfferings).deselect_ao(new_ao.code)
+          return delete_present
         else
-          page.deselect_ao(new_ao)
+          on(ManageCourseOfferings).deselect_ao(new_ao.code)
           return false
         end
       end
@@ -794,8 +785,8 @@ class CourseOffering < DataFactory
   #  @course_offering.attempt_co_delete_by_status(CourseOffering::OFFERED_STATUS)
   #    :cluster_private_name default value is first cluster
   #
-  # @param opts [Hash] :co_obj_list => [co_obj1, co_obj2, ...]
-  # @returns boolean - delete opertion was available
+  # @param co_state (string)
+  # @returns boolean - delete operation was available
   def attempt_co_delete_by_status(co_state)
     on ManageCourseOfferingList do |page|
       @course = page.select_co_by_status(co_state)
@@ -816,7 +807,7 @@ class CourseOffering < DataFactory
   #  @course_offering.attempt_ao_select_by_status(ActivityOfferingObject::OFFERED_STATUS)
   #    :cluster_private_name default value is first cluster
   #
-  # @param opts [Hash] :co_obj_list => [co_obj1, co_obj2, ...]
+  # @param status (string)
   # @returns boolean - checkbox to select AO was available
   def ao_has_checkbox_by_status(ao_status, cluster_private_name = :default_cluster)
     on ManageCourseOfferings do |page|
@@ -824,25 +815,6 @@ class CourseOffering < DataFactory
       return row.cells[0].checkbox.visible?
     end
   end
-
-  #approve activity offering
-  #
-  #   @example
-  #   @course_offering.approve_ao :ao_obj=> ao_obj1
-  #        :cluster_private_name default value is first cluster
-  #
-  #@param  opts [Hash] {:ao_obj => activity_offering1, :cluster_private_name => "priv_name"}
-  def approve_ao(opts)
-
-    defaults = {
-        :cluster_private_name => :default_cluster
-    }
-    options = defaults.merge(opts)
-
-    approve_ao_list :ao_obj_list => [ options[:ao_obj] ], :cluster_private_name => options[:cluster_private_name]
-  end
-
-
 
   #approve list of activity offerings
   #
@@ -889,12 +861,9 @@ class CourseOffering < DataFactory
     on(ReinstateActivityOffering).reinstate_activity
   end
 
-
-
   def get_ao_list(cluster_private_name = :default_cluster)
-   get_cluster_obj_by_private_name(cluster_private_name).ao_list
+    @activity_offering_cluster_list.by_private_name(cluster_private_name).ao_list
   end
-
 
   #create a new list of activity offerings
   #
@@ -903,9 +872,16 @@ class CourseOffering < DataFactory
   #
   #@param opts [Hash] {:number_aos_to_create => int, :ao_object => ao_obj }
   def create_list_aos(opts)
-    activity_offering_object = opts[:ao_object]
-    activity_offering_object.parent_course_offering = self
-    activity_offering_object.create_simple :number_aos_to_create => opts[:number_aos_to_create]
+    defaults = {
+        :ao_cluster => @activity_offering_cluster_list[0] #default cluster
+    }
+    options = defaults.merge(opts)
+
+    activity_offering_object = options[:ao_object]
+    activity_offering_object.parent_cluster = options[:ao_cluster]
+    new_ao_list = activity_offering_object.create_simple :number_aos_to_create => options[:number_aos_to_create]
+    activity_offering_object.parent_cluster.ao_list << new_ao_list
+    activity_offering_object.parent_cluster.ao_list.flatten!
   end
 
   #create a new specified activity offering
@@ -918,16 +894,17 @@ class CourseOffering < DataFactory
 
     defaults = {
         :navigate_to_page => true,
-        :ao_obj => (make ActivityOfferingObject)
+        :ao_obj => (make ActivityOfferingObject),
+        :ao_cluster => @activity_offering_cluster_list[0] #default cluster
     }
     options = defaults.merge(opts)
 
     self.manage if options[:navigate_to_page]
 
     activity_offering_object = options[:ao_obj]
-    activity_offering_object.parent_course_offering = self
+    activity_offering_object.parent_cluster = options[:ao_cluster]
     activity_offering_object.create
-    get_cluster_obj_by_private_name(activity_offering_object.aoc_private_name).ao_list << activity_offering_object
+    activity_offering_object.parent_cluster.ao_list << activity_offering_object
     return activity_offering_object
   end
 
@@ -941,54 +918,21 @@ class CourseOffering < DataFactory
   def copy_ao(opts)
 
     defaults = {
-        :cluster_private_name => :default_cluster
+        :ao_cluster => @activity_offering_cluster_list[0] #default cluster
     }
     options = defaults.merge(opts)
-    new_activity_offering = make ActivityOfferingObject, :code => options[:ao_code], :aoc_private_name => options[:cluster_private_name], :create_by_copy => true, :parent_course_offering => self
 
-    new_activity_offering.create
-    get_cluster_obj_by_private_name(options[:cluster_private_name]).ao_list << new_activity_offering
-    return new_activity_offering
-  end
-
-  #enter the edit page for the specified activity offering
-  #
-  #@param  opts [Hash] {:ao_code => "CODE"}
-  def edit_ao(opts)
-    defaults = {
-        :cluster_private_name => :default_cluster
-    }
-    options = defaults.merge(opts)
+    new_code = ''
     on ManageCourseOfferings do |page|
-      page.edit(options[:ao_code], options[:cluster_private_name])
+      pre_copy_list = page.get_cluster_assigned_ao_list(options[:ao_cluster].private_name)
+      page.copy(options[:ao_code], options[:ao_cluster].private_name)
+      post_copy_list = page.get_cluster_assigned_ao_list(options[:ao_cluster].private_name)
+      new_code = (post_copy_list - pre_copy_list).first
     end
-  end
 
-  # returns a list of AOs matching a given state
-  # note: can return an empty array but not nil
-  #
-  # @param opts [Hash] {:cluster_private_name => "private_name", (see default value = :default_cluster)
-  #                     :aos => [],
-  #                     :ao_status => "target_status" (see default value = "Draft") }
-  # example: draft_aos = @courseOffering.get_aos_by_status :aos => array_of_all_aos
-  def get_aos_by_status(opts)
-    defaults = {
-        :cluster_private_name => :default_cluster,
-        :aos => [],
-        :ao_status => ActivityOfferingObject::DRAFT_STATUS
-    }
-    options = defaults.merge(opts)
-
-    retVal = []
-
-    options[:aos].each { |ao|
-      status = on(ManageCourseOfferings).ao_status( ao.code, options[:cluster_private_name] )
-      if status == options[:ao_status]
-        retVal << ao
-      end
-    }
-
-    retVal
+    new_activity_offering = make ActivityOfferingObject, :code => new_code, :parent_cluster => options[:ao_cluster]
+    options[:ao_cluster].ao_list << new_activity_offering
+    return new_activity_offering
   end
 
   # add/create an ao_cluster to the CourseOffering
@@ -999,35 +943,12 @@ class CourseOffering < DataFactory
   # @param ao_cluster [ActivityOfferingClusterObject]
   def add_ao_cluster(ao_cluster)
     ao_cluster.create
+    ao_cluster.parent_course_offering = self
     @activity_offering_cluster_list << ao_cluster
   end
 
-  # delete an ao_cluster from the CourseOffering
-  # @example
-  #  @course_offering.delete_ao_cluster(ao_cluster_object)
-  #
-  #
-  # @param ao_cluster [ActivityOfferingClusterObject]
-  def delete_ao_cluster(ao_cluster)
-    ao_cluster.delete
-    @activity_offering_cluster_list.delete(get_cluster_obj_by_private_name(ao_cluster.private_name))
-  end
-
-  # delete an ao_cluster from the CourseOffering
-  # @example
-  #  @course_offering.get_cluster_obj_by_private_name(cluster_private_name)
-  #
-  #
-  # @param cluster_private_name [String]
-  # @returns  ActivityOfferingClusterObject
-  def get_cluster_obj_by_private_name(cluster_private_name)
-    return @activity_offering_cluster_list[0] unless cluster_private_name != :default_cluster
-    @activity_offering_cluster_list.select{|cluster| cluster.private_name == cluster_private_name}[0]
-  end
-
-
   def get_ao_obj_by_code(ao_code, cluster_private_name = :default_cluster)
-   get_cluster_obj_by_private_name(cluster_private_name).ao_list.select{|ao| ao.code == ao_code}[0]
+   @activity_offering_cluster_list.by_private_name(cluster_private_name).ao_list.select{|ao| ao.code == ao_code}[0]
   end
 
   # searches all clusters
@@ -1162,22 +1083,6 @@ class CourseOffering < DataFactory
     # If there is a string, remove final ", "
     formatted_credits_list[-2..-1] = "" if formatted_credits_list.length > 0
     formatted_credits_list
-  end
-
-  def full_ao_list
-    #TODO - required for existing validations
-  end
-
-  #TODO - this method is not used
-  def reset_ao_clusters
-    #move all aos back first cluster - NB initialize_with_actual_values needs to be run first
-    @activity_offering_cluster_list[1..-1].each do |cluster|
-      puts "reset cluster name: #{cluster.private_name}"
-      cluster.move_all_aos_to_another_cluster(@activity_offering_cluster_list[0])
-      cluster.delete
-      #TODO - delete from array  - test this
-      @activity_offering_cluster_list.delete(cluster)
-    end
   end
 
 end

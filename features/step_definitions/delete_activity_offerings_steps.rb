@@ -4,7 +4,6 @@ When /^I create a Course Offering and add (\d+) Activity Offerings$/ do |number_
   @orig_number_aos = @course_offering.get_ao_list.count
   @activity_offering = make ActivityOfferingObject, :format => "Lecture Only"
   @course_offering.create_list_aos :ao_object => @activity_offering, :number_aos_to_create=>number_of_aos_to_create
-  @course_offering.initialize_with_actual_values
   @total_number =  @course_offering.get_ao_list.count
 end
 
@@ -56,7 +55,7 @@ end
 And /^I delete the added AO$/ do
   @total_number = @course_offering.get_ao_list.count
   @deleted_ao_codes = [@course_offering.get_ao_list[-1].code]
-  @confirm_message = @course_offering.delete_ao_list :code_list =>  @deleted_ao_codes
+  @confirm_message = @course_offering.delete_ao_list :code_list => @deleted_ao_codes
 end
 
 And /^I receive a warning that the course is cross-listed$/ do

@@ -27,7 +27,6 @@ class ActivityOfferingObject < DataFactory
                 :max_enrollment,
                 :seat_remaining_percent,
                 :course_url,
-                :aoc_private_name,
                 :subterm
   #type: collection
   attr_accessor :actual_scheduling_information_list,
@@ -39,12 +38,11 @@ class ActivityOfferingObject < DataFactory
   #boolean - generally set using options hash
   attr_accessor :requires_evaluation,
                 :honors_course,
-                :create_by_copy,
                 :colocated,
                 :colocate_shared_enrollment,
                 :allow_non_std_timeslots
-  #type ActivityOffering object - generally set using options hash
-  attr_accessor :parent_course_offering
+  #type ActivityOfferingClusterObject - generally set using options hash
+  attr_accessor :parent_cluster
   #type Waitlist object - generally set using options hash
   attr_accessor :waitlist_config
 
@@ -60,7 +58,6 @@ class ActivityOfferingObject < DataFactory
     @browser = browser
 
     defaults = {
-        :parent_course_offering => (make CourseOffering),
         :status => DRAFT_STATUS,
         :format => nil, #nil means use default
         :activity_type => "Lecture",
@@ -73,8 +70,6 @@ class ActivityOfferingObject < DataFactory
         :course_url => "",
         :requires_evaluation => false,
         :honors_course => false,
-        :aoc_private_name => :default_cluster,
-        :create_by_copy => nil, #if true create copy using :ao_code
         :colocated => false,
         :colocate_ao_list => [],
         :colocate_shared_enrollment => false,
@@ -84,6 +79,13 @@ class ActivityOfferingObject < DataFactory
 
     options = defaults.merge(opts)
     set_options(options)
+
+    @seat_pool_list.each do |sp|
+      sp.parent_ao = self
+    end
+    @personnel_list.each do |person|
+      person.parent_obj = self
+    end
   end
 
   def <=>(other)
@@ -106,7 +108,7 @@ class ActivityOfferingObject < DataFactory
     }
     options = defaults.merge(opts)
 
-    @parent_course_offering.manage if options[:navigate_to_page]
+    manage_parent_co if options[:navigate_to_page]
 
     on ManageCourseOfferings do |page|
       begin
@@ -123,6 +125,7 @@ class ActivityOfferingObject < DataFactory
       page.loading.wait_while_present
       sleep 2
       page.activity_type.select @activity_type #unless @activity_type.nil?
+      page.cluster.select @parent_cluster.private_name unless @parent_cluster.private_name == :default_cluster
       page.quantity.set options[:number_aos_to_create]
       page.complete_add_activity
       post_add_ao_list = page.codes_list
@@ -133,24 +136,20 @@ class ActivityOfferingObject < DataFactory
         new_code_list =  post_add_ao_list
       end
 
-      return new_code_list
+      new_ao_list = []
+      new_code_list.each do |code|
+        new_ao_list << (make ActivityOfferingObject,
+                             :code=>code,
+                             :format=>@format,
+                             :activity_type=>@activity_type,
+                             :parent_cluster=> @parent_cluster)
+      end
+      return new_ao_list
     end
   end
 
   #navigates to activity offering edit page and sets up activity offering based on class attributes
   def create
-    #@parent_course_offering.manage
-
-    if @create_by_copy then
-      on ManageCourseOfferings do |page|
-        pre_copy_list = page.get_cluster_assigned_ao_list(@aoc_private_name)
-        page.copy(@code, @aoc_private_name)
-        post_copy_list = page.get_cluster_assigned_ao_list(@aoc_private_name)
-        @code = (post_copy_list - pre_copy_list).first
-        return
-      end
-    end
-
     on ManageCourseOfferings do |page|
       pre_add_ao_list = page.codes_list
       post_add_ao_list = []
@@ -186,10 +185,10 @@ class ActivityOfferingObject < DataFactory
 
   def get_actual_values_from_page
     ao_table_row = on(ManageCourseOfferings).target_row(@code)
-    initialize_with_actual_values(ao_table_row, @parent_course_offering, @aoc_private_name)
+    initialize_with_actual_values(ao_table_row, @parent_cluster)
   end
 
-  def initialize_with_actual_values(ao_table_row, parent_co, cluster_name)
+  def initialize_with_actual_values(ao_table_row, parent_cluster)
     @code =  ao_table_row.cells[ManageCourseOfferings::AO_CODE].text
     @status = ao_table_row.cells[ManageCourseOfferings::AO_STATUS].text
     @activity_type = ao_table_row.cells[ManageCourseOfferings::AO_TYPE].text
@@ -207,8 +206,7 @@ class ActivityOfferingObject < DataFactory
         end
       end
     end
-    @aoc_private_name = cluster_name
-    @parent_course_offering = parent_co
+    @parent_cluster = parent_cluster
   end
 
   def get_existing_scheduling_information(ao_table_row)
@@ -250,6 +248,10 @@ class ActivityOfferingObject < DataFactory
     end
 
     si_list
+  end
+
+  def manage_parent_co
+    @parent_cluster.parent_course_offering.manage
   end
 
   #navigates activity offering edit page and updates activity offering based on class attributes
@@ -329,7 +331,7 @@ class ActivityOfferingObject < DataFactory
         # add the colo-COs to this CO
         if !opts[:colocate_ao_list].nil?
           opts[:colocate_ao_list].each do |ao_to_colo|
-            page.colocated_co_input_field.value = ao_to_colo.parent_course_offering.course
+            page.colocated_co_input_field.value = ao_to_colo.parent_cluster.parent_course_offering.course
             page.colocated_ao_input_field.value = ao_to_colo.code
             page.add_colocated
             page.add_colocate_ao_confirmation_add
@@ -345,7 +347,7 @@ class ActivityOfferingObject < DataFactory
             @max_enrollment = opts[:max_enrollment]
           else # ie: 'separately manage'
             page.select_separately_manage_enrollment_radio
-            page.edit_separate_max_enr(@parent_course_offering.course, @code, opts[:max_enrollment])
+            page.edit_separate_max_enr(@parent_cluster.parent_course_offering.course, @code, opts[:max_enrollment])
             @max_enrollment = opts[:max_enrollment]
           end
         end
@@ -445,6 +447,31 @@ class ActivityOfferingObject < DataFactory
 
   end #END: edit_honors_course
   private :edit_honors_course
+
+  def delete opts={}
+    defaults = {
+        :navigate_to_page => true,
+        :confirm_delete => true
+    }
+    options = defaults.merge(opts)
+
+    manage_parent_co if options[:navigate_to_page]
+
+    on ManageCourseOfferings do |page|
+      page.select_aos([@code], @parent_cluster.private_name)
+      page.delete_aos
+    end
+
+    on ActivityOfferingConfirmDelete do |page|
+      confirmation_message = page.delete_confirm_message
+      if options[:confirm_delete]
+        page.delete_activity_offering
+        @parent_cluster.ao_list.delete(self)
+      else
+        page.cancel
+      end
+    end
+  end
 
   def add_req_sched_info opts={}
 
@@ -567,13 +594,12 @@ class ActivityOfferingObject < DataFactory
 
   # suspends the activity offering
   def suspend opts={}
-
     defaults = {
         :navigate_to_page => true
     }
     options = defaults.merge(opts)
 
-    @parent_course_offering.manage if options[:navigate_to_page]
+    manage_parent_co if options[:navigate_to_page]
 
     on ManageCourseOfferings do |page|
       page.select_ao(self.code)
@@ -590,7 +616,7 @@ class ActivityOfferingObject < DataFactory
     }
     options = defaults.merge(opts)
 
-    @parent_course_offering.manage if options[:navigate_to_page]
+    manage_parent_co if options[:navigate_to_page]
 
     on ManageCourseOfferings do |page|
       page.select_ao(self.code)
@@ -607,7 +633,7 @@ class ActivityOfferingObject < DataFactory
     }
     options = defaults.merge(opts)
 
-    @parent_course_offering.manage if options[:navigate_to_page]
+    manage_parent_co if options[:navigate_to_page]
 
     on ManageCourseOfferings do |page|
       page.select_ao(self.code)
@@ -626,7 +652,7 @@ class ActivityOfferingObject < DataFactory
     }
     options = defaults.merge(opts)
 
-    @parent_course_offering.manage if options[:navigate_to_page]
+    manage_parent_co if options[:navigate_to_page]
 
     on ManageCourseOfferings do |page|
       page.select_ao(self.code)
@@ -644,7 +670,7 @@ class ActivityOfferingObject < DataFactory
 
   # offers the activity offering (in published SOC, at least)
   def offer
-    @parent_course_offering.manage
+    manage_parent_co
     on(ManageCourseOfferings).edit(self.code)
     on ActivityOfferingMaintenance do |page|
       page.send_revised_scheduling_information
