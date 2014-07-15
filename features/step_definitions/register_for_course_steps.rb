@@ -431,45 +431,8 @@ Then /^the number of credits I am registered for and waitlisted for are correctl
 end
 
 Given /^I log in to student registration as (\w+)$/  do |user|
-  case user
-    when "admin"
-      visit RestAdminLogin
-    when "martha"
-      visit RestMarthaLogin
-    when "student"
-      visit RestStudentLogin
-    when "student1"
-      visit RestStudent1Login
-    when "student2"
-      visit RestStudent2Login
-    when "student3"
-      visit RestStudent3Login
-    when "student4"
-      visit RestStudent4Login
-    when "student5"
-      visit RestStudent5Login
-    when "student6"
-      visit RestStudent6Login
-    when "student7"
-      visit RestStudent7Login
-    when "student8"
-      visit RestStudent8Login
-    when "student9"
-      visit RestStudent9Login
-    when "EILEENB"
-      visit RestEILEENBLogin
-    when "EILEENL"
-      visit RestEILEENLLogin
-    when "DMITRYL"
-      visit RestDMITRYLLogin
-    when "ELEANORB"
-      visit RestELEANORBLogin
-    when "SONALIK"
-      visit RestSONALIKLogin
-    when "SOOB"
-      visit RestSOOBLogin
-    when "STEVENJ"
-      visit RestSTEVENJLogin
+  on RestLoginPage do |page|
+    page.login_as user
   end
   puts "I am logged in to student registration as #{user}"
 end
