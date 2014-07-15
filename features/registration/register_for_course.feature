@@ -10,6 +10,7 @@ Feature: REG.Register for course
     Given I log in to student registration as student
 
   #CR 1.1 (KSENROLL-11747)  CR 1.3 (KSENROLL-11812)
+  @smoke_test
   Scenario: CR 1.1 I want to enter course information into my list of selections so that I can indicate what I want to register for.
     When I add a CHEM course offering to my registration cart
     Then the course is present in my cart
