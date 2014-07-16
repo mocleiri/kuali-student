@@ -1,4 +1,4 @@
-@blue_team
+@pending @blue_team
 Feature: Admin Registration
   CR22.1 As a Central Registration Personnel I want to enter a student id so that basic student info is display and I can register the student
 
