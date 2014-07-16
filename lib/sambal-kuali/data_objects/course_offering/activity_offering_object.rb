@@ -251,7 +251,11 @@ class ActivityOfferingObject < DataFactory
   end
 
   def manage_parent_co
-    @parent_cluster.parent_course_offering.manage
+    parent_course_offering.manage
+  end
+
+  def parent_course_offering
+    @parent_cluster.parent_course_offering
   end
 
   #navigates activity offering edit page and updates activity offering based on class attributes

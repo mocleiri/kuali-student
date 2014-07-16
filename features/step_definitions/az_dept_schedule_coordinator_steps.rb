@@ -71,7 +71,7 @@ When /^I manage a course offering for a subject code not in my admin org$/ do
 end
 
 When /^I manage the course offering$/ do
-     @course_offering.manage
+     @course_offering.initialize_with_actual_values
 end
 
 When /^I list the course offerings for that subject code$/ do

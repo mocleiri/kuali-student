@@ -143,10 +143,16 @@ class CourseOffering < DataFactory
       @course = create_co_copy(@create_by_copy.course, @create_by_copy.term)
       #deep copy
       @term = @create_by_copy.term
-      @activity_offering_cluster_list = @create_by_copy.activity_offering_cluster_list.sort
-      @activity_offering_cluster_list.each do |aoc|
-        aoc.parent_course_offering = self
+      @activity_offering_cluster_list = collection('ActivityOfferingCluster')
+      @create_by_copy.activity_offering_cluster_list.each do |aoc|
+        copied_cluster = (make ActivityOfferingClusterObject, :private_name=> aoc.private_name, :parent_course_offering => self)
+        copied_cluster.ao_list = aoc.ao_list.sort
+        @activity_offering_cluster_list << copied_cluster
+        sleep 5
       end
+      # @activity_offering_cluster_list.each do |aoc|
+      #   aoc.parent_course_offering = self
+      # end
     elsif @create_from_existing != nil
       @course = @create_from_existing.course
       #will update @course if suffix added

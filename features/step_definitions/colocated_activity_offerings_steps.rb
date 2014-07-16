@@ -139,9 +139,8 @@ Then /^the activity offering in the course offering copy is not colocated$/ do
 end
 
 When /^I copy one of the colocated activity offerings$/ do
-  @activity_offering_copy = create ActivityOfferingObject, :create_by_copy => true,
-                                   :code => @ao_list[0].code,
-                                   :parent_cluster => @ao_list[0].parent_cluster
+  ao_code = @ao_list[0].code
+  @activity_offering_copy = @ao_list[0].parent_course_offering.copy_ao :ao_code => ao_code
 end
 
 Then /^the activity offering copy is added to the colocated set$/ do
