@@ -564,8 +564,7 @@ class CourseOffering < DataFactory
     on ManageCourseOfferings do |page|
       ao_obj.code = page.select_ao_by_status(options[:ao_status])
       if ao_obj.code.nil?
-        ao_code = ao_obj.create_simple
-        ao_obj.code = ao_code[0]
+        ao_obj = ao_obj.create_simple[0]
         if options[:ao_status] == ActivityOfferingObject::OFFERED_STATUS
           ao_obj.approve :navigate_to_page => false
         end

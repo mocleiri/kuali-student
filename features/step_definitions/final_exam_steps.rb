@@ -1718,20 +1718,14 @@ end
 
 Given /^I create an Activity Offering that has no ASIs or RSIs$/ do
   @activity_offering = make ActivityOfferingObject, :activity_type => "Lecture", :parent_cluster => @course_offering.default_cluster
-  new_code_list = @activity_offering.create_simple
-  new_code_list.each do |code|
-    @activity_offering.code = code
-    @activity_offering.approve :navigate_to_page => false
-  end
+  @activity_offering = @activity_offering.create_simple[0]
+  @activity_offering.approve :navigate_to_page => false
 end
 
 Given /^I create an Activity Offering that has RSI data but has no ASI data$/ do
   @activity_offering = make ActivityOfferingObject, :activity_type => "Lecture", :parent_cluster => @course_offering.default_cluster
-  new_code_list = @activity_offering.create_simple
-  new_code_list.each do |code|
-    @activity_offering.code = code
-    @activity_offering.approve :navigate_to_page => false
-  end
+  @activity_offering = @activity_offering.create_simple[0]
+  @activity_offering.approve :navigate_to_page => false
 
   @course_offering.manage
   end_time = (DateTime.strptime("#{@matrix.rules[0].statements[0].start_time}", '%I:%M') + ("50".to_f/1440)).strftime( '%I:%M')
