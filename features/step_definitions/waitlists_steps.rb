@@ -305,7 +305,7 @@ Given /^there are two other activity offering with waitlists enabled and no wait
   @ao_list = []
   ["ENGL416","ENGL420"].each do |co_code|
     course_offering = create CourseOffering, :course => co_code, :waitlists => true
-    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
+    activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster
     @ao_list << activity_offering
   end
 end
@@ -496,7 +496,7 @@ Given /^I create two colocated activity offerings \(shared enrolment\) with wait
 
   ["ENGL300","WMST300"].each do |co_code|
     course_offering = create CourseOffering, :course => co_code, :waitlists => true, :term => @term.term_code
-    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
+    activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster
     @ao_list << activity_offering
   end
 
@@ -526,7 +526,7 @@ end
 
 When /^I add another activity offering to the colocated set$/ do
     course_offering = create CourseOffering, :course => "WMST400", :waitlists => true, :term => @term.term_code
-    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
+    activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster
     @ao_list << activity_offering
 
     @ao_list[0].manage_parent_co
