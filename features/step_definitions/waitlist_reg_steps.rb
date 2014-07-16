@@ -127,5 +127,38 @@ end
 
 
 Given /^a waitlisted course exists$/ do
+  visit WaitlistRestCallPage do |page|
+    # puts page.service_text
+    @waitlist_roster = page.get_waitlist_roster
+    @waitlist_roster.each_with_index do |roster_item,index|
+      puts "Waitlist array item #{index}"
+      roster_item.each do |key,val|
+        if key=="aoWaitlistOrder"
+          puts">> #{key}"
+          val.each do |aowo_hash|
+            aowo_hash.each do |aowo_key,aowo_val|
+              puts "  >> #{aowo_key} => #{aowo_val} (#{aowo_val.class.name})"
+            end
+          end
+        else
+          puts ">> #{key} => #{val} (#{val.class.name})"
+        end
+      end
+    end
+    # puts "#{@waitlist_roster} (#{@waitlist_roster.class.name})"
+  end
+end
+
+Then /^the order of students remaining on the waitlist is adjusted correctly$/ do
+  visit WaitlistRestCallPage do |page|
+    pending
+  end
+end
+
+When /^a registered student drops the course$/ do
+  pending
+end
+
+When /^a student is removed from the waitlist$/ do
   pending
 end
