@@ -104,7 +104,6 @@ function initialize_schema() {
     -e "s#\${jdbc.password}#${SANITIZED_SCHEMA^^}#g" \
     -e 's#${jdbc.pool.size.max}#20#g' \
     -e 's#${rice.krad.dev.mode}#false#g' \
-    -e 's#${rice.krad.script.cleanup}#false#g' \
     -e 's#${keystore.file.default}#/rice.keystore#g' \
         ~/kuali/main/dev/ks-with-rice-bundled-config.xml
 
