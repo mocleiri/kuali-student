@@ -29,8 +29,10 @@ class CourseSectionPage < BasePage
   element(:add_to_button_enabled) {|b|b.button(class:"btn btn-primary btn btn-primary uif-boxLayoutHorizontalItem")}
   element(:add_to_button_disabled) {|b|b.button(id:/addButton/,class:"btn btn-primary btn btn-primary uif-boxLayoutHorizontalItem disabled")}
   element(:add_to_plan_link) {|b|b.a(id:/addLink/,index:1)}
-  action(:lecture_lab_discussion) { |course_code,b| b.div(id: /#{course_code}_formatOfferingOptions/).radio(index:0) }
-  action(:lecture) { |course_code,b| b.div(id: /#{course_code}_formatOfferingOptions/).radio(index:1) }
+#  action(:lecture_lab_discussion) { |course_code,b| b.div(id: /#{course_code}_formatOfferingOptions/).radio(index:0) }
+#  action(:lecture) { |course_code,b| b.div(id: /#{course_code}_formatOfferingOptions/).radio(index:1) }
+  element(:lecture_lab_discussion) {|b|b.radio(label:"Lecture + Lab + Discussion")}
+  element(:lecture) {|b|b.radio(label:"Lecture Only")}
   action(:ao_lecture){|course_code,b| b.div(id: /#{course_code}.*activity-offering-lecture/) }
   action(:ao_discussion){|course_code,b| b.div(id: /#{course_code}.*activity-offering-discussion/) }
   action(:ao_lab){|course_code,b| b.div(id: /#{course_code}.*activity-offering-lab/) }
