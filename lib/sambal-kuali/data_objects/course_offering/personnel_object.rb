@@ -98,12 +98,12 @@ class PersonnelObject < DataFactory
     @parent_obj.edit :defer_save => true if options[:start_edit]
 
     if @context == :activity_offering
-      #TODO: only edits the first row
       on ActivityOfferingMaintenance do |page|
-        page.personnel_table.rows[1].cells[PERSONNEL_ID_COLUMN].text_field.set options[:id] unless options[:id].nil?
-        page.personnel_table.rows[1].cells[PERSONNEL_NAME_COLUMN].text_field.set options[:name] unless options[:name].nil?
-        page.personnel_table.rows[1].cells[PERSONNEL_AFFILIATION_COLUMN].select().select(options[:affiliation]) unless options[:affiliation].nil?
-        page.personnel_table.rows[1].cells[PERSONNEL_INST_EFFORT_COLUMN].text_field.set options[:inst_effort] unless options[:inst_effort].nil?
+        target_row = page.target_person_row(@id)
+        target_row.cells[PERSONNEL_ID_COLUMN].text_field.set options[:id] unless options[:id].nil?
+        target_row.cells[PERSONNEL_NAME_COLUMN].text_field.set options[:name] unless options[:name].nil?
+        target_row.cells[PERSONNEL_AFFILIATION_COLUMN].select().select(options[:affiliation]) unless options[:affiliation].nil?
+        target_row.cells[PERSONNEL_INST_EFFORT_COLUMN].text_field.set options[:inst_effort] unless options[:inst_effort].nil?
       end
     else
       on CourseOfferingCreateEdit do |page|
