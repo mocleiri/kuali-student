@@ -23,7 +23,7 @@ module CoRefData
       activity_offering.edit :start_edit => false,
                              :send_to_scheduler => true
 
-      activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+      activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                                  :format => "Lecture/Discussion", :activity_type => "Discussion"
       si_obj =  make SchedulingInformationObject, :days => "W",
                      :start_time => "09:00", :start_time_ampm => "am",
@@ -55,7 +55,7 @@ module CoRefData
       course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
       course_offering.create
 
-      activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+      activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                                  :format => "Lecture Only", :activity_type => "Lecture"
       si_obj =  make SchedulingInformationObject, :days => "MW",
                      :start_time => "11:00", :start_time_ampm => "am",
@@ -65,7 +65,7 @@ module CoRefData
       activity_offering.edit :start_edit => false,
                              :send_to_scheduler => true
 
-      activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+      activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                                  :format => "Lecture Only", :activity_type => "Lecture"
       si_obj =  make SchedulingInformationObject, :days => "W",
                      :start_time => "09:00", :start_time_ampm => "am",
@@ -96,7 +96,7 @@ module CoRefData
       course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
       course_offering.create
 
-      activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+      activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                                  :format => "Lecture/Discussion", :activity_type => "Lecture"
       si_obj =  make SchedulingInformationObject, :days => "TH",
                      :start_time => "12:30", :start_time_ampm => "pm",
@@ -106,7 +106,7 @@ module CoRefData
       activity_offering.edit :start_edit => false,
                              :send_to_scheduler => true
 
-      activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+      activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                                  :format => "Lecture/Discussion", :activity_type => "Discussion"
       si_obj =  make SchedulingInformationObject, :days => "W",
                      :start_time => "09:00", :start_time_ampm => "am",
@@ -132,7 +132,7 @@ module CoRefData
     course_offering.delivery_format_list[0].grade_format = "Lecture"
     course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
 
-    activity_offering = make ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+    activity_offering = make ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                              :format => "Lecture Only", :activity_type => "Lecture"
 
     course_offering.activity_offering_cluster_list[0].ao_list << activity_offering
@@ -143,7 +143,7 @@ module CoRefData
                    :facility => 'SQH', :room => '1101'
     activity_offering.requested_scheduling_information_list << si_obj
 
-    activity_offering = make ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+    activity_offering = make ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                              :format => "Lecture Only", :activity_type => "Lecture"
 
     course_offering.activity_offering_cluster_list[0].ao_list << activity_offering
