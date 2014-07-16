@@ -140,7 +140,7 @@ When /^I edit an Activity Offering with non-standard time slots (approved|not ap
   else
     course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term => "201301", :course=>"ENGL262")
   end
-  @activity_offering = make ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster, :code => 'A'
+  @activity_offering = make ActivityOfferingObject, :parent_cluster => course_offering.default_cluster, :code => 'A'
   @activity_offering.get_actual_values_from_page
 end
 
