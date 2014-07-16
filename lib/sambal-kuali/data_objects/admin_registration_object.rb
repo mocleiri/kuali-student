@@ -11,7 +11,7 @@ class AdminRegistrationData < DataFactory
     @browser = browser
 
     defaults = {
-        :student_id => "student1"
+        :student_id => "ks-2094"
     }
 
     options = defaults.merge(opts)

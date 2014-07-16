@@ -8,8 +8,7 @@ Feature: Admin Registration
 #KSENROLL-13422
   Scenario: CR22.1.1 Verify that valid student is entered
     When I attempt to load a student by valid student Id
-    Then student information and change term section is displayed"
-
+    Then student information and change term section is displayed
 
   Scenario: CR22.1.2 Verify error message when entering invalid student
     When I attempt to load a student by invalid student Id
