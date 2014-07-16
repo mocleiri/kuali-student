@@ -16,7 +16,7 @@ Feature: REG.Registration Date Check
 
 #KSENROLL-13255
   Scenario: CR 12.1 Verify pre-registration period allows access to cart but not registration
-    Given I log in to student registration as SONALIK
+    Given I log in to student registration as E.SONALIK
     When I attempt to display my registration cart during pre-registration
     Then I can add and remove courses from my cart
     When I attempt to register for the course
@@ -24,7 +24,7 @@ Feature: REG.Registration Date Check
 
   #KSENROLL-13256
   Scenario: CR 12.2 Verify registration for courses in sub-terms with different reg periods
-    Given I log in to student registration as STEVENJ
+    Given I log in to student registration as E.STEVENJ
     And I attempt to register for a course in a subterm whose registration period is closed
     Then there is a message indicating that the registration period is not open
     When I attempt to register for a course in a subterm whose registration period is open

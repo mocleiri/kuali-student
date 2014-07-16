@@ -57,14 +57,14 @@ Then /^there is a message indicating that registration is unavailable for the te
 end
 
 When /^I log in to student registration as a user configured for Fall (\d+)$/ do |year|
-  case year.to_i
-    when 2011 then
-      visit RestMonicafLogin
-      puts "I am logged in to student registration as monicaf"
-    when 2012 then
-      visit RestSOOBLogin
-      puts "I am logged in to student registration as SOOB"
+  user = case year.to_i
+           when 2011 then "e.monicaf"
+           when 2012 then "b.corab"
+         end
+  on RestLoginPage do |page|
+    page.login_as user
   end
+  puts "I am logged in to student registration as #{user}"
 end
 
 And /^I attempt to access registration for Fall 2012$/ do

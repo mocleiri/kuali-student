@@ -430,7 +430,7 @@ Then /^the number of credits I am registered for and waitlisted for are correctl
   end
 end
 
-Given /^I log in to student registration as (\w+)$/  do |user|
+Given /^I log in to student registration as ([\w\.]+)$/  do |user|
   on RestLoginPage do |page|
     page.login_as user
   end
