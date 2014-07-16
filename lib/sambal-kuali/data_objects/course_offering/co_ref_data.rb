@@ -13,7 +13,7 @@ module CoRefData
       course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
       course_offering.create
 
-      activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+      activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                                  :format => "Lecture/Discussion", :activity_type => "Lecture"
       si_obj =  make SchedulingInformationObject, :days => "TH",
                      :start_time => "11:00", :start_time_ampm => "am",
