@@ -362,7 +362,7 @@ When /^I view the Exam Offerings for a CO created from an existing CO with multi
     course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
     course_offering.create
 
-    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+    activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                                :format => "Lecture/Discussion", :activity_type => "Lecture"
     si_obj =  make SchedulingInformationObject, :days => "TH",
                    :start_time => "12:30", :start_time_ampm => "pm",
@@ -453,7 +453,7 @@ When /^I view the Exam Offerings for a CO with a standard final exam driven by C
     course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
     course_offering.create
 
-    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+    activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                                :format => "Lecture/Discussion", :activity_type => "Lecture"
     si_obj =  make SchedulingInformationObject, :days => "TH",
                    :start_time => "11:00", :start_time_ampm => "am",
@@ -1690,7 +1690,7 @@ Given /^that the Course Offering has an AO-driven exam in a term that uses the F
     course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
     course_offering.create
 
-    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+    activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                                :format => "Lecture/Discussion", :activity_type => "Lecture"
     si_obj =  make SchedulingInformationObject, :days => "MW",
                    :start_time => "02:00", :start_time_ampm => "pm",
