@@ -40,6 +40,7 @@ class RegistrationCart < RegisterForCourseBase
   element(:registering_message) { |b| b.div(id: "registering_message") }
   element(:user_message_div) { |b| b.div(id: "user_message") }
   element(:user_message) { |b| b.user_message_div.text }
+  element(:reason_message_span) { |course_code,reg_group_code,b| b.span(id: "reason_message_#{course_code}_#{reg_group_code}") }
   element(:reason_message) { |course_code,reg_group_code,b| b.span(id: "reason_message_#{course_code}_#{reg_group_code}").text }
   element(:undo_remove_link) { |b| b.button(id: "userMessageInvoke") }
   action(:undo_remove) { |b| b.undo_remove_link.click }
