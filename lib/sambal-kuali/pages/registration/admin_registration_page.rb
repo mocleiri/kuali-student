@@ -77,15 +77,6 @@ class AdminRegistration < BasePage
     registered_courses_table.th(class: "sorting_asc").text
   end
 
-  def get_registered_course_course_code
-    loading.wait_while_present
-    array = []
-    registered_courses_table.rows.each do |row|
-      array << row.cells[COURSE_CODE].text
-    end
-    return array
-  end
-
   #################################################################
   ### Wait listed Courses Table
   #################################################################
@@ -115,14 +106,5 @@ class AdminRegistration < BasePage
   def get_waitlisted_course_code_sort
     loading.wait_while_present
     waitlisted_courses_table.th(class: "sorting_asc").text
-  end
-
-  def get_waitlisted_course_course_code
-    loading.wait_while_present
-    array = []
-    waitlisted_courses_table.rows.each do |row|
-      array << row.cells[COURSE_CODE].text
-    end
-    return array
   end
 end
