@@ -116,7 +116,7 @@ Then(/^I should be able to view the format offerings for the course$/) do
 
     codescription_level= "#{@course_search_result. course_offering_description_list[0].courseofferingdescription_level}"
     courseterm_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].courseterm_level}"
-    formatlist_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].formatlist_list[1].formatlist_level}"
+    formatlist_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].formatlist_list[0].formatlist_level}"
     formatoffering_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].formatlist_list[0].fo_list[0].fo_format_level}"
     activityoffering_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].formatlist_list[0].fo_list[0].ao_list[0].ao_activityoffering_level}"
 
@@ -131,7 +131,7 @@ Then(/^I should be able to view the format offerings for the course$/) do
 
     codescription_level= "#{@course_search_result. course_offering_description_list[0].courseofferingdescription_level}"
     courseterm_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].courseterm_level}"
-    formatlist_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].formatlist_list[1].formatlist_level}"
+    formatlist_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].formatlist_list[0].formatlist_level}"
     formatoffering_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].formatlist_list[0].fo_list[1].fo_format_level}"
     activityoffering_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].formatlist_list[0].fo_list[0].ao_list[0].ao_activityoffering_level}"
 
@@ -147,7 +147,7 @@ Then(/^I should be able to view the format offerings for the course$/) do
 
     codescription_level= "#{@course_search_result. course_offering_description_list[0].courseofferingdescription_level}"
     courseterm_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].courseterm_level}"
-    formatlist_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].formatlist_list[1].formatlist_level}"
+    formatlist_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].formatlist_list[0].formatlist_level}"
     formatoffering_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].formatlist_list[0].fo_list[2].fo_format_level}"
     activityoffering_level="#{@course_search_result.course_offering_description_list[0].course_term_list[0].formatlist_list[0].fo_list[0].ao_list[0].ao_activityoffering_level}"
 
