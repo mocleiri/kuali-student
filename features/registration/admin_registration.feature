@@ -52,18 +52,18 @@ Feature: Admin Registration
     Then the default sort order for registered courses should be on course code
 
 #KSENROLL-13426
-  @wip
+  @pending
   Scenario: CR22.4.1 Verify the waitlisted courses table populate and the correct credit count is shown
     When I search for a term by valid term code for student with waitlisted courses
     Then waitlisted courses table is populated with courses
     And table header should contain total number of credits for waitlisted courses
 
-  @wip
+  @pending
   Scenario: CR22.4.2 Verify waitlisted courses table is not populated for student with no waitlisted courses
     When I search for a term by valid term code
     Then waitlisted courses table is not populated with courses
 
-  @wip
+  @pending
   Scenario: CR22.4.3 Verify waitlisted course table is populated and default sort order is by course code
     When I search for a term by valid term code for student with waitlisted courses
     Then the default sort order for waitlisted courses should be on course code
