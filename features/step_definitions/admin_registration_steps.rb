@@ -40,7 +40,7 @@ Then /^error message is displayed stating "(.*?)"$/ do |exp_msg|
 end
 
 When /^I search for a term without entering a term code$/  do
-  @admin_reg = create AdminRegistrationData :term_code=> nil
+  @admin_reg = create AdminRegistrationData, :term_code => " "
 end
 
 Then /^a required error message is displayed stating "(.*?)"$/ do |exp_msg|
