@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.Map;
 
 public class DbDiff {
-    private static final String DRIVER_CLASS_NAME =  "oracle.jdbc.OracleDriver";
-    private static final String JDBC_URL = "jdbc:oracle:thin:@oracle:1521:XE";
-    private static final String FILE_OUTPUT_DIRECTORY = "target/sqls/";
+    private static String DRIVER_CLASS_NAME =  "oracle.jdbc.OracleDriver";
+    private static String JDBC_URL = "jdbc:oracle:thin:@oracle:1521:XE";
+    private static String FILE_OUTPUT_DIRECTORY = "target/sqls/";
 
     private DbConnection beforeDatabase; //  Connection to the database before changes were made.
     private DbConnection afterDatabase;
@@ -31,7 +31,25 @@ public class DbDiff {
 
     public static void main(String[] args) {
         //  TODO: Don't hard code the schema/passwd
-        DbDiff dbDiff = new DbDiff("KSBUNDLEDNEW", "KSBUNDLEDNEW", "KSBUNDLED", "KSBUNDLED");
+        // DONE:
+        if (args.length < 4) {
+            System.err.println("ERROR: please provide 'beforeUser', 'beforePass', 'afterUser' and 'afterPass' arguments");
+            System.exit(1);
+        }
+
+        if (System.getProperty("driver.class.name") != null) {
+            DRIVER_CLASS_NAME = System.getProperty("driver.class.name");
+        }
+
+        if (System.getProperty("jdbc.url") != null) {
+            JDBC_URL = System.getProperty("jdbc.url");
+        }
+
+        if (System.getProperty("file.output.directory") != null) {
+            FILE_OUTPUT_DIRECTORY = System.getProperty("file.output.directory");
+        }
+
+        DbDiff dbDiff = new DbDiff(args[0], args[1], args[2], args[3]);
         dbDiff.doDiff();
     }
 
