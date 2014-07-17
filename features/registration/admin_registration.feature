@@ -4,7 +4,9 @@ Feature: Admin Registration
 
   CR22.2 As Central Registration Personnel I want to select a term so that I can display basic info of the term and register a student
 
-  CR22.3 As a Central Registration Personnel I want to view the Registered Courses for the Student and Term so that i can see if any additional actions are required for the registration of the student
+  CR22.3 As a Central Registration Personnel I want to view the Registered Courses for the Student and Term so that I can see if any additional actions are required for the registration of the student
+
+  CR22.4 As a Central Registration Personnel I want	view the Waitlisted Courses for the student and term so that I can see if any additional actions are required for the registration of the student
 
   Background:
     Given I am logged in as admin
