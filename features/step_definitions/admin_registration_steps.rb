@@ -18,3 +18,33 @@ Then /^a validation error message displayed stating "([^"]+)"$/ do |exp_msg|
   page.get_student_error_message.should match /#{exp_msg}/
   end
 end
+
+When /^I search for a term by valid term code$/ do
+  @admin_reg = create AdminRegistrationData, :term_code => "201208"
+end
+
+Then /^term description is displayed stating "([^"]+)"$/ do |exp_msg|
+  on AdminRegistration do |page|
+    page.get_change_term_info_message.should =~ /#{exp_msg}/
+  end
+end
+
+When /^I search for a term by invalid term code$/ do
+  @admin_reg = create AdminRegistrationData, :term_code=> "558899"
+end
+
+Then /^error message is displayed stating "(.*?)"$/ do |exp_msg|
+  on AdminRegistration do |page|
+    page.get_term_error_message.should match /#{exp_msg}/
+  end
+end
+
+When /^I search for a term without entering a term code$/  do
+  @admin_reg = create AdminRegistrationData :term_code=> nil
+end
+
+Then /^a required error message is displayed stating "(.*?)"$/ do |exp_msg|
+  on AdminRegistration do |page|
+    page.get_term_error_message.should match /#{exp_msg}/
+  end
+end

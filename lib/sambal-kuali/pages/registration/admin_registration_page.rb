@@ -13,17 +13,28 @@ class AdminRegistration < BasePage
   action(:student_info_go){ |b| b.student_info_go_btn.when_present.click}
   element(:student_info_msg) { |b| b.student_info_section.div(id: /studentInfoMsg/)}
   value(:student_info_msg_value){ |b| b.student_info_msg.when_present.text}
+  element(:student_error_message) { |b| b.student_info_section.li(class: 'uif-errorMessageItem')}
   element(:registration_change_term_section) { |b| b.frm.div(id: "KS-AdminRegistration-ChangeTermSection")}
   element(:change_term_input) { |b| b.registration_change_term_section.text_field(id: /termCodeField/)}
   element(:change_term_go_btn) { |b| b.registration_change_term_section.button(id: "changeTermGoButton")}
   action(:change_term_go){ |b| b.change_term_go_btn.when_present.click}
-  element(:change_term_info_msg) { |b| b.registration_change_term_section.div(id: /studentInfoMsg/)}
+  element(:change_term_info_msg) { |b| b.registration_change_term_section.div(id: /changeTermInfoMsg/)}
   value(:change_term_info_msg_value){ |b| b.change_term_info_msg.when_present.text}
-  element(:student_error_message) { |b| b.student_info_section.li(class: 'uif-errorMessageItem')}
+  element(:change_term_error_message) { |b| b.registration_change_term_section.li(class: 'uif-errorMessageItem')}
 
   def get_student_error_message
     loading.wait_while_present
     student_error_message.text
+  end
+
+  def get_term_error_message
+    loading.wait_while_present
+    change_term_error_message.text
+  end
+
+  def get_change_term_info_message
+    loading.wait_while_present
+    change_term_info_msg.text
   end
 
 end
