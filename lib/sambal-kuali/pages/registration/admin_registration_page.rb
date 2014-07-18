@@ -107,4 +107,40 @@ class AdminRegistration < BasePage
     loading.wait_while_present
     waitlisted_courses_table.th(class: "sorting_asc").text
   end
+
+  #course code and section code
+  element(:admin_registration_reg_for_section) { |b| b.frm.div(id: "KS-AdminRegistration-RegFor")}
+  element(:admin_registration_reg_for_table) { |b| b.admin_registration_reg_for_section.table}
+  element(:course_code_input) { |b| b.get_blank_row("code")}
+  element(:section_code_input) { |b| b.get_blank_row("section")}
+  element(:course_description_message) { |b| b.admin_registration_reg_for_section.div(class: "uif-messageField")}
+  element(:reg_for_error_message) { |b| b.frm.div(id: "KS-AdminRegistration-RegFor_messages")}
+
+  element(:course_add_btn) { |b| b.admin_registration_reg_for_section.button(text: /\+/)}
+  action(:course_add){ |b| b.course_add_btn.when_present.click}
+  element(:course_register_btn) { |b| b.admin_registration_reg_for_section.button(text: /Register/)}
+  action(:course_register){ |b| b.course_register_btn.when_present.click}
+
+  #COURSE_CODE = 0
+  SECTION = 1
+
+  def get_course_description_message
+    loading.wait_while_present
+    course_description_message.text
+  end
+
+  def get_blank_row(cell_type)
+    loading.wait_while_present
+    admin_registration_reg_for_table.rows[1..-1].each do |row|
+      if row.text == "" or row.text == nil
+        row.text_fields.each do |input|
+          if  input.attribute_value('name') =~ /#{Regexp.escape(cell_type)}/
+            return input if input.attribute_value('value') == ""
+          end
+        end
+      end
+    end
+    return nil
+  end
+
 end

@@ -8,6 +8,8 @@ Feature: Admin Registration
 
   CR22.4 As Central Registration Personnel I want to view the Waitlisted Courses for the student and term so that I can see if any additional actions are required for the registration of the student
 
+  CR22.5 As a Central Registration Personnel I want to enter a Course Code so that I can register a student
+
   Background:
     Given I am logged in as admin
 
@@ -63,3 +65,19 @@ Feature: Admin Registration
   Scenario: CR22.4.3 Verify the waitlisted course table is populated and default sort order is by course code
     When I search for a term by valid term code for student with waitlisted courses
     Then the default sort order for waitlisted courses should be on course code
+
+#KSENROLL-13427
+  @pending
+   Scenario: CR22.5.1 Verify that the course description appears after a valid course code is entered
+     When I enter a valid course code for term
+     Then the course description is displayed stating "The Major Works of Shakespeare"
+
+  @pending
+  Scenario: CR22.5.2 Verify that an error message appears after an invalid course code is entered for term
+    When I enter an invalid course code for term
+    Then the error message for course code is displayed stating "Invalid Course Code for specified Term"
+
+  @pending @bug @KSENROLL-13671
+  Scenario: CR22.5.3 Verify that an error message appears after an invalid course code is entered
+    When I enter an invalid course code
+    Then the error message for course code is displayed stating "Invalid Course Code"

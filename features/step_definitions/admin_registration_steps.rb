@@ -113,5 +113,31 @@ Then(/^the default sort order for waitlisted courses should be on course code$/)
   end
 end
 
+When /^I enter a valid course code for term$/ do
+  @admin_reg = create AdminRegistrationData, :term_code=> "201208", :course_code=> "ENGL304"
+end
 
+Then /^the course description is displayed stating "([^"]*)"$/ do |exp_msg|
+  on AdminRegistration do |page|
+    page.course_add_btn.focus
+    page.get_course_description_message.should match /#{exp_msg}/
+  end
+end
 
+When /^I enter an invalid course code for term$/ do
+  @admin_reg = create AdminRegistrationData, :term_code=> "201208", :course_code=> "ENGL299", :section=> "1001"
+end
+
+Then /^the error message for course code is displayed stating "([^"]*)"$/ do |exp_msg|
+  on AdminRegistration do |page|
+    page.course_register
+    page.loading.wait_while_present
+    page.reg_for_error_message.text.should match /#{exp_msg}/
+    #temporary work around to leave the browser in a clean state
+    page.student_info_go
+  end
+end
+
+When /^I enter an invalid course code$/ do
+  @admin_reg = create AdminRegistrationData, :term_code=> "201208", :course_code=> "ENG299L", :section=> "1001"
+end

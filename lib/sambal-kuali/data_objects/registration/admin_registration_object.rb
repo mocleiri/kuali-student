@@ -6,14 +6,18 @@ class AdminRegistrationData < DataFactory
   include Comparable
 
   attr_accessor :student_id,
-                :term_code
+                :term_code,
+                :course_code,
+                :section
 
   def initialize(browser, opts={})
     @browser = browser
 
     defaults = {
         :student_id => "ks-2094",
-        :term_code => nil
+        :term_code => nil,
+        :course_code => nil,
+        :section => nil
     }
 
     options = defaults.merge(opts)
@@ -30,6 +34,11 @@ class AdminRegistrationData < DataFactory
       if @term_code != nil
         page.change_term_input.set @term_code
         page.change_term_go
+
+        page.course_code_input.when_present.set @course_code if @course_code != nil
+        page.section_code_input.when_present.set @section if @section != nil
+
+
       end
     end
   end
