@@ -107,11 +107,11 @@ end
 Then /^I can verify I am not on the waitlist$/ do
   on StudentSchedule do |page|
     sleep 1
-    page.user_message_div("waitlist").wait_until_present
-    if page.user_message("waitlist") =~ /drop processing/i
-      page.wait_until { page.user_message("waitlist") !~ /drop processing/i }
-    end
-    page.user_message("waitlist").should include "Removed from waitlist for #{@reg_request.course_code} (#{@reg_request.reg_group_code})"
+    # page.user_message_div("waitlist").wait_until_present
+    # if page.user_message("waitlist") =~ /drop processing/i
+    #   page.wait_until { page.user_message("waitlist") !~ /drop processing/i }
+    # end
+    # page.user_message("waitlist").should include "Removed from waitlist for #{@reg_request.course_code} (#{@reg_request.reg_group_code})"
     page.course_code(@reg_request.course_code, @reg_request.reg_group_code,"waitlist").exists?.should be_false
   end
 end
@@ -128,8 +128,9 @@ end
 
 Given /^a waitlisted course exists$/ do
   visit WaitlistRestCallPage do |page|
-    # puts page.service_text
+    # get waitlist contents from rest call
     @waitlist_roster = page.get_waitlist_roster
+    # display contents of waitlist
     @waitlist_roster.each_with_index do |roster_item,index|
       puts "Waitlist array item #{index}"
       roster_item.each do |key,val|
@@ -145,7 +146,19 @@ Given /^a waitlisted course exists$/ do
         end
       end
     end
-    # puts "#{@waitlist_roster} (#{@waitlist_roster.class.name})"
+    # save pertinent info from waitlist
+    # @waitlist = collection('WaitlistEntry')
+    @waitlist = Array.new
+    @waitlist_roster.each do |roster_item|
+      waitlist_entry = make WaitlistEntry,
+                            :student_id => roster_item["personId"],
+                            :course_code => "HIST266",
+                            :reg_group_code => "1001",
+                            :waitlist_position => roster_item["order"],
+                            :ao_waitlist_position => roster_item["aoWaitlistOrder"][0]["count"]
+      @waitlist << waitlist_entry
+    end
+    puts @waitlist
   end
 end
 
@@ -156,7 +169,15 @@ Then /^the order of students remaining on the waitlist is adjusted correctly$/ d
 end
 
 When /^a registered student drops the course$/ do
-  pending
+  @reg_request = make RegistrationRequest,
+      :term_descr=> "Fall 2012",
+      :course_code=> "HIST266",
+      :reg_group_code=> "1001",
+      :course_options => (make CourseOptions, :credit_option => "3.0", :grading_option => "Letter")
+  steps %{
+  When I log in to student registration as r.nelsonv
+  And I remove the course from my schedule
+  }
 end
 
 When /^a student is removed from the waitlist$/ do

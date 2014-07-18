@@ -242,7 +242,7 @@ end
 When /^I drop a course I am registered for that has a waitlist$/ do
   course_options = (make CourseOptions, :credit_option => "3.0")
 
-  @reg_request = make RegistrationRequest, :student_id=>"EILEENB",
+  @reg_request = make RegistrationRequest, :student_id=>"B.EILEENB",
                       :term_code=> 201208,
                       :term_descr=> "Fall 2012",
                       :course_code=> "ENGL101",
