@@ -372,7 +372,7 @@ When /^I view the Exam Offerings for a CO created from an existing CO with multi
     activity_offering.edit :start_edit => false,
                            :send_to_scheduler => true
 
-    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+    activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                                :format => "Lecture/Discussion", :activity_type => "Discussion"
     si_obj =  make SchedulingInformationObject, :days => "W",
                    :start_time => "09:00", :start_time_ampm => "am",
