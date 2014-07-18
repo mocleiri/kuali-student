@@ -314,7 +314,7 @@ Then /^the Activity Offerings for the copied CO are assigned to the target subte
     page.cancel
   end
 
-  @activity_offering_target2 = make ActivityOfferingObject, :code => "B", :parent_cluster => @course_offering_target.default_cluster
+  @activity_offering_target2 = make ActivityOfferingObject, :code => "B", :parent_cluster => @course_offering_copy.default_cluster
   on ManageCourseOfferings do |page|
     page.has_subterm_icon(@activity_offering_target2.code).should == true
     page.view_activity_offering(@activity_offering_target2.code)
