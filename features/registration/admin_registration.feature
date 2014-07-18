@@ -31,11 +31,11 @@ Feature: Admin Registration
 
   Scenario: CR22.2.2 Verify error message when entering invalid term
     When I search for a term by invalid term code
-    Then error message is displayed stating "Change Term: Invalid term ID."
+    Then error message is displayed stating "Change Term: Invalid term."
 
   Scenario: CR22.2.3 Verify error message when no term is entered
     When I search for a term without entering a term code
-    Then a required error message is displayed stating "Change Term: Term Code is required."
+    Then a required error message is displayed stating "Change Term: Term is required."
 
 #KSENROLL-13425
   Scenario: CR22.3.1 Verify the registered courses table is populated and the correct credit count is shown
