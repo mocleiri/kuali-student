@@ -121,6 +121,11 @@ class AdminRegistration < BasePage
   element(:course_register_btn) { |b| b.admin_registration_reg_for_section.button(text: /Register/)}
   action(:course_register){ |b| b.course_register_btn.when_present.click}
 
+  element(:confirm_registration_popup_section) { |b| b.frm.section(id: "registerConfirmDialog")}
+  element(:confirm_registration_popup_table) { |b| b.frm.div(id: "KS-AdminRegistration-DialogCollection").table}
+  element(:confirmation_cancel_link) { |b| b.confirm_registration_popup_section.a(text: /Cancel/)}
+  action(:confirmation_cancel){ |b| b.confirmation_cancel_link.when_present.click}
+
   #COURSE_CODE = 0
   SECTION = 1
 
@@ -141,6 +146,12 @@ class AdminRegistration < BasePage
       end
     end
     return nil
+  end
+
+  def get_confirm_registration_row(text)
+    confirm_registration_popup_table.rows[1..-1].each do |row|
+      return row if row.text =~ /#{Regexp.escape(text)}/
+    end
   end
 
 end

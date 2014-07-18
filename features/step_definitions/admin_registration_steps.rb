@@ -117,6 +117,10 @@ When /^I enter a valid course code for term$/ do
   @admin_reg = create AdminRegistrationData, :term_code=> "201208", :course_code=> "ENGL304"
 end
 
+When /^I enter a valid section for course code$/ do
+  @admin_reg = create AdminRegistrationData, :term_code=> "201208", :course_code=> "ENGL304", :section=> "1001"
+end
+
 Then /^the course description is displayed stating "([^"]*)"$/ do |exp_msg|
   on AdminRegistration do |page|
     page.course_add_btn.focus
@@ -140,4 +144,19 @@ end
 
 When /^I enter an invalid course code$/ do
   @admin_reg = create AdminRegistrationData, :term_code=> "201208", :course_code=> "ENG299L", :section=> "1001"
+end
+
+When /^I enter an invalid section$/ do
+  @admin_reg = create AdminRegistrationData, :term_code=> "201208", :course_code=> "ENGL304", :section=> "100d"
+end
+
+Then /^the section code should appear on the confirm registration dialog$/ do
+  on AdminRegistration do |page|
+    page.course_register
+    page.loading.wait_while_present
+    page.get_confirm_registration_row("#{@admin_reg.course_code} (#{@admin_reg.section})").nil?.should be_false
+    page.confirmation_cancel
+    #temporary work around to leave the browser in a clean state
+    page.student_info_go
+  end
 end

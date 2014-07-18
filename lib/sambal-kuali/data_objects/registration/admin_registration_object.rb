@@ -38,8 +38,8 @@ class AdminRegistrationData < DataFactory
         page.course_code_input.when_present.set @course_code if @course_code != nil
         page.section_code_input.when_present.set @section if @section != nil
 
-
       end
     end
   end
+
 end
