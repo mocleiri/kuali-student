@@ -109,8 +109,6 @@ class ManageCourseOfferings < BasePage
 
   element(:activity_offering_results_div) { |b| b.frm.div(id: "KS-CourseOfferingManagement-AOClustersCollection") }
 
-
-
   def activity_offering_results_table(cluster_private_name = :default_cluster)
     if cluster_private_name == :default_cluster then
       return cluster_div_list[0].table unless !cluster_div_list[0].table.exists?
@@ -217,6 +215,14 @@ class ManageCourseOfferings < BasePage
   def ao_requisites(code, cluster_private_name = :default_cluster)
     ao_requisites_link(code, cluster_private_name).click
     loading.wait_while_present(120)
+  end
+
+  def ao_comments_link(code,cluster_private_name = :default_cluster)
+    target_row(code, cluster_private_name).a(class: /ks-fontello-icon-comment/)
+  end
+
+  def ao_comments(code, cluster_private_name = :default_cluster)
+    ao_comments_link(code, cluster_private_name).click
   end
 
   def select_aos(code_list, cluster_private_name = :default_cluster)
