@@ -65,7 +65,9 @@ class RegistrationRequest < DataFactory
       page.wait_until {page.term_select.include? @term_descr }
       page.select_term @term_descr
       page.menu
+      #Need to ensure term has actually changed
       page.wait_until {page.header_term_name.text.include? @term_descr}
+      sleep 1
       page.show_add_dialog
       page.course_code_input.wait_until_present
       page.course_code_input.set @course_code
