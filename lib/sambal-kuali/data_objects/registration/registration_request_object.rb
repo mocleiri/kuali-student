@@ -210,7 +210,8 @@ class RegistrationRequest < DataFactory
     end
   end
 
-  def remove_course(status=STATUS_SCHEDULE)
+  def remove_course(status=STATUS_SCHEDULE,do_navigation=false)
+    visit StudentSchedule if do_navigation
     on StudentSchedule do |page|
       page.course_code(@course_code,@reg_group_code,status).wait_until_present
       page.show_course_details @course_code,@reg_group_code,status
