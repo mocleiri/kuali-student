@@ -127,6 +127,7 @@ end
 
 
 Given /^a waitlisted course exists$/ do
+  sleep 1
   visit WaitlistRestCallPage do |page|
     # get waitlist contents from rest call
     @waitlist_roster = page.get_waitlist_roster
@@ -163,9 +164,7 @@ Given /^a waitlisted course exists$/ do
 end
 
 Then /^the order of students remaining on the waitlist is adjusted correctly$/ do
-  visit WaitlistRestCallPage do |page|
-    pending
-  end
+  pending
 end
 
 When /^a registered student drops the course$/ do
@@ -176,8 +175,8 @@ When /^a registered student drops the course$/ do
       :course_options => (make CourseOptions, :credit_option => "3.0", :grading_option => "Letter")
   steps %{
   When I log in to student registration as r.nelsonv
-  And I remove the course from my schedule
   }
+  @reg_request.remove_course("schedule",true)
 end
 
 When /^a student is removed from the waitlist$/ do

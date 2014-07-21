@@ -51,7 +51,8 @@ Feature: REG.Wait List
   Scenario: CR 8.5 Verify the order of waitlisted students is maintained as students are removed
     Given a waitlisted course exists
     When a registered student drops the course
-    Then the order of students remaining on the waitlist is adjusted correctly
+    Then a waitlisted course exists
+#    Then the order of students remaining on the waitlist is adjusted correctly
     When a student is removed from the waitlist
     Then the order of students remaining on the waitlist is adjusted correctly
 
