@@ -8,7 +8,7 @@ Feature: REG.Time Conflict
 
  Background:
     Given I am using a mobile screen size
-    Given I log in to student registration as student2
+    Given I log in to student registration as student5
 
   #KSENROLL-13008
   Scenario: CR 9.1 - Attempt to register for two courses whose offering times are in conflict
