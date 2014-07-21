@@ -200,11 +200,7 @@ class ManageCourseOfferings < BasePage
   end
 
   def edit(code, cluster_private_name = :default_cluster)
-    begin
-      edit_link(code, cluster_private_name).click
-    rescue Timeout::Error => e
-      puts "rescued target_row edit"
-    end
+    edit_link(code, cluster_private_name).click
     loading.wait_while_present(120)
   end
 

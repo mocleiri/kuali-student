@@ -83,6 +83,7 @@ class ActivityOfferingClusterObject < DataFactory
         page.private_name_add.set @private_name
         page.published_name_add.set @published_name
         page.complete_add_aoc
+        sleep 3
       end
   end
 

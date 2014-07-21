@@ -49,8 +49,8 @@ Then /^the activity offering scheduling information are copied to the rollover t
   source_activity_offering.requested_scheduling_information_list.size.should_not == 0
 
   #now navigate to course offering copy and validate RSIs
-  @course_offering_copy.initialize_with_actual_values
-  @course_offering_copy.find_ao_obj_by_code(source_activity_offering.code).edit :defer_save => true
+  @course_offering_copy.manage
+  on(ManageCourseOfferings).edit(source_activity_offering.code, source_activity_offering.parent_cluster.private_name)
 
   on ActivityOfferingMaintenance do |page|
     page.actual_sched_info_div.exists?.should == false  #should not be any ASIs
