@@ -31,7 +31,8 @@ class ActivityOfferingObject < DataFactory
   #type: collection
   attr_accessor :actual_scheduling_information_list,
                 :requested_scheduling_information_list,
-                :seat_pool_list
+                :seat_pool_list,
+                :admin_comments_list
   #array - generally set using options hash
   attr_accessor :personnel_list,
                 :colocate_ao_list
@@ -74,7 +75,8 @@ class ActivityOfferingObject < DataFactory
         :colocate_ao_list => [],
         :colocate_shared_enrollment => false,
         :subterm => nil,
-        :waitlist_config => (make Waitlist, :parent_ao => self)
+        :waitlist_config => (make Waitlist, :parent_ao => self),
+        :admin_comments_list => collection('AdminComment')
     }
 
     options = defaults.merge(opts)
@@ -491,6 +493,23 @@ class ActivityOfferingObject < DataFactory
     rsi_obj.create
     @requested_scheduling_information_list << rsi_obj
     save unless options[:defer_save]
+  end
+
+  def add_admin_comment opts={}
+    defaults = {
+        :defer_save => false,
+        :do_navigation => true
+    }
+    options = defaults.merge(opts)
+
+    if options[:do_navigation]
+      parent_course_offering.manage
+      on(ManageCourseOfferings).ao_comments @code, @parent_cluster.private_name
+    end
+
+    options[:comment_obj].create
+    options[:comment_obj].parent_obj = self
+    @admin_comments_list << options[:comment_obj]
   end
 
   def add_personnel person

@@ -13,7 +13,7 @@ class BasePage < PageFactory
       element(:logged_in_link) { |b| b.div(class: "ks-uif-viewHeader-container navbar-inverse navbar").link(class: "dropdown-toggle") }
       value(:logged_in_user) { |b| b.div(class: "ks-uif-viewHeader-container navbar-inverse navbar").link(class: "dropdown-toggle").text }
 
-      element(:loading) { |b| b.image(alt: "Loading...") }
+      element(:loading) { |b| b.frm.image(alt: "Loading...") }
       element(:adding) { |b| b.frm.image(alt: "Adding Line...") }
       element(:growl_div) { |b| b.frm.div(id: "jGrowl") }
       element(:growl_message_div) { |b| b.growl_div.div(class: "jGrowl-message") }

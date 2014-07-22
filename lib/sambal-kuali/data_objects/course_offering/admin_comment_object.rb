@@ -5,19 +5,42 @@ class AdminCommentObject < DataFactory
   include StringFactory
   include Workflows
 
-  attr_accessor :created_date,
+  attr_accessor :text,
+                :created_date,
                 :creator,
                 :parent_obj
 
   def initialize(browser, opts={})
     @browser = browser
-    #no defaults
+    defaults = {
+        :text => "comment text #{random_alphanums(4)}"
+    }
+    options = defaults.merge(opts)
     set_options(options)
   end
 
   def create
-    # manage parent CO
-    #
+    created_by = ''
+    created_date = ''
+    on AdminComments do |page|
+      page.new_comment_field.set @text
+      page.add_comment
+    end
+    on AdminComments do |page| #synch to page again
+      new_comment_div = page.comment_div_by_text(@text)
+      created_by = page.comment_created_by(new_comment_div)
+      created_date = page.comment_created_date(new_comment_div)
+    end
+
+    @creator = created_by
+    @created_date = created_date
+  end
+
+  def manage_comments
+    @parent_obj.parent_co.manage
+    on(ManageCourseOfferings) do |page|
+
+    end
   end
 
   #need to specify both :org_id & :org_name

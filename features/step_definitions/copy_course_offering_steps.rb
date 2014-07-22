@@ -67,6 +67,7 @@ Then /^the activity offering scheduling information are copied to the rollover t
       page.get_requested_sched_info_facility(row).should == del_sched_info.facility_long_name
       page.get_requested_sched_info_room(row).should == del_sched_info.room
     end
+    page.cancel
   end
 end
 
