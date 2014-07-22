@@ -2,7 +2,7 @@ When /^I attempt to load a student by valid student Id$/ do
   @admin_reg = create AdminRegistrationData
 end
 
-Then(/^student information and change term section is displayed$/) do
+Then(/^student basic information and change term section is displayed$/) do
   on AdminRegistration do |page|
     page.student_info_msg.text.should =~ /BOWEN, EILEEN \(#{@admin_reg.student_id.upcase}\)/
     page.registration_change_term_section.visible?.should == true
@@ -19,11 +19,11 @@ Then /^a validation error message displayed stating "([^"]+)"$/ do |exp_msg|
   end
 end
 
-When /^I search for a term by valid term code for student with no registered courses$/ do
+When /^I attempt to load a Term by valid term Id for student with no registered courses$/ do
   @admin_reg = create AdminRegistrationData, :student_id => "KS-10296", :term_code => "201208"
 end
 
-When /^I search for a term by valid term code$/ do
+When /^I attempt to load a Term by valid term Id$/ do
   @admin_reg = create AdminRegistrationData, :term_code => "201208"
 end
 
@@ -33,7 +33,7 @@ Then /^term description is displayed stating "([^"]+)"$/ do |exp_msg|
   end
 end
 
-When /^I search for a term by invalid term code$/ do
+When /^I attempt to load a Term by invalid term Id$/ do
   @admin_reg = create AdminRegistrationData, :term_code=> "558899"
 end
 
@@ -43,7 +43,7 @@ Then /^error message is displayed stating "(.*?)"$/ do |exp_msg|
   end
 end
 
-When /^I search for a term without entering a term code$/  do
+When /^I attempt to load a Term without entering a term Id$/  do
   @admin_reg = create AdminRegistrationData, :term_code => " "
 end
 
@@ -81,7 +81,7 @@ Then(/^the default sort order for registered courses should be on course code$/)
   end
 end
 
-And /^I search for a term by valid term code for student with waitlisted courses$/ do
+And /^I attempt to load a Term by valid term Id for student with waitlisted courses$/ do
     @admin_reg = create AdminRegistrationData, :student_id=> "KS-7185", :term_code=> "201208"
 end
 

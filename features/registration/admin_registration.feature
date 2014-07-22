@@ -18,7 +18,7 @@ Feature: REG.Admin Registration
 #KSENROLL-13422
   Scenario: CR22.1.1 Verify that valid student is entered
     When I attempt to load a student by valid student Id
-    Then student information and change term section is displayed
+    Then student basic information and change term section is displayed
 
   Scenario: CR22.1.2 Verify error message when entering invalid student
     When I attempt to load a student by invalid student Id
@@ -26,46 +26,46 @@ Feature: REG.Admin Registration
 
 #KSENROLL-13424
   Scenario: CR22.2.1 Verify that valid term is entered
-    When I search for a term by valid term code
+    When I attempt to load a Term by valid term Id
     Then term description is displayed stating "Fall 2012"
 
   Scenario: CR22.2.2 Verify error message when entering invalid term
-    When I search for a term by invalid term code
+    When I attempt to load a Term by invalid term Id
     Then error message is displayed stating "Change Term: Invalid term."
 
   Scenario: CR22.2.3 Verify error message when no term is entered
-    When I search for a term without entering a term code
+    When I attempt to load a Term without entering a term Id
     Then a required error message is displayed stating "Change Term: Term is required."
 
 #KSENROLL-13425
   Scenario: CR22.3.1 Verify the registered courses table is populated and the correct credit count is shown
-    When I search for a term by valid term code
+    When I attempt to load a Term by valid term Id
     Then registered courses table is populated with courses
     And table header should contain total number of credits for registered courses
 
   Scenario: CR22.3.2 Verify the registered courses table is not populated for student with no registered courses
-    When I search for a term by valid term code for student with no registered courses
+    When I attempt to load a Term by valid term Id for student with no registered courses
     Then registered courses table is not populated with courses
 
   Scenario: CR22.3.3 Verify the registered course table is populated and default sort order is by course code
-    When I search for a term by valid term code
+    When I attempt to load a Term by valid term Id
     Then the default sort order for registered courses should be on course code
 
 #KSENROLL-13426
   @pending
   Scenario: CR22.4.1 Verify the waitlisted courses table is populated and the correct credit count is shown
-    When I search for a term by valid term code for student with waitlisted courses
+    When I attempt to load a Term by valid term Id for student with waitlisted courses
     Then waitlisted courses table is populated with courses
     And table header should contain total number of credits for waitlisted courses
 
   @pending
   Scenario: CR22.4.2 Verify the waitlisted courses table is not populated for student with no waitlisted courses
-    When I search for a term by valid term code
+    When I attempt to load a Term by valid term Id
     Then waitlisted courses table is not populated with courses
 
   @pending
   Scenario: CR22.4.3 Verify the waitlisted course table is populated and default sort order is by course code
-    When I search for a term by valid term code for student with waitlisted courses
+    When I attempt to load a Term by valid term Id for student with waitlisted courses
     Then the default sort order for waitlisted courses should be on course code
 
 #KSENROLL-13427
