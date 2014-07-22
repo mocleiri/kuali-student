@@ -1,6 +1,6 @@
 class AdminRegistration < BasePage
 
-  #expected_element :cancel_update_link
+  expected_element :student_info_input
 
   wrapper_elements
   frame_element
@@ -21,28 +21,18 @@ class AdminRegistration < BasePage
   element(:change_term_info_msg) { |b| b.registration_change_term_section.div(id: "changeTermInfoMsg")}
   value(:change_term_info_msg_value){ |b| b.change_term_info_msg.when_present.text}
   element(:change_term_error_message) { |b| b.registration_change_term_section.li(class: 'uif-errorMessageItem')}
-
-  def get_student_error_message
-    loading.wait_while_present
-    student_error_message.text
-  end
-
-  def get_term_error_message
-    loading.wait_while_present
-    change_term_error_message.text
-  end
-
-  def get_change_term_info_message
-    loading.wait_while_present
-    change_term_info_msg.text
-  end
+  value(:get_student_error_message){ |b| b.student_error_message.when_present.text}
+  value(:get_term_error_message){ |b| b.change_term_error_message.when_present.text}
+  value(:get_change_term_info_message){ |b| b.change_term_info_msg.when_present.text}
 
   #################################################################
   ### Register Courses Table
   #################################################################
   element(:registered_courses_section) { |b| b.frm.section( id: "KS-AdminRegistration-Registered")}
   element(:registered_courses_table) { |b| b.registered_courses_section.table}
-  element(:registered_courses_header) { |b| b.registered_courses_section.text}
+  value(:registered_courses_header) { |b| b.registered_courses_section.text}
+  value(:get_registered_course_credits){ |row, b| b.row.cells[CREDITS].text}
+  value(:get_registered_course_code_sort){ |b| b.registered_courses_table.th(class: "sorting_asc").text}
 
   COURSE_CODE = 0
   COURSE_NAME = 1
@@ -67,23 +57,15 @@ class AdminRegistration < BasePage
     end
   end
 
-  def get_registered_course_credits(row)
-    loading.wait_while_present
-    row.cells[CREDITS].text
-  end
-
-  def get_registered_course_code_sort
-    loading.wait_while_present
-    registered_courses_table.th(class: "sorting_asc").text
-  end
-
   #################################################################
   ### Wait listed Courses Table
   #################################################################
 
   element(:waitlisted_courses_section) { |b| b.frm.section( id: "KS-AdminRegistration-Waitlist")}
   element(:waitlisted_courses_table) { |b| b.waitlisted_courses_section.table}
-  element(:waitlisted_courses_header) { |b| b.waitlisted_courses_section.text}
+  value(:waitlisted_courses_header) { |b| b.waitlisted_courses_section.text}
+  value(:get_waitlisted_course_credits){ |row, b| b.row.cells[CREDITS].text}
+  value(:get_waitlisted_course_code_sort){ |b| b.waitlisted_courses_table.th(class: "sorting_asc").text}
 
   def waitlisted_courses_row
     loading.wait_while_present
@@ -96,16 +78,6 @@ class AdminRegistration < BasePage
     else
       return nil
     end
-  end
-
-  def get_waitlisted_course_credits(row)
-    loading.wait_while_present
-    row.cells[CREDITS].text
-  end
-
-  def get_waitlisted_course_code_sort
-    loading.wait_while_present
-    waitlisted_courses_table.th(class: "sorting_asc").text
   end
 
   #course code and section code
@@ -125,14 +97,10 @@ class AdminRegistration < BasePage
   element(:confirm_registration_popup_table) { |b| b.frm.div(id: "KS-AdminRegistration-DialogCollection").table}
   element(:confirmation_cancel_link) { |b| b.confirm_registration_popup_section.a(text: /Cancel/)}
   action(:confirmation_cancel){ |b| b.confirmation_cancel_link.when_present.click}
+  value(:get_course_description_message){ |b| b.course_description_message.when_present.text}
 
   #COURSE_CODE = 0
   SECTION = 1
-
-  def get_course_description_message
-    loading.wait_while_present
-    course_description_message.text
-  end
 
   def get_blank_row(cell_type)
     loading.wait_while_present

@@ -1,5 +1,5 @@
 @blue_team
-Feature: Admin Registration
+Feature: REG.Admin Registration
   CR22.1 As a Central Registration Personnel I want to enter a student id so that basic student info is display and I can register the student
 
   CR22.2 As Central Registration Personnel I want to select a term so that I can display basic info of the term and register a student
@@ -69,17 +69,15 @@ Feature: Admin Registration
     Then the default sort order for waitlisted courses should be on course code
 
 #KSENROLL-13427
-  @pending
    Scenario: CR22.5.1 Verify that the course description appears after a valid course code is entered
      When I enter a valid course code for term
      Then the course description is displayed stating "The Major Works of Shakespeare"
 
-  @pending
   Scenario: CR22.5.2 Verify that an error message appears after an invalid course code is entered for term
     When I enter an invalid course code for term
     Then the error message for course code is displayed stating "Invalid Course Code for specified Term"
 
-  @pending @bug @KSENROLL-13671
+  @bug @KSENROLL-13671
   Scenario: CR22.5.3 Verify that an error message appears after an invalid course code is entered
     When I enter an invalid course code
     Then the error message for course code is displayed stating "Invalid Course Code"
