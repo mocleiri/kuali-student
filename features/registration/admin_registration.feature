@@ -83,12 +83,11 @@ Feature: REG.Admin Registration
     Then the error message for course code is displayed stating "Invalid Course Code"
 
 #KSENROL-13428
-  @pending
   Scenario: CR22.6.1 Verify that the confirm registration dialog appears after a valid section is entered
     When I enter a valid section for course code
     Then the section code should appear on the confirm registration dialog
 
-  @pending @bug @KSENROLL-13671
+  @bug @KSENROLL-13671
   Scenario: CR22.6.2 Verify that an error message appears after an invalid section is entered
     When I enter an invalid section
     Then the error message for course code is displayed stating "Invalid Section for Course Code"
