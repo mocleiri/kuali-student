@@ -59,13 +59,13 @@ Feature: BT.Course Search
   Examples:
     |multi_text   	              |
     # Single page search with 2 words
-    |Shakespeare beekeeping       |
+    #|Shakespeare beekeeping       |
     # Multi page search with 2 words
-    |Organic marine               |
+    #|Organic marine               |
     # Multi page search with partial 2 words
     |eng  lit                     |
     #Multi page search with 3 words
-    |Inorganic ecology beekeeping |
+    #|Inorganic ecology beekeeping |
 
 #************************* KSAP_ 819, US- 618**********************************************************************************
 
@@ -73,7 +73,7 @@ Feature: BT.Course Search
     When I search for a course with "2xx" level option
     Then only "200" level courses "should" be displayed
 
-#************************* KSAP-821, US- KSAP-622**********************************************************************************
+#    ************************* KSAP-821, US- KSAP-622**********************************************************************************
   Scenario Outline: CS10 Successfully search for a course and change the pagination options
     When I search for a course with multi word"<multi_text>" text option
     And I choose to see "<per_page>" records per page
@@ -85,7 +85,7 @@ Feature: BT.Course Search
     | english history  |  20       | Showing 1-20 of 200 results for english history  | 5     |  20            |
     | english history  |  50       | Showing 1-50 of 200 results for english history  | 4     |  50            |
     | english history  | 100       | Showing 1-100 of 200 results for english history | 2     | 100            |
-    | greek mythology  |  20       | Showing 1-7 of 7 results for greek mythology     | 1     |   7            |
+    | greek mythology  |  20       | Showing 1-8 of 8 results for greek mythology     | 1     |   8            |
 
 #************************* KSAP-818, US- 620**********************************************************************************
 
