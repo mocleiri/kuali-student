@@ -66,7 +66,7 @@ class CourseSearch < BasePage
   action(:term_checkbox_click){ |scheduled_terms,b| b.div(id:"facet_quarter_disclosureContent").div(class:"facets").li.a(text:"#{scheduled_terms}").click}
   action(:credits_checkbox_click){ |credit,b| b.div(id:"facet_credits_disclosureContent").div(class:"facets").li.a(text:"#{credit}").click}
   action(:courselevel_checkbox_click){ |course_level,b| b.div(id:"facet_level_disclosureContent").div(class:"facets").li.a(text:"#{course_level}").click}
-  action(:courseprefix_chekbox_click){ |course_prefix,b| b.div(id:"facet_curriculum_disclosureContent").div(class:"facets").li.a(text:"#{course_prefix}").click}
+  action(:courseprefix_chekbox_click){ |subject,course_prefix,b| b.div(id:"facet_curriculum_disclosureContent").div(class:"facets").li(title:"#{subject}").a(text:"#{course_prefix}").click}
 
 
 
