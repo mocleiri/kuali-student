@@ -5,7 +5,7 @@ module Workflows
   # Site Navigation helpers...
 #  def navigate_to_course_search_home
  #   on KSRicePortal do |page|
-  #    page.course_search_home
+     # page.course_search_home
    # end
   #end
 
@@ -15,17 +15,22 @@ module Workflows
     end
   end
 
+
+ def  navigate_to_course_planner_home
+   visit CoursePlannerPage do |page|
+      puts page
+     end
+   end
+
+
   def navigate_to_i18n_poc_home
     on KSRicePortal do |page|
       page.i18n_poc_home
     end
   end
 
-  def navigate_to_course_planner_home
-    on KSRicePortal do |page|
-      page.course_planner_home
-    end
-  end
+
+
 
   def navigate_to_maintenance_portal
     on KSFunctionalHome do |page|
