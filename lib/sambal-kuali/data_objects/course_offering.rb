@@ -73,7 +73,7 @@ class CourseSearchResults < DataFactory
      page.term_checkbox_click(@scheduled_terms)                         if facet_type=="term"
      page.credits_checkbox_click(@credit)                       if facet_type=="credit"
      page.courselevel_checkbox_click(@course_level)                   if facet_type=="course_level"
-     page.courseprefix_chekbox_click(@course_prefix)                 if facet_type=="course_prefix"
+     page.courseprefix_chekbox_click(@subject,@course_prefix)                 if facet_type=="course_prefix"
     end
  end
   def navigate_course_detail_page
