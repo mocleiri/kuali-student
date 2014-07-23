@@ -8,7 +8,9 @@ class AdminRegistrationData < DataFactory
   attr_accessor :student_id,
                 :term_code,
                 :course_code,
-                :section
+                :section,
+                :term_description,
+                :course_description
 
   def initialize(browser, opts={})
     @browser = browser
@@ -17,7 +19,9 @@ class AdminRegistrationData < DataFactory
         :student_id => "ks-2094",
         :term_code => nil,
         :course_code => nil,
-        :section => nil
+        :section => nil,
+        :term_description => nil,
+        :course_description => nil
     }
 
     options = defaults.merge(opts)
@@ -37,7 +41,6 @@ class AdminRegistrationData < DataFactory
 
         page.course_code_input.when_present.set @course_code if @course_code != nil
         page.section_code_input.when_present.set @section if @section != nil
-
       end
     end
   end

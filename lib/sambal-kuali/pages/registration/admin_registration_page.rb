@@ -31,7 +31,7 @@ class AdminRegistration < BasePage
   element(:registered_courses_section) { |b| b.frm.section( id: "KS-AdminRegistration-Registered")}
   element(:registered_courses_table) { |b| b.registered_courses_section.table}
   value(:registered_courses_header) { |b| b.registered_courses_section.text}
-  value(:get_registered_course_credits){ |row, b| b.row.cells[CREDITS].text}
+  value(:get_registered_course_credits){ |b| b.cells[CREDITS].text}
   value(:get_registered_course_code_sort){ |b| b.registered_courses_table.th(class: "sorting_asc").text}
 
   COURSE_CODE = 0
@@ -64,7 +64,7 @@ class AdminRegistration < BasePage
   element(:waitlisted_courses_section) { |b| b.frm.section( id: "KS-AdminRegistration-Waitlist")}
   element(:waitlisted_courses_table) { |b| b.waitlisted_courses_section.table}
   value(:waitlisted_courses_header) { |b| b.waitlisted_courses_section.text}
-  value(:get_waitlisted_course_credits){ |row, b| b.row.cells[CREDITS].text}
+  value(:get_waitlisted_course_credits){ |b| b.cells[CREDITS].text}
   value(:get_waitlisted_course_code_sort){ |b| b.waitlisted_courses_table.th(class: "sorting_asc").text}
 
   def waitlisted_courses_row

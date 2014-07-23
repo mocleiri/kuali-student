@@ -29,7 +29,7 @@ Feature: REG.Admin Registration
 #KSENROLL-13424
   Scenario: CR22.2.1 Verify that valid term is entered
     When I attempt to load a Term by valid term Id
-    Then term description is displayed stating "Fall 2012"
+    Then term description is displayed
 
   Scenario: CR22.2.2 Verify error message when entering invalid term
     When I attempt to load a Term by invalid term Id
@@ -40,40 +40,40 @@ Feature: REG.Admin Registration
     Then a required error message is displayed stating "Change Term: Term is required."
 
 #KSENROLL-13425
-  Scenario: CR22.3.1 Verify the registered courses table is populated and the correct credit count is shown
+  Scenario: CR22.3.1 Verify registered courses are populated and the correct credit count is shown
     When I attempt to load a Term by valid term Id
-    Then registered courses table is populated with courses
-    And table header should contain total number of credits for registered courses
+    Then registered courses are populated
+    And the total number of credits for registered courses are displayed
 
-  Scenario: CR22.3.2 Verify the registered courses table is not populated for student with no registered courses
+  Scenario: CR22.3.2 Verify registered courses are populated for student with no registered courses
     When I attempt to load a Term by valid term Id for student with no registered courses
-    Then registered courses table is not populated with courses
+    Then registered courses are not populated
 
-  Scenario: CR22.3.3 Verify the registered course table is populated and default sort order is by course code
+  Scenario: CR22.3.3 Verify registered course are populated and default sort order is by course code
     When I attempt to load a Term by valid term Id
     Then the default sort order for registered courses should be on course code
 
 #KSENROLL-13426
   @pending
-  Scenario: CR22.4.1 Verify the waitlisted courses table is populated and the correct credit count is shown
+  Scenario: CR22.4.1 Verify waitlisted courses are populated and the correct credit count is shown
     When I attempt to load a Term by valid term Id for student with waitlisted courses
-    Then waitlisted courses table is populated with courses
-    And table header should contain total number of credits for waitlisted courses
+    Then waitlisted courses are populated
+    And the total number of credits for waitlisted courses are displayed
 
   @pending
-  Scenario: CR22.4.2 Verify the waitlisted courses table is not populated for student with no waitlisted courses
+  Scenario: CR22.4.2 Verify waitlisted courses are populated for student with no waitlisted courses
     When I attempt to load a Term by valid term Id
-    Then waitlisted courses table is not populated with courses
+    Then waitlisted courses are populated
 
   @pending
-  Scenario: CR22.4.3 Verify the waitlisted course table is populated and default sort order is by course code
+  Scenario: CR22.4.3 Verify waitlisted courses are populated and default sort order is by course code
     When I attempt to load a Term by valid term Id for student with waitlisted courses
     Then the default sort order for waitlisted courses should be on course code
 
 #KSENROLL-13427
    Scenario: CR22.5.1 Verify that the course description appears after a valid course code is entered
      When I enter a valid course code for term
-     Then the course description is displayed stating "The Major Works of Shakespeare"
+     Then the course description is displayed
 
   Scenario: CR22.5.2 Verify that an error message appears after an invalid course code is entered for term
     When I enter an invalid course code for term
