@@ -1,4 +1,4 @@
-@blue_team
+@nightly @blue_team
 Feature: REG.Admin Registration
   CR22.1 As a Central Registration Personnel I want to enter a student id so that basic student info is display and I can register the student
 
@@ -11,6 +11,8 @@ Feature: REG.Admin Registration
   CR22.5 As a Central Registration Personnel I want to enter a Course Code so that I can register a student
 
   CR22.6 As a Central Registration Personnel I want to enter a Section so that I can register a student for the default options (credit & registration options)
+
+  CR22.8 As a Central Registration Personnel I want to be able to add multiple course for a student so that i can register the student for multiple courses at once
 
   Background:
     Given I am logged in as admin
@@ -91,3 +93,8 @@ Feature: REG.Admin Registration
   Scenario: CR22.6.2 Verify that an error message appears after an invalid section is entered
     When I enter an invalid section
     Then the error message for course code is displayed stating "Invalid Section for Course Code"
+
+#KSENROLL-13722
+  @draft
+  Scenario: CR22.8.1 Verify I am able to add and remove multiple courses for a student when registering
+    When I add multiple courses to a student for registration in a valid term
