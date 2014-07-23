@@ -267,3 +267,106 @@ class CourseOptions < DataFactory
     end
 
   end
+
+class WaitlistEntry < DataFactory
+
+  include Foundry
+  include DateFactory
+  include StringFactory
+  include Workflows
+
+  #string - generally set using options hash
+  attr_reader   :student_id,
+                :term_code,
+                :course_code,
+                :reg_group_code
+  #number
+  attr_reader   :waitlist_position,
+                :ao_waitlist_position
+
+  #  defaults = {
+  #    :student_id=>"student",
+  #    :term_code=>"201208",
+  #    :course_code=>"HIST266",
+  #    :reg_group_code=>"1001",
+  #    :waitlist_position=>0,
+  #    :ao_waitlist_position=>0
+  #  }
+
+  def initialize(browser, opts={})
+    @browser = browser
+
+    defaults = {
+       :student_id=>"student",
+       :term_code=>"201208",
+       :course_code=>"HIST266",
+       :reg_group_code=>"1001",
+       :waitlist_position=>0,
+       :ao_waitlist_position=>0
+    }
+    options = defaults.merge(opts)
+    update_options(options)
+
+  end
+
+  def inspect
+    "\nWaitlistEntry -- id: #{@student_id}, \twaitlist position: #{@waitlist_position}, \tAO waitlist position: #{@ao_waitlist_position}\n"
+  end
+
+end
+
+class WaitlistRoster < DataFactory
+
+  include Foundry
+  include DateFactory
+  include StringFactory
+  include Workflows
+
+  #string - generally set using options hash
+  attr_reader   :term_code,
+                :course_code,
+                :reg_group_code
+  #hash of :student_id=>WaitlistEntry
+  attr_reader   :waitlist_entries
+
+  #  defaults = {
+  #    :term_code=>"201208"
+  #    :course_code=>"HIST266",
+  #    :reg_group_code=>"1001",
+  #    :waitlist_entries=>{}
+  #  }
+
+  def initialize(browser, opts={})
+    @browser = browser
+
+    defaults = {
+        :term_code=>"201208",
+        :course_code=>"HIST266",
+        :reg_group_code=>"1001",
+        :waitlist_entries=>{}
+    }
+    options = defaults.merge(opts)
+    update_options(options)
+    get_waitlist_entries
+  end
+
+  def get_waitlist_entries
+    on WaitlistRestCallPage do |page|
+      waitlist_roster = page.get_waitlist_roster @term_code,@course_code,@reg_group_code
+      waitlist_roster.each do |roster_item|
+        waitlist_entry = make WaitlistEntry,
+                              :student_id => roster_item["personId"],
+                              :term_code => @term_code,
+                              :course_code => @course_code,
+                              :reg_group_code => @reg_group_code,
+                              :waitlist_position => roster_item["order"],
+                              :ao_waitlist_position => roster_item["aoWaitlistOrder"][0]["count"]
+        @waitlist_entries[waitlist_entry.student_id] = waitlist_entry
+      end
+    end
+  end
+
+  def inspect
+    "\nWaitlist Roster -- term: #{@term_code}, course: #{@course_code}, reg group: #{@reg_group_code}\nentries: #{@waitlist_entries}"
+  end
+end
