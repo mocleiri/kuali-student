@@ -93,5 +93,6 @@ Feature: REG.Admin Registration
 
 #KSENROLL-13722
   @draft
-  Scenario: CR22.8.1 Verify I am able to add and remove multiple courses for a student when registering
-    When I add multiple courses to a student for registration in a valid term
+  Scenario: CR22.8.1 Verify I am able to add multiple courses for a student when registering
+    When I select the course that a student will be registered for
+    Then I should be able to select additional courses for the student
