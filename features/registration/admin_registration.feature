@@ -49,23 +49,20 @@ Feature: REG.Admin Registration
     When I attempt to load a Term by valid term Id for student with no registered courses
     Then registered courses are not populated
 
-  Scenario: CR22.3.3 Verify registered course are populated and default sort order is by course code
+  Scenario: CR22.3.3 Verify registered courses are populated and default sort order is by course code
     When I attempt to load a Term by valid term Id
     Then the default sort order for registered courses should be on course code
 
 #KSENROLL-13426
-  @pending
   Scenario: CR22.4.1 Verify waitlisted courses are populated and the correct credit count is shown
     When I attempt to load a Term by valid term Id for student with waitlisted courses
     Then waitlisted courses are populated
     And the total number of credits for waitlisted courses are displayed
 
-  @pending
   Scenario: CR22.4.2 Verify waitlisted courses are populated for student with no waitlisted courses
     When I attempt to load a Term by valid term Id
     Then waitlisted courses are populated
 
-  @pending
   Scenario: CR22.4.3 Verify waitlisted courses are populated and default sort order is by course code
     When I attempt to load a Term by valid term Id for student with waitlisted courses
     Then the default sort order for waitlisted courses should be on course code
