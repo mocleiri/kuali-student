@@ -94,7 +94,7 @@ Feature: REG.Admin Registration
     Then the error message for course code is displayed stating "Invalid Section for Course Code"
 
 #KSENROLL-13722
-  @draft
+  @pending
   Scenario: CR22.8.1 Verify I am able to add multiple courses for a student when registering
     When I select the course that a student will be registered for
     Then I should be able to select additional courses for the student
