@@ -119,8 +119,7 @@ end
 Then /^I can go to My Schedule and verify I am not on the waitlist$/ do
   visit StudentSchedule
   on StudentSchedule do |page|
-    #this is a wait, until dev gets in a notification that processing is finished
-    @reg_request.change_term_and_return(@reg_request.term_descr, "Spring 2012")
+    sleep 3
     page.course_code(@reg_request.course_code, @reg_request.reg_group_code,"waitlist").exists?.should be_false
   end
 end

@@ -252,6 +252,7 @@ When /^I drop a course I am registered for that has a waitlist$/ do
 
   visit StudentSchedule
   @reg_request.remove_course("schedule")
+  sleep 3
 end
 
 When /^I view my schedule$/ do
