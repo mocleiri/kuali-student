@@ -1,4 +1,21 @@
-class RegisterForCourseSearchResults < RegisterForCourseBase
+class CourseSearchPage < RegisterForCourseBase
+
+  def go_to_results_page (search_string)
+    page_url = "#{$test_site}/registration/index.jsp#/search/#{search_string}"
+    @browser.goto page_url
+    course_input_div.wait_until_present
+  end
+
+  # Search input
+  element(:course_input_div){ |b| b.div(class: "kscr-Responsive-searchFormWrapper kscr-SearchForm") }
+  element(:course_input){ |b| b.text_field(id: "courseSearchCriteria") }
+  element(:course_input_button) { |b| b.button(id: "searchSubmit") }
+  action(:begin_course_search) { |b| b.course_input_button.click}
+
+  def search_for_a_course(course)
+    course_input.set course
+    begin_course_search
+  end
 
   # Facets
   element(:seats_avail_toggle) { |b| b.li(id: "search_facet_seatsAvailable_option_seatsAvailable") }
@@ -21,18 +38,13 @@ class RegisterForCourseSearchResults < RegisterForCourseBase
   COURSE_DESC = 1
   COURSE_CRED = 2
 
-  def go_to_results_page (search_string)
-    page_url = "#{$test_site}/registration/index.jsp#/search/#{search_string}"
-    @browser.goto page_url
-  end
-
   def target_result_row_by_course(course_code)
     results_table.rows.each do |row|
       return row if row.cells[COURSE_CODE].text.match course_code
     end
     return nil
   end
-  
+
   def course_title_by_course (course_code)
     item = target_result_row_by_course (course_code)
     row.cells[COURSE_DESC].text
@@ -61,7 +73,7 @@ class RegisterForCourseSearchResults < RegisterForCourseBase
     item = target_result_row_by_index (index)
     row.cells[COURSE_DESC].text
   end
-  
+
   def course_desc_link_by_index (index)
     row = target_result_row_by_index (index)
     row.cells[COURSE_DESC].link
