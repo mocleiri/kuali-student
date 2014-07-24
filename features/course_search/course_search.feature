@@ -59,13 +59,13 @@ Feature: BT.Course Search
   Examples:
     |multi_text   	              |
     # Single page search with 2 words
-    #|Shakespeare beekeeping       |
+    |Shakespeare beekeeping       |
     # Multi page search with 2 words
-    #|Organic marine               |
+    |Organic marine               |
     # Multi page search with partial 2 words
-    |eng  lit                     |
+    |engl  lit                   |
     #Multi page search with 3 words
-    #|Inorganic ecology beekeeping |
+    |Inorganic ecology beekeeping |
 
 #************************* KSAP_ 819, US- 618**********************************************************************************
 
