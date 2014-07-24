@@ -8,6 +8,8 @@ class AdminCommentObject < DataFactory
   attr_accessor :text,
                 :created_date,
                 :creator,
+                :last_editor,
+                :edited_date,
                 :parent_obj
 
   def initialize(browser, opts={})
@@ -27,54 +29,84 @@ class AdminCommentObject < DataFactory
       page.add_comment
     end
     on AdminComments do |page| #synch to page again
-      new_comment_div = page.comment_div_by_text(@text)
-      created_by = page.comment_created_by(new_comment_div)
-      created_date = page.comment_created_date(new_comment_div)
+      new_comment = page.comment_by_text(@text)
+      created_by = page.comment_created_by(new_comment)
+      created_date = page.comment_created_date(new_comment)
     end
 
     @creator = created_by
     @created_date = created_date
   end
 
-  def manage_comments
-    @parent_obj.parent_co.manage
-    on(ManageCourseOfferings) do |page|
-
-    end
-  end
-
-  #need to specify both :org_id & :org_name
   def edit opts={}
     defaults = {
-        :defer_save => false,
-        :start_edit => true
+        :do_navigation => true,
+        :cancel_edit => false,
+        :close_comments_dialog => true
     }
     options = defaults.merge(opts)
 
-    @parent_co.edit :defer_save => true if options[:start_edit]
+    if options[:do_navigation]
+      @parent_obj.manage_comments
+    end
 
-    if !options[:org_id].nil? && !options[:org_name].nil?
-      on CourseOfferingCreateEdit do |page|
-        row = page.target_orgs_row(@org_id)
-        row.cells[ORG_ID_COLUMN].button().click
-        page.loading.wait_while_present
-      end
+    edit_comment = nil
 
-      on OrgLookupPopUp do |page|
-        page.long_name.set options[:org_name]
-        page.search
-        page.return_value options[:org_id]
+    if options[:text] != nil
+      on AdminComments do |page|
+        edit_comment = page.comment_by_text(@text)
+        page.edit_comment_element(edit_comment).click
+        page.comment_text_editor(edit_comment).clear
+        page.comment_text_editor(edit_comment).set options[:text]
       end
     end
 
-    @parent_co.save unless options[:defer_save]
-    set_options(options)
+    if ! options[:cancel_edit]
+      edited_by = ''
+      edited_date = ''
+      on AdminComments do |page|
+        page.comment_save_edit(edit_comment).click
+        page.loading.wait_while_present
+        @text = options[:text]
+      end
+      on AdminComments do |page|
+        edit_comment = page.comment_by_text(@text)
+        @last_editor = page.comment_edited_by(edit_comment)
+        @edited_date = page.comment_edited_date(edit_comment)
+        page.close if options[:close_comments_dialog]
+      end
+    else
+      on(AdminComments).comment_cancel_edit(edit_comment)
+    end
   end
 
+def cancel_edit
 
+end
+
+
+  def delete opts={}
+    defaults = {
+        :do_navigation => false,
+        :confirm_delete => true,
+        :close_comments_dialog => true
+    }
+    options = defaults.merge(opts)
+
+    if options[:do_navigation]
+      @parent_obj.manage_comments
+    end
+
+    on AdminComments do |page| #synch to page again
+      page.delete_comment(@text, options[:confirm_delete])
+      page.close if options[:close_comments_dialog]
+    end
+    @parent_obj.admin_comments_list.delete(self) if options[:confirm_delete]
+  end
 
 end
 
 class AdminCommentCollection < CollectionsFactory
   contains AdminCommentObject
+
 end

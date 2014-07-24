@@ -24,25 +24,24 @@ Feature: CO.Manage Admin Comments
 
   Scenario: CO 27.1.1 Verify successful add of admin comment to a course offering
     Given I am logged in as admin
-    And I manage comments for a course offering
-    When I add a new Comment
-    Then the course offering comment can be viewed immediately -- including created by userid and creation date
+    When I add a comment to an activity offering
+    When I add a comment to a course offering
+    Then the course offering comment can be viewed successfully
 
   Scenario: CO 27.2.1 Verify successful add of admin comment to an activity offering
     Given I am logged in as admin
-    And I manage comments for an activity offering
-    When I add a new Comment
-    Then the activity offering comment can be viewed immediately -- including created by userid and creation date
+    When I add a comment to an activity offering
+    Then the activity offering comment can be viewed successfully
 
-  Scenario: CO27.3.1 Verify user can view an existing admin comment on a course offering
-    Given I am logged in as admin
-    When I manage comments for a course offering with existing comments
-    Then the course offering comments can be viewed successfully
-
-  Scenario: CO27.4.1 Verify user can view an existing admin comment on an activity offering
-    Given I am logged in as admin
-    And I manage comments for an activity offering with existing comments
-    When the activity offering comments can be viewed successfully
+#  Scenario: CO27.3.1 Verify user can view an existing admin comment on a course offering
+#    Given I am logged in as admin
+#    When I manage comments for a course offering with existing comments
+#    Then the course offering comments can be viewed successfully
+#
+#  Scenario: CO27.4.1 Verify user can view an existing admin comment on an activity offering
+#    Given I am logged in as admin
+#    And I manage comments for an activity offering with existing comments
+#    When the activity offering comments can be viewed successfully
 
   Scenario: CO27.5.1 Verify successful deletion of comment on course offering
     Given I am logged in as admin
@@ -51,10 +50,11 @@ Feature: CO.Manage Admin Comments
     Then the comment is grayed out/marked for deletion and an undo option is present
     And when I close the comment page the comment is permanently deleted
 
-  Scenario: CO27.5.2 Verify user can undo deletion of comment on course offering
+  Scenario: CO27.5.2 Verify user can cancel deletion of comment on course offering
     Given I am logged in as admin
     And I manage comments for a course offering with existing comments
     When I delete an existing comment
+    Then the comment is grayed out/marked for deletion and an undo option is present
     And then choose the undo option
     Then the comment is no longer grayed out/marked for deletion
     And when I close the comment page the comment is not deleted
@@ -63,16 +63,13 @@ Feature: CO.Manage Admin Comments
     Given I am logged in as admin
     And I manage comments for an activity offering with existing comments
     When I delete an existing comment
-    Then the comment is grayed out/marked for deletion and an undo option is present
-    And when I close the comment page the comment is deleted
+    Then the comment is successfully deleted
 
   Scenario: CO27.6.2 Verify user can undo deletion of comment on activity offering
     Given I am logged in as admin
     And I manage comments for an activity offering with existing comments
-    When I delete an existing comment
-    And then choose the undo option
-    Then the comment is no longer grayed out/marked for deletion
-    And when I close the comment page the comment is not deleted
+    When I select the delete option for an existing comment but choose not to confirm the deletion
+    Then the activity offering comment is not deleted and can be viewed successfully
 
   Scenario: CO27.7.1 Verify successful edit of comment on course offering
     Given I am logged in as admin
@@ -89,13 +86,13 @@ Feature: CO.Manage Admin Comments
   Scenario: CO27.8.1 Verify successful edit of comment on activity offering
     Given I am logged in as admin
     And I manage comments for an activity offering with existing comments
-    When I edit an existing comment and save
+    When I edit an existing activity offering comment and save
     Then the comment is updated successfully
 
   Scenario: CO27.8.2 Verify user can cancel the editing of comment on activity offering
     Given I am logged in as admin
     And I manage comments for an activity offering with existing comments
-    When I edit an existing comment and cancel
+    When I edit an existing activity offering comment and cancel
     Then the comment is not updated
 
   Scenario: CO 27.9.1 Verify Department Schedule Coordinator (Carol) permissions on course offering comments

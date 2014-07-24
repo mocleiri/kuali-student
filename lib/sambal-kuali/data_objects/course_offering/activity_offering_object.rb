@@ -503,13 +503,18 @@ class ActivityOfferingObject < DataFactory
     options = defaults.merge(opts)
 
     if options[:do_navigation]
-      parent_course_offering.manage
-      on(ManageCourseOfferings).ao_comments @code, @parent_cluster.private_name
+      manage_comments
     end
 
     options[:comment_obj].create
     options[:comment_obj].parent_obj = self
     @admin_comments_list << options[:comment_obj]
+  end
+
+
+  def manage_comments
+    parent_course_offering.manage
+    on(ManageCourseOfferings).ao_comments @code, @parent_cluster.private_name
   end
 
   def add_personnel person

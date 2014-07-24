@@ -687,6 +687,27 @@ class CourseOffering < DataFactory
     save unless options[:defer_save]
   end
 
+  def add_admin_comment opts={}
+    defaults = {
+        :defer_save => false,
+        :do_navigation => true
+    }
+    options = defaults.merge(opts)
+
+    if options[:do_navigation]
+      #manage_comments
+    end
+
+    options[:comment_obj].parent_obj = self
+    options[:comment_obj].create
+    @admin_comments_list << options[:comment_obj]
+  end
+
+  def manage_comments
+    manage
+    on(ManageCourseOfferings).co_comments_link.click
+  end
+
 # TEMPORARY - This will eventually be replaced by a call to course_offering.delivery_format_list,
 # the format deleted from the list and the new list passed on the options hash to course_offering.edit
 
