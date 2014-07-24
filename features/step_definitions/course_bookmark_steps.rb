@@ -22,7 +22,8 @@ end
 
 Then(/^I should be able to see a page that displays the bookmarks and display the CDP overview section information$/) do
 on BookmarkPage do |page|
-  page.browser_secondary_nav.exists?.should==true
+  page.bookmark_page.exists?.should==true
+  page.bookmark_details.exists?.should==true
 end
 end
 
@@ -53,3 +54,23 @@ Then(/^I should be able to view a link to bookmark page in the secondary navigat
     page.browser_secondary_nav.exists?.should==true
   end
 end
+
+And(/^I bookmark the course$/) do
+  on CourseSearch do |page|
+    if page.boomark_icon_empty.exists?.should==true then
+       page.bookmark_icon_empty.click
+    else
+      page.bookmark_icon.click
+    end
+  end
+end
+
+Then(/^I should be able to bookmark the course and remove the bookmark$/) do
+  on CourseSearch do |page|
+    if page.bookmark_icon_empty(@course_search_results.course_code).exists?.should==true then
+      page.bookmark_icon_empty(@course_search_results.course_code).click
+    else
+      page.bookmark_icon(@course_search_results.course_code).click
+    end
+  end
+ end

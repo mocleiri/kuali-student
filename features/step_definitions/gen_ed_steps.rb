@@ -58,3 +58,17 @@ When(/^I search for  courses in the Course Search Page$/) do
 end
 
 
+When(/^I search for a specific course in the Course Search Page$/) do
+  @course_search_results = make CourseSearchResults,
+                                :course_code => "ENGL201" ,
+                                :description=>"historical",
+                                :requisite=>"None",
+                                :scheduled_terms=>"SP 14",
+                                :projected_terms=>"Check",
+                                :gened_requirements=>"General",
+                                :subject=>"English",
+                                :gened_code=>"DSHU",
+                                :gened_course=>"General Education: Humanities"
+  @course_search_results.course_search
+
+end
