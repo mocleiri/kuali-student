@@ -67,6 +67,8 @@ And /^the total number of credits for registered courses are displayed$/ do
       credits += page.get_registered_course_credits(row).to_i
     end
     page.registered_courses_header.should match /#{credits.to_s}/
+    #temporary work around to leave the browser in a clean state
+    page.student_info_go
   end
 end
 

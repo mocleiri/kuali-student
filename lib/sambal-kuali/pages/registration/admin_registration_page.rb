@@ -24,6 +24,13 @@ class AdminRegistration < BasePage
   value(:get_student_error_message){ |b| b.student_error_message.when_present.text}
   value(:get_term_error_message){ |b| b.change_term_error_message.when_present.text}
   value(:get_change_term_info_message){ |b| b.change_term_info_msg.when_present.text}
+  element(:confirm_term_popup_section) { |b| b.frm.section(id: "termEligibilityDialog")}
+  element(:confirm_term_dialog_table) { |b| b.frm.div(id: "KS-AdminRegistration-TermIssues").table}
+  element(:confirm_term_cancel_link) { |b| b.confirm_term_popup_section.a(id: "cancelTerm_link")}
+  action(:confirm_term_cancel){ |b| b.confirm_term_cancel_link.when_present.click}
+  element(:confirm_term_continue_btn) { |b| b.confirm_term_popup_section.button(id: "termContinue_btn")}
+  action(:confirm_term_continue){ |b| b.confirm_term_continue_btn.when_present.click}
+
 
   #################################################################
   ### Register Courses Table

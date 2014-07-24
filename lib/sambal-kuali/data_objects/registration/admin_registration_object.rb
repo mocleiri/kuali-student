@@ -21,7 +21,7 @@ class AdminRegistrationData < DataFactory
         :course_code => nil,
         :section => nil,
         :term_description => nil,
-        :course_description => nil
+        :course_description => nil,
     }
 
     options = defaults.merge(opts)
@@ -38,7 +38,10 @@ class AdminRegistrationData < DataFactory
       if @term_code != nil
         page.change_term_input.set @term_code
         page.change_term_go
-
+        page.loading.wait_while_present
+       if page.confirm_term_popup_section.visible?
+         page.confirm_term_continue
+       end
         page.course_code_input.when_present.set @course_code if @course_code != nil
         page.section_code_input.when_present.set @section if @section != nil
       end
