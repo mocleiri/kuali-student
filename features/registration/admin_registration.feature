@@ -14,6 +14,8 @@ Feature: REG.Admin Registration
 
   CR22.8 As a Central Registration Personnel I want to be able to add multiple course for a student so that i can register the student for multiple courses at once
 
+  CR22.15 As a Central Registration Personnel I want to be able to remove unwanted courses i've entered before registering the student for them so that i can remove a course without registering for it
+
   Background:
     Given I am logged in as admin
 
@@ -96,3 +98,10 @@ Feature: REG.Admin Registration
   Scenario: CR22.8.1 Verify I am able to add multiple courses for a student when registering
     When I select the course that a student will be registered for
     Then I should be able to select additional courses for the student
+
+#KSENROLL-13720
+  @draft
+  Scenario: CR22.15.1 Verify I am able to add and then remove multiple courses for a student when registering
+    When I select the course that a student will be registered for
+    And I select additional courses to be registered for
+    Then I should be able to remove all the additional courses

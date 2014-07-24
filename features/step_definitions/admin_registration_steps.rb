@@ -178,3 +178,30 @@ Then /^I should be able to select additional courses for the student$/ do
     page.get_last_section_value.should match /#{@admin_reg.course_section_codes[3].section}/i
   end
 end
+
+When /^I select additional courses to be registered for$/ do
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "CHEM241",
+                                                             :section=> "1002", :add_new_line => true)
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL312",
+                                                             :section=> "1003", :add_new_line => true)
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "PHYS739",
+                                                             :section=> "1004", :add_new_line => true)
+end
+
+Then /^I should be able to remove all the additional courses$/ do
+  on AdminRegistration do |page|
+    page.course_delete_btn(0).visible?.should be_true
+
+    (@admin_reg.course_section_codes.length - 1).downto(1) do |i|
+      course_code = @admin_reg.course_section_codes[i].course_code
+      section = @admin_reg.course_section_codes[i].section
+
+      @admin_reg.course_section_codes[i].delete :index => "#{i}", :navigate_to_page => false
+
+      page.get_last_course_code_value.should_not match /#{course_code}/i
+      page.get_last_section_value.should_not match /#{section}/i
+    end
+
+    page.course_delete_btn(0).exist?.should be_false
+  end
+end
