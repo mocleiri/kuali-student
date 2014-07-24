@@ -27,7 +27,8 @@ class CourseOffering < DataFactory
   #array - generally set using options hash
   attr_accessor :activity_offering_cluster_list,
                 :affiliated_person_list,
-                :admin_org_list
+                :admin_org_list,
+                :admin_comments_list
   #string - generally set using options hash
   attr_accessor :grade_format,
                 :delivery_format_list,
@@ -87,7 +88,8 @@ class CourseOffering < DataFactory
         :exclude_scheduling => false,
         :exclude_instructor => false,
         :use_final_exam_matrix => true,
-        :eo_rsi => nil
+        :eo_rsi => nil,
+        :admin_comments_list => collection('AdminComment')
     }
     options = defaults.merge(opts)
     set_options(options)
@@ -695,7 +697,7 @@ class CourseOffering < DataFactory
     options = defaults.merge(opts)
 
     if options[:do_navigation]
-      #manage_comments
+      manage_comments
     end
 
     options[:comment_obj].parent_obj = self

@@ -24,7 +24,6 @@ Feature: CO.Manage Admin Comments
 
   Scenario: CO 27.1.1 Verify successful add of admin comment to a course offering
     Given I am logged in as admin
-    When I add a comment to an activity offering
     When I add a comment to a course offering
     Then the course offering comment can be viewed successfully
 
@@ -46,54 +45,50 @@ Feature: CO.Manage Admin Comments
   Scenario: CO27.5.1 Verify successful deletion of comment on course offering
     Given I am logged in as admin
     And I manage comments for a course offering with existing comments
-    When I delete an existing comment
-    Then the comment is grayed out/marked for deletion and an undo option is present
-    And when I close the comment page the comment is permanently deleted
+    When I delete an existing comment for the course offering
+    Then the course offering comment is successfully deleted
 
   Scenario: CO27.5.2 Verify user can cancel deletion of comment on course offering
     Given I am logged in as admin
     And I manage comments for a course offering with existing comments
-    When I delete an existing comment
-    Then the comment is grayed out/marked for deletion and an undo option is present
-    And then choose the undo option
-    Then the comment is no longer grayed out/marked for deletion
-    And when I close the comment page the comment is not deleted
+    When I select the delete option for an existing course offering comment but choose not to confirm the deletion
+    Then the course offering comment is not deleted and can be viewed successfully
 
   Scenario: CO27.6.1 Verify successful deletion of comment on activity offering
     Given I am logged in as admin
     And I manage comments for an activity offering with existing comments
-    When I delete an existing comment
-    Then the comment is successfully deleted
+    When I delete an existing comment for the activity offering
+    Then the activity offering comment is successfully deleted
 
   Scenario: CO27.6.2 Verify user can undo deletion of comment on activity offering
     Given I am logged in as admin
     And I manage comments for an activity offering with existing comments
-    When I select the delete option for an existing comment but choose not to confirm the deletion
+    When I select the delete option for an existing activity offering comment but choose not to confirm the deletion
     Then the activity offering comment is not deleted and can be viewed successfully
 
   Scenario: CO27.7.1 Verify successful edit of comment on course offering
     Given I am logged in as admin
     And I manage comments for a course offering with existing comments
-    When I edit an existing comment and save
-    Then the comment is updated successfully
+    When I edit an existing course offering comment and save
+    Then the course offering comment is updated successfully
 
   Scenario: CO27.7.2 Verify user can cancel the editing of comment on course offering
     Given I am logged in as admin
     And I manage comments for a course offering with existing comments
-    When I edit an existing comment and cancel
-    Then the comment is not updated
+    When I edit an existing course offering comment and cancel
+    Then the course offering comment is not updated
 
   Scenario: CO27.8.1 Verify successful edit of comment on activity offering
     Given I am logged in as admin
     And I manage comments for an activity offering with existing comments
     When I edit an existing activity offering comment and save
-    Then the comment is updated successfully
+    Then the activity offering comment is updated successfully
 
   Scenario: CO27.8.2 Verify user can cancel the editing of comment on activity offering
     Given I am logged in as admin
     And I manage comments for an activity offering with existing comments
     When I edit an existing activity offering comment and cancel
-    Then the comment is not updated
+    Then the activity offering comment is not updated
 
   Scenario: CO 27.9.1 Verify Department Schedule Coordinator (Carol) permissions on course offering comments
     Given I am logged in as a Department Schedule Coordinator
@@ -115,7 +110,6 @@ Feature: CO.Manage Admin Comments
     But I am not able to edit comments entered by another user
     And I am not able to delete comments entered by another user
 
-
   Scenario: CO 27.9.3 DSC (Carol) has read-only permission on course offering comments created for activities in another org
   Given I am logged in as a Department Schedule Coordinator
     And I manage comments for a course offering outside my admin org with existing comments
@@ -131,7 +125,6 @@ Feature: CO.Manage Admin Comments
     But I am not able to edit the comments
     And I am not able to delete the comments
     And I am not able to create new comments
-
 
   Scenario: CO27.10.1 Verify user can include url and email hyperlinks in new admin comments on course and activity offerings
     Given I am logged in as admin

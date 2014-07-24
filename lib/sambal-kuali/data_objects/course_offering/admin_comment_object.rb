@@ -73,17 +73,12 @@ class AdminCommentObject < DataFactory
         edit_comment = page.comment_by_text(@text)
         @last_editor = page.comment_edited_by(edit_comment)
         @edited_date = page.comment_edited_date(edit_comment)
-        page.close if options[:close_comments_dialog]
       end
     else
       on(AdminComments).comment_cancel_edit(edit_comment)
     end
+    on(AdminComments).close if options[:close_comments_dialog]
   end
-
-def cancel_edit
-
-end
-
 
   def delete opts={}
     defaults = {

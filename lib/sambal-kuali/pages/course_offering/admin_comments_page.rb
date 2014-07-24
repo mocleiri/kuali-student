@@ -89,5 +89,5 @@ class AdminComments < BasePage
   end
 
 
-  action(:close) { |b| b.frm.button(id: 'commentsLightBoxContents-cancel').click }
+  action(:close) { |b| b.frm.button(id: 'commentsLightBoxContents-cancel').click; sleep 3 } #sleep required after closing dialog, issue across this project
 end
