@@ -1,8 +1,7 @@
 class KSMaintenancePortal < BasePage
 
   page_url "#{$test_site}/portal.do"
-  #expected_title /Kuali Portal Index/
-  #expected_element :enrollment_home_link
+  #no expected_element - could land on or login page first
 
   value(:copyright) { |b| b.div(id: "footer-copyright").text }
   action(:acknowledgements) { |b| b.link(href: "acknowledgments.jsp").click }
@@ -59,5 +58,6 @@ class KSMaintenancePortal < BasePage
   action(:krms_edit_agenda) { |b| b.link(text: "Edit Agenda").click }
   action(:krms_manage_co_agendas) { |b| b.link(text: "Manage Course Offering Agendas").click}
 
-
+ #course Reg link
+  action(:admin_reg) { |b| b.link(text: "Admin Registration").click }
 end

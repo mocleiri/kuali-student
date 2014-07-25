@@ -1,6 +1,6 @@
 class Login < PageFactory
 
-  page_url "#{$test_site}/kr-krad/launch?methodToCall=start&viewId=ksFunctionalHomeView"
+  page_url "#{$test_site}/kr-krad/launch?viewId=enrollmentHomeView&methodToCall=start"
 
   expected_element :username_field
 

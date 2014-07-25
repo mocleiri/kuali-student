@@ -1,0 +1,17 @@
+class ActivePopulationLookup < PopulationsBase
+
+  expected_element :keyword
+
+  def frm
+    self.iframe(class: "fancybox-iframe")
+  end
+
+  include PopulationsSearch
+
+  population_lookup_elements
+  green_search_buttons
+  #element(:paginate_links_span) { |b| b.frm.div(class: "dataTables_paginate paging_full_numbers").span() }
+  element(:no_of_pages_info_div) { |b| b.frm.div(class: "dataTables_info") }
+  value(:no_of_entries) { |b| b.no_of_pages_info_div.text[/\d+(?=.ent)/] }
+
+ end
