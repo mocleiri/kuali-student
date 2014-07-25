@@ -64,7 +64,7 @@ class AdminRegistration < BasePage
 
   element(:course_addline_btn) { |b| b.admin_registration_reg_for_section.button(id: "addLineButton")}
   action(:course_addline){ |b| b.course_addline_btn.when_present.click}
-  element(:course_register_btn) { |b| b.admin_registration_reg_for_section.button(id: "registerButton")}
+  element(:course_register_btn) { |b| b.admin_registration_reg_for_section.button(id: "KS-AdminRegistration-RegisterButton")}
   action(:course_register){ |b| b.course_register_btn.when_present.click}
   element(:course_delete_btn) { |index, b| b.admin_registration_reg_for_section.button(id: /KS-AdminRegistration-RegFor_del_line#{index}/) }
   action(:course_delete) { |index, b| b.course_delete_btn(index).when_present.click}

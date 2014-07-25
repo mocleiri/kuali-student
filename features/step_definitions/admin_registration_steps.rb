@@ -91,8 +91,8 @@ And /^the total number of credits for waitlisted courses are displayed$/ do
   end
 end
 
-Then /^waitlisted courses table is not populated with courses$/ do
-  on(AdminRegistration).waitlisted_courses_row.should == nil
+Then /^waitlisted courses are not populated$/ do
+  on(AdminRegistration).waitlisted_courses_rows.empty?.should be_true
 end
 
 Then /^the default sort order for waitlisted courses should be on course code$/ do
@@ -176,6 +176,9 @@ Then /^I should be able to select additional courses for the student$/ do
                                                                :section=> "1004", :add_new_line => true)
     page.get_last_course_code_value.should match /#{@admin_reg.course_section_codes[3].course_code}/i
     page.get_last_section_value.should match /#{@admin_reg.course_section_codes[3].section}/i
+
+    #temporary work around to leave the browser in a clean state
+    page.student_info_go
   end
 end
 
@@ -203,5 +206,8 @@ Then /^I should be able to remove all the additional courses$/ do
     end
 
     page.course_delete_btn(0).exist?.should be_false
+
+    #temporary work around to leave the browser in a clean state
+    page.student_info_go
   end
 end

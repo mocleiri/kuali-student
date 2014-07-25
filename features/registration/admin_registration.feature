@@ -61,18 +61,18 @@ Feature: REG.Admin Registration
     Then waitlisted courses are populated
     And the total number of credits for waitlisted courses are displayed
 
-  Scenario: CR22.4.2 Verify waitlisted courses are populated for student with no waitlisted courses
+  Scenario: CR22.4.2 Verify no waitlisted courses are populated for student who is not on a waitlist
     When I attempt to load a Term by valid term Id
-    Then waitlisted courses are populated
+    Then waitlisted courses are not populated
 
   Scenario: CR22.4.3 Verify waitlisted courses are populated and default sort order is by course code
     When I attempt to load a Term by valid term Id for student with waitlisted courses
     Then the default sort order for waitlisted courses should be on course code
 
 #KSENROLL-13427
-   Scenario: CR22.5.1 Verify that the course description appears after a valid course code is entered
-     When I enter a valid course code for term
-     Then the course description is displayed
+  Scenario: CR22.5.1 Verify that the course description appears after a valid course code is entered
+    When I enter a valid course code for term
+    Then the course description is displayed
 
   Scenario: CR22.5.2 Verify that an error message appears after an invalid course code is entered for term
     When I enter an invalid course code for term
