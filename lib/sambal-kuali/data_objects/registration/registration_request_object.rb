@@ -359,8 +359,8 @@ class WaitlistRoster < DataFactory
                               :term_code => @term_code,
                               :course_code => @course_code,
                               :reg_group_code => @reg_group_code,
-                              :waitlist_position => roster_item["order"],
-                              :ao_waitlist_position => roster_item["aoWaitlistOrder"][0]["count"]
+                              :waitlist_position => roster_item["position"],
+                              :ao_waitlist_position => roster_item["aoWaitlistOrder"][0]["position"]
         @waitlist_entries[waitlist_entry.student_id] = waitlist_entry
       end
     end
