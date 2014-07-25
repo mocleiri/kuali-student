@@ -127,43 +127,22 @@ end
 
 Given /^a waitlisted course exists$/ do
   sleep 1
-  visit WaitlistRestCallPage do |page|
-    # get waitlist contents from rest call
-    @waitlist_roster = page.get_waitlist_roster
-    # display contents of waitlist
-    @waitlist_roster.each_with_index do |roster_item,index|
-      puts "Waitlist array item #{index}"
-      roster_item.each do |key,val|
-        if key=="aoWaitlistOrder"
-          puts">> #{key}"
-          val.each do |aowo_hash|
-            aowo_hash.each do |aowo_key,aowo_val|
-              puts "  >> #{aowo_key} => #{aowo_val} (#{aowo_val.class.name})"
-            end
-          end
-        else
-          puts ">> #{key} => #{val} (#{val.class.name})"
-        end
-      end
-    end
-    # save pertinent info from waitlist
-    # @waitlist = collection('WaitlistEntry')
-    @waitlist = Array.new
-    @waitlist_roster.each do |roster_item|
-      waitlist_entry = make WaitlistEntry,
-                            :student_id => roster_item["personId"],
-                            :course_code => "HIST266",
-                            :reg_group_code => "1001",
-                            :waitlist_position => roster_item["order"],
-                            :ao_waitlist_position => roster_item["aoWaitlistOrder"][0]["count"]
-      @waitlist << waitlist_entry
-    end
-    puts @waitlist
-  end
+  term_code = "201208"
+  course_code = "HIST266"
+  reg_group_code = "1001"
+  @orig_waitlist = make WaitlistRoster, :term_code=>term_code, :course_code=>course_code, :reg_group_code=>reg_group_code
+  puts "@orig_waitlist"
+  p @orig_waitlist
 end
 
 Then /^the order of students remaining on the waitlist is adjusted correctly$/ do
-  pending
+  sleep 1
+  term_code = "201208"
+  course_code = "HIST266"
+  reg_group_code = "1001"
+  @updated_waitlist = make WaitlistRoster, :term_code=>term_code, :course_code=>course_code, :reg_group_code=>reg_group_code
+  puts "@updated_waitlist"
+  p @updated_waitlist
 end
 
 When /^a registered student drops the course$/ do
