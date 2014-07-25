@@ -220,6 +220,7 @@ class AcademicCalendar < DataFactory
 
     on EditAcademicCalendar do |page|
       page.add_holiday_calendar_select.select hcal_object.name
+      page.loading.wait_while_present
       page.add_holiday_calendar
       page.save
     end

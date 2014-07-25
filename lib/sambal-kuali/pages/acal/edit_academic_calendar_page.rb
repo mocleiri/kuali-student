@@ -90,7 +90,7 @@ class EditAcademicCalendar < BasePage
   element(:add_holiday_calendar_div) { |b| b.frm.div(id: "acal-holidays_disclosureContent") }
   element(:add_holiday_calendar_select) { |b| b.add_holiday_calendar_div.select }
   element(:add_holiday_calendar_button) { |b| b.add_holiday_calendar_div.button(id: "acal-holidays_add") }
-  action(:add_holiday_calendar)  { |b| b.add_holiday_calendar_button.click; b.loading.wait_while_present }
+  action(:add_holiday_calendar)  { |b| b.add_holiday_calendar_button.click; b.adding.wait_while_present }
 
   def edit_start_date(row, value); row.cells[EDIT_START_DATE_COL].text_field.set(value); end
   def edit_start_time(row, value); row.cells[EDIT_START_TIME_COL].text_field.set(value); end
