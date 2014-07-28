@@ -211,3 +211,45 @@ Then /^I should be able to remove all the additional courses$/ do
     page.student_info_go
   end
 end
+
+When /^I attempt to register a student for a course with default values specified for Credit and Registration Options$/ do
+  @admin_reg = create AdminRegistrationData, :term_code=> "201301"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
+                                                             :section=> "1002", :course_default_credits => "3.0",
+                                                             :course_default_reg_options => "Letter")
+  on(AdminRegistration).course_register
+end
+
+Then /^the default values are displayed when confirming registration$/ do
+  on AdminRegistration do |page|
+    page.get_course_default_credits(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_credits}/
+    page.get_course_default_reg_options(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_reg_options}/
+  end
+end
+
+When /^I attempt to register a student for a course$/ do
+  @admin_reg = create AdminRegistrationData, :term_code=> "201301"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "CHEM241",
+                                                             :section=> "1002")
+  on(AdminRegistration).course_register
+end
+
+Then /^the effective date should default to system date$/ do
+  on AdminRegistration do |page|
+    puts {@admin_reg.course_section_codes[0].course_default_effective_date}
+    page.get_course_default_effective_date(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_effective_date}/
+  end
+end
+
+When /^I attempt to register a student for a cancelled course section$/ do
+  @admin_reg = create AdminRegistrationData, :term_code=> "201301"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
+                                                             :section=> "1001")
+  on(AdminRegistration).course_register
+end
+
+When /^an error message appears indicating that the section was cancelled for the selected term$/ do
+  section = @admin_reg.course_section_codes[0].section
+  course = @admin_reg.course_section_codes[0].course_code
+  on(AdminRegistration).get_cancelled_section_error_message.should match /Section #{section}.* for #{course}.* was cancelled for the selected term./
+end

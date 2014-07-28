@@ -6,7 +6,9 @@ class ARCourseSectionObject < DataFactory
   include Workflows
 
   attr_accessor :parent, :course_code, :section,
-                :course_description
+                :course_description,:course_default_credits,
+                :course_default_reg_options,
+                :course_default_effective_date
 
   def initialize(browser, opts={})
     @browser = browser
@@ -19,7 +21,10 @@ class ARCourseSectionObject < DataFactory
         :course_description => nil,
         :add_new_line => false,
         :register => false,
-        :confirm_registration => false
+        :confirm_registration => false,
+        :course_default_credits => nil,
+        :course_default_reg_options => nil,
+        :course_default_effective_date => right_now[:date_w_slashes]
     }
 
     options = defaults.merge(opts)

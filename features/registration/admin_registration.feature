@@ -12,6 +12,8 @@ Feature: REG.Admin Registration
 
   CR22.6 As a Central Registration Personnel I want to enter a Section so that I can register a student for the default options (credit & registration options)
 
+  CR22.7 As Central Registration Personnel I want to enter a section and change the default options (if available) so that i can register a student for the selected options (credit & registration & effective date options)
+
   CR22.8 As a Central Registration Personnel I want to be able to add multiple course for a student so that i can register the student for multiple courses at once
 
   CR22.15 As a Central Registration Personnel I want to be able to remove unwanted courses i've entered before registering the student for them so that i can remove a course without registering for it
@@ -92,6 +94,22 @@ Feature: REG.Admin Registration
   Scenario: CR22.6.2 Verify that an error message appears after an invalid section is entered
     When I enter an invalid section
     Then the error message for course code is displayed stating "Invalid Section for Course Code"
+
+#KSENROLL-13367
+  @draft
+  Scenario: CR22.7.1 Verify default values are on the confirm registration dialog for a specified course
+    When I attempt to register a student for a course with default values specified for Credit and Registration Options
+    Then the default values are displayed when confirming registration
+
+  @draft
+  Scenario: CR22.7.2 Verify default date is on the confirm registration dialog for specified course
+    When I attempt to register a student for a course
+    Then the effective date should default to system date
+
+  @draft
+  Scenario: CR22.7.3 Verify error message appears when attempting to register for cancelled course
+    When I attempt to register a student for a cancelled course section
+    Then an error message appears indicating that the section was cancelled for the selected term
 
 #KSENROLL-13722
   @pending

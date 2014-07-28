@@ -10,8 +10,11 @@ class AdminRegistration < BasePage
   COURSE_NAME = 1
   SECTION = 1
   MULTI_COURSE_CODES = 1
+  POPUP_CREDITS = 1
   CREDITS     = 2
   MULTI_SECTIONS = 2
+  POPUP_REG_OPTIONS = 2
+  POPUP_REG_EFFECTIVE_DATE = 3
   REG_OPTIONS = 3
   ACTIVITY    = 4
   DATE_TIME   = 5
@@ -68,6 +71,8 @@ class AdminRegistration < BasePage
   action(:course_register){ |b| b.course_register_btn.when_present.click}
   element(:course_delete_btn) { |index, b| b.admin_registration_reg_for_section.button(id: /KS-AdminRegistration-RegFor_del_line#{index}/) }
   action(:course_delete) { |index, b| b.course_delete_btn(index).when_present.click}
+  element(:cancelled_section_error_message) { |b| b.reg_for_error_message.li(class: 'uif-errorMessageItem')}
+  value(:get_cancelled_section_error_message){ |b| b.cancelled_section_error_message.when_present.text}
 
   element(:confirm_registration_popup_section) { |b| b.frm.section(id: "registerConfirmDialog")}
   element(:confirm_registration_popup_table) { |b| b.frm.div(id: "KS-AdminRegistration-DialogCollection").table}
@@ -156,4 +161,19 @@ class AdminRegistration < BasePage
     return array
   end
 
+  #################################################################
+  ### Default Popup Options
+  #################################################################
+  value(:get_course_default_credits){ |code, b| b.loading.wait_while_present; b.get_confirm_reg_dialog_row(code).cells[POPUP_CREDITS].text}
+  value(:get_course_default_reg_options){ |code, b| b.loading.wait_while_present; b.get_confirm_reg_dialog_row(code).cells[POPUP_REG_OPTIONS].text}
+  value(:get_course_default_effective_date){ |code, b| b.loading.wait_while_present; b.get_confirm_reg_dialog_row(code).cells[POPUP_REG_EFFECTIVE_DATE].text_field().value}
+
+  def get_confirm_reg_dialog_row(text)
+    loading.wait_while_present
+    if confirm_registration_popup_table.exists?
+      confirm_registration_popup_table.rows[1..-1].each do |row|
+        return row if row.text =~ /#{text}/
+      end
+    end
+  end
 end
