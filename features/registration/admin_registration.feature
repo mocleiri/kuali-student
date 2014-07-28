@@ -116,7 +116,6 @@ Feature: REG.Admin Registration
     Then I should be able to select additional courses for the student
 
 #KSENROLL-13720
-  @pending
   Scenario: CR22.15.1 Verify I am able to add and then remove multiple courses for a student when registering
     When I select the course that a student will be registered for
     And I select additional courses to be registered for

@@ -116,6 +116,29 @@ class AdminRegistration < BasePage
     end
   end
 
+  def get_course_code_value text
+    rows = admin_registration_reg_for_table.rows(text: /#{text}/)
+    rows.each do |row|
+      if rows.length > 1
+        return row.cells[MULTI_COURSE_CODES].text_field().value
+      else
+        return row.cells[COURSE_CODE].text_field().value
+      end
+    end
+    return nil
+  end
+
+  def get_section_value text
+    rows = admin_registration_reg_for_table.rows(text: /#{text}/)
+    rows.each do |row|
+      if rows.length > 1
+        return row.cells[MULTI_SECTIONS].text_field().value
+      else
+        return row.cells[SECTION].text_field().value
+      end
+    end
+    return nil
+  end
 
   #################################################################
   ### Register Courses Table

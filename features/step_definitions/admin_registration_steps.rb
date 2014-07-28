@@ -184,26 +184,34 @@ end
 
 When /^I select additional courses to be registered for$/ do
   @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "CHEM241",
-                                                             :section=> "1002", :add_new_line => true)
+                                                             :section=> "1002", :add_new_line => true,
+                                                             :course_description => "Organic Chemistry II")
   @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL312",
-                                                             :section=> "1003", :add_new_line => true)
+                                                             :section=> "1003", :add_new_line => true,
+                                                             :course_description => "Romantic to Modern British Literature")
   @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "PHYS739",
-                                                             :section=> "1004", :add_new_line => true)
+                                                             :section=> "1004", :add_new_line => true,
+                                                             :course_description => "Seminar in Theoretical Solid State Physics")
 end
 
 Then /^I should be able to remove all the additional courses$/ do
   on AdminRegistration do |page|
     page.course_delete_btn(0).visible?.should be_true
 
-    (@admin_reg.course_section_codes.length - 1).downto(1) do |i|
-      course_code = @admin_reg.course_section_codes[i].course_code
-      section = @admin_reg.course_section_codes[i].section
+    course_descr = @admin_reg.course_section_codes[1].course_description
+    @admin_reg.course_section_codes[1].delete :index => "1", :navigate_to_page => false
+    page.get_course_code_value(course_descr).nil?.should be_true
+    page.get_section_value(course_descr).nil?.should be_true
 
-      @admin_reg.course_section_codes[i].delete :index => "#{i}", :navigate_to_page => false
+    course_descr = @admin_reg.course_section_codes[2].course_description
+    @admin_reg.course_section_codes[2].delete :index => "2", :navigate_to_page => false
+    page.get_course_code_value(course_descr).nil?.should be_true
+    page.get_section_value(course_descr).nil?.should be_true
 
-      page.get_last_course_code_value.should_not match /#{course_code}/i
-      page.get_last_section_value.should_not match /#{section}/i
-    end
+    course_descr = @admin_reg.course_section_codes[1].course_description
+    @admin_reg.course_section_codes[1].delete :index => "1", :navigate_to_page => false
+    page.get_course_code_value(course_descr).nil?.should be_true
+    page.get_section_value(course_descr).nil?.should be_true
 
     page.course_delete_btn(0).exist?.should be_false
 
