@@ -80,7 +80,6 @@ Feature: REG.Admin Registration
     When I enter an invalid course code for term
     Then the error message for course code is displayed stating "Invalid Course Code for specified Term"
 
-  @bug @KSENROLL-13671
   Scenario: CR22.5.3 Verify that an error message appears after an invalid course code is entered
     When I enter an invalid course code
     Then the error message for course code is displayed stating "Invalid Course Code"
@@ -90,7 +89,6 @@ Feature: REG.Admin Registration
     When I enter a valid section for course code
     Then the section code should appear on the confirm registration dialog
 
-  @bug @KSENROLL-13671
   Scenario: CR22.6.2 Verify that an error message appears after an invalid section is entered
     When I enter an invalid section
     Then the error message for course code is displayed stating "Invalid Section for Course Code"
