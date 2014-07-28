@@ -224,6 +224,13 @@ Then /^there is a message indicating successful registration$/ do
   end
 end
 
+And /^the registration process has finished$/ do
+  on RegistrationCart do |page|
+    page.wait_until { !page.registering_message.visible? } if page.registering_message.visible?
+    sleep 1
+  end
+end
+
 Then /^there is a message indicating the course was dropped$/ do
   on StudentSchedule do |page|
     page.user_message_div("schedule").wait_until_present

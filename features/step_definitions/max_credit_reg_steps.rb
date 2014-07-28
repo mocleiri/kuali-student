@@ -34,6 +34,18 @@ When /^I add courses to my registration cart that would exceed the summer term c
   reg_group_code = "1003"
   term_code = "201205"
   term_descr = "Summer I 2012"
+
+  # currently the cart processes in reverse order. so, if we want to get a max credit
+  # error on WMST496M, it needs to be added first so that it's processed last
+  course_options = (make CourseOptions, :credit_option => "2.5")
+  @reg_request = make RegistrationRequest, :student_id=>"student2",
+                      :term_code=>term_code,
+                      :term_descr=>term_descr,
+                      :course_code=>"WMST469M",
+                      :reg_group_code=>"1001", :course_options => course_options, :modify_course_options => true
+  @reg_request.create
+
+  # now add the 2 remaining items to the cart.
   for i in (0..1)
     reg_group_code.next!
     @reg_request_engl = make RegistrationRequest, :student_id=>"student2",
@@ -44,14 +56,6 @@ When /^I add courses to my registration cart that would exceed the summer term c
                              :course_has_options=>false
     @reg_request_engl.create
   end
-  @reg_request_engl.register
-  course_options = (make CourseOptions, :credit_option => "2.5")
-  @reg_request = make RegistrationRequest, :student_id=>"student2",
-                      :term_code=>term_code,
-                      :term_descr=>term_descr,
-                      :course_code=>"WMST469M",
-                      :reg_group_code=>"1001", :course_options => course_options, :modify_course_options => true
-  @reg_request.create
 end
 
 Then /^there is a message indicating that I have registered for a credit amount over the (\w+) term credit limit$/ do |term|
