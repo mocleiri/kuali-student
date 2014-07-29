@@ -333,7 +333,7 @@ function process_args {
 
   if [ -z "$REPO_PREFIX" ];
   then
-    echo "repository url not seti (use -t option)\n"
+    echo "repository url not set (use -t option)\n"
     usage;
   fi
   echo "Repo Prefix: $REPO_PREFIX"
