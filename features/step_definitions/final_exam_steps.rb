@@ -494,7 +494,7 @@ When /^I view the Exam Offerings for a CO in an Open SOC with a standard final e
     course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
     course_offering.create
 
-    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+    activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                                :format => "Lecture/Discussion", :activity_type => "Lecture"
     si_obj =  make SchedulingInformationObject, :days => "TH",
                    :start_time => "11:00", :start_time_ampm => "am",
@@ -502,7 +502,7 @@ When /^I view the Exam Offerings for a CO in an Open SOC with a standard final e
                    :facility => 'TWS', :room => '1100'
     activity_offering.add_req_sched_info :rsi_obj => si_obj
 
-    activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+    activity_offering = create ActivityOfferingObject, :parent_cluster => course_offering.default_cluster,
                                :format => "Lecture/Discussion", :activity_type => "Discussion"
     si_obj =  make SchedulingInformationObject, :days => "W",
                    :start_time => "09:00", :start_time_ampm => "am",
