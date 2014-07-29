@@ -5,9 +5,7 @@ When(/^I search for courses in the Course Search Page$/) do
                                :gened_requirements=>nil,
                                :subject=>nil,
                                :gened_code=>nil,
-                               :credit=>nil,
-                               :course_level=>nil,
-                               :course_prefix=>nil
+                               :credit=>nil
   p @course_search_result
   @course_search_result.course_search
   @course_search_result.clear_facets
@@ -25,7 +23,7 @@ end
 
 
 And(/^I narrow the search results by a specific Credit$/) do
-  on CourseSearch do |page|
+  on CourseSearchPage do |page|
     @course_search_result.select_facet("credit")
     page.clear_credit_facet.wait_until_present
     #cannot avoid sleep currently since have already tried to wait for element existence.Can research in future if there is a way
@@ -36,7 +34,7 @@ end
 
 And(/^I narrow the search results by a specific course prefix$/) do
 
-  on CourseSearch do |page|
+  on CourseSearchPage do |page|
     @course_search_result.select_facet("course_prefix")
     page.clear_courseprefix_facet.wait_until_present
     #cannot avoid sleep currently since have already tried to wait for element existence.Can research in future if there is a way
@@ -92,7 +90,7 @@ end
 Then(/^I should see the courses with the specific course level$/) do
   on CourseSearchPage do |page|
     page.results_table.rows[1..-1].each do |row|
-      page.courselevel(row).should match /#{@course_search_result.course_level.slice(0,1)}/
+      page.courseLevel(row).should match /#{@course_search_result.course_level.slice(0,1)}/
     end
   end
 end
@@ -107,7 +105,7 @@ When /^I narrow the search results using any facet$/ do
                                :subject=>"English",
                                :gened_code=>"DSHU",
                                :credit=>"1",
-                               :course_level=> '3',
+                               :course_level=> '300',
                                :course_prefix=>'ENGL'
   @course_search_result.course_search
   @course_search_result.clear_facets

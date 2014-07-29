@@ -10,7 +10,7 @@ When /^I search for a course with "(.*?)" text option$/ do |text|
 end
 
 Then /^the course "(.*?)" appear in the search results$/ do |test_condition|
-  on CourseSearch do |page|
+  on CourseSearchPage do |page|
     if test_condition == "should"
       page.results_list.should include @course_search_result.course_code
     else
@@ -25,7 +25,7 @@ end
 
 
 Then /^courses containing  "(.*?)" text option appears$/ do |expected|
-  on CourseSearch do |page|
+  on CourseSearchPage do |page|
     page.results_list_courses(expected).each { |e| e.should include (expected) }
   end
 end
@@ -46,19 +46,19 @@ end
 
 
 Then /^I should check and display results across multiple pages\.$/ do
-  on CourseSearch do |page|
+  on CourseSearchPage do |page|
     puts page.course_code_list
   end
 end
 
 And /^the search result should match with the course description$/ do
-  on CourseSearch do |page|
+  on CourseSearchPage do |page|
     puts page.course_description_match
   end
 end
 
 Then /^I should extract and print the course code, course title and course description for the course$/ do
-  on CourseSearch do |page|
+  on CourseSearchPage do |page|
     page.course_description_match should be true
   end
 end
@@ -129,7 +129,7 @@ Then /^only "(.*?)" level courses "(.*?)" be displayed$/ do |text, condition|
 end
 
 When /^I choose to see "(.*?)" records per page$/ do |per_page|
-  on CourseSearch do |page|
+  on CourseSearchPage do |page|
     page.course_search_results_select.select per_page
     #Sleep for X seconds to wait for the js to process the change
     sleep(2)
@@ -138,13 +138,13 @@ When /^I choose to see "(.*?)" records per page$/ do |per_page|
 end
 
 Then /^The table header text will be "(.*?)"$/ do |header_text|
-  on CourseSearch do |page|
+  on CourseSearchPage do |page|
     page.course_search_results_info.text.should == header_text
   end
 end
 
 Then /^There will be (.*?) pages of results with (.*?) records per page$/ do |pages, total_per_page|
-  on CourseSearch do |page|
+  on CourseSearchPage do |page|
     page.result_pagination.span.links.size.to_s.should == pages
 
     #Doing size-1 here since results_table.rows.size includes the header row
@@ -153,7 +153,7 @@ Then /^There will be (.*?) pages of results with (.*?) records per page$/ do |pa
 end
 
 Then /^Pagination controls will not be visible if there is only 1 page$/ do
-  on CourseSearch do |page|
+  on CourseSearchPage do |page|
     #If there's only one page, no pagination controls or record# selection
     elementsPresent = true
     if "1" == page.result_pagination.span.links.size.to_s
@@ -187,7 +187,7 @@ end
 
 
 When /^I sort the table by course code$/ do
-  on CourseSearch do |page|
+  on CourseSearchPage do |page|
     page.code_sort_icon
   end
 end
@@ -195,13 +195,13 @@ end
 
 Then /^the course code listed should be sorted in "(.*?)"$/ do  |text|
   if text == "Descending"
-    on CourseSearch do |page|
+    on CourseSearchPage do |page|
       page.code_element.wait_until_present
     end
     @course_search_result.check_code_descending_order_in_all_pages.should be_true
     puts "Descending is Passed True"
   else
-    on CourseSearch do |page|
+    on CourseSearchPage do |page|
       page.code_element.wait_until_present
     end
     @course_search_result.check_code_ascending_order_in_all_pages.should be_true
@@ -211,7 +211,7 @@ end
 
 
 When /^I sort the table by title$/ do
-  on CourseSearch do |page|
+  on CourseSearchPage do |page|
     page.title_sort_icon
   end
 end
@@ -219,13 +219,13 @@ end
 
 Then /^the course Title listed should be sorted in "(.*?)"$/ do |text|
   if text == "Ascending"
-    on CourseSearch do |page|
+    on CourseSearchPage do |page|
       page.title_element.wait_until_present
     end
     @course_search_result.check_title_ascending_order_in_all_pages.should be_true
     puts"Ascending is Passed True"
   else
-    on CourseSearch do |page|
+    on CourseSearchPage do |page|
       page.title_element.wait_until_present
     end
     @course_search_result.check_title_descending_order_in_all_pages.should be_true

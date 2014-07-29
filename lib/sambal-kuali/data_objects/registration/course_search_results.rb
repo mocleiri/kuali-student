@@ -49,7 +49,7 @@ class CourseSearchResults < DataFactory
         :subject=>"English",
         :gened_code=>"DSSP",
         :gened_course=>"General Education: Scholarship in Practice",
-        :course_level=> '3',
+        :course_level=> '300',
         :course_prefix=> 'ENGL'
     }
     options = defaults.merge(opts)
@@ -208,8 +208,8 @@ class CourseSearchResults < DataFactory
 #############################
 
   def course_search_with_search_text(text=@search_text, term_select=@term_select)
-    navigate_to_maintenance_portal
-    navigate_to_course_search_home
+    #navigate_to_maintenance_portal
+    #navigate_to_course_search_home
     on CourseSearchPage do |page|
       sleep 2
       page.search_for_course.set text
@@ -258,15 +258,15 @@ class CourseSearchResults < DataFactory
     on CourseSearchPage do |page|
       puts "Search Text = #{single_text}"
       pgno = 1
-      if page.results_list_next_enabled.exists?
+      if page.next_page_on.exists?
 
-        until page.results_list_next_disabled.exists?
+        until page.next_page_off.exists?
           puts "------ page no = #{pgno}"
           page.single_text_search_results_validation(single_text)
-          page.results_list_next_enabled.wait_until_present
-          page.results_list_next_click
+          page.next_page_on.wait_until_present
+          page.next_page_on.click
           pgno = pgno+1
-          page.results_list_next_enabled.wait_until_present
+          page.next_page_on.wait_until_present
         end
       else
         puts "------ page no = #{pgno}"
@@ -283,17 +283,17 @@ class CourseSearchResults < DataFactory
     on CourseSearchPage do |page|
       puts "Search Text = #{split_text}"
       pgno = 1
-      if page.results_list_next_enabled.exists?
-        until page.results_list_next_disabled.exists?
+      if page.next_page_on.exists?
+        until page.next_page_off.exists?
           puts "------ page no = #{pgno}"
           result = page.results_list_validation(split_text,search_FullText)
           if result == false
             return false
           end
-          page.results_list_next_enabled.wait_until_present
-          page.results_list_next_click
+          page.next_page_on.wait_until_present
+          page.next_page_on.click
           pgno = pgno+1
-          page.results_list_next_enabled.wait_until_present
+          page.next_page_on.wait_until_present
         end
       else
 
@@ -310,14 +310,14 @@ class CourseSearchResults < DataFactory
       puts "Search Text = #{text}"
       pgno = 1
       puts level_digit = text.slice(0)
-      if page.results_list_next_enabled.exists?
-        until page.results_list_next_disabled.exists?
+      if page.next_page_on.exists?
+        until page.next_page_off.exists?
           puts "------ page no = #{pgno}"
           page.result_list_level(text)
-          page.results_list_next_enabled.wait_until_present
-          page.results_list_next_click
+          page.next_page_on.wait_until_present
+          page.next_page_on.click
           pgno = pgno+1
-          page.results_list_next_enabled.wait_until_present
+          page.next_page_on.wait_until_present
         end
       else
 
@@ -333,16 +333,16 @@ class CourseSearchResults < DataFactory
       puts "Search Text = #{expected_text}"
       pgno = 1
       puts level_digit = expected_text.slice(0)
-      until page.results_list_next_disabled.exists?
+      until page.next_page_off.exists?
         puts "------ page no = #{pgno}"
         pass = page.validate_result_list(expected_courses,expected_text)
         if pass!= true
           return false
         end
-        page.results_list_next_enabled.wait_until_present
-        page.results_list_next_click
+        page.next_page_on.wait_until_present
+        page.next_page_on.click
         pgno = pgno+1
-        page.results_list_next_enabled.wait_until_present
+        page.next_page_on.wait_until_present
       end
       puts "------ page no = #{pgno}"
       pass = page.validate_result_list(expected_courses,expected_text)
@@ -363,14 +363,14 @@ class CourseSearchResults < DataFactory
   def check_code_ascending_order_in_all_pages
     on CourseSearchPage do |page|
       pgno = 1
-      if page.results_list_next_enabled.exists?
-        until page.results_list_next_disabled.exists?
+      if page.next_page_on.exists?
+        until page.next_page_off.exists?
           puts "------ page no = #{pgno}"
           page.check_results_sort_order(true , 0)
-          page.results_list_next_enabled.wait_until_present
-          page.results_list_next_click
+          page.next_page_on.wait_until_present
+          page.next_page_on.click
           pgno = pgno+1
-          page.results_list_next_enabled.wait_until_present
+          page.next_page_on.wait_until_present
         end
       else
         puts "------ page no = #{pgno}"
@@ -382,14 +382,14 @@ class CourseSearchResults < DataFactory
   def check_code_descending_order_in_all_pages
     on CourseSearchPage do |page|
       pgno = 1
-      if page.results_list_next_enabled.exists?
-        until page.results_list_next_disabled.exists?
+      if page.next_page_on.exists?
+        until page.next_page_off.exists?
           puts "------ page no = #{pgno}"
           page.check_results_sort_order(false , 0)
-          page.results_list_next_enabled.wait_until_present
-          page.results_list_next_click
+          page.next_page_on.wait_until_present
+          page.next_page_on.click
           pgno = pgno+1
-          page.results_list_next_enabled.wait_until_present
+          page.next_page_on.wait_until_present
         end
       else
         puts "------ page no = #{pgno}"
@@ -401,14 +401,14 @@ class CourseSearchResults < DataFactory
   def check_title_ascending_order_in_all_pages
     on CourseSearchPage do |page|
       pgno = 1
-      if page.results_list_next_enabled.exists?
-        until page.results_list_next_disabled.exists?
+      if page.next_page_on.exists?
+        until page.next_page_off.exists?
           puts "------ page no = #{pgno}"
           page.check_results_sort_order(true , 1)
-          page.results_list_next_enabled.wait_until_present
-          page.results_list_next_click
+          page.next_page_on.wait_until_present
+          page.next_page_on.click
           pgno = pgno+1
-          page.results_list_next_enabled.wait_until_present
+          page.next_page_on.wait_until_present
         end
       else
         puts "------ page no = #{pgno}"
@@ -423,14 +423,14 @@ class CourseSearchResults < DataFactory
   def check_title_descending_order_in_all_pages
     on CourseSearchPage do |page|
       pgno = 1
-      if page.results_list_next_enabled.exists?
-        until page.results_list_next_disabled.exists?
+      if page.next_page_on.exists?
+        until page.next_page_off.exists?
           puts "------ page no = #{pgno}"
           page.check_results_sort_order(false , 1)
-          page.results_list_next_enabled.wait_until_present
-          page.results_list_next_click
+          page.next_page_on.wait_until_present
+          page.next_page_on.click
           pgno = pgno+1
-          page.results_list_next_enabled.wait_until_present
+          page.next_page_on.wait_until_present
         end
       else
         puts "------ page no = #{pgno}"
@@ -608,8 +608,8 @@ class CourseSearchResults < DataFactory
 
       puts "no of rows = #{no_of_rows}"
       pgno = 1
-      if page.results_list_next_enabled.exists?
-        until page.results_list_next_disabled.exists?
+      if page.next_page_on.exists?
+        until page.next_page_off.exists?
           puts "------ page no = #{pgno}"
           if pgno == 1
             puts "inside pageno = 1 "
@@ -628,11 +628,11 @@ class CourseSearchResults < DataFactory
 
           #Need to refactor this in future.As workaround sleep added
           sleep(5)
-          page.results_list_next_enabled.wait_until_present(50)
-          page.results_list_next_click
+          page.next_page_on.wait_until_present(50)
+          page.next_page_on.click
           sleep(5)
           pgno = pgno+1
-          page.results_list_next_enabled.wait_until_present(50)
+          page.next_page_on.wait_until_present(50)
           end
       else
         if pgno == 1
