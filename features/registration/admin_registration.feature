@@ -18,6 +18,8 @@ Feature: REG.Admin Registration
 
   CR22.15 As a Central Registration Personnel I want to be able to remove unwanted courses i've entered before registering the student for them so that i can remove a course without registering for it
 
+  CR22.17 As a Central Registration Personnel I want to view the Registered Courses for the Student and Term once I've registered him for one or more so that i can see if any additional actions are required for the registration of the student
+
   Background:
     Given I am logged in as admin
 
@@ -94,18 +96,18 @@ Feature: REG.Admin Registration
     Then the error message for course code is displayed stating "Invalid Section for Course Code"
 
 #KSENROLL-13367
-  @draft
+  @pending
   Scenario: CR22.7.1 Verify default values are on the confirm registration dialog for a specified course
     When I attempt to register a student for a course with default values specified for Credit and Registration Options
     Then the default values are displayed when confirming registration
 
-  @draft
+  @pending
   Scenario: CR22.7.2 Verify default date is on the confirm registration dialog for specified course
     When I attempt to register a student for a course
     Then the effective date should default to system date
 
-  @draft
-  Scenario: CR22.7.3 Verify error message appears when attempting to register for cancelled course
+  @pending
+  Scenario: CR22.7.3 Verify error message appears when attempting to register for cancelled course section
     When I attempt to register a student for a cancelled course section
     Then an error message appears indicating that the section was cancelled for the selected term
 
@@ -119,3 +121,9 @@ Feature: REG.Admin Registration
     When I select the course that a student will be registered for
     And I select additional courses to be registered for
     Then I should be able to remove all the additional courses
+
+#KSENROLL-13715
+  @draft
+  Scenario: CR22.8.3 Verify the registration date is displayed as float over if the effective date has been changed
+    When I change the effective date of a course and register a student for the course
+    Then the registration date is displayed as float-over after successfully registering the course

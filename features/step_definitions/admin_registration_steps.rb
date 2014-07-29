@@ -244,7 +244,6 @@ end
 
 Then /^the effective date should default to system date$/ do
   on AdminRegistration do |page|
-    puts {@admin_reg.course_section_codes[0].course_default_effective_date}
     page.get_course_default_effective_date(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_effective_date}/
   end
 end
@@ -259,5 +258,25 @@ end
 When /^an error message appears indicating that the section was cancelled for the selected term$/ do
   section = @admin_reg.course_section_codes[0].section
   course = @admin_reg.course_section_codes[0].course_code
-  on(AdminRegistration).get_cancelled_section_error_message.should match /Section #{section}.* for #{course}.* was cancelled for the selected term./
+  on(AdminRegistration).get_cancelled_section_error_message.should match /Section #{section}.*for #{course}.*was cancelled for the selected term./
+end
+
+When /^I change the effective date of a course and register a student for the course$/ do
+  @admin_reg = create AdminRegistrationData, :term_code=> "201301"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "CHEM241",
+                                                             :section=> "1001", :course_default_effective_date => tomorrow[:date_w_slashes])
+  @effective_date = @admin_reg.course_section_codes[0].course_default_effective_date
+  on AdminRegistration do |page|
+    page.course_register
+    page.set_course_default_effective_date(@admin_reg.course_section_codes[0].course_code).set "#{@effective_date}"
+    page.confirm_registration
+    page.confirm_registration_issue
+  end
+end
+
+Then /^the registration date is displayed as float\-over after successfully registering the course$/ do
+  on AdminRegistration do |page|
+      @browser.driver.action.move_to(page.registered_course_notification_icon).perform
+      page.get_effective_date_float_popup(@admin_reg.course_section_codes[0].course_default_effective_date).nil?.should be_false
+  end
 end

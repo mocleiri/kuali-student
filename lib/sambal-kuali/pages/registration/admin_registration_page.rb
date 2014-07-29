@@ -23,6 +23,15 @@ class AdminRegistration < BasePage
   REG_DATE    = 8
 
   element(:admin_registration_page) { |b| b.frm.div(id: "KS-AdminRegistration")}
+  element(:effective_date_float_table) { |b| b.div(id: /jquerybubblepopup/).table}
+  value(:get_effective_date_float){ |date, b| b.effective_date_float_table.rows(text: /#{date}/).text}
+
+  def get_effective_date_float_popup date
+    effective_date_float_table.rows(text: /#{date}/).each do |row|
+      return row.text
+    end
+    return nil
+  end
 
   #################################################################
   ### Student and Term
@@ -77,10 +86,14 @@ class AdminRegistration < BasePage
   element(:confirm_registration_popup_section) { |b| b.frm.section(id: "registerConfirmDialog")}
   element(:confirm_registration_popup_table) { |b| b.frm.div(id: "KS-AdminRegistration-DialogCollection").table}
   element(:confirm_registration_btn) { |b| b.confirm_registration_popup_section.button(id: "confirmRegistrationButton")}
-  action(:confirm_registration){ |b| b.confirmation_register_btn.when_present.click}
+  action(:confirm_registration){ |b| b.confirm_registration_btn.when_present.click}
   element(:cancel_registration_link) { |b| b.confirm_registration_popup_section.a(id: "cancelRegistrationLink")}
   action(:cancel_registration){ |b| b.cancel_registration_link.when_present.click}
   value(:get_course_description_message){ |b| b.loading.wait_while_present; b.course_description_message.when_present.text}
+
+  element(:admin_registration_issues_section) { |b| b.frm.div(id: "KS-AdminRegistration-Issues").table}
+  element(:confirm_registration_issue_btn) { |b| b.admin_registration_issues_section.button(id: "u1o0zn0m_line0")}
+  action(:confirm_registration_issue){ |b| b.confirm_registration_issue_btn.when_present.click}
 
   def get_blank_row(cell_type)
     loading.wait_while_present
@@ -147,6 +160,7 @@ class AdminRegistration < BasePage
   element(:registered_courses_table) { |b| b.registered_courses_section.table}
   value(:registered_courses_header) { |b| b.registered_courses_section.text}
   value(:get_registered_course_credits){ |row, b| b.loading.wait_while_present; row.cells[CREDITS].text}
+  value(:registered_course_notification_icon){ |b| b.loading.wait_while_present; b.registered_courses_table.span(class: 'icon-notification')}
   value(:get_registered_course_code_sort){ |b| b.loading.wait_while_present; b.registered_courses_table.th(class: "sorting_asc").text}
 
   def registered_courses_rows
@@ -190,6 +204,8 @@ class AdminRegistration < BasePage
   value(:get_course_default_credits){ |code, b| b.loading.wait_while_present; b.get_confirm_reg_dialog_row(code).cells[POPUP_CREDITS].text}
   value(:get_course_default_reg_options){ |code, b| b.loading.wait_while_present; b.get_confirm_reg_dialog_row(code).cells[POPUP_REG_OPTIONS].text}
   value(:get_course_default_effective_date){ |code, b| b.loading.wait_while_present; b.get_confirm_reg_dialog_row(code).cells[POPUP_REG_EFFECTIVE_DATE].text_field().value}
+  element(:set_course_default_effective_date){ |code, b| b.loading.wait_while_present; b.get_confirm_reg_dialog_row(code).cells[POPUP_REG_EFFECTIVE_DATE].text_field()}
+
 
   def get_confirm_reg_dialog_row(text)
     loading.wait_while_present
