@@ -36,6 +36,7 @@ class ManageCourseOfferings < BasePage
   element(:view_exam_offerings_link) { |b| b.manage_offering_links_div.link(:text => /Manage Exam Offerings/) }
   action(:view_exam_offerings) { |b| b.view_exam_offerings_link.click; b.loading.wait_while_present }
   element(:co_comments_link) { |b| b.manage_offering_links_div.link(:text => /Comments/) }
+  value(:co_comments_link_count){ |b| b.co_comments_link.text[/\d+(?=\))/].to_i }
 
   element(:cross_listed_message_element) { |b| b.frm.div(id: "KS-CourseOfferingManagement-TitleAndCrossListInfoSection").div(data_label: 'Crosslisted as') }
   value(:cross_listed_message) { |b| b.cross_listed_message_element.text }
@@ -217,6 +218,10 @@ class ManageCourseOfferings < BasePage
 
   def ao_comments_link(code,cluster_private_name = :default_cluster)
     target_row(code, cluster_private_name).a(class: /ks-fontello-icon-comment/)
+  end
+
+  def ao_comments_link_count(code,cluster_private_name = :default_cluster)
+    ao_comments_link(code,cluster_private_name).text[/\d+(?=\))/].to_i
   end
 
   def ao_comments(code, cluster_private_name = :default_cluster)

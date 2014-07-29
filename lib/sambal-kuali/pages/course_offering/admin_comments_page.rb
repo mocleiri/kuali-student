@@ -1,6 +1,6 @@
 class AdminComments < BasePage
 
-  expected_element :add_comment_element
+  expected_element :comment_list_header
 
   def frm
     self.iframe(class: "fancybox-iframe")
