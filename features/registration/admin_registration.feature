@@ -110,7 +110,6 @@ Feature: REG.Admin Registration
     Then an error message appears indicating that the section was cancelled for the selected term
 
 #KSENROLL-13722
-  @pending
   Scenario: CR22.8.1 Verify I am able to add multiple courses for a student when registering
     When I select the course that a student will be registered for
     Then I should be able to select additional courses for the student
