@@ -10,7 +10,7 @@ MVN="mvn"
 AFT_URL="https://svn.kuali.org/repos/student/test/functional-automation/sambal/trunk"
 
 # tomcat variables
-TOMCAT_VERSION=7.0.54
+TOMCAT_VERSION=7.0.55
 export CATALINA_HOME=${WORKSPACE}/tomcat
 export CATALINA_OPTS="-Xms512m -Xmx4g -XX:MaxPermSize=512m -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -XX:+PrintTenuringDistribution -Xloggc:${WORKSPACE}/tomcat/logs/heap.log -XX:HeapDumpPath=${WORKSPACE}/tomcat/logs -XX:+HeapDumpOnOutOfMemoryError"
 export CATALINA_PID=$(mktemp --suffix .ksaft.catalina)
@@ -127,9 +127,9 @@ function download_tomcat() {
     http://archive.apache.org/dist/tomcat/tomcat-7/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
 
   # stop building if md5sum does not match
-  echo "e43771bc8c6a10956495d13300567244  /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz" | \
+  echo "3c46fc0f608c1280dcd65100a983f285  /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz" | \
     md5sum -c
-  echo "${FUNCNAME[0]}: download tomcat $TOMCAT_VERSION."
+  echo "${FUNCNAME[0]}: downloaded tomcat $TOMCAT_VERSION."
 }
 
 function extract_tomcat() {
