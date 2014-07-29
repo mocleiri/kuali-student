@@ -1,4 +1,4 @@
-@wip @yellow_team
+@nightly @yellow_team
 Feature: CO.Manage Admin Comments
 
   CO 27.1 As an Administrator I want to add a comment to a course offering so that special information or requests are recorded
