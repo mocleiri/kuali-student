@@ -14,6 +14,10 @@ Given /^I am logged in as a Department Schedule Coordinator$/ do
     log_in "carol", "carol"
 end
 
+Given /^I am logged in as a Central Registration Personnel$/ do
+  log_in "admin", "admin"
+end
+
 Given /^I log out$/ do
     log_out
 end
