@@ -73,4 +73,12 @@ Then(/^I should be able to bookmark the course and remove the bookmark$/) do
       page.bookmark_icon(@course_search_results.course_code).click
     end
   end
- end
+end
+
+
+
+Then(/^I should be able to remove the bookmark in the course details page$/) do
+  on CourseDetailPage do |page|
+    page.removebookmark.click
+    end
+end

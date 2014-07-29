@@ -24,6 +24,8 @@ class CourseDetailPage < BasePage
   action(:add_to_plan_click) { |b| b.add_to_plan.click }
   action(:add_bookmark) { |b| b.button(id: /addSavedCourse/).click }
   action(:remove_bookmark) { |b| b.button(id: /deleteSavedCourse/).click }
+  element(:removebookmark){ |b| b.button(id:/deleteSavedCourse/,class:"btn btn-default uif-boxLayoutHorizontalItem")}
+  element(:bookmark){ |b| b.button(id:/addSavedCourse/,class:"btn btn-default uif-boxLayoutHorizontalItem")}
 
   #40-add to plan popover elements
   element(:course_term) { |b| b.select(name: "termId") }

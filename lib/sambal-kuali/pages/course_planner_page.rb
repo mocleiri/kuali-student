@@ -1,12 +1,12 @@
 class CoursePlannerPage < BasePage
 
-  page_url = "#{$test_site}kr-krad/planner"
+  page_url  "#{$test_site}/kr-krad/planner"
 
   wrapper_elements
   frame_element
 
 
-  expected_element :course_planner_header
+  expected_element :bookmark_gutter
   element(:course_planner_header) { |b| b.div(text: "Fall 2013 - Summer I 2014") }
 
   #10 - planner page elements
@@ -48,7 +48,8 @@ class CoursePlannerPage < BasePage
   element(:notes_content) {|b| b.textarea(class:"uif-textAreaControl ksap-characterCount ks-plan-Note-input").text}
   element(:close_popup) {|b| b.td(class:"jquerypopover-innerHtml").img(class:"ksap-popup-close")}
   action (:close_popup_click) {|b| b.close_popup.click}
-
+  element(:bookmark_gutter) {|b|b.div(id:"bookmark_summary")}
+  element(:view_more_details) {|b|b.a(id:"bookmark_widget_footer")}
   #action(:course_page_click) {|b| b.div(id:"applicationNavigation").a(text:"Find Courses").click}
 
 end

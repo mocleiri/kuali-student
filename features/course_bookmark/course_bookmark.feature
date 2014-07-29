@@ -19,6 +19,11 @@ Feature: BT.Bookmark a course
   Scenario: BK 2.0.3 Verify that I can access the secondary navigation for bookmarks
     When I navigate to the Planner page
     Then I should be able to view a link to bookmark page in the secondary navigation
+
+  Scenario: BK 2.0.4 Verify that I can remove a bookmark in the course details page
+    When I bookmark a course
+    Then I should be able to remove the bookmark in the course details page
+
 @wip
   Scenario: BK 1.0.1 Verify that I can bookmark courses in  the course search page
     When I search for a specific course in the Course Search Page
