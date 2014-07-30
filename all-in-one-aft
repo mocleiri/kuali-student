@@ -30,8 +30,8 @@ Usage: $ME
         Enable debug messages during execution
     -h|--help
         Print this message and exit.
-    --tag_url <url of svn tags>
-        URL of the deployments directory to pull tags from
+    --repo_prefix <url of svn code>
+        URL of the deployments directory to pull svn code from
     --build_job_url <url of build job>
         URL for the CI job that creates the tagged builds
     --aft_url <url for afts>
@@ -413,7 +413,7 @@ function process_args {
   # --longoptions specifies long options
   args=$(getopt \
     --options h \
-    --longoptions "help,debug,tag_url:,build_job_url:,aft_url:,artifact_prefix:,schema_prefix:,aft_style:,snapshot" \
+    --longoptions "help,debug,repo_prefix:,build_job_url:,aft_url:,artifact_prefix:,schema_prefix:,aft_style:,snapshot" \
     --name "$ME" -- "$@")
 
   if [ $? != 0 ]
@@ -433,7 +433,7 @@ function process_args {
         set_debug_mode
         shift
         ;;
-      --tag_url)
+      --repo_prefix)
         REPO_PREFIX=$2
         shift 2
         ;;
