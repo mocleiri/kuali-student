@@ -34,7 +34,7 @@ class CourseDetailPage < BasePage
   #50-course description page links
   element(:section_details){|b|b.div(id:"u11to302").a(id:"ud5rpm1")}
 
-  #message for bookmark and remove bookmark
+  #message for bookmark and remove bookmark func
   element(:bookmark_message){|b|b.div(id:"bookmarkMessage",class:"uif-message uif-boxLayoutVerticalItem clearfix")}
   element(:remove_bookmark_message){|b|b.div(id:"bookmarkMessage",class:"uif-message uif-boxLayoutVerticalItem clearfix ksap-hide")}
 
