@@ -16,6 +16,8 @@ Feature: REG.Admin Registration
 
   CR22.8 As a Central Registration Personnel I want to be able to add multiple course for a student so that i can register the student for multiple courses at once
 
+  CR22.12 As a Central Registration Personnel I want the system to perform Registration Eligibility checks once i've entered the term so that I can register the student for the correct term
+
   CR22.15 As a Central Registration Personnel I want to be able to remove unwanted courses i've entered before registering the student for them so that i can remove a course without registering for it
 
   CR22.17 As a Central Registration Personnel I want to view the Registered Courses for the Student and Term once I've registered him for one or more so that i can see if any additional actions are required for the registration of the student
@@ -113,6 +115,36 @@ Feature: REG.Admin Registration
     When I select the course that a student will be registered for
     Then I should be able to select additional courses for the student
 
+#KSENROLL-13716
+  @pending
+  Scenario: CR22.12.1 Verify that failed Term eligibility warning Message display and no dialog for student with registered or Wait-listed courses
+    When I attempt to load a Term by valid Term Id for student with Registered or Wait-listed courses
+    Then the Term confirmation does not occur
+    And a warning message confirming that the term is not open is displayed
+
+  @pending
+  Scenario: CR22.12.2 Verify that failed Term eligibility check dialog and warning Message display for student with no registered or Wait-listed courses
+    When I attempt to load a Term by valid Term Id for a student with no Registered or Wait-listed courses
+    Then the Term confirmation does occur
+
+  @pending
+  Scenario: CR22.12.3 Verify that the rest of the registration page do not show if failed Term eligibility dialog  response is cancel
+    When I attempt to load a Term by valid Term Id for a student with no Registered or Wait-listed courses
+    And I decide not to continue with the selected term
+    Then only a warning message is displayed
+
+  @pending
+  Scenario: CR22.12.4 Verify that the registration tabs shows if failed Term eligibility dialog  response is continue
+    When I attempt to load a Term by valid Term Id for a student with no Registered or Wait-listed courses
+    And I decide to continue with the selected term
+    Then a warning message along with the Registered and Wait-listed courses are displayed
+
+  @pending
+  Scenario: CR22.12.5 Verify that Term eligibility check passes for open registration term
+    When I open the term for registration
+    And I attempt to load a Term by valid Term Id for a student with no Registered or Wait-listed courses
+    Then no failed Term eligibility check or warning message is displayed
+
 #KSENROLL-13720
   Scenario: CR22.15.1 Verify I am able to add and then remove multiple courses for a student when registering
     When I select the course that a student will be registered for
@@ -140,4 +172,6 @@ Feature: REG.Admin Registration
   @draft
   Scenario: CR22.17.4 Verify the credit total for the term updates after registering a course
     When I register a student for a course
-    Then the credit total for the term should be updated
+    Then the credit total for the term should be updated  Scenario: CR22.8.3 Verify the registration date is displayed as float over if the effective date has been changed
+    When I change the effective date of a course and register a student for the course
+    Then the registration date is displayed as float-over after successfully registering the course

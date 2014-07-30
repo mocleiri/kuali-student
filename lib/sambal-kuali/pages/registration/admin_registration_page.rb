@@ -56,6 +56,9 @@ class AdminRegistration < BasePage
   element(:change_term_error_message) { |b| b.registration_change_term_section.li(class: 'uif-errorMessageItem')}
   value(:get_term_error_message){ |b| b.change_term_error_message.when_present.text}
 
+  element(:change_term_warning_message) { |b| b.registration_change_term_section.p(id: "changeTermEligibilityWarning")}
+  value(:get_change_term_warning_message){ |b| b.change_term_warning_message.when_present.text}
+
   element(:confirm_term_popup_section) { |b| b.frm.section(id: "termEligibilityDialog")}
   element(:confirm_term_dialog_table) { |b| b.frm.div(id: "KS-AdminRegistration-TermIssues").table}
   element(:confirm_term_continue_btn) { |b| b.confirm_term_popup_section.button(id: "termContinue_btn")}
@@ -186,7 +189,6 @@ class AdminRegistration < BasePage
     end
     return nil
   end
-
 
   #################################################################
   ### Wait listed Courses Table

@@ -340,3 +340,103 @@ When /^I register a student for a course$/ do
                                                              :section=> "1001", :register => true,
                                                              :confirm_registration => true)
 end
+
+When /^I open the term for registration$/ do
+  @calendar = make AcademicCalendar, :year => "2013", :name => "2012-2013 Academic Calendar"
+
+  term = make AcademicTermObject, :parent_calendar => @calendar, :term => "Summer I", :term_type => "Summer 1"
+  @calendar.terms << term
+
+  @calendar.terms[0].edit :defer_save => true
+  puts "-3"
+  keydategroup = make KeyDateGroupObject, :key_date_group_type=> "Registration"
+  keydates = []
+  keydates << (make KeyDateObject, :key_date_type => "Registration Open", :start_date => "09/05/#{@calendar.year}",
+                    :end_date => "")
+  puts "-2"
+
+  keydategroup.key_dates = keydates
+  puts "-1"
+  @calendar.terms[0].add_key_date_group keydategroup
+end
+
+And /^I attempt to load a Term by valid Term Id for a student with no Registered or Wait-listed courses$/ do
+  @admin_reg = create AdminRegistrationData, :student_id => "KS-10296", :term_code => "201305"
+end
+
+Then /^no failed Term eligibility check or warning message is displayed$/ do
+  on AdminRegistration do |page|
+    page.loading.wait_while_present
+    page.confirm_term_popup_section.visible?.should be_false
+    page.change_term_warning_message.exists?.should be_false
+    page.admin_registration_reg_for_section.visible?.should be_true
+  end
+end
+
+When /^I attempt to load a Term by valid Term Id for student with Registered or Wait-listed courses$/ do
+  @admin_reg = create AdminRegistrationData,:term_code => "201500"
+end
+
+Then /^the Term confirmation does not occur$/ do
+  on AdminRegistration do |page|
+    page.confirm_term_popup_section.visible?.should == false
+  end
+end
+
+And /^a warning message confirming that the term is not open is displayed$/ do
+  on AdminRegistration do |page|
+    page.change_term_warning_message.visible?.should == true
+    page.admin_registration_reg_for_section.visible?.should == true
+  end
+end
+
+Then /^the Term confirmation does occur$/ do
+  on AdminRegistration do |page|
+    page.change_term_input.set "201500"
+    page.change_term_go
+    page.loading.wait_while_present
+    page.confirm_term_popup_section.visible?.should == true
+    page.confirm_term_continue
+    #temporary work around to leave the browser in a clean state
+    page.student_info_go
+  end
+end
+
+When /^I decide not to continue with the selected term$/ do
+  on AdminRegistration do |page|
+    page.change_term_input.set "201500"
+    page.change_term_go
+    page.loading.wait_while_present
+    page.confirm_term_popup_section.visible?.should == true
+    page.confirm_term_cancel
+    page.loading.wait_while_present
+  end
+end
+
+Then /^only a warning message is displayed$/ do
+  on AdminRegistration do |page|
+    page.change_term_warning_message.visible?.should == true
+    page.course_addline_btn.exists?.should == false
+    #temporary work around to leave the browser in a clean state
+    page.student_info_go
+  end
+end
+
+When /^I decide to continue with the selected term$/ do
+  on AdminRegistration do |page|
+    page.change_term_input.set "201500"
+    page.change_term_go
+    page.loading.wait_while_present
+    page.confirm_term_popup_section.visible?.should == true
+    page.confirm_term_continue
+  end
+end
+
+Then /^a warning message along with the Registered and Wait-listed courses are displayed$/ do
+  on AdminRegistration do |page|
+    page.change_term_warning_message.visible?.should == true
+    page.admin_registration_reg_for_section.visible?.should == true
+    #temporary work around to leave the browser in a clean state
+    page.student_info_go
+  end
+end
