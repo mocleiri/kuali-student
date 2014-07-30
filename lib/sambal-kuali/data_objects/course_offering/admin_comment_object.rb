@@ -67,6 +67,7 @@ class AdminCommentObject < DataFactory
       on AdminComments do |page|
         page.comment_save_edit(edit_comment).click
         page.loading.wait_while_present
+        sleep 1
         @text = options[:text]
       end
       on AdminComments do |page|

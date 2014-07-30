@@ -23,59 +23,59 @@ Feature: CO.Manage Admin Comments
 #  Offerings so that I can draw attention to text or include actionable urls and email addresses
 
   Scenario: CO 27.1.1 Verify successful add of admin comment to a course offering
-    Given I am logged in as admin
+    Given I am logged in as a Schedule Coordinator
     When I add a comment to a course offering
     Then the course offering comment can be viewed successfully
 
   Scenario: CO 27.2.1 Verify successful add of admin comment to an activity offering
-    Given I am logged in as admin
+    Given I am logged in as a Schedule Coordinator
     When I add a comment to an activity offering
     Then the activity offering comment can be viewed successfully
 
   Scenario: CO27.5.1 Verify successful deletion of comment on course offering
-    Given I am logged in as admin
+    Given I am logged in as a Schedule Coordinator
     And I manage comments for a course offering with existing comments
     When I delete an existing comment for the course offering
     Then the course offering comment is successfully deleted
 
   Scenario: CO27.5.2 Verify user can cancel deletion of comment on course offering
-    Given I am logged in as admin
+    Given I am logged in as a Schedule Coordinator
     And I manage comments for a course offering with existing comments
     When I select the delete option for an existing course offering comment but choose not to confirm the deletion
     Then the course offering comment is not deleted and can be viewed successfully
 
   Scenario: CO27.6.1 Verify successful deletion of comment on activity offering
-    Given I am logged in as admin
+    Given I am logged in as a Schedule Coordinator
     And I manage comments for an activity offering with existing comments
     When I delete an existing comment for the activity offering
     Then the activity offering comment is successfully deleted
 
   Scenario: CO27.6.2 Verify user can undo deletion of comment on activity offering
-    Given I am logged in as admin
+    Given I am logged in as a Schedule Coordinator
     And I manage comments for an activity offering with existing comments
     When I select the delete option for an existing activity offering comment but choose not to confirm the deletion
     Then the activity offering comment is not deleted and can be viewed successfully
 
   Scenario: CO27.7.1 Verify successful edit of comment on course offering
-    Given I am logged in as admin
+    Given I am logged in as a Schedule Coordinator
     And I manage comments for a course offering with existing comments
     When I edit an existing course offering comment and save
     Then the course offering comment is updated successfully
 
   Scenario: CO27.7.2 Verify user can cancel the editing of comment on course offering
-    Given I am logged in as admin
+    Given I am logged in as a Schedule Coordinator
     And I manage comments for a course offering with existing comments
     When I edit an existing course offering comment and cancel
     Then the course offering comment is not updated
 
   Scenario: CO27.8.1 Verify successful edit of comment on activity offering
-    Given I am logged in as admin
+    Given I am logged in as a Schedule Coordinator
     And I manage comments for an activity offering with existing comments
     When I edit an existing activity offering comment and save
     Then the activity offering comment is updated successfully
 
   Scenario: CO27.8.2 Verify user can cancel the editing of comment on activity offering
-    Given I am logged in as admin
+    Given I am logged in as a Schedule Coordinator
     And I manage comments for an activity offering with existing comments
     When I edit an existing activity offering comment and cancel
     Then the activity offering comment is not updated
@@ -114,7 +114,7 @@ Feature: CO.Manage Admin Comments
 
 #  @draft @not_implemented
 #  Scenario: CO27.10.1 Verify user can include url and email hyperlinks in new admin comments on course and activity offerings
-#    Given I am logged in as admin
+#    Given I am logged in as a Schedule Coordinator
 #    And I manage comments for a course offering
 #    When I add a new comment with a url or email hyperlink and select Add Comment
 #    Then the comment is saved with a working hyperlink
@@ -122,7 +122,7 @@ Feature: CO.Manage Admin Comments
 #
 #  @draft @not_implemented
 #  Scenario: CO27.10.2 Verify user can include url and email hyperlinks in existing admin comments on course and activity offerings
-#    Given I am logged in as admin
+#    Given I am logged in as a Schedule Coordinator
 #    And I manage comments for an activity offering with an existing comment
 #    When I add a url or email hyperlink and select Add Comment
 #    Then the comment is saved with a working hyperlink
@@ -130,7 +130,7 @@ Feature: CO.Manage Admin Comments
 #
 #  @draft @not_implemented
 #  Scenario: CO27.10.3 Verify user can include typography elements such as underlining, bolding, and italics in new admin comments on course and activity offerings
-#    Given I am logged in as admin
+#    Given I am logged in as a Schedule Coordinator
 #    And I manage comments for a course offering
 #    When I add a new comment with underlining, bolding and italics and select Add Comment
 #    Then the comment is saved with the typography elements displayed
@@ -138,7 +138,7 @@ Feature: CO.Manage Admin Comments
 #
 #  @draft @not_implemented
 #  Scenario: CO27.10.4 Verify user can include typography elements such as underlining, bolding, and italics in existing admin comments on course and activity offerings
-#    Given I am logged in as admin
+#    Given I am logged in as a Schedule Coordinator
 #    And I manage comments for an activity offering with an existing comment
 #    When I add underlining, bolding and italics to the comment and select Add Comment
 #    Then the comment is saved with the typography elements displayed

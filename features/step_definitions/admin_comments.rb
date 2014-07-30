@@ -280,8 +280,8 @@ end
 
 And(/^I am not able to create new comments for the course offering$/) do
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
     page.add_comment_element.present?.should be_false
+    page.close
   end
 end
 
@@ -326,8 +326,8 @@ end
 
 And(/^I am not able to create new comments for the activity offering$/) do
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
     page.add_comment_element.present?.should be_false
+    page.close
   end
 end
 
