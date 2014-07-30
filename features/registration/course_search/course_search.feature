@@ -33,11 +33,18 @@ Feature: REG.Course Search
     | ENGL     | ENGL     |
     | BSCI     | BSCI     |
 
-  Scenario Outline: CR 19.2.4 Search by Single Course Level
+  Scenario Outline: CR 19.2.4 Search by Multiple Subject Code
+    When I search for a course with "<text>" text option
+    Then courses containing  "<expected>" text options appear
+  Examples:
+    | text       | expected  |
+    | ENGL BSCI  | ENGL, BSCI |
+    | CHEM HIST  | CHEM, HIST |
+
+  Scenario Outline: CR 19.2.5 Search by Single Course Level
     When I search for a course with "<text>" text option
     Then courses containing  "<expected>" text option appears
   Examples:
     | text   | expected |
     | ENGL2  | ENGL2    |
     | CHEM3  | CHEM3    |
-

@@ -239,7 +239,7 @@ class CourseSearchPage < RegisterForCourseBase
   def results_list_courses (expected)
     trimmed_array_list= Array.new
     results_list
-    if expected.length == 4
+    if expected.length == 4 || expected.length > 4 && expected[4] == ','
       trimmed_array_list<<results_list.map! {|x| x.slice(0,4) }
     elsif expected.length == 5
       trimmed_array_list<<results_list.map! {|x| x.slice(0,5) }

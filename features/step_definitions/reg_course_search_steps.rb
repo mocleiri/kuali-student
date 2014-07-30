@@ -30,6 +30,15 @@ Then /^courses containing  "(.*?)" text option appears$/ do |expected|
   end
 end
 
+Then /^courses containing  "(.*?)" text options appear$/ do |expected|
+  on CourseSearchPage do |page|
+    results = page.results_list_courses(expected)
+    for result in results
+      ((result-expected.split(", ")).empty?).should == true;
+    end
+  end
+end
+
 When /^I search for a "(.*?)" "(.*?)" by "(.*?)"$/ do |course_status,course, term_selection|
   @course_search_result = make CourseSearchResults, :course_code => course, :term_select => term_selection
   @course_search_result.course_search
