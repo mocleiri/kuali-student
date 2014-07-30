@@ -20,6 +20,7 @@ class CourseSearchPage < RegisterForCourseBase
   # Facets
   element(:seats_avail_toggle) { |b| b.li(id: "search_facet_seatsAvailable_option_seatsAvailable") }
   action(:toggle_seats_avail) { |b| b.seats_avail_toggle.click }
+  element(:seats_avail_count) { |b| b.seats_avail_toggle.span(index: 1).text }
   element(:credits_toggle) { |credits, b| b.li(id: "search_facet_creditOptions_option_#{credits}") }
   action(:toggle_credits) { |credits, b| b.credits_toggle(credits).click }
   element(:course_level_toggle) { |course_level,b| b.li(id: "search_facet_courseLevel_option_#{course_level}") }
@@ -27,6 +28,8 @@ class CourseSearchPage < RegisterForCourseBase
   element(:course_prefix_toggle) { |course_prefix,b| b.li(id: "search_facet_coursePrefix_option_#{course_prefix}") }
   action(:toggle_course_prefix) { |course_prefix,b| b.course_prefix_toggle(course_prefix).click }
   element(:clear_level_facet) { |b| b.div(id: "search_facet_clear_courseLevel") }
+  element(:clear_prefix_facet) { |b| b.div(id: "search_facet_clear_coursePrefix") }
+  element(:clear_credit_facet) { |b| b.div(id: "search_facet_clear_creditOptions") }
 
   # Results
   element(:search_results_summary_div) { |b| b.div(id: "search_results_summary") }
@@ -34,6 +37,7 @@ class CourseSearchPage < RegisterForCourseBase
   element(:display_limit_select) { |b| b.select(id: "display_limit_select") }
   element(:results_table) { |b| b.table(id: "search_results_table") }
   element(:course_code_result_link) { |course_code,b| b.tr(id: "course_detail_row_#{course_code}").td(index: 0).span }
+  element(:row_result_link) { |result_row,b| result_row.td(index: 0).span }
 
   # Pagination
   element(:next_page_on) { |b| b.a(id: "nextPageLink") }
@@ -45,10 +49,18 @@ class CourseSearchPage < RegisterForCourseBase
   element(:back_to_search_results) { |b| b.a(id: "returnToSearch") }
   element(:course_description) { |b| b.div(id: "courseDescription").text }
 
-  # Table column indexes
+  # Results table column indexes
   COURSE_CODE = 0
   COURSE_DESC = 1
   COURSE_CRED = 2
+
+  # Detail AO table column indexes
+  AO_DAYS = 0
+  AO_TIME = 1
+  AO_INSTRUCTOR = 2
+  AO_LOCATION = 3
+  AO_SEATS = 4
+  AO_SELECT = 5
 
   #Gives the digit for course level comparison, eg ENGL200 would have 2 extracted and compared
   value(:courseLevel){ |row,b| row.cells[COURSE_CODE].text.slice(4,1) }
@@ -84,6 +96,10 @@ class CourseSearchPage < RegisterForCourseBase
     row.cells[COURSE_CODE].text
   end
 
+  def course_prefix_by_row(row)
+    row.cells[COURSE_CODE].text.slice(0,4)
+  end
+
   def course_title_by_index (index)
     row = target_result_row_by_index (index)
     row.cells[COURSE_DESC].text
@@ -99,8 +115,15 @@ class CourseSearchPage < RegisterForCourseBase
     row.cells[COURSE_CRED].text
   end
 
+  def seats_avail_count_number
+    seats_avail_count.match('(\d)')[1].to_i
+  end
 
-  COURSE_GEN_ED=6
+  def seats_avail
+    # TODO go through all AO tables: if each table has a row with seat > 0  return true
+    # issue with id search_results_table - it appears for every table present (dupe id)
+  end
+
 
   def results_list
 
@@ -117,11 +140,6 @@ class CourseSearchPage < RegisterForCourseBase
   def get_credit
     credit=credits.split(".")[0]
   end
-
-  def get_courseprefix
-    courseprefix=courseprefix.slice(4,1)
-  end
-
 
   def results_list_bycolumn(columnname)
     list = []
@@ -147,24 +165,6 @@ class CourseSearchPage < RegisterForCourseBase
     list
   end
 
-  # Get code from data table row safely
-  def get_table_row_gened(index,rescues)
-    begin
-
-      code = results_table.rows[index].cells[COURSE_GEN_ED].text
-      return code
-    rescue => e
-      rescues = rescues+1
-      puts "Retrieve code for row #{index} rescue from #{e.message}: #{rescues}"
-      if rescues<5
-        sleep(1)
-        get_table_row_code(index,rescues)
-      else
-        puts "Failed to retrieve code for row #{index}"
-        return ""
-      end
-    end
-  end
   # Get code from data table row safely
   def get_table_row_code(index,rescues)
     begin
