@@ -274,6 +274,7 @@ function run_afts() {
 
   # temporarily override immediate exit
   set +e
+  set -x
   gem install --no-rdoc --no-ri bundler
   bundle install
   firefox -version
@@ -285,6 +286,7 @@ function run_afts() {
     --format pretty \
     --format json \
     --out $WORKSPACE/cucumber1.json --format junit --out .
+  if [ $DEBUG -eq 0 ]; then set +x; fi
   set -e
   echo "${FUNCNAME[0]}: AFTs finished."
 }
