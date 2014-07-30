@@ -268,7 +268,7 @@ class RegisterForCourseBase < BasePage
 
   element(:menu_button) { |b| b.cr_header_div.button(id: "reg_menu_button")}
   action(:menu) { |b| b.menu_button.click }
-  element(:term_select) { |b| b.div(class: "ng-scope").select(id: "searchTerm") }
+  element(:term_select) { |b| b.select(id: "searchTerm") }
   element(:search) { |b| b.cr_header_div.link(id: "goToSearch")}
   element(:schedule_link) { |b| b.cr_header_div.link(id: "goToSchedule") }
   element(:cart_link) { |b| b.cr_header_div.link(id: "goToCart") }
@@ -297,7 +297,6 @@ class LargeFormatRegisterForCourseBase < BasePage
   element(:reg_locked_message) { |b| b.span(id: "reg_locked_message").text }
 
   def select_term(term)
-    term_select.wait_until_present
     term_select.select(term)
   end
 end

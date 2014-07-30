@@ -18,12 +18,12 @@ Feature: REG.Course Search
 
   Scenario Outline: CR 19.2.2 Search by Multiple Course Code
     When I search for a course with "<text>" text option
-    Then "<expected_courses>" and courses matching at least one "<expected_component>" are returned
+    Then courses containing  "<expected>" text options appear
   Examples:
-    | text                    |expected_courses                 | expected_component                             |
-    | ENGL101 CHEM231         | ENGL101, CHEM231                | none                                           |
-    | TEST345 CHEM231         | CHEM231                         | none                                           |
-    | ENGL101 BSCI120 ENGL212 | ENGL101, BSCI120, ENGL212       | none                                           |
+    | text                    | expected                                                 |
+    | ENGL101 CHEM231         | ENGL101, ENGL101H, ENGL101M, ENGL101S, ENGL101X, CHEM231 |
+    | PHYS374 CHEM231         | PHYS374, CHEM231                                         |
+    | ENGL211 BSCI120 ENGL212 | ENGL211, BSCI120, ENGL212                                |
 
   Scenario Outline: CR 19.2.3 Search by Subject Code
     When I search for a course with "<text>" text option
@@ -41,10 +41,10 @@ Feature: REG.Course Search
     | ENGL BSCI  | ENGL, BSCI |
     | CHEM HIST  | CHEM, HIST |
 
-  Scenario Outline: CR 19.2.5 Search by Single Course Level
+  Scenario Outline: CR 19.2.9 Search by Keyword
     When I search for a course with "<text>" text option
-    Then courses containing  "<expected>" text option appears
+    Then courses containing  "<expected>" text options appear
   Examples:
-    | text   | expected |
-    | ENGL2  | ENGL2    |
-    | CHEM3  | CHEM3    |
+    | text    | expected                                                                                            |
+    | Atomic  | PHYS721, CHEM682, PHYS420, CHEM403, PHYS622                                                         |
+    | Organic | CHEM640, CHEM491, CHEM242, CHEM105, CHEM231, CHEM889D, CHEM641, CHEM241, CHEM889G, CHEM232, CHEM460 |
