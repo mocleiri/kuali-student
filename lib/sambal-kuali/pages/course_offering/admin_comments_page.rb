@@ -9,7 +9,7 @@ class AdminComments < BasePage
   element(:loading) { |b| b.frm.image(alt: "Loading...") }
 
   element(:new_comment_field) { |b| b.frm.textarea(id: 'KS-NewCommentField_control') }
-  element(:add_comment_element) { |b| b.frm.button(id: 'u1840ksm') } #TODO: static id
+  element(:add_comment_element) { |b| b.frm.button(text: 'Add Comment') } #TODO: static id
   element(:add_comment) { |b| b.add_comment_element.click; b.loading.wait_while_present; sleep 1 }
 
   element(:comment_list_header) { |b| b.frm.header(id: 'Comment_list_Header') }
