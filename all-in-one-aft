@@ -274,13 +274,17 @@ function run_afts() {
 
   # temporarily override immediate exit
   set +e
-  ${WORKSPACE}/jenkinscucumber \
-    http://localhost:8080 \
-    headless_data \
-    headless \
-    --threads=4 \
-    --parallel=true \
-    --firefox=27
+  gem install --no-rdoc --no-ri bundler
+  bundle install
+  firefox -version
+  chmod 777 $WORKSPACE/cleanup_test_processes.sh
+  $WORKSPACE/cleanup_test_processes.sh
+  cucumber TEST_SITE='http://localhost:8080' \
+    FIREFOX_PATH=/usr/bin/firefox14 \
+    --profile headless \
+    --format pretty \
+    --format json \
+    --out $WORKSPACE/cucumber1.json --format junit --out .
   set -e
   echo "${FUNCNAME[0]}: AFTs finished."
 }
