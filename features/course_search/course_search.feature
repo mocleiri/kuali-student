@@ -85,7 +85,7 @@ Feature: BT.Course Search
     | english history  |  20       | Showing 1-20 of 200 results for english history  | 5     |  20            |
     | english history  |  50       | Showing 1-50 of 200 results for english history  | 4     |  50            |
     | english history  | 100       | Showing 1-100 of 200 results for english history | 2     | 100            |
-    | greek mythology  |  20       | Showing 1-8 of 8 results for greek mythology     | 1     |   8            |
+    | greek mythology  |  20       | Showing 1-7 of 8 results for greek mythology     | 1     |   7            |
 
 #************************* KSAP-818, US- 620**********************************************************************************
 

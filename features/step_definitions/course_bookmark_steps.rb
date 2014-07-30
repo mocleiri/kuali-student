@@ -15,6 +15,7 @@ When(/^I navigate to the Planner page$/) do
 And(/^I click on View more details link$/) do
 
   on CoursePlannerPage do |page|
+    sleep 1
  page.view_more_details.click
   end
 end
@@ -22,6 +23,7 @@ end
 
 Then(/^I should be able to see a page that displays the bookmarks and display the CDP overview section information$/) do
 on BookmarkPage do |page|
+  sleep 2
   page.bookmark_page.exists?.should==true
   page.bookmark_details.exists?.should==true
 end
@@ -38,7 +40,7 @@ When(/^I bookmark a course$/) do
   on CourseDetailPage do |page|
     sleep 2
     puts page.removebookmark.exists?
-    if page.removebookmark.exists?.should==true then
+    if page.removebookmark.exists? then
       puts page.removebookmark.exists?
       else
       page.add_bookmark
@@ -51,13 +53,13 @@ When(/^I bookmark a course$/) do
 end
 Then(/^I should be able to view a link to bookmark page in the secondary navigation$/) do
   on BookmarkPage do |page|
-    page.browser_secondary_nav.exists?.should==true
+    page.browser_secondary_nav.exists?
   end
 end
 
 And(/^I bookmark the course$/) do
   on CourseSearch do |page|
-    if page.boomark_icon_empty.exists?.should==true then
+    if page.boomark_icon_empty.exists? then
        page.bookmark_icon_empty.click
     else
       page.bookmark_icon.click
@@ -67,7 +69,7 @@ end
 
 Then(/^I should be able to bookmark the course and remove the bookmark$/) do
   on CourseSearch do |page|
-    if page.bookmark_icon_empty(@course_search_results.course_code).exists?.should==true then
+    if page.bookmark_icon_empty(@course_search_results.course_code).exists? then
       page.bookmark_icon_empty(@course_search_results.course_code).click
     else
       page.bookmark_icon(@course_search_results.course_code).click
@@ -79,6 +81,7 @@ end
 
 Then(/^I should be able to remove the bookmark in the course details page$/) do
   on CourseDetailPage do |page|
+    sleep 2
     page.removebookmark.click
     end
 end
