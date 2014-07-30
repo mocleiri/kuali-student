@@ -285,7 +285,7 @@ function run_enr_afts() {
     --firefox=27
 }
 
-function run_cm_afts() {
+function run_non_enr_afts() {
   set -x
   gem install --no-rdoc --no-ri bundler
   bundle install
@@ -301,10 +301,6 @@ function run_cm_afts() {
   if [ $DEBUG -eq 0 ]; then set +x; fi
 }
 
-function run_ksap_afts() {
-  echo "KSAP AFTs not implemented yet"
-}
-
 function run_afts() {
   dbgprint
 
@@ -315,8 +311,8 @@ function run_afts() {
   set +e
   case $AFT_STYLE in
     enr)  run_enr_afts;;
-    cm)   run_cm_afts;;
-    ksap) run_ksap_afts;;
+    cm)   run_non_enr_afts;;
+    ksap) run_non_enr_afts;;
     *)
       echo "Invalid AFT_STYLE '${AFT_STYLE}'"
       usage
