@@ -304,7 +304,7 @@ Then(/^I am able to view the comments for the activity offering$/) do
     page.comment_text(comment_div).should == comment.text
     page.comment_created_by(comment_div).should == comment.creator
     page.comment_created_date(comment_div).should == comment.created_date
-    page.header_text_comments_count.should == @activity.admin_comments_list.length
+    page.header_text_comments_count.should == @activity_offering.admin_comments_list.length
   end
 end
 
