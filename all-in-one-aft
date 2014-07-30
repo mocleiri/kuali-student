@@ -109,7 +109,7 @@ function initialize_schema() {
     -e "s#\${jdbc.password}#${SANITIZED_SCHEMA^^}#g" \
     -e "s#\${jdbc.pool.size.max}#20#g" \
     -e "s#\${rice.krad.dev.mode}#false#g" \
-    -e "s#\${keystore.file.default}#/${HOME}/rice.keystore#g" \
+    -e "s#\${keystore.file.default}#${HOME}/rice.keystore#g" \
         ~/kuali/main/dev/ks-with-rice-bundled-config.xml
 
   dbgprint $(cat ~/kuali/main/dev/ks-with-rice-bundled-config.xml)
