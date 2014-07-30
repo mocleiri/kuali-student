@@ -144,6 +144,9 @@ function initialize_schema() {
   then
     cd ${WORKSPACE}/ks-impex-bundled-db-build-${BUILD_NUMBER}
   else
+    set -x
+    cd ${WORKSPACE}/ks-aggregate
+    ${MVN} clean install -Pimpex-only
     cd ${WORKSPACE}/ks-aggregate/ks-deployments/ks-dbs/ks-impex/ks-impex-bundled-db
   fi
 
@@ -195,6 +198,7 @@ function install_maven_dependency_plugin() {
   dbgprint
 
   set -x
+  cd ${WORKSPACE}
   ${MVN} org.apache.maven.plugins:maven-dependency-plugin:2.8:get \
         -Dartifact=org.apache.maven.plugins:maven-dependency-plugin:2.8:jar
   if [ $DEBUG -eq 0 ]; then set +x; fi
@@ -206,6 +210,7 @@ function install_oracle_driver() {
   dbgprint
 
   set -x
+  cd ${WORKSPACE}
   ${MVN} org.apache.maven.plugins:maven-dependency-plugin:2.8:copy \
     -Dartifact=com.oracle:ojdbc6_g:11.2.0.2:jar \
     -DoutputDirectory=${WORKSPACE}/tomcat/lib
