@@ -40,6 +40,8 @@ Usage: $ME
         Valid values are enr, ksap, cm
     --artifact_prefix <prefix of artifact version>
         e.g., 2.1.1-FR2-M1 or 2.1.0-FR1, etc.
+    --snapshot
+        Run off of SNAPSHOTs (instead of tags)
 
 EOT
     exit 2
@@ -85,16 +87,30 @@ function initialize_config() {
   dbgprint
 
   # rice.keystore
-  cp -p \
-    ${WORKSPACE}/ks-with-rice-bundled-${BUILD_NUMBER}/src/main/resources/rice.keystore \
-    ${HOME}/rice.keystore
+  if [ $SNAPSHOT -eq 0 ]
+  then
+    cp -p \
+      ${WORKSPACE}/ks-with-rice-bundled-${BUILD_NUMBER}/src/main/resources/rice.keystore \
+      ${HOME}/rice.keystore
+  else
+    cp -p \
+      ${WORKSPACE}/ks-aggregate/ks-deployments/ks-web/ks-with-rice-bundled/src/main/resources/rice.keystore \
+      ${HOME}/rice.keystore
+  fi
 
   # config file in ~/kuali/main/dev
   mkdir -p ~/kuali/main/dev
   filepath=src/main/resources/org/kuali/student/ks-deployment-resources/deploy/config
-  cp -p \
-    ${WORKSPACE}/ks-deployment-resources-${BUILD_NUMBER}/${filepath}/ks-with-rice-bundled-config.xml \
-    ~/kuali/main/dev/ks-with-rice-bundled-config.xml
+  if [ $SNAPSHOT -eq 0 ]
+  then
+    cp -p \
+      ${WORKSPACE}/ks-deployment-resources-${BUILD_NUMBER}/${filepath}/ks-with-rice-bundled-config.xml \
+      ~/kuali/main/dev/ks-with-rice-bundled-config.xml
+  else
+    cp -p \
+      ${WORKSPACE}/ks-aggregate/ks-deployments/ks-deployment-resources/${filepath}/ks-with-rice-bundled-config.xml \
+      ~/kuali/main/dev/ks-with-rice-bundled-config.xml
+  fi
 
   echo "${FUNCNAME[0]}: config initialized successfully"
 }
@@ -103,7 +119,13 @@ function initialize_schema() {
   dbgprint
 
   # replace non alpha-numeric characters with underscore (_) in schema name
-  SANITIZED_SCHEMA="${SCHEMA_PREFIX}${ARTIFACT_PREFIX//[^a-zA-z0-9]/_}_${BUILD_NUMBER}"
+  if [ $SNAPSHOT -eq 0 ]
+  then
+    SANITIZED_SCHEMA="${SCHEMA_PREFIX}${ARTIFACT_PREFIX//[^a-zA-z0-9]/_}_${BUILD_NUMBER}"
+  else
+    timestamp=$(date +'%F-%R')
+    SANITIZED_SCHEMA="${SCHEMA_PREFIX}${ARTIFACT_PREFIX//[^a-zA-z0-9]/_}_${timestamp}"
+  fi
 
   # do some substitutions (note: schema name has been uppercased)
   sed -i.bak \
@@ -118,7 +140,12 @@ function initialize_schema() {
 
   dbgprint $(cat ~/kuali/main/dev/ks-with-rice-bundled-config.xml)
 
-  cd ${WORKSPACE}/ks-impex-bundled-db-build-${BUILD_NUMBER}
+  if [ $SNAPSHOT -eq 0 ]
+  then
+    cd ${WORKSPACE}/ks-impex-bundled-db-build-${BUILD_NUMBER}
+  else
+    cd ${WORKSPACE}/ks-aggregate/ks-deployments/ks-dbs/ks-impex/ks-impex-bundled-db
+  fi
 
   # load bundled schema (note: schema name has been uppercased)
   set -x
@@ -219,17 +246,32 @@ EOT
   echo "${FUNCNAME[0]}: tomcat setup finished."
 }
 
+function compile_snapshot() {
+  dbgprint
+
+  cd ${WORKSPACE}/ks-aggregate
+  set -x
+  ${MVN} clean install -DskipTests -Pbundled-only-war -Dks.gwt.compile.phase=none
+  if [ $DEBUG -eq 0 ]; then set +x; fi
+}
+
 function install_war_artifact() {
   dbgprint
 
-  set -x
-  ${MVN} org.apache.maven.plugins:maven-dependency-plugin:2.8:copy \
-    -Dartifact=org.kuali.student.web:ks-with-rice-bundled:${ARTIFACT_PREFIX}-build-${BUILD_NUMBER}:war \
-    -DoutputDirectory=.
-  if [ $DEBUG -eq 0 ]; then set +x; fi
+  if [ $SNAPSHOT -eq 0 ]
+  then
+    set -x
+    ${MVN} org.apache.maven.plugins:maven-dependency-plugin:2.8:copy \
+      -Dartifact=org.kuali.student.web:ks-with-rice-bundled:${ARTIFACT_PREFIX}-build-${BUILD_NUMBER}:war \
+      -DoutputDirectory=.
+    if [ $DEBUG -eq 0 ]; then set +x; fi
 
-  cp -p ks-with-rice-bundled-${ARTIFACT_PREFIX}-build-${BUILD_NUMBER}.war \
-    ${WORKSPACE}/tomcat/webapps/ROOT.war
+    cp -p ks-with-rice-bundled-${ARTIFACT_PREFIX}-build-${BUILD_NUMBER}.war \
+      ${WORKSPACE}/tomcat/webapps/ROOT.war
+  else
+    cp -p ${WORKSPACE}/ks-aggregate/ks-deployments/ks-web/ks-with-rice-bundled/target/ks-with-rice-bundled-${ARTIFACT_PREFIX}-SNAPSHOT.war \
+      ${WORKSPACE}/tomcat/webapps/ROOT.war
+  fi
   echo "${FUNCNAME[0]}: installation of war finished."
 }
 
@@ -337,6 +379,10 @@ function set_debug_mode {
   set -x
 }
 
+function set_snapshot {
+  let "SNAPSHOT+=1"
+}
+
 # check that a variable is set and is not the empty string
 function check_not_blank {
   if [ ! -n "$2" ]; then
@@ -358,6 +404,7 @@ function check_args {
 function process_args {
   DEBUG=0
   BUILD_NUMBER=0
+  SNAPSHOT=0
 
   # temporarily override immediate exit
   set +e
@@ -366,7 +413,7 @@ function process_args {
   # --longoptions specifies long options
   args=$(getopt \
     --options h \
-    --longoptions "help,debug,tag_url:,build_job_url:,aft_url:,artifact_prefix:,schema_prefix:,aft_style:" \
+    --longoptions "help,debug,tag_url:,build_job_url:,aft_url:,artifact_prefix:,schema_prefix:,aft_style:,snapshot" \
     --name "$ME" -- "$@")
 
   if [ $? != 0 ]
@@ -419,6 +466,10 @@ function process_args {
         SCHEMA_PREFIX=$2
         shift 2
         ;;
+      --snapshot)
+        set_snapshot
+        shift
+        ;;
       --)
         shift
         break
@@ -436,28 +487,34 @@ process_args "$@"
 # make sure we have what we need to proceed
 check_args
 
-# retrieve latest stable build number
-get_latest_stable_build
+if [ $SNAPSHOT -eq 0 ]; then
+  # retrieve latest stable build number
+  get_latest_stable_build
 
-# export impex sources from svn repo to specified path
-svn_export \
-  ${REPO_PREFIX}/build-${BUILD_NUMBER}/ks-dbs/ks-impex/ks-impex-bundled-db \
-  ${WORKSPACE}/ks-impex-bundled-db-build-${BUILD_NUMBER}
+  # export impex sources from svn repo to specified path
+  svn_export \
+    ${REPO_PREFIX}/build-${BUILD_NUMBER}/ks-dbs/ks-impex/ks-impex-bundled-db \
+    ${WORKSPACE}/ks-impex-bundled-db-build-${BUILD_NUMBER}
 
-# export deployment sources from svn repo to specified path
-svn_export \
-  ${REPO_PREFIX}/build-${BUILD_NUMBER}/ks-deployment-resources \
-  ${WORKSPACE}/ks-deployment-resources-${BUILD_NUMBER}
+  # export deployment sources from svn repo to specified path
+  svn_export \
+    ${REPO_PREFIX}/build-${BUILD_NUMBER}/ks-deployment-resources \
+    ${WORKSPACE}/ks-deployment-resources-${BUILD_NUMBER}
 
-# export ks-with-rice-bundled sources from svn repo to specified path
-svn_export \
-  ${REPO_PREFIX}/build-${BUILD_NUMBER}/ks-web/ks-with-rice-bundled \
-  ${WORKSPACE}/ks-with-rice-bundled-${BUILD_NUMBER}
+  # export ks-with-rice-bundled sources from svn repo to specified path
+  svn_export \
+    ${REPO_PREFIX}/build-${BUILD_NUMBER}/ks-web/ks-with-rice-bundled \
+    ${WORKSPACE}/ks-with-rice-bundled-${BUILD_NUMBER}
+else
+  # export all sources from svn repo to specified path
+  svn_export ${REPO_PREFIX} ${WORKSPACE}/ks-aggregate
+
+  # compile snapshot
+  compile_snapshot
+fi
 
 # export sambal sources from svn repo to specified path
-svn_export \
-  $AFT_URL \
-  ${WORKSPACE}
+svn_export $AFT_URL ${WORKSPACE}
 
 # initialize config file
 initialize_config
