@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/usr/bin/env bash -e
 
 # Jenkins script to perform an all in one AFT test
 #
@@ -7,30 +7,35 @@
 
 # maven version 3.2 on jenkins
 MVN="mvn"
+
+# some default options
 AFT_URL="https://svn.kuali.org/repos/student/test/functional-automation/sambal/trunk"
+REPO_PREFIX="https://svn.kuali.org/repos/student/enrollment/ks-deployments/tags/builds/ks-deployments-2.1/2.1.1-FR2-M1"
+CI_JOB_URL="https://ci.kuali.org/view/student/view/enr-1.0/view/deploy/job/ks-enr-1.0-nightly-build"
+ARTIFACT_PREFIX="2.1.1-FR2-M1"
 
 # tomcat variables
 TOMCAT_VERSION=7.0.55
 export CATALINA_HOME=${WORKSPACE}/tomcat
 export CATALINA_OPTS="-Xms512m -Xmx4g -XX:MaxPermSize=512m -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC -XX:+PrintTenuringDistribution -Xloggc:${WORKSPACE}/tomcat/logs/heap.log -XX:HeapDumpPath=${WORKSPACE}/tomcat/logs -XX:+HeapDumpOnOutOfMemoryError"
-export CATALINA_PID=$(mktemp --suffix .ksaft.catalina)
+export CATALINA_PID=$(mktemp --suffix .ksaft.catalina 2>/dev/null || mktemp -t .ksaft.catalina)
 
 function usage() {
   cat <<EOT
 Usage: $ME
 
-    -d
+    --debug
         Enable debug messages during execution
-    -h
+    -h|--help
         Print this message and exit.
-    -t <url of svn tags>
-        required - URL of the deployments directory to pull tags from
-    -j <url of build job>
-        required - URL for the CI job that creates the tagged builds
-    -a <url for afts>
+    --tag_url <url of svn tags>
+        URL of the deployments directory to pull tags from
+    --build_job_url <url of build job>
+        URL for the CI job that creates the tagged builds
+    --aft_url <url for afts>
         URL for AFT code
-    -p <prefix of artifact version>
-        required - e.g., 2.1.1-FR2-M1 or 2.1.0-FR1, etc.
+    --artifact_prefix <prefix of artifact version>
+        e.g., 2.1.1-FR2-M1 or 2.1.0-FR1, etc.
 
 EOT
     exit 0
@@ -78,7 +83,7 @@ function initialize_config() {
   # rice.keystore
   cp -p \
     ${WORKSPACE}/ks-with-rice-bundled-${BUILD_NUMBER}/src/main/resources/rice.keystore \
-    /rice.keystore
+    ${HOME}/rice.keystore
 
   # config file in ~/kuali/main/dev
   mkdir -p ~/kuali/main/dev
@@ -98,13 +103,13 @@ function initialize_schema() {
 
   # do some substitutions (note: schema name has been uppercased)
   sed -i.bak \
-    -e 's#${public.url}#http://localhost:8080#g' \
-    -e 's#${jdbc.url}#jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE#g' \
+    -e "s#\${public.url}#http://localhost:8080#g" \
+    -e "s#\${jdbc.url}#jdbc:oracle:thin:@oracle.ks.kuali.org:1521:ORACLE#g" \
     -e "s#\${jdbc.username}#${SANITIZED_SCHEMA^^}#g" \
     -e "s#\${jdbc.password}#${SANITIZED_SCHEMA^^}#g" \
-    -e 's#${jdbc.pool.size.max}#20#g' \
-    -e 's#${rice.krad.dev.mode}#false#g' \
-    -e 's#${keystore.file.default}#/rice.keystore#g' \
+    -e "s#\${jdbc.pool.size.max}#20#g" \
+    -e "s#\${rice.krad.dev.mode}#false#g" \
+    -e "s#\${keystore.file.default}#/${HOME}/rice.keystore#g" \
         ~/kuali/main/dev/ks-with-rice-bundled-config.xml
 
   dbgprint $(cat ~/kuali/main/dev/ks-with-rice-bundled-config.xml)
@@ -128,7 +133,7 @@ function download_tomcat() {
 
   # stop building if md5sum does not match
   echo "3c46fc0f608c1280dcd65100a983f285  /tmp/apache-tomcat-$TOMCAT_VERSION.tar.gz" | \
-    md5sum -c
+    md5sum -c -
   echo "${FUNCNAME[0]}: downloaded tomcat $TOMCAT_VERSION."
 }
 
@@ -304,54 +309,60 @@ function process_args {
   DEBUG=0
   BUILD_NUMBER=0
 
-  while getopts hdt:j:a:p: flag;
+  # temporarily override immediate exit
+  set +e
+
+  # --options specifies short options
+  # --longoptions specifies long options
+  args=$(getopt \
+    --options h \
+    --longoptions "help,debug,tag_url:,build_job_url:,aft_url:artifact_prefix:" \
+    --name "$ME" -- "$@")
+
+  if [ $? != 0 ]
+  then
+    usage
+    exit 2
+  fi
+
+  eval set -- "$args"
+
+  while true
   do
-    case "$flag" in
-      h)
-        usage;
+    case "$1" in
+      -h|--help)
+        usage
         exit
         ;;
-      d)
+      --debug)
         set_debug_mode
+        shift
         ;;
-      t)
-        REPO_PREFIX=$OPTARG
+      --tag_url)
+        REPO_PREFIX=$2
+        shift 2
         ;;
-      j)
-        CI_JOB_URL=$OPTARG
+      --build_job_url)
+        CI_JOB_URL=$2
+        shift 2
         ;;
-      a)
-        AFT_URL=$OPTARG
+      --aft_url)
+        AFT_URL=$2
+        shift 2
         ;;
-      p)
-        ARTIFACT_PREFIX=$OPTARG
+      --artifact_prefix)
+        ARTIFACT_PREFIX=$2
+        shift 2
         ;;
-      ?)
-        break;
+      --)
+        shift
+        break
+        ;;
     esac
   done
-
-  if [ -z "$REPO_PREFIX" ];
-  then
-    echo -e "\nrepository url not set (use -t option)\n"
-    usage;
-  fi
-  echo "Repo Prefix: $REPO_PREFIX"
-
-  if [ -z "$CI_JOB_URL" ];
-  then
-    echo -e "\nci job url not set (use -j option)\n"
-    usage;
-  fi
-  echo "CI Job: $CI_JOB_URL"
-
-  if [ -z "$ARTIFACT_PREFIX" ];
-  then
-    echo -e "\nartifact prefix not set (use -p option)\n"
-    usage;
-  fi
-  echo "Artifact Prefix: $ARTIFACT_PREFIX"
+  set -e
 }
+
 ME=$(basename $0)
 
 # process all of our command line arguments
