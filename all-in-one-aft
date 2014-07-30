@@ -316,7 +316,7 @@ function process_args {
   # --longoptions specifies long options
   args=$(getopt \
     --options h \
-    --longoptions "help,debug,tag_url:,build_job_url:,aft_url:artifact_prefix:" \
+    --longoptions "help,debug,tag_url:,build_job_url:,aft_url:,artifact_prefix:" \
     --name "$ME" -- "$@")
 
   if [ $? != 0 ]
