@@ -10,6 +10,7 @@ MVN="mvn"
 
 # some default options
 AFT_URL="https://svn.kuali.org/repos/student/test/functional-automation/sambal/trunk"
+AFT_STYLE="enr"
 REPO_PREFIX="https://svn.kuali.org/repos/student/enrollment/ks-deployments/tags/builds/ks-deployments-2.1/2.1.1-FR2-M1"
 CI_JOB_URL="https://ci.kuali.org/view/student/view/enr-1.0/view/deploy/job/ks-enr-1.0-nightly-build"
 ARTIFACT_PREFIX="2.1.1-FR2-M1"
@@ -35,6 +36,8 @@ Usage: $ME
         URL for the CI job that creates the tagged builds
     --aft_url <url for afts>
         URL for AFT code
+    --aft_style Type of AFT to run
+        Valid values are enr, ksap, cm
     --artifact_prefix <prefix of artifact version>
         e.g., 2.1.1-FR2-M1 or 2.1.0-FR1, etc.
 
@@ -272,6 +275,36 @@ function start_tomcat() {
   echo "${FUNCNAME[0]}: tomcat startup finished."
 }
 
+function run_enr_afts() {
+  ${WORKSPACE}/jenkinscucumber \
+    http://localhost:8080 \
+    headless_data \
+    headless \
+    --threads=4 \
+    --parallel=true \
+    --firefox=27
+}
+
+function run_cm_afts() {
+  set -x
+  gem install --no-rdoc --no-ri bundler
+  bundle install
+  firefox -version
+  chmod 777 $WORKSPACE/cleanup_test_processes.sh
+  $WORKSPACE/cleanup_test_processes.sh
+  cucumber TEST_SITE='http://localhost:8080' \
+    FIREFOX_PATH=/usr/bin/firefox14 \
+    --profile headless \
+    --format pretty \
+    --format json \
+    --out $WORKSPACE/cucumber1.json --format junit --out .
+  if [ $DEBUG -eq 0 ]; then set +x; fi
+}
+
+function run_ksap_afts() {
+  echo "KSAP AFTs not implemented yet"
+}
+
 function run_afts() {
   dbgprint
 
@@ -280,13 +313,15 @@ function run_afts() {
 
   # temporarily override immediate exit
   set +e
-  ${WORKSPACE}/jenkinscucumber \
-    http://localhost:8080 \
-    headless_data \
-    headless \
-    --threads=4 \
-    --parallel=true \
-    --firefox=27
+  case $AFT_STYLE in
+    enr)  run_enr_afts;;
+    cm)   run_cm_afts;;
+    ksap) run_ksap_afts;;
+    *)
+      echo "Invalid AFT_STYLE '${AFT_STYLE}'"
+      usage
+      ;;
+  esac
   set -e
   echo "${FUNCNAME[0]}: AFTs finished."
 }
@@ -317,6 +352,7 @@ function check_not_blank {
 # make sure we have all the arguments we need to proceed
 function check_args {
   check_not_blank AFT_URL $AFT_URL
+  check_not_blank AFT_STYLE $AFT_STYLE
   check_not_blank REPO_PREFIX $REPO_PREFIX
   check_not_blank CI_JOB_URL $CI_JOB_URL
   check_not_blank ARTIFACT_PREFIX $ARTIFACT_PREFIX
@@ -334,7 +370,7 @@ function process_args {
   # --longoptions specifies long options
   args=$(getopt \
     --options h \
-    --longoptions "help,debug,tag_url:,build_job_url:,aft_url:,artifact_prefix:,schema_prefix:" \
+    --longoptions "help,debug,tag_url:,build_job_url:,aft_url:,artifact_prefix:,schema_prefix:,aft_style:" \
     --name "$ME" -- "$@")
 
   if [ $? != 0 ]
@@ -364,6 +400,19 @@ function process_args {
         ;;
       --aft_url)
         AFT_URL=$2
+        shift 2
+        ;;
+      --aft_style)
+        AFT_STYLE=$2
+        case $AFT_STYLE in
+          enr|ksap|cm)
+            # valid options
+            ;;
+          *)
+            echo "\n    Invalid AFT style '${AFT_STYLE}' chosen\n"
+            usage
+            ;;
+        esac
         shift 2
         ;;
       --artifact_prefix)
@@ -452,4 +501,4 @@ run_afts
 trap - EXIT SIGINT SIGTERM
 cleanup_tomcat
 
-# vim: tabstop=2 shiftwidth=2
+# vim: tabstop=2 shiftwidth=2 syntax=sh
