@@ -83,6 +83,8 @@ Then(/^I should be able to remove the bookmark in the course details page$/) do
   on CourseDetailPage do |page|
     sleep 2
     page.removebookmark.click
+    sleep 5
+    page.remove_bookmark_message.exists?.should==true
     end
 end
 
@@ -94,6 +96,8 @@ Then(/^I should be able to bookmark  the course$/) do
     page.star_remove_bookmark
   else
     page.star_bookmark.click
+    sleep 5
+    page.bookmark_message.exists?.should==true
   end
 
 end

@@ -101,6 +101,7 @@ class CourseSearch < BasePage
   element(:star_bookmark) {|b|b.a(id:/bookmark_anchor/,class:"ks-fontello-icon-star saved")}
   element(:star_remove_bookmark) {|b|b.a(id:/bookmark_anchor/,class:"ks-fontello-icon-star-empty")}
 
+
   #Navigation plan to find course  and vice versa
   #action(:plan_page_click) {|b| b.div(id:"applicationNavigation").a(text:"Plan").click}
 

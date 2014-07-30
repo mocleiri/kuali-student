@@ -20,7 +20,8 @@ class CoursePlannerPage < BasePage
   action(:course_code_term_click) { |term,code,b| b.div(id:"kuali-atp-#{term}_planned_#{code}_code").span(class: "uif-message").click }
   action(:add_to_plan) { |b| b.frm.button(text: "Add to Plan").click }
 
-  #30 - right click operations
+  #30 - right click opera
+  # actions
 
   action(:edit_plan_item_click) { |b| b.td(class: "jquerybubblepopup-innerHtml").a(:id => /planner_menu_edit_plan_item*/).click }
   action(:course_code_delete_click) { |b| b.td(class: "jquerybubblepopup-innerHtml").a(:id => /planner_menu_delete_plan_item*/).click }
