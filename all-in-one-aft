@@ -333,21 +333,21 @@ function process_args {
 
   if [ -z "$REPO_PREFIX" ];
   then
-    echo "repository url not set (use -t option)\n"
+    echo -e "\nrepository url not set (use -t option)\n"
     usage;
   fi
   echo "Repo Prefix: $REPO_PREFIX"
 
   if [ -z "$CI_JOB_URL" ];
   then
-    echo "ci job url not set (use -j option)\n"
+    echo -e "\nci job url not set (use -j option)\n"
     usage;
   fi
   echo "CI Job: $CI_JOB_URL"
 
   if [ -z "$ARTIFACT_PREFIX" ];
   then
-    echo "artifact prefix not set (use -p option)\n"
+    echo -e "\nartifact prefix not set (use -p option)\n"
     usage;
   fi
   echo "Artifact Prefix: $ARTIFACT_PREFIX"
