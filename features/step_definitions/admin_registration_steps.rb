@@ -220,63 +220,123 @@ Then /^I should be able to remove all the additional courses$/ do
   end
 end
 
-When /^I attempt to register a student for a course with default values specified for Credit and Registration Options$/ do
+When /^I attempt to register a student for a course with default values for Credit and Registration Options$/ do
   @admin_reg = create AdminRegistrationData, :term_code=> "201301"
   @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
                                                              :section=> "1002", :course_default_credits => "3.0",
-                                                             :course_default_reg_options => "Letter")
-  on(AdminRegistration).course_register
+                                                             :course_default_reg_options => "Letter", :register =>true)
 end
 
 Then /^the default values are displayed when confirming registration$/ do
   on AdminRegistration do |page|
     page.get_course_default_credits(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_credits}/
     page.get_course_default_reg_options(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_reg_options}/
+    page.cancel_registration
   end
 end
 
 When /^I attempt to register a student for a course$/ do
   @admin_reg = create AdminRegistrationData, :term_code=> "201301"
   @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "CHEM241",
-                                                             :section=> "1002")
-  on(AdminRegistration).course_register
+                                                             :section=> "1002", :register => true)
 end
 
 Then /^the effective date should default to system date$/ do
   on AdminRegistration do |page|
     page.get_course_default_effective_date(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_effective_date}/
+    page.cancel_registration
   end
 end
 
 When /^I attempt to register a student for a cancelled course section$/ do
   @admin_reg = create AdminRegistrationData, :term_code=> "201301"
   @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
-                                                             :section=> "1001")
-  on(AdminRegistration).course_register
+                                                             :section=> "1001", :register => true)
 end
 
 When /^an error message appears indicating that the section was cancelled for the selected term$/ do
-  section = @admin_reg.course_section_codes[0].section
-  course = @admin_reg.course_section_codes[0].course_code
-  on(AdminRegistration).get_cancelled_section_error_message.should match /Section #{section}.*for #{course}.*was cancelled for the selected term./
+  @section = @admin_reg.course_section_codes[0].section
+  @course = @admin_reg.course_section_codes[0].course_code
+  on(AdminRegistration).get_cancelled_section_error_message.should match /Section #{@section}.*for #{@course}.*was cancelled for the selected term./
 end
 
-When /^I change the effective date of a course and register a student for the course$/ do
+When /^I change the effective date of a course before confirming registration$/ do
   @admin_reg = create AdminRegistrationData, :term_code=> "201301"
-  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "CHEM241",
-                                                             :section=> "1001", :course_default_effective_date => tomorrow[:date_w_slashes])
-  @effective_date = @admin_reg.course_section_codes[0].course_default_effective_date
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
+                                                             :section=> "1003", :course_default_effective_date => tomorrow[:date_w_slashes])
   on AdminRegistration do |page|
     page.course_register
-    page.set_course_default_effective_date(@admin_reg.course_section_codes[0].course_code).set "#{@effective_date}"
+    @effective_date = @admin_reg.course_section_codes[0].course_default_effective_date
+    page.set_course_default_effective_date(@course).set "#{@effective_date}"
     page.confirm_registration
-    page.confirm_registration_issue
+    page.dismiss_registration_result
   end
 end
 
-Then /^the registration date is displayed as float\-over after successfully registering the course$/ do
+Then /^the registration date is displayed as a float\-over message$/ do
   on AdminRegistration do |page|
-      @browser.driver.action.move_to(page.registered_course_notification_icon).perform
-      page.get_effective_date_float_popup(@admin_reg.course_section_codes[0].course_default_effective_date).nil?.should be_false
+    page.registered_courses_rows[1..-1].each do |row|
+        page.effective_date_float_icon(row).click
+    end
+    page.get_effective_date_float(@admin_reg.course_section_codes[0].course_default_effective_date).nil?.should be_false
   end
+end
+
+When /^I register a student for a course that passed eligibility$/ do
+  @admin_reg = create AdminRegistrationData, :term_code=> "201301"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "CHEM241",
+                                                             :section=> "1001", :register => true,
+                                                             :confirm_registration => true)
+end
+
+Then /^a message indicating the course has been successfully registered appears$/ do
+  on AdminRegistration do |page|
+    page.get_registration_results_success.should match /Course was successfully registered./
+    page.dismiss_registration_result == true
+  end
+end
+
+And /^the course is displayed$/ do
+  on(AdminRegistration).get_registered_course(@course,@section).nil?.should be_false
+end
+
+Then /^the credit total for the term should be updated$/ do
+  on AdminRegistration do |page|
+    @updated_credits = 0
+    page.registered_courses_rows.each do |row|
+      @updated_credits += page.get_registered_course_credits(row).to_i
+    end
+    @updated_credits.equal?(@total_credits).should be_false
+  end
+end
+
+When /^I attempt to register a student for a course that failed eligibility$/ do
+  @admin_reg = create AdminRegistrationData, :term_code=> "201301"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "CHEM241",
+                                                             :section=> "1001", :register => true,
+                                                             :confirm_registration => true)
+end
+
+Then /^a message indicating the course failed eligibility appears$/ do
+  on AdminRegistration do |page|
+    page.get_registration_results_success.should match /Time conflict (#{@course})./
+    page.dismiss_registration_result == true
+  end
+end
+
+And /^the course does not display$/ do
+  on(AdminRegistration).get_registered_course(@course,@section).nil?.should be_true
+end
+
+When /^I register a student for a course$/ do
+  @admin_reg = create AdminRegistrationData, :term_code=> "201301"
+  on AdminRegistration do |page|
+    @total_credits = 0
+    page.registered_courses_rows.each do |row|
+      @total_credits += page.get_registered_course_credits(row).to_i
+    end
+  end
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101H",
+                                                             :section=> "1001", :register => true,
+                                                             :confirm_registration => true)
 end

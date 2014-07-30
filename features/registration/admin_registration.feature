@@ -96,17 +96,14 @@ Feature: REG.Admin Registration
     Then the error message for course code is displayed stating "Invalid Section for Course Code"
 
 #KSENROLL-13367
-  @pending
-  Scenario: CR22.7.1 Verify default values are on the confirm registration dialog for a specified course
-    When I attempt to register a student for a course with default values specified for Credit and Registration Options
+  Scenario: CR22.7.1 Verify default values are displayed for a specified course
+    When I attempt to register a student for a course with default values for Credit and Registration Options
     Then the default values are displayed when confirming registration
 
-  @pending
   Scenario: CR22.7.2 Verify default date is on the confirm registration dialog for specified course
     When I attempt to register a student for a course
     Then the effective date should default to system date
 
-  @pending
   Scenario: CR22.7.3 Verify error message appears when attempting to register for cancelled course section
     When I attempt to register a student for a cancelled course section
     Then an error message appears indicating that the section was cancelled for the selected term
@@ -124,6 +121,23 @@ Feature: REG.Admin Registration
 
 #KSENROLL-13715
   @draft
-  Scenario: CR22.8.3 Verify the registration date is displayed as float over if the effective date has been changed
-    When I change the effective date of a course and register a student for the course
-    Then the registration date is displayed as float-over after successfully registering the course
+  Scenario: CR22.17.1 Verify the course displays when course eligibility passed for registration
+    When I register a student for a course that passed eligibility
+    Then a message indicating the course has been successfully registered appears
+    And the course is displayed
+
+  @draft
+  Scenario: CR22.17.2 Verify the course does not display when course eligibility failed for registration
+    When I attempt to register a student for a course that failed eligibility
+    Then a message indicating the course failed eligibility appears
+    And the course does not display
+
+  @draft
+  Scenario: CR22.17.3 Verify the registration date is displayed as float over if the effective date has been changed
+    When I change the effective date of a course before confirming registration
+    Then the registration date is displayed as a float-over message
+
+  @draft
+  Scenario: CR22.17.4 Verify the credit total for the term updates after registering a course
+    When I register a student for a course
+    Then the credit total for the term should be updated

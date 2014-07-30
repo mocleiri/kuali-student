@@ -22,6 +22,8 @@ class ARCourseSectionObject < DataFactory
         :add_new_line => false,
         :register => false,
         :confirm_registration => false,
+        :confirm_registration_issue => false,
+        :dismiss_registration_result => false,
         :course_default_credits => nil,
         :course_default_reg_options => nil,
         :course_default_effective_date => right_now[:date_w_slashes]
@@ -42,9 +44,12 @@ class ARCourseSectionObject < DataFactory
         page.course_code_input.when_present.set @course_code
         page.section_code_input.when_present.set @section
 
+        page.loading.wait_while_present
         if @register
           page.course_register
           page.confirm_registration if @confirm_registration
+          page.dismiss_registration_result if @dismiss_registration_result
+          page.confirm_registration_issue if @confirm_registration_issue
         end
       end
     end
