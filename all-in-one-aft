@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#/usr/bin/env bash -e
 
 # Jenkins script to perform an all in one AFT test
 #
