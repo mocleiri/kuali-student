@@ -97,6 +97,10 @@ class CourseSearch < BasePage
   action (:add_to_plan_button) { |b| b.frm.button(id:"u35").click}
   element(:term) { |b| b.frm.div(id:"course_add_course_page").select(name:"termId") }
 
+  #star icon for bookmarks
+  element(:star_bookmark) {|b|b.a(id:/bookmark_anchor/,class:"ks-fontello-icon-star saved")}
+  element(:star_remove_bookmark) {|b|b.a(id:/bookmark_anchor/,class:"ks-fontello-icon-star-empty")}
+
   #Navigation plan to find course  and vice versa
   #action(:plan_page_click) {|b| b.div(id:"applicationNavigation").a(text:"Plan").click}
 

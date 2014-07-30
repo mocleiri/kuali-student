@@ -24,10 +24,14 @@ Feature: BT.Bookmark a course
     When I bookmark a course
     Then I should be able to remove the bookmark in the course details page
 
-@wip
+
   Scenario: BK 1.0.1 Verify that I can bookmark courses in  the course search page
     When I search for a specific course in the Course Search Page
-    Then I should be able to bookmark the course
+    Then I should be able to bookmark  the course
+
+  Scenario: BK 1.0.2 Verify that I can remove bookmark for the courses in  the course search page
+    When I search for a specific course in the Course Search Page
+    Then I should be able to remove the bookmark for the course
 
 
 

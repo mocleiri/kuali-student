@@ -85,3 +85,32 @@ Then(/^I should be able to remove the bookmark in the course details page$/) do
     page.removebookmark.click
     end
 end
+
+
+Then(/^I should be able to bookmark  the course$/) do
+  on CourseSearch do |page|
+
+  if page.star_remove_bookmark.exists? then
+    page.star_remove_bookmark
+  else
+    page.star_bookmark.click
+  end
+
+end
+end
+
+
+Then(/^I should be able to remove the bookmark for the course$/) do
+  on CourseSearch do |page|
+
+    if page.star_remove_bookmark.exists? then
+      page.star_remove_bookmark
+    else
+      page.star_bookmark.click
+      sleep 2
+      page.star_remove_bookmark.click
+    end
+
+  end
+
+end
