@@ -1,4 +1,4 @@
-@draft @red_team
+@nightly @red_team
 
 Feature: REG.Results Sort
   CR 19.12 - As a student I want to sort my search results so that I can view them more easily (large format)
