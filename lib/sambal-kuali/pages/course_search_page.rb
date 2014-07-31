@@ -24,10 +24,10 @@ class CourseSearch < BasePage
   #element(:results_table){ |b| b.frm.div(id: /course_search_results/).table }
   element(:results_table) { |b| b.table(id: "course_search_results") }
   ################
-  action(:code_sort_icon) {|b| b.div(id:/course_search_results_wrapper/).table().thead().th(text:"Code").click}
-  action(:title_sort_icon) {|b| b.div(id:/course_search_results_wrapper/).table().thead().th(text:"Title").click}
-  element(:code_element) {|b| b.div(id:/course_search_results_wrapper/).table().tbody().tr().td(class:"ksap-text-nowrap sortable")}
-  element(:title_element)  {|b| b.div(id:/course_search_results_wrapper/).table().tbody().tr().td(class:"sortable details_link")}
+  action(:code_sort_icon) { |b| b.div(id:'course_search_results_wrapper').table().thead().th(text:"Code").when_present.click }
+  action(:title_sort_icon) { |b| b.div(id:'course_search_results_wrapper').table().thead().th(text:"Title").when_present.click }
+  element(:code_element) {|b| b.div(id:'course_search_results_wrapper').table().tbody().tr().td(class:"ksap-text-nowrap sortable")}
+  element(:title_element)  {|b| b.div(id:'course_search_results_wrapper').table().tbody().tr().td(class:"sortable details_link")}
 
   element(:result_pagination) {|b| b.div(id:"course_search_results_paginate")}
   element(:results_list_previous_enabled) { |b| b.a(id: "course_search_results_previous")}
