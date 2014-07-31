@@ -1,4 +1,4 @@
-@draft @red_team
+@nightly @red_team
 
 Feature: REG.Course Search
   CR 19.2 - As a student I want to search for courses so that I can view

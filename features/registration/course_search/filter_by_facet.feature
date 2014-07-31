@@ -1,4 +1,4 @@
-@red_team
+@nightly @red_team
 
 Feature: REG.Filter by Facets
   CR 19.10 - As a student I want to be able to apply a variety of search criteria
