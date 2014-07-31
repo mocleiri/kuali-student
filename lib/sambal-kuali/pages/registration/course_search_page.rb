@@ -36,14 +36,24 @@ class CourseSearchPage < RegisterForCourseBase
   element(:search_results_summary) { |b| b.search_results_summary_div.text }
   element(:display_limit_select) { |b| b.select(id: "display_limit_select") }
   element(:results_table) { |b| b.table(id: "search_results_table") }
+  element(:sort_selector) { |column,b| b.i(id: "sort_selector_#{column}") }
+  action(:sort_results_by) { |column,b| b.sort_selector(column).click }
   element(:course_code_result_link) { |course_code,b| b.tr(id: "course_detail_row_#{course_code}").td(index: 0).span }
   element(:row_result_link) { |result_row,b| result_row.td(index: 0).span }
 
   # Pagination
-  element(:next_page_on) { |b| b.a(id: "nextPageLink") }
+  element(:first_page_on) { |b| b.a(id: "firstPageLink") }
+  element(:first_page_off) { |b| b.span(id: "firstPage") }
+  action(:first_page) { |b| b.first_page_on.click }
   element(:previous_page_on) { |b| b.a(id: "prevPageLink") }
-  element(:next_page_off) { |b| b.span(id: "nextPage") }
   element(:previous_page_off) { |b| b.span(id: "prevPage") }
+  action(:previous_page) { |b| b.previous_page_on.click }
+  element(:next_page_on) { |b| b.a(id: "nextPageLink") }
+  element(:next_page_off) { |b| b.span(id: "nextPage") }
+  action(:next_page) { |b| b.next_page_on.click }
+  element(:last_page_on) { |b| b.a(id: "lastPageLink") }
+  element(:last_page_off) { |b| b.span(id: "lastPage") }
+  action(:last_page) { |b| b.last_page_on.click }
 
   # Details view
   element(:back_to_search_results) { |b| b.a(id: "returnToSearch") }

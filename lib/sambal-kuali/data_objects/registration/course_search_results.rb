@@ -201,7 +201,7 @@ class CourseSearchResults < DataFactory
           page.next_page_on.wait_until_present
           page.next_page_on.click
           pgno = pgno+1
-          page.next_page_on.wait_until_present
+          page.wait_until { page.next_page_on.visible? || page.next_page_off.visible? }
         end
       else
         puts "------ page no = #{pgno}"
@@ -298,14 +298,15 @@ class CourseSearchResults < DataFactory
   def check_code_ascending_order_in_all_pages
     on CourseSearchPage do |page|
       pgno = 1
-      if page.next_page_on.exists?
-        until page.next_page_off.exists?
+      page.first_page if page.first_page_on.visible?
+      if page.next_page_on.visible?
+        until page.next_page_off.visible?
           puts "------ page no = #{pgno}"
           page.check_results_sort_order(true , 0)
           page.next_page_on.wait_until_present
-          page.next_page_on.click
+          page.next_page
           pgno = pgno+1
-          page.next_page_on.wait_until_present
+          page.wait_until { page.next_page_on.visible? || page.next_page_off.visible? }
         end
       else
         puts "------ page no = #{pgno}"
@@ -317,14 +318,15 @@ class CourseSearchResults < DataFactory
   def check_code_descending_order_in_all_pages
     on CourseSearchPage do |page|
       pgno = 1
-      if page.next_page_on.exists?
-        until page.next_page_off.exists?
+      page.first_page if page.first_page_on.visible?
+      if page.next_page_on.visible?
+        until page.next_page_off.visible?
           puts "------ page no = #{pgno}"
           page.check_results_sort_order(false , 0)
           page.next_page_on.wait_until_present
-          page.next_page_on.click
+          page.next_page
           pgno = pgno+1
-          page.next_page_on.wait_until_present
+          page.wait_until { page.next_page_on.visible? || page.next_page_off.visible? }
         end
       else
         puts "------ page no = #{pgno}"
@@ -336,14 +338,15 @@ class CourseSearchResults < DataFactory
   def check_title_ascending_order_in_all_pages
     on CourseSearchPage do |page|
       pgno = 1
-      if page.next_page_on.exists?
-        until page.next_page_off.exists?
+      page.first_page if page.first_page_on.visible?
+      if page.next_page_on.visible?
+        until page.next_page_off.visible?
           puts "------ page no = #{pgno}"
           page.check_results_sort_order(true , 1)
           page.next_page_on.wait_until_present
-          page.next_page_on.click
+          page.next_page
           pgno = pgno+1
-          page.next_page_on.wait_until_present
+          page.wait_until { page.next_page_on.visible? || page.next_page_off.visible? }
         end
       else
         puts "------ page no = #{pgno}"
@@ -358,14 +361,15 @@ class CourseSearchResults < DataFactory
   def check_title_descending_order_in_all_pages
     on CourseSearchPage do |page|
       pgno = 1
-      if page.next_page_on.exists?
-        until page.next_page_off.exists?
+      page.first_page if page.first_page_on.visible?
+      if page.next_page_on.visible?
+        until page.next_page_off.visible?
           puts "------ page no = #{pgno}"
           page.check_results_sort_order(false , 1)
           page.next_page_on.wait_until_present
-          page.next_page_on.click
+          page.next_page
           pgno = pgno+1
-          page.next_page_on.wait_until_present
+          page.wait_until { page.next_page_on.visible? || page.next_page_off.visible? }
         end
       else
         puts "------ page no = #{pgno}"

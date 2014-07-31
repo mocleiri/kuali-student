@@ -186,28 +186,16 @@ Then /^"(.*?)" and courses matching at least one "(.*?)" are returned$/ do |expe
 end
 
 
-# KSAP-773------------------------------------------------------------------------------------------------------------------------------------
 
-
-And /^I search for courses in the Course Search Page$/ do
-  @course_search_result = make CourseSearchResults, :course_code => "General"
-  @course_search_result.course_search
-end
-
-
-When /^I sort the results by course code$/ do
+When /^I sort the results by (course code|title|credits)$/ do |sort_key|
+  column = case sort_key
+             when "course code" then "Code"
+             when "title" then "Title"
+               when "credits" then "Credits"
+           end
   on CourseSearchPage do |page|
-    page.code_sort_icon
+    page.sort_results_by(column)
   end
-end
-
-
-Then /^the course codes should be sorted in descending order$/ do
-  on CourseSearchPage do |page|
-    #page.code_element.wait_until_present
-    @course_search_result.check_code_descending_order_in_all_pages.should be_true
-  end
-  puts "Descending Passed"
 end
 
 Then /^the course codes should be sorted in ascending order$/ do
@@ -215,16 +203,48 @@ Then /^the course codes should be sorted in ascending order$/ do
     #page.code_element.wait_until_present
     @course_search_result.check_code_ascending_order_in_all_pages.should be_true
   end
-  puts "Ascending Passed"
+  puts "Codes descending passed"
 end
 
-
-When /^I sort the results by title$/ do
+Then /^the course codes should be sorted in descending order$/ do
   on CourseSearchPage do |page|
-    page.title_sort_icon
+    #page.code_element.wait_until_present
+    @course_search_result.check_code_descending_order_in_all_pages.should be_true
   end
+  puts "Codes descending passed"
 end
 
+Then /^the titles should be sorted in ascending order$/ do
+  on CourseSearchPage do |page|
+    #page.code_element.wait_until_present
+    @course_search_result.check_title_ascending_order_in_all_pages.should be_true
+  end
+  puts "Titles ascending passed"
+end
+
+Then /^the titles should be sorted in descending order$/ do
+  on CourseSearchPage do |page|
+    #page.code_element.wait_until_present
+    @course_search_result.check_title_descending_order_in_all_pages.should be_true
+  end
+  puts "Titles descending passed"
+end
+
+Then /^the credits should be sorted in ascending order$/ do
+  on CourseSearchPage do |page|
+    #page.code_element.wait_until_present
+    @course_search_result.check_credit_ascending_order_in_all_pages.should be_true
+  end
+  puts "Credits ascending passed"
+end
+
+Then /^the credits should be sorted in descending order$/ do
+  on CourseSearchPage do |page|
+    #page.code_element.wait_until_present
+    @course_search_result.check_credit_descending_order_in_all_pages.should be_true
+  end
+  puts "Credits descending passed"
+end
 
 Then /^the course Title listed should be sorted in "(.*?)"$/ do |text|
   if text == "Ascending"
