@@ -4,6 +4,8 @@
 #
 # written by Orlando Ramirez (orlando.ramirezmartinez@utoronto.ca)
 # enhanced by Haroon Rafique (haroon.rafique@kuali.org)
+#
+# TODO: Drop database schema after the application is shut down
 
 # maven version 3.2 on jenkins
 MVN="mvn"
