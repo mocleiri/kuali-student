@@ -44,8 +44,8 @@ end
 Then /^a required error message is displayed stating "(.*?)"$/ do |exp_msg|
   on AdminRegistration do |page|
     page.get_term_error_message.should match /#{exp_msg}/
-    #temporary work around to leave the browser in a clean state
-    page.student_info_go
+
+    page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
 
@@ -60,8 +60,8 @@ And /^the total number of credits for registered courses are displayed$/ do
       credits += page.get_registered_course_credits(row).to_i
     end
     page.registered_courses_header.should match /#{credits.to_s}/
-    #temporary work around to leave the browser in a clean state
-    page.student_info_go
+
+    page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
 
@@ -114,8 +114,8 @@ Then /^the course description is displayed$/ do
   on AdminRegistration do |page|
     page.course_addline_btn.focus
     page.get_course_description_message.should == @admin_reg.course_section_codes[0].course_description
-    #temporary work around to leave the browser in a clean state
-    page.student_info_go
+
+    page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
 
@@ -129,8 +129,8 @@ Then /^the error message for course code is displayed stating "([^"]*)"$/ do |ex
     page.course_register
     page.loading.wait_while_present
     page.reg_for_error_message.text.should match /#{exp_msg}/
-    #temporary work around to leave the browser in a clean state
-    page.student_info_go
+
+    page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
 
@@ -150,8 +150,8 @@ Then /^the section code should appear on the confirm registration dialog$/ do
     page.loading.wait_while_present
     page.get_confirm_registration_row("#{@admin_reg.course_section_codes[0].course_code} (#{@admin_reg.course_section_codes[0].section})").nil?.should be_false
     page.cancel_registration
-    #temporary work around to leave the browser in a clean state
-    page.student_info_go
+
+    page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
 
@@ -177,8 +177,7 @@ Then /^I should be able to select additional courses for the student$/ do
     page.get_last_course_code_value.should match /#{@admin_reg.course_section_codes[3].course_code}/i
     page.get_last_section_value.should match /#{@admin_reg.course_section_codes[3].section}/i
 
-    #temporary work around to leave the browser in a clean state
-    page.student_info_go
+    page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
 
@@ -215,8 +214,7 @@ Then /^I should be able to remove all the additional courses$/ do
 
     page.course_delete_btn(0).exist?.should be_false
 
-    #temporary work around to leave the browser in a clean state
-    page.student_info_go
+    page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
 
@@ -341,7 +339,7 @@ When /^I register a student for a course$/ do
                                                              :confirm_registration => true)
 end
 
-When /^I open the term for registration$/ do
+When /^I open the term for registration in the Academic Calendar$/ do
   @calendar = make AcademicCalendar, :year => "2013", :name => "2012-2013 Academic Calendar"
 
   term = make AcademicTermObject, :parent_calendar => @calendar, :term => "Summer I", :term_type => "Summer 1"
@@ -397,8 +395,8 @@ Then /^the Term confirmation does occur$/ do
     page.loading.wait_while_present
     page.confirm_term_popup_section.visible?.should == true
     page.confirm_term_continue
-    #temporary work around to leave the browser in a clean state
-    page.student_info_go
+
+    page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
 
@@ -413,12 +411,12 @@ When /^I decide not to continue with the selected term$/ do
   end
 end
 
-Then /^only a warning message is displayed$/ do
+Then /^only the term eligibility warning message is displayed$/ do
   on AdminRegistration do |page|
-    page.change_term_warning_message.visible?.should == true
+    page.get_change_term_warning_message.should match /Registration for #{page.get_change_term_info_message} is not currently open/
     page.course_addline_btn.exists?.should == false
-    #temporary work around to leave the browser in a clean state
-    page.student_info_go
+
+    page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
 
@@ -436,7 +434,7 @@ Then /^a warning message along with the Registered and Wait-listed courses are d
   on AdminRegistration do |page|
     page.change_term_warning_message.visible?.should == true
     page.admin_registration_reg_for_section.visible?.should == true
-    #temporary work around to leave the browser in a clean state
-    page.student_info_go
+
+    page.student_info_go  #Needed to leave the browser in a clean state
   end
 end

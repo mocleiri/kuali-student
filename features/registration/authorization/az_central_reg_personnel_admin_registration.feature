@@ -1,5 +1,5 @@
 @nightly @blue_team
-Feature: AZ Central Registration Personnel using Admin Registration
+Feature: REG.AZ Central Registration Personnel using Admin Registration
   CR22.18 As a Central Registration Personnel I want to be the appropriate Role to have access to register students so
   that not any person that have access to the system can register students for courses
 
