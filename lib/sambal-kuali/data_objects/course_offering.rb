@@ -449,6 +449,35 @@ class CourseSearchResults < DataFactory
   end
 
 
+# this method will set bookmark if not already set.
+  def set_course_bookmark
+    on CourseSearch do |page|
+      page.star_bookmark_off.click
+    end
+
+  end
+
+  def clear_course_bookmark
+    on CourseSearch do |page|
+      page.star_bookmark_on.click
+    end
+  end
+
+  def initial_bookmark_state_set
+    course_search
+    on CourseSearch do |page|
+      page.star_bookmark_off.click if page.star_bookmark_off.exists?
+    end
+  end
+
+  def initial_bookmark_state_clear
+    course_search
+    on CourseSearch do |page|
+      page.star_bookmark_on.click if page.star_bookmark_on.exists?
+    end
+  end
+
+
 #KSAP-1000--------------------------------------------------------------------------
 
 

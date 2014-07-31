@@ -53,7 +53,7 @@ When(/^I bookmark a course$/) do
 end
 Then(/^I should be able to view a link to bookmark page in the secondary navigation$/) do
   on BookmarkPage do |page|
-    page.browser_secondary_nav.exists?
+    page.browser_secondary_nav.exists?.should be_true
   end
 end
 
@@ -88,33 +88,43 @@ Then(/^I should be able to remove the bookmark in the course details page$/) do
     end
 end
 
-
-Then(/^I should be able to bookmark  the course$/) do
-  on CourseSearch do |page|
-
-  if page.star_remove_bookmark.exists? then
-    page.star_remove_bookmark
-  else
-    page.star_bookmark.click
-    sleep 5
-#    page.bookmark_message.exists?.should==true
-  end
-
-end
+Then(/^I remove the bookmark$/) do
+    @course_search_results.clear_course_bookmark
 end
 
-
-Then(/^I should be able to remove the bookmark for the course$/) do
-  on CourseSearch do |page|
-
-    if page.star_remove_bookmark.exists? then
-      page.star_remove_bookmark
-    else
-      page.star_bookmark.click
-      sleep 2
-      page.star_remove_bookmark.click
+Then(/^I should no longer see the bookmark against the course$/) do
+    @course_search_results.set_search_entry
+    on CourseSearch do  |page|
+      page.star_bookmark_off.exists?.should be_true
     end
+end
 
+
+
+When(/^I search for a specific course on Course Search Page$/) do
+  @course_search_results = make CourseSearchResults,
+                                :course_code => "ENGL201" ,
+                                :description=>"historical",
+                                :requisite=>"None",
+                                :scheduled_terms=>"SP 14",
+                                :projected_terms=>"Check",
+                                :gened_requirements=>"General",
+                                :subject=>"English",
+                                :gened_code=>"DSHU",
+                                :gened_course=>"General Education: Humanities"
+  @course_search_results.initial_bookmark_state_clear
+  @course_search_results.set_search_entry
+
+end
+
+
+And(/^I bookmark that course$/) do
+  @course_search_results.set_course_bookmark
+end
+
+Then(/^I should see the bookmark against the course$/) do
+  @course_search_results.set_search_entry
+  on CourseSearch do  |page|
+    page.star_bookmark_on.exists?.should be_true
   end
-
 end

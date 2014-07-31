@@ -98,9 +98,10 @@ class CourseSearch < BasePage
   element(:term) { |b| b.frm.div(id:"course_add_course_page").select(name:"termId") }
 
   #star icon for bookmarks
-  element(:star_bookmark) {|b|b.a(id:/bookmark_anchor/,class:"ks-fontello-icon-star saved")}
-  element(:star_remove_bookmark) {|b|b.a(id:/bookmark_anchor/,class:"ks-fontello-icon-star-empty")}
-
+  element(:star_bookmark_on) {|b|b.a(id:/bookmark_anchor/,class:"ks-fontello-icon-star saved")}
+  element(:star_bookmark_off) {|b|b.a(id:/bookmark_anchor/,class:"ks-fontello-icon-star-empty")}
+  action(:set_star_bookmark) { |b| b.star_bookmark_off.click; b.star_bookmark_on.wait_until_present  }
+  action(:clear_star_bookmark) { |b| b.star_bookmark_on.click; b.star_bookmark_off.wait_until_present }
 
   #Navigation plan to find course  and vice versa
   #action(:plan_page_click) {|b| b.div(id:"applicationNavigation").a(text:"Plan").click}

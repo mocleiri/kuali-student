@@ -58,7 +58,7 @@ When(/^I search for  courses in the Course Search Page$/) do
 end
 
 
-When(/^I search for a specific course in the Course Search Page$/) do
+  When(/^I search for a specific course in the Course Search Page$/) do
   @course_search_results = make CourseSearchResults,
                                 :course_code => "ENGL201" ,
                                 :description=>"historical",
@@ -69,6 +69,7 @@ When(/^I search for a specific course in the Course Search Page$/) do
                                 :subject=>"English",
                                 :gened_code=>"DSHU",
                                 :gened_course=>"General Education: Humanities"
-  @course_search_results.course_search
+  @course_search_results.initial_bookmark_state_set
+  @course_search_results.set_search_entry
 
 end
