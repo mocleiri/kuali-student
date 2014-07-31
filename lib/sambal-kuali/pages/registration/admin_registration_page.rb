@@ -23,11 +23,11 @@ class AdminRegistration < BasePage
   REG_DATE    = 8
 
   element(:admin_registration_page) { |b| b.frm.div(id: "KS-AdminRegistration")}
-  element(:effective_date_float_table) { |b| b.div(id: /jquerybubblepopup/).table}
-  element(:effective_date_float_icon) { |row, b| b.loading.wait_while_present; row.span(class: "icon-notification")}
+  element(:transaction_date_float_table) { |b| b.div(id: /jquerybubblepopup/).table}
+  element(:transaction_date_float_icon) { |row, b| b.loading.wait_while_present; row.span(class: "icon-notification")}
 
-  def get_effective_date_float date
-    effective_date_float_table.rows(text: /#{date}/).each do |row|
+  def get_transaction_date_float date
+    transaction_date_float_table.rows(text: /#{date}/).each do |row|
       return row.text
     end
     return nil
@@ -183,11 +183,11 @@ class AdminRegistration < BasePage
     return array
   end
 
-  def get_registered_course (course,section)
-    registered_courses_table.rows(text: /#{course} (#{section})/).each do |row|
-      return row.text
+  def get_registered_course (course)
+    registered_courses_table.rows[1..-1].each do |row|
+      return row.text if row.text=~ /#{Regexp.escape(course)}/
     end
-    return nil
+      return nil
   end
 
   #################################################################

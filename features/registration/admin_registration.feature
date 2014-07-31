@@ -147,24 +147,24 @@ Feature: REG.Admin Registration
     Then I should be able to remove all the additional courses
 
 #KSENROLL-13715
-  @draft
+  @pending
   Scenario: CR22.17.1 Verify the course displays when course eligibility passed for registration
     When I register a student for a course that passed eligibility
     Then a message indicating the course has been successfully registered appears
     And the course is displayed
 
-  @draft
+  @pending
   Scenario: CR22.17.2 Verify the course does not display when course eligibility failed for registration
     When I attempt to register a student for a course that failed eligibility
     Then a message indicating the course failed eligibility appears
     And the course does not display
 
-  @draft
+  @pending
   Scenario: CR22.17.3 Verify the registration date is displayed as float over if the effective date has been changed
     When I change the effective date of a course before confirming registration
     Then the registration date is displayed as a float-over message
 
-  @draft
+  @pending
   Scenario: CR22.17.4 Verify the credit total for the term updates after registering a course
     When I register a student for a course
     Then the credit total for the term should be updated
