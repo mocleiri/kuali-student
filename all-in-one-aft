@@ -122,13 +122,11 @@ function initialize_schema() {
   dbgprint
 
   # replace non alpha-numeric characters with underscore (_) in schema name
-  SANITIZED_SCHEMA="${SCHEMA_PREFIX}${ARTIFACT_PREFIX//[^a-zA-z0-9]/_}"
   if [ $SNAPSHOT -eq 0 ]
   then
-    SANITIZED_SCHEMA="${SANITIZED_SCHEMA}_${BUILD_NUMBER}"
+    SANITIZED_SCHEMA="${SCHEMA_PREFIX}${ARTIFACT_PREFIX//[^a-zA-z0-9]/_}_${BUILD_NUMBER}"
   else
-    timestamp=$(date +'%m%d%H')
-    SANITIZED_SCHEMA="${SANITIZED_SCHEMA}_${timestamp//[^0-9]/_}"
+    SANITIZED_SCHEMA="${SCHEMA_PREFIX}_SNAPSHOT"
   fi
 
   # do some substitutions (note: schema name has been uppercased)
