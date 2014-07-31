@@ -9,13 +9,13 @@ Feature: REG.Filter by Facets
 
   #KSENROLL-13741
   Scenario: Verify course search results using seats available facet
-    When I search for History courses in the Course Search Page
+    When I search for HIST26 courses in the Course Search Page
     And I narrow the search results to courses with available seats
     Then I should see only courses with available seats
 
   #KSENROLL-13741
   Scenario: Verify search results using course level facet
-    When I search for courses in the Course Search Page
+    When I search for ENGL courses in the Course Search Page
     And I narrow the search results by a specific course level
     Then I should see only courses with the specific course level
 

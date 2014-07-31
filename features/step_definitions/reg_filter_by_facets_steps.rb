@@ -26,19 +26,6 @@ When(/^I search for courses with multiple prefixes in the Course Search Page$/) 
   @course_search_result.course_code = "ENGL"
 end
 
-When(/^I search for History courses in the Course Search Page$/) do
-  @course_search_result = make CourseSearchResults,
-                               :course_code => "HIST26" ,
-                               :scheduled_terms=>nil,
-                               :gened_requirements=>nil,
-                               :subject=>nil,
-                               :gened_code=>nil,
-                               :credit=>nil
-  p @course_search_result
-  @course_search_result.course_search
-  @course_search_result.clear_facets
-end
-
 
 And /^I narrow the search results to courses with available seats$/ do
   on CourseSearchPage do |page|
