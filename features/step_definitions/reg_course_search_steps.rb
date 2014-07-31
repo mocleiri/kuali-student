@@ -189,37 +189,37 @@ end
 # KSAP-773------------------------------------------------------------------------------------------------------------------------------------
 
 
-And /^I search for a course on course search$/ do
+And /^I search for courses in the Course Search Page$/ do
   @course_search_result = make CourseSearchResults, :course_code => "General"
   @course_search_result.course_search
 end
 
 
-When /^I sort the table by course code$/ do
+When /^I sort the results by course code$/ do
   on CourseSearchPage do |page|
     page.code_sort_icon
   end
 end
 
 
-Then /^the course code listed should be sorted in "(.*?)"$/ do  |text|
-  if text == "Descending"
-    on CourseSearchPage do |page|
-      page.code_element.wait_until_present
-    end
+Then /^the course codes should be sorted in descending order$/ do
+  on CourseSearchPage do |page|
+    #page.code_element.wait_until_present
     @course_search_result.check_code_descending_order_in_all_pages.should be_true
-    puts "Descending is Passed True"
-  else
-    on CourseSearchPage do |page|
-      page.code_element.wait_until_present
-    end
-    @course_search_result.check_code_ascending_order_in_all_pages.should be_true
-    puts "Ascending is Passed True"
   end
+  puts "Descending Passed"
+end
+
+Then /^the course codes should be sorted in ascending order$/ do
+  on CourseSearchPage do |page|
+    #page.code_element.wait_until_present
+    @course_search_result.check_code_ascending_order_in_all_pages.should be_true
+  end
+  puts "Ascending Passed"
 end
 
 
-When /^I sort the table by title$/ do
+When /^I sort the results by title$/ do
   on CourseSearchPage do |page|
     page.title_sort_icon
   end

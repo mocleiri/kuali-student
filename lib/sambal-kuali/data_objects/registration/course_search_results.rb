@@ -81,34 +81,6 @@ class CourseSearchResults < DataFactory
     end
   end
 
-  def remove_code_from_term
-    # navigate_to_course_planner_home
-    on CoursePlannerPage do |page|
-      begin
-        page.course_planner_header.wait_until_present
-        page.course_code_term(@planned_term, @course_code) != nil?
-        page.course_code_term_click(@planned_term, @course_code)
-        page.course_code_delete_click
-        page.delete_course.wait_until_present
-        page.delete_course_click
-        page.refresh
-      rescue
-        #means that course was NOT found, BUT be careful as the rescue will hide errors if they occur in cleanup steps
-      end
-    end
-  end
-
-  def course_search_to_planner
-    on CourseSearchPage  do |page|
-      page.plan_page_click
-    end
-    on CoursePlannerPage do |page|
-      page.course_planner_header.wait_until_present
-      remove_code_from_term
-      page.course_page_click
-    end
-  end
-
   def verify_saved_course_code_notes
     on CoursePlannerPage do |page|
       page.course_page_click
@@ -118,43 +90,6 @@ class CourseSearchResults < DataFactory
       page.course_code_term_click(@planned_term, @course_code)
       page.view_course_summary_click
       page.close_popup.wait_until_present
-    end
-  end
-
-  def add_course_to_term
-    navigate_to_maintenance_portal
-    navigate_to_course_planner_home
-    on CoursePlannerPage do |page|
-      remove_code_from_term
-      page.add_to_term(@planned_term)
-      page.course_code_text.wait_until_present
-      page.course_code_text.set @course_code
-      page.credit.set @credit
-      page.notes.set @notes
-      page.add_to_plan
-      puts page.growl_text
-    end
-  end
-
-  def edit_plan_item_verify_notes
-    on CoursePlannerPage do |page|
-      sleep 2
-      page.course_code_term_click(@planned_term, @course_code)
-      page.edit_plan_item_click
-    end
-  end
-
-  def edit_plan_item
-    on CoursePlannerPage do|page|
-      sleep 2
-      page.course_code_term_click(@planned_term, @course_code)
-      page.edit_plan_item_click
-      page.close_popup.wait_until_present
-      page.notes.set @notes
-      page.save_click
-      sleep 2
-      page.course_code_term_click(@planned_term, @course_code)
-      page.view_course_summary_click
     end
   end
 
@@ -327,7 +262,7 @@ class CourseSearchResults < DataFactory
     end
   end
 
-  # Check that returned results meet search criteria and required courses are
+  # Check that returned results meet search criteria and required courses are ??
   def check_all_results_data(expected_courses, expected_text)
     on CourseSearchPage do |page|
       puts "Search Text = #{expected_text}"
