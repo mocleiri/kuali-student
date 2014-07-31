@@ -8,21 +8,21 @@ Feature: REG.Results Sort
 
 #KSENROLL-13742 (this whole feature)
   Scenario: CS 19.12.1 Sorting by course code in both ascending and descending order.
-    When I search for courses in the Course Search Page
+    When I search for ENGL2 courses in the Course Search Page
     And I sort the results by course code
     Then the course codes should be sorted in ascending order
     When I sort the results by course code
     Then the course codes should be sorted in descending order
 
   Scenario: CS 19.12.2 Sorting by title in both ascending and descending order.
-    When I search for courses in the Course Search Page
+    When I search for ENGL2 courses in the Course Search Page
     And I sort the results by title
     Then the titles should be sorted in ascending order
     When I sort the results by title
     Then the titles should be sorted in descending order
 
   Scenario: CS 19.12.3 Sorting by credits in both ascending and descending order.
-    When I search for courses in the Course Search Page
+    When I search for CHEM courses in the Course Search Page
     And I sort the results by credits
     Then the credits should be sorted in ascending order
     When I sort the results by credits

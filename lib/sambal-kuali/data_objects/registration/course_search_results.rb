@@ -355,9 +355,6 @@ class CourseSearchResults < DataFactory
     end
   end
 
-
-
-
   def check_title_descending_order_in_all_pages
     on CourseSearchPage do |page|
       pgno = 1
@@ -374,6 +371,47 @@ class CourseSearchResults < DataFactory
       else
         puts "------ page no = #{pgno}"
         page.check_results_sort_order(false , 1)
+      end
+    end
+  end
+
+
+  def check_credits_ascending_order_in_all_pages
+    on CourseSearchPage do |page|
+      pgno = 1
+      page.first_page if page.first_page_on.visible?
+      if page.next_page_on.visible?
+        until page.next_page_off.visible?
+          puts "------ page no = #{pgno}"
+          page.check_results_sort_order(true , 2)
+          page.next_page_on.wait_until_present
+          page.next_page
+          pgno = pgno+1
+          page.wait_until { page.next_page_on.visible? || page.next_page_off.visible? }
+        end
+      else
+        puts "------ page no = #{pgno}"
+        page.check_results_sort_order(true ,2)
+      end
+    end
+  end
+
+  def check_credits_descending_order_in_all_pages
+    on CourseSearchPage do |page|
+      pgno = 1
+      page.first_page if page.first_page_on.visible?
+      if page.next_page_on.visible?
+        until page.next_page_off.visible?
+          puts "------ page no = #{pgno}"
+          page.check_results_sort_order(false , 2)
+          page.next_page_on.wait_until_present
+          page.next_page
+          pgno = pgno+1
+          page.wait_until { page.next_page_on.visible? || page.next_page_off.visible? }
+        end
+      else
+        puts "------ page no = #{pgno}"
+        page.check_results_sort_order(false , 2)
       end
     end
   end

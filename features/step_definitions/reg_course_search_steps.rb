@@ -233,7 +233,7 @@ end
 Then /^the credits should be sorted in ascending order$/ do
   on CourseSearchPage do |page|
     #page.code_element.wait_until_present
-    @course_search_result.check_credit_ascending_order_in_all_pages.should be_true
+    @course_search_result.check_credits_ascending_order_in_all_pages.should be_true
   end
   puts "Credits ascending passed"
 end
@@ -241,7 +241,7 @@ end
 Then /^the credits should be sorted in descending order$/ do
   on CourseSearchPage do |page|
     #page.code_element.wait_until_present
-    @course_search_result.check_credit_descending_order_in_all_pages.should be_true
+    @course_search_result.check_credits_descending_order_in_all_pages.should be_true
   end
   puts "Credits descending passed"
 end

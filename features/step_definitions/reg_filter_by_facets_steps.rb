@@ -1,6 +1,6 @@
-When /^I search for courses in the Course Search Page$/ do
+When /^I search for (\w+) courses in the Course Search Page$/ do  |course_code|
   @course_search_result = make CourseSearchResults,
-                               :course_code => "ENGL2" ,
+                               :course_code => course_code ,
                                :scheduled_terms=>nil,
                                :gened_requirements=>nil,
                                :subject=>nil,
