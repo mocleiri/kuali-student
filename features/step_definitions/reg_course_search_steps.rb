@@ -298,12 +298,13 @@ When /^I click on the course details link for (\w+)$/ do |course_code|
   @course_search_result.navigate_course_detail_page course_code
 end
 
-Then /^I can view the details of the (\w+) course$/  do |course_code|
+Then /^I can view the details of the (\w+) course$/ do |course_code|
   on CourseDetailsPage do |page|
     page.course_description_div(course_code).wait_until_present
-    page.course_code(course_code).should == course_code
-    page.course_title(course_code).should =~ /Cell Biology and Physiology/i
-    page.course_credits(course_code).should =~ /4 cr/i
+    puts "page.course_code = #{page.course_code}"
+    page.course_code.should == course_code
+    page.course_title.should =~ /Cell Biology and Physiology/i
+    page.course_credits.should =~ /4 cr/i
     page.course_description(course_code).should =~ /Biochemical and physiological mechanisms/i
   end
 end
