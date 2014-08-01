@@ -51,7 +51,6 @@ Feature: REG.Course Search
     | Microb  | BSCI122, BSCI222, BSCI223, BSCI283, BSCI348A, BSCI348R, BSCI424, BSCI443 |
 
   #KSENROLL-13899
-  @wip
   Scenario: CR 19.4 - As a student I want to select a course so that I can view its details
     When I search for a course with "BSCI330" text option
     Then courses containing  "BSCI330" text options appear
