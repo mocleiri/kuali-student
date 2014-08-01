@@ -498,6 +498,10 @@ class CourseSearch < BasePage
       end
     end
   end
+
+  def wait_until_result_refresh(text)
+    wait_until { course_search_results_info.text != text }
+  end
 end
 
 

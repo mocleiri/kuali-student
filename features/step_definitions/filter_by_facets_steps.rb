@@ -114,9 +114,11 @@ When(/^I narrow the search results in the course search page using any facet$/) 
   on CourseSearch do |page|
     @search_results_before_facet_selection=page.course_search_results_info.text
     @course_search_result.select_facet("term")
+    page.wait_until_result_refresh(@search_results_before_facet_selection)
     page.clear_term_facet.wait_until_present
     #cannot avoid sleep currently since have already tried to wait for element existence.Can research in future if there is a way
     sleep 1
+    @search_results_after_facet_selection = page.course_search_results_info.text
    end
 end
 
@@ -127,7 +129,8 @@ And(/^I undo the filtering performed using the specified facet$/) do
 
     page.clear_term_facet.click
        #cannot avoid sleep currently since have already tried to wait for element existence.Can research in future if there is a way
-    sleep 1
+    #sleep 1
+    page.wait_until_result_refresh(@search_results_after_facet_selection)
     @search_results_after_clearing=page.course_search_results_info.text
     end
 
