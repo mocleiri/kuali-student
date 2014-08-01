@@ -194,6 +194,7 @@ When /^I sort the results by (course code|title|credits)$/ do |sort_key|
                when "credits" then "Credits"
            end
   on CourseSearchPage do |page|
+    wait_until {page.sort_selector(column).visible?}
     page.sort_results_by(column)
   end
 end
