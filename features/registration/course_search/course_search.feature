@@ -20,10 +20,10 @@ Feature: REG.Course Search
     When I search for a course with "<text>" text option
     Then courses containing  "<expected>" text options appear
   Examples:
-    | text                    | expected                                                 |
-    | ENGL101 CHEM231         | ENGL101, ENGL101H, ENGL101M, ENGL101S, ENGL101X, CHEM231 |
-    | PHYS374 CHEM231         | PHYS374, CHEM231                                         |
-    | ENGL211 BSCI120 ENGL212 | ENGL211, BSCI120, ENGL212                                |
+    | text                    | expected                                                                     |
+    | ENGL101 CHEM231         | ENGL101, ENGL101A, ENGL101C, ENGL101H, ENGL101M, ENGL101S, ENGL101X, CHEM231 |
+    | PHYS374 CHEM231         | PHYS374, CHEM231                                                             |
+    | ENGL211 BSCI120 ENGL212 | ENGL211, BSCI120, ENGL212                                                    |
 
   Scenario Outline: CR 19.2.3 Search by Subject Code
     When I search for a course with "<text>" text option
@@ -45,6 +45,6 @@ Feature: REG.Course Search
     When I search for a course with "<text>" text option
     Then courses containing  "<expected>" text options appear
   Examples:
-    | text    | expected                                                                                            |
-    | Atomic  | PHYS721, CHEM682, PHYS420, CHEM403, PHYS622                                                         |
-    | Organic | CHEM640, CHEM491, CHEM242, CHEM105, CHEM231, CHEM889D, CHEM641, CHEM241, CHEM889G, CHEM232, CHEM460 |
+    | text    | expected                                                                 |
+    | Atomic  | PHYS721, CHEM682, PHYS420, CHEM403, PHYS622, PHYS728                     |
+    | Microb  | BSCI122, BSCI222, BSCI223, BSCI283, BSCI348A, BSCI348R, BSCI424, BSCI443 |
