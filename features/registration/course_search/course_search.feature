@@ -3,11 +3,12 @@
 Feature: REG.Course Search
   CR 19.2 - As a student I want to search for courses so that I can view
             courses to potentially add them to my Reg Cart (Large format)
+  CR 19.4 - As a student I want to select a course so that I can view its details (Large format)
 
   Background:
     Given I am logged in as a Student
 
-  #KSENROLL-13740 (this whole feature)
+  #KSENROLL-13740 (all CR 19.2.x scenarios)
   Scenario Outline: CR 19.2.1 Search by Single Course Code
     When I search for a course with "<text>" text option
     Then courses containing  "<expected>" text option appears
@@ -48,3 +49,11 @@ Feature: REG.Course Search
     | text    | expected                                                                 |
     | Atomic  | PHYS721, CHEM682, PHYS420, CHEM403, PHYS622, PHYS728                     |
     | Microb  | BSCI122, BSCI222, BSCI223, BSCI283, BSCI348A, BSCI348R, BSCI424, BSCI443 |
+
+  #KSENROLL-13899
+  @wip
+  Scenario: CR 19.4 - As a student I want to select a course so that I can view its details
+    When I search for a course with "BSCI330" text option
+    Then courses containing  "BSCI330" text options appear
+    When I click on the course details link for BSCI330
+    Then I can view the details of the BSCI330 course

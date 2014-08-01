@@ -69,9 +69,10 @@ class CourseSearchResults < DataFactory
      page.toggle_course_prefix(@course_prefix) if facet_type=="course_prefix"
     end
  end
-  def navigate_course_detail_page
+
+  def navigate_course_detail_page course_code
     on CourseSearchPage  do |page|
-       page.course_code_result_link(@course_code).click
+      page.course_desc_link_by_course(course_code).click
     end
   end
 
