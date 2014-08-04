@@ -311,9 +311,10 @@ end
 
 When /^I select a lecture and lab$/ do
   on CourseDetailsPage do |page|
-    page.lecture2_box.click
-    wait_until {page.selected_message.visible?}
-    page.lab5_box.click
+    page.toggle_ao_select("Y")
+    wait_until { page.details_heading("Lecture").text =~ /Selected/i }
+    page.toggle_ao_select("AA")
+    wait_until { page.details_heading("Lab").text =~ /Selected/i }
   end
 end
 

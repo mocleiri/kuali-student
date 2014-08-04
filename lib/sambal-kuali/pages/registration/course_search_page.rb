@@ -64,14 +64,6 @@ class CourseSearchPage < RegisterForCourseBase
   COURSE_DESC = 2
   COURSE_CRED = 3
 
-  # Detail AO table column indexes
-  AO_DAYS = 0
-  AO_TIME = 1
-  AO_INSTRUCTOR = 2
-  AO_LOCATION = 3
-  AO_SEATS = 4
-  AO_SELECT = 5
-
   #Gives the digit for course level comparison, eg ENGL200 would have 2 extracted and compared
   value(:courseLevel){ |row,b| row.cells[COURSE_CODE].text.slice(4,1) }
 
