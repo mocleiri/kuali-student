@@ -1,11 +1,11 @@
 When /^I search for a course$/ do
-  @course_search_result = make CourseSearchResults
+  @course_search_result = make CourseSearch
   @course_search_result.course_search
 end
 
 
 When /^I search for a course with "(.*?)" text option$/ do |text|
-  @course_search_result = make CourseSearchResults
+  @course_search_result = make CourseSearch
   @course_search_result.course_search(text)
 end
 
@@ -40,7 +40,7 @@ Then /^courses containing  "(.*?)" text options appear$/ do |expected|
 end
 
 When /^I search for a "(.*?)" "(.*?)" by "(.*?)"$/ do |course_status,course, term_selection|
-  @course_search_result = make CourseSearchResults, :course_code => course, :term_select => term_selection
+  @course_search_result = make CourseSearch, :course_code => course, :term_select => term_selection
   @course_search_result.course_search
 end
 
@@ -49,7 +49,7 @@ end
 #-------------------------------------------------------------------------------------------
 
 When /^I search for a course on the course search page$/ do
-  @course_search_result = make CourseSearchResults, :course_code => "ENGL2"
+  @course_search_result = make CourseSearch, :course_code => "ENGL2"
   @course_search_result.course_search
 end
 
@@ -74,18 +74,18 @@ end
 
 
 When /^I search for a course on the course search page with course title$/ do
-  @course_search_result = make CourseSearchResults, :search_text => "eng"
+  @course_search_result = make CourseSearch, :search_text => "eng"
   @course_search_result.course_search_with_search_text
 end
 
 
 When /^I search for a course with one word"(.*?)" text option$/ do |text|
-  @course_search_result = make CourseSearchResults, :search_text => text
+  @course_search_result = make CourseSearch, :search_text => text
   @course_search_result.course_search_with_search_text
 end
 
 Then /^course title or course description containing "(.*?)"text option "(.*?)" appear$/ do |text,condition|
-  @course_search_result = make CourseSearchResults
+  @course_search_result = make CourseSearch
   if condition == "should"
     @course_search_result.multi_text_search(text).should be_true
   else
@@ -98,14 +98,14 @@ Then /^course title or course description containing "(.*?)"text option "(.*?)" 
 end
 
 When /^I search for a course with multi word"(.*?)" text option$/ do |text|
-  @course_search_result = make CourseSearchResults, :search_text => text, :term_select => "All"
+  @course_search_result = make CourseSearch, :search_text => text, :term_select => "All"
   @course_search_result.course_search_with_search_text
 
 end
 
 
 Then(/^course code or course title or course description containing any word of "(.*?)"text option "(.*?)" appear$/) do |expected, condition|
-  @course_search_result = make CourseSearchResults
+  @course_search_result = make CourseSearch
   if condition == "should"
     @course_search_result.multi_text_search(expected).should be_true
   else
@@ -120,12 +120,12 @@ end
 #------------------------------------------------------------------------------------------------------------------------------------
 
 When /^I search for a course with "(.*?)" level option$/ do |level|
-  @course_search_result = make CourseSearchResults
+  @course_search_result = make CourseSearch
   @course_search_result.course_search(level)
 end
 
 Then /^only "(.*?)" level courses "(.*?)" be displayed$/ do |text, condition|
-  @course_search_result = make CourseSearchResults
+  @course_search_result = make CourseSearch
   if condition == "should"
     @course_search_result.check_all_results_data_for_level(text).should be_true
     puts "Test is Passed True"
@@ -176,7 +176,7 @@ end
 
 #------------------------------------------------------------------------------------------------------------------------------------
 When /^I search for "(.*?)"$/ do |text|
-  @course_search_result = make CourseSearchResults, :search_text => text
+  @course_search_result = make CourseSearch, :search_text => text
   @course_search_result.course_search_with_search_text
 end
 
@@ -266,7 +266,7 @@ end
 #-----------------------------------------------------------------------------------------------------------------------
 
 When /^I search for a course with "(.*?)" option$/ do |text|
-  @course_search_result = make CourseSearchResults, :search_text => text
+  @course_search_result = make CourseSearch, :search_text => text
   @course_search_result.course_search_with_search_text
 end
 
@@ -284,7 +284,7 @@ end
 
 
 When /^I search for a "(.*?)" having divisions and levels with space in the search text$/ do |text|
-  @course_search_result = make CourseSearchResults, :search_text => text
+  @course_search_result = make CourseSearch, :search_text => text
   @course_search_result.course_search_with_search_text
 end
 
@@ -306,5 +306,20 @@ Then /^I can view the details of the (\w+) course$/ do |course_code|
     page.course_title.should =~ /Cell Biology and Physiology/i
     page.course_credits.should =~ /4 cr/i
     page.course_description(course_code).should =~ /Biochemical and physiological mechanisms/i
+  end
+end
+
+When /^I select a lecture and lab$/ do
+  on CourseDetailsPage do |page|
+    page.lecture2_box.click
+    wait_until {page.selected_message.visible?}
+    page.lab5_box.click
+  end
+end
+
+Then /^I should see only the selected lecture and lab$/ do
+  on CourseDetailsPage do |page|
+    # only 1 row in lecs table?
+    # only 1 row in labs table?
   end
 end

@@ -1,4 +1,4 @@
-class CourseSearchResults < DataFactory
+class CourseSearch < DataFactory
 
   include Foundry
   include DateFactory
@@ -26,7 +26,8 @@ class CourseSearchResults < DataFactory
                 :subject,
                 :gened_code,
                 :gened_course,
-                :course_level
+                :course_level,
+                :section
 
   def initialize(browser, opts={})
     @browser = browser

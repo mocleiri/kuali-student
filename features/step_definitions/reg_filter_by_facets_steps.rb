@@ -1,5 +1,5 @@
 When /^I search for (\w+) courses in the Course Search Page$/ do  |course_code|
-  @course_search_result = make CourseSearchResults,
+  @course_search_result = make CourseSearch,
                                :course_code => course_code ,
                                :scheduled_terms=>nil,
                                :gened_requirements=>nil,
@@ -12,7 +12,7 @@ When /^I search for (\w+) courses in the Course Search Page$/ do  |course_code|
 end
 
 When(/^I search for courses with multiple prefixes in the Course Search Page$/) do
-  @course_search_result = make CourseSearchResults,
+  @course_search_result = make CourseSearch,
                                :course_code => "BSCI ENGL" ,
                                :scheduled_terms=>nil,
                                :gened_requirements=>nil,
@@ -119,7 +119,7 @@ end
 
 
 When /^I narrow the search results using any facet$/ do
-  @course_search_result = make CourseSearchResults,
+  @course_search_result = make CourseSearch,
                                :course_code => "ENGL" ,
                                :scheduled_terms=>"SP 14",
                                :gened_requirements=>"General",

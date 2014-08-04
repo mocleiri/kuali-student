@@ -1,5 +1,7 @@
 class CourseDetailsPage < RegisterForCourseBase
 
+  expected_element :course_credits_div
+
   # return to search
   element(:return_to_search_link) { |b| b.link(id: "returnToSearch") }
   action(:return_to_search) { |b| b.return_to_search_link.click }
@@ -7,7 +9,8 @@ class CourseDetailsPage < RegisterForCourseBase
   # header
   element(:course_code) { |b| b.span(id: "search_details_code").text }
   element(:course_title) { |b| b.span(id: "search_details_title").text }
-  element(:course_credits) { |b| b.span(id: "search_details_credits").text }
+  element(:course_credits_div) { |b| b.span(id: "search_details_credits") }
+  element(:course_credits) { |b| b.course_credits_div.text }
 
   # description
   element(:course_description_div) { |course_code,b| b.div(id: "courseDescription_#{course_code}") }
