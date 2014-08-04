@@ -20,11 +20,9 @@ import com.thoughtworks.qdox.model.*;
 import com.thoughtworks.qdox.model.Type;
 import com.thoughtworks.qdox.model.annotation.AnnotationValue;
 import org.kuali.student.contract.model.*;
-import org.kuali.student.contract.model.util.JavaClassAnnotationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.annotation.XmlEnum;
 import java.io.File;
 import java.math.BigDecimal;
 import java.util.*;
@@ -47,23 +45,9 @@ public class ServiceContractModelQDoxLoader implements
     private List<ServiceMethod> serviceMethods = null;
     private Map<String, XmlType> xmlTypeMap = null;
     private List<MessageStructure> messageStructures;
-    private boolean validateKualiStudent;
-
+    
     public ServiceContractModelQDoxLoader(List<String> sourceDirectories) {
-        this (sourceDirectories, true);
-    }
-
-    public ServiceContractModelQDoxLoader(List<String> sourceDirectories, boolean validateKualiStudent) {
         this.sourceDirectories = sourceDirectories;
-        this.setValidateKualiStudent(validateKualiStudent);
-    }
-
-    public boolean isValidateKualiStudent() {
-        return validateKualiStudent;
-    }
-
-    public void setValidateKualiStudent(boolean validateKualiStudent) {
-        this.validateKualiStudent = validateKualiStudent;
     }
 
     @Override
@@ -240,7 +224,7 @@ public class ServiceContractModelQDoxLoader implements
 						String message = "failed to parse return type message structure: " + serviceMethod.getService() + " : " + returnType;
 						
 						log.error (message + " : " + e.getMessage());
-						log.debug(message, e);
+						log.error(message, e);
 					}
                 }
             }
@@ -610,16 +594,27 @@ public class ServiceContractModelQDoxLoader implements
         throw new RuntimeException("Unknown shortName " + shortName);
     }
 
+    private boolean validateKualiStudent (JavaClass messageStructureJavaClass) {
+      if (messageStructureJavaClass.getPackageName().startsWith("org.kuali.student.contract.model.test.source")) {
+          return false;
+      } 
+      if (messageStructureJavaClass.getPackageName().startsWith("org.kuali.student.")) {
+          return true;
+      } 
+      return false;
+    }
+    
     private void addMessageStructure(JavaClass messageStructureJavaClass,
             String serviceKey) {
-        Set<JavaClass> subObjectsToAdd = new LinkedHashSet<JavaClass>();
+        Map<String, JavaClass> subObjectsToAdd = new LinkedHashMap<String, JavaClass>();
+        boolean validateKualiStudent = this.validateKualiStudent(messageStructureJavaClass);
         for (String shortName : this.getShortNames(messageStructureJavaClass)) {
             JavaMethod setterMethod = findSetterMethod(messageStructureJavaClass,
                     shortName);
             JavaMethod getterMethod = findGetterMethod(messageStructureJavaClass,
                     shortName);
             if (getterMethod == null) {
-                if (this.validateKualiStudent) {
+                if (validateKualiStudent) {
                     throw new IllegalArgumentException("shortName has no corresponding getter method: "
                             + messageStructureJavaClass.getFullyQualifiedName()
                             + "." + shortName);
@@ -652,6 +647,9 @@ public class ServiceContractModelQDoxLoader implements
             messageStructures.add(ms);
             ms.setXmlObject(messageStructureJavaClass.getName());
             ms.setShortName(shortName);
+//            if (shortName.equalsIgnoreCase("signups")) {
+//                System.out.println(".....................Found signups in " + ms.getXmlObject());
+//            }
             ms.setId(ms.getXmlObject() + "." + ms.getShortName());
             ms.setName(calcMissing(calcName(messageStructureJavaClass, getterMethod, setterMethod,
                     beanField, shortName)));
@@ -673,7 +671,7 @@ public class ServiceContractModelQDoxLoader implements
                     beanField, shortName)));
             ms.setImplNotes(calcImplementationNotes(getterMethod, setterMethod, beanField));
             ms.setColumnName(calcImplementationColumn(getterMethod, setterMethod, beanField));
-            ms.setDeprecated(isDeprecated(getterMethod));
+            ms.setDeprecated(isDeprecated(getterMethod, setterMethod));
             ms.setStatus("???");
             ms.setLookup(calcLookup (messageStructureJavaClass, getterMethod, setterMethod,
                     beanField, serviceKey, ms.getXmlObject(), shortName, ms.getType()));
@@ -686,15 +684,25 @@ public class ServiceContractModelQDoxLoader implements
                 if (!subObjToAdd.getName().equals("Object")) {
                     if (!subObjToAdd.getName().equals("LocaleKeyList")) {
                         if (!subObjToAdd.getName().equals("MessageGroupKeyList")) {
-                            subObjectsToAdd.add(subObjToAdd);
+                            String key = subObjToAdd.getName();
+                            subObjectsToAdd.put(key, subObjToAdd);
+//                            if (key.equalsIgnoreCase("FeeManagementSignup")) {
+//                                System.out.println(".....................Found FeeManagementSignup to add to subobjects to add key =" + key);
+//                            }
                         }
                     }
                 }
 //                }
             }
         }
+
+//        System.out.println (".....................size =" + subObjectsToAdd.size() + " keys=" + subObjectsToAdd.keySet());
         // now add all it's complex sub-objects if they haven't already been added
-        for (JavaClass subObjectToAdd : subObjectsToAdd) {
+        for (String key : subObjectsToAdd.keySet()) {
+            JavaClass subObjectToAdd = subObjectsToAdd.get(key);
+//            if (key.equalsIgnoreCase("FeeManagementSignup")) {
+//                System.out.println(".....................Found FeeManagementSignup to add to subobjects to add key =" + key);
+//            }
             XmlType xmlType = xmlTypeMap.get(calcType(subObjectToAdd));
             if (xmlType == null) {
                 try {
@@ -1112,12 +1120,22 @@ public class ServiceContractModelQDoxLoader implements
         return false;
     }
 
-    private boolean isDeprecated(JavaMethod serviceMethod) {
+    private boolean isDeprecated(JavaMethod serviceMethod ) {
         for (Annotation annotation : serviceMethod.getAnnotations()) {
             if (annotation.getType().getJavaClass().getName().equals(
                     "Deprecated")) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    private boolean isDeprecated(JavaMethod getterMethod, JavaMethod setterMethod) {
+        if (getterMethod != null) {
+            return this.isDeprecated(getterMethod);
+        }
+        if (setterMethod != null) {
+            return this.isDeprecated(setterMethod);
         }
         return false;
     }
@@ -1457,11 +1475,13 @@ public class ServiceContractModelQDoxLoader implements
             return field;
         }
         if (setterMethod != null) {
-            String paramName = setterMethod.getParameters()[0].getName();
-            if (paramName.equalsIgnoreCase(shortName)) {
-                return null;
+            if (setterMethod.getParameters().length > 0) {
+                String paramName = setterMethod.getParameters()[0].getName();
+                if (paramName.equalsIgnoreCase(shortName)) {
+                    return null;
+                }
+                return findField(javaClass, paramName);
             }
-            return findField(javaClass, paramName);
         }
         return null;
     }
@@ -1755,32 +1775,34 @@ public class ServiceContractModelQDoxLoader implements
     private String calcType(JavaClass javaClass) {
     	
         if (javaClass.isEnum()) {
+            
+            return "Enum";
         	
-			if (!JavaClassAnnotationUtils.doesAnnotationExist(
-			        XmlEnum.class.getSimpleName(), javaClass)) {
-				// a rice or other dependency without the @XmlEnum annotation
-				// present
-				if (javaClass.getName().equals("WriteAccess")) {
-					// rice CommonLookupParam
-					return "String";
-				} else if (javaClass.getName().equals("Widget")) {
-					// rice CommonLookupParam
-					return "String";
-				} else if (javaClass.getName().equals("Usage")) {
-					// rice
-					return "String";
-				} else {
-					// this allows the types to be manually specified 
-					// using the full package.classname format.
-					return javaClass.getFullyQualifiedName();
-				}
-
-			}
-    		
-    		Class<?>annotationSpecifiedType = JavaClassAnnotationUtils.extractXmlEnumValue(javaClass);
-    		
-        	return annotationSpecifiedType.getSimpleName();
-           
+//			if (!JavaClassAnnotationUtils.doesAnnotationExist(
+//			        XmlEnum.class.getSimpleName(), javaClass)) {
+//				// a rice or other dependency without the @XmlEnum annotation
+//				// present
+//				if (javaClass.getName().equals("WriteAccess")) {
+//					// rice CommonLookupParam
+//					return "String";
+//				} else if (javaClass.getName().equals("Widget")) {
+//					// rice CommonLookupParam
+//					return "String";
+//				} else if (javaClass.getName().equals("Usage")) {
+//					// rice
+//					return "String";
+//				} else {
+//					// this allows the types to be manually specified 
+//					// using the full package.classname format.
+//					return javaClass.getFullyQualifiedName();
+//				}
+//
+//			}
+//    		
+//    		Class<?>annotationSpecifiedType = JavaClassAnnotationUtils.extractXmlEnumValue(javaClass);
+//    		
+//        	return annotationSpecifiedType.getSimpleName();
+//           
         }
         // this is messed up instead of list of strings it is an object with a list of strings
         if (javaClass.getName().equals(LOCALE_KEY_LIST)) {
@@ -1945,8 +1967,7 @@ public class ServiceContractModelQDoxLoader implements
                 ", services=" + services +
                 ", serviceMethods=" + serviceMethods +
                 ", xmlTypeMap=" + xmlTypeMap +
-                ", messageStructures=" + messageStructures +
-                ", validateKualiStudent=" + validateKualiStudent +
+                ", messageStructures=" + messageStructures+
                 '}';
     }
 }

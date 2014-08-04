@@ -89,6 +89,9 @@ public class MessageStructureTypeCalculator {
             if (type.equalsIgnoreCase("void")) {
                 return "void";
             }
+            if (type.equalsIgnoreCase("Enum")) {
+                return "Enum";
+            }
         }
 
         if (xmlType.getPrimitive().equalsIgnoreCase("Mapped String")) {
@@ -103,18 +106,21 @@ public class MessageStructureTypeCalculator {
             return msType;
         }
 
-        if (type.equals("org.kuali.rice.krms.api.repository.typerelation.RelationshipType")) {
-            return "String";
-        }
-        if (type.equals("org.kuali.student.core.ges.service.ValueType")) {
-            return "String";
-        }
-        if (type.equals("org.kuali.student.r2.core.search.dto.SortDirection")) {
-            return "String";
-        }
-         
+//        if (type.equals("org.kuali.rice.krms.api.repository.typerelation.RelationshipType")) {
+//            return "String";
+//        }
+//        if (type.equals("org.kuali.student.core.ges.service.ValueType")) {
+//            return "String";
+//        }
+//        if (type.equals("org.kuali.student.r2.core.search.dto.SortDirection")) {
+//            return "String";
+//        }
+//        if (type.equals("org.kuali.student.enrollment.academicrecord.service.SubscriptionActionEnum")) {
+//            return "String";
+//        }
+//         
 //        if (type.endsWith("Enum")) {
-//            return "Enum";
+//            return "String";
 //        }       
         throw new DictionaryValidationException("Unknown/unhandled xmlType.primtive value, "
                 + xmlType.getPrimitive()

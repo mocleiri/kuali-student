@@ -155,8 +155,7 @@ public class M6M7ServiceContractComparisonTest {
             out.println("* " + directory);
         }
         out.println("");
-        boolean validateKualiStudent = false;
-        ServiceContractModel instance = new ServiceContractModelQDoxLoader(srcDirs, validateKualiStudent);
+        ServiceContractModel instance = new ServiceContractModelQDoxLoader(srcDirs);
 
         instance = new ServiceContractModelCache(instance);
         validate(instance);
@@ -180,8 +179,7 @@ public class M6M7ServiceContractComparisonTest {
             out.println("* " + directory);
         }
         out.println("");
-        boolean validateKualiStudent = true;
-        ServiceContractModel instance = new ServiceContractModelQDoxLoader(srcDirs, validateKualiStudent);
+        ServiceContractModel instance = new ServiceContractModelQDoxLoader(srcDirs);
 
         instance = new ServiceContractModelCache(instance);
         validate(instance);

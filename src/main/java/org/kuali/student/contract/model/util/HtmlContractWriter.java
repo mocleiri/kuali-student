@@ -57,12 +57,6 @@ public class HtmlContractWriter {
 
     public void write(String projectVersion, String formattedDate) {
         this.writeIndexPage(projectVersion, formattedDate);
-        for (Service service : model.getServices()) {
-            HtmlContractServiceWriter swriter = new HtmlContractServiceWriter(service,
-                    directory,
-                    model);
-            swriter.write(projectVersion, formattedDate);
-        }
         for (XmlType xmlType : model.getXmlTypes()) {
             HtmlContractMessageStructureWriter msWriter =
                     new HtmlContractMessageStructureWriter(
@@ -70,6 +64,12 @@ public class HtmlContractWriter {
                     directory,
                     model);
             msWriter.write(projectVersion, formattedDate);
+        }
+        for (Service service : model.getServices()) {
+            HtmlContractServiceWriter swriter = new HtmlContractServiceWriter(service,
+                    directory,
+                    model);
+            swriter.write(projectVersion, formattedDate);
         }
     }
     private static final Comparator<XmlType> XML_TYPE_NAME_COMPARATOR =

@@ -77,6 +77,8 @@ public class ServiceContractModelQDoxLoaderTest {
     private static final String RESOURCES_DIRECTORY = "src/test/resources";
     private static final String TEST_SOURCE_DIRECTORY =
             "src/test/java/org/kuali/student/contract/model/test/source";
+    
+    private static final String KSAP_API_DIRECTORY = "D:\\svn\\ks\\trunk\\ks-api\\ks-ap-api\\src\\main\\java";
     private static final String ENROLL_PROJECT_SRC_MAIN = "C:/svn/ks-1.3/ks-enroll/ks-enroll-api/src/main";
     private static final String ENROLL_PROJECT_JAVA_DIRECTORY = ENROLL_PROJECT_SRC_MAIN + "/java";
     private static final String RICE_CORE_API_DIRECTORY = "C:/svn/rice/trunk/core/api/src/main/java";
@@ -92,19 +94,19 @@ public class ServiceContractModelQDoxLoaderTest {
             return model;
         }
         List<String> srcDirs = new ArrayList();
-        log.info("User directory=" + System.getProperty("user.dir"));
-        log.info("Current directory=" + new File(".").getAbsolutePath());
+        System.out.println("User directory=" + System.getProperty("user.dir"));
+        System.out.println("Current directory=" + new File(".").getAbsolutePath());
 //        srcDirs.add (ENROLL_PROJECT_JAVA_DIRECTORY);
         srcDirs.add(TEST_SOURCE_DIRECTORY);
+//        srcDirs.add(KSAP_API_DIRECTORY); 
 //        srcDirs.add(RICE_CORE_API_DIRECTORY); 
 //        srcDirs.add(RICE_KIM_API_DIRECTORY); 
 //        srcDirs.add(RICE_LOCATION_API_DIRECTORY); 
 //        srcDirs.add(RICE_KEW_API_DIRECTORY); 
 //        srcDirs.add(RICE_KEN_API_DIRECTORY); 
 //        srcDirs.add(RICE_KSB_API_DIRECTORY); 
-//        srcDirs.add(RICE_KRMS_API_DIRECTORY);     
-        boolean validateKualiStudent = false;
-        ServiceContractModel instance = new ServiceContractModelQDoxLoader(srcDirs, validateKualiStudent);
+//        srcDirs.add(RICE_KRMS_API_DIRECTORY);
+        ServiceContractModel instance = new ServiceContractModelQDoxLoader(srcDirs);
         
         instance = new ServiceContractModelCache(instance);
         validate(instance);
@@ -150,13 +152,13 @@ public class ServiceContractModelQDoxLoaderTest {
      */
     @Test
     public void testGetServiceMethods() {
-        log.info("getServiceMethods");
+        System.out.println("getServiceMethods");
         ServiceContractModel model = getModel();
         List<ServiceMethod> result = model.getServiceMethods();
-        log.info("Number of methods=" + result.size());
+        System.out.println("Number of methods=" + result.size());
         boolean getAtpFound = false;
         for (ServiceMethod method : result) {
-            log.info(dump(method));
+            System.out.println(dump(method));
             if (method.getName().equals("getAtp")) {
                 getAtpFound = true;
                 assertEquals ("this is an implementation note\nthis is another", method.getImplNotes());
@@ -175,7 +177,7 @@ public class ServiceContractModelQDoxLoaderTest {
      */
 //    @Test
     public void testGetSourceNames() {
-        log.info("getSourceNames");
+        System.out.println("getSourceNames");
         ServiceContractModel model = getModel();
         List<String> expResult = new ArrayList();
         expResult.add(TEST_SOURCE_DIRECTORY);
@@ -188,11 +190,11 @@ public class ServiceContractModelQDoxLoaderTest {
      */
 //    @Test
     public void testGetServices() {
-        log.info("getServices");
+        System.out.println("getServices");
         ServiceContractModel model = getModel();
         List<Service> result = model.getServices();
         for (Service service : result) {
-            log.info(service.getKey() + " " + service.getName() + " "
+            System.out.println(service.getKey() + " " + service.getName() + " "
                     + service.getVersion() + " " + service.getStatus());
         }
         assertEquals(4, result.size());
@@ -203,11 +205,11 @@ public class ServiceContractModelQDoxLoaderTest {
      */
 //    @Test
     public void testGetXmlTypes() {
-        log.info("getXmlTypes");
+        System.out.println("getXmlTypes");
         ServiceContractModel model = getModel();
         List<XmlType> result = model.getXmlTypes();
         for (XmlType xmlType : result) {
-            log.info("XmlType=" + xmlType.getName() + " "
+            System.out.println("XmlType=" + xmlType.getName() + " "
                     + xmlType.getPrimitive());
         }
         if (result.size() < 10) {
@@ -220,12 +222,12 @@ public class ServiceContractModelQDoxLoaderTest {
      */
 //    @Test
     public void testGetMessageStructures() throws FileNotFoundException {
-        log.info("getMessageStructures");
+        System.out.println("getMessageStructures");
         ServiceContractModel model = getModel();
         List<MessageStructure> result = model.getMessageStructures();
         for (MessageStructure ms : result) {
             if (ms.getId().equalsIgnoreCase("academicCalendarInfo.typeKey")) {
-                log.info("MessageStructure=" + ms.getId() + " " + ms.getType() + "required=["+ ms.getRequired() + "]");
+                System.out.println("MessageStructure=" + ms.getId() + " " + ms.getType() + "required=["+ ms.getRequired() + "]");
             }
         }
         if (result.size() < 10) {

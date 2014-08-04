@@ -123,7 +123,7 @@ public class HtmlContractWriterTest {
 //		srcDirs.add(COMMON_DIRECTORY);
 //		srcDirs.add(LUM_DIRECTORY);
         ServiceContractModel instance = new ServiceContractModelQDoxLoader(
-                srcDirs, false);
+                srcDirs);
         return new ServiceContractModelCache(instance);
 
     }    
@@ -132,7 +132,7 @@ public class HtmlContractWriterTest {
         List<String> srcDirs = new ArrayList<String>();
         srcDirs.add(KSA_DIRECTORY);
         ServiceContractModel instance = new ServiceContractModelQDoxLoader(
-                srcDirs, false);
+                srcDirs);
         return new ServiceContractModelCache(instance);
 
     }    

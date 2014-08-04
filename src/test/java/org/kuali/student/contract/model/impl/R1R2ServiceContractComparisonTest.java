@@ -143,8 +143,7 @@ public class R1R2ServiceContractComparisonTest {
             log.info ("* " + directory);
         }
         log.info ("");
-        boolean validateKualiStudent = false;
-        ServiceContractModel instance = new ServiceContractModelQDoxLoader(srcDirs, validateKualiStudent);
+        ServiceContractModel instance = new ServiceContractModelQDoxLoader(srcDirs);
 
         instance = new ServiceContractModelCache(instance);
         validate(instance);
@@ -165,8 +164,7 @@ public class R1R2ServiceContractComparisonTest {
             log.info ("* " + directory);
         }
         log.info ("");     
-        boolean validateKualiStudent = true;
-        ServiceContractModel instance = new ServiceContractModelQDoxLoader(srcDirs, validateKualiStudent);
+        ServiceContractModel instance = new ServiceContractModelQDoxLoader(srcDirs);
 
         instance = new ServiceContractModelCache(instance);
         validate(instance);

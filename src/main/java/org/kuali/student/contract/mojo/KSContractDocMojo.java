@@ -75,11 +75,11 @@ public class KSContractDocMojo extends AbstractKSMojo {
     }
     
     
-    private static final String CORE_DIRECTORY = "D:/svn/ks/ks-api/ks-core-api/src/main";
+    private static final String CORE_DIRECTORY = "D:/svn/ks/services/ks-api/ks-core-api/src/main";
     // "C:/svn/maven-dictionary-generator/trunk/src/main/java/org/kuali/student/core";
-    private static final String COMMON_DIRECTORY = "D:/svn/ks/ks-api/ks-common-api/src/main/java";
-    private static final String ENROLL_DIRECTORY = "D:/svn/ks/ks-api/ks-enroll-api/src/main/java";
-    private static final String LUM_DIRECTORY = "D:/svn/ks/ks-api/ks-lum-api/src/main/java";
+    private static final String COMMON_DIRECTORY = "D:/svn/ks/services/ks-api/ks-common-api/src/main/java";
+    private static final String ENROLL_DIRECTORY = "D:/svn/ks/services/ks-api/ks-enroll-api/src/main/java";
+    private static final String LUM_DIRECTORY = "D:/svn/ks/services/ks-api/ks-lum-api/src/main/java";
     private static final String KSAP_API_DIRECTORY = "D:\\svn\\ks\\trunk\\ks-api\\ks-ap-api\\src\\main\\java";
     private static final String KME_API_DIRECTORY = "D:\\svn\\kplus2\\kme\\bulletin\\api\\src\\main\\java\\org\\kuali\\mobility\\bulletin";
     private static final String KSA_DIRECTORY = "D:/svn/ks/ksa/ksa-core/src/main/java";
@@ -101,15 +101,16 @@ public class KSContractDocMojo extends AbstractKSMojo {
     public static void main(String[] args) {
         log.info("execute");
         List<String> srcDirs = new ArrayList<String>();
+//        srcDirs.add(KSA_DIRECTORY);
         srcDirs.add(COMMON_DIRECTORY);
         srcDirs.add(CORE_DIRECTORY);
         srcDirs.add(LUM_DIRECTORY);
         srcDirs.add(ENROLL_DIRECTORY);        
 //        srcDirs.add(RICE_KIM_API_DIRECTORY);     
-        srcDirs.add(KSAP_API_DIRECTORY);    
+//        srcDirs.add(KSAP_API_DIRECTORY);    
 //        srcDirs.add(KME_API_DIRECTORY);
-        srcDirs.add(RICE_CORE_API_DIRECTORY);
-        srcDirs.add(RICE_KRMS_API_DIRECTORY);
+//        srcDirs.add(RICE_CORE_API_DIRECTORY);
+//        srcDirs.add(RICE_KRMS_API_DIRECTORY);
 //        srcDirs.add(TRUNK_ENROLL_IMPL_KRMS_API);
         KSContractDocMojo instance = new KSContractDocMojo();
         Map pluginContext = new HashMap();

@@ -93,6 +93,9 @@ public abstract class JavaClassWriter extends XmlWriter {
     }
 
     public void importsAdd(String pack) {
+        if (pack.startsWith("java.lang.")) {
+            return;
+        }
         this.imports.add(pack);
     }
 
@@ -117,7 +120,7 @@ public abstract class JavaClassWriter extends XmlWriter {
     }
 
     public void writeImports() {
-        if (imports.size() == 0) {
+        if (imports.isEmpty()) {
             return;
         }
 

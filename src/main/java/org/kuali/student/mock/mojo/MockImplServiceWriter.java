@@ -168,7 +168,7 @@ public class MockImplServiceWriter extends JavaClassWriter {
 //   }
 //  }
 //  pack = pack + buf.toString ();
-        pack = pack + "service.impl.mock";
+        pack = pack + "service.impl.map";
         return pack;
     }
 
@@ -194,7 +194,7 @@ public class MockImplServiceWriter extends JavaClassWriter {
      * Given the service key (name), returns a calculated class name for the mock impl.
      */
     public static String calcClassName(String servKey) {
-        return GetterSetterNameCalculator.calcInitUpper(fixServKey(servKey) + "ServiceMockImpl");
+        return GetterSetterNameCalculator.calcInitUpper(fixServKey(servKey) + "ServiceMapImpl");
     }
 
     public static String calcServiceInterfaceClassName(String servKey) {
