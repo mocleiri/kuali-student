@@ -230,6 +230,8 @@ Then /^the default values are displayed when confirming registration$/ do
     page.get_course_default_credits(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_credits}/
     page.get_course_default_reg_options(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_reg_options}/
     page.cancel_registration
+
+    page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
 
@@ -255,7 +257,11 @@ end
 When /^an error message appears indicating that the section was cancelled for the selected term$/ do
   section = @admin_reg.course_section_codes[0].section
   course = @admin_reg.course_section_codes[0].course_code
-  on(AdminRegistration).get_cancelled_section_error_message.should match /Section #{section}.*for #{course}.*was cancelled for the selected term./
+  on AdminRegistration do |page|
+    page.get_cancelled_section_error_message.should match /Section #{section}.*for #{course}.*was cancelled for the selected term./
+
+    page.student_info_go  #Needed to leave the browser in a clean state
+  end
 end
 
 When /^I change the effective date of a course before confirming registration$/ do
