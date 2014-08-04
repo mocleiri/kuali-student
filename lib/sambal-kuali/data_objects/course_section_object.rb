@@ -32,7 +32,7 @@ class CourseSectionObject < DataFactory
   def initialize(browser, opts={})
     @browser = browser
     defaults = {
-        :course_detail_header=>"ENGL202 Course Offerings",
+        :course_detail_header=>"ENGL202 Sections",
         :term_and_course_offering=>"Spring 2014 (1 course offering)",
         :course_offering=>"ENGL202 - Inventing Western Literature: Renaissance to Modern (3 cr)",
         :course_description=>"Course description: Wide range of texts",
