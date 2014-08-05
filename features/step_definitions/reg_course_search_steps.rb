@@ -51,6 +51,7 @@ end
 When /^I search for (\w+) courses on the course search page$/ do |search_string|
   @course_search_result = make CourseSearch, :course_code => search_string
   @course_search_result.course_search
+  @course_search_result.clear_facets
 end
 
 
