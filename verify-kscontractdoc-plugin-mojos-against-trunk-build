@@ -1,6 +1,7 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # compute the plugin version from the trunk code
+# This will be a.b.c-SNAPSHOT
 PLUGIN_VERSION=$(curl --silent http://svn.kuali.org/repos/student/tools/maven-kscontractdoc-plugin/trunk/pom.xml | grep "<version>" | egrep -o "([1-9+\.[0-9]+\.[0-9]+-SNAPSHOT)")
 
 R=$?
@@ -23,7 +24,7 @@ fi
 
 rm -rf ks-api-co
 
-svn co https://svn.kuali.org/repos/student/enrollment/ks-api/tags/builds/ks-api-2.1/2.1.1-FR2-M1/build-$KS_BUILD_NUMBER ks-api-co
+svn export https://svn.kuali.org/repos/student/enrollment/ks-api/tags/builds/ks-api-2.1/2.1.1-FR2-M1/build-$KS_BUILD_NUMBER ks-api-co
 
 cd ks-api-co
 
