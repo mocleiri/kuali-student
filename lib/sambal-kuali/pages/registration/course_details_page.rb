@@ -19,6 +19,9 @@ class CourseDetailsPage < RegisterForCourseBase
   # heading
   element(:details_heading) { |activity_type, b| b.div(id: "#{activity_type}_details_heading") }
 
+  # selected messages
+  element(:selected_message) { |b| b.div(id: "one_ao_selected") }
+
   # activities
   element(:results_table) { |activity_type,b| b.table(id: "#{activity_type}_search_results_table") }
   element(:table_row) { |activity_type, ao_code, b| b.results_table(activity_type).row(id: "course_detail_row_#{ao_code}") }

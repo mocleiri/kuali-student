@@ -60,6 +60,7 @@ class CourseSearchPage < RegisterForCourseBase
   element(:course_description) { |b| b.div(id: "courseDescription").text }
 
   # Results table column indexes
+  COURSE_SEATS_INDICATOR = 0
   COURSE_CODE = 1
   COURSE_DESC = 2
   COURSE_CRED = 3

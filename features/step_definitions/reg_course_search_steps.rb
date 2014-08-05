@@ -297,8 +297,7 @@ end
 
 Then /^I should see only the selected lecture and lab$/ do
   on CourseDetailsPage do |page|
-    # only 1 row in lecs table?
-    # only 1 row in labs table?
+      page.selected_message.text.should match /Section(\s+)#{@course_search_result.section}(\s+)Selected/i
   end
 end
 

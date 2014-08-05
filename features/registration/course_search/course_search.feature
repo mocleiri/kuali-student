@@ -57,6 +57,6 @@ Feature: REG.Course Search
     When I click on the course details link for BSCI330
     Then I can view the details of the BSCI330 course
     When I select a lecture and lab
-#    Then I should see only the selected lecture and lab
+    Then I should see only the selected lecture and lab
 #    When I add the selected lecture and lab to my registration cart
 #    Then I can see the selected section has been added to my cart
