@@ -48,7 +48,6 @@ Feature: REG.Wait List
 
 #KSENROLL-12349
 #KSENROLL-12350
-  @wip
   Scenario: CR 8.5 Verify the order of waitlisted students is maintained as students are removed
             CR 8.6 Verify the number of waitlisted students is maintained as students are added and removed
     When multiple students attempted to register for a full HIST26 course offering then get added to a waitlist
