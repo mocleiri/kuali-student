@@ -51,7 +51,8 @@ class CourseSearch < DataFactory
         :gened_code=>"DSSP",
         :gened_course=>"General Education: Scholarship in Practice",
         :course_level=> '300',
-        :course_prefix=> 'ENGL'
+        :course_prefix=> 'ENGL',
+        :section=> '1026'
     }
     options = defaults.merge(opts)
     set_options(options)
