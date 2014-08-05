@@ -48,8 +48,8 @@ end
 
 #-------------------------------------------------------------------------------------------
 
-When /^I search for a course on the course search page$/ do
-  @course_search_result = make CourseSearch, :course_code => "ENGL2"
+When /^I search for (\w+) courses on the course search page$/ do |search_string|
+  @course_search_result = make CourseSearch, :course_code => search_string
   @course_search_result.course_search
 end
 
@@ -200,51 +200,27 @@ When /^I sort the results by (course code|title|credits)$/ do |sort_key|
 end
 
 Then /^the course codes should be sorted in ascending order$/ do
-  on CourseSearchPage do |page|
-    #page.code_element.wait_until_present
-    @course_search_result.check_code_ascending_order_in_all_pages.should be_true
-  end
-  puts "Codes descending passed"
+  @course_search_result.check_code_ascending_order_in_all_pages.should be_true
 end
 
 Then /^the course codes should be sorted in descending order$/ do
-  on CourseSearchPage do |page|
-    #page.code_element.wait_until_present
-    @course_search_result.check_code_descending_order_in_all_pages.should be_true
-  end
-  puts "Codes descending passed"
+  @course_search_result.check_code_descending_order_in_all_pages.should be_true
 end
 
 Then /^the titles should be sorted in ascending order$/ do
-  on CourseSearchPage do |page|
-    #page.code_element.wait_until_present
-    @course_search_result.check_title_ascending_order_in_all_pages.should be_true
-  end
-  puts "Titles ascending passed"
+  @course_search_result.check_title_ascending_order_in_all_pages.should be_true
 end
 
 Then /^the titles should be sorted in descending order$/ do
-  on CourseSearchPage do |page|
-    #page.code_element.wait_until_present
-    @course_search_result.check_title_descending_order_in_all_pages.should be_true
-  end
-  puts "Titles descending passed"
+  @course_search_result.check_title_descending_order_in_all_pages.should be_true
 end
 
 Then /^the credits should be sorted in ascending order$/ do
-  on CourseSearchPage do |page|
-    #page.code_element.wait_until_present
-    @course_search_result.check_credits_ascending_order_in_all_pages.should be_true
-  end
-  puts "Credits ascending passed"
+  @course_search_result.check_credits_ascending_order_in_all_pages.should be_true
 end
 
 Then /^the credits should be sorted in descending order$/ do
-  on CourseSearchPage do |page|
-    #page.code_element.wait_until_present
-    @course_search_result.check_credits_descending_order_in_all_pages.should be_true
-  end
-  puts "Credits descending passed"
+  @course_search_result.check_credits_descending_order_in_all_pages.should be_true
 end
 
 Then /^the course Title listed should be sorted in "(.*?)"$/ do |text|
@@ -322,5 +298,18 @@ Then /^I should see only the selected lecture and lab$/ do
   on CourseDetailsPage do |page|
     # only 1 row in lecs table?
     # only 1 row in labs table?
+  end
+end
+
+When /^I add the selected lecture and lab to my registration cart$/ do
+  course_options = (make CourseOptions)
+  @reg_request = make RegistrationRequest, :student_id=>"student",
+                      :course_code=>"BSCI330",
+                      :reg_group_code=>"1026",
+                      :course_options => course_options
+  @reg_request.add_to_cart_from_search
+
+  on CourseDetailsPage do |page|
+    page.add_to_cart
   end
 end
