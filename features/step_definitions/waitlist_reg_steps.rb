@@ -56,6 +56,24 @@ Given /^I register for an? full (\w+) course offering that (has|does not have) a
   }
 end
 
+When /^multiple students attempted to register for an? full (\w+) course offering then get added to a waitlist$/  do |subj|
+  steps %{
+    And I log in to student registration as student1
+    And I add an #{subj} course offering to my registration cart
+    And I register for the course
+    And I add myself to a waitlist for the course
+    Then there is a message indicating that I have been added to the waitlist
+    And I log in to student registration as student2
+  }
+  sleep 2
+  steps %{
+    And I add an #{subj} course offering to my registration cart
+    And I register for the course
+    And I add myself to a waitlist for the course
+    Then there is a message indicating that I have been added to the waitlist
+  }
+end
+
 
 When /^I register for an? full (\w+) course offering and add myself to a waitlist$/  do |subj|
   steps %{
@@ -125,7 +143,7 @@ Then /^I can go to My Schedule and verify I am not on the waitlist$/ do
 end
 
 
-Given /^a waitlisted course exists$/ do
+And /^a waitlisted course exists$/ do
   sleep 1
   term_code = "201208"
   course_code = "HIST266"
@@ -133,6 +151,24 @@ Given /^a waitlisted course exists$/ do
   @orig_waitlist = make WaitlistRoster, :term_code=>term_code, :course_code=>course_code, :reg_group_code=>reg_group_code
   puts "@orig_waitlist"
   p @orig_waitlist
+end
+
+Then /^they have been added to the end of the waitlist$/ do | |
+  sleep 3
+  term_code = "201208"
+  course_code = "HIST266"
+  reg_group_code = "1001"
+  student_id = "student1"
+  @orig_waitlist = make WaitlistRoster, :term_code=>term_code, :course_code=>course_code, :reg_group_code=>reg_group_code
+  puts "@orig_waitlist"
+  p @orig_waitlist
+  waitlist_entry_size = @orig_waitlist.waitlist_entries.size
+  student1_position = @orig_waitlist.waitlist_entries["student1"].waitlist_position
+  student2_position = @orig_waitlist.waitlist_entries["student2"].waitlist_position
+
+  student2_position.should == waitlist_entry_size
+  student1_position.should == (waitlist_entry_size - 1)
+
 end
 
 Then /^the order of students remaining on the waitlist is adjusted correctly$/ do
@@ -143,6 +179,28 @@ Then /^the order of students remaining on the waitlist is adjusted correctly$/ d
   @updated_waitlist = make WaitlistRoster, :term_code=>term_code, :course_code=>course_code, :reg_group_code=>reg_group_code
   puts "@updated_waitlist"
   p @updated_waitlist
+
+  student1_position = @orig_waitlist.waitlist_entries["student1"].waitlist_position
+  student2_position = @orig_waitlist.waitlist_entries["student2"].waitlist_position
+
+  student1_entry = @updated_waitlist.waitlist_entries["student1"]
+  student2_new_position = @updated_waitlist.waitlist_entries["student2"].waitlist_position
+
+  student1_entry == nil   # student1 dropped the course
+  student2_new_position.should == student1_position    #student2 should be moved into student1's place
+
+end
+
+When /^the first student drops the course$/ do
+  @reg_request = make RegistrationRequest,
+                      :term_descr=> "Fall 2012",
+                      :course_code=> "HIST266",
+                      :reg_group_code=> "1001",
+                      :course_options => (make CourseOptions, :credit_option => "3.0", :grading_option => "Letter")
+  steps %{
+  When I log in to student registration as student1
+  }
+  @reg_request.remove_course("waitlist",true)
 end
 
 When /^a registered student drops the course$/ do
@@ -157,6 +215,21 @@ When /^a registered student drops the course$/ do
   @reg_request.remove_course("schedule",true)
 end
 
-When /^a student is removed from the waitlist$/ do
-  pending
+Then /^the second student drops the course$/ do
+  @reg_request = make RegistrationRequest,
+                      :term_descr=> "Fall 2012",
+                      :course_code=> "HIST266",
+                      :reg_group_code=> "1001",
+                      :course_options => (make CourseOptions, :credit_option => "3.0", :grading_option => "Letter")
+  steps %{
+  When I log in to student registration as student2
+  }
+  @reg_request.remove_course("waitlist",true)
+end
+
+Then /^there is a message indicating the waitlisted course was removed$/ do
+  on StudentSchedule do |page|
+    page.user_message_div("waitlist").wait_until_present
+    page.wait_until { page.user_message("waitlist").include?('Removed from waitlist for') }
+  end
 end

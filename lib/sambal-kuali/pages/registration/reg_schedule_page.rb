@@ -39,8 +39,8 @@ class StudentSchedule < RegisterForCourseBase
   element(:remove_course_button) { |course_code,reg_group_code,status=STATUS_SCHEDULE,b| b.button(id: "#{prefix(status)}remove_#{course_code}_#{reg_group_code}") }
   action(:remove_the_course) { |course_code,reg_group_code,status=STATUS_SCHEDULE,b| b.remove_course_button(course_code,reg_group_code,status).click }
 
-  element(:confirm_remove_waitlist_button) { |b| b.button(id: "removeWaitlist") }
-  element(:cancel_remove_waitlist_button) { |b| b.button(id: "removeWaitlistCancel") }
+  element(:confirm_remove_waitlist_button) { |course_code,reg_group_code,b| b.button(id: "removeWaitlist_#{course_code}_#{reg_group_code}") }
+  element(:cancel_remove_waitlist_button) { |course_code,reg_group_code,b| b.button(id: "removeWaitlistCancel_#{course_code}_#{reg_group_code}") }
 
   def self.prefix(status)
     return (status==STATUS_SCHEDULE)?"":PREFIX_WAITLIST
@@ -88,8 +88,8 @@ class StudentSchedule < RegisterForCourseBase
         confirm_drop(course_code,reg_group_code).wait_until_present
         confirm_drop(course_code,reg_group_code).click
       when STATUS_WAITLIST then
-        confirm_remove_waitlist_button.wait_until_present
-        confirm_remove_waitlist_button.click
+        confirm_remove_waitlist_button(course_code,reg_group_code).wait_until_present
+        confirm_remove_waitlist_button(course_code,reg_group_code).click
     end
   end
 

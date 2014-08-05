@@ -95,6 +95,13 @@ When /^I add an? (\w+) course offering to my registration cart$/ do |subj|
       term_descr = "Fall 2012"
       credit_option = "3.0"
       course_has_options = true
+    when "HIST26" then
+      term_code = "201208"
+      course_code = "HIST266"
+      reg_group_code = "1001"
+      term_descr = "Fall 2012"
+      credit_option = "3.0"
+      course_has_options = true
     when "HIST3" then
       course_code = "HIST133"
       reg_group_code = "1001"
@@ -440,6 +447,7 @@ end
 
 Given /^I log in to student registration as ([\w\.]+)$/  do |user|
   on RestLoginPage do |page|
+    sleep 1
     page.login_as user
   end
   puts "I am logged in to student registration as #{user}"
