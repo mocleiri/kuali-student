@@ -64,4 +64,4 @@ Feature: REG.Course Search
     When I select a lecture and lab
     Then I should see only the selected lecture and lab
     When I add the selected lecture and lab to my registration cart
-#    Then I can see the selected section has been added to my cart
+    Then I can see the selected section has been added to my cart

@@ -277,12 +277,11 @@ end
 
 Then /^I can view the details of the (\w+) course$/ do |course_code|
   on CourseDetailsPage do |page|
-    page.course_description_div(course_code).wait_until_present
-    puts "page.course_code = #{page.course_code}"
-    page.course_code.should == course_code
-    page.course_title.should =~ /Cell Biology and Physiology/i
-    page.course_credits.should =~ /4 cr/i
-    page.course_description(course_code).should =~ /Biochemical and physiological mechanisms/i
+    page.details_course_description_div(course_code).wait_until_present
+    page.details_course_code.should == course_code
+    page.details_course_title.should =~ /Cell Biology and Physiology/i
+    page.details_course_credits.should =~ /4 cr/i
+    page.details_course_description(course_code).should =~ /Biochemical and physiological mechanisms/i
   end
 end
 
@@ -308,4 +307,13 @@ When /^I add the selected lecture and lab to my registration cart$/ do
                       :reg_group_code=>"1026",
                       :course_options => course_options
   @reg_request.add_to_cart_from_search
+end
+
+Then /^I can see the selected section has been added to my cart$/ do
+  on CourseDetailsPage do |page|
+    page.cart_course_code(@reg_request.course_code,@reg_request.reg_group_code).wait_until_present
+    expected_text = "#{@reg_request.course_code} (#{@reg_request.reg_group_code})"
+    page.cart_course_code(@reg_request.course_code,@reg_request.reg_group_code).text.should == expected_text
+  end
+
 end
