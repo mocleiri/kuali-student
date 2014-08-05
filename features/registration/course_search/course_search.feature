@@ -4,7 +4,10 @@ Feature: REG.Course Search
   CR 19.2 - As a student I want to search for courses so that I can view
             courses to potentially add them to my Reg Cart (Large format)
   CR 19.4 - As a student I want to select a course so that I can view its details (Large format)
-
+  CR 19.6 - As a student I want to select a valid registration group from my search results so that
+            I can add to my cart (large format)
+  CR 19.8 - As a student I want to add a valid registration group to my registration cart
+            from my search results (large format)
   Background:
     Given I am logged in as a Student
 
@@ -50,13 +53,15 @@ Feature: REG.Course Search
     | Atomic  | PHYS721, CHEM682, PHYS420, CHEM403, PHYS622, PHYS728                     |
     | Microb  | BSCI122, BSCI222, BSCI223, BSCI283, BSCI348A, BSCI348R, BSCI424, BSCI443 |
 
-  #KSENROLL-13899
+  #KSENROLL-13899, KSENROLL-13900, KSENROLL-13901
   Scenario: CR 19.4 - As a student I want to select a course so that I can view its details
+            CR 19.6 - As a student I want to select a valid registration group from my search results
+            CR 19.8 - As a student I want to add a valid registration group to my registration cart
     When I search for a course with "BSCI330" text option
     Then courses containing  "BSCI330" text options appear
     When I click on the course details link for BSCI330
     Then I can view the details of the BSCI330 course
     When I select a lecture and lab
     Then I should see only the selected lecture and lab
-#    When I add the selected lecture and lab to my registration cart
+    When I add the selected lecture and lab to my registration cart
 #    Then I can see the selected section has been added to my cart

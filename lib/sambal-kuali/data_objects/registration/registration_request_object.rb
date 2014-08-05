@@ -243,6 +243,22 @@ class RegistrationRequest < DataFactory
     end
   end
 
+  def add_to_cart_from_search
+    on CourseDetailsPage do |page|
+      page.add_to_cart
+      if @course_has_options
+        if @modify_course_options
+          page.edit_save_button(@course_code,@reg_group_code,CONTEXT_NEW_ITEM).wait_until_present
+          edit_course_options :credit_option=>@course_options.credit_option,
+                              :grading_option=>@course_options.grading_option,
+                              :context => CONTEXT_NEW_ITEM
+        else
+          page.edit_save_button(@course_code,@reg_group_code,CONTEXT_NEW_ITEM).wait_until_present
+          page.save_edits @course_code,@reg_group_code,CONTEXT_NEW_ITEM
+        end
+      end
+    end
+  end
 end
 
 class CourseOptions < DataFactory

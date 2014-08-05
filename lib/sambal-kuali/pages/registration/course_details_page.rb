@@ -16,6 +16,13 @@ class CourseDetailsPage < RegisterForCourseBase
   element(:course_description_div) { |course_code,b| b.div(id: "courseDescription_#{course_code}") }
   element(:course_description) { |course_code,b| b.course_description_div(course_code).text }
 
+  # add to cart
+  element(:add_to_cart_button) { |b| b.button(id: "search_details_add_to_cart") }
+  action(:add_to_cart) { |b| b.add_to_cart_button.click }
+  # add to cart confirmation dialog
+  element(:edit_save_button) { |course_code,reg_group_code,context,b| b.button(id: "#{context}_save_#{course_code}_#{reg_group_code}") }
+  action(:save_edits) { |course_code,reg_group_code,context,b| b.edit_save_button(course_code,reg_group_code,context).click }
+
   # heading
   element(:details_heading) { |activity_type, b| b.div(id: "#{activity_type}_details_heading") }
 

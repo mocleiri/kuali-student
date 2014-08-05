@@ -308,8 +308,4 @@ When /^I add the selected lecture and lab to my registration cart$/ do
                       :reg_group_code=>"1026",
                       :course_options => course_options
   @reg_request.add_to_cart_from_search
-
-  on CourseDetailsPage do |page|
-    page.add_to_cart
-  end
 end
