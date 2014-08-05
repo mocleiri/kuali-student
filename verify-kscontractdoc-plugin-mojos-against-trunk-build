@@ -1,0 +1,58 @@
+#!/bin/bash
+
+# compute the plugin version from the trunk code
+PLUGIN_VERSION=$(curl --silent http://svn.kuali.org/repos/student/tools/maven-kscontractdoc-plugin/trunk/pom.xml | grep "<version>" | egrep -o "([1-9+\.[0-9]+\.[0-9]+-SNAPSHOT)")
+
+R=$?
+
+if test "$R" -eq 0
+then
+ # all is well - continue
+ echo "PLUGIN_VERSION=$PLUGIN_VERSION"
+else
+ # a problem
+ echo "failed to extract the plugin version"
+ exit 1;
+fi
+
+if test -z "$KS_BUILD_NUMBER"
+then
+	echo "KS_BUILD_NUMBER not set in the environment. can't continue."
+	exit 1
+fi
+
+rm -rf ks-api-co
+
+svn co https://svn.kuali.org/repos/student/enrollment/ks-api/tags/builds/ks-api-2.1/2.1.1-FR2-M1/build-$KS_BUILD_NUMBER ks-api-co
+
+cd ks-api-co
+
+echo "Build contract docs"
+
+# build contract docs
+mvn clean install -e -DskipTests -Dks.prepare-contract-dependencies.phase=install -Dks.contractdoc.phase=install -Dks-contract-docs.plugin.version=$PLUGIN_VERSION -Dks.enforcer.phase=none
+
+
+if test -f ks-enroll-api/target/site/services/contractdocs/index.html
+then
+	echo "Contract Docs Generated OK"
+else
+	echo "Contract Docs Failed to Generate"
+  	exit 1
+fi
+ 
+
+# build dictionary docs
+
+echo "Build dictionary docs"
+
+mvn clean install -e -DskipTests -Dks.prepare-contract-dependencies.phase=install -Dks.dictionarydoc.phase=install -Dks-contract-docs.plugin.version=$PLUGIN_VERSION -Dks.enforcer.phase=none
+
+if test -f ks-enroll-api/target/site/services/dictionarydocs/index.html
+then
+	echo "Dictionary Docs Generated OK"
+else
+	echo "Dictionary Docs Failed to Generate"
+  	exit 1
+fi
+
