@@ -296,7 +296,7 @@ end
 
 Then /^I should see only the selected lecture and lab$/ do
   on CourseDetailsPage do |page|
-      page.selected_message.text.should match /Section(\s+)#{@course_search_result.section}(\s+)Selected/i
+      page.selected_message.text.should match /Section(\s+)#{@course_search_result.selected_section}(\s+)Selected/i
   end
 end
 
@@ -304,7 +304,7 @@ When /^I add the selected lecture and lab to my registration cart$/ do
   course_options = (make CourseOptions)
   @reg_request = make RegistrationRequest, :student_id=>"student",
                       :course_code=>"BSCI330",
-                      :reg_group_code=>"1026",
+                      :reg_group_code=>@course_search_result.selected_section,
                       :course_options => course_options
   @reg_request.add_to_cart_from_search
 end

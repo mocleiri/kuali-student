@@ -27,7 +27,7 @@ class CourseSearch < DataFactory
                 :gened_code,
                 :gened_course,
                 :course_level,
-                :section
+                :selected_section
 
   def initialize(browser, opts={})
     @browser = browser
@@ -52,7 +52,7 @@ class CourseSearch < DataFactory
         :gened_course=>"General Education: Scholarship in Practice",
         :course_level=> '300',
         :course_prefix=> 'ENGL',
-        :section=> '1026'
+        :selected_section=> '1026'
     }
     options = defaults.merge(opts)
     set_options(options)
