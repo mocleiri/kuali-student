@@ -9,10 +9,10 @@ class EoRsiObject < DataFactory
   attr_accessor :ao_driven,
                 :ao_code,
                 :status,
+                :sched_state,
                 :day,
                 :room,
                 :facility,
-                :override_matrix,
                 :on_matrix
   attr_writer   :start_time,
                 :end_time
@@ -25,6 +25,7 @@ class EoRsiObject < DataFactory
         :ao_code => nil,
         :ao_driver_activity => nil,
         :status => 'Draft',
+        :sched_state => 'Scheduled',
         :day => 'Day 1',
         :start_time => '11:00 AM',
         :end_time => '12:00 PM',
@@ -40,16 +41,17 @@ class EoRsiObject < DataFactory
   end
 
   def start_time
-    @start_time.rjust(8,'0')
+    @start_time == ''?'':@start_time.rjust(8,'0')
   end
 
   def end_time
-    @end_time.rjust(8,'0')
+    @end_time == ''?'':@end_time.rjust(8,'0')
   end
 
   def edit opts={}
 
     defaults = {
+        :override_matrix=> false,
         :exp_success=> true,
         :defer_save => false,
         :do_navigation => true
@@ -61,14 +63,14 @@ class EoRsiObject < DataFactory
     end
 
     if @ao_driven
-      edit_row =  on(ViewExamOfferings).eo_by_ao_target_row(@ao_code) #TODO: AO Cluster
+      edit_row =  on(ViewExamOfferings).ao_eo_target_row(@ao_code) #TODO: AO Cluster
     else
       edit_row = on(ViewExamOfferings).co_target_row
     end
 
     on(ViewExamOfferings).edit_rsi(edit_row)
 
-    on(ViewExamOfferings).override_checkbox(edit_row).set if @on_matrix
+    on(ViewExamOfferings).override_checkbox(edit_row).set if options[:override_matrix]
 
     if options[:day]
       on(ViewExamOfferings).rsi_day(edit_row).select options[:day]
@@ -115,7 +117,7 @@ class EoRsiObject < DataFactory
     end
 
     if @ao_driven
-      edit_row =  on(ViewExamOfferings).eo_by_ao_target_row(@ao_code) #TODO: AO Cluster
+      edit_row =  on(ViewExamOfferings).ao_eo_target_row(@ao_code) #TODO: AO Cluster
     else
       edit_row = on(ViewExamOfferings).co_target_row
     end

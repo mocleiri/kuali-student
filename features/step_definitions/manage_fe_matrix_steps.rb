@@ -442,9 +442,9 @@ end
 
 Then /^the Requested Scheduling Information for the Exam Offering should be populated$/ do
   on ViewExamOfferings do |page|
-    page.get_eo_by_co_days_text.should match /#{Regexp.escape(@matrix.rules[0].rsi_days)}/
-    page.get_eo_by_co_st_time_text.should match /#{Regexp.escape(@matrix.rules[0].start_time)}/
-    page.get_eo_by_co_end_time_text.should match /#{Regexp.escape(@matrix.rules[0].end_time)}/
+    page.co_eo_days.should match /#{Regexp.escape(@matrix.rules[0].rsi_days)}/
+    page.co_eo_st_time.should match /#{Regexp.escape(@matrix.rules[0].start_time)}/
+    page.co_eo_end_time.should match /#{Regexp.escape(@matrix.rules[0].end_time)}/
   end
 end
 
@@ -476,9 +476,9 @@ end
 
 Then /^the Schedule Information for the Exam Offering should be blank$/ do
   on ViewExamOfferings do |page|
-    page.get_eo_by_co_days_text.should == ""
-    page.get_eo_by_co_st_time_text.should == ""
-    page.get_eo_by_co_end_time_text.should == ""
+    page.co_eo_days.should == ""
+    page.co_eo_st_time.should == ""
+    page.co_eo_end_time.should == ""
   end
 end
 
@@ -643,33 +643,33 @@ end
 
 Then /^the (?:Requested|Actual) Scheduling Information for the Exam Offering of the AO should be populated$/ do
   on ViewExamOfferings do |page|
-    page.get_eo_by_ao_days_text(@activity_offering.code).should match /#{Regexp.escape(@matrix.rules[0].rsi_days)}/i
-    page.get_eo_by_ao_st_time_text(@activity_offering.code).should match /#{Regexp.escape(@matrix.rules[0].start_time)}/i
-    page.get_eo_by_ao_end_time_text(@activity_offering.code).should match /#{Regexp.escape(@matrix.rules[0].end_time)}/i
+    page.ao_eo_days(@activity_offering.code).should match /#{Regexp.escape(@matrix.rules[0].rsi_days)}/i
+    page.ao_eo_st_time(@activity_offering.code).should match /#{Regexp.escape(@matrix.rules[0].start_time)}/i
+    page.ao_eo_end_time(@activity_offering.code).should match /#{Regexp.escape(@matrix.rules[0].end_time)}/i
   end
 end
 
 Then /^the EO's Scheduling Information should change to reflect the updates made to the AO's Actual Scheduling Info$/ do
   on ViewExamOfferings do |page|
-    page.get_eo_by_ao_days_text(@activity_offering.code).should match /#{Regexp.escape(@matrix.rules[0].rsi_days)}/i
-    page.get_eo_by_ao_st_time_text(@activity_offering.code).should match /#{Regexp.escape(@matrix.rules[0].start_time)}/i
-    page.get_eo_by_ao_end_time_text(@activity_offering.code).should match /#{Regexp.escape(@matrix.rules[0].end_time)}/i
+    page.ao_eo_days(@activity_offering.code).should match /#{Regexp.escape(@matrix.rules[0].rsi_days)}/i
+    page.ao_eo_st_time(@activity_offering.code).should match /#{Regexp.escape(@matrix.rules[0].start_time)}/i
+    page.ao_eo_end_time(@activity_offering.code).should match /#{Regexp.escape(@matrix.rules[0].end_time)}/i
   end
 end
 
 Then /^the (?:Requested|Actual) Scheduling Information for the Exam Offering of the AO should not be populated$/ do
   on ViewExamOfferings do |page|
-    page.get_eo_by_ao_days_text(@activity_offering.code).should == ""
-    page.get_eo_by_ao_st_time_text(@activity_offering.code).should == ""
-    page.get_eo_by_ao_end_time_text(@activity_offering.code).should == ""
+    page.ao_eo_days(@activity_offering.code).should == ""
+    page.ao_eo_st_time(@activity_offering.code).should == ""
+    page.ao_eo_end_time(@activity_offering.code).should == ""
   end
 end
 
 Then /^the EO's Scheduling Information for the Exam Offering of the AO should be updated to blank to reflect it was not found on the matrix$/ do
   on ViewExamOfferings do |page|
-    page.get_eo_by_ao_days_text(@activity_offering.code).should == ""
-    page.get_eo_by_ao_st_time_text(@activity_offering.code).should == ""
-    page.get_eo_by_ao_end_time_text(@activity_offering.code).should == ""
+    page.ao_eo_days(@activity_offering.code).should == ""
+    page.ao_eo_st_time(@activity_offering.code).should == ""
+    page.ao_eo_end_time(@activity_offering.code).should == ""
   end
 end
 
@@ -768,6 +768,12 @@ Given /^I manage CO-driven exam offerings for a course offering configured not t
   @course_offering = make CourseOffering, :term => Rollover::OPEN_EO_CREATE_TERM, :course => "CHEM131", :use_final_exam_matrix => false
   @course_offering.create
   on(ManageCourseOfferings).view_exam_offerings
+
+  @eo_rsi = make EoRsiObject, :day => '',
+                 :start_time => '',
+                 :end_time => '',
+                 :facility => '',
+                 :room => ''
 end
 
 Given /^I manage AO-driven exam offerings for a course offering configured not to use the exam matrix$/ do
@@ -797,7 +803,7 @@ Given /^I manage AO-driven exam offerings for a course offering configured not t
   on(ManageCourseOfferings).view_exam_offerings
 end
 
-When /^the Override Matrix field should not be present$/ do
+When /^the Override Matrix option should not be present$/ do
   on ViewExamOfferings do |page|
     row = page.co_target_row
     page.override_checkbox(row).exists?.should be_false
@@ -806,7 +812,7 @@ end
 
 Then /^I am not able to edit the AO-driven exam offering RSI$/ do
   on ViewExamOfferings do |page|
-    row = page.eo_by_ao_target_row('A')
+    row = page.ao_eo_target_row('A')
     page.edit_rsi_element(row).present?.should be_false
   end
 end
@@ -819,4 +825,123 @@ Given /^I manage a course offering with a CO-driven exam offering with RSI gener
                  :end_time => '',
                  :facility => '',
                  :room => ''
+end
+
+Given(/^I manage a course offering with an on\-matrix CO\-driven exam offering with no match on the matrix$/) do
+  @course_offering = make CourseOffering, :term => Rollover::OPEN_EO_CREATE_TERM, :course => "WMST200", :use_final_exam_matrix => true
+  @course_offering.create
+  on(ManageCourseOfferings).view_exam_offerings
+
+  @eo_rsi = make EoRsiObject, :day => '',
+                 :start_time => '',
+                 :end_time => '',
+                 :facility => '',
+                 :room => '',
+                 :sched_state => 'Matrix Error'
+
+end
+
+And(/^the CO RSI is blank and the scheduling state is matrix error$/) do
+  on ViewExamOfferings do |page|
+    page.co_eo_status.should == @eo_rsi.status
+    page.co_eo_sched_state.should == @eo_rsi.sched_state
+    page.co_target_row.exists?.should be_true
+    page.co_eo_days.should match /#{@eo_rsi.day}/
+    page.co_eo_st_time.should == @eo_rsi.start_time
+    page.co_eo_end_time.should == @eo_rsi.end_time
+    #page.co_eo_bldg.should == @eo_rsi.facility TODO: issue with short vs full facility name
+    page.co_eo_room.should == @eo_rsi.room
+  end
+end
+
+And(/^the AO RSI is blank and the scheduling state is matrix error$/) do
+  ao_code = @eo_rsi.ao_code
+  on ViewExamOfferings do |page|
+    page.ao_eo_target_row(ao_code).exists?.should be_true
+    page.ao_eo_status(ao_code).should == 'Draft'
+    page.ao_eo_sched_state(ao_code).should == 'Matrix Error'
+    page.ao_eo_days(ao_code).should == ''
+    page.ao_eo_st_time(ao_code).should == ''
+    page.ao_eo_end_time(ao_code).should == ''
+    page.ao_eo_bldg(ao_code).should == ''
+    page.ao_eo_room(ao_code).should == ''
+    page.cancel
+  end
+end
+
+And(/^the CO-driven EO RSI scheduling state is (.*?)$/) do |expected_state|
+  on ViewExamOfferings do |page|
+    page.co_target_row.exists?.should be_true
+    page.co_eo_sched_state.should == expected_state
+  end
+end
+
+And(/^the AO-driven EO RSI scheduling state is (.*?)$/) do |expected_state|
+  on ViewExamOfferings do |page|
+    page.ao_eo_target_row(@activity_offering.code).exists?.should be_true
+    page.ao_eo_sched_state(@activity_offering.code).should == expected_state
+  end
+end
+
+Given(/^I manage a course offering with an on\-matrix AO\-driven exam offering with no match on the matrix$/) do
+  @course_offering = make CourseOffering, :term=> Rollover::OPEN_EO_CREATE_TERM,
+                         :course => 'WMST210',
+                         :final_exam_driver => "Final Exam Per Activity Offering"
+  @course_offering.delivery_format_list[0].format = "Lecture"
+  @course_offering.delivery_format_list[0].grade_format = "Lecture"
+  @course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
+  @course_offering.create
+
+  @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster,
+                             :format => "Lecture Only", :activity_type => "Lecture"
+  si_obj =  make SchedulingInformationObject, :days => "F",
+                 :start_time => "11:00", :start_time_ampm => "am",
+                 :end_time => "11:50", :end_time_ampm => "am",
+                 :facility => 'TWS', :room => '1100'
+  @activity_offering.add_req_sched_info :rsi_obj => si_obj
+
+  on(ManageCourseOfferings).view_exam_offerings
+
+  @eo_rsi = make EoRsiObject,:ao_driven => true, :ao_code => @activity_offering.code,
+                 :day => '',
+                 :start_time => '',
+                 :end_time => '',
+                 :facility => '',
+                 :room => '',
+                 :sched_state => 'Matrix Error'
+
+end
+
+When(/^I change the driving AO RSI to match an entry on the final exam matrix$/) do
+  @activity_offering.edit :defer_save => true
+  @activity_offering.requested_scheduling_information_list[0].edit :days => "MWF", :start_time => "09:00", :start_time_ampm => "am", :end_time => "09:50", :end_time_ampm => "am",
+                                                                   :facility => "PHYS", :facility_long_name => "PHYS",:room => "4102"
+  @activity_offering.save
+
+  #update according to matrix
+  @eo_rsi.day = 'Day 4'
+  @eo_rsi.start_time = '08:00 AM'
+  @eo_rsi.end_time = '10:00 AM'
+  #app set to us AO RSI location
+  @eo_rsi.facility = 'PHYS'
+  @eo_rsi.room = '4102'
+  @eo_rsi.sched_state = 'Unscheduled'
+end
+
+When(/^I change the driving AO RSI so it no longer matches an entry on the exam matrix$/) do
+  on(ViewExamOfferings).cancel
+  @activity_offering.edit :defer_save => true
+  @activity_offering.requested_scheduling_information_list[0].edit :days => "SU"
+  @activity_offering.save
+
+  #update according to matrix
+  @eo_rsi.day = ''
+  @eo_rsi.start_time = ''
+  @eo_rsi.end_time = ''
+  #app set to us AO RSI location
+  @eo_rsi.facility = ''
+  @eo_rsi.room = ''
+  @eo_rsi.sched_state = 'Matrix Error'
+
+  on(ManageCourseOfferings).view_exam_offerings
 end

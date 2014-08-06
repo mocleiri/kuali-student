@@ -312,14 +312,14 @@ Then /^see Exam Offerings for each Activity Offering of the Course with a status
     array = page.ao_code_list
     if array != nil
       array.each do |code|
-        page.get_eo_by_ao_status_text(code).should match /#{exp_state}/
+        page.ao_eo_status(code).should match /#{exp_state}/
       end
       no_of_eos = array.length
     end
     array = page.ao_code_list("CL Leftovers")
     if array != nil
       array.each do |code|
-        page.get_eo_by_ao_status_text(code, "CL Leftovers").should match /#{exp_state}/
+        page.ao_eo_status(code, "CL Leftovers").should match /#{exp_state}/
       end
       no_of_eos = array.length
     end
@@ -330,7 +330,7 @@ end
 Then /^see one Exam Offering for the Course Offering with a status of ([^"]*)$/ do |exp_state|
   on ViewExamOfferings do |page|
     page.table_header_text.should match /for Course Offering/
-    page.get_eo_by_co_status_text.should match /#{exp_state}/
+    page.co_eo_status.should match /#{exp_state}/
     page.co_eo_count.should == "1"
   end
 end
@@ -781,23 +781,11 @@ When /^I? ?update all fields on the exam offering RSI$/ do
                :end_time => '4:50 PM'
 end
 
-When /^I? ?update the location fields on the exam offering RSI$/ do
+When /^I select override matrix and update the location fields on the exam offering RSI$/ do
   @eo_rsi.edit :override_matrix => true,
                :do_navigation => false,
                :facility => 'MTH',
                :room => '0303'
-end
-
-When /^I? ?I trigger the population of the EO RSI from the matrix$/ do
-  @eo_rsi.edit :do_navigation => false
-  on ViewExamOfferings do |page|
-    page.co_target_row.exists?.should be_true
-    page.get_eo_by_co_days_text.should match /#{@eo_rsi.day}/
-    page.get_eo_by_co_st_time_text.should == @eo_rsi.start_time
-    page.get_eo_by_co_end_time_text.should == @eo_rsi.end_time
-    #page.get_eo_by_co_bldg_text.should == @eo_rsi.facility TODO: issue with short vs full facility name
-    page.get_eo_by_co_room_text.should == @eo_rsi.room
-  end
 end
 
 When /^I? ?update the available fields on the exam offering RSI$/ do
@@ -809,8 +797,19 @@ When /^I? ?update the available fields on the exam offering RSI$/ do
                :room => '4102'
 end
 
+When /^I select exam matrix override and update the available fields on the exam offering RSI$/ do
+  @eo_rsi.edit :do_navigation => false,
+               :override_matrix => true,
+               :day => 'Day 5',
+               :start_time => '4:00 PM',
+               :end_time => '4:50 PM',
+               :facility => 'PHYS',
+               :room => '4102'
+end
+
 When /^I select matrix override and update the day and time fields on the exam offering RSI$/ do
   @eo_rsi.edit :do_navigation => false,
+               :override_matrix => true,
                :day => 'Day 2',
                :start_time => '6:00 PM',
                :end_time => '7:00 PM'
@@ -822,11 +821,11 @@ When /^I subsequently remove matrix override from the CO driven exam offering RS
   on(ManageCourseOfferings).view_exam_offerings
   on ViewExamOfferings do |page|
     page.co_target_row.exists?.should be_true
-    page.get_eo_by_co_days_text.should match /#{@eo_rsi.day}/
-    page.get_eo_by_co_st_time_text.should == @eo_rsi.start_time
-    page.get_eo_by_co_end_time_text.should == @eo_rsi.end_time
-    #page.get_eo_by_co_bldg_text.should == @eo_rsi.facility TODO: issue with short vs full facility name
-    page.get_eo_by_co_room_text.should == @eo_rsi.room
+    page.co_eo_days.should match /#{@eo_rsi.day}/
+    page.co_eo_st_time.should == @eo_rsi.start_time
+    page.co_eo_end_time.should == @eo_rsi.end_time
+    #page.co_eo_bldg.should == @eo_rsi.facility TODO: issue with short vs full facility name
+    page.co_eo_room.should == @eo_rsi.room
   end
   @eo_rsi.remove_override_matrix :do_navigation => false
 end
@@ -837,12 +836,12 @@ When /^I subsequently remove matrix override from the AO-driven exam offering RS
   on(ManageCourseOfferings).view_exam_offerings
   ao_code = @eo_rsi.ao_code
   on ViewExamOfferings do |page|
-    page.eo_by_ao_target_row(ao_code).exists?.should be_true
-    page.get_eo_by_ao_days_text(ao_code).should match /#{@eo_rsi.day}/
-    page.get_eo_by_ao_st_time_text(ao_code).should == @eo_rsi.start_time
-    page.get_eo_by_ao_end_time_text(ao_code).should == @eo_rsi.end_time
-    #page.get_eo_by_ao_bldg_text(ao_code).should == @eo_rsi.facility TODO: issue with short vs full facility name
-    page.get_eo_by_ao_room_text(ao_code).should == @eo_rsi.room
+    page.ao_eo_target_row(ao_code).exists?.should be_true
+    page.ao_eo_days(ao_code).should match /#{@eo_rsi.day}/
+    page.ao_eo_st_time(ao_code).should == @eo_rsi.start_time
+    page.ao_eo_end_time(ao_code).should == @eo_rsi.end_time
+    #page.ao_eo_bldg(ao_code).should == @eo_rsi.facility TODO: issue with short vs full facility name
+    page.ao_eo_room(ao_code).should == @eo_rsi.room
   end
   @eo_rsi.remove_override_matrix :do_navigation => false
 end
@@ -874,15 +873,15 @@ When /^I update the scheduling information for the related activity offering and
   @activity_offering.save
 end
 
-When /^delete the contents of the exam offering RSI facility and room number fields$/ do
+When /^I select override matrix and delete the contents of the exam offering RSI facility and room number fields$/ do
   @eo_rsi.edit :do_navigation => false, :facility => '', :room => '', :override_matrix => true
 end
 
-When /^blank the exam offering RSI Day field$/ do
+When /^I leave exam offering RSI Day field blank$/ do
   @eo_rsi.edit :do_navigation => false, :day => '', :override_matrix => true, :exp_success=> false
 end
 
-When /^enter a blank time in the exam offering RSI end time field$/ do
+When /^I enter a blank time in the exam offering RSI end time field$/ do
   @eo_rsi.edit :do_navigation => false, :end_time => '', :override_matrix => true, :exp_success=> false
 end
 
@@ -890,17 +889,17 @@ When /^enter an invalid room code in the exam offering RSI room field$/ do
   @eo_rsi.edit :do_navigation => false, :room => '98989', :override_matrix => true, :exp_success=> false
 end
 
-When /^enter an invalid facility code in the exam offering RSI facility field$/ do
+When /^I enter an invalid facility code in the exam offering RSI facility field$/ do
   @eo_rsi.edit :do_navigation => false, :facility => 'NX2', :override_matrix => true, :exp_success=> false
 end
 
-When /^enter an invalid time in the exam offering RSI start time field$/ do
+When /^I enter an invalid time in the exam offering RSI start time field$/ do
   @eo_rsi.edit :do_navigation => false, :start_time => '13:00 AM', :override_matrix => true, :exp_success=> false
 end
 
 When /^the error displayed for AO-driven exam offerings RSI day field is required$/ do
   on ViewExamOfferings do |page|
-    row = page.eo_by_ao_target_row(@activity_offering.code)
+    row = page.ao_eo_target_row(@activity_offering.code)
     page.rsi_day(row).click
     sleep 1
     popup_text = page.div(id: /jquerybubblepopup/, data_for: "#{page.rsi_day(row).id}").table.text
@@ -927,7 +926,7 @@ end
 
 When /^the error displayed for AO-driven exam offerings RSI end time is required$/ do
   on ViewExamOfferings do |page|
-    row = page.eo_by_ao_target_row(@activity_offering.code)
+    row = page.ao_eo_target_row(@activity_offering.code)
     element = page.rsi_end_time(row)
     element.click
     sleep 1
@@ -940,7 +939,7 @@ end
 
 When /^the error displayed for AO-driven exam offerings RSI facility is: (.*?)$/ do |expected_errMsg|
   on ViewExamOfferings do |page|
-    row = page.eo_by_ao_target_row(@activity_offering.code)
+    row = page.ao_eo_target_row(@activity_offering.code)
     element = page.rsi_facility(row)
     element.click
     sleep 1
@@ -953,7 +952,7 @@ end
 
 When /^the error displayed for AO-driven exam offerings RSI room is: (.*?)$/ do |expected_errMsg|
   on ViewExamOfferings do |page|
-    row = page.eo_by_ao_target_row(@activity_offering.code)
+    row = page.ao_eo_target_row(@activity_offering.code)
     element = page.rsi_room(row)
     element.click
     sleep 1
@@ -973,11 +972,11 @@ When /^the CO-driven exam offering RSI is successfully updated$/ do
   on(ManageCourseOfferings).view_exam_offerings
   on ViewExamOfferings do |page|
     page.co_target_row.exists?.should be_true
-    page.get_eo_by_co_days_text.should match /#{@eo_rsi.day}/
-    page.get_eo_by_co_st_time_text.should == @eo_rsi.start_time
-    page.get_eo_by_co_end_time_text.should == @eo_rsi.end_time
-    #page.get_eo_by_co_bldg_text.should == @eo_rsi.facility TODO: issue with short vs full facility name
-    page.get_eo_by_co_room_text.should == @eo_rsi.room
+    page.co_eo_days.should match /#{@eo_rsi.day}/
+    page.co_eo_st_time.should == @eo_rsi.start_time
+    page.co_eo_end_time.should == @eo_rsi.end_time
+    #page.co_eo_bldg.should == @eo_rsi.facility TODO: issue with short vs full facility name
+    page.co_eo_room.should == @eo_rsi.room
   end
 end
 
@@ -986,11 +985,11 @@ When /^the CO-driven exam offering RSI is updated according to the exam matrix$/
   on(ManageCourseOfferings).view_exam_offerings
   on ViewExamOfferings do |page|
     page.co_target_row.exists?.should be_true
-    page.get_eo_by_co_days_text.should match @matrix.rules[0].rsi_days
-    page.get_eo_by_co_st_time_text.should == "#{@matrix.rules[0].start_time} #{@matrix.rules[0].st_time_ampm.upcase}"
-    page.get_eo_by_co_end_time_text.should == "#{@matrix.rules[0].end_time} #{@matrix.rules[0].end_time_ampm.upcase}"
-    #page.get_eo_by_co_bldg_text.should == @matrix.rules[0].facility TODO: issue with short vs full facility name
-    page.get_eo_by_co_room_text.should == @matrix.rules[0].room
+    page.co_eo_days.should match @matrix.rules[0].rsi_days
+    page.co_eo_st_time.should == "#{@matrix.rules[0].start_time} #{@matrix.rules[0].st_time_ampm.upcase}"
+    page.co_eo_end_time.should == "#{@matrix.rules[0].end_time} #{@matrix.rules[0].end_time_ampm.upcase}"
+    #page.co_eo_bldg.should == @matrix.rules[0].facility TODO: issue with short vs full facility name
+    page.co_eo_room.should == @matrix.rules[0].room
   end
 end
 
@@ -999,12 +998,12 @@ When /^the AO-driven exam offering RSI is updated according to the exam matrix$/
   on(ManageCourseOfferings).view_exam_offerings
   code = @activity_offering.code
   on ViewExamOfferings do |page|
-    page.eo_by_ao_target_row(code).exists?.should be_true
-    page.get_eo_by_ao_days_text(code).should match @matrix.rules[0].rsi_days
-    page.get_eo_by_ao_st_time_text(code).should == "#{@matrix.rules[0].start_time} #{@matrix.rules[0].st_time_ampm.upcase}"
-    page.get_eo_by_ao_end_time_text(code).should == "#{@matrix.rules[0].end_time} #{@matrix.rules[0].end_time_ampm.upcase}"
-    #page.get_eo_by_ao_bldg_text(code).should == @eo_rsi.facility TODO: issue with short vs full facility name
-    #page.get_eo_by_ao_room_text(code).should == @matrix.rules[0].room
+    page.ao_eo_target_row(code).exists?.should be_true
+    page.ao_eo_days(code).should match @matrix.rules[0].rsi_days
+    page.ao_eo_st_time(code).should == "#{@matrix.rules[0].start_time} #{@matrix.rules[0].st_time_ampm.upcase}"
+    page.ao_eo_end_time(code).should == "#{@matrix.rules[0].end_time} #{@matrix.rules[0].end_time_ampm.upcase}"
+    #page.ao_eo_bldg(code).should == @eo_rsi.facility TODO: issue with short vs full facility name
+    #page.ao_eo_room(code).should == @matrix.rules[0].room
   end
 end
 
@@ -1013,12 +1012,12 @@ When /^the AO-driven exam offering RSI is not updated$/ do
   on(ManageCourseOfferings).view_exam_offerings
   code = @activity_offering.code
   on ViewExamOfferings do |page|
-    page.eo_by_ao_target_row(code).exists?.should be_true
-    page.get_eo_by_ao_days_text(code).should match /#{@eo_rsi.day}/
-    page.get_eo_by_ao_st_time_text(code).should == @eo_rsi.start_time
-    page.get_eo_by_ao_end_time_text(code).should == @eo_rsi.end_time
-    #page.get_eo_by_ao_bldg_text(code).should == @eo_rsi.facility TODO: issue with short vs full facility name
-    page.get_eo_by_ao_room_text(code).should == @eo_rsi.room
+    page.ao_eo_target_row(code).exists?.should be_true
+    page.ao_eo_days(code).should match /#{@eo_rsi.day}/
+    page.ao_eo_st_time(code).should == @eo_rsi.start_time
+    page.ao_eo_end_time(code).should == @eo_rsi.end_time
+    #page.ao_eo_bldg(code).should == @eo_rsi.facility TODO: issue with short vs full facility name
+    page.ao_eo_room(code).should == @eo_rsi.room
   end
 end
 
@@ -1027,12 +1026,12 @@ When /^the exam offering RSI is blank according to the new AO RSI information$/ 
   on(ManageCourseOfferings).view_exam_offerings
   code = @activity_offering.code
   on ViewExamOfferings do |page|
-    page.eo_by_ao_target_row(code).exists?.should be_true
-    page.get_eo_by_ao_days_text(code).should == ''
-    page.get_eo_by_ao_st_time_text(code).should == ''
-    page.get_eo_by_ao_end_time_text(code).should == ''
-    page.get_eo_by_ao_bldg_text(code).should == ''
-    page.get_eo_by_ao_room_text(code).should == ''
+    page.ao_eo_target_row(code).exists?.should be_true
+    page.ao_eo_days(code).should == ''
+    page.ao_eo_st_time(code).should == ''
+    page.ao_eo_end_time(code).should == ''
+    page.ao_eo_bldg(code).should == ''
+    page.ao_eo_room(code).should == ''
   end
 end
 
@@ -1041,11 +1040,11 @@ When /^the CO-driven exam offering RSI is not updated$/ do
   on(ManageCourseOfferings).view_exam_offerings
   on ViewExamOfferings do |page|
     page.co_target_row.exists?.should be_true
-    page.get_eo_by_co_days_text.should match /#{@eo_rsi.day}/
-    page.get_eo_by_co_st_time_text.should == @eo_rsi.start_time
-    page.get_eo_by_co_end_time_text.should == @eo_rsi.end_time
-    #page.get_eo_by_co_bldg_text.should == @eo_rsi.facility TODO: issue with short vs full facility name
-    page.get_eo_by_co_room_text.should == @eo_rsi.room
+    page.co_eo_days.should match /#{@eo_rsi.day}/
+    page.co_eo_st_time.should == @eo_rsi.start_time
+    page.co_eo_end_time.should == @eo_rsi.end_time
+    #page.co_eo_bldg.should == @eo_rsi.facility TODO: issue with short vs full facility name
+    page.co_eo_room.should == @eo_rsi.room
   end
 end
 
@@ -1054,12 +1053,12 @@ When /^the AO-driven exam offering RSI is successfully updated$/ do
   on(ManageCourseOfferings).view_exam_offerings
   ao_code = @eo_rsi.ao_code
   on ViewExamOfferings do |page|
-    page.eo_by_ao_target_row(ao_code).exists?.should be_true
-    page.get_eo_by_ao_days_text(ao_code).should match /#{@eo_rsi.day}/
-    page.get_eo_by_ao_st_time_text(ao_code).should == @eo_rsi.start_time
-    page.get_eo_by_ao_end_time_text(ao_code).should == @eo_rsi.end_time
-    #page.get_eo_by_ao_bldg_text(ao_code).should == @eo_rsi.facility TODO: issue with short vs full facility name
-    page.get_eo_by_ao_room_text(ao_code).should == @eo_rsi.room
+    page.ao_eo_target_row(ao_code).exists?.should be_true
+    page.ao_eo_days(ao_code).should match /#{@eo_rsi.day}/
+    page.ao_eo_st_time(ao_code).should == @eo_rsi.start_time
+    page.ao_eo_end_time(ao_code).should == @eo_rsi.end_time
+    #page.ao_eo_bldg(ao_code).should == @eo_rsi.facility TODO: issue with short vs full facility name
+    page.ao_eo_room(ao_code).should == @eo_rsi.room
   end
 end
 
@@ -1344,7 +1343,7 @@ Then /^all the Final Exam and Exam Driver data for the COs should be retained af
   on(ManageCourseOfferings).view_exam_offerings
   on ViewExamOfferings do |page|
     page.table_header_text.should match /for Course Offering/
-    page.get_eo_by_co_status_text.should match /Draft/
+    page.co_eo_status.should match /Draft/
   end
 
   @test_co_list << (make CourseOffering, :term => @calendar_target.terms[0].term_code, :course => @co_list[1].course)
@@ -1356,21 +1355,21 @@ Then /^all the Final Exam and Exam Driver data for the COs should be retained af
   @test_co_list << (make CourseOffering, :term => @calendar_target.terms[0].term_code, :course => @co_list[2].course)
   @test_co_list[2].manage
   on(ManageCourseOfferings).view_exam_offerings
-  on(ViewExamOfferings).get_eo_by_ao_status_text("A").should match /Draft/
+  on(ViewExamOfferings).ao_eo_status("A").should match /Draft/
 
   @test_co_list << (make CourseOffering, :term => @calendar_target.terms[0].term_code, :course => @co_list[3].course)
   @test_co_list[3].manage
   on(ManageCourseOfferings).view_exam_offerings
   on ViewExamOfferings do |page|
     page.table_header_text.should match /for Course Offering/
-    page.get_eo_by_co_status_text.should match /Draft/
+    page.co_eo_status.should match /Draft/
   end
 end
 
 Then /^the Exam Offerings for Course Offering should be in a ([^"]*) state$/ do |exp_state|
   on ViewExamOfferings do |page|
     page.table_header_text.should match /for Course Offering/
-    page.get_eo_by_co_status_text.should match /#{exp_state}/
+    page.co_eo_status.should match /#{exp_state}/
     page.co_eo_count.should == "1"
   end
 end
@@ -1378,7 +1377,7 @@ end
 Then /^the EO in the Exam Offerings for Course Offering table should be in a ([^"]*) state$/ do |exp_state|
   on ViewExamOfferings do |page|
     page.table_header_text.should match /for Course Offering/
-    page.get_eo_by_co_status_text.should match /#{exp_state}/
+    page.co_eo_status.should match /#{exp_state}/
     page.co_eo_count.should == "1"
   end
 end
@@ -1390,7 +1389,7 @@ end
 Then /^the Exam Offerings for Course Offering in the EO for CO table should be in a ([^"]*) state$/ do |exp_state|
   on ViewExamOfferings do |page|
     page.table_header_text.should match /for Course Offering/
-    page.get_eo_by_co_status_text.should match /#{exp_state}/
+    page.co_eo_status.should match /#{exp_state}/
     page.co_eo_count.should == "1"
   end
 end
@@ -1400,7 +1399,7 @@ Then /^the Exam Offerings for each Activity Offering in the EO for AO table shou
     page.table_header_text.should match /for Activity Offering/
     @course_offering.activity_offering_cluster_list.each do |cluster|
       cluster.ao_list.each do |ao|
-        page.get_eo_by_ao_status_text(ao.code).should match /#{exp_state}/ if ao.activity_type == @course_offering.delivery_format_list[0].final_exam_activity
+        page.ao_eo_status(ao.code).should match /#{exp_state}/ if ao.activity_type == @course_offering.delivery_format_list[0].final_exam_activity
       end
     end
   end
@@ -1411,7 +1410,7 @@ Then /^the Exam Offering for Activity Offering should not be in a ([^"]*) state$
     page.table_header_text.should match /for Activity Offering/
     array = page.ao_code_list
     array.each do |code|
-      page.get_eo_by_ao_status_text(code).should_not match /#{exp_state}/
+      page.ao_eo_status(code).should_not match /#{exp_state}/
     end
   end
 end
@@ -1422,14 +1421,14 @@ Then /^the Exam Offerings? for Activity Offering should be in a ([^"]*) state$/ 
     array = page.ao_code_list
     if array != nil
       array.each do |code|
-        page.get_eo_by_ao_status_text(code).should match /#{exp_state}/
+        page.ao_eo_status(code).should match /#{exp_state}/
       end
       no_of_eos = array.length
     end
     array = page.ao_code_list("CL Leftovers")
     if array != nil
       array.each do |code|
-        page.get_eo_by_ao_status_text(code, "CL Leftovers").should match /#{exp_state}/
+        page.ao_eo_status(code, "CL Leftovers").should match /#{exp_state}/
       end
       no_of_eos = array.length
     end
@@ -1445,7 +1444,7 @@ Then /^the EO for the suspended AO in the Exam Offering for Activity Offering ta
     if array != nil
       array.each do |code|
         if code == @activity_offering.code
-          page.get_eo_by_ao_status_text(code).should match /#{exp_state}/
+          page.ao_eo_status(code).should match /#{exp_state}/
           no_of_eos += 1
         end
       end
@@ -1454,7 +1453,7 @@ Then /^the EO for the suspended AO in the Exam Offering for Activity Offering ta
     if array != nil
       array.each do |code|
         if code == @activity_offering.code
-          page.get_eo_by_ao_status_text(code, "CL Leftovers").should match /#{exp_state}/
+          page.ao_eo_status(code, "CL Leftovers").should match /#{exp_state}/
           no_of_eos += 1
         end
       end
@@ -1469,7 +1468,7 @@ Then /^the EOs in the Exam Offerings for Activity Offering table should be in a 
     page.table_header_text.should match /for Activity Offering/
     @course_offering.activity_offering_cluster_list.each do |cluster|
       cluster.ao_list.each do |ao|
-        page.get_eo_by_ao_status_text(ao.code).should match /#{exp_state}/ if ao.activity_type == @course_offering.delivery_format_list[0].final_exam_activity
+        page.ao_eo_status(ao.code).should match /#{exp_state}/ if ao.activity_type == @course_offering.delivery_format_list[0].final_exam_activity
       end
     end
   end
@@ -1495,14 +1494,14 @@ Then /^the ([\d]*) Exam Offerings? for Activity Offering should be in a ([^"]*) 
     array = page.ao_code_list
     if array != nil
       array.each do |code|
-        page.get_eo_by_ao_status_text(code).should match /#{exp_state}/
+        page.ao_eo_status(code).should match /#{exp_state}/
       end
       no_of_eos = array.length
     end
     array = page.ao_code_list("CL Leftovers")
     if array != nil
       array.each do |code|
-        page.get_eo_by_ao_status_text(code, "CL Leftovers").should match /#{exp_state}/
+        page.ao_eo_status(code, "CL Leftovers").should match /#{exp_state}/
       end
       no_of_eos = array.length
     end
@@ -1561,7 +1560,7 @@ Then /^the Exclude Saturday or Exclude Sunday fields should be deselected when v
 end
 
 Then /^the Exam Offering listed in the EO for CO table should be in a ([^"]*) state$/ do |exp_msg|
-  on(ViewExamOfferings).get_eo_by_co_status_text.should =~ /#{exp_msg}/
+  on(ViewExamOfferings).co_eo_status.should =~ /#{exp_msg}/
 end
 
 Then /^the Exam Offering table should be in a Canceled state$/ do
@@ -1593,7 +1592,7 @@ Then /^there should be no Exam Offering for Activity Offering table present$/ do
 end
 
 Then /^the Exam Offering table for the canceled AO should also be in the same state$/ do
-  on(ViewExamOfferings).get_eo_by_ao_status_text('A').should == 'Canceled'
+  on(ViewExamOfferings).ao_eo_status('A').should == 'Canceled'
 end
 
 Given /^that a CO allows for multiple Format Offerings and has one existing format offering and a standard exam driven by Course Offering$/ do
@@ -1882,22 +1881,22 @@ Then /^the Exam Offerings Slotting info should be populated or left blank depend
         if !ao_rsi_list.empty?
           if ao_rsi_list[0].days != "TH"
             on ViewExamOfferings do |page|
-              page.get_eo_by_ao_days_text(ao.code).should == ""
-              page.get_eo_by_ao_st_time_text(ao.code).should == ""
-              page.get_eo_by_ao_end_time_text(ao.code).should == ""
+              page.ao_eo_days(ao.code).should == ""
+              page.ao_eo_st_time(ao.code).should == ""
+              page.ao_eo_end_time(ao.code).should == ""
             end
           else
             on ViewExamOfferings do |page|
-              page.get_eo_by_ao_days_text(ao.code).should match /#{@matrix.rules[2].rsi_days}/
-              page.get_eo_by_ao_st_time_text(ao.code).should match /#{@matrix.rules[2].start_time}/i
-              page.get_eo_by_ao_end_time_text(ao.code).should match /#{@matrix.rules[2].end_time}/i
+              page.ao_eo_days(ao.code).should match /#{@matrix.rules[2].rsi_days}/
+              page.ao_eo_st_time(ao.code).should match /#{@matrix.rules[2].start_time}/i
+              page.ao_eo_end_time(ao.code).should match /#{@matrix.rules[2].end_time}/i
             end
           end
         else
           on ViewExamOfferings do |page|
-            page.get_eo_by_ao_days_text(ao.code).should == ""
-            page.get_eo_by_ao_st_time_text(ao.code).should == ""
-            page.get_eo_by_ao_end_time_text(ao.code).should == ""
+            page.ao_eo_days(ao.code).should == ""
+            page.ao_eo_st_time(ao.code).should == ""
+            page.ao_eo_end_time(ao.code).should == ""
           end
         end
       end
@@ -1905,15 +1904,15 @@ Then /^the Exam Offerings Slotting info should be populated or left blank depend
       on(ManageCourseOfferings).view_exam_offerings
       if test_co.course == @co_list[0].course
         on ViewExamOfferings do |page|
-          page.get_eo_by_co_days_text.should == ""
-          page.get_eo_by_co_st_time_text.should == ""
-          page.get_eo_by_co_end_time_text.should == ""
+          page.co_eo_days.should == ""
+          page.co_eo_st_time.should == ""
+          page.co_eo_end_time.should == ""
         end
       else
         on ViewExamOfferings do |page|
-          page.get_eo_by_co_days_text.should match /#{@matrix.rules[1].rsi_days}/
-          page.get_eo_by_co_st_time_text.should match /#{@matrix.rules[1].start_time}/i
-          page.get_eo_by_co_end_time_text.should match /#{@matrix.rules[1].end_time}/i
+          page.co_eo_days.should match /#{@matrix.rules[1].rsi_days}/
+          page.co_eo_st_time.should match /#{@matrix.rules[1].start_time}/i
+          page.co_eo_end_time.should match /#{@matrix.rules[1].end_time}/i
         end
       end
     end
@@ -2114,26 +2113,26 @@ Then /^the Exam Offerings Slotting info should be populated after the Mass Sched
     if test_co.course != @co_list[0].course
       on ViewExamOfferings do |page|
         ao = test_co.activity_offering_cluster_list[0].ao_list[0]
-        page.get_eo_by_ao_days_text(ao.code).should match /#{@matrix.rules[1].rsi_days}/
-        page.get_eo_by_ao_st_time_text(ao.code).should match /#{@matrix.rules[1].start_time}/i
-        page.get_eo_by_ao_end_time_text(ao.code).should match /#{@matrix.rules[1].end_time}/i
+        page.ao_eo_days(ao.code).should match /#{@matrix.rules[1].rsi_days}/
+        page.ao_eo_st_time(ao.code).should match /#{@matrix.rules[1].start_time}/i
+        page.ao_eo_end_time(ao.code).should match /#{@matrix.rules[1].end_time}/i
 
         ao = test_co.activity_offering_cluster_list[0].ao_list[1]
-        page.get_eo_by_ao_days_text(ao.code).should match /#{@matrix.rules[2].rsi_days}/
-        page.get_eo_by_ao_st_time_text(ao.code).should match /#{@matrix.rules[2].start_time}/i
-        page.get_eo_by_ao_end_time_text(ao.code).should match /#{@matrix.rules[2].end_time}/i
+        page.ao_eo_days(ao.code).should match /#{@matrix.rules[2].rsi_days}/
+        page.ao_eo_st_time(ao.code).should match /#{@matrix.rules[2].start_time}/i
+        page.ao_eo_end_time(ao.code).should match /#{@matrix.rules[2].end_time}/i
       end
     else
       on ViewExamOfferings do |page|
-        page.get_eo_by_co_days_text.should match /#{@matrix.rules[0].rsi_days}/
-        page.get_eo_by_co_st_time_text.should match /#{@matrix.rules[0].start_time}/i
-        page.get_eo_by_co_end_time_text.should match /#{@matrix.rules[0].end_time}/i
+        page.co_eo_days.should match /#{@matrix.rules[0].rsi_days}/
+        page.co_eo_st_time.should match /#{@matrix.rules[0].start_time}/i
+        page.co_eo_end_time.should match /#{@matrix.rules[0].end_time}/i
       end
     end
   end
 end
 
-When /^I? ?add facility and room information to the exam offering RSI$/ do
+When /^I? select matrix override and add facility and room information to the exam offering RSI$/ do
   @eo_rsi.edit :do_navigation => false,
                :day => 'Day 5',
                :start_time => '12:00 PM',
@@ -2248,4 +2247,35 @@ Given /^an academic term has course offerings with slotted exam offerings$/ do
                  :room => si_obj.room         #use AO location is checked on matrix page
 
 
+end
+
+Given(/^I manage an AO\-driven exam offering$/) do
+  @course_offering = make CourseOffering, :term=> '201208',
+                          :course => 'ENGL304'
+  @activity_offering = make ActivityOfferingObject, :code=>'A', :parent_cluster=>@course_offering.default_cluster
+  @course_offering.manage
+
+  @eo_rsi = make EoRsiObject, :ao_code => @activity_offering.code,
+                 :ao_driver_activity => 'Lecture',
+                 :day => 'Day 1',
+                 :start_time => '08:00 AM',
+                 :end_time => '10:00 AM',
+                 :facility => 'Tawes Fine Arts Bldg.',
+                 :room => '1100'
+
+  on(ManageCourseOfferings).view_exam_offerings
+end
+
+Given(/^I manage a CO\-driven exam offering$/) do
+  @course_offering = make CourseOffering, :term=> '201208',
+                          :course => 'CHEM135'
+  @course_offering.manage
+
+  @eo_rsi = make EoRsiObject, :day => 'Day 2',
+                 :start_time => '10:30 AM',
+                 :end_time => '12:30 PM',
+                 :facility => 'Jull "Hall"',
+                 :room => '1105'
+
+  on(ManageCourseOfferings).view_exam_offerings
 end

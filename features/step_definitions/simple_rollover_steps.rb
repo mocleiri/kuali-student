@@ -352,11 +352,11 @@ And /^the exam offerings are successfully generated$/ do
   @course_offering.manage
   on(ManageCourseOfferings).view_exam_offerings
   on ViewExamOfferings do |page|
-    page.get_eo_by_co_days_text.should =~ /#{@matrix.rules[0].rsi_days}/
-    page.get_eo_by_co_st_time_text.should == "#{@matrix.rules[0].start_time} #{@matrix.rules[0].start_time_ampm}"
-    page.get_eo_by_co_end_time_text.should == "#{@matrix.rules[0].end_time} #{@matrix.rules[0].end_time_ampm}"
-    page.get_eo_by_co_bldg_text.should == @matrix.rules[0].facility
-    page.get_eo_by_co_room_text.should == @matrix.rules[0].room
+    page.co_eo_days.should =~ /#{@matrix.rules[0].rsi_days}/
+    page.co_eo_st_time.should == "#{@matrix.rules[0].start_time} #{@matrix.rules[0].start_time_ampm}"
+    page.co_eo_end_time.should == "#{@matrix.rules[0].end_time} #{@matrix.rules[0].end_time_ampm}"
+    page.co_eo_bldg.should == @matrix.rules[0].facility
+    page.co_eo_room.should == @matrix.rules[0].room
   end
 
 

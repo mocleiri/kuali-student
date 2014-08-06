@@ -10,7 +10,7 @@ Given /^I am logged in as a Student/ do
       log_in "student", "student"
 end
 
-Given /^I am logged in as a Department Schedule Coordinator$/ do
+Given /^I am logged in as a Department Schedule Coordinator/ do
     log_in "carol", "carol"
 end
 
