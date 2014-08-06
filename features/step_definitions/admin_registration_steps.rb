@@ -245,6 +245,8 @@ Then /^the effective date should default to system date$/ do
   on AdminRegistration do |page|
     page.get_course_default_effective_date(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_effective_date}/
     page.cancel_registration
+
+    page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
 
