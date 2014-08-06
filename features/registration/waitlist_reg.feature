@@ -52,10 +52,12 @@ Feature: REG.Wait List
             CR 8.6 Verify the number of waitlisted students is maintained as students are added and removed
     When multiple students attempted to register for a full HIST26 course offering then get added to a waitlist
     Then they have been added to the end of the waitlist
-    When the first student drops the course
-    Then there is a message indicating the waitlisted course was removed
+    When the first student removes herself from the waitlist
     Then the order of students remaining on the waitlist is adjusted correctly
-    Then the second student drops the course
+    When the first student re-adds herself to the HIST26 waitlist
+    Then the first student is added to the end of the waitlist
+       * the first student removes herself from the waitlist
+       * the second student removes himself from the waitlist
 
   #KSENROLL-12351
   Scenario: CR 8.7 I want to edit the parameters of a waitlisted registration group so if I am registered for it I can take it with my preferred options

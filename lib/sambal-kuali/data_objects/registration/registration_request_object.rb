@@ -211,11 +211,18 @@ class RegistrationRequest < DataFactory
   end
 
   def remove_course(status=STATUS_SCHEDULE,do_navigation=false)
+    expected_user_message = case status
+                              when STATUS_SCHEDULE then "dropped successfully"
+                              when STATUS_WAITLIST then "Removed from waitlist for"
+                            end
     visit StudentSchedule if do_navigation
     on StudentSchedule do |page|
       page.course_code(@course_code,@reg_group_code,status).wait_until_present
       page.show_course_details @course_code,@reg_group_code,status
       page.remove_course @course_code,@reg_group_code,status
+      # wait for confirmation message
+      page.user_message_div(status).wait_until_present
+      page.wait_until { page.user_message(status).include?(expected_user_message) }
     end
   end
 
