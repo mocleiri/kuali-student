@@ -34,14 +34,22 @@ Usage: $ME
         Print this message and exit.
     --repo_prefix <url of svn code>
         URL of the deployments directory to pull svn code from
+        default is https://svn.kuali.org/repos/student/enrollment/ks-deployments/tags/builds/ks-deployments-2.1/2.1.1-FR2-M1
     --build_job_url <url of build job>
         URL for the CI job that creates the tagged builds
+        default is https://ci.kuali.org/view/student/view/enr-1.0/view/deploy/job/ks-enr-1.0-nightly-build
     --aft_url <url for afts>
         URL for AFT code
+        default is https://svn.kuali.org/repos/student/test/functional-automation/sambal/trunk
     --aft_style Type of AFT to run
         Valid values are enr, ksap, cm
+        default is enr
     --artifact_prefix <prefix of artifact version>
         e.g., 2.1.1-FR2-M1 or 2.1.0-FR1, etc.
+        default is 2.1.1-FR2-M1
+    --schema_prefix <prefix of schema name>
+        e.g., KSAFT_JDK8_
+        defualt is KSAFT_
     --snapshot
         Run off of SNAPSHOTs (instead of tags)
 
