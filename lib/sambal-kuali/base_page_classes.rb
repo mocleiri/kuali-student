@@ -173,6 +173,8 @@ end
 
 module CalendarStickyFooter
 
+  PageFactory.element(:acal_sticky_footer_div) { |b| b.frm.div(class: /uif-stickyButtonFooter/,data_parent: /CalendarEditPage/) } # persistent id not possible
+
   def save(opts = {})
     defaults = {
         :exp_success => true
