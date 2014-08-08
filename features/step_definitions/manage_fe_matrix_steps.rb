@@ -945,3 +945,68 @@ When(/^I change the driving AO RSI so it no longer matches an entry on the exam 
 
   on(ManageCourseOfferings).view_exam_offerings
 end
+
+Then(/^the scheduling state for a CO\-driven EO RSI with a matching matrix entry is 'Unscheduled'$/) do
+  @course_offering_co_driven_match.manage
+  on(ManageCourseOfferings).view_exam_offerings
+  on ViewExamOfferings do |page|
+    page.co_target_row.exists?.should be_true
+    page.co_eo_sched_state.should == 'Unscheduled'
+  end
+end
+
+And(/^the scheduling state for a CO\-driven EO RSI with no matching matrix entry is 'Matrix Error'$/) do
+  @course_offering_co_driven.manage
+  on(ManageCourseOfferings).view_exam_offerings
+  on ViewExamOfferings do |page|
+    page.co_target_row.exists?.should be_true
+    page.co_eo_sched_state.should == 'Matrix Error'
+  end
+end
+
+Then(/^the scheduling state for a CO-driven EO RSI for a course offering configured to not use the matrix is 'Unscheduled'$/) do
+  @course_offering_co_driven_off_matrix.manage
+  on(ManageCourseOfferings).view_exam_offerings
+  on ViewExamOfferings do |page|
+    page.co_target_row.exists?.should be_true
+    page.co_eo_sched_state.should == 'Unscheduled'
+  end
+end
+
+And(/^the scheduling state AO\-driven EO RSI with a matching matrix entry is 'Unscheduled'$/) do
+  @course_offering_ao_driven.manage
+  on(ManageCourseOfferings).view_exam_offerings
+  on ViewExamOfferings do |page|
+    page.ao_eo_target_row('A').exists?.should be_true
+    page.ao_eo_sched_state('A').should == 'Unscheduled'
+  end
+end
+
+And(/^the scheduling state AO\-driven EO RSI with no matching matrix entry is 'Matrix Error'$/) do
+  @course_offering_ao_driven.manage
+  on(ManageCourseOfferings).view_exam_offerings
+  on ViewExamOfferings do |page|
+    page.ao_eo_target_row('B').exists?.should be_true
+    page.ao_eo_sched_state('B').should == 'Matrix Error'
+  end
+end
+
+And(/^the scheduling state AO\-driven EO RSI with no AO scheduling information is 'Matrix Error'$/) do
+  @course_offering_no_rsi.manage
+  on(ManageCourseOfferings).view_exam_offerings
+  on ViewExamOfferings do |page|
+    page.ao_eo_target_row('A').exists?.should be_true
+    page.ao_eo_sched_state('A').should == 'Matrix Error'
+  end
+end
+
+And(/^the scheduling state AO-driven EO RSI for a course offering configured to not use the matrix is 'Unscheduled'$/) do
+  @course_offering_ao_driven_off_matrix.manage
+  on(ManageCourseOfferings).view_exam_offerings
+  on ViewExamOfferings do |page|
+    page.ao_eo_target_row('A').exists?.should be_true
+    page.ao_eo_sched_state('A').should == 'Unscheduled'
+    page.ao_eo_target_row('B').exists?.should be_true
+    page.ao_eo_sched_state('B').should == 'Unscheduled'
+  end
+end

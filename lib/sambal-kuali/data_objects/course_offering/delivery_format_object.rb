@@ -12,6 +12,7 @@ class DeliveryFormatObject < DataFactory
   def initialize(browser, opts={})
     @browser = browser
 
+    #TODO: defaults should be Lecture/Lecture
     defaults = {
         :format => "random",
         :grade_format => "Course Offering",
