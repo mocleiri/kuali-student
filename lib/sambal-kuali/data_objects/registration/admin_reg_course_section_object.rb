@@ -66,6 +66,22 @@ class ARCourseSectionObject < DataFactory
     @parent.course_section_codes.delete self
   end
 
+  def edit_course opts = {}
+    defaults = {
+      :navigate_to_page => false
+    }
+    options = defaults.merge(opts)
+
+    set_options(options)
+
+    @parent.create if options[:navigate_to_page]
+
+    on AdminRegistration do |page|
+      page.edit_registered_course @course_code, @section
+      page.loading.wait_while_present
+    end
+  end
+
 end
 
 class ARCourseSectionCollection < CollectionsFactory

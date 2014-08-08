@@ -532,3 +532,78 @@ And /^I attempt to register the student for a course with a time conflict$/ do
                                                              :confirm_registration => true)
 
 end
+
+When /^I attempt to edit a course with default values for Credit and Registration Options$/ do
+  @admin_reg = create AdminRegistrationData, :student_id => "KS-11898", :term_code => "201208"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
+                                                             :section=> "1002", :course_default_credits => "3.0",
+                                                             :course_default_reg_options => "Letter", :register => true,
+                                                             :confirm_registration => true)
+  on AdminRegistration do |page|
+    page.confirm_registration_issue
+    page.loading.wait_while_present
+    page.dismiss_registration_result
+  end
+
+  @admin_reg.course_section_codes[0].edit_course
+end
+
+Then /^the default values are displayed on edit course dialog$/ do
+  on AdminRegistration do |page|
+    page.get_edited_reg_course_default_credits(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_credits}/
+    page.get_edited_reg_course_default_reg_options(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_reg_options}/
+    page.cancel_edited_course
+    page.student_info_go  #Needed to leave the browser in a clean state
+  end
+end
+
+When /^I attempt to edit a registered course$/ do
+  @admin_reg = create AdminRegistrationData, :student_id => "KS-11899", :term_code=> "201208"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL304",
+                                                             :section=> "1001", :register => true,
+                                                             :confirm_registration => true ,
+                                                             :course_default_effective_date => tomorrow[:date_w_slashes])
+  on AdminRegistration do |page|
+    page.confirm_registration_issue
+    page.loading.wait_while_present
+    page.dismiss_registration_result
+  end
+
+  @admin_reg.course_section_codes[0].edit_course
+end
+
+Then /^I save the edited course with no effective date$/ do
+  on AdminRegistration do |page|
+    page.set_edited_reg_course_effective_date( @admin_reg.course_section_codes[0].course_code).set nil
+    page.save_edited_course
+  end
+end
+
+Then /^a message appears indicating that the effective date is required$/ do
+  on AdminRegistration do |page|
+    page.loading.wait_while_present
+    page.edit_course_dialog_error_msg.should match /Effective date is required/
+    page.cancel_edited_course
+
+    page.student_info_go  #Needed to leave the browser in a clean state
+  end
+end
+
+Then /^I save the changes made to Registration Options and Effective Date$/ do
+  on AdminRegistration do |page|
+    page.set_edited_reg_course_reg_options( @admin_reg.course_section_codes[0].course_code).select "Audit"
+    page.set_edited_reg_course_effective_date( @admin_reg.course_section_codes[0].course_code).set in_a_week[:date_w_slashes]
+    page.save_edited_course
+  end
+end
+
+Then /^a message appears indicating that the course has been updated successfully$/ do
+  on AdminRegistration do |page|
+    page.loading.wait_while_present
+    page.confirm_registration_issue
+    page.loading.wait_while_present
+    page.get_registration_results_success.should match /Course was successfully updated/
+
+    page.student_info_go  #Needed to leave the browser in a clean state
+  end
+end

@@ -24,6 +24,8 @@ Feature: REG.Admin Registration
 
   CR22.17 As a Central Registration Personnel I want to view the Registered Courses for the Student and Term once I've registered him for one or more so that i can see if any additional actions are required for the registration of the student
 
+  CR23.2 As a Central Registration Personnel I want to be able to edit options for Registered courses for the student and term so that i can make changes to grading options; credit options and effective date
+
   Background:
     Given I am logged in as admin
 
@@ -192,3 +194,21 @@ Feature: REG.Admin Registration
   Scenario: CR22.17.4 Verify the credit total for the term updates after registering a course
     When I register a student for a course
     Then the student's registered courses credit total for the term should be updated
+
+#KSENROLL-13777
+  @pending
+  Scenario: CR23.2.1 Verify default values are displayed for a course that is being edited
+    When I attempt to edit a course with default values for Credit and Registration Options
+    Then the default values are displayed on edit course dialog
+
+  @pending
+  Scenario: CR23.2.2 Verify On Edit course, the inputs must be mandatory
+    When I attempt to edit a registered course
+    And I save the edited course with no effective date
+    Then a message appears indicating that the effective date is required
+
+  @pending
+  Scenario: CR23.2.3 Verify that Edited course is updated
+    When I attempt to edit a registered course
+    And I save the changes made to Registration Options and Effective Date
+    Then a message appears indicating that the course has been updated successfully

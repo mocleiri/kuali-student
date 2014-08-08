@@ -21,6 +21,7 @@ class AdminRegistration < BasePage
   INSTRUCTOR  = 6
   ROOM        = 7
   REG_DATE    = 8
+  ACTIONS     = 10
 
   element(:admin_registration_page) { |b| b.frm.div(id: "KS-AdminRegistration")}
   element(:transaction_date_float_table) { |b| b.div(id: /jquerybubblepopup/).table}
@@ -172,6 +173,17 @@ class AdminRegistration < BasePage
   value(:get_registered_course_credits){ |row, b| b.loading.wait_while_present; row.cells[CREDITS].text}
   value(:get_registered_course_code_sort){ |b| b.loading.wait_while_present; b.registered_courses_table.th(class: "sorting_asc").text}
 
+  element(:registered_course_edit_link) { |b| b.registered_courses_table.a(id: "registeredEditLink")}
+  action(:registered_course_edit){ |b| b.registered_course_edit_link.when_present.click}
+  element(:course_edit_popup_section) { |b| b.frm.section(id: "courseEditDialog")}
+  element(:course_edit_popup_table) { |b| b.frm.div(id: "KS-AdminRegistration-Courses-Edit").table}
+  element(:course_edit_save_btn) { |b| b.course_edit_popup_section.button(id: "saveEditCourseButton")}
+  action(:save_edited_course){ |b| b.course_edit_save_btn.when_present.click}
+  element(:cancel_edit_link) { |b| b.course_edit_popup_section.a(id: "cancelEditCourseLink")}
+  action(:cancel_edited_course){ |b| b.cancel_edit_link.when_present.click}
+
+  value(:edit_course_dialog_error_msg) { |b| b.course_edit_popup_section.div(class: /uif-messageField uif-boxLayoutVerticalItem/).text}
+
   def registered_courses_rows
     array = []
 
@@ -189,7 +201,12 @@ class AdminRegistration < BasePage
     registered_courses_table.rows[1..-1].each do |row|
       return row.text if row.text=~ /#{Regexp.escape(course)}/
     end
-      return nil
+    return nil
+  end
+
+  def edit_registered_course(course, section)
+    actions = registered_courses_table.row(text: /#{course} \(#{section}\)/).cells[ACTIONS]
+    actions.a(id: /registeredEditLink_line\d+/).click
   end
 
   #################################################################
@@ -222,11 +239,26 @@ class AdminRegistration < BasePage
   value(:get_course_default_effective_date){ |code, b| b.loading.wait_while_present; b.get_confirm_reg_dialog_row(code).cells[POPUP_REG_EFFECTIVE_DATE].text_field().value}
   element(:set_course_default_effective_date){ |code, b| b.loading.wait_while_present; b.get_confirm_reg_dialog_row(code).cells[POPUP_REG_EFFECTIVE_DATE].text_field()}
 
+  element(:set_edited_reg_course_reg_options) { |code, b| b.get_edited_reg_course_dialog_row(code).cells[POPUP_REG_OPTIONS].select()}
+  element(:set_edited_reg_course_effective_date) { |code, b| b.get_edited_reg_course_dialog_row(code).cells[POPUP_REG_EFFECTIVE_DATE].text_field()}
+  value(:get_edited_reg_course_default_credits){ |code, b| b.get_edited_reg_course_dialog_row(code).cells[POPUP_CREDITS].text}
+  value(:get_edited_reg_course_default_reg_options){ |code, b| b.get_edited_reg_course_dialog_row(code).cells[POPUP_REG_OPTIONS].text}
 
   def get_confirm_reg_dialog_row(text)
     loading.wait_while_present
     if confirm_registration_popup_table.exists?
       confirm_registration_popup_table.rows[1..-1].each do |row|
+        puts row.text
+        puts "------------------"
+        return row if row.text =~ /#{text}/
+      end
+    end
+  end
+
+  def get_edited_reg_course_dialog_row(text)
+    loading.wait_while_present
+    if course_edit_popup_table.exists?
+      course_edit_popup_table.rows[1..-1].each do |row|
         return row if row.text =~ /#{text}/
       end
     end
