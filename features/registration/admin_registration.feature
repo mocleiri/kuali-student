@@ -20,6 +20,8 @@ Feature: REG.Admin Registration
 
   CR22.15 As a Central Registration Personnel I want to be able to remove unwanted courses i've entered before registering the student for them so that i can remove a course without registering for it
 
+  CR22.16 As a Central Registration Personnel I want to the system to display any failed eligibility check messages for the Course code as Errors with Additional Actions so that i can decide if i want to proceed with the registration or not
+
   CR22.17 As a Central Registration Personnel I want to view the Registered Courses for the Student and Term once I've registered him for one or more so that i can see if any additional actions are required for the registration of the student
 
   Background:
@@ -146,18 +148,40 @@ Feature: REG.Admin Registration
     And I select additional courses to be registered for
     Then I should be able to remove all the additional courses
 
+#KSENROLL-13776
+  @pending
+  Scenario: CR22.16.1 Verify multiple course eligibility failed messages appear
+    When I attempt to register a student for courses with more credits than the allowed maximum
+    And I attempt to register the student for a course with a time conflict
+    Then multiple failed eligibility messages appear
+    And the student is not registered for the course
+
+  @pending
+  Scenario: CR22.16.2 Verify the course does not display after denying the course for registration
+    When I attempt to register the student for a course with a time conflict
+    Then a message indicating failed eligibility for course registration appears
+    And I deny the course for registration
+    And the student is not registered for the course
+
+  @pending
+  Scenario: CR22.16.3 Verify the course displays after allowing the course for registration
+    When I attempt to register the student for a course with a time conflict
+    Then a message indicating failed eligibility for course registration appears
+    And I allow the course for registration
+    And the student is registered for the course
+
 #KSENROLL-13715
   @pending
   Scenario: CR22.17.1 Verify the course displays when course eligibility passed for registration
     When I register a student for a course that passed eligibility
     Then a message indicating the course has been successfully registered appears
-    And the course is displayed
+    And the student is registered for the course
 
   @pending
   Scenario: CR22.17.2 Verify the course does not display when course eligibility failed for registration
     When I attempt to register a student for a course that failed eligibility
-    Then a message indicating the course failed eligibility appears
-    And the course does not display
+    Then a message indicating failed eligibility for course registration appears
+    And the student is not registered for the course
 
   @pending
   Scenario: CR22.17.3 Verify the registration date is displayed as float over if the effective date has been changed
@@ -167,4 +191,4 @@ Feature: REG.Admin Registration
   @pending
   Scenario: CR22.17.4 Verify the credit total for the term updates after registering a course
     When I register a student for a course
-    Then the credit total for the term should be updated
+    Then the student's registered courses credit total for the term should be updated

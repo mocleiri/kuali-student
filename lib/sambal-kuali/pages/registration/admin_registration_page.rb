@@ -24,7 +24,7 @@ class AdminRegistration < BasePage
 
   element(:admin_registration_page) { |b| b.frm.div(id: "KS-AdminRegistration")}
   element(:transaction_date_float_table) { |b| b.div(id: /jquerybubblepopup/).table}
-  element(:transaction_date_float_icon) { |row, b| b.loading.wait_while_present; row.span(class: "icon-notification")}
+  element(:get_registered_course_reg_date){ |row, b| b.loading.wait_while_present; row.cells[REG_DATE]}
 
   def get_transaction_date_float date
     transaction_date_float_table.rows(text: /#{date}/).each do |row|
@@ -95,11 +95,14 @@ class AdminRegistration < BasePage
   value(:get_course_description_message){ |b| b.loading.wait_while_present; b.course_description_message.when_present.text}
 
   element(:admin_registration_issues_section) { |b| b.frm.div(id: "KS-AdminRegistration-Results").table}
-  element(:confirm_registration_issue_btn) { |b| b.admin_registration_issues_section.button(id: "u1o0zn0m_line0")}
+  element(:confirm_registration_issue_btn) { |b| b.admin_registration_issues_section.button(id: /u1o0zn0m_line/)}
   action(:confirm_registration_issue){ |b| b.confirm_registration_issue_btn.when_present.click}
 
   element(:get_registration_results_success) { |b| b.admin_registration_issues_section.ul(class: 'uif-readOnlyStringList').when_present.text}
-  element(:registration_results_btn) { |b| b.admin_registration_issues_section.button(id: "KS-AdminRegistration-Results_del_line0")}
+  element(:deny_registration_issue_btn) { |b| b.admin_registration_issues_section.button(id: /KS-AdminRegistration-Results_del_line/)}
+  action(:deny_registration_issue){ |b| b.deny_registration_issue_btn.when_present.click}
+
+  element(:registration_results_btn) { |b| b.admin_registration_issues_section.i(class: "ks-fontello-icon-cancel")}
   action(:dismiss_registration_result){ |b| b.registration_results_btn.when_present.click}
 
   def get_blank_row(cell_type)
@@ -167,7 +170,6 @@ class AdminRegistration < BasePage
   element(:registered_courses_table) { |b| b.registered_courses_section.table}
   value(:registered_courses_header) { |b| b.registered_courses_section.text}
   value(:get_registered_course_credits){ |row, b| b.loading.wait_while_present; row.cells[CREDITS].text}
-  value(:get_registered_course_reg_date){ |row, b| b.loading.wait_while_present; row.cells[REG_DATE].text}
   value(:get_registered_course_code_sort){ |b| b.loading.wait_while_present; b.registered_courses_table.th(class: "sorting_asc").text}
 
   def registered_courses_rows

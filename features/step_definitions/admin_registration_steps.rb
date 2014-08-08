@@ -245,7 +245,6 @@ Then /^the effective date should default to system date$/ do
   on AdminRegistration do |page|
     page.get_course_default_effective_date(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_effective_date}/
     page.cancel_registration
-
     page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
@@ -267,7 +266,7 @@ When /^an error message appears indicating that the section was cancelled for th
 end
 
 When /^I change the effective date of a course before confirming registration$/ do
-  @admin_reg = create AdminRegistrationData, :term_code=> "201301"
+  @admin_reg = create AdminRegistrationData, :student_id => "KS-2015", :term_code=> "201301"
   @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
                                                              :section=> "1003", :course_default_effective_date => tomorrow[:date_w_slashes])
   on AdminRegistration do |page|
@@ -282,10 +281,11 @@ end
 Then /^the registration date is displayed as a float\-over message$/ do
   on AdminRegistration do |page|
     page.registered_courses_rows[1..-1].each do |row|
-        page.transaction_date_float_icon(row).click if page.transaction_date_float_icon(row).exists?
+        page.get_registered_course_reg_date(row).click if page.get_registered_course_reg_date(row).exists?
     end
     page.get_transaction_date_float(right_now[:date_w_slashes]).nil?.should be_false
   end
+  page.student_info_go  #Needed to leave the browser in a clean state
 end
 
 When /^I register a student for a course that passed eligibility$/ do
@@ -298,15 +298,18 @@ end
 Then /^a message indicating the course has been successfully registered appears$/ do
   on AdminRegistration do |page|
     page.get_registration_results_success.should match /Course was successfully registered./
-    page.dismiss_registration_result == true
+    page.dismiss_registration_result
   end
 end
 
-And /^the course is displayed$/ do
-  on(AdminRegistration).get_registered_course("#{ @admin_reg.course_section_codes[0].course_code} (#{ @admin_reg.course_section_codes[0].section})").nil?.should be_false
+Then /^the student is registered for the course$/ do
+  on AdminRegistration do |page|
+    page.get_registered_course("#{ @admin_reg.course_section_codes[0].course_code} (#{ @admin_reg.course_section_codes[0].section})").nil?.should be_false
+    page.student_info_go  #Needed to leave the browser in a clean state
+  end
 end
 
-Then /^the credit total for the term should be updated$/ do
+Then /^the student's registered courses credit total for the term should be updated$/ do
   on AdminRegistration do |page|
     @updated_credits = 0
     page.registered_courses_rows.each do |row|
@@ -314,24 +317,35 @@ Then /^the credit total for the term should be updated$/ do
     end
     @updated_credits.equal?(@total_credits).should be_false
   end
+  page.student_info_go  #Needed to leave the browser in a clean state
 end
 
 When /^I attempt to register a student for a course that failed eligibility$/ do
   @admin_reg = create AdminRegistrationData, :term_code=> "201301"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
+                                                             :section=> "1002", :register => true,
+                                                             :confirm_registration => true)
+  on AdminRegistration do |page|
+    page.confirm_registration_issue
+    page.loading.wait_while_present
+    page.dismiss_registration_result
+  end
   @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "CHEM272",
                                                              :section=> "1001", :register => true,
                                                              :confirm_registration => true)
 end
 
-Then /^a message indicating the course failed eligibility appears$/ do
+Then /^a message indicating failed eligibility for course registration appears$/ do
   on AdminRegistration do |page|
     page.get_registration_results_success.should match /Time conflict.*/
-    page.dismiss_registration_result == true
   end
 end
 
-And /^the course does not display$/ do
-  on(AdminRegistration).get_registered_course("#{ @admin_reg.course_section_codes[0].course_code} (#{ @admin_reg.course_section_codes[0].section})").nil?.should be_true
+Then /^the student is not registered for the course$/ do
+  on AdminRegistration do |page|
+    page.get_registered_course("#{ @admin_reg.course_section_codes[1].course_code} (#{ @admin_reg.course_section_codes[1].section})").nil?.should be_true
+    page.student_info_go  #Needed to leave the browser in a clean state
+  end
 end
 
 When /^I register a student for a course$/ do
@@ -345,6 +359,11 @@ When /^I register a student for a course$/ do
   @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101H",
                                                              :section=> "1002", :register => true,
                                                              :confirm_registration => true)
+  on AdminRegistration do |page|
+    page.confirm_registration_issue
+    page.loading.wait_while_present
+    page.dismiss_registration_result
+  end
 end
 
 When /^I open the term for registration in the Academic Calendar$/ do
@@ -445,4 +464,71 @@ Then /^a warning message along with the Registered and Wait-listed courses are d
 
     page.student_info_go  #Needed to leave the browser in a clean state
   end
+end
+
+When /^I attempt to register a student for courses with more credits than the allowed maximum$/ do
+  @admin_reg = create AdminRegistrationData, :student_id => "KS-2011", :term_code=> "201301"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
+                                                             :section=> "1002", :register => true,
+                                                             :confirm_registration => true,
+                                                             :dismiss_registration_result => true)
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
+                                                             :section=> "1003", :register => true,
+                                                             :confirm_registration => true,
+                                                             :dismiss_registration_result => true)
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
+                                                             :section=> "1004", :register => true,
+                                                             :confirm_registration => true,
+                                                             :dismiss_registration_result => true)
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
+                                                             :section=> "1005", :register => true,
+                                                             :confirm_registration => true,
+                                                             :dismiss_registration_result => true)
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
+                                                             :section=> "1006", :register => true,
+                                                             :confirm_registration => true,
+                                                             :dismiss_registration_result => true)
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
+                                                             :section=> "1020", :register => true,
+                                                             :confirm_registration => true,
+                                                             :dismiss_registration_result => true)
+end
+
+Then /^multiple failed eligibility messages appear$/ do
+  on AdminRegistration do |page|
+    result_success = page.get_registration_results_success
+    result_success.should match /Time conflict/
+    result_success.should match /Reached maximum credit limit./
+    page.deny_registration_issue
+  end
+end
+
+When /^I deny the course for registration$/ do
+  on AdminRegistration do |page|
+    page.deny_registration_issue
+  end
+end
+
+When /^I allow the course for registration$/ do
+  on AdminRegistration do |page|
+    page.confirm_registration_issue
+    page.loading.wait_while_present
+    page.dismiss_registration_result
+  end
+end
+
+And /^I attempt to register the student for a course with a time conflict$/ do
+  @admin_reg = create AdminRegistrationData, :student_id => "KS-2011", :term_code=> "201301"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
+                                                               :section=> "1021", :register => true,
+                                                               :confirm_registration => true)
+  on AdminRegistration do |page|
+    page.confirm_registration_issue
+    page.loading.wait_while_present
+    page.dismiss_registration_result
+  end
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "CHEM272",
+                                                             :section=> "1001", :register => true,
+                                                             :confirm_registration => true)
+
 end
