@@ -35,6 +35,7 @@ class EditAcademicTerms < BasePage
       toggle_link = term_div.link(id: /^term_section_line\d+_toggle$/)
       if toggle_link.text == term_type
         toggle_link.click if !term_div.text_field(id: /term_name_line\d+_control/).present?
+        term_div.text_field(id: /term_name_line\d+_control/).wait_until_present
         return
       end
     end
