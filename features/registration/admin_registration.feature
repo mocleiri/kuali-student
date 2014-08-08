@@ -151,21 +151,18 @@ Feature: REG.Admin Registration
     Then I should be able to remove all the additional courses
 
 #KSENROLL-13776
-  @pending
   Scenario: CR22.16.1 Verify multiple course eligibility failed messages appear
     When I attempt to register a student for courses with more credits than the allowed maximum
     And I attempt to register the student for a course with a time conflict
     Then multiple failed eligibility messages appear
     And the student is not registered for the course
 
-  @pending
   Scenario: CR22.16.2 Verify the course does not display after denying the course for registration
     When I attempt to register the student for a course with a time conflict
     Then a message indicating failed eligibility for course registration appears
     And I deny the course for registration
     And the student is not registered for the course
 
-  @pending
   Scenario: CR22.16.3 Verify the course displays after allowing the course for registration
     When I attempt to register the student for a course with a time conflict
     Then a message indicating failed eligibility for course registration appears
