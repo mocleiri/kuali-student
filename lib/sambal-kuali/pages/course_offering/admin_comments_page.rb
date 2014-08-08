@@ -1,12 +1,12 @@
 class AdminComments < BasePage
 
+  wrapper_elements
+
   expected_element :comment_list_header
 
   def frm
     self.iframe(class: "fancybox-iframe")
   end
-
-  element(:loading) { |b| b.frm.image(alt: "Loading...") }
 
   element(:new_comment_field) { |b| b.frm.textarea(id: 'KS-NewCommentField_control') }
   element(:add_comment_element) { |b| b.frm.button(text: 'Add Comment') } #TODO: static id

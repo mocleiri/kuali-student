@@ -15,12 +15,7 @@ class OrgLookupPopUp < BasePage
 
   def return_value(id)
     target_org_row(id).wait_until_present
-    target_org_row(id).link(text: "Select").wait_until_present
-    begin
-      target_org_row(id).link(text: "Select").click
-      rescue Timeout::Error => e
-      puts "rescued Select timeout"
-    end
+    target_org_row(id).link(text: "Select").when_present.click
     loading.wait_while_present
   end
 
