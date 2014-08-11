@@ -96,11 +96,11 @@ class AdminRegistration < BasePage
   value(:get_course_description_message){ |b| b.loading.wait_while_present; b.course_description_message.when_present.text}
 
   element(:admin_registration_issues_section) { |b| b.frm.div(id: "KS-AdminRegistration-Results").table}
-  element(:confirm_registration_issue_btn) { |b| b.admin_registration_issues_section.button(id: /u1o0zn0m_line/)}
+  element(:confirm_registration_issue_btn) { |b| b.admin_registration_issues_section.button(id: /allowActionButton/)}
   action(:confirm_registration_issue){ |b| b.confirm_registration_issue_btn.when_present.click}
 
   element(:get_registration_results_success) { |b| b.admin_registration_issues_section.ul(class: 'uif-readOnlyStringList').when_present.text}
-  element(:deny_registration_issue_btn) { |b| b.admin_registration_issues_section.button(id: /KS-AdminRegistration-Results_del_line/)}
+  element(:deny_registration_issue_btn) { |b| b.admin_registration_issues_section.button(id: /denyActionButton/)}
   action(:deny_registration_issue){ |b| b.deny_registration_issue_btn.when_present.click}
 
   element(:registration_results_btn) { |b| b.admin_registration_issues_section.i(class: "ks-fontello-icon-cancel")}

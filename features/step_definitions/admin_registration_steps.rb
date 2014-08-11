@@ -466,7 +466,7 @@ Then /^a warning message along with the Registered and Wait-listed courses are d
   end
 end
 
-When /^I attempt to register a student for courses with more credits than the allowed maximum$/ do
+When /^I register a student for courses with more credits than the allowed maximum$/ do
   @admin_reg = create AdminRegistrationData, :student_id => "KS-2011", :term_code=> "201301"
   @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
                                                              :section=> "1002", :register => true,

@@ -152,7 +152,7 @@ Feature: REG.Admin Registration
 
 #KSENROLL-13776
   Scenario: CR22.16.1 Verify multiple course eligibility failed messages appear
-    When I attempt to register a student for courses with more credits than the allowed maximum
+    When I register a student for courses with more credits than the allowed maximum
     And I attempt to register the student for a course with a time conflict
     Then multiple failed eligibility messages appear
     And the student is not registered for the course
