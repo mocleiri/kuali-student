@@ -17,6 +17,8 @@ class CourseDetailsPage < RegisterForCourseBase
   element(:details_course_description) { |course_code,b| b.details_course_description_div(course_code).text }
 
   # add to cart
+  element(:selected_section_span) { |b| b.span(id: "selected_reg_group_code") }
+  element(:selected_section) { |b| b.selected_section_span.text }
   element(:add_to_cart_button) { |b| b.button(id: "search_details_add_to_cart") }
   action(:add_to_cart) { |b| b.add_to_cart_button.click }
   # add to cart confirmation dialog
