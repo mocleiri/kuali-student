@@ -82,6 +82,26 @@ class ARCourseSectionObject < DataFactory
     end
   end
 
+  def delete_course opts = {}
+    defaults = {
+        :navigate_to_page => false,
+        :confirm_drop => false,
+        :effective_date => nil
+    }
+    options = defaults.merge(opts)
+
+    set_options(options)
+
+    @parent.create if options[:navigate_to_page]
+
+    on AdminRegistration do |page|
+      page.delete_registered_course @course_code, @section
+      page.loading.wait_while_present
+      page.drop_registered_effective_date.set(@effective_date) if @effective_date != nil
+      page.confirm_reg_drop if @confirm_drop
+    end
+  end
+
 end
 
 class ARCourseSectionCollection < CollectionsFactory

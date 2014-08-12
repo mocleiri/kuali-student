@@ -198,8 +198,10 @@ class AdminRegistration < BasePage
   end
 
   def get_registered_course (course)
-    registered_courses_table.rows[1..-1].each do |row|
-      return row.text if row.text=~ /#{Regexp.escape(course)}/
+    if registered_courses_table.exists?
+      registered_courses_table.rows[1..-1].each do |row|
+        return row.text if row.text=~ /#{Regexp.escape(course)}/
+      end
     end
     return nil
   end
@@ -207,6 +209,11 @@ class AdminRegistration < BasePage
   def edit_registered_course(course, section)
     actions = registered_courses_table.row(text: /#{course} \(#{section}\)/).cells[ACTIONS]
     actions.a(id: /registeredEditLink_line\d+/).click
+  end
+
+  def delete_registered_course(course, section)
+    actions = registered_courses_table.row(text: /#{course} \(#{section}\)/).cells[ACTIONS]
+    actions.a(id: /registeredDropLink_line\d+/).click
   end
 
   #################################################################
@@ -263,4 +270,14 @@ class AdminRegistration < BasePage
       end
     end
   end
+
+  #################################################################
+  ### Drop Course Dialog
+  #################################################################
+  element(:drop_course_dialog) { |b| b.section(id: "dropCourseDialog")}
+  element(:confirm_reg_drop_btn) { |b| b.drop_course_dialog.button(id: "confirmRegDropBtn")}
+  action(:confirm_reg_drop) { |b| b.confirm_reg_drop_btn.when_present.click}
+  element(:drop_registered_effective_date) { |b| b.drop_course_dialog.text_field(name: "pendingDropCourse.registeredDropDate")}
+
+
 end

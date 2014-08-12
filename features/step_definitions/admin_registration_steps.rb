@@ -607,3 +607,31 @@ Then /^a message appears indicating that the course has been updated successfull
     page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
+
+Given(/^I have registered a student for a course that needed to be allowed in the term$/) do
+  @admin_reg = create AdminRegistrationData, :student_id => "KS-7196", :term_code=> "201208"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL304",
+                                                             :section=> "1001", :register => true,
+                                                             :confirm_registration => true ,
+                                                             :course_default_effective_date => tomorrow[:date_w_slashes])
+  on AdminRegistration do |page|
+    page.confirm_registration_issue
+    page.loading.wait_while_present
+    page.dismiss_registration_result
+  end
+
+
+end
+
+When(/^I attempt to drop the registered course$/) do
+  @admin_reg.course_section_codes[0].delete_course :confirm_drop => true
+end
+
+Then(/^a message appears indicating that I need to allow or deny the drop of the course$/) do
+  on AdminRegistration do |page|
+    page.loading.wait_while_present
+    page.get_registration_results_success.should match /Registration is not currently open/
+    page.deny_registration_issue
+    page.student_info_go  #Needed to leave the browser in a clean state
+  end
+end

@@ -26,6 +26,8 @@ Feature: REG.Admin Registration
 
   CR23.2 As a Central Registration Personnel I want to be able to edit options for Registered courses for the student and term so that i can make changes to grading options; credit options and effective date
 
+  CR23.3 As a	Central Registration Personnel	I want to	the system to check Eligibility checks on drop of a course for the student	so that	i can ensure the student is stil eligibile for the registered courses
+
   Background:
     Given I am logged in as admin
 
@@ -209,3 +211,9 @@ Feature: REG.Admin Registration
     When I attempt to edit a registered course
     And I save the changes made to Registration Options and Effective Date
     Then a message appears indicating that the course has been updated successfully
+
+  @pending
+  Scenario: CR23.3.1 Verify that an allow or deny warning message shows before a course is dropped from the registered courses table
+    Given I have registered a student for a course that needed to be allowed in the term
+    When I attempt to drop the registered course
+    Then a message appears indicating that I need to allow or deny the drop of the course
