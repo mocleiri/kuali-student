@@ -8,6 +8,8 @@ Feature: REG.Course Search
             I can add to my cart (large format)
   CR 19.8 - As a student I want to add a valid registration group to my registration cart
             from my search results (large format)
+  CR 19.14  As a student I want to know if my selection is already in my
+            registration cart so that I do not have duplicate entries (large format)
   Background:
     Given I am logged in as a Student
 
@@ -65,3 +67,11 @@ Feature: REG.Course Search
     Then I should see only the selected lecture and lab
     When I add the selected lecture and lab to my registration cart
     Then I can see the selected section has been added to my cart
+
+    #KSENROLL-14021
+  Scenario: CR 19.14 - Student is notified that course search selection is already in registration cart
+    Given I have added a CHEM course to my registration cart
+    When I search for the same course
+    And I select the same lecture and discussion as in the course
+    Then the Add to Cart option should change to a notice that the course is in my cart
+    * I remove the course from my registration cart on the search page

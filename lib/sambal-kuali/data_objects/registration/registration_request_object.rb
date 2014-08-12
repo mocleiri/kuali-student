@@ -89,6 +89,38 @@ class RegistrationRequest < DataFactory
     end
   end
 
+  def create_from_search
+    visit CourseSearchPage do |page|
+      # wait in case list has not loaded yet
+      #page.menu_button.wait_until_present
+      #page.menu
+      page.wait_until {page.term_select.include? @term_descr }
+      page.select_term @term_descr
+      page.menu
+      #Need to ensure term has actually changed
+      page.wait_until {page.header_term_name.text.include? @term_descr}
+      sleep 1
+      page.show_add_dialog
+      page.course_code_input.wait_until_present
+      page.course_code_input.set @course_code
+      page.reg_group_code_input.wait_until_present
+      page.reg_group_code_input.set @reg_group_code
+      page.submit_button.wait_until_present
+      page.add_to_cart
+      if @course_has_options
+        if @modify_course_options
+          page.edit_save_button(@course_code,@reg_group_code,CONTEXT_NEW_ITEM).wait_until_present
+          edit_course_options :credit_option=>@course_options.credit_option,
+                              :grading_option=>@course_options.grading_option,
+                              :context => CONTEXT_NEW_ITEM
+        else
+          page.edit_save_button(@course_code,@reg_group_code,CONTEXT_NEW_ITEM).wait_until_present
+          page.save_edits @course_code,@reg_group_code,CONTEXT_NEW_ITEM
+        end
+      end
+    end
+  end
+
   def inspect
     "Registration Request\nID: #{@student_id}, Term: #{@term_descr}, Course: #{@course_code}, Reg group: #{@reg_group_code}, Credits: #{@course_options.credit_option}, Grading: #{@course_options.grading_option}"
   end
@@ -138,6 +170,15 @@ class RegistrationRequest < DataFactory
 
   def remove_from_cart
     on RegistrationCart do |page|
+      page.course_code(@course_code,@reg_group_code).wait_until_present
+      page.show_course_details @course_code,@reg_group_code
+      page.remove_course_button(@course_code,@reg_group_code).wait_until_present
+      page.remove_course_from_cart @course_code,@reg_group_code
+    end
+  end
+
+  def remove_from_cart_on_search
+    on CourseSearchPage do |page|
       page.course_code(@course_code,@reg_group_code).wait_until_present
       page.show_course_details @course_code,@reg_group_code
       page.remove_course_button(@course_code,@reg_group_code).wait_until_present
@@ -250,7 +291,7 @@ class RegistrationRequest < DataFactory
     end
   end
 
-  def add_to_cart_from_search
+  def add_to_cart_from_search_details
     on CourseDetailsPage do |page|
       page.add_to_cart
       if @course_has_options
@@ -266,6 +307,7 @@ class RegistrationRequest < DataFactory
       end
     end
   end
+
 end
 
 class CourseOptions < DataFactory

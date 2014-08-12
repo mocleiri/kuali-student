@@ -284,9 +284,10 @@ end
 
 class LargeFormatRegisterForCourseBase < BasePage
 
-  expected_element :cr_header_div
+  expected_element :header_term_name
 
   element(:cr_header_div) { |b| b.div(class: "kscr-Header-container ng-scope") }
+  element(:header_term_name) { |b| b.span(id: "header_termName") }
 
   element(:term_select) { |b| b.select(id: "searchTermDesktop") }
   element(:user_menu_link) { |b| b.span(id: "header_user") }

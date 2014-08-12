@@ -105,14 +105,10 @@ class CourseSearch < DataFactory
 
 
   def course_search (text=@course_code, term_select=@term_select)
-    on CourseSearchPage do |page|
+    visit CourseSearchPage do |page|
       sleep 2
-      page.go_to_results_page text
-      # page.search_for_course.set text
-      # if @term_select != nil
-      #   page.search_term_select.select term_select
-      # end
-      page.search
+      #page.go_to_results_page text
+      page.search_for_a_course text
     end
   end
 

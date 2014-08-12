@@ -21,6 +21,7 @@ class CourseDetailsPage < RegisterForCourseBase
   element(:selected_section) { |b| b.selected_section_span.text }
   element(:add_to_cart_button) { |b| b.button(id: "search_details_add_to_cart") }
   action(:add_to_cart) { |b| b.add_to_cart_button.click }
+  element(:in_cart_button) { |b| b.button(id: "search_details_in_cart") }
   # add to cart confirmation dialog
   element(:edit_save_button) { |course_code,reg_group_code,context,b| b.button(id: "#{context}_save_#{course_code}_#{reg_group_code}") }
   action(:save_edits) { |course_code,reg_group_code,context,b| b.edit_save_button(course_code,reg_group_code,context).click }
