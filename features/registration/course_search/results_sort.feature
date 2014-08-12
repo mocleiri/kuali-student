@@ -22,7 +22,7 @@ Feature: REG.Results Sort
     Then the titles should be sorted in descending order
 
   Scenario: CS 19.12.3 Sorting by credits in both ascending and descending order.
-    When I search for CHEM courses on the course search page
+    When I search for ENGL2 courses on the course search page
     And I sort the results by credits
     Then the credits should be sorted in ascending order
     When I sort the results by credits

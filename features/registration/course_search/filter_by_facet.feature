@@ -28,7 +28,8 @@ Feature: REG.Filter by Facets
 #KSENROLL-13741
   Scenario: Verify search results using multiple facets
     When I search for courses with multiple prefixes in the Course Search Page
-    And I narrow the search results by a specific course level and a specific course prefix
+    And I narrow the search results by a specific course level
+    And I narrow the search results by a specific course prefix
     Then I should see only courses with the specific course level and the specific course prefix
 
   #KSENROLL-13741

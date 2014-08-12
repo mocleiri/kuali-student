@@ -61,12 +61,12 @@ Feature: REG.Course Search
             CR 19.8 - As a student I want to add a valid registration group to my registration cart
     When I search for a course with "BSCI330" text option
     Then courses containing  "BSCI330" text options appear
-    When I click on the course details link for BSCI330
-    Then I can view the details of the BSCI330 course
+    And I can view the details of the BSCI330 course
     When I select a lecture and lab
     Then I should see only the selected lecture and lab
     When I add the selected lecture and lab to my registration cart
     Then I can see the selected section has been added to my cart
+    * I remove the course from my registration cart on the search page
 
     #KSENROLL-14021
   Scenario: CR 19.14 - Student is notified that course search selection is already in registration cart

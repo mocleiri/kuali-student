@@ -1,38 +1,19 @@
 
 When(/^I search for courses with multiple prefixes in the Course Search Page$/) do
   @course_search_result = make CourseSearch,
-                               :course_code => "BSCI ENGL" ,
-                               :scheduled_terms=>nil,
-                               :gened_requirements=>nil,
-                               :subject=>nil,
-                               :gened_code=>nil,
-                               :credit=>nil
-  p @course_search_result
-  @course_search_result.course_search
-  @course_search_result.clear_facets
-  #for facets, pick one prefix
-  @course_search_result.course_code = "ENGL"
+                               :search_string => "BSCI ENGL"
+  @course_search_result.search :navigate=>true
 end
 
 
 And /^I narrow the search results to courses with available seats$/ do
-  on CourseSearchPage do |page|
-    @course_search_result.select_facet("avail_seats")
-    # page.clear_term_facet.wait_until_present
-    #cannot avoid sleep currently since have already tried to wait for element existence.Can research in future if there is a way
-    sleep 1
-  end
+  @course_search_result.select_facet("avail_seats")
 end
 
 
 And(/^I narrow the search results by a specific course prefix$/) do
-
-  on CourseSearchPage do |page|
-    @course_search_result.select_facet("course_prefix")
-    page.clear_prefix_facet.wait_until_present
-    #cannot avoid sleep currently since have already tried to wait for element existence.Can research in future if there is a way
-    sleep 1
-  end
+  @course_search_result.edit :course_prefix => "ENGL"
+  @course_search_result.select_facet("course_prefix")
 end
 
 
@@ -67,12 +48,8 @@ end
 
 
 And(/^I narrow the search results by a specific course level$/) do
-  on CourseSearchPage do |page|
-    @course_search_result.select_facet("course_level")
-    page.clear_level_facet.wait_until_present
-    #cannot avoid sleep currently since have already tried to wait for element existence.Can research in future if there is a way
-    sleep 1
-  end
+  @course_search_result.edit :course_level=>"400"
+  @course_search_result.select_facet("course_level")
 end
 
 And /^I narrow the search results by a specific course level and a specific course prefix$/ do
@@ -108,39 +85,27 @@ end
 
 When /^I narrow the search results using any facet$/ do
   @course_search_result = make CourseSearch,
-                               :course_code => "ENGL" ,
-                               :scheduled_terms=>"SP 14",
-                               :gened_requirements=>"General",
-                               :subject=>"English",
-                               :gened_code=>"DSHU",
-                               :credit=>"1",
-                               :course_level=> '300',
-                               :course_prefix=>'ENGL'
-  @course_search_result.course_search
-  @course_search_result.clear_facets
+                               :search_string => "ENGL" ,
+                               :course_level=> '300'
+  @course_search_result.search :navigate=>true
   sleep 1
   on CourseSearchPage do |page|
     @search_results_before_facet_selection=page.results_table.text
-    @course_search_result.select_facet("course_level")
-    page.clear_level_facet.wait_until_present
-    #cannot avoid sleep currently since have already tried to wait for element existence.Can research in future if there is a way
-    sleep 1
   end
+  @course_search_result.select_facet("course_level")
 end
 
 
 
 And(/^I undo the filtering performed using the specified facet$/) do
+  @course_search_result.clear_facet("course_level")
+  sleep 2
   on CourseSearchPage do |page|
-
-    page.clear_level_facet.click
-    #cannot avoid sleep currently since have already tried to wait for element existence.Can research in future if there is a way
-    sleep 1
     @search_results_after_clearing=page.results_table.text
   end
 
 end
 
-Then(/^I should see the courses in the search results without any filtering being applied$/) do
+Then /^I should see the courses in the search results without any filtering being applied$/ do
   @search_results_before_facet_selection.should == @search_results_after_clearing
 end
