@@ -99,6 +99,7 @@ class ARCourseSectionObject < DataFactory
       page.loading.wait_while_present
       page.drop_registered_effective_date.set(@effective_date) if @effective_date != nil
       page.confirm_reg_drop if @confirm_drop
+      page.loading.wait_while_present
     end
   end
 

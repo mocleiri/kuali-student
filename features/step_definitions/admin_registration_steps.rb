@@ -635,3 +635,78 @@ Then(/^a message appears indicating that I need to allow or deny the drop of the
     page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
+
+When /^I attempt to drop a registered course$/ do
+  @admin_reg = create AdminRegistrationData, :student_id => "KS-2020", :term_code=> "201401"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL201",
+                                                             :section=> "1001", :register => true,
+                                                             :confirm_registration => true ,
+                                                             :course_default_effective_date => tomorrow[:date_w_slashes])
+  on AdminRegistration do |page|
+    # page.confirm_registration_issue
+    page.loading.wait_while_present
+    page.dismiss_registration_result
+  end
+
+  @admin_reg.course_section_codes[0].delete_course :confirm_drop => true, :effective_date => tomorrow[:date_w_slashes]
+end
+
+Then /^the student is no longer registered for the course$/ do
+  on(AdminRegistration).get_registered_course("#{ @admin_reg.course_section_codes[0].course_code} (#{ @admin_reg.course_section_codes[0].section})").nil?.should be_true
+end
+
+Then /^a message appears indicating that the course has been successfully dropped$/ do
+  on AdminRegistration do |page|
+    page.get_registration_results_success.should match /Course was successfully dropped/
+    page.dismiss_registration_result
+
+    page.student_info_go  #Needed to leave the browser in a clean state
+  end
+end
+
+When /^I register multiple students for the same course$/ do
+  course_section_obj = make ARCourseSectionObject, :course_code=> "ENGL202",
+                            :section=> "1003", :register => true,
+                            :confirm_registration => true ,
+                            :course_default_effective_date => tomorrow[:date_w_slashes]
+
+  @admin_reg_student1 = create AdminRegistrationData, :student_id => "KS-2035", :term_code=> "201401"
+  @admin_reg_student1.add_course_section :course_section_obj => course_section_obj
+  on(AdminRegistration).loading.wait_while_present
+
+  @admin_reg_student2 = create AdminRegistrationData, :student_id => "KS-2036", :term_code=> "201401"
+  @admin_reg_student2.add_course_section :course_section_obj => course_section_obj
+  on(AdminRegistration).loading.wait_while_present
+end
+
+Then /^the first student is registered for the course$/ do
+  @admin_reg_student1.create
+
+  on(AdminRegistration).get_registered_course("#{ @admin_reg_student1.course_section_codes[0].course_code} (#{ @admin_reg_student1.course_section_codes[0].section})").nil?.should be_false
+end
+
+Then /^the second student is waitlisted for the course$/ do
+  @admin_reg_student2.create
+
+  on(AdminRegistration).get_waitlisted_course("#{ @admin_reg_student2.course_section_codes[0].course_code} (#{ @admin_reg_student2.course_section_codes[0].section})").nil?.should be_false
+end
+
+When /^I drop the course for the first student$/ do
+  @admin_reg_student1.course_section_codes[0].delete_course :parent => @admin_reg_student1, :navigate_to_page => true,
+                                                            :confirm_drop => true, :effective_date => tomorrow[:date_w_slashes]
+end
+
+Then /^that student is no longer registered for the course$/ do
+  on(AdminRegistration).get_registered_course("#{ @admin_reg_student1.course_section_codes[0].course_code} (#{ @admin_reg_student1.course_section_codes[0].section})").nil?.should be_true
+end
+
+Then /^the second student's course has moved from waitlisted to registered$/ do
+  @admin_reg_student2.create
+
+  on AdminRegistration do |page|
+    page.get_registered_course("#{ @admin_reg_student2.course_section_codes[0].course_code} (#{ @admin_reg_student2.course_section_codes[0].section})").nil?.should be_false
+    page.get_waitlisted_course("#{ @admin_reg_student2.course_section_codes[0].course_code} (#{ @admin_reg_student2.course_section_codes[0].section})").nil?.should be_true
+
+    page.student_info_go  #Needed to leave the browser in a clean state
+  end
+end
