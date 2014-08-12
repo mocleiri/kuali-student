@@ -82,8 +82,8 @@ class AdminRegistration < BasePage
   action(:course_addline){ |b| b.course_addline_btn.when_present.click}
   element(:course_register_btn) { |b| b.admin_registration_reg_for_section.button(id: "KS-AdminRegistration-RegisterButton")}
   action(:course_register){ |b| b.course_register_btn.when_present.click}
-  element(:course_delete_btn) { |index, b| b.admin_registration_reg_for_section.button(id: /KS-AdminRegistration-RegFor_del_line#{index}/) }
-  action(:course_delete) { |index, b| b.course_delete_btn(index).when_present.click}
+  element(:course_delete_link) { |index, b| b.admin_registration_reg_for_section.a(id: /removeCourseAction_line#{index}/)}
+  action(:course_delete) { |index, b| b.course_delete_link(index).when_present.click}
   element(:cancelled_section_error_message) { |b| b.reg_for_error_message.li(class: 'uif-errorMessageItem')}
   value(:get_cancelled_section_error_message){ |b| b.cancelled_section_error_message.when_present.text}
 

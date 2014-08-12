@@ -195,7 +195,7 @@ end
 
 Then /^I should be able to remove all the additional courses$/ do
   on AdminRegistration do |page|
-    page.course_delete_btn(0).visible?.should be_true
+    page.course_delete_link(0).visible?.should be_true
 
     course_descr = @admin_reg.course_section_codes[1].course_description
     @admin_reg.course_section_codes[1].delete :index => "1", :navigate_to_page => false
@@ -212,7 +212,7 @@ Then /^I should be able to remove all the additional courses$/ do
     page.get_course_code_value(course_descr).nil?.should be_true
     page.get_section_value(course_descr).nil?.should be_true
 
-    page.course_delete_btn(0).exist?.should be_false
+    page.course_delete_link(0).exist?.should be_false
 
     page.student_info_go  #Needed to leave the browser in a clean state
   end
