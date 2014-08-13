@@ -6,7 +6,7 @@ When(/^I search for courses in the Course Search Page$/) do
                                :subject=>"English",
                                :gened_code=>"DSHU",
                                :credit=>"1.0",
-                               :course_level=> '200',
+                               :course_level=> '100',
                                :course_prefix=>'ENGL'
 
   @course_search_result.course_search
