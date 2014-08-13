@@ -90,6 +90,27 @@ function svn_export() {
     dbgprint "Exporting repo $1"
 
     svn info $1
+    if [ $SNAPSHOT -ne 0 ]; then
+      repo_root=$(svn info $1 | \
+        awk '/Repository Root/ {print $3}')
+
+      # externals is an associatve array
+      declare -A externals
+      # use process substition to read values from command
+      while read external local
+      do
+        externals[$local]=$external
+      done < <(svn propget svn:externals $1 | grep '^[^#]')
+      #        ^^^ get all external definitions
+
+      for local in "${!externals[@]}"
+      do
+        echo $local
+        # substitute ^ with $repo_root
+        svn info ${externals[$local]//^/$repo_root}
+      done
+    fi
+
     OPT=""
     if [ $DEBUG -eq 0 ]; then OPT="-q"; fi
     svn $OPT export --force $1 $2
