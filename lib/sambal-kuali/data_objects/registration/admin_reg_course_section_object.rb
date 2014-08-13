@@ -21,12 +21,7 @@ class ARCourseSectionObject < DataFactory
         :course_description => nil,
         :add_new_line => false,
         :register => false,
-        :confirm_registration => false,
-        :confirm_registration_issue => false,
-        :dismiss_registration_result => false,
-        :course_default_credits => nil,
-        :course_default_reg_options => nil,
-        :course_default_effective_date => right_now[:date_w_slashes]
+        :confirm_registration => false
     }
 
     options = defaults.merge(opts)
@@ -44,12 +39,11 @@ class ARCourseSectionObject < DataFactory
         page.course_code_input.when_present.set @course_code
         page.section_code_input.when_present.set @section
 
-        page.loading.wait_while_present
         if @register
+          page.loading.wait_while_present
           page.course_register
-          page.confirm_registration if @confirm_registration
-          page.dismiss_registration_result if @dismiss_registration_result
-          page.confirm_registration_issue if @confirm_registration_issue
+
+          confirm_registration if @confirm_registration
         end
       end
     end
@@ -64,6 +58,48 @@ class ARCourseSectionObject < DataFactory
     end
 
     @parent.course_section_codes.delete self
+  end
+
+  def confirm_registration opts = {}
+    defaults = {
+        :confirm_course_credits => nil,
+        :confirm_course_reg_options => nil,
+        :confirm_course_effective_date => right_now[:date_w_slashes],
+        :confirm_registration => true,
+        :allow_registration => true,
+        :deny_registration => true
+    }
+    options = defaults.merge(opts)
+
+    set_options(options)
+
+    on AdminRegistration do |page|
+      page.loading.wait_while_present
+      if options[:confirm_course_credits] != nil and page.set_confirm_course_credits(@course_code).exists?
+        page.set_confirm_course_credits(@course_code).select options[:confirm_course_credits]
+      end
+
+      if options[:confirm_course_reg_options] != nil and page.set_confirm_course_reg_options(@course_code).exists?
+        page.set_confirm_course_reg_options(@course_code).select options[:confirm_course_reg_options]
+      end
+
+      page.set_confirm_course_effective_date(@course_code).set options[:confirm_course_effective_date]
+
+      if options[:confirm_registration]
+        page.confirm_registration
+      else
+        page.cancel_registration
+      end
+      page.loading.wait_while_present
+
+      if options[:allow_registration] and page.confirm_registration_issue_btn.exists?
+        page.confirm_registration_issue
+      elsif !options[:allow_registration] and options[:deny_registration] and page.deny_registration_issue_btn.exists?
+        page.deny_registration_issue
+      end
+      page.loading.wait_while_present
+
+    end
   end
 
   def edit_course opts = {}
