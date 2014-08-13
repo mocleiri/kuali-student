@@ -45,3 +45,13 @@ Background:
     When I create a course offering from an existing offering within same term and choose to exclude scheduling information
     Then the new Course Offering should be displayed in the list of available offerings
     And the new Course Offering should not contain any scheduling information in its activity offerings
+
+  Scenario: CO 6.11.1 Create Course Offering from existing Course Offering excluding cancelled actvity offering
+    Given I have an existing course offering with cancelled activity offerings
+    When I create a course offering in a different term from the existing offering and choose to exclude cancelled activity offerings
+    Then the new Course Offering should not contain cancelled activity offerings
+
+  Scenario: CO 6.11.2 Create Course Offering from existing Course Offering excluding cancelled actvity offering
+    Given I have an existing course offering with cancelled activity offerings
+    When I copy the existing offering to create a course in the same term and choose to exclude cancelled activity offerings
+    Then the new Course Offering should not contain cancelled activity offerings

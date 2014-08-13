@@ -147,3 +147,30 @@ And /^I create a Course Offering from catalog with Activity Offerings$/ do
                                :format => "Lab Only", :activity_type => "Lab"
   @activity_offering2.add_req_sched_info :rsi_obj => (make SchedulingInformationObject, :days => "WF")
 end
+
+
+Given(/^I have an existing course offering with cancelled activity offerings$/) do
+  @orig_course_offering = make CourseOffering, :term=> '201208', :course => "CHEM483"
+
+  @orig_course_offering.manage
+  on ManageCourseOfferings do |page|
+    page.ao_status('I').should == ActivityOfferingObject::CANCELED_STATUS
+    page.ao_status('K').should == ActivityOfferingObject::CANCELED_STATUS
+  end
+end
+
+When(/^I create a course offering in a different term from the existing offering and choose to exclude cancelled activity offerings$/) do
+  @course_offering = create CourseOffering, :term=> Rollover::MAIN_TEST_TERM_TARGET, :course => "CHEM483", :exclude_cancelled_aos => true, :create_from_existing=>(@orig_course_offering)
+end
+
+Then(/^the new Course Offering should not contain cancelled activity offerings$/) do
+  on ManageCourseOfferings do |page|
+    actual_ao_codes = page.codes_list
+    actual_ao_codes.should_not include 'K'
+    actual_ao_codes.should_not include 'I'
+  end
+end
+
+When(/^I copy the existing offering to create a course in the same term and choose to exclude cancelled activity offerings$/) do
+  @course_offering = create CourseOffering, :course => "CHEM483", :exclude_cancelled_aos => true, :create_by_copy=>(@orig_course_offering)
+end
