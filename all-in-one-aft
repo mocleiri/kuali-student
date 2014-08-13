@@ -10,6 +10,9 @@
 # maven version 3.2 on jenkins
 MVN="mvn"
 
+# make sure all environment variables are set
+set -o nounset
+
 # some default options
 AFT_URL="https://svn.kuali.org/repos/student/test/functional-automation/sambal/trunk"
 AFT_STYLE="enr"
