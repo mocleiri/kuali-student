@@ -399,6 +399,7 @@ function set_debug_mode {
 
 function set_snapshot {
   let "SNAPSHOT+=1"
+  REPO_PREFIX="https://svn.kuali.org/repos/student/enrollment/aggregate/trunk"
 }
 
 # check that a variable is set and is not the empty string
