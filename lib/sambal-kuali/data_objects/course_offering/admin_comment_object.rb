@@ -15,7 +15,9 @@ class AdminCommentObject < DataFactory
   def initialize(browser, opts={})
     @browser = browser
     defaults = {
-        :text => "comment text #{random_alphanums(4)}"
+        :text => "comment text #{random_alphanums(4)}",
+        :last_editor => '',
+        :edited_date => ''
     }
     options = defaults.merge(opts)
     set_options(options)
@@ -29,9 +31,9 @@ class AdminCommentObject < DataFactory
       page.add_comment
     end
     on AdminComments do |page| #synch to page again
-      new_comment = page.comment_by_text(@text)
-      created_by = page.comment_created_by(new_comment)
-      created_date = page.comment_created_date(new_comment)
+      comment_index = page.comment_index_by_text(@text)
+      created_by = page.comment_created_by(comment_index)
+      created_date = page.comment_created_date(comment_index)
     end
 
     @creator = created_by
@@ -50,14 +52,14 @@ class AdminCommentObject < DataFactory
       @parent_obj.manage_comments
     end
 
-    edit_comment = nil
+    comment_index = -1
 
     if options[:text] != nil
       on AdminComments do |page|
-        edit_comment = page.comment_by_text(@text)
-        page.edit_comment_element(edit_comment).click
-        page.comment_text_editor(edit_comment).clear
-        page.comment_text_editor(edit_comment).set options[:text]
+        comment_index = page.comment_index_by_text(@text)
+        page.edit_comment_element(comment_index).click
+        page.comment_text_editor(comment_index).clear
+        page.comment_text_editor(comment_index).set options[:text]
       end
     end
 
@@ -65,18 +67,19 @@ class AdminCommentObject < DataFactory
       edited_by = ''
       edited_date = ''
       on AdminComments do |page|
-        page.comment_save_edit(edit_comment).click
+        page.comment_save_edit(comment_index).click
         page.loading.wait_while_present
         sleep 1
         @text = options[:text]
       end
       on AdminComments do |page|
-        edit_comment = page.comment_by_text(@text)
-        @last_editor = page.comment_edited_by(edit_comment)
-        @edited_date = page.comment_edited_date(edit_comment)
+        comment_index = page.comment_index_by_text(@text)
+        @last_editor = page.comment_edited_by(comment_index)
+        @edited_date = page.comment_edited_date(comment_index)
       end
     else
-      on(AdminComments).comment_cancel_edit(edit_comment)
+      on(AdminComments).comment_cancel_edit(comment_index).click
+      sleep 1 #TODO: add proper synch
     end
     on(AdminComments).close if options[:close_comments_dialog]
   end

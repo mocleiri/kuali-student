@@ -13,10 +13,10 @@ Then(/^the activity offering comment.*can be viewed successfully$/) do
   @course_offering.get_ao_obj_by_code('A').manage_comments
   comment = @course_offering.get_ao_obj_by_code('A').admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.comment_text(comment_div).should == comment.text
-    page.comment_created_by(comment_div).should == comment.creator
-    page.comment_created_date(comment_div).should == comment.created_date
+    comment_index = page.comment_index_by_text(comment.text)
+    page.comment_text(comment_index).should == comment.text
+    page.comment_created_by(comment_index).should == comment.creator
+    page.comment_created_date(comment_index).should == comment.created_date
     page.header_text_comments_count.should == @course_offering.get_ao_obj_by_code('A').admin_comments_list.length
     page.close
   end
@@ -87,10 +87,10 @@ Then(/^the course offering comment.*can be viewed successfully$/) do
   @course_offering.manage_comments
   comment = @course_offering.admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.comment_text(comment_div).should == comment.text
-    page.comment_created_by(comment_div).should == comment.creator
-    page.comment_created_date(comment_div).should == comment.created_date
+    comment_index = page.comment_index_by_text(comment.text)
+    page.comment_text(comment_index).should == comment.text
+    page.comment_created_by(comment_index).should == comment.creator
+    page.comment_created_date(comment_index).should == comment.created_date
     page.header_text_comments_count.should == @course_offering.admin_comments_list.length
     page.close
   end
@@ -101,10 +101,10 @@ Then(/^the activity offering comment is updated successfully$/) do
   @course_offering.get_ao_obj_by_code('A').manage_comments
   comment = @course_offering.get_ao_obj_by_code('A').admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.comment_text(comment_div).should == comment.text
-    page.comment_edited_by(comment_div).should == comment.last_editor
-    page.comment_edited_date(comment_div).should == comment.edited_date
+    comment_index = page.comment_index_by_text(comment.text)
+    page.comment_text(comment_index).should == comment.text
+    page.comment_edited_by(comment_index).should == comment.last_editor
+    page.comment_edited_date(comment_index).should == comment.edited_date
     page.header_text_comments_count.should == @course_offering.get_ao_obj_by_code('A').admin_comments_list.length
     page.close
   end
@@ -114,10 +114,10 @@ Then(/^the activity offering comment is not updated$/) do
   @course_offering.get_ao_obj_by_code('A').manage_comments
   comment = @course_offering.get_ao_obj_by_code('A').admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.comment_text(comment_div).should == comment.text
-    page.comment_edited_by(comment_div).should == comment.last_editor
-    page.comment_edited_date(comment_div).should == comment.edited_date
+    comment_index = page.comment_index_by_text(comment.text)
+    page.comment_text(comment_index).should == comment.text
+    page.comment_edited_by(comment_index).should == comment.last_editor
+    page.comment_edited_date(comment_index).should == comment.edited_date
     page.header_text_comments_count.should == @course_offering.get_ao_obj_by_code('A').admin_comments_list.length
     page.close
   end
@@ -127,10 +127,10 @@ Then(/^the course offering comment is updated successfully$/) do
   @course_offering.manage_comments
   comment = @course_offering.admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.comment_text(comment_div).should == comment.text
-    page.comment_edited_by(comment_div).should == comment.last_editor
-    page.comment_edited_date(comment_div).should == comment.edited_date
+    comment_index = page.comment_index_by_text(comment.text)
+    page.comment_text(comment_index).should == comment.text
+    page.comment_edited_by(comment_index).should == comment.last_editor
+    page.comment_edited_date(comment_index).should == comment.edited_date
     page.header_text_comments_count.should == @course_offering.admin_comments_list.length
     page.close
   end
@@ -140,10 +140,10 @@ Then(/^the course offering comment is not updated$/) do
   @course_offering.manage_comments
   comment = @course_offering.admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.comment_text(comment_div).should == comment.text
-    page.comment_edited_by(comment_div).should == comment.last_editor
-    page.comment_edited_date(comment_div).should == comment.edited_date
+    comment_index = page.comment_index_by_text(comment.text)
+    page.comment_text(comment_index).should == comment.text
+    page.comment_edited_by(comment_index).should == comment.last_editor
+    page.comment_edited_date(comment_index).should == comment.edited_date
     page.header_text_comments_count.should == @course_offering.admin_comments_list.length
     page.close
   end
@@ -168,10 +168,10 @@ Then(/^I am able to add new comments for the activity offering$/) do
   @activity_offering.manage_comments
   comment = @activity_offering.admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.comment_text(comment_div).should == comment.text
-    page.comment_created_by(comment_div).should == comment.creator
-    page.comment_created_date(comment_div).should == comment.created_date
+    comment_index = page.comment_index_by_text(comment.text)
+    page.comment_text(comment_index).should == comment.text
+    page.comment_created_by(comment_index).should == comment.creator
+    page.comment_created_date(comment_index).should == comment.created_date
     page.header_text_comments_count.should == @activity_offering.admin_comments_list.length
     page.close
   end
@@ -183,10 +183,10 @@ And(/^I am able to edit comments for the activity offering$/) do
   @activity_offering.manage_comments
   comment = @activity_offering.admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.comment_text(comment_div).should == comment.text
-    page.comment_edited_by(comment_div).should == comment.last_editor
-    page.comment_edited_date(comment_div).should == comment.edited_date
+    comment_index = page.comment_index_by_text(comment.text)
+    page.comment_text(comment_index).should == comment.text
+    page.comment_edited_by(comment_index).should == comment.last_editor
+    page.comment_edited_date(comment_index).should == comment.edited_date
     page.header_text_comments_count.should == @activity_offering.admin_comments_list.length
     page.close
   end
@@ -209,10 +209,10 @@ Then(/^I am able to add new admin comments for the course offering$/) do
   @course_offering.manage_comments
   comment = @course_offering.admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.comment_text(comment_div).should == comment.text
-    page.comment_created_by(comment_div).should == comment.creator
-    page.comment_created_date(comment_div).should == comment.created_date
+    comment_index = page.comment_index_by_text(comment.text)
+    page.comment_text(comment_index).should == comment.text
+    page.comment_created_by(comment_index).should == comment.creator
+    page.comment_created_date(comment_index).should == comment.created_date
     page.header_text_comments_count.should == @course_offering.admin_comments_list.length
     page.close
   end
@@ -225,10 +225,10 @@ And(/^I am able to edit comments for the course offering$/) do
   @course_offering.manage_comments
   comment = @course_offering.admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.comment_text(comment_div).should == comment.text
-    page.comment_edited_by(comment_div).should == comment.last_editor
-    page.comment_edited_date(comment_div).should == comment.edited_date
+    comment_index = page.comment_index_by_text(comment.text)
+    page.comment_text(comment_index).should == comment.text
+    page.comment_edited_by(comment_index).should == comment.last_editor
+    page.comment_edited_date(comment_index).should == comment.edited_date
     page.header_text_comments_count.should == @course_offering.admin_comments_list.length
     page.close
   end
@@ -254,10 +254,10 @@ end
 Then(/^I am able to view the comments for the course offering$/) do
   comment = @course_offering.admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.comment_text(comment_div).should == comment.text
-    page.comment_created_by(comment_div).should == comment.creator
-    page.comment_created_date(comment_div).should == comment.created_date
+    comment_index = page.comment_index_by_text(comment.text)
+    page.comment_text(comment_index).should == comment.text
+    page.comment_created_by(comment_index).should == comment.creator
+    page.comment_created_date(comment_index).should == comment.created_date
     page.header_text_comments_count.should == @course_offering.admin_comments_list.length
   end
 end
@@ -265,16 +265,16 @@ end
 But(/^I am not able to edit the comments for the course offering$/) do
   comment = @course_offering.admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.edit_comment_element(comment_div).present?.should be_false
+    comment_index = page.comment_index_by_text(comment.text)
+    page.edit_comment_element(comment_index).present?.should be_false
   end
 end
 
 And(/^I am not able to delete the comments for the course offering$/) do
   comment = @course_offering.admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.delete_comment_element(comment_div).present?.should be_false
+    comment_index = page.comment_index_by_text(comment.text)
+    page.delete_comment_element(comment_index).present?.should be_false
   end
 end
 
@@ -300,10 +300,10 @@ end
 Then(/^I am able to view the comments for the activity offering$/) do
   comment = @activity_offering.admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.comment_text(comment_div).should == comment.text
-    page.comment_created_by(comment_div).should == comment.creator
-    page.comment_created_date(comment_div).should == comment.created_date
+    comment_index = page.comment_index_by_text(comment.text)
+    page.comment_text(comment_index).should == comment.text
+    page.comment_created_by(comment_index).should == comment.creator
+    page.comment_created_date(comment_index).should == comment.created_date
     page.header_text_comments_count.should == @activity_offering.admin_comments_list.length
   end
 end
@@ -311,16 +311,16 @@ end
 But(/^I am not able to edit the comments for the activity offering$/) do
   comment = @activity_offering.admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.edit_comment_element(comment_div).present?.should be_false
+    comment_index = page.comment_index_by_text(comment.text)
+    page.edit_comment_element(comment_index).present?.should be_false
   end
 end
 
 And(/^I am not able to delete the comments for the activity offering$/) do
   comment = @activity_offering.admin_comments_list[0]
   on AdminComments do |page|
-    comment_div = page.comment_by_text(comment.text)
-    page.delete_comment_element(comment_div).present?.should be_false
+    comment_index = page.comment_index_by_text(comment.text)
+    page.delete_comment_element(comment_index).present?.should be_false
   end
 end
 
