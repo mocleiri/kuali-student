@@ -128,3 +128,15 @@ Then(/^I should see the bookmark against the course$/) do
     page.star_bookmark_on.exists?.should be_true
   end
 end
+
+
+
+Then(/^I should be able to remove the bookmark from the Bookmark gutter$/) do
+ on  BookmarkPage do |page|
+   page.bookmark_delete_link.wait_until_present
+   page.bookmark_delete_link.click
+   page.bookmark_remove_button.wait_until_present
+   page.bookmark_remove_button.click
+ end
+ end
+
