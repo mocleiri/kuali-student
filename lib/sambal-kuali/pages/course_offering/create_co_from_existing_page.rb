@@ -11,13 +11,13 @@ class CreateCOFromExisting < BasePage
   element(:sticky_footer_div) { |b| b.frm.div(class: "ks-uif-footer clearfix uif-stickyFooter uif-stickyButtonFooter") }
   action(:cancel) { |b| b.sticky_footer_div.link(text: "Cancel").click; b.loading.wait_while_present }
 
-  element(:exclude_cancelled_aos) { |b| b.frm.label(text: /Exclude cancelled Activity Offerings/) }
+  element(:exclude_cancelled_aos) { |b| b.frm.label(text: /Exclude canceled activity offerings/) }
   action(:select_exclude_cancelled_aos) { |b| b.exclude_cancelled_aos.wait_until_present; b.exclude_cancelled_aos.click }
 
   element(:exclude_scheduling) { |b| b.frm.label(text: /Exclude scheduling information/) }
   action(:select_exclude_scheduling) { |b| b.exclude_scheduling.wait_until_present; b.exclude_scheduling.click }
 
-  element(:exclude_instructor) { |b| b.frm.label(text: /Exclude instructor information/) }
+  element(:exclude_instructor) { |b| b.frm.label(text: /Exclude instructional assignments/) }
   action(:select_exclude_instructor) { |b| b.exclude_instructor.wait_until_present; b.exclude_instructor.click }
 
   element(:course_offering_existing_table) { |b| b.frm.section(id: "KS-ExistingOffering-ListCOs").table() }
