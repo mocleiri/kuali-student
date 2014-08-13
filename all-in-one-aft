@@ -573,4 +573,4 @@ run_afts
 trap - EXIT SIGINT SIGTERM
 cleanup_tomcat
 
-# vim: tabstop=2 shiftwidth=2 syntax=sh
+# vim: tabstop=2 shiftwidth=2 syntax=sh filetype=sh
