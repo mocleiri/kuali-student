@@ -59,10 +59,18 @@ class TimeSlotMaintenance < BasePage
 
   def get_time_slot_code_list
     time_slot_code_list = []
-    time_slot_search_results_table.rows.each_with_index do |row, index|
-      time_slot_code_list << row[TIME_SLOT_RESULTS_CODE].text unless index == 0 || index == time_slot_search_results_table.rows.length-1
+    time_slot_search_results_table.rows[1..-1].each do |row|
+      time_slot_code_list << row.cells[TIME_SLOT_RESULTS_CODE].text
     end
     time_slot_code_list
+  end
+
+  def time_slot_days_list
+    time_slot_days_list = []
+    time_slot_search_results_table.rows[1..-1].each do |row|
+      time_slot_days_list << row.cells[TIME_SLOT_RESULTS_DAYS].text
+    end
+    time_slot_days_list
   end
 
   def target_results_row(code)

@@ -16,7 +16,7 @@ When /^I add a duplicate time slot$/ do
 end
 
 When /^I add a new time slot but omit the (start time|end time|days)$/ do |data_to_omit|
-  time_slot = make TimeSlots::TimeSlot
+  time_slot = make TimeSlot
 
   case data_to_omit
     when "start time"
@@ -33,6 +33,15 @@ end
 
 Then /^the timeslots are saved$/ do
   @time_slots.show_time_slots
+
+  #verify default sorting on day list/start_time
+  on TimeSlotMaintenance do |page|
+    ts_list = TimeSlot.init_actual_list(page.time_slot_search_results_table)
+    sorted_ts_list = ts_list.sort
+
+    ts_list.should <=> sorted_ts_list #.should == 0  #ie array is unchanged after sorting
+  end
+
   @time_slots.new_time_slots.each do |time_slot|
     on TimeSlotMaintenance do |page|
       row = page.target_results_row time_slot.code

@@ -70,7 +70,7 @@ class TimeSlots < DataFactory
   # duplicates a time-slot that already exists in the table (by it's code) -- note, does not validate nor store the result
   def add_duplicate_time_slot(code)
     target_timeslot_row = on(TimeSlotMaintenance).target_results_row(code)
-    time_slot = make TimeSlots::TimeSlot, :term_type => target_timeslot_row[TimeSlotMaintenance::TIME_SLOT_RESULTS_TERM_TYPE].text,
+    time_slot = make TimeSlot, :term_type => target_timeslot_row[TimeSlotMaintenance::TIME_SLOT_RESULTS_TERM_TYPE].text,
                      :days => target_timeslot_row[TimeSlotMaintenance::TIME_SLOT_RESULTS_DAYS].text.gsub( /\s+/, ''),
                      :start_time => target_timeslot_row[TimeSlotMaintenance::TIME_SLOT_RESULTS_START_TIME].text.split(" ")[0],
                      :start_time_am_pm => target_timeslot_row[TimeSlotMaintenance::TIME_SLOT_RESULTS_START_TIME].text.split(" ")[1],
@@ -111,7 +111,7 @@ class TimeSlots < DataFactory
       eTime, eAmPm = increment_time( startTime ).split(" ")
 
       begin
-        add_new_time_slot(make TimeSlots::TimeSlot, :term_type => termType, :start_time => sTime, :start_time_am_pm => sAmPm, :end_time => eTime, :end_time_am_pm => eAmPm)
+        add_new_time_slot(make TimeSlot, :term_type => termType, :start_time => sTime, :start_time_am_pm => sAmPm, :end_time => eTime, :end_time_am_pm => eAmPm)
         done_creating_unique_timeslot = true
       rescue Exception => e
         if i < max_attempts_to_create_unique_timeslots
@@ -166,51 +166,86 @@ class TimeSlots < DataFactory
     end
     puts ts_list
   end
+end
 
-  # Stores test data for creating/editing and validating an individual time slot
+# Stores test data for creating/editing and validating an individual time slot
+#
+# Class attributes are initialized with default data unless values are explicitly provided
+#
+# Note that typical usage of this should be via 'make' not 'create' and then pass to an add-method in the TimeSlots object
+#
+# For examples, see comment at the top of the file
+#
+# Note the use of the ruby options hash pattern re: setting attribute values
+class TimeSlot < DataFactory
+
+  include Comparable
+  # type: string generally set using options hash
+  attr_accessor :code,
+                :term_type,
+                :days,
+                :start_time,
+                :start_time_am_pm,
+                :end_time,
+                :end_time_am_pm
+
+  # provides default data
   #
-  # Class attributes are initialized with default data unless values are explicitly provided
-  #
-  # Note that typical usage of this should be via 'make' not 'create' and then pass to an add-method in the TimeSlots object
-  #
-  # For examples, see comment at the top of the file
-  #
-  # Note the use of the ruby options hash pattern re: setting attribute values
-  class TimeSlot < DataFactory
+  # initialize is generally called using TestFactory Foundry .make or .create methods
+  def initialize(browser, opts={})
+    @browser = browser
 
-    # type: string generally set using options hash
-    attr_accessor :code,
-                  :term_type,
-                  :days,
-                  :start_time,
-                  :start_time_am_pm,
-                  :end_time,
-                  :end_time_am_pm
+    defaults = {
+        :code => "",
+        :term_type => "Fall - Full",
+        :days => "MTWHFSU",
+        :start_time => "12:01",
+        :start_time_am_pm => "PM",
+        :end_time => "12:06",
+        :end_time_am_pm => "PM"
+    }
 
-    # provides default data
-    #
-    # initialize is generally called using TestFactory Foundry .make or .create methods
-    def initialize(browser, opts={})
-      @browser = browser
+    options = defaults.merge(opts)
 
-      defaults = {
-          :code => "",
-          :term_type => "Fall - Full",
-          :days => "MTWHFSU",
-          :start_time => "12:01",
-          :start_time_am_pm => "PM",
-          :end_time => "12:06",
-          :end_time_am_pm => "PM"
-      }
-
-      options = defaults.merge(opts)
-
-      set_options(options)
-    end
-
-    def print_time_slot_to_console
-      puts "Code #{code}, Term type #{term_type}, Days #{days}, Start #{start_time} #{start_time_am_pm}, End #{end_time} #{end_time_am_pm}"
-    end
+    set_options(options)
   end
 
+  #compare for default sort order
+  def <=>(other)
+    int_days_str = TimeSlot.convert_days_to_ints(@days)
+    other_int_days_str = TimeSlot.convert_days_to_ints(other.days)
+    sort1 = int_days_str <=> other_int_days_str
+    return sort1 unless sort1 == 0
+    #tie breaker on start time
+    st_time = DateTime.strptime(@start_time, '%I:%M %p')
+    other_st_time = DateTime.strptime(other.start_time, '%I:%M %p')
+    return st_time <=> other_st_time
+  end
+
+  def self.convert_days_to_ints day_str
+    int_days_str = day_str
+    int_days_str = int_days_str.sub('M','1')
+    int_days_str = int_days_str.sub('T','2')
+    int_days_str = int_days_str.sub('W','3')
+    int_days_str = int_days_str.sub('H','4')
+    int_days_str = int_days_str.sub('F','5')
+    int_days_str = int_days_str.sub('S','6')
+    int_days_str = int_days_str.sub('U','7')
+    int_days_str
+  end
+
+  def self.init_actual_list(table)
+    time_slots_list = []
+    table.rows[1..-1].each do |row|
+      ts = TimeSlot.new(@broswer,{})
+      ts.days = row.cells[TimeSlotMaintenance::TIME_SLOT_RESULTS_DAYS].text
+      ts.start_time = row.cells[TimeSlotMaintenance::TIME_SLOT_RESULTS_START_TIME].text
+      time_slots_list << ts
+    end
+    time_slots_list
+  end
+
+  def print_time_slot_to_console
+    puts "Code #{code}, Term type #{term_type}, Days #{days}, Start #{start_time} #{start_time_am_pm}, End #{end_time} #{end_time_am_pm}"
+  end
 end
