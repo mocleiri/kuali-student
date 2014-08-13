@@ -12,6 +12,7 @@
 package org.kuali.student.enrollment.courseoffering.service;
 
 import org.kuali.student.enrollment.academicrecord.service.SubscriptionActionEnum;
+import org.kuali.student.enrollment.courseoffering.dto.ActivityOfferingInfo;
 import org.kuali.student.enrollment.courseoffering.dto.CourseOfferingInfo;
 import org.kuali.student.r2.common.dto.ContextInfo;
 import org.kuali.student.r2.common.dto.StatusInfo;
@@ -25,6 +26,7 @@ import org.kuali.student.r2.common.exceptions.PermissionDeniedException;
 import org.kuali.student.r2.common.exceptions.ReadOnlyException;
 import org.kuali.student.r2.common.exceptions.VersionMismatchException;
 
+import javax.jws.WebParam;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -38,11 +40,14 @@ import java.util.UUID;
 public class CourseOfferingSubscriptionServiceDecorator extends CourseOfferingServiceDecorator
         implements CourseOfferingSubscriptionService {
 
+    public static String COURSE_OFFERING = "course.offering";
+    public static String ACTIVITY_OFFERING = "activity.offering";
+
     private static class Selector {
-        String courseOfferingId;
+        String offeringId;
         String termId;
-        String courseCode;
-        String courseOfferingTypeKey;
+        String code;
+        String offeringTypeKey;
         SubscriptionActionEnum action;
         CourseOfferingCallbackService callback;
 
@@ -65,6 +70,84 @@ public class CourseOfferingSubscriptionServiceDecorator extends CourseOfferingSe
             PermissionDeniedException {
         String id = UUID.randomUUID().toString();
         Selector selector = new Selector(action, courseOfferingCallbackService);
+        callbacks.put(id, selector);
+        return id;
+    }
+
+    @Override
+    public String subscribeToCourseOfferingsByIds(SubscriptionActionEnum action,
+                                                  List<String> courseOfferingIds,
+                                                  CourseOfferingCallbackService courseOfferingCallbackService,
+                                                  ContextInfo contextInfo) throws
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException {
+        String id = UUID.randomUUID().toString();
+        Selector selector = new Selector(action, courseOfferingCallbackService);
+        callbacks.put(id, selector);
+        return id;
+    }
+
+    @Override
+    public String subscribeToActivityOfferings(
+            SubscriptionActionEnum action,
+            CourseOfferingCallbackService courseOfferingCallbackService,
+            ContextInfo contextInfo) throws
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException {
+        String id = UUID.randomUUID().toString();
+        Selector selector = new Selector(action, courseOfferingCallbackService);
+        callbacks.put(id, selector);
+        return id;
+    }
+
+    @Override
+    public String subscribeToActivityOfferingsByTerm(
+            SubscriptionActionEnum action,
+            String termId,
+            CourseOfferingCallbackService courseOfferingCallbackService, ContextInfo contextInfo) throws
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException {
+        String id = UUID.randomUUID().toString();
+        Selector selector = new Selector(action, courseOfferingCallbackService);
+        selector.termId = termId;
+        callbacks.put(id, selector);
+        return id;
+    }
+
+    @Override
+    public String subscribeToActivityOfferingsByActivity(
+            SubscriptionActionEnum action,
+            String activityCode,
+            CourseOfferingCallbackService courseOfferingCallbackService, ContextInfo contextInfo) throws
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException {
+        String id = UUID.randomUUID().toString();
+        Selector selector = new Selector(action, courseOfferingCallbackService);
+        selector.code = activityCode;
+        callbacks.put(id, selector);
+        return id;
+    }
+
+    @Override
+    public String subscribeToActivityOfferingsByType(
+            SubscriptionActionEnum action,
+            String activityOfferingTypeKey,
+            CourseOfferingCallbackService courseOfferingCallbackService, ContextInfo contextInfo) throws
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException {
+        String id = UUID.randomUUID().toString();
+        Selector selector = new Selector(action, courseOfferingCallbackService);
+        selector.offeringTypeKey = activityOfferingTypeKey;
         callbacks.put(id, selector);
         return id;
     }
@@ -96,7 +179,7 @@ public class CourseOfferingSubscriptionServiceDecorator extends CourseOfferingSe
             PermissionDeniedException {
         String id = UUID.randomUUID().toString();
         Selector selector = new Selector(action, courseOfferingCallbackService);
-        selector.courseCode = courseCode;
+        selector.code = courseCode;
         callbacks.put(id, selector);
         return id;
     }
@@ -112,7 +195,7 @@ public class CourseOfferingSubscriptionServiceDecorator extends CourseOfferingSe
             PermissionDeniedException {
         String id = UUID.randomUUID().toString();
         Selector selector = new Selector(action, courseOfferingCallbackService);
-        selector.courseOfferingTypeKey = courseOfferingTypeKey;
+        selector.offeringTypeKey = courseOfferingTypeKey;
         callbacks.put(id, selector);
         return id;
     }
@@ -129,11 +212,11 @@ public class CourseOfferingSubscriptionServiceDecorator extends CourseOfferingSe
         return status;
     }
 
-    protected void fireSelectedCallbacks(Selector target, String id, ContextInfo contextInfo) {
+    protected void fireSelectedCallbacks(Selector target, String id, String dtoType, ContextInfo contextInfo) {
         // consider running this in a different thread so it does not block the main call
         for (Selector selector : this.callbacks.values()) {
             if (matches(selector, target)) {
-                callCallback(selector.callback, target.action, id, contextInfo);
+                callCallback(selector.callback, target.action, id, dtoType, contextInfo);
             }
         }
     }
@@ -141,16 +224,29 @@ public class CourseOfferingSubscriptionServiceDecorator extends CourseOfferingSe
     protected void callCallback(CourseOfferingCallbackService callback,
             SubscriptionActionEnum action,
             String id,
+            String dtoType,
             ContextInfo contextInfo) {
         switch (action) {
             case CREATE:
-                callback.newCourseOfferings(Arrays.asList(id), contextInfo);
+                if(dtoType.equals(COURSE_OFFERING)) {
+                    callback.newCourseOfferings(Arrays.asList(id), contextInfo);
+                } else if(dtoType.equals(ACTIVITY_OFFERING)) {
+                    callback.newActivityOfferings(Arrays.asList(id), contextInfo);
+                }
                 break;
             case UPDATE:
-                callback.updateCourseOfferings(Arrays.asList(id), contextInfo);
+                if(dtoType.equals(COURSE_OFFERING)) {
+                    callback.updateCourseOfferings(Arrays.asList(id), contextInfo);
+                } else if(dtoType.equals(ACTIVITY_OFFERING)) {
+                    callback.updateActivityOfferings(Arrays.asList(id), contextInfo);
+                }
                 break;
             case DELETE:
-                callback.deleteCourseOfferings(Arrays.asList(id), contextInfo);
+                if(dtoType.equals(COURSE_OFFERING)) {
+                    callback.deleteCourseOfferings(Arrays.asList(id), contextInfo);
+                } else if(dtoType.equals(ACTIVITY_OFFERING)) {
+                    callback.deleteActivityOfferings(Arrays.asList(id), contextInfo);
+                }
                 break;
         }
     }
@@ -164,18 +260,18 @@ public class CourseOfferingSubscriptionServiceDecorator extends CourseOfferingSe
                 return false;
             }
         }
-        if (selector.courseCode != null) {
-            if (!selector.courseCode.equals(target.courseCode)) {
+        if (selector.code != null) {
+            if (!selector.code.equals(target.code)) {
                 return false;
             }
         }
-        if (selector.courseOfferingTypeKey != null) {
-            if (!selector.courseOfferingTypeKey.equals(target.courseOfferingTypeKey)) {
+        if (selector.offeringTypeKey != null) {
+            if (!selector.offeringTypeKey.equals(target.offeringTypeKey)) {
                 return false;
             }
         }
-        if (selector.courseOfferingId != null) {
-            if (!selector.courseOfferingId.equals(target.courseOfferingId)) {
+        if (selector.offeringId != null) {
+            if (!selector.offeringId.equals(target.offeringId)) {
                 return false;
             }
         }
@@ -210,11 +306,11 @@ public class CourseOfferingSubscriptionServiceDecorator extends CourseOfferingSe
                 optionKeys, contextInfo);
         String id = info.getId();
         Selector target = new Selector(SubscriptionActionEnum.CREATE, null);
-        target.courseCode = info.getCourseCode();
-        target.courseOfferingId = id;
-        target.courseOfferingTypeKey = info.getTypeKey();
+        target.code = info.getCourseCode();
+        target.offeringId = id;
+        target.offeringTypeKey = info.getTypeKey();
         target.termId = info.getTermId();
-        this.fireSelectedCallbacks(target, id, contextInfo);
+        this.fireSelectedCallbacks(target, id, COURSE_OFFERING, contextInfo);
         return info;
     }
 
@@ -235,11 +331,11 @@ public class CourseOfferingSubscriptionServiceDecorator extends CourseOfferingSe
                 contextInfo);
         String id = info.getId();
         Selector target = new Selector(SubscriptionActionEnum.UPDATE, null);
-        target.courseCode = info.getCourseCode();
-        target.courseOfferingId = id;
-        target.courseOfferingTypeKey = info.getTypeKey();
+        target.code = info.getCourseCode();
+        target.offeringId = id;
+        target.offeringTypeKey = info.getTypeKey();
         target.termId = info.getTermId();
-        this.fireSelectedCallbacks(target, id, contextInfo);
+        this.fireSelectedCallbacks(target, id, COURSE_OFFERING, contextInfo);
         return info;
     }
 
@@ -256,12 +352,37 @@ public class CourseOfferingSubscriptionServiceDecorator extends CourseOfferingSe
         StatusInfo status = this.getNextDecorator().deleteCourseOffering(courseOfferingId, contextInfo);
         Selector target = new Selector(SubscriptionActionEnum.UPDATE, null);
         String id = info.getId();
-        target.courseCode = info.getCourseCode();
-        target.courseOfferingId = id;
-        target.courseOfferingTypeKey = info.getTypeKey();
+        target.code = info.getCourseCode();
+        target.offeringId = id;
+        target.offeringTypeKey = info.getTypeKey();
         target.termId = info.getTermId();
-        this.fireSelectedCallbacks(target, id, contextInfo);
+        this.fireSelectedCallbacks(target, id, COURSE_OFFERING, contextInfo);
         return status;
+    }
+
+    @Override
+    public ActivityOfferingInfo updateActivityOffering(String activityOfferingId, ActivityOfferingInfo activityOfferingInfo,
+                                                   ContextInfo contextInfo)
+            throws DataValidationErrorException,
+            DoesNotExistException,
+            InvalidParameterException,
+            MissingParameterException,
+            OperationFailedException,
+            PermissionDeniedException,
+            ReadOnlyException,
+            VersionMismatchException {
+
+        ActivityOfferingInfo info = this.getNextDecorator().updateActivityOffering(activityOfferingId,
+                activityOfferingInfo,
+                contextInfo);
+        String id = info.getId();
+        Selector target = new Selector(SubscriptionActionEnum.UPDATE, null);
+        target.code = info.getActivityCode();
+        target.offeringId = id;
+        target.offeringTypeKey = info.getTypeKey();
+        target.termId = info.getTermId();
+        this.fireSelectedCallbacks(target, id, ACTIVITY_OFFERING, contextInfo);
+        return info;
     }
 
 }

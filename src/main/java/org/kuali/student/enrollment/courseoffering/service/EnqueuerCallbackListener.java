@@ -18,6 +18,7 @@ import org.springframework.jms.core.JmsTemplate;
 
 import javax.jms.JMSException;
 import javax.jms.ObjectMessage;
+import javax.jws.WebParam;
 import java.util.List;
 import java.util.Queue;
 
@@ -57,6 +58,21 @@ public class EnqueuerCallbackListener implements CourseOfferingCallbackService {
 
     @Override
     public StatusInfo deleteCourseOfferings(List<String> courseOfferingIds, ContextInfo contextInfo) {
+        return null;
+    }
+
+    @Override
+    public StatusInfo newActivityOfferings(List<String> activityOfferingIds, ContextInfo contextInfo) {
+        return null;
+    }
+
+    @Override
+    public StatusInfo updateActivityOfferings(List<String> activityOfferingIds,ContextInfo contextInfo) {
+        return null;
+    }
+
+    @Override
+    public StatusInfo deleteActivityOfferings(List<String> activityOfferingIds,ContextInfo contextInfo) {
         return null;
     }
 }
