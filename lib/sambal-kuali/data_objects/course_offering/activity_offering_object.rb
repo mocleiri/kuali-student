@@ -53,6 +53,8 @@ class ActivityOfferingObject < DataFactory
   DRAFT_STATUS = "Draft"
   # [String]
   APPROVED_STATUS = "Approved"
+  # [String]
+  CANCELED_STATUS = "Canceled"
 
   # initialize is generally called using TestFactory Foundry .make or .create methods
   def initialize(browser, opts={})
