@@ -11,7 +11,7 @@
 MVN="mvn"
 
 # make sure all environment variables are set
-# exit immediately if a piple returns a non-zero status
+# exit immediately if a pipeline returns a non-zero status
 set -o nounset errexit
 
 # some default options
