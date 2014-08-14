@@ -14,9 +14,9 @@ MVN="mvn"
 set -o nounset
 
 # some default options
-AFT_URL="https://svn.kuali.org/repos/student/test/functional-automation/sambal/trunk"
+AFT_URL="http://mirror.svn.kuali.org/repos/student/test/functional-automation/sambal/trunk"
 AFT_STYLE="enr"
-REPO_PREFIX="https://svn.kuali.org/repos/student/enrollment/ks-deployments/tags/builds/ks-deployments-2.1/2.1.1-FR2-M1"
+REPO_PREFIX="http://mirror.svn.kuali.org/repos/student/enrollment/ks-deployments/tags/builds/ks-deployments-2.1/2.1.1-FR2-M1"
 CI_JOB_URL="https://ci.kuali.org/view/student/view/enr-1.0/view/deploy/job/ks-enr-1.0-nightly-build"
 ARTIFACT_PREFIX="2.1.1-FR2-M1"
 SCHEMA_PREFIX="KSAFT_"
@@ -37,13 +37,13 @@ Usage: $ME
         Print this message and exit.
     --repo_prefix <url of svn code>
         URL of the deployments directory to pull svn code from
-        default is https://svn.kuali.org/repos/student/enrollment/ks-deployments/tags/builds/ks-deployments-2.1/2.1.1-FR2-M1
+        default is http://mirror.svn.kuali.org/repos/student/enrollment/ks-deployments/tags/builds/ks-deployments-2.1/2.1.1-FR2-M1
     --build_job_url <url of build job>
         URL for the CI job that creates the tagged builds
         default is https://ci.kuali.org/view/student/view/enr-1.0/view/deploy/job/ks-enr-1.0-nightly-build
     --aft_url <url for afts>
         URL for AFT code
-        default is https://svn.kuali.org/repos/student/test/functional-automation/sambal/trunk
+        default is http://mirror.svn.kuali.org/repos/student/test/functional-automation/sambal/trunk
     --aft_style Type of AFT to run
         Valid values are enr, ksap, cm
         default is enr
@@ -420,7 +420,7 @@ function set_debug_mode {
 
 function set_snapshot {
   let "SNAPSHOT+=1"
-  REPO_PREFIX="https://svn.kuali.org/repos/student/enrollment/aggregate/trunk"
+  REPO_PREFIX="http://mirror.svn.kuali.org/repos/student/enrollment/aggregate/trunk"
 }
 
 # check that a variable is set and is not the empty string
