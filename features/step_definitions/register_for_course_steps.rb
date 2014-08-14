@@ -438,6 +438,17 @@ Then /^I log out from student registration$/ do
   end
 end
 
+Then /^I log out from student registration large format$/ do
+  on LargeFormatRegisterForCourseBase do |page|
+    page.user_menu
+    page.logout_link.wait_until_present
+    page.logout
+  end
+  on Login do
+    #just wait for page to come up
+  end
+end
+
 Then /^the number of credits I am registered for and waitlisted for are correctly updated in my schedule$/ do
   on StudentSchedule do |page|
     page.reg_credit_count.downcase.match('(.*) credits')[1].to_f.should == 3

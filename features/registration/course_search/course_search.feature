@@ -67,6 +67,7 @@ Feature: REG.Course Search
     When I add the selected lecture and lab to my registration cart
     Then I can see the selected section has been added to my cart
     * I remove the course from my registration cart on the search page
+    * I log out from student registration large format
 
     #KSENROLL-14021
   Scenario: CR 19.14 - Student is notified that course search selection is already in registration cart
@@ -75,3 +76,4 @@ Feature: REG.Course Search
     And I select the same lecture and discussion as in the course
     Then the Add to Cart option should change to a notice that the course is in my cart
     * I remove the course from my registration cart on the search page
+    * I log out from student registration large format
