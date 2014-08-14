@@ -138,6 +138,7 @@ When /^I search for the same course$/ do
 end
 
 And /^I select the same lecture and discussion as in the course$/ do
+  sleep 2
   @course_search_result.navigate_course_detail_page :course_code=>@reg_request.course_code
   on CourseDetailsPage do |page|
     page.results_table("Discussion").wait_until_present
