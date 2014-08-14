@@ -4,11 +4,10 @@
     <parent>
         <groupId>org.kuali.student.fa</groupId>
         <artifactId>ks-fa</artifactId>
-        <version>0.1.0-FR2-M1-SNAPSHOT</version>
+        <version>0.1.0-FR2-M1-build-855</version>
     </parent>
     <groupId>org.kuali.student.fa</groupId>
     <artifactId>ks-fa-api</artifactId>
     <name>KS Financial Aid API</name>
-
     <!-- TODO add in dependencies and cxf plugin setup from ks-ap-api/pom.xml -->
 </project>
