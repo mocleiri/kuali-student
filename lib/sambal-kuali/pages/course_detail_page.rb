@@ -37,6 +37,7 @@ class CourseDetailPage < BasePage
   #message for bookmark and remove bookmark func
   element(:bookmark_message){|b|b.div(id:"bookmarkMessage",class:"uif-message uif-boxLayoutVerticalItem clearfix")}
   element(:remove_bookmark_message){|b|b.div(id:"bookmarkMessage",class:"uif-message uif-boxLayoutVerticalItem clearfix ksap-hide")}
+  element(:count_for_bookmark) {|b|b.span(id:"Ksap-Header-Bookmark-Count-Value")}
 
 
 

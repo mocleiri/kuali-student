@@ -73,8 +73,7 @@ class CourseSearch < BasePage
   #bookmark icon
   element(:bookmark_icon) { |course_code,b|b.tr(id:"#{course_code}").span(id:/bookmark_status/).a(class:"ks-fontello-icon-star saved")}
   element(:bookmark_icon_empty) { |course_code,b|b.tr(id:"#{course_code}").span(id:/bookmark_status/).a(class:"ks-fontello-icon-star-empty")}
-
-
+  element(:bookmark_count_coursesearch) { |b|b.div(class:"ksapBookmarkCount").span(id:"Ksap-Header-Bookmark-Count-Value")}
 
 
 

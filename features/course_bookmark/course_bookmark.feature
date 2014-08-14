@@ -41,3 +41,11 @@ Feature: BT.Bookmark a course
     And I navigate to the Planner page
     Then I should be able to remove the bookmark from the Bookmark gutter
 
+
+
+  Scenario: BK 1.0.4 Verify that I can remove a bookmark from the Bookmark page
+   When I bookmark a course
+   And I navigate to the Planner page
+   And  I click on View more details link
+   Then I should be able to remove the bookmark from the Bookmark page
+

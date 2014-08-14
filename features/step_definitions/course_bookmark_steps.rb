@@ -44,6 +44,9 @@ When(/^I bookmark a course$/) do
       puts page.removebookmark.exists?
       else
       page.add_bookmark
+      sleep 3
+      @count_bookmark=page.count_for_bookmark.text.to_i
+      puts @count_bookmark
     end
   end
 
@@ -80,22 +83,32 @@ end
 
 
 Then(/^I should be able to remove the bookmark in the course details page$/) do
+
   on CourseDetailPage do |page|
     sleep 2
     page.removebookmark.click
     sleep 5
     page.remove_bookmark_message.exists?.should==true
+    page.count_for_bookmark.text.to_i==@count_bookmark-1
     end
 end
 
 Then(/^I remove the bookmark$/) do
+  sleep 3
+  on CourseSearch do |page|
+    @count_bookmark_coursesearch=page.bookmark_count_coursesearch.text.to_i
+  end
     @course_search_results.clear_course_bookmark
+  on CourseSearch do |page|
+    @count_bookmark_coursesearch=page.bookmark_count_coursesearch.text.to_i
+  end
 end
 
 Then(/^I should no longer see the bookmark against the course$/) do
     @course_search_results.set_search_entry
     on CourseSearch do  |page|
       page.star_bookmark_off.exists?.should be_true
+      page.bookmark_count_coursesearch.text.to_i== @count_bookmark_coursesearch-1
     end
 end
 
@@ -133,10 +146,34 @@ end
 
 Then(/^I should be able to remove the bookmark from the Bookmark gutter$/) do
  on  BookmarkPage do |page|
+   sleep 3
+   puts page.bookmark_count.text.to_i
+   count=page.bookmark_count.text.to_i
+   page.refresh
    page.bookmark_delete_link.wait_until_present
    page.bookmark_delete_link.click
    page.bookmark_remove_button.wait_until_present
    page.bookmark_remove_button.click
+   sleep 3
+   page.bookmark_count.text.to_i==count-1
  end
  end
 
+
+Then(/^I should be able to remove the bookmark from the Bookmark page$/) do
+
+  on  BookmarkPage do |page|
+    sleep 3
+    puts page.bookmark_count.text.to_i
+    count=page.bookmark_count.text.to_i
+    page.refresh
+    page.bookmark_delete_link.wait_until_present
+    page.bookmark_section.click
+    page.bookmark_more_info.click
+    page.bookmark_delete_link.click
+    page.bookmark_remove_button.wait_until_present
+    page.bookmark_remove_button.click
+    sleep 3
+    page.bookmark_count.text.to_i==count-1
+   end
+end
