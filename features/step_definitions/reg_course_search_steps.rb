@@ -97,7 +97,7 @@ end
 When /^I select a lecture and lab$/ do
   @course_search_result.select_ao :ao_type=>"Lecture", :ao_code=>"Y"
   @course_search_result.select_ao :ao_type=>"Lab", :ao_code=>"AA"
-  @course_search_result.set_section :section => "1026"       # TEMP HARDCODE
+  @course_search_result.set_section :section => "1026"
 end
 
 Then /^I should see only the selected lecture and lab$/ do
