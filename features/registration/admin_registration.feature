@@ -118,7 +118,6 @@ Feature: REG.Admin Registration
     And I decide to continue with the selected term
     Then a warning message along with the Registered and Wait-listed courses are displayed
 
-  @bug @KSENROLL-14047
   Scenario: CR22.12.5 Verify that Term eligibility check passes for open registration term
     When I open the term for registration in the Academic Calendar
     And I attempt to load a Term by valid Term Id for a student with no Registered or Wait-listed courses

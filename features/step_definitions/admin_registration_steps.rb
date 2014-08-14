@@ -102,7 +102,7 @@ end
 When /^I enter a valid course code for term$/ do
   @admin_reg = create AdminRegistrationData, :term_code=> "201201"
   @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code => "ENGL201",
-                                                             :course_description => "Inventing Western Literature: Ancient and Medieval Traditions")
+                                                             :description => "Inventing Western Literature: Ancient and Medieval Traditions")
 end
 
 When /^I enter a valid section for course code$/ do
@@ -113,7 +113,7 @@ end
 Then /^the course description is displayed$/ do
   on AdminRegistration do |page|
     page.course_addline_btn.focus
-    page.get_course_description_message(1).should == @admin_reg.course_section_codes[0].course_description
+    page.get_course_description_message(1).should == @admin_reg.course_section_codes[0].description
 
     page.student_info_go  #Needed to leave the browser in a clean state
   end
@@ -221,14 +221,14 @@ end
 When /^I attempt to register a student for a course with default values for Credit and Registration Options$/ do
   @admin_reg = create AdminRegistrationData, :term_code=> "201401"
   @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL101",
-                                                             :section=> "1002", :course_default_credits => "3.0",
-                                                             :course_default_reg_options => "Letter", :register =>true)
+                                                             :section=> "1002", :popup_credits => "3.0",
+                                                             :popup_reg_options => "Letter", :register =>true)
 end
 
 Then /^the default values are displayed when confirming registration$/ do
   on AdminRegistration do |page|
-    page.get_confirm_course_credits(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_credits}/
-    page.get_confirm_course_reg_options(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_reg_options}/
+    page.get_confirm_course_credits(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].popup_credits}/
+    page.get_confirm_course_reg_options(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].popup_reg_options}/
     page.cancel_registration
 
     page.student_info_go  #Needed to leave the browser in a clean state
@@ -238,13 +238,14 @@ end
 When /^I attempt to register a student for a course$/ do
   @admin_reg = create AdminRegistrationData, :term_code=> "201401"
   @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "CHEM241",
-                                                             :section=> "1002", :register => true)
+                                                             :section=> "1002", :register => true, :popup_effective_date => right_now[:date_w_slashes])
 end
 
 Then /^the effective date should default to system date$/ do
   on AdminRegistration do |page|
-    page.get_confirm_course_effective_date(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_effective_date}/
+    page.get_confirm_course_effective_date(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].popup_effective_date}/
     page.cancel_registration
+
     page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
@@ -530,7 +531,10 @@ Then /^the student is not registered for the course$/ do
 end
 
 When /^I deny the course for registration$/ do
-  on(AdminRegistration).deny_registration_issue
+  on AdminRegistration do |page|
+    page.loading.wait_while_present
+    page.deny_registration_issue
+  end
 end
 
 When /^I allow the course for registration$/ do
@@ -548,13 +552,13 @@ When /^I attempt to edit a course with default values for Credit and Registratio
                                                              :course_default_reg_options => "Letter", :register => true,
                                                              :confirm_registration => true)
 
-  @admin_reg.course_section_codes[0].edit_course
+  @admin_reg.course_section_codes[0].edit_course :save_edit => false, :cancel_edit => false
 end
 
 Then /^the default values are displayed on edit course dialog$/ do
   on AdminRegistration do |page|
-    page.get_edited_reg_course_default_credits(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_credits}/
-    page.get_edited_reg_course_default_reg_options(@admin_reg.course_section_codes[0].course_code).should match /#{@admin_reg.course_section_codes[0].course_default_reg_options}/
+    page.get_edit_course_credits.should match /#{@admin_reg.course_section_codes[0].popup_credits}/
+    page.get_edit_course_reg_options.should match /#{@admin_reg.course_section_codes[0].popup_reg_options}/
     page.cancel_edited_course
 
     page.student_info_go  #Needed to leave the browser in a clean state
@@ -569,15 +573,10 @@ When /^I attempt to edit a registered course$/ do
   on AdminRegistration do |page|
     page.dismiss_registration_result if page.dismiss_registration_results_btn.exists?
   end
-
-  @admin_reg.course_section_codes[0].edit_course
 end
 
 Then /^I save the edited course with no effective date$/ do
-  on AdminRegistration do |page|
-    page.set_edited_reg_course_effective_date( @admin_reg.course_section_codes[0].course_code).set nil
-    page.save_edited_course
-  end
+  @admin_reg.course_section_codes[0].edit_course :edit_course_effective_date => " "
 end
 
 Then /^a message appears indicating that the effective date is required$/ do
@@ -591,11 +590,8 @@ Then /^a message appears indicating that the effective date is required$/ do
 end
 
 Then /^I save the changes made to Registration Options and Effective Date$/ do
-  on AdminRegistration do |page|
-    page.set_edited_reg_course_reg_options( @admin_reg.course_section_codes[0].course_code).select "Audit"
-    page.set_edited_reg_course_effective_date( @admin_reg.course_section_codes[0].course_code).set in_a_week[:date_w_slashes]
-    page.save_edited_course
-  end
+  @admin_reg.course_section_codes[0].edit_course :edit_course_effective_date => in_a_week[:date_w_slashes],
+                                                 :edit_course_reg_options => "Audit"
 end
 
 Then /^a message appears indicating that the course has been updated successfully$/ do
@@ -702,5 +698,130 @@ Then /^the second student's course has moved from waitlisted to registered$/ do
     page.get_waitlisted_course("#{ @admin_reg_student2.course_section_codes[0].course_code} (#{ @admin_reg_student2.course_section_codes[0].section})").nil?.should be_true
 
     page.student_info_go  #Needed to leave the browser in a clean state
+  end
+end
+
+When /^I edit a registered course by changing the Registration Options$/ do
+  @admin_reg = create AdminRegistrationData, :student_id => "KS-2078", :term_code=> "201201"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL302",
+                                                             :section=> "1001", :register => true,
+                                                             :confirm_registration => true)
+
+  on AdminRegistration do |page|
+    page.loading.wait_while_present
+    page.dismiss_registration_result
+  end
+end
+
+And /^I save the changes made to Registration Options$/ do
+  @admin_reg.course_section_codes[0].edit_course :edit_course_reg_options => "Pass/Fail"
+end
+
+Then /^the registered course is updated with the new Registration Options$/ do
+  on AdminRegistration do |page|
+    page.loading.wait_while_present
+    page.get_registration_results_success.should match /Course was successfully updated/
+
+    row = page.get_registered_course("#{ @admin_reg.course_section_codes[0].course_code} (#{ @admin_reg.course_section_codes[0].section})")
+    page.get_registered_course_reg_options(row).should match /#{@admin_reg.course_section_codes[0].popup_reg_options}/
+
+    page.student_info_go  #Needed to leave the browser in a clean state
+  end
+end
+
+When /^I edit a registered course by assigning more credits than the allowed maximum$/ do
+  @admin_reg = create AdminRegistrationData, :student_id => "KS-2034", :term_code=> "201201"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL468C",
+                                                             :section=> "1001", :register => true, :popup_credits => "3.0")
+  @admin_reg.course_section_codes[0].confirm_registration :confirm_registration => true,
+                                                          :confirm_course_credits => @admin_reg.course_section_codes[0].popup_credits
+
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "PHYS499A",
+                                                             :section=> "1001", :register => true, :popup_credits => "16.0")
+  @admin_reg.course_section_codes[1].confirm_registration :confirm_registration => true,
+                                                          :confirm_course_credits => @admin_reg.course_section_codes[1].popup_credits
+end
+
+And /^I save the changes made to course credits$/ do
+  @admin_reg.course_section_codes[0].edit_course :edit_course_credits => "6.0"
+end
+
+And /^I save the changed credits to be more than the allowed maximum$/ do
+  @admin_reg.course_section_codes[0].edit_course :edit_course_credits => "6.0"
+end
+
+Then /^the registered course is not updated with the new Course Credits$/ do
+  on AdminRegistration do |page|
+    row = page.get_registered_course("#{ @admin_reg.course_section_codes[0].course_code} (#{ @admin_reg.course_section_codes[0].section})")
+    page.get_registered_course_credits(row).should_not match /#{@admin_reg.course_section_codes[0].popup_credits}/
+  end
+end
+
+And /^a message appears indicating that the updated course failed eligibility$/ do
+  on AdminRegistration do |page|
+    page.loading.wait_while_present
+    page.get_registration_results_warning.should match /Reached maximum credit limit/
+
+    page.student_info_go  #Needed to leave the browser in a clean state
+  end
+end
+
+When /^I register a student for a course with a time conflict$/ do
+  @admin_reg = create AdminRegistrationData, :student_id => "KS-2045", :term_code=> "201201"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL468C",
+                                                             :section=> "1001", :register => true, :popup_credits => "3.0")
+  @admin_reg.course_section_codes[0].confirm_registration :confirm_registration => true,
+                                                          :confirm_course_credits => @admin_reg.course_section_codes[0].popup_credits
+end
+
+And /^I add registered courses by selecting more credits than the allowed maximum$/ do
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL468C",
+                                                             :section=> "1001", :register => true, :popup_credits => "4.0")
+  @admin_reg.course_section_codes[1].confirm_registration :confirm_registration => true,
+                                                          :confirm_course_credits => @admin_reg.course_section_codes[1].popup_credits
+
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "PHYS499A",
+                                                             :section=> "1001", :register => true, :popup_credits => "16.0")
+  @admin_reg.course_section_codes[2].confirm_registration :confirm_registration => true,
+                                                          :confirm_course_credits => @admin_reg.course_section_codes[2].popup_credits
+end
+
+When /^I attempt to edit a registered course by adding more credits than the allowed maximum$/ do
+  @admin_reg = create AdminRegistrationData, :student_id => "KS-2044", :term_code=> "201401"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL468C",
+                                                             :section=> "1001", :register => true, :popup_credits => "4.0")
+  @admin_reg.course_section_codes[0].confirm_registration :confirm_registration => true,
+                                                          :confirm_course_credits => @admin_reg.course_section_codes[0].popup_credits
+
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "PHYS499A",
+                                                             :section=> "1001", :register => true, :popup_credits => "16.0")
+  @admin_reg.course_section_codes[1].confirm_registration :confirm_registration => true,
+                                                          :confirm_course_credits => @admin_reg.course_section_codes[1].popup_credits
+end
+
+When /^I deny the edited course to be updated$/ do
+  on AdminRegistration do |page|
+    page.loading.wait_while_present
+    page.deny_registration_issue
+  end
+end
+
+When /^I attempt to edit a registered course by assigning more credits than the allowed maximum$/ do
+  @admin_reg = create AdminRegistrationData, :student_id => "KS-2046", :term_code=> "201401"
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL468C",
+                                                             :section=> "1001", :register => true, :popup_credits => "4.0")
+  @admin_reg.course_section_codes[0].confirm_registration :confirm_registration => true,
+                                                          :confirm_course_credits => @admin_reg.course_section_codes[0].popup_credits
+
+  @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "PHYS499A",
+                                                             :section=> "1001", :register => true, :popup_credits => "16.0")
+  @admin_reg.course_section_codes[0].confirm_registration :confirm_registration => true,
+                                                          :confirm_course_credits => @admin_reg.course_section_codes[0].popup_credits
+end
+
+When /^I allow the edited course to be updated$/ do
+  on AdminRegistration do |page|
+    page.confirm_registration_issue
+    page.loading.wait_while_present
   end
 end
