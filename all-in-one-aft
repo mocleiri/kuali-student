@@ -1,4 +1,4 @@
-#/usr/bin/env bash -e
+#!/usr/bin/env bash
 
 # Jenkins script to perform an all in one AFT test
 #
@@ -11,7 +11,8 @@
 MVN="mvn"
 
 # make sure all environment variables are set
-set -o nounset
+# exit immediately if a piple returns a non-zero status
+set -o nounset errexit
 
 # some default options
 AFT_URL="http://mirror.svn.kuali.org/repos/student/test/functional-automation/sambal/trunk"
