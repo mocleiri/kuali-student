@@ -212,6 +212,8 @@ class TimeSlot < DataFactory
 
   #compare for default sort order
   def <=>(other)
+    sort0 = @term_type <=> other.term_type
+    return sort0 unless sort0 == 0
     int_days_str = TimeSlot.convert_days_to_ints(@days)
     other_int_days_str = TimeSlot.convert_days_to_ints(other.days)
     sort1 = int_days_str <=> other_int_days_str
@@ -238,6 +240,7 @@ class TimeSlot < DataFactory
     time_slots_list = []
     table.rows[1..-1].each do |row|
       ts = TimeSlot.new(@broswer,{})
+      ts.term_type = row.cells[TimeSlotMaintenance::TIME_SLOT_RESULTS_TERM_TYPE].text
       ts.days = row.cells[TimeSlotMaintenance::TIME_SLOT_RESULTS_DAYS].text
       ts.start_time = row.cells[TimeSlotMaintenance::TIME_SLOT_RESULTS_START_TIME].text
       time_slots_list << ts
