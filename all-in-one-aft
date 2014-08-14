@@ -11,8 +11,9 @@
 MVN="mvn"
 
 # make sure all environment variables are set
+set -o nounset
 # exit immediately if a pipeline returns a non-zero status
-set -o nounset errexit
+set -o errexit
 
 # some default options
 AFT_URL="http://mirror.svn.kuali.org/repos/student/test/functional-automation/sambal/trunk"
