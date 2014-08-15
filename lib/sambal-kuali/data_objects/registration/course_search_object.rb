@@ -43,38 +43,8 @@ class CourseSearch < DataFactory
     on CourseSearchPage do |page|
       sleep 2
       page.go_to_results_page options[:search_string]
-      # page.search_for_a_course options
     end
     set_options(options)
-  end
-
-  def sort_results opts={}
-    return nil if opts[:sort_key].nil?
-    column = case opts[:sort_key]
-               when "course code" then
-                 "Code"
-               when "title" then
-                 "Title"
-               when "credits" then
-                 "Credits"
-             end
-    on CourseSearchPage do |page|
-      wait_until { page.sort_selector(column).visible? }
-      page.sort_results_by(column)
-    end
-  end
-  
-  def navigate_course_detail_page opts={}
-    defaults = {
-        :course_code => @course_code
-    }
-    options = defaults.merge(opts)
-
-    return nil if options[:course_code].nil?
-
-    on CourseSearchPage  do |page|
-      page.course_desc_link_by_course(options[:course_code]).click
-    end
   end
 
   def select_ao opts={}
@@ -90,6 +60,7 @@ class CourseSearch < DataFactory
     edit_course_level opts
     edit_course_code opts
     edit_course_prefix opts
+    edit_selected_section opts
   end
 
   def edit_course_level opts={}
@@ -110,20 +81,11 @@ class CourseSearch < DataFactory
   end
   private :edit_course_prefix
 
-  def set_section opts={}
-    ###
-    ### PAGE NO LONGER DISPLAYING SECTION NUMBER
-    ### IS THIS A PERMANENT CHANGE??
-    ###
-    if opts[:section].nil?
-      on CourseDetailsPage do |page|
-        page.selected_section_span.wait_until_present
-        @selected_section = page.selected_section.match(/\d+/,7)[0]
-      end
-    else
-      @selected_section = opts[:section]
-    end
+  def edit_selected_section opts={}
+    return nil if opts[:selected_section].nil?
+    set_options(opts)
   end
+  private :edit_selected_section
 
   def check_sort_order_in_all_pages opts={}
     defaults = {

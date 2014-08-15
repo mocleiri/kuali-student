@@ -18,7 +18,7 @@ When /^I search for (\w+) courses on the course search page$/ do |search_string|
 end
 
 When /^I sort the results by (course code|title|credits)$/ do |sort_key|
-  @course_search_result.sort_results :sort_key=>sort_key
+  on(CourseSearchPage).sort_results :sort_key=>sort_key
 end
 
 Then /^the course codes should be sorted in ascending order$/ do
@@ -46,7 +46,7 @@ Then /^the credits should be sorted in descending order$/ do
 end
 
 Then /^I can view the details of the (\w+) course$/ do |course_code|
-  @course_search_result.navigate_course_detail_page :course_code=>course_code
+  on(CourseSearchPage).navigate_to_course_detail_page :course_code=>course_code
   on CourseDetailsPage do |page|
     page.details_course_description_div(course_code).wait_until_present
     page.details_course_code.should == course_code
@@ -59,7 +59,7 @@ end
 When /^I select a lecture and lab$/ do
   @course_search_result.select_ao :ao_type=>"Lecture", :ao_code=>"Y"
   @course_search_result.select_ao :ao_type=>"Lab", :ao_code=>"AA"
-  @course_search_result.set_section :section => "1026"
+  @course_search_result.edit :selected_section => "1026"
 end
 
 Then /^I should see only the selected lecture and lab$/ do
@@ -101,7 +101,7 @@ end
 
 And /^I select the same lecture and discussion as in the course$/ do
   sleep 2
-  @course_search_result.navigate_course_detail_page :course_code=>@reg_request.course_code
+  on(CourseSearchPage).navigate_to_course_detail_page :course_code=>@reg_request.course_code
   on CourseDetailsPage do |page|
     page.results_table("Discussion").wait_until_present
     page.toggle_ao_select("O")

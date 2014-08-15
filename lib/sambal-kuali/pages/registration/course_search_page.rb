@@ -92,6 +92,8 @@ class CourseSearchPage < LargeFormatRegisterForCourseBase
   COURSE_DESC = 2
   COURSE_CRED = 3
 
+  COLUMN_HEADINGS = ["","Code","Title","Credits"]
+
   #Gives the digit for course level comparison, eg ENGL200 would have 2 extracted and compared
   value(:courseLevel){ |row,b| row.cells[COURSE_CODE].text.slice(4,1) }
 
@@ -165,6 +167,25 @@ class CourseSearchPage < LargeFormatRegisterForCourseBase
     sleep 1
     toggle_course_details(course_code,reg_group_code) unless remove_course_button(course_code,reg_group_code).visible?
   end
+  
+  def sort_results opts={}
+    return nil if opts[:sort_key].nil?
+    column = case opts[:sort_key]
+               when "course code" then
+                 COLUMN_HEADINGS[COURSE_CODE]
+               when "title" then
+                 COLUMN_HEADINGS[COURSE_DESC]
+               when "credits" then
+                 COLUMN_HEADINGS[COURSE_CRED]
+             end
+      wait_until { sort_selector(column).visible? }
+      sort_results_by(column)
+  end
+
+  def navigate_to_course_detail_page opts={}
+    return nil if opts[:course_code].nil?
+    course_desc_link_by_course(opts[:course_code]).click
+  end
 
   def remove_course_from_cart(course_code, reg_group_code)
     remove_course_button(course_code,reg_group_code).click
@@ -176,15 +197,10 @@ class CourseSearchPage < LargeFormatRegisterForCourseBase
 
 
   def results_list (column=COURSE_CODE)
-    heading_text = case column
-                     when COURSE_CODE then "Code"
-                     when COURSE_DESC then "Title"
-                     when COURSE_CRED then "Credits"
-                   end
     list = []
     no_of_rows = get_results_table_rows_no - 1
-    (0..no_of_rows).each { |index| list << get_table_row_value(index, column).upcase }
-    list.delete_if { |item| item == heading_text.upcase }
+    (0..no_of_rows).each { |index| list << get_table_row_value(index, column).upcase }   # convert to uppercase because application sort is case-insensitive
+    list.delete_if { |item| item == COLUMN_HEADINGS[column].upcase }
     list.delete_if {|item| item == "" }
     list
   end
