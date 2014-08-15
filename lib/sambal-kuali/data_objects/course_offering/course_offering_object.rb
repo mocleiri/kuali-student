@@ -141,21 +141,7 @@ class CourseOffering < DataFactory
 
   # creates course offering based on class attributes
   def create
-    if @create_by_copy != nil
-      @course = create_co_copy(@create_by_copy.course, @create_by_copy.term)
-      #deep copy
-      @term = @create_by_copy.term
-      @activity_offering_cluster_list = collection('ActivityOfferingCluster')
-      @create_by_copy.activity_offering_cluster_list.each do |aoc|
-        copied_cluster = (make ActivityOfferingClusterObject, :private_name=> aoc.private_name, :parent_course_offering => self)
-        copied_cluster.ao_list = aoc.ao_list.sort
-        @activity_offering_cluster_list << copied_cluster
-        sleep 5
-      end
-      # @activity_offering_cluster_list.each do |aoc|
-      #   aoc.parent_course_offering = self
-      # end
-    elsif @create_from_existing != nil
+    if @create_from_existing != nil
       @course = @create_from_existing.course
       #will update @course if suffix added
       @course = create_from_existing_course(@create_from_existing.course, @create_from_existing.term)
@@ -210,6 +196,47 @@ class CourseOffering < DataFactory
     ensure_in_single_co_view
 
     return self
+  end
+
+  def copy opts={}
+    defaults = {
+        :exclude_cancelled_aos => false,
+        :exclude_scheduling => false,
+        :exclude_instructor => false
+    }
+    options = defaults.merge(opts)
+
+    go_to_manage_course_offerings
+    on ManageCourseOfferings do |page|
+      page.term.set term
+      page.input_code.set @course[0,4] #subject code + course level (assumes always more than one CO returned)
+      page.show
+      #make sure showing list
+      begin
+        on ManageCourseOfferings do |page|
+          page.list_all_course_link.wait_until_present(5)
+          page.list_all_courses
+        end
+      rescue Watir::Wait::TimeoutError
+        #means a list was already returned
+      end
+    end
+
+    on ManageCourseOfferingList do |page|
+      page.copy @course
+    end
+    on CopyCourseOffering do |page|
+      page.select_exclude_cancelled_aos if options[:exclude_cancelled_aos]
+      page.select_exclude_scheduling if options[:exclude_scheduling]
+      page.select_exclude_instructor if options[:exclude_instructor]
+      page.create_copy
+    end
+
+    co_copy = self.linked_data_object_copy(nil)
+    on ManageCourseOfferings do |page|
+      co_copy.course = page.input_code.value
+    end
+    co_copy
   end
 
   def default_cluster
@@ -535,7 +562,8 @@ class CourseOffering < DataFactory
     if existing_co != nil
       @course = existing_co
     else
-      @course = create_co_copy(@course, @term)
+      new_course = self.copy
+      @course = new_course.course
       on(ManageCourseOfferings).list_all_courses
 
       if options[:co_status] == OFFERED_STATUS or options[:co_status] == PLANNED_STATUS
@@ -1012,41 +1040,6 @@ class CourseOffering < DataFactory
   end
   private :create_from_existing_course
 
-  def create_co_copy(source_course_code, term)
-    go_to_manage_course_offerings
-    on ManageCourseOfferings do |page|
-      page.term.set term
-      page.input_code.set source_course_code[0,4] #subject code + course level (assumes always more than one CO returned)
-      page.show
-      #make sure showing list
-      begin
-        on ManageCourseOfferings do |page|
-          page.list_all_course_link.wait_until_present(5)
-          page.list_all_courses
-        end
-      rescue Watir::Wait::TimeoutError
-        #means a list was already returned
-      end
-    end
-
-    on ManageCourseOfferingList do |page|
-      page.copy source_course_code
-    end
-    on CopyCourseOffering do |page|
-
-      page.select_exclude_cancelled_aos if @exclude_cancelled_aos
-      page.select_exclude_scheduling if @exclude_scheduling
-      page.select_exclude_instructor if @exclude_instructor
-      page.create_copy
-    end
-
-    on ManageCourseOfferings do |page|
-      @course = page.input_code.value # source_course_code[0,5] #subject code + course level (assumes always more than one CO returned)
-    end
-    return @course
-  end
-  private :create_co_copy
-
   # deletes a list of COs from the subject-code view using the toolbar
   #
   # @example
@@ -1112,6 +1105,5 @@ class CourseOffering < DataFactory
     formatted_credits_list[-2..-1] = "" if formatted_credits_list.length > 0
     formatted_credits_list
   end
-
 end
 

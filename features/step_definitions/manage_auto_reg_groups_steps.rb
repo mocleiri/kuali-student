@@ -35,7 +35,7 @@ Given /^there are default registration groups for a course offering$/ do
 end
 
 Given /^I have created an additional activity offering cluster for a course offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM277", :term=>Rollover::OPEN_SOC_TERM)
+  @course_offering = (make CourseOffering, :course=>"CHEM277", :term=>Rollover::OPEN_SOC_TERM).copy
   #@course_offering = make CourseOffering, :course=>"CHEM277A", :term=>Rollover::OPEN_SOC_TERM
   @course_offering.initialize_with_actual_values
   existing_cluster = @course_offering.activity_offering_cluster_list[0]
@@ -107,12 +107,12 @@ Then /^the Manage Course Offerings page is displayed$/ do
 end
 
 Given /^I manage registration groups for a new course offering with multiple AO types and only one lecture activity$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM237", :term=>"201301")
+  @course_offering = (make CourseOffering, :course=>"CHEM237", :term=>"201301").copy
   @course_offering.initialize_with_actual_values
 end
 
 Given /^I manage registration groups for a new course offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM135", :term=>"201301")
+  @course_offering = (make CourseOffering, :course=>"CHEM135", :term=>"201301").copy
   @course_offering.initialize_with_actual_values
 end
 

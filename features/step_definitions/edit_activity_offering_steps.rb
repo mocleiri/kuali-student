@@ -192,7 +192,7 @@ Then /^the miscellaneous changes are persisted$/ do
 end
 
 Given /^I manage a given Course Offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :course=>"ENGL244")
+  @course_offering = (make CourseOffering, :course=>"ENGL244").copy
   #@course_offering.manage
 end
 
@@ -201,7 +201,7 @@ Given /^I edit an Activity Offering$/ do
 end
 
 Given /^I edit an Activity Offering that has available subterms$/ do
-  @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :course=>"ENGL222", :term=>"201208")
+  @course_offering = (make CourseOffering, :course=>"ENGL222", :term=>"201208").copy
   @activity_offering =  make ActivityOfferingObject, :code => "A", :parent_cluster => @course_offering.default_cluster
   @course_offering.manage
   @activity_offering.edit :defer_save => true
@@ -271,7 +271,7 @@ Then /^I copy the activity offering$/ do
 end
 
 Then /^I copy the parent course offering$/ do
-  @course_offering_copy = create CourseOffering, :create_by_copy => @course_offering
+  @course_offering_copy = @course_offering.copy
 end
 
 Then /^the AO subterm indicator is successfully copied$/ do

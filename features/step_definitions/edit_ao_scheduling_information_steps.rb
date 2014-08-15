@@ -1,11 +1,11 @@
 And /^I am editing an AO with RSIs$/ do
-  course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term => "201208", :course=>"ENGL211")
+  course_offering = (make CourseOffering, :term => "201208", :course=>"ENGL211").copy
   course_offering.initialize_with_actual_values
   @activity_offering = course_offering.get_ao_obj_by_code("A")
 end
 
 And /^I am editing an AO with RSIs in an open term$/ do
-  course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term => "201301", :course=>"ENGL211")
+  course_offering = (make CourseOffering, :term => "201301", :course=>"ENGL211").copy
   course_offering.initialize_with_actual_values
   @activity_offering = course_offering.get_ao_obj_by_code("A")
 end
@@ -136,9 +136,9 @@ end
 
 When /^I edit an Activity Offering with non-standard time slots (approved|not approved)$/ do |approval|
   if approval=="not approved"
-    course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term => "201301", :course=>"ENGL202")
+    course_offering = (make CourseOffering, :term => "201301", :course=>"ENGL202").copy
   else
-    course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :term => "201301", :course=>"ENGL262")
+    course_offering = (make CourseOffering, :term => "201301", :course=>"ENGL262").copy
   end
   @activity_offering = make ActivityOfferingObject, :parent_cluster => course_offering.default_cluster, :code => 'A'
   @activity_offering.get_actual_values_from_page

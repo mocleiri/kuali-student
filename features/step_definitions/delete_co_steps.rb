@@ -1,5 +1,5 @@
 When /^I create a Course Offering with Draft Activity Offerings$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
+  @course_offering = (make CourseOffering).copy
 end
 
 And /^I cancel the deletion of a Course Offering in Course Offering Code view$/ do
@@ -54,7 +54,7 @@ end
 When /^I create multiple Course Offerings with Draft Activity Offerings$/ do
   @course_offering_list = []
   ['ENGL250','ENGL222','ENGL211'].each do |course_code|
-    @course_offering_list << (create CourseOffering, :create_by_copy=>(make CourseOffering, :course=> course_code))
+    @course_offering_list << (make CourseOffering, :course=> course_code).copy
   end
 end
 

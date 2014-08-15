@@ -19,7 +19,7 @@ When /^I want to add a new statement to the Antirequisite section$/ do
 end
 
 When /^I add a new course offering rule to a course$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "PHYS272")
+  @course_offering = (make CourseOffering, :term => "201208", :course => "PHYS272").copy
   on ManageCourseOfferings do |page|
     page.codes_list.each do |code|
       aos = make ActivityOfferingObject, :code => code, :parent_cluster => @course_offering.default_cluster
@@ -176,7 +176,7 @@ When /^I want to compare the CO to the CLU for the Student Eligibility & Prerequ
 end
 
 When /^I add a new course offering requisite to a course$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "PHYS272")
+  @course_offering = (make CourseOffering, :term => "201208", :course => "PHYS272").copy
   on ManageCourseOfferings do |page|
     page.codes_list.each do |code|
       aos = make ActivityOfferingObject, :code => code, :parent_cluster => @course_offering.default_cluster

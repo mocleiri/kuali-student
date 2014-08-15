@@ -11,7 +11,7 @@ Given /^I have initiated two browser sessions with different users$/ do
 end
 
 When /^two users are concurrently editing the same course offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM132")
+  @course_offering = (make CourseOffering, :course=>"CHEM132").copy
   orig_co_code = @course_offering.course
 
   @course_offering.manage

@@ -24,7 +24,7 @@ When /^I edit an existing activity offering with (\d+) seat pools?$/ do |number|
     pool_list << seatpool
   end
 
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
+  @course_offering = (make CourseOffering).copy
   @course_offering.manage
   @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :max_enrollment => 100, :defer_save => true

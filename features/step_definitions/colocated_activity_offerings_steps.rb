@@ -14,7 +14,7 @@ When /^I create "([2-9])" COs with an AO in each$/ do |number_of_cos_to_create|
   @ao_list = []
 
   for i in 1..number_of_cos_to_create.to_i
-    co = create CourseOffering, :create_by_copy => (make CourseOffering, :course => "ENGL255", :term => Rollover::MAIN_TEST_TERM_TARGET)
+    co = (make CourseOffering, :course => "ENGL255", :term => Rollover::MAIN_TEST_TERM_TARGET).copy
     ao = make ActivityOfferingObject, :code => "A", :parent_cluster => co.default_cluster
     @ao_list << ao
   end
@@ -102,7 +102,7 @@ Then /^the first colocated AO is not colocated with any remaining AOs$/ do
 end
 
 When /^I designate a valid term and Course Offering Code with a fully colocated AO$/ do
-  co = create CourseOffering, :create_by_copy => (make CourseOffering, :course => "CHEM441", :term => "201208")
+  co = (make CourseOffering, :course => "CHEM441", :term => "201208").copy
   @activity_offering = make ActivityOfferingObject, :code => "A", :parent_cluster => co.activity_offering_cluster_list[0]
 end
 

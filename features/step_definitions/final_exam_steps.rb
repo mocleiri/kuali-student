@@ -101,7 +101,7 @@ When /^I return to the Edit Co page for the course after updating the change$/ d
 end
 
 When /^I create a Course Offering from an existing Course Offering with a standard final exam option$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "CHEM277")
+  @course_offering = (make CourseOffering, :term => "201208", :course => "CHEM277").copy
 
   @activity_offering = make ActivityOfferingObject, :code => "A", :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :send_to_scheduler => true
@@ -203,7 +203,7 @@ end
 When /^I view the Exam Offerings for a CO created from an existing CO with a standard final exam driven by Course Offering$/ do
   @original_co = engl304_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   @course_offering.edit :final_exam_type => "Standard Final Exam",
                                  :final_exam_driver => "Final Exam Per Course Offering"
 
@@ -218,7 +218,7 @@ end
 Given /^there is an exsiting CO with a Standard Final Exam option$/ do
   @original_co = engl301_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   @activity_offering = make ActivityOfferingObject, :code => "A", :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :send_to_scheduler => true
 end
@@ -226,7 +226,7 @@ end
 Given /^that Activity Offerings exist for the selected Course Offering$/ do
   @original_co = engl304_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   #setup existing format
   @course_offering.delivery_format_list[0].format = "Lecture/Discussion"
   @activity_offering = make ActivityOfferingObject, :code => "A", :parent_cluster => @course_offering.default_cluster
@@ -331,13 +331,13 @@ end
 When /^I view the Exam Offerings for a CO with two AOs and a standard final exam driven by Activity Offering$/ do
   @original_co = engl201_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   on(ManageCourseOfferings).view_exam_offerings
 end
 
 Given /^that the CO has two existing AOs and a standard final exam driven by Activity Offering$/ do
   @original_co = engl201_published_eo_create_term
-  @course_offering = create CourseOffering, :create_by_copy=>(@original_co)
+  @course_offering = @original_co.copy
 end
 
 When /^I add two new AOs to the CO and then create a copy of the CO$/ do
@@ -353,7 +353,7 @@ end
 
 #TODO: confirm not used
 When /^I view the Exam Offerings for a CO with two new AOs and a standard final exam driven by Activity Offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "ENGL201")
+  @course_offering = (make CourseOffering, :term => "201208", :course => "ENGL201").copy
   @activity_offering = @course_offering.activity_offering_cluster_list[0].ao_list[0]
   @activity_offering.edit :send_to_scheduler => true
 
@@ -366,7 +366,7 @@ When /^I view the Exam Offerings for a CO with two new AOs and a standard final 
 end
 
 When /^I create a CO with two new AOs and then view the Exam Offerings where the CO has a standard final exam driven by Activity Offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "ENGL201")
+  @course_offering = (make CourseOffering, :term => "201208", :course => "ENGL201").copy
   @activity_offering = @course_offering.activity_offering_cluster_list[0].ao_list[0]
   #  make ActivityOfferingObject, :code => "A", :parent_course_offering => @course_offering
   @activity_offering.edit :send_to_scheduler => true
@@ -416,7 +416,7 @@ When /^I view the Exam Offerings for a CO with a standard final exam driven by C
 
 
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   @course_offering.delivery_format_list[0].format = "Lecture/Discussion"
   @course_offering.edit :final_exam_type => "Standard Final Exam",
                                  :final_exam_driver => "Final Exam Per Course Offering"
@@ -454,7 +454,7 @@ When /^I view the Exam Offerings for a CO in an Open SOC with a standard final e
     activity_offering.add_req_sched_info :rsi_obj => si_obj
   end
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   @course_offering.delivery_format_list[0].format = "Lecture/Discussion"
 
   @course_offering.edit :final_exam_type => "Standard Final Exam", :final_exam_driver => "Final Exam Per Activity Offering",
@@ -481,7 +481,7 @@ Given /^that the CO is set to have exam offerings driven by CO$/ do
 
   @original_co = engl305_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   @course_offering.edit :final_exam_type => "Standard Final Exam",
                                  :final_exam_driver => "Final Exam Per Course Offering"
 end
@@ -489,7 +489,7 @@ end
 Given /^that the CO is set to have exam offerings driven by AO$/ do
   @original_co = engl305_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   @course_offering.delivery_format_list[0].format = "Lecture/Discussion"
 end
 
@@ -508,7 +508,7 @@ end
 When /^I view the Exam Offerings for a CO where the Activity Offering Standard FE is changed to Alternate Final Exam$/ do
   @original_co = engl304_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   @course_offering.delivery_format_list[0].format = "Lecture/Discussion"
   @course_offering.initialize_with_actual_values
 
@@ -518,7 +518,7 @@ When /^I view the Exam Offerings for a CO where the Activity Offering Standard F
 end
 
 When /^I view the Exam Offerings for a CO where the Course Offering No FE is changed to Standard Final Exam$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "ENGL304")
+  @course_offering = (make CourseOffering, :term => "201208", :course => "ENGL304").copy
   @course_offering.edit :final_exam_type => "No Final Exam or Assessment"
 
   @course_offering.edit :final_exam_type => "Standard Final Exam",
@@ -530,7 +530,7 @@ end
 Given /^that the CO is set to have no exam offerings$/ do
   @original_co = engl304_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   @course_offering.edit :final_exam_type => "No Final Exam or Assessment"
 end
 
@@ -613,11 +613,12 @@ When /^I add an Exam Period to the term$/ do
 end
 
 When /^I add an Exam Period to the new term$/ do
-  exam_period = make ExamPeriodObject, :parent_term => @calendar.terms[0], :start_date=>"12/11/#{@calendar.year}",
-                     :end_date=>"12/20/#{@calendar.year}"
+  exam_period = make ExamPeriodObject, :parent_term => @calendar.terms[0], :start_date=>"09/11/#{@calendar.year}",
+                     :end_date=>"09/20/#{@calendar.year}"
 
   @calendar.terms[0].add_exam_period exam_period
   @calendar.terms[0].save
+  sleep 2
 end
 
 When /^I deselect Exclude Saturday and Exclude Sunday for the Exam Period$/ do
@@ -639,7 +640,7 @@ end
 When /^there is more than one Activity Offering for the Course$/ do
   @original_co = engl301_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
 end
 
 When /^I cancel an Activity Offering for a CO with a standard final exam driven by Course Offering$/ do
@@ -651,7 +652,7 @@ When /^I cancel an Activity Offering for a CO with a standard final exam driven 
 end
 
 When /^I cancel an Activity Offering for a CO with a standard final exam driven by Activity Offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "ENGL301")
+  @course_offering = (make CourseOffering, :term => "201208", :course => "ENGL301").copy
   @activity_offering = make ActivityOfferingObject, :code => "A", :parent_cluster => @course_offering.default_cluster
   @activity_offering.cancel :navigate_to_page => false
 end
@@ -660,7 +661,7 @@ Given /^that the Lecture AO that drives the exam is not in a cancelled state$/ d
   @original_co = engl301_published_eo_create_term
 
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   delivery_format_list = []
   delivery_format_list[0] = make DeliveryFormatObject, :format => "Lecture/Discussion", :grade_format => "Course Offering", :final_exam_activity => "Lecture"
 
@@ -677,7 +678,7 @@ end
 When /^I cancel all Activity Offerings for a CO with a standard final exam driven by Course Offering$/ do
   @original_co = engl301_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   @course_offering.edit :final_exam_type => "Standard Final Exam",
                                  :final_exam_driver => "Final Exam Per Course Offering"
 
@@ -700,7 +701,7 @@ end
 When /^I cancel all Activity Offerings for a CO with a standard final exam driven by Activity Offering$/ do
   @original_co = engl301_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   delivery_format_list = []
   delivery_format_list[0] = make DeliveryFormatObject, :format => "Lecture/Discussion", :grade_format => "Course Offering", :final_exam_activity => "Lecture"
 
@@ -1008,7 +1009,7 @@ end
 When /^I suspend an Activity Offering for a CO with a standard final exam driven by Course Offering$/ do
   @original_co = engl301_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   @course_offering.edit :final_exam_type => "Standard Final Exam",
                                  :final_exam_driver => "Final Exam Per Course Offering"
 
@@ -1021,7 +1022,7 @@ end
 When /^I suspend the Course Offering for a CO with a standard final exam driven by Course Offering$/ do
   @original_co = engl301_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   @course_offering.edit :final_exam_type => "Standard Final Exam",
                                  :final_exam_driver => "Final Exam Per Course Offering"
 
@@ -1036,7 +1037,7 @@ When /^I suspend all Activity Offerings for a CO with a standard final exam driv
   @original_co = engl301_published_eo_create_term
 
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   @course_offering.edit :final_exam_type => "Standard Final Exam",
                                  :final_exam_driver => "Final Exam Per Course Offering"
 
@@ -1050,7 +1051,7 @@ end
 When /^I suspend an Activity Offering for a CO with a standard final exam driven by Activity Offering$/ do
   @original_co = engl301_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
   @course_offering.delivery_format_list[0].format = "Lecture"
   @course_offering.delivery_format_list[0].grade_format = "Lecture"
   @course_offering.delivery_format_list[0].final_exam_activity = "Lecture"
@@ -1511,7 +1512,7 @@ end
 Given /^that a CO allows for multiple Format Offerings and has one existing format offering and a standard exam driven by Course Offering$/ do
   @original_co = engl304_published_eo_create_term
 
-  @course_offering = create CourseOffering, :create_by_copy=> @original_co
+  @course_offering = @original_co.copy
 end
 
 When /^I edit the CO to add a second Format Offering$/ do
@@ -1527,7 +1528,7 @@ When /^I create a Course Offering from copy in a term that uses the matrix and h
 end
 
 When /^I create a Course Offering from copy in a term with a defined final exam period that uses the FE matrix$/ do
-  @copy_co = create CourseOffering, :create_by_copy => @course_offering
+  @copy_co = @course_offering.copy
 end
 
 Then /^there should be a warning message stating that "(.*?)"$/ do |exp_msg|
@@ -1569,13 +1570,13 @@ And /^I have created an Activity Offering that only has Requested Scheduling Inf
 end
 
 When /^I create a Course Offering from copy in a term with a defined final exam period that uses the matrix$/ do
-  @course_offering = create CourseOffering, :create_by_copy => @original_co
+  @course_offering = @original_co.copy
   @course_offering.initialize_with_actual_values
   @activity_offering = @course_offering.activity_offering_cluster_list[0].ao_list[0]
 end
 
 When /^I create a copy of the initial course offering in a term that uses the FE matrix and has defined final exam period$/ do
-  @course_offering = create CourseOffering, :create_by_copy => @original_co
+  @course_offering = @original_co.copy
   @course_offering.initialize_with_actual_values
   @activity_offering = @course_offering.activity_offering_cluster_list[0].ao_list[0]
 end
@@ -1623,7 +1624,7 @@ Given /^that the Course Offering has an AO-driven exam in a term that uses the F
   end
 
 When /^I create a copy of the Course Offering and decide to exclude all scheduling information$/ do
-  @course_offering = create CourseOffering, :create_by_copy => @original_co, :exclude_scheduling => true
+  @course_offering = @original_co.copy :exclude_scheduling => true
   @course_offering.initialize_with_actual_values
   @activity_offering = @course_offering.activity_offering_cluster_list[0].ao_list[0]
 end

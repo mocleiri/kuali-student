@@ -1,5 +1,5 @@
 When /^I create a seat pool for an activity offering by completing all fields$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
+  @course_offering = (make CourseOffering).copy
   @course_offering.manage
   @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :max_enrollment => 100, :defer_save => true
@@ -32,7 +32,7 @@ Then /^a warning message is displayed about seats exceeding max enrollment$/ do
 end
 
 When /^I create seat pools for an activity offering and priorities are duplicated and not sequential$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
+  @course_offering = (make CourseOffering).copy
   @course_offering.manage
   @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :max_enrollment => 100, :defer_save => true
@@ -56,7 +56,7 @@ Then /^the seat pool priorities are correctly sequenced$/ do
 end
 
 When /^I add a seat pool using a population that is already used for that activity offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
+  @course_offering = (make CourseOffering).copy
   @course_offering.manage
   @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :max_enrollment => 100, :defer_save => true
@@ -84,7 +84,7 @@ end
 
 
 When /^I add a seat pool without specifying a population$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering)
+  @course_offering = (make CourseOffering).copy
   @course_offering.manage
   @activity_offering = create ActivityOfferingObject, :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :max_enrollment => 100, :defer_save => true

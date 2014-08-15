@@ -98,7 +98,7 @@ When /^I compare the added rule with the CO and CLU rules in the Student Eligibi
 end
 
 When /^I edit a course offering requisite at the AO level by adding a new text statement$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "PHYS272")
+  @course_offering = (make CourseOffering, :term => "201208", :course => "PHYS272").copy
   on ManageCourseOfferings do |page|
     page.codes_list.each do |code|
       aos = make ActivityOfferingObject, :code => code, :parent_cluster => @course_offering.default_cluster
@@ -120,7 +120,7 @@ When /^I edit a course offering requisite at the AO level by adding a new text s
 end
 
 When /^I suppress a course offering rule for an activity in a course$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "PHYS272")
+  @course_offering = (make CourseOffering, :term => "201208", :course => "PHYS272").copy
   on ManageCourseOfferings do |page|
     page.codes_list.each do |code|
       aos = make ActivityOfferingObject, :code => code, :parent_cluster => @course_offering.default_cluster
@@ -247,7 +247,7 @@ end
 
 #Antirequisite
 When /^I add a text rule to the Antirequisite section$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "PHYS272")
+  @course_offering = (make CourseOffering, :term => "201208", :course => "PHYS272").copy
   on ManageCourseOfferings do |page|
     page.codes_list.each do |code|
       aos = make ActivityOfferingObject, :code => code, :parent_cluster => @course_offering.default_cluster
@@ -270,7 +270,7 @@ end
 
 #Corequisite
 When /^I suppress a course offering rule for a specific activity in a course$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "PHYS272")
+  @course_offering = (make CourseOffering, :term => "201208", :course => "PHYS272").copy
   on ManageCourseOfferings do |page|
     page.codes_list.each do |code|
       aos = make ActivityOfferingObject, :code => code, :parent_cluster => @course_offering.default_cluster
@@ -284,7 +284,7 @@ When /^I suppress a course offering rule for a specific activity in a course$/ d
 end
 
 When /^I edit a course offering rule at the AO level by adding a new text statement$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201208", :course => "PHYS272")
+  @course_offering = (make CourseOffering, :term => "201208", :course => "PHYS272").copy
   on ManageCourseOfferings do |page|
     page.codes_list.each do |code|
       aos = make ActivityOfferingObject, :code => code, :parent_cluster => @course_offering.default_cluster
@@ -307,7 +307,7 @@ end
 
 ###General steps###
 Given /^I have made changes to multiple AO Requisites for the same course offering$/ do
-  @course_offering = create CourseOffering, :term => "201208", :create_by_copy=>(make CourseOffering, :term => "201208", :course => "CHEM277")
+  @course_offering = (make CourseOffering, :term => "201208", :course => "CHEM277").copy
   @activity_offering =  make ActivityOfferingObject, :code => "A", :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :send_to_scheduler => true
 

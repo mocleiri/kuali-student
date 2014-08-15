@@ -59,7 +59,7 @@ When /^I create a course offering from an existing offering within same term and
 end
 
 When /^I create a course offering from an existing offering within same term and choose to exclude instructor information using Manage CO$/ do
-  @course_offering = create CourseOffering, :exclude_instructor => true, :create_by_copy => (make CourseOffering, :course => "CHEM132", :term=> Rollover::MAIN_TEST_TERM_SOURCE)
+  @course_offering = (make CourseOffering, :course => "CHEM132", :term=> Rollover::MAIN_TEST_TERM_SOURCE).copy :exclude_instructor => true
 end
 
 Then /^the new Course Offering should be displayed in the list of available offerings$/ do
@@ -172,5 +172,5 @@ Then(/^the new Course Offering should not contain cancelled activity offerings$/
 end
 
 When(/^I copy the existing offering to create a course in the same term and choose to exclude cancelled activity offerings$/) do
-  @course_offering = create CourseOffering, :course => "CHEM483", :exclude_cancelled_aos => true, :create_by_copy=>(@orig_course_offering)
+  @course_offering = (@orig_course_offering).copy :exclude_cancelled_aos => true
 end

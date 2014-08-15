@@ -94,7 +94,7 @@ end
 
 
 When /^I create a cross-listed Course Offering$/ do
-  @cross_listed_co = create CourseOffering, :create_by_copy => (make CourseOffering, :course => "ENGL250", :term => Rollover::MAIN_TEST_TERM_SOURCE)
+  @cross_listed_co = (make CourseOffering, :course => "ENGL250", :term => Rollover::MAIN_TEST_TERM_SOURCE).copy
   @cross_listed_co.capture_crosslist_aliases
 end
 

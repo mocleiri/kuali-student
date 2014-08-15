@@ -15,7 +15,7 @@ When /^I copy an AO with Actual Scheduling Information$/ do
   @course_offering_source = make CourseOffering, :course => "CHEM276"
   @course_offering_source.initialize_with_actual_values
 
-  @course_offering = create CourseOffering, :create_by_copy => @course_offering_source
+  @course_offering = @course_offering_source.copy
   @ao_copy = make ActivityOfferingObject, :code => 'A',
                     :parent_cluster => @course_offering.default_cluster
 end

@@ -1,5 +1,5 @@
 When /^I edit a course offering with the waitlists active option selected$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"ENGL271")
+  @course_offering = (make CourseOffering, :course=>"ENGL271").copy
 end
 
 When /^I can return to manage course offering using the cancel button$/ do
@@ -8,7 +8,7 @@ When /^I can return to manage course offering using the cancel button$/ do
 end
 
 When /^I edit a course offering with multiple format types$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"ENGL271")
+  @course_offering = (make CourseOffering, :course=>"ENGL271").copy
   #setup values for existing delivery format
   @course_offering.delivery_format_list[0].format="Lecture Only"
   @course_offering.delivery_format_list[0].grade_format="Lecture"
@@ -16,7 +16,7 @@ When /^I edit a course offering with multiple format types$/ do
 end
 
 When /^I edit a course offering with 2 format types$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"ENGL271")
+  @course_offering = (make CourseOffering, :course=>"ENGL271").copy
   #setup values for existing delivery format
   @course_offering.delivery_format_list[0].format="Lecture Only"
   @course_offering.delivery_format_list[0].grade_format="Lecture"
@@ -24,11 +24,11 @@ When /^I edit a course offering with 2 format types$/ do
 end
 
 When /^I edit a course offering with multiple registration options and credit types$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM399A")
+  @course_offering = (make CourseOffering, :course=>"CHEM399A").copy
 end
 
 When /^I edit a course offering with multiple grading options$/ do
-    @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"ENGL899", :term => "201205")
+    @course_offering = (make CourseOffering, :course=>"ENGL899", :term => "201205").copy
 end
 
 And /^I clear the existing registration options$/ do
@@ -187,7 +187,7 @@ Then /^I edit the same course offering$/ do
 end
 
 When /^I edit a course offering$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM132")
+  @course_offering = (make CourseOffering, :course=>"CHEM132").copy
   @course_offering.edit :defer_save => true
 end
 

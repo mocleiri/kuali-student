@@ -1,5 +1,5 @@
 When /^I create a Course Offering and add (\d+) Activity Offerings$/ do |number_of_aos_to_create|
-  @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :course=>"CHEM401")
+  @course_offering = (make CourseOffering, :course=>"CHEM401").copy
   @course_offering.initialize_with_actual_values
   @orig_number_aos = @course_offering.get_ao_list.count
   @activity_offering = make ActivityOfferingObject, :format => "Lecture Only"
@@ -36,7 +36,7 @@ end
 
 
 When /^I designate a valid term and cross\-listed Course Offering Code$/ do
-  @course_offering = create CourseOffering, :create_by_copy => (make CourseOffering, :course => "ENGL250")
+  @course_offering = (make CourseOffering, :course => "ENGL250").copy
 end
 
 And /^I? ?add an Activity Offering to the cross-listed CO$/ do

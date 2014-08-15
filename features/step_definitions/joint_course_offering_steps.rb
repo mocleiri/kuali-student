@@ -1,5 +1,5 @@
 When /^I create a new jointly defined Course Offering$/ do
-  @joint_co = create CourseOffering, :create_by_copy => (make CourseOffering, :course => "HIST300", :term => "201208")
+  @joint_co = (make CourseOffering, :course => "HIST300", :term => "201208").copy
 end
 
 And /^I attempt to "(delete|delete and cancel)" a joint Course Offering$/ do |delete_flag|

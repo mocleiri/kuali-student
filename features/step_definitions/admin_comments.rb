@@ -1,11 +1,11 @@
 And(/^I add a comment to an activity offering$/) do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"PHYS272")
+  @course_offering = (make CourseOffering, :course=>"PHYS272").copy
   @course_offering.initialize_with_actual_values
   @course_offering.get_ao_obj_by_code('A').add_admin_comment :comment_obj => (make AdminCommentObject)
 end
 
 And(/^I add a comment to a course offering$/) do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"CHEM481")
+  @course_offering = (make CourseOffering, :course=>"CHEM481").copy
   @course_offering.add_admin_comment :comment_obj => (make AdminCommentObject)
 end
 
@@ -24,8 +24,7 @@ Then(/^the activity offering comment.*can be viewed successfully$/) do
 end
 
 And(/^I manage comments for an activity offering with existing comments$/) do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"PHYS272")
-  #@course_offering = make CourseOffering, :course=>"PHYS272Q"
+  @course_offering = (make CourseOffering, :course=>"PHYS272").copy
   @course_offering.initialize_with_actual_values
   @course_offering.get_ao_obj_by_code('A').add_admin_comment :comment_obj => (make AdminCommentObject)
 end
@@ -151,13 +150,12 @@ end
 
 
 And(/^I manage comments for a course offering with existing comments$/) do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>'CHEM481')
-  #@course_offering = make CourseOffering, :course=>'CHEM481B'
+  @course_offering = (make CourseOffering, :course=>'CHEM481').copy
   @course_offering.add_admin_comment :comment_obj => (make AdminCommentObject)
 end
 
 And(/^I manage comments for an? (?:course|activity) offering in my admin org$/) do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>'ENGL302')
+  @course_offering = (make CourseOffering, :course=>'ENGL302').copy
 end
 
 Then(/^I am able to add new comments for the activity offering$/) do
@@ -247,7 +245,7 @@ end
 
 Given(/^there is a course offering with existing comments$/) do
   step "I am logged in as a Schedule Coordinator"
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>'CHEM481')
+  @course_offering = (make CourseOffering, :course=>'CHEM481').copy
   @course_offering.add_admin_comment :comment_obj => (make AdminCommentObject)
 end
 
@@ -291,7 +289,7 @@ end
 
 Given(/^there is an activity offering with existing comments$/) do
   step "I am logged in as a Schedule Coordinator"
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>'CHEM481')
+  @course_offering = (make CourseOffering, :course=>'CHEM481').copy
   @course_offering.initialize_with_actual_values
   @activity_offering = @course_offering.get_ao_obj_by_code('A')
   @activity_offering.add_admin_comment :comment_obj => (make AdminCommentObject)

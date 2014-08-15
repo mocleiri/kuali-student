@@ -65,7 +65,7 @@ class AORequisitesData < DataFactory
       @course_offering = make CourseOffering, {:course => @course, :term => @term}
       @course_offering.manage
     else
-      @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => @term, :course => @course)
+      @course_offering = (make CourseOffering, :term => @term, :course => @course).copy
     end
 
     on ManageCourseOfferings do |page|

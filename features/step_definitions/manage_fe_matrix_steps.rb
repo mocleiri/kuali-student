@@ -601,7 +601,7 @@ end
 
 
 Given /^that I copy a Course Offering that has an AO-driven exam that is marked to use the matrix and Requested Scheduling Information for the exam exists on the Final Exam Matrix$/ do
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :term => "201301", :course => "HIST110")
+  @course_offering = (make CourseOffering, :term => "201301", :course => "HIST110").copy
   @course_offering.delivery_format_list[0].edit :final_exam_activity => "Discussion"
 
   @matrix = make FinalExamMatrix, :term_type => "Spring Term"
