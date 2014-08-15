@@ -124,6 +124,43 @@ class CourseSearchPage < LargeFormatRegisterForCourseBase
     toggle_add_dialog if submit_button.visible?
   end
 
+  def select_facet(facet_type,facet_value=nil)
+    seats_avail_facet_div.wait_until_present
+    case facet_type
+      when "avail_seats" then
+        toggle_seats_avail unless seats_avail_toggle.attribute_value("class") =~ /kscr-SearchFacet-option--Selected/i
+        clear_seats_avail_facet.wait_until_present
+      when "credit" then
+        toggle_credits(facet_value) unless credits_toggle(facet_value).attribute_value("class") =~ /kscr-SearchFacet-option--Selected/i
+        clear_credit_facet.wait_until_present
+      when "course_level"
+        toggle_course_level(facet_value) unless course_level_toggle(facet_value).attribute_value("class") =~ /kscr-SearchFacet-option--Selected/i
+        clear_level_facet.wait_until_present
+      when "course_prefix"
+        toggle_course_prefix(facet_value) unless course_prefix_toggle(facet_value).attribute_value("class") =~ /kscr-SearchFacet-option--Selected/i
+        clear_prefix_facet.wait_until_present
+    end
+    sleep 1
+  end
+
+  def clear_facet(facet_type,facet_value=nil)
+    seats_avail_facet_div.wait_until_present
+    case facet_type
+      when "avail_seats" then
+        toggle_seats_avail if seats_avail_toggle.attribute_value("class") =~ /kscr-SearchFacet-option--Selected/i
+        clear_seats_avail_facet.wait_while_present
+      when "credit" then
+        toggle_credits(facet_value) if credits_toggle(facet_value).attribute_value("class") =~ /kscr-SearchFacet-option--Selected/i
+        clear_credit_facet.wait_while_present
+      when "course_level" then
+        toggle_course_level(facet_value) if course_level_toggle(facet_value).attribute_value("class") =~ /kscr-SearchFacet-option--Selected/i
+        clear_level_facet.wait_while_present
+      when "course_prefix" then
+        toggle_course_prefix(facet_value) if course_prefix_toggle(facet_value).attribute_value("class") =~ /kscr-SearchFacet-option--Selected/i
+        clear_prefix_facet.wait_while_present
+    end
+  end
+
   def show_course_details(course_code, reg_group_code)
     sleep 1
     toggle_course_details(course_code,reg_group_code) unless remove_course_button(course_code,reg_group_code).visible?

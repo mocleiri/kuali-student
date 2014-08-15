@@ -7,13 +7,13 @@ end
 
 
 And /^I narrow the search results to courses with available seats$/ do
-  @course_search_result.select_facet("avail_seats")
+  on(CourseSearchPage).select_facet("avail_seats")
 end
 
 
 And(/^I narrow the search results by a specific course prefix$/) do
   @course_search_result.edit :course_prefix => "ENGL"
-  @course_search_result.select_facet("course_prefix")
+  on(CourseSearchPage).select_facet("course_prefix",@course_search_result.course_prefix)
 end
 
 
@@ -49,19 +49,7 @@ end
 
 And(/^I narrow the search results by a specific course level$/) do
   @course_search_result.edit :course_level=>"400"
-  @course_search_result.select_facet("course_level")
-end
-
-And /^I narrow the search results by a specific course level and a specific course prefix$/ do
-  on CourseSearchPage do |page|
-    @course_search_result.select_facet("course_level")
-    page.clear_level_facet.wait_until_present
-    sleep 1
-    @course_search_result.select_facet("course_prefix")
-    page.clear_prefix_facet.wait_until_present
-    sleep 1
-    #things
-  end
+  on(CourseSearchPage).select_facet("course_level",@course_search_result.course_level)
 end
 
 Then /^I should see only courses with the specific course level and the specific course prefix$/ do
@@ -92,7 +80,7 @@ When /^I narrow the search results using any facet$/ do
   on CourseSearchPage do |page|
     @search_results_before_facet_selection=page.results_table.text
   end
-  @course_search_result.select_facet("course_level")
+  on(CourseSearchPage).select_facet("course_level",@course_search_result.course_level)
 end
 
 

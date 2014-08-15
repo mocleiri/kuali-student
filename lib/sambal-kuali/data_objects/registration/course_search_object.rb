@@ -48,47 +48,6 @@ class CourseSearch < DataFactory
     set_options(options)
   end
 
-  def select_facet(facet_type)
-    on CourseSearchPage do |page|
-      page.seats_avail_facet_div.wait_until_present
-      case facet_type
-        when "avail_seats" then
-          page.toggle_seats_avail
-          page.clear_seats_avail_facet.wait_until_present
-        when "credit" then
-          page.toggle_credits(@credit)
-          page.clear_credit_facet.wait_until_present
-        when "course_level"
-          page.toggle_course_level(@course_level)
-          page.clear_level_facet.wait_until_present
-        when "course_prefix"
-          page.toggle_course_prefix(@course_prefix)
-          page.clear_prefix_facet.wait_until_present
-      end
-    end
-    sleep 1
-  end
-
-  def clear_facet(facet_type)
-    on CourseSearchPage do |page|
-      page.seats_avail_facet_div.wait_until_present
-      case facet_type
-        when "avail_seats" then
-          page.toggle_seats_avail if page.seats_avail_toggle.attribute_value("class") =~ /kscr-SearchFacet-option--Selected/i
-          page.clear_seats_avail_facet.wait_while_present
-        when "credit" then
-          page.toggle_credits(@credit) if page.credits_toggle(@credit).attribute_value("class") =~ /kscr-SearchFacet-option--Selected/i
-          page.clear_credit_facet.wait_while_present
-        when "course_level" then
-          page.toggle_course_level(@course_level) if page.course_level_toggle(@course_level).attribute_value("class") =~ /kscr-SearchFacet-option--Selected/i
-          page.clear_level_facet.wait_while_present
-        when "course_prefix" then
-          page.toggle_course_prefix(@course_prefix) if page.course_prefix_toggle(@course_prefix).attribute_value("class") =~ /kscr-SearchFacet-option--Selected/i
-          page.clear_prefix_facet.wait_while_present
-      end
-    end
-  end
-
   def sort_results opts={}
     return nil if opts[:sort_key].nil?
     column = case opts[:sort_key]
