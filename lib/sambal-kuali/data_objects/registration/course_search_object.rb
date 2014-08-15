@@ -16,11 +16,11 @@ class CourseSearch < DataFactory
     @browser = browser
 
     defaults = {
-        :search_string => "",
-        :course_code => "",
-        :course_prefix => "",
-        :course_level => "",
-        :selected_section => ""
+        :search_string => nil,
+        :course_code => nil,
+        :course_prefix => nil,
+        :course_level => nil,
+        :selected_section => nil
     }
     options = defaults.merge(opts)
     set_options(options)
