@@ -92,15 +92,16 @@ class AdminRegistration < BasePage
   action(:cancel_registration){ |b| b.cancel_registration_link.when_present.click}
 
   element(:admin_registration_issues_section) { |b| b.frm.div(id: "KS-AdminRegistration-Results").table}
-  element(:confirm_registration_issue_btn) { |b| b.admin_registration_issues_section.button(id: /allowActionButton/)}
-  action(:confirm_registration_issue){ |b| b.confirm_registration_issue_btn.when_present.click}
-  element(:deny_registration_issue_btn) { |b| b.admin_registration_issues_section.button(id: /denyActionButton/)}
-  action(:deny_registration_issue){ |b| b.deny_registration_issue_btn.when_present.click}
-  element(:dismiss_registration_results_btn) { |b| b.admin_registration_issues_section.i(class: "ks-fontello-icon-cancel")}
-  action(:dismiss_registration_result){ |b| b.dismiss_registration_results_btn.when_present.click}
-
   element(:registration_results_success) { |b| b.admin_registration_issues_section.row(class: "alert-success")}
   element(:registration_results_warning) { |b| b.admin_registration_issues_section.row(class: "alert-warning")}
+
+  element(:dismiss_registration_results_btn) { |b| b.registration_results_success.i(class: "ks-fontello-icon-cancel")}
+  action(:dismiss_registration_result){ |b| b.dismiss_registration_results_btn.when_present.click}
+
+  element(:confirm_registration_issue_btn) { |b| b.registration_results_warning.button(id: /allowActionButton/)}
+  action(:confirm_registration_issue){ |b| b.confirm_registration_issue_btn.when_present.click}
+  element(:deny_registration_issue_btn) { |b| b.registration_results_warning.button(id: /denyActionButton/)}
+  action(:deny_registration_issue){ |b| b.deny_registration_issue_btn.when_present.click}
 
   element(:get_registration_results_success) { |b| b.registration_results_success.div(class: "uif-horizontalBoxGroup clearfix").when_present.text}
   element(:get_registration_results_warning) { |b| b.registration_results_warning.div(class: "uif-horizontalBoxGroup clearfix").when_present.text}
@@ -188,14 +189,14 @@ class AdminRegistration < BasePage
 
   def edit_registered_course(course, section)
     loading.wait_while_present
-    wait_until { registered_courses_table.row(text: /#{course} \(#{section}\)/).exists? }
+    wait_until { registered_courses_table.row(text: /#{course} \(#{section}\)/).present? }
     actions = registered_courses_table.row(text: /#{course} \(#{section}\)/).cells[ACTIONS]
     actions.a(id: /registeredEditLink_line\d+/).click
   end
 
   def delete_registered_course(course, section)
     loading.wait_while_present
-    wait_until { registered_courses_table.row(text: /#{course} \(#{section}\)/).exists? }
+    wait_until { registered_courses_table.row(text: /#{course} \(#{section}\)/).present? }
     actions = registered_courses_table.row(text: /#{course} \(#{section}\)/).cells[ACTIONS]
     actions.a(id: /registeredDropLink_line\d+/).click
   end
