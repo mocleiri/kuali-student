@@ -112,7 +112,7 @@ class CourseSearch < DataFactory
     options = defaults.merge(opts)
 
     return nil if options[:course_code].nil?
-    # course_code = options[:course_code]
+
     on CourseSearchPage  do |page|
       page.course_desc_link_by_course(options[:course_code]).click
     end

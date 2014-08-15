@@ -16,7 +16,7 @@ Feature: REG.Course Search
   #KSENROLL-13740 (all CR 19.2.x scenarios)
   Scenario Outline: CR 19.2.1 Search by Single Course Code
     When I search for a course with "<text>" text option
-    Then courses containing  "<expected>" text option appears
+    Then courses containing "<expected>" course code appear
   Examples:
     | text     | expected |
     | ENGL202  | ENGL202  |
@@ -24,7 +24,7 @@ Feature: REG.Course Search
 
   Scenario Outline: CR 19.2.2 Search by Multiple Course Code
     When I search for a course with "<text>" text option
-    Then courses containing  "<expected>" text options appear
+    Then courses containing "<expected>" course codes appear
   Examples:
     | text                    | expected                                                                     |
     | ENGL101 CHEM231         | ENGL101, ENGL101A, ENGL101C, ENGL101H, ENGL101M, ENGL101S, ENGL101X, CHEM231 |
@@ -33,23 +33,23 @@ Feature: REG.Course Search
 
   Scenario Outline: CR 19.2.3 Search by Subject Code
     When I search for a course with "<text>" text option
-    Then courses containing  "<expected>" text option appears
+    Then courses containing "<expected>" course codes appear
   Examples:
-    | text     | expected |
-    | ENGL     | ENGL     |
-    | BSCI     | BSCI     |
+    | text     | expected         |
+    | ENGL     | ENGL, HIST, WMST |
+    | BSCI     | BSCI             |
 
   Scenario Outline: CR 19.2.4 Search by Multiple Subject Code
     When I search for a course with "<text>" text option
-    Then courses containing  "<expected>" text options appear
+    Then courses containing "<expected>" course codes appear
   Examples:
-    | text       | expected  |
-    | ENGL BSCI  | ENGL, BSCI |
-    | CHEM HIST  | CHEM, HIST |
+    | text       | expected                     |
+    | ENGL BSCI  | ENGL, BSCI                   |
+    | CHEM HIST  | CHEM, HIST, BSCI, ENGL, WMST |
 
   Scenario Outline: CR 19.2.9 Search by Keyword
     When I search for a course with "<text>" text option
-    Then courses containing  "<expected>" text options appear
+    Then courses containing "<expected>" course codes appear
   Examples:
     | text    | expected                                                                 |
     | Atomic  | PHYS721, CHEM682, PHYS420, CHEM403, PHYS622, PHYS728                     |
@@ -60,7 +60,7 @@ Feature: REG.Course Search
             CR 19.6 - As a student I want to select a valid registration group from my search results
             CR 19.8 - As a student I want to add a valid registration group to my registration cart
     When I search for a course with "BSCI330" text option
-    Then courses containing  "BSCI330" text options appear
+    Then courses containing "BSCI330" course code appear
     And I can view the details of the BSCI330 course
     When I select a lecture and lab
     Then I should see only the selected lecture and lab

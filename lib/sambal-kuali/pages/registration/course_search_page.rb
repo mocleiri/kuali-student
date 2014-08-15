@@ -151,7 +151,8 @@ class CourseSearchPage < LargeFormatRegisterForCourseBase
     list.delete_if {|item| item == "" }
     list
   end
-  
+  private :results_list
+
   def results_all_pages (column=COURSE_CODE)
     complete_list = []
     first_page if first_page_on.visible?
@@ -212,14 +213,13 @@ class CourseSearchPage < LargeFormatRegisterForCourseBase
   end
 
   def results_list_courses (expected)
-    trimmed_array_list= Array.new
-    results_list
+    trimmed_array_list = Array.new
     if expected.length == 4 || expected.length > 4 && expected[4] == ','
-      trimmed_array_list<<results_list.map! {|x| x.slice(0,4) }
+      trimmed_array_list<<(results_all_pages(COURSE_CODE).map! {|x| x.slice(0,4) }).uniq
     elsif expected.length == 5
-      trimmed_array_list<<results_list.map! {|x| x.slice(0,5) }
+      trimmed_array_list<<(results_all_pages(COURSE_CODE).map! {|x| x.slice(0,5) }).uniq
     else
-      trimmed_array_list<<results_list.map! {|x| x }
+      trimmed_array_list<<(results_all_pages(COURSE_CODE).map! {|x| x }).uniq
     end
     trimmed_array_list
   end

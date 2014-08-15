@@ -3,17 +3,11 @@ When /^I search for a course with "(.*?)" text option$/ do |text|
   @course_search_result.search :navigate=>true
 end
 
-Then /^courses containing  "(.*?)" text option appears$/ do |expected|
-  on CourseSearchPage do |page|
-    page.results_list_courses(expected).each { |e| e.should include (expected) }
-  end
-end
-
-Then /^courses containing  "(.*?)" text options appear$/ do |expected|
+Then /^courses containing "(.*?)" course codes? appear$/ do |expected|
   on CourseSearchPage do |page|
     results = page.results_list_courses(expected)
     for result in results
-      ((result-expected.split(", ")).empty?).should == true;
+      ((result - expected.split(", ")).empty?).should == true
     end
   end
 end
@@ -21,38 +15,6 @@ end
 When /^I search for (\w+) courses on the course search page$/ do |search_string|
   @course_search_result = make CourseSearch, :search_string => search_string
   @course_search_result.search :navigate=>true
-end
-
-# DO WE NEED TO TEST THIS??
-When /^I choose to see "(.*?)" records per page$/ do |per_page|
-  on CourseSearchPage do |page|
-    page.course_search_results_select.select per_page
-    #Sleep for X seconds to wait for the js to process the change
-    sleep(2)
-    page.course_search_results_select.value.should == per_page
-  end
-end
-
-Then /^There will be (.*?) pages of results with (.*?) records per page$/ do |pages, total_per_page|
-  on CourseSearchPage do |page|
-    page.result_pagination.span.links.size.to_s.should == pages
-
-    #Doing size-1 here since results_table.rows.size includes the header row
-    (page.results_table.rows.size-1).to_s.should == total_per_page
-  end
-end
-
-Then /^Pagination controls will not be visible if there is only 1 page$/ do
-  on CourseSearchPage do |page|
-    #If there's only one page, no pagination controls or record# selection
-    elementsPresent = true
-    if "1" == page.result_pagination.span.links.size.to_s
-      elementsPresent = false
-    end
-
-    page.result_pagination.visible?.should == elementsPresent
-    page.course_search_results_select.visible?.should == elementsPresent
-  end
 end
 
 When /^I sort the results by (course code|title|credits)$/ do |sort_key|
