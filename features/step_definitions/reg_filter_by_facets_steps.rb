@@ -86,9 +86,9 @@ end
 
 
 And(/^I undo the filtering performed using the specified facet$/) do
-  @course_search_result.clear_facet("course_level")
-  sleep 2
   on CourseSearchPage do |page|
+    page.clear_facet("course_level",@course_search_result.course_level)
+    sleep 2
     @search_results_after_clearing=page.results_table.text
   end
 
