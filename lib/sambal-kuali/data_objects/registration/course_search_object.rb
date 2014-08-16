@@ -39,11 +39,29 @@ class CourseSearch < DataFactory
 
     return nil if options[:search_string].nil?
 
-    visit CourseSearchPage if options[:navigate]
-    on CourseSearchPage do |page|
-      sleep 2
-      page.go_to_results_page options[:search_string]
+    # Check to see whether we're in mobile or large format, and branch accordingly
+    browser_size = @browser.window.size
+    if options[:navigate]
+      puts "#{browser_size}"
+      if browser_size.width == 320
+        visit CourseSearchMobilePage
+      else
+        visit CourseSearchPage
+      end
     end
+
+    if browser_size.width == 320
+      on CourseSearchMobilePage do |page|
+        sleep 2
+        page.go_to_results_page options[:search_string]
+      end
+    else
+      on CourseSearchPage do |page|
+        sleep 2
+        page.go_to_results_page options[:search_string]
+      end
+    end
+
     set_options(options)
   end
 

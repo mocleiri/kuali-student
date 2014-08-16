@@ -4,10 +4,17 @@ When /^I search for a course with "(.*?)" text option$/ do |text|
 end
 
 Then /^courses containing "(.*?)" course codes? appear$/ do |expected|
-  on CourseSearchPage do |page|
-    results = page.results_list_courses(expected)
-    for result in results
-      ((result - expected.split(", ")).empty?).should == true
+  browser_size = @browser.window.size
+  if browser_size.width == 320
+    on CourseSearchMobilePage do |page|
+      page.results_list_courses(expected).each { |e| e.should include (expected) }
+    end
+  else
+    on CourseSearchPage do |page|
+      results = page.results_list_courses(expected)
+      for result in results
+        ((result - expected.split(", ")).empty?).should == true
+      end
     end
   end
 end
