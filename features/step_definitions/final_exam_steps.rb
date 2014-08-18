@@ -1521,7 +1521,7 @@ When /^I edit the CO to add a second Format Offering$/ do
 end
 
 When /^I create a Course Offering from copy in a term that uses the matrix and has a final exam period defined$/ do
-  @copy_co = create CourseOffering, :create_by_copy => @course_offering
+  @copy_co = @course_offering.copy
 
   @copy_co.edit :final_exam_type => "Standard Final Exam",
                                  :final_exam_driver => "Final Exam Per Course Offering"

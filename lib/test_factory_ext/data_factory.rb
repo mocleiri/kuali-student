@@ -31,9 +31,7 @@ class DataFactory
             object_copy.instance_variable_set(var,orig_val.linked_data_object_copy(object_copy))
           end
         else
-          if key != :browser
-            object_copy.instance_variable_set(var.to_s,orig_val)
-          end
+          object_copy.instance_variable_set(var.to_s,orig_val)
       end
     end
     object_copy

@@ -384,7 +384,7 @@ end
 When /^I edit a course offering in my admin org that has multiple credit types$/ do
   @term_for_test = Rollover::OPEN_SOC_TERM unless @term_for_test != nil
   #create copy, since don't want course in Offered state
-  @course_offering = create CourseOffering, :create_by_copy =>(make CourseOffering,  :course=>"ENGL369D", :term => @term_for_test)
+  @course_offering = (make CourseOffering,  :course=>"ENGL369D", :term => @term_for_test).copy
   @course_offering.manage
   on ManageCourseOfferings do |page|
     page.edit_course_offering
@@ -702,7 +702,7 @@ end
 
 When /^there is a course with a co-located SI in my admin org/ do
   step "I am logged in as a Schedule Coordinator"
-  @course_offering = create CourseOffering, :create_by_copy=>(make CourseOffering, :course=>"ENGL462", :term=>@term_for_test)
+  @course_offering = (make CourseOffering, :course=>"ENGL462", :term=>@term_for_test).copy
   @course_offering.initialize_with_actual_values
   colocated_ao_parent = make CourseOffering, :course => "ENGL295", :term => @term_for_test
   colocated_ao = make ActivityOfferingObject, :code=> "A",

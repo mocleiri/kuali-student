@@ -44,8 +44,7 @@ class CourseOffering < DataFactory
                 :joint_co_to_create,
                 :cross_listed_codes
   #object - generally set using options hash - course offering object to copy
-  attr_accessor  :create_by_copy,
-                 :eo_rsi
+  attr_accessor  :eo_rsi
   #boolean - - generally set using options hash true/false
   attr_accessor :cross_listed,
                 :waitlist #nil means use default setting
@@ -77,7 +76,6 @@ class CourseOffering < DataFactory
         :fixed_credit_count => "",
         :multiple_credit_list => {},
         :search_by_subj => false,
-        :create_by_copy => nil,
         :create_from_existing => nil,
         :joint_co_to_create => nil,
         :cross_listed => false,
