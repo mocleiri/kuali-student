@@ -6,7 +6,7 @@ class ARCourseSectionObject < DataFactory
   include Workflows
 
   attr_accessor :parent, :course_code, :section, :credits, :description,
-                :popup_credits, :popup_reg_options, :popup_effective_date
+                :requested_credits, :requested_reg_options, :requested_effective_date
 
   def initialize(browser, opts={})
     @browser = browser
@@ -21,9 +21,9 @@ class ARCourseSectionObject < DataFactory
         :add_new_line => false,
         :register => false,
         :confirm_registration => false,
-        :popup_credits => nil,
-        :popup_reg_options => nil,
-        :popup_effective_date => nil
+        :requested_credits => nil,
+        :requested_reg_options => nil,
+        :requested_effective_date => nil
     }
     options = defaults.merge(opts)
 
@@ -75,17 +75,17 @@ class ARCourseSectionObject < DataFactory
       page.loading.wait_while_present
       if options[:confirm_course_credits] != nil and page.set_confirm_course_credits(@course_code).exists?
         page.set_confirm_course_credits(@course_code).select options[:confirm_course_credits]
-        @popup_credits = options[:confirm_course_credits]
+        @requested_credits = options[:confirm_course_credits]
       end
 
       if options[:confirm_course_reg_options] != nil and page.set_confirm_course_reg_options(@course_code).exists?
         page.set_confirm_course_reg_options(@course_code).select options[:confirm_course_reg_options]
-        @popup_reg_options = options[:confirm_course_reg_options]
+        @requested_reg_options = options[:confirm_course_reg_options]
       end
 
       if options[:confirm_course_effective_date] != nil
         page.set_confirm_course_effective_date(@course_code).set options[:confirm_course_effective_date]
-        @popup_effective_date = options[:confirm_course_effective_date]
+        @requested_effective_date = options[:confirm_course_effective_date]
       end
 
       if options[:confirm_registration]
@@ -123,17 +123,17 @@ class ARCourseSectionObject < DataFactory
 
       if options[:edit_course_credits] != nil and page.set_edit_course_credits.exists?
         page.set_edit_course_credits.select options[:edit_course_credits]
-        @popup_credits = options[:edit_course_credits]
+        @requested_credits = options[:edit_course_credits]
       end
 
       if options[:edit_course_reg_options] != nil and page.set_edit_course_reg_options.exists?
         page.set_edit_course_reg_options.select options[:edit_course_reg_options]
-        @popup_reg_options = options[:edit_course_reg_options]
+        @requested_reg_options = options[:edit_course_reg_options]
       end
 
       if options[:edit_course_effective_date] != nil
         page.set_edit_course_effective_date.set options[:edit_course_effective_date]
-        @popup_effective_date = options[:edit_course_effective_date]
+        @requested_effective_date = options[:edit_course_effective_date]
       end
 
       if options[:save_edit]
@@ -162,7 +162,7 @@ class ARCourseSectionObject < DataFactory
 
       if options[:drop_course_effective_date] != nil
         page.drop_registered_effective_date.set options[:drop_course_effective_date]
-        @popup_effective_date = options[:drop_course_effective_date]
+        @requested_effective_date = options[:drop_course_effective_date]
       end
 
       if options[:confirm_drop]
