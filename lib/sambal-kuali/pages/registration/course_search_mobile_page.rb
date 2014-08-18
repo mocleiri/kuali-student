@@ -9,7 +9,7 @@ class CourseSearchMobilePage < RegisterForCourseBase
   end
 
   # Search input
-  element(:course_input_div){ |b| b.div(class: "kscr-Responsive-searchFormWrapper kscr-SearchForm") }
+  element(:course_input_div){ |b| b.div(class: "kscr-SearchForm") }
   element(:course_input){ |b| b.text_field(id: "courseSearchCriteria") }
   element(:course_input_button) { |b| b.button(id: "searchSubmit") }
   action(:begin_course_search) { |b| b.course_input_button.click}
@@ -41,10 +41,31 @@ class CourseSearchMobilePage < RegisterForCourseBase
   element(:result_item_longName) { |course_code,b| b.div(id: "search-result-column-#{course_code}-longName")}
   element(:result_item_credits) { |course_code,b| b.div(id: "search-result-column-#{course_code}-creditOptions")}
 
+  COURSE_CODE = 1
+  COURSE_DESC = 2
+  COURSE_CRED = 3
 
   #click on a card to go to details view
   def select_course(course_code)
     result_item(course_code).click
+  end
+
+  def all_subject_codes
+    sleep 3 # wait for complete list to be rendered
+    (all_results(COURSE_CODE).map! { |course_code| course_code[0, 4] }).uniq
+  end
+
+  def all_results (column=COURSE_CODE)
+    class_name_suffix = case column
+                          when COURSE_CODE then "courseCode"
+                          when COURSE_DESC then "longName"
+                          when COURSE_CRED then "creditOptions"
+                        end
+    results = []
+    results_list.divs(class: "kscr-Search-result-column-#{class_name_suffix}").each do |div|
+      results << div.text
+    end
+    results
   end
 
 end

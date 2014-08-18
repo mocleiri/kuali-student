@@ -5,16 +5,36 @@ end
 
 Then /^courses containing "(.*?)" course codes? appear$/ do |expected|
   browser_size = @browser.window.size
-  if browser_size.width == 320
+  # mobile
+  if browser_size.width <= 640
     on CourseSearchMobilePage do |page|
-      page.results_list_courses(expected).each { |e| e.should include (expected) }
+      page.all_results(CourseSearchMobilePage::COURSE_CODE).each do |course_code|
+        course_code.should =~ /#{expected}/
+      end
     end
+  # large format
   else
     on CourseSearchPage do |page|
       results = page.results_list_courses(expected)
       for result in results
         ((result - expected.split(", ")).empty?).should == true
       end
+    end
+  end
+end
+
+Then /^"(.*?)" course codes? appears?$/ do |expected|
+  if @browser.window.size.width <= 640
+    on CourseSearchMobilePage do |page|
+      ((page.all_results(CourseSearchMobilePage::COURSE_CODE) - expected.split(", ")).empty?).should == true
+    end
+  end
+end
+
+Then /^courses containing "(.*?)" subject codes? appear$/ do |expected|
+  if @browser.window.size.width <= 640
+    on CourseSearchMobilePage do |page|
+      ((page.all_subject_codes - expected.split(", ")).empty?).should == true
     end
   end
 end

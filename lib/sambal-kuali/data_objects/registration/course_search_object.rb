@@ -41,16 +41,17 @@ class CourseSearch < DataFactory
 
     # Check to see whether we're in mobile or large format, and branch accordingly
     browser_size = @browser.window.size
+    # For some unknown reason, the dimensions in the browser object are 2x what
+    # we set them to.  We set mobile width = 320, so check for <= 640
     if options[:navigate]
-      puts "#{browser_size}"
-      if browser_size.width == 320
+      if browser_size.width <= 640
         visit CourseSearchMobilePage
       else
         visit CourseSearchPage
       end
     end
 
-    if browser_size.width == 320
+    if browser_size.width <= 640
       on CourseSearchMobilePage do |page|
         sleep 2
         page.go_to_results_page options[:search_string]
