@@ -1,5 +1,5 @@
-$test_site = "http://localhost:8081/ks-with-rice-bundled-dev" #Local Env
-# $test_site = "http://env2.ks.kuali.org"
+#$test_site = "http://localhost:8081/ks-with-rice-bundled-dev" #Local Env
+$test_site = "http://env2.ks.kuali.org"
 $test_site = ENV['TEST_SITE'] unless ENV['TEST_SITE'] == nil
 
 $: << File.dirname(__FILE__)+'/../../lib'
@@ -41,7 +41,7 @@ Before do
   @browser = browser
 end
 
-# at_exit { browser.close unless browser.nil? }
+at_exit { browser.close unless browser.nil? }
 
 if ENV['HEADLESS']
   #re-start browser after each failed scenario
@@ -64,9 +64,9 @@ def get_browser_connection
   #client.timeout = 15 # seconds default is 60
 
   #Profile Proxy Configuration
-  profile = Selenium::WebDriver::Firefox::Profile.new
-  profile.proxy = Selenium::WebDriver::Proxy.new :http => 'localhost:8001'
-  # profile.proxy = Selenium::WebDriver::Proxy.new :http => 'cache6.p.nwu.ac.za:80'
+  #profile = Selenium::WebDriver::Firefox::Profile.new
+  #profile.proxy = Selenium::WebDriver::Proxy.new :http => 'localhost:8001'
+  #, :profile => profile
 
   the_browser = nil
   retry_ctr = 0
@@ -74,8 +74,7 @@ def get_browser_connection
     retry_ctr += 1
     puts "debug env.rb [#{$env_no}] - browser init - attempt #{retry_ctr}"
     begin
-      the_browser = Watir::Browser.new :firefox , :http_client => client   #, :profile => profile
-      the_browser.window.maximize
+      the_browser = Watir::Browser.new :firefox , :http_client => client
       the_browser.goto("#{$test_site}/login.jsp")
       sleep 2
       raise "connect failed" unless  the_browser.text_field(id: "j_username").exists?
