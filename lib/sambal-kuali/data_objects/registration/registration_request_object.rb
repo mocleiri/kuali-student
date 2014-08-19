@@ -168,7 +168,12 @@ class RegistrationRequest < DataFactory
   end
   private :edit_reg_group
 
-  def remove_from_cart
+  def remove_from_cart opts={}
+    defaults = {
+        :navigate_to_page=>false
+    }
+    options = defaults.merge(opts)
+    visit RegistrationCart if options[:navigate_to_page]
     on RegistrationCart do |page|
       page.course_code(@course_code,@reg_group_code).wait_until_present
       page.show_course_details @course_code,@reg_group_code
@@ -292,7 +297,8 @@ class RegistrationRequest < DataFactory
   end
 
   def add_to_cart_from_search_details
-    on CourseDetailsPage do |page|
+    page_class = (@browser.window.size.width <= 640) ? CourseDetailsMobilePage : CourseDetailsPage
+    on page_class do |page|
       page.add_to_cart
       if @course_has_options
         if @modify_course_options

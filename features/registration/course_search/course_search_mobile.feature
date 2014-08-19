@@ -1,4 +1,4 @@
-@draft @red_team
+@nightly @red_team
 
 Feature: REG.Course Search Mobile
   CR 19.1 - As a student I want to search for courses so that I can view
@@ -68,7 +68,7 @@ Feature: REG.Course Search Mobile
     When I add the selected lecture and lab to my registration cart
     Then I can see the selected section has been added to my cart
     * I remove the course from my registration cart on the search page
-    * I log out from student registration mobile format
+    * I log out from student registration
 
   #KSENROLL-14161
   Scenario: CR 19.13 - Student is notified that course search selection is already in registration cart
@@ -77,4 +77,4 @@ Feature: REG.Course Search Mobile
     And I select the same lecture and discussion as in the course
     Then the Add to Cart option should change to a notice that the course is in my cart
     * I remove the course from my registration cart on the search page
-    * I log out from student registration mobile format
+    * I log out from student registration

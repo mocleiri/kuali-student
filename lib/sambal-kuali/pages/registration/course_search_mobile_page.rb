@@ -37,6 +37,7 @@ class CourseSearchMobilePage < RegisterForCourseBase
 
   element(:results_list){ |b| b.div(id: "search-results-list")}
   element(:result_item) { |course_code,b| b.div(id: "course_detail_result_#{course_code}")}
+  action(:select_course) { |course_code,b| b.result_item(course_code).click}
   element(:result_item_courseCode) { |course_code,b| b.div(id: "search-result-column-#{course_code}-courseCode")}
   element(:result_item_longName) { |course_code,b| b.div(id: "search-result-column-#{course_code}-longName")}
   element(:result_item_credits) { |course_code,b| b.div(id: "search-result-column-#{course_code}-creditOptions")}

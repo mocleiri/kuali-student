@@ -41,26 +41,16 @@ class CourseSearch < DataFactory
 
     # Check to see whether we're in mobile or large format, and branch accordingly
     browser_size = @browser.window.size
+    page_class = (browser_size.width <= 640) ? CourseSearchMobilePage : CourseSearchPage
     # For some unknown reason, the dimensions in the browser object are 2x what
     # we set them to.  We set mobile width = 320, so check for <= 640
     if options[:navigate]
-      if browser_size.width <= 640
-        visit CourseSearchMobilePage
-      else
-        visit CourseSearchPage
-      end
+      visit page_class
     end
 
-    if browser_size.width <= 640
-      on CourseSearchMobilePage do |page|
-        sleep 2
-        page.go_to_results_page options[:search_string]
-      end
-    else
-      on CourseSearchPage do |page|
-        sleep 2
-        page.go_to_results_page options[:search_string]
-      end
+    on page_class do |page|
+      sleep 2
+      page.go_to_results_page options[:search_string]
     end
 
     set_options(options)
@@ -69,7 +59,8 @@ class CourseSearch < DataFactory
   def select_ao opts={}
     return nil if opts[:ao_type].nil? || opts[:ao_code].nil?
 
-    on CourseDetailsPage do |page|
+    page_class = (@browser.window.size.width <= 640) ? CourseDetailsMobilePage : CourseDetailsPage
+    on page_class do |page|
       page.toggle_ao_select(opts[:ao_code])
       wait_until { page.details_heading(opts[:ao_type]).text =~ /Selected/i }
     end
