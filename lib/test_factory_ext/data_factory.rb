@@ -1,10 +1,5 @@
 class DataFactory
 
-  include Foundry
-  include DateFactory
-  include StringFactory
-  include Comparable
-
   def linked_data_object_copy(parent_obj)
     object_copy = self.class.new(@browser, {})
     self.instance_variables.each do |var|
