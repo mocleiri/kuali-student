@@ -338,7 +338,7 @@ And /^I(?: can)? generate 'bulk' exam offerings for the(?: new)? term$/ do
 end
 
 And /^I cannot generate 'bulk' exam offerings for the new term$/ do
-  @manage_soc.term_code = @calendar_target.terms[0].term_code
+  @manage_soc.term_code = @calendar.terms[0].term_code
   @manage_soc.search
 
   on ManageSocPage do |page|
