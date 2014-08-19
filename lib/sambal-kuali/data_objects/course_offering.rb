@@ -92,7 +92,8 @@ class CourseSearchResults < DataFactory
     # navigate_to_course_planner_home
     on CoursePlannerPage do |page|
       begin
-        page.course_planner_header.wait_until_present
+        #page.course_planner_header.wait_until_present
+        sleep 5
         page.course_code_term(@planned_term, @course_code) != nil?
         page.course_code_term_click(@planned_term, @course_code)
         page.course_code_delete_click
@@ -102,9 +103,50 @@ class CourseSearchResults < DataFactory
       rescue
         #means that course was NOT found, BUT be careful as the rescue will hide errors if they occur in cleanup steps
       end
+
+
     end
   end
 
+
+  def remove_course_from_plan_or_backup
+    on CoursePlannerPage do |page|
+
+      begin
+        #page.course_planner_header.wait_until_present
+        sleep 5
+        page.course_code_term(@course_search_result.planned_term, @course_search_result.course_code) != nil?
+        puts page.course_code_term(@course_search_result.planned_term, @course_search_result.course_code)
+        page.course_code_term_click(@course_search_result.planned_term, @course_search_result.course_code)
+        page.course_code_delete_click
+        page.delete_course.wait_until_present
+        page.delete_course_click
+        page.refresh
+      rescue
+        #means that course was NOT found, BUT be careful as the rescue will hide errors if they occur in cleanup steps
+      end
+
+
+      begin
+        #page.course_planner_header.wait_until_present
+        sleep 5
+        if   page.course_code_term_backup(@course_search_result.planned_term, @course_search_result.course_code) != nil?
+          puts page.course_code_term_backup(@course_search_result.planned_term, @course_search_result.course_code)
+          page.course_code_term_click_backup(@course_search_result.planned_term, @course_search_result.course_code)
+          page.course_code_delete_click
+          page.delete_course.wait_until_present
+          page.delete_course_click
+          page.refresh
+        end
+
+      rescue
+        #   puts "the rescuer"
+        #means that course was NOT found, BUT be careful as the rescue will hide errors if they occur in cleanup steps
+      end
+    end
+
+
+  end
   def course_search_to_planner
     on CourseSearch  do |page|
       page.plan_page_click
@@ -202,17 +244,41 @@ class CourseSearchResults < DataFactory
     on CourseSearch do |page|
       page.plus_symbol.wait_until_present
       page.plus_symbol_popover
-      page.term.wait_until_present
+     # page.term.wait_until_present
+      sleep 15
+      #page.refresh
+      #page.term.select @term
+      #page.add_to_plan_popover.send_keys :tab
       page.term.select @term
-      page.add_to_plan_credit.set @credit
       page.add_to_plan_notes.set @notes
       page.add_to_plan_button
       page.plan_page_click
     end
   end
 
+  def select_add_to_plan_backup
+    on CourseSearch do |page|
+      page.plus_symbol.wait_until_present
+      page.plus_symbol_popover
+      # page.term.wait_until_present
+      sleep 15
+      #page.refresh
+      #page.term.select @term
+      #page.add_to_plan_popover.send_keys :tab
+      page.term.select @term
+      page.add_to_plan_notes.set @notes
+      page.backup_checkbox.set
+      page.add_to_plan_button
+      page.plan_page_click
+    end
+  end
 
 
+  def select_add_to_plan_CDP
+    on CourseDetailPage do |page|
+
+    end
+  end
 
 #############################
 

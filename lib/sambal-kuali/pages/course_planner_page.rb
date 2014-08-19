@@ -7,7 +7,7 @@ class CoursePlannerPage < BasePage
 
 
   expected_element :bookmark_gutter
-  element(:course_planner_header) { |b| b.div(text: "Fall 2013 - Summer I 2014") }
+  element(:course_planner_header) { |b| b.main(id:"plan-page").div(class:"uif-message")}
 
   #10 - planner page elements
   action(:add_to_term) { |term,b| b.div(id: "#{term}_planned_add").a(class: "uif-actionLink uif-boxLayoutHorizontalItem").click }
@@ -16,8 +16,14 @@ class CoursePlannerPage < BasePage
   element(:course_code_text) { |b| b.frm.text_field(name: "courseCd") }
   element(:credit) { |b| b.frm.text_field(name: "courseCredit") }
   element(:notes) { |b| b.frm.text_field(name: "courseNote") }
-  action(:course_code_term) { |term,code,b| b.div(id:"kuali-atp-#{term}_planned_#{code}_code").span(class: "uif-message").text }
-  action(:course_code_term_click) { |term,code,b| b.div(id:"kuali-atp-#{term}_planned_#{code}_code").span(class: "uif-message").click }
+  action(:course_code_term) { |term,code,b| b.div(id:"kuali-atp-#{term}_planned_#{code}_code").p(class: "uif-message").text }
+  action(:course_code_term_click) { |term,code,b| b.div(id:"kuali-atp-#{term}_planned_#{code}_code").p(class: "uif-message").click }
+
+  #action(:course_code_term_backup) { |term,code,b| b.div(id:"kuali-atp-#{term}_backup_#{code}_code").p(class: "uif-message").text }
+  action(:course_code_term_backup) { |term,code,b| b.div(id:"kuali-atp-#{term}_backup_#{code}_code").p(class: "uif-message").text }
+
+  action(:course_code_term_click_backup) { |term,code,b| b.div(id:"kuali-atp-#{term}_backup_#{code}_code").p(class: "uif-message").click }
+  #action(:course_code_term_click_backup) { |term,code,b| b.div(id:"kuali-atp-#{term}_backup_#{code}_code").p(class: "uif-message").click }
   action(:add_to_plan) { |b| b.frm.button(text: "Add to Plan").click }
 
   #30 - right click opera
@@ -51,6 +57,9 @@ class CoursePlannerPage < BasePage
   action (:close_popup_click) {|b| b.close_popup.click}
   element(:bookmark_gutter) {|b|b.div(id:"bookmark_summary")}
   element(:view_more_details) {|b|b.a(id:"bookmark_widget_footer")}
+  element(:course_interm) {|term,code,b|b.div(id:"kuali-atp-#{term}_planned_#{code}_code")}
+
+
   #action(:course_page_click) {|b| b.div(id:"applicationNavigation").a(text:"Find Courses").click}
 
 end
