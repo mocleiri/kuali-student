@@ -39,5 +39,11 @@ class CourseSectionPage < BasePage
   element(:course_termlist) {|b|b.div(id:"course-term-list")}
   element(:term_credit) {|term_credit,b|b.a(id:/#{term_credit}_section_toggle/)}
   element(:course_variable_credit) {|course_variable_credit,course_code,b|b.a(id:/#{course_variable_credit}_#{course_code}_section_toggle/)}
+  element(:actual_course_code) {|coursedesc_level,courseterm_level,formatlist_level,fo_level,b|b.div(id:"code_line#{coursedesc_level}_line#{courseterm_level}_line#{formatlist_level}_line#{fo_level}")}
+  element(:actual_course_instructor) {|coursedesc_level,courseterm_level,formatlist_level,fo_level,b|b.div(id:"code_line#{coursedesc_level}_line#{courseterm_level}_line#{formatlist_level}_line#{fo_level}")}
+  element(:actual_course_days) {|coursedesc_level,courseterm_level,formatlist_level,fo_level,b|b.div(id:"days_line#{coursedesc_level}_line#{courseterm_level}_line#{formatlist_level}_line#{fo_level}")}
+  element(:actual_course_time) {|coursedesc_level,courseterm_level,formatlist_level,fo_level,b|b.div(id:"time_line#{coursedesc_level}_line#{courseterm_level}_line#{formatlist_level}_line#{fo_level}")}
+  element(:actual_course_location) {|coursedesc_level,courseterm_level,formatlist_level,fo_level,b|b.div(id:"location_line#{coursedesc_level}_line#{courseterm_level}_line#{formatlist_level}_line#{fo_level}")}
+  element(:actual_course_seatsopen) {|coursedesc_level,courseterm_level,formatlist_level,fo_level,b|b.div(id:"location_line#{coursedesc_level}_line#{courseterm_level}_line#{formatlist_level}_line#{fo_level}")}
   end
 

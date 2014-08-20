@@ -40,7 +40,7 @@ class CourseDetailPage < BasePage
   element(:count_for_bookmark) {|b|b.span(id:"Ksap-Header-Bookmark-Count-Value")}
 
 
-  element(:term_cdp) { |b| b.select(id:"u6paxti_control")}
+  element(:term_cdp) { |b| b.select(id:"planner_term_input_control")}
   element(:add_to_plan_notes_cdp) { |b| b.text_field(name:"courseNote") }
   action (:add_to_plan_button_cdp) { |b| b.frm.button(id:"u1iyq7jo").click}
 
