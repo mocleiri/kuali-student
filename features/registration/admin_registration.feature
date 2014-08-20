@@ -37,7 +37,7 @@ Feature: REG.Admin Registration
 
   Scenario: CR22.2.2 Verify error message when entering invalid term
     When I attempt to load a Term by invalid term Id
-    Then error message is displayed stating "Change Term: Invalid term."
+    Then error message is displayed stating "Change Term: No term defined for code:"
 
   Scenario: CR22.2.3 Verify error message when no term is entered
     When I attempt to load a Term without entering a term Id
