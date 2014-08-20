@@ -7,7 +7,7 @@ class DataFactory
       orig_val = instance_variable_get var
       case
         when orig_val.kind_of?(CollectionsFactory)
-          new_collection = CollectionsFactory.new(@browser)
+          new_collection = orig_val.class.new(@browser)
           orig_val.each do |item|
             new_collection << item.linked_data_object_copy(object_copy)
           end

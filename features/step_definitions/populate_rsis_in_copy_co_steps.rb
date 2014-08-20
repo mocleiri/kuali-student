@@ -1,6 +1,6 @@
 When /^I copy an CO with AOs that have ASIs to a new CO in the different term with RSIs in its AOs$/ do
   @source_course_offering = make CourseOffering, :term=> Rollover::SOC_STATES_SOURCE_TERM, :course => "ENGL462"
-  @course_offering = create CourseOffering, :term=> Rollover::PUBLISHED_SOC_TERM , :create_from_existing => @source_course_offering
+  @course_offering = @source_course_offering.create_from_existing :target_term=> Rollover::PUBLISHED_SOC_TERM
 end
 
 Then /^The new CO and AOs are Successfully created$/ do

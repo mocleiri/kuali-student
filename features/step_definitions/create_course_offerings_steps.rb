@@ -39,23 +39,23 @@ Then /^the new Course Offering should contain only the selected delivery formats
 end
 
 And /^I create a course offering from an existing offering$/ do
-  @course_offering = create CourseOffering, :term=> Rollover::PUBLISHED_SOC_TERM, :course => "CHEM132", :create_from_existing=>(make CourseOffering, :term=> "201201", :course => "CHEM132")
+  @course_offering = (make CourseOffering, :term=> "201201", :course => "CHEM132").create_from_existing :target_term=> Rollover::PUBLISHED_SOC_TERM
 end
 
 When /^I create a course offering from an existing offering in a different term and choose to exclude instructor information$/ do
-  @course_offering = create CourseOffering, :term=> Rollover::FINAL_EDITS_SOC_TERM, :course => "CHEM132", :exclude_instructor => true, :create_from_existing=>(make CourseOffering, :term=> Rollover::MAIN_TEST_TERM_SOURCE, :course => "CHEM132")
+  @course_offering = (make CourseOffering, :term=> Rollover::MAIN_TEST_TERM_SOURCE, :course => "CHEM132").create_from_existing :target_term=> Rollover::FINAL_EDITS_SOC_TERM, :exclude_instructor => true
 end
 
 When /^I create a course offering from an existing offering in a different term and choose to exclude scheduling information$/ do
-  @course_offering = create CourseOffering, :term=> Rollover::FINAL_EDITS_SOC_TERM, :course => "CHEM132", :exclude_scheduling => true, :create_from_existing=>(make CourseOffering, :term=> Rollover::MAIN_TEST_TERM_SOURCE, :course => "CHEM132")
+  @course_offering = (make CourseOffering, :term=> Rollover::MAIN_TEST_TERM_SOURCE, :course => "CHEM132").create_from_existing :target_term=> Rollover::FINAL_EDITS_SOC_TERM, :exclude_scheduling => true
 end
 
 When /^I create a course offering from an existing offering within same term and choose to exclude scheduling information$/ do
-  @course_offering = create CourseOffering, :term=> Rollover::PUBLISHED_SOC_TERM, :course => "ENGL295", :exclude_scheduling => true, :create_from_existing=>(make CourseOffering, :term=> Rollover::PUBLISHED_SOC_TERM, :course => "ENGL295")
+  @course_offering = (make CourseOffering, :term=> Rollover::PUBLISHED_SOC_TERM, :course => "ENGL295").create_from_existing :target_term=> Rollover::PUBLISHED_SOC_TERM, :course => "ENGL295", :exclude_scheduling => true
 end
 
 When /^I create a course offering from an existing offering within same term and choose to exclude instructor information using Create CO$/ do
-  @course_offering = create CourseOffering, :term=> Rollover::PUBLISHED_SOC_TERM, :course => "ENGL295", :exclude_instructor => true, :create_from_existing=>(make CourseOffering, :term=> Rollover::PUBLISHED_SOC_TERM, :course => "ENGL295")
+  @course_offering = (make CourseOffering, :term=> Rollover::PUBLISHED_SOC_TERM, :course => "ENGL295").create_from_existing :target_term=> Rollover::PUBLISHED_SOC_TERM, :course => "ENGL295", :exclude_instructor => true
 end
 
 When /^I create a course offering from an existing offering within same term and choose to exclude instructor information using Manage CO$/ do
@@ -160,7 +160,7 @@ Given(/^I have an existing course offering with cancelled activity offerings$/) 
 end
 
 When(/^I create a course offering in a different term from the existing offering and choose to exclude cancelled activity offerings$/) do
-  @course_offering = create CourseOffering, :term=> Rollover::MAIN_TEST_TERM_TARGET, :course => "CHEM483", :exclude_cancelled_aos => true, :create_from_existing=>(@orig_course_offering)
+  @course_offering = @orig_course_offering.create_from_existing :target_term=> Rollover::MAIN_TEST_TERM_TARGET, :exclude_cancelled_aos => true
 end
 
 Then(/^the new Course Offering should not contain cancelled activity offerings$/) do

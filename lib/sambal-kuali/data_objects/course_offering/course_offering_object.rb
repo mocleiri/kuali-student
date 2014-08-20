@@ -76,7 +76,6 @@ class CourseOffering < DataFactory
         :fixed_credit_count => "",
         :multiple_credit_list => {},
         :search_by_subj => false,
-        :create_from_existing => nil,
         :joint_co_to_create => nil,
         :cross_listed => false,
         :cross_listed_codes => [],
@@ -139,57 +138,50 @@ class CourseOffering < DataFactory
 
   # creates course offering based on class attributes
   def create
-    if @create_from_existing != nil
-      @course = @create_from_existing.course
-      #will update @course if suffix added
-      @course = create_from_existing_course(@create_from_existing.course, @create_from_existing.term)
-      #deep copy
-      @activity_offering_cluster_list = @create_from_existing.activity_offering_cluster_list
-    else #create from catalog
-      start_create_by_search
-      on CreateCourseOffering do  |page|
-        page.continue
+    #create from catalog
+    start_create_by_search
+    on CreateCourseOffering do  |page|
+      page.continue
+    end
+
+    on CourseOfferingCreateEdit do |page|
+      @suffix = random_alphanums(3).upcase if @suffix == ""
+      @suffix.strip! #if you set suffix => ' ' you get no suffix
+      page.suffix.set @suffix
+      @course = "#{@course}#{@suffix}"
+      if @joint_co_to_create != nil
+        create_joint_co
+      end
+      page.cross_listed_co_check_box.set if @cross_listed
+
+      if @final_exam_type == "STANDARD"
+        page.final_exam_option_standard
+        page.final_exam_driver_select( @final_exam_driver)
+        page.check_final_exam_matrix( @use_final_exam_matrix)
+      elsif @final_exam_type == "ALTERNATE"
+        page.final_exam_option_alternate
+      else
+        page.final_exam_option_none
       end
 
-      on CourseOfferingCreateEdit do |page|
-        @suffix = random_alphanums(3).upcase if @suffix == ""
-        @suffix.strip! #if you set suffix => ' ' you get no suffix
-        page.suffix.set @suffix
-        @course = "#{@course}#{@suffix}"
-        if @joint_co_to_create != nil
-          create_joint_co()
-        end
-        page.cross_listed_co_check_box.set if @cross_listed
-
-        if @final_exam_type == "STANDARD"
-          page.final_exam_option_standard
-          page.final_exam_driver_select( @final_exam_driver)
-          page.check_final_exam_matrix( @use_final_exam_matrix)
-        elsif @final_exam_type == "ALTERNATE"
-          page.final_exam_option_alternate
-        else
-          page.final_exam_option_none
-        end
-
-        index = 0 #FIXME
-        @delivery_format_list.each do |dfl|
-          on(CourseOfferingCreateEdit).add_format if index > 0  #update default df row on first iteration
-          index += 1
-          dfl.parent_co = self
-          dfl.create
-        end
-
-        if @waitlist.nil?  #if waitlist is nil, means use default
-          @waitlist = page.has_waitlist?
-        elsif  !@waitlist
-          page.waitlist_off
-          page.waitlist_continue_action
-        else
-          page.waitlist_on
-        end
-        page.create_offering_button.wait_until_present
-        page.create_offering unless @defer_save
+      index = 0 #FIXME
+      @delivery_format_list.each do |dfl|
+        on(CourseOfferingCreateEdit).add_format if index > 0  #update default df row on first iteration
+        index += 1
+        dfl.parent_co = self
+        dfl.create
       end
+
+      if @waitlist.nil?  #if waitlist is nil, means use default
+        @waitlist = page.has_waitlist?
+      elsif  !@waitlist
+        page.waitlist_off
+        page.waitlist_continue_action
+      else
+        page.waitlist_on
+      end
+      page.create_offering_button.wait_until_present
+      page.create_offering unless @defer_save
     end
     ensure_in_single_co_view
 
@@ -234,6 +226,7 @@ class CourseOffering < DataFactory
     on ManageCourseOfferings do |page|
       co_copy.course = page.input_code.value
     end
+    ensure_in_single_co_view
     co_copy
   end
 
@@ -513,10 +506,10 @@ class CourseOffering < DataFactory
     end
   end
 
-  def start_create_by_search
+  def start_create_by_search target_term=@term
     go_to_create_course_offerings
     on CreateCourseOffering do  |page|
-      page.target_term.set @term
+      page.target_term.set target_term
       #page.target_term.fire_event "onchange"
       #page.catalogue_course_code.click
       page.catalogue_course_code.set @course[0,7]   #always use canonical code
@@ -1015,28 +1008,36 @@ class CourseOffering < DataFactory
     return nil
   end
 
-  def create_from_existing_course(course, term)
-    start_create_by_search
+  def create_from_existing opts={}
+    defaults = {
+        :exclude_cancelled_aos => false,
+        :exclude_scheduling => false,
+        :exclude_instructor => false
+    }
+    options = defaults.merge(opts)
+
+    start_create_by_search options[:target_term]
     on CreateCourseOffering do |page|
       page.choose_from_existing
       page.continue
     end
 
     on CreateCOFromExisting do |page|
-      page.select_copy_for_existing_course(term, course)
+      page.select_copy_for_existing_course(@term, @course)
 
-      page.select_exclude_cancelled_aos if @exclude_cancelled_aos
-      page.select_exclude_scheduling if @exclude_scheduling
-      page.select_exclude_instructor if @exclude_instructor
+      page.select_exclude_cancelled_aos if options[:exclude_cancelled_aos]
+      page.select_exclude_scheduling if options[:exclude_scheduling]
+      page.select_exclude_instructor if options[:exclude_instructor]
       page.create
     end
-    co_code = ""
+    co_copy = self.linked_data_object_copy(nil)
     on ManageCourseOfferings do |page|
-      co_code = page.input_code.value
+      co_copy.course = page.input_code.value
+      co_copy.term = options[:target_term]
     end
-    co_code
+    ensure_in_single_co_view
+    co_copy
   end
-  private :create_from_existing_course
 
   # deletes a list of COs from the subject-code view using the toolbar
   #

@@ -741,8 +741,7 @@ Given /^that the Course Offering has an AO-driven exam that is marked to use the
 
   @original_co = engl304_published_eo_create_term
 
-  @course_offering = create CourseOffering, :term => Rollover::PUBLISHED_EO_CREATE_TERM,
-                            :create_from_existing => (@original_co)
+  @course_offering = @original_co.create_from_existing :target_term => Rollover::PUBLISHED_EO_CREATE_TERM
 
   @course_offering.initialize_with_actual_values
   @activity_offering = @course_offering.activity_offering_cluster_list[0].ao_list[0]

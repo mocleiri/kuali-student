@@ -316,7 +316,7 @@ Given /^I have made changes to multiple AO Requisites for the same course offeri
 end
 
 When /^I copy a course offering from an existing offering that had changes made to its activity offerings$/ do
-  @copyCO = create CourseOffering, :term => "201301", :create_from_existing => @course_offering
+  @copyCO = @course_offering.create_from_existing :target_term => "201301"
 end
 
 Then /^the copied course offering should have the same AO Requisites as the original$/ do

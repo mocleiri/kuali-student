@@ -84,5 +84,5 @@ Then /^I copy the colocated AO\'s parent course offering$/ do
 end
 
 When /^I create a new course offering in a subsequent term by copying the existing course offering$/ do
-  @course_offering_copy = create CourseOffering, :term=> Rollover::PUBLISHED_SOC_TERM, :create_from_existing=>@course_offering
+  @course_offering_copy = @course_offering.create_from_existing :target_term=> Rollover::PUBLISHED_SOC_TERM
 end

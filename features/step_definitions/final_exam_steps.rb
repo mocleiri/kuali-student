@@ -85,7 +85,7 @@ When /^I create a Course Offering from catalog with an alternate final assessmen
 end
 
 When /^I create a Course Offering from an existing Course Offering with an alternate final assessment option$/ do
-  @course_offering = create CourseOffering, :create_from_existing => (make CourseOffering, :term => "201208", :course => "ENGL101S")
+  @course_offering = (make CourseOffering, :term => "201201", :course => "ENGL101S").create_from_existing :target_term => '201201'
 end
 
 When /^I edit the Course Offering to have a Standard Final Exam$/ do
@@ -106,7 +106,7 @@ When /^I create a Course Offering from an existing Course Offering with a standa
   @activity_offering = make ActivityOfferingObject, :code => "A", :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :send_to_scheduler => true
 
-  @course_offering_copy = create CourseOffering, :term=> @course_offering.term , :create_from_existing => @course_offering
+  @course_offering_copy = @course_offering.create_from_existing :target_term=> @course_offering.term
   on(ManageCourseOfferings).edit_course_offering
 end
 
@@ -210,7 +210,7 @@ When /^I view the Exam Offerings for a CO created from an existing CO with a sta
   @activity_offering = make ActivityOfferingObject, :code => "A", :parent_cluster => @course_offering.default_cluster
   @activity_offering.edit :send_to_scheduler => true
 
-  @create_co = create CourseOffering, :term=> @course_offering.term, :create_from_existing => @course_offering
+  @create_co = @course_offering.create_from_existing :target_term=> @course_offering.term
 
   on(ManageCourseOfferings).view_exam_offerings
 end
@@ -234,7 +234,7 @@ Given /^that Activity Offerings exist for the selected Course Offering$/ do
 end
 
 When /^I create a Course Offering from an existing CO with a Standard Final Exam option$/ do
-  @create_co = create CourseOffering, :term=> @course_offering.term, :create_from_existing => @course_offering
+  @create_co = @course_offering.create_from_existing :target_term=> @course_offering.term
 end
 
 When /^I select Final Exam Per Course Offering as the Final Exam Driver and Update the Course Offering$/ do
@@ -281,7 +281,7 @@ end
 When /^I view the Exam Offerings for a CO created from an existing CO with a standard final exam driven by Activity Offering$/ do
   @original_co = engl305_published_eo_create_term
 
-  @course_offering = create CourseOffering, :term=> @original_co.term, :create_from_existing => @original_co
+  @course_offering = @original_co.create_from_existing :target_term=> @original_co.term
   on(ManageCourseOfferings).view_exam_offerings
 end
 
@@ -324,7 +324,7 @@ When /^I view the Exam Offerings for a CO created from an existing CO with multi
     activity_offering.add_req_sched_info :rsi_obj => si_obj
   end
 
-  @course_offering = create CourseOffering, :term=> @original_co.term, :create_from_existing => @original_co
+  @course_offering = @original_co.create_from_existing :target_term=> @original_co.term
   on(ManageCourseOfferings).view_exam_offerings
 end
 
@@ -346,7 +346,7 @@ When /^I add two new AOs to the CO and then create a copy of the CO$/ do
   @add_ao_one = @course_offering.create_ao :ao_obj => (make ActivityOfferingObject, :format => "Lecture Only")
   @add_ao_two = @course_offering.create_ao :ao_obj => (make ActivityOfferingObject, :format => "Lecture Only")
 
-  @create_co = create CourseOffering, :term=> @course_offering.term, :create_from_existing => @course_offering
+  @create_co = @course_offering.create_from_existing :target_term=> @course_offering.term
 
   on(ManageCourseOfferings).view_exam_offerings
 end
@@ -360,7 +360,7 @@ When /^I view the Exam Offerings for a CO with two new AOs and a standard final 
   @add_ao_one = @course_offering.create_ao :ao_obj => (make ActivityOfferingObject, :format => "Lecture Only")
   @add_ao_two = @course_offering.create_ao :ao_obj => (make ActivityOfferingObject, :format => "Lecture Only")
 
-  @create_co = create CourseOffering, :term=> @course_offering.term, :create_from_existing => @course_offering
+  @create_co = @course_offering.create_from_existing :target_term=> @course_offering.term
 
   on(ManageCourseOfferings).view_exam_offerings
 end
@@ -374,7 +374,7 @@ When /^I create a CO with two new AOs and then view the Exam Offerings where the
   @add_ao_one = @course_offering.create_ao :ao_obj => (make ActivityOfferingObject, :format => "Lecture Only")
   @add_ao_two = @course_offering.create_ao :ao_obj => (make ActivityOfferingObject, :format => "Lecture Only"), :navigate_to_page => false
 
-  @create_co = create CourseOffering, :term=> @course_offering.term, :create_from_existing => @course_offering
+  @create_co = @course_offering.create_from_existing :target_term=> @course_offering.term
 
   on(ManageCourseOfferings).view_exam_offerings
 end
@@ -468,7 +468,7 @@ end
 When /^I view the Exam Offerings for a CO where the Course Offering Standard FE is changed to No Final Exam$/ do
   @original_co = engl305_published_eo_create_term
 
-  @course_offering = create CourseOffering, :term=> @original_co.term, :create_from_existing => @original_co
+  @course_offering = @original_co.create_from_existing :target_term=> @original_co.term
   # @course_offering.delivery_format_list[0].format = "Lecture Only"
   @course_offering.edit :final_exam_type => "Standard Final Exam", :final_exam_driver => "Final Exam Per Course Offering"
 

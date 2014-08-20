@@ -287,11 +287,10 @@ Then /^the Activity Offerings are assigned to the target subterms$/ do
     page.subterm.should == @activity_offering2.subterm
     page.cancel
   end
-
 end
 
 Then /^I can create a Course Offering in the second term from the existing CO in the first term$/ do
-  @course_offering_copy = create CourseOffering, :term=>  @calendar_target2.terms[0].term_code, :create_from_existing=>@course_offering
+  @course_offering_copy = @course_offering.create_from_existing :target_term=> @calendar_target2.terms[0].term_code
 end
 
 Then /^the Activity Offerings for the copied CO are assigned to the target subterms$/ do
