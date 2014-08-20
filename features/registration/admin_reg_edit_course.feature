@@ -43,7 +43,6 @@ Feature: REG.Edit Course on Admin Registration
     When I attempt to edit a course with default values for Credit and Registration Options
     Then the default values are displayed on edit course dialog
 
-  @bug @KSENROLL-14124
   Scenario: CR23.2.2 Verify On Edit course, the inputs must be mandatory
     When I attempt to edit a registered course
     And I save the edited course with no effective date
