@@ -124,6 +124,7 @@ Feature: REG.Admin Registration
     Then no failed Term eligibility check or warning message is displayed
 
 #KSENROLL-13720
+  @wip
   Scenario: CR22.15.1 Verify I am able to add and then remove multiple courses for a student when registering
     When I select the course that a student will be registered for
     And I select additional courses to be registered for

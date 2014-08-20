@@ -27,7 +27,6 @@ Feature: REG.Register Course on Admin Registration
     When I register a student for courses with more credits than the allowed maximum
     And I register the student for a course with a time conflict
     Then multiple failed eligibility messages appear
-    And the student is not registered for the course
 
   Scenario: CR22.16.2 Verify the course does not display after denying the course for registration
     When I attempt to register the student for a course with a time conflict

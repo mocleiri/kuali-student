@@ -41,7 +41,7 @@ class ARCourseSectionObject < DataFactory
         page.section_code_input.when_present.set @section
 
         if @register
-          page.loading.wait_while_present
+          page.wait_until { page.course_register_btn.visible? }
           page.course_register
 
           confirm_registration if @confirm_registration

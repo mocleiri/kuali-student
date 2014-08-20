@@ -34,7 +34,7 @@ When /^I attempt to load a Term by invalid term Id$/ do
 end
 
 Then /^error message is displayed stating "(.*?)"$/ do |exp_msg|
-  on(AdminRegistration).get_term_error_message.should match /#{exp_msg}/
+  on(AdminRegistration).get_term_error_message.should match /#{exp_msg} #{@admin_reg.term_code}/
 end
 
 When /^I attempt to load a Term without entering a term Id$/  do
@@ -516,9 +516,7 @@ Then /^multiple failed eligibility messages appear$/ do
 
     page.deny_registration_issue
 
-    if result_warning =~ /([A-Z]{4}[0-9]{3}[A-Z]*\s\([0-9]{4}\))/
-      @course_and_section = $1
-    end
+    page.student_info_go  #Needed to leave the browser in a clean state
   end
 end
 
@@ -608,6 +606,13 @@ Given(/^I have registered a student for a course that needed to be allowed in th
   @admin_reg.add_course_section :course_section_obj => (make ARCourseSectionObject, :course_code=> "ENGL304",
                                                              :section=> "1001", :register => true,
                                                              :confirm_registration => true)
+  on AdminRegistration do |page|
+    sleep 5
+    if page.confirm_registration_issue_btn.exists?
+      puts "needed to click again"
+      page.confirm_registration_issue
+    end
+  end
 end
 
 When(/^I attempt to drop the registered course$/) do
