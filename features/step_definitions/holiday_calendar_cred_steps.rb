@@ -147,7 +147,7 @@ end
 
 When /^I edit a Holiday date so that the start date is earlier than the Holiday Calendar start date$/ do
   new_start_date = (Date.strptime( @holiday_calendar.start_date , '%m/%d/%Y') - 2).strftime("%m/%d/%Y")
-  @holiday_calendar.edit_holiday "Veterans Day", {:start_date => new_start_date }
+  @holiday_calendar.edit_holiday "Veterans Day", {:start_date => new_start_date, :use_date_picker => true }
 end
 
 When /^I add a new Holiday with a date later than the Holiday end date$/ do

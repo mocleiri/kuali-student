@@ -32,7 +32,7 @@ class AcademicCalendar < DataFactory
   def initialize(browser, opts={})
     @browser = browser
 
-    if opts[:year].nil? then
+    if opts[:year].nil?
       calendar_year = get_random_calendar_year
     else
       calendar_year = opts[:year].to_i
@@ -133,7 +133,8 @@ class AcademicCalendar < DataFactory
   def edit opts = {}
 
     defaults = {
-        :exp_success=> true
+        :exp_success=> true,
+        :use_date_picker => false
     }
     options = defaults.merge(opts)
 
@@ -141,16 +142,25 @@ class AcademicCalendar < DataFactory
     on(CalendarSearch).edit @name
 
     on EditAcademicCalendar do |page|
-      if !options[:name].nil? then
+      unless options[:name].nil?
         page.academic_calendar_name.set options[:name]
       end
 
-      if !options[:start_date].nil? then
-        page.calendar_start_date.set options[:start_date]
+      unless options[:start_date].nil?
+        if options[:use_date_picker]
+          page.date_picker_start_date options[:start_date]
+        else
+          page.calendar_start_date.set options[:start_date]
+        end
       end
 
-      if !options[:end_date].nil? then
-        page.calendar_end_date.set options[:end_date]
+      unless options[:end_date].nil?
+        if options[:use_date_picker]
+          page.date_picker_end_date options[:end_date]
+        else
+          page.calendar_end_date.set options[:end_date]
+        end
+
       end
 
       page.save :exp_success => options[:exp_success]
@@ -271,7 +281,7 @@ class AcademicTermObject < DataFactory
       :parent_calendar => nil,
       :term => 'Fall',
       :start_date=>"09/02/#{calendar_year}",
-      :end_date=>"09/24/#{calendar_year}",
+      :end_date=>"09/26/#{calendar_year}",
       :term_type=> nil,
       :term_name => nil,
       :term_code => "#{calendar_year}08" ,
@@ -362,7 +372,8 @@ class AcademicTermObject < DataFactory
         :exam_period => nil,
         :include_non_active_days => false,
         :defer_save => false,
-        :do_navigation => true
+        :do_navigation => true,
+        :use_date_picker => false
     }
     options = defaults.merge(opts)
 
@@ -381,11 +392,19 @@ class AcademicTermObject < DataFactory
       end
 
       if options[:start_date] != nil
-        page.term_start_date(term_index).set options[:start_date]
+        if options[:use_date_picker]
+          page.date_picker_start_date term_index, options[:start_date]
+        else
+          page.term_start_date(term_index).set options[:start_date]
+        end
       end
 
       if options[:end_date] != nil
-        page.term_end_date(term_index).set options[:end_date]
+        if options[:use_date_picker]
+          page.date_picker_end_date term_index, options[:end_date]
+        else
+          page.term_end_date(term_index).set options[:end_date]
+        end
       end
 
       page.terms_tab_link.click #close any open date pickers
@@ -638,7 +657,8 @@ class KeyDateObject < DataFactory
   def edit opts={}
 
     defaults = {
-        :exp_success => true
+        :exp_success => true,
+        :use_date_picker => false
     }
     options = defaults.merge(opts)
 
@@ -646,11 +666,19 @@ class KeyDateObject < DataFactory
       edit_row = page.key_date_target_row @parent_term.term_type, @parent_key_date_group.key_date_group_type, @key_date_type
 
       if options[:start_date] != nil
-        page.edit_key_date_start_date edit_row, options[:start_date]
+        if options[:use_date_picker]
+          page.date_picker_keydate_start_date edit_row, options[:start_date]
+        else
+          page.edit_key_date_start_date edit_row, options[:start_date]
+        end
       end
 
       if options[:end_date] != nil
-        page.edit_key_date_end_date edit_row,options[:end_date]
+        if options[:use_date_picker]
+          page.date_picker_keydate_end_date edit_row, options[:end_date]
+        else
+          page.edit_key_date_end_date edit_row,options[:end_date]
+        end
       end
 
       if options[:start_time] != nil
@@ -764,13 +792,22 @@ class CalendarEventObject < DataFactory
     end
   end
 
-  def edit options={}
+  def edit opts={}
+
+    defaults = {
+        :use_date_picker => false
+    }
+    options = defaults.merge(opts)
 
     on EditAcademicCalendar  do |page|
       edit_row = page.target_event_row_in_edit @event_type
 
       if options[:start_date] != nil
-        page.edit_start_date edit_row, options[:start_date]
+        if options[:use_date_picker]
+          page.date_picker_event_start_date edit_row, options[:start_date]
+        else
+          page.edit_start_date edit_row, options[:start_date]
+        end
       end
 
       if options[:start_time] != nil
@@ -782,7 +819,11 @@ class CalendarEventObject < DataFactory
       end
 
       if options[:end_date] != nil
-        page.edit_end_date edit_row, options[:end_date]
+        if options[:use_date_picker]
+          page.date_picker_event_end_date edit_row,options[:end_date]
+        else
+          page.edit_end_date edit_row, options[:end_date]
+        end
       end
 
       if options[:end_time] != nil
@@ -881,7 +922,8 @@ class ExamPeriodObject < DataFactory
     defaults = {
         :exp_success => true,
         :defer_save => false,
-        :navigate_to_page => true
+        :navigate_to_page => true,
+        :use_date_picker => false
     }
     options = defaults.merge(opts)
 
@@ -894,11 +936,19 @@ class ExamPeriodObject < DataFactory
       page.loading.wait_while_present
 
       if options[:start_date] != nil
-        page.set_exam_start_date @parent_term.term_type, options[:start_date]
+        if options[:use_date_picker]
+          page.date_picker_exams_start_date @parent_term.term_type, options[:start_date]
+        else
+          page.set_exam_start_date @parent_term.term_type, options[:start_date]
+        end
       end
 
       if options[:end_date] != nil
-        page.set_exam_end_date @parent_term.term_type, options[:end_date]
+        if options[:use_date_picker]
+          page.date_picker_exams_end_date @parent_term.term_type, options[:start_date]
+        else
+          page.set_exam_end_date @parent_term.term_type, options[:end_date]
+        end
       end
 
       if !options[:exclude_saturday]

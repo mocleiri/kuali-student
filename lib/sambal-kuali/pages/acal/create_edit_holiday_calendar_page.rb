@@ -3,6 +3,7 @@ class CreateEditHolidayCalendar < BasePage #Create/Edit are the same page (only 
   wrapper_elements
   frame_element
   include CalendarStickyFooter
+  include DatePicker
 
   expected_element :calendar_name
 
@@ -55,6 +56,10 @@ class CreateEditHolidayCalendar < BasePage #Create/Edit are the same page (only 
     target_row(holiday_type).text_field(name: /startDate/).set date
   end
 
+  def date_picker_holiday_start_date(holiday_type, date_str)
+    date_picker_set(target_row(holiday_type).button(alt: 'Date picker',index: 0), date_str)
+  end
+
   def edit_start_time(holiday_type, time, meridian)
     target_row(holiday_type).text_field(name: /startTime/).set time
     if meridian == "am" then
@@ -67,6 +72,11 @@ class CreateEditHolidayCalendar < BasePage #Create/Edit are the same page (only 
   def edit_end_date(holiday_type, date)
     target_row(holiday_type).text_field(name: /endDate/).set date
   end
+
+  def date_picker_holiday_end_date(holiday_type, date_str)
+    date_picker_set(target_row(holiday_type).button(alt: 'Date picker',index: 1), date_str)
+  end
+
 
   def edit_end_time(holiday_type, time, meridian)
     target_row(holiday_type).text_field(name: /endTime/).set time

@@ -333,16 +333,35 @@ class Holiday < DataFactory
   end
 
   def edit(opts)
+    defaults = {
+        :use_date_picker => false
+    }
+    options = defaults.merge(opts)
+
     on CreateEditHolidayCalendar do |page|
-      page.edit_start_date @type, opts[:start_date] unless opts[:start_date].nil?
-      page.edit_start_time @type, opts[:start_time], opts[:start_ampm]  unless opts[:start_time].nil?
-      page.edit_end_date @type, opts[:end_date] unless opts[:end_date].nil?
-      page.edit_end_time @type, opts[:end_time], opts[:end_ampm]  unless opts[:end_time].nil?
-      page.edit_instructional @type, opts[:instructional] unless opts[:instructional].nil?
+      if options[:start_date] != nil
+        if options[:use_date_picker]
+          page.date_picker_holiday_start_date @type, options[:start_date]
+        else
+          page.edit_start_date @type, options[:start_date]
+        end
+      end
+      page.edit_start_time @type, options[:start_time], options[:start_ampm] unless options[:start_time].nil?
+
+      if options[:end_date] != nil
+        if options[:use_date_picker]
+          page.date_picker_holiday_end_date @type, options[:end_date]
+        else
+          page.edit_end_date @type, options[:end_date]
+        end
+      end
+
+      page.edit_end_time @type, options[:end_time], options[:end_ampm]  unless options[:end_time].nil?
+      page.edit_instructional @type, options[:instructional] unless options[:instructional].nil?
       page.save
     end
 
-    set_options(opts)
+    set_options(options)
   end
 
   def init_holiday(holiday_row)

@@ -7,7 +7,7 @@ When /^I change the final exam period start date to be before the term start dat
   term.exam_period = make ExamPeriodObject, :parent_term => term
   @calendar.add_term term
 
-  @calendar.terms[0].exam_period.edit :start_date => "08/15/#{@calendar.year}"
+  @calendar.terms[0].exam_period.edit :start_date => "08/15/#{@calendar.year}", :use_date_picker => true
 end
 
 When /^I change the final exam period end date to be after the term end date and save$/ do

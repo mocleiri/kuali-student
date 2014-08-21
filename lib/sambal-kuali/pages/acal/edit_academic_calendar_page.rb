@@ -3,6 +3,7 @@ class EditAcademicCalendar < BasePage
   wrapper_elements
   frame_element
   include CalendarStickyFooter
+  include DatePicker
 
   expected_element :header_calendar_name
 
@@ -14,15 +15,24 @@ class EditAcademicCalendar < BasePage
   value(:page_info_message_text) { |b| b.frm.ul(id: "pageValidationList").li(class: "uif-infoMessageItem").text}
   action(:calendar_tab) { |b| b.frm.link(text: "Calendar").click }
   action(:terms_tab) { |b| b.frm.link(text: "Terms").click }
-  
+
+  element(:calendar_info_section) { |b| b.frm.section(id: "KS-AcademicCalendar-MetaSubSection") }
   element(:academic_calendar_name) { |b| b.frm.text_field(name: "academicCalendarInfo.name") }
   element(:calendar_start_date) { |b| b.frm.text_field(name: "academicCalendarInfo.startDate") }
   element(:calendar_end_date) { |b| b.frm.text_field(name: "academicCalendarInfo.endDate") }
 
+  def date_picker_start_date date_str #format: 08/20/2433
+    date_picker_set(calendar_info_section.button(alt: 'Date picker',index: 0), date_str)
+  end
+
+  def date_picker_end_date date_str #format: 08/20/2433
+    date_picker_set(calendar_info_section.button(alt: 'Date picker',index: 1), date_str)
+  end
+
   element(:event_toggle_link) { |b| b.frm.link(id: "acal-info-event_toggle") }
 
   def open_events_section()
-    if !add_event_button.present? then # collapse means collapsed
+    unless add_event_button.present?
       event_toggle_link.click
       sleep 1
     end
@@ -57,12 +67,18 @@ class EditAcademicCalendar < BasePage
 
   element(:event_start_date) { |row, b| row.text_field(id: /event_start_date_line/) }
   element(:event_start_time) { |row, b| row.text_field(id: /event_start_time_line/) }
+  def date_picker_event_start_date(row, date_str)
+    date_picker_set(row.button(alt: 'Date picker',index: 0), date_str)
+  end
   element(:event_start_am) { |row, b| row.radio(id: /event_start_time_ampm_line/, value: "AM") }
   element(:event_start_pm) { |row, b| row.radio(id: /event_start_time_ampm_line/, value: "PM") }
   action(:event_start_am_set) { |row, b| b.add_event_start_am(row).set; b.loading.wait_while_present}
   action(:event_start_pm_set) { |row, b| b.add_event_start_pm(row).set; b.loading.wait_while_present}
 
   element(:event_end_date) { |row, b| row.text_field(id: /event_end_date_line/) }
+  def date_picker_event_end_date(row, date_str)
+    date_picker_set(row.button(alt: 'Date picker',index: 1), date_str)
+  end
   element(:event_end_time) { |row, b| row.text_field(id: /event_end_time_line/) }
   element(:event_end_am) { |row, b| row.radio.(id: /event_end_time_ampm_line/, value: "AM") }
   element(:event_end_pm) {|row, b| row.radio(id: /event_end_time_ampm_line/, value: "PM") }

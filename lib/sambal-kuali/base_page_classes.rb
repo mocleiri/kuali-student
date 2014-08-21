@@ -202,6 +202,52 @@ module CalendarStickyFooter
   end
 end
 
+module DatePicker
+  PageFactory.element(:date_picker_dialog) { |b| b.frm.div(id: "ui-datepicker-div") }
+  PageFactory.action(:date_picker_next_month) { |b| b.date_picker_dialog.link(title: 'Next').click }
+  PageFactory.action(:date_picker_prev_month) { |b| b.date_picker_dialog.link(title: 'Prev').click }
+  PageFactory.action(:date_picker_pick_day) { |day,b| b.date_picker_dialog.link(text: "#{day.to_i}").click }
+  PageFactory.value(:date_picker_month_str) { |b| b.date_picker_dialog.span(class: "ui-datepicker-month").text }
+  PageFactory.value(:date_picker_month_int) { |b| b.date_picker_dialog.td(class: "ui-datepicker-current-day").attribute_value('data-month').to_i + 1 }
+  PageFactory.value(:date_picker_year) { |b| b.date_picker_dialog.span(class: "ui-datepicker-year").text }
+  PageFactory.value(:date_picker_day) { |b| b.date_picker_dialog.td(class: "ui-datepicker-current-day").text }
+
+  def date_picker_set (date_picker_element, date_str)
+    date_picker_element.click
+    temp = date_str.split('/')
+    day = temp[1]
+    month = temp[0]
+    year = temp[2]
+    date_picker_pick_year year
+    date_picker_pick_month month
+    date_picker_pick_day day
+  end
+
+  def date_picker_pick_year year
+    while year != self.date_picker_year
+      if year < self.date_picker_year
+        self.date_picker_prev_month
+      else
+        self.date_picker_next_month
+      end
+      sleep 0.1
+    end
+  end
+
+  def date_picker_pick_month month
+    int_month = month.to_i
+    while int_month != self.date_picker_month_int
+      if int_month < self.date_picker_month_int
+        self.date_picker_prev_month
+      else
+        self.date_picker_next_month
+      end
+      sleep 0.1
+    end
+  end
+end
+
+
 module PopulationEdit
 
   def child_populations

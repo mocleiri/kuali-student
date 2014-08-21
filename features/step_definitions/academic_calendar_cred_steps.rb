@@ -88,7 +88,8 @@ end
 When /^I update the Academic Calendar$/ do
   @calendar.edit :name => random_alphanums.strip,
                  :start_date => "02/15/#{@calendar.year.to_i + 1}",
-                 :end_date => "07/06/#{@calendar.year.to_i + 1}"
+                 :end_date => "07/06/#{@calendar.year.to_i + 1}",
+                 :use_date_picker => true
 end
 
 When /^I edit the term and make it official$/ do
@@ -287,7 +288,8 @@ end
 When /^I edit the information for a term$/ do
   @calendar.terms[0].edit :term_name => "CE Term1",
              :start_date => (Date.strptime( @calendar.terms[0].start_date , '%m/%d/%Y') + 2).strftime("%m/%d/%Y"), #add 2 days
-             :end_date => (Date.strptime( @calendar.terms[0].end_date , '%m/%d/%Y') + 2).strftime("%m/%d/%Y")     #add 2 days
+             :end_date => (Date.strptime( @calendar.terms[0].end_date , '%m/%d/%Y') + 2).strftime("%m/%d/%Y"),     #add 2 days
+             :use_date_picker => true
 end
 
 When /^I add events to the Academic Calendar$/ do
@@ -309,7 +311,7 @@ When /^I update the event dates$/ do
     page.edit @calendar.name
   end
   @calendar.events[0].edit :start_date => "04/06/#{@calendar.year.to_i + 1}", :end_date=>"05/29/#{@calendar.year.to_i + 1}",
-                  :start_time=>"11:11", :end_time=>"09:45"
+                  :start_time=>"11:11", :end_time=>"09:45", :use_date_picker => true
 end
 
 When /^I remove the events from the Academic Calendar$/ do
@@ -440,7 +442,7 @@ end
 
 Then /^I edit an instructional Key Date$/ do
   @calendar.terms[0].edit
-  @calendar.terms[0].key_date_groups[0].key_dates[0].edit :start_date => "09/14/#{@calendar.year}"
+  @calendar.terms[0].key_date_groups[0].key_dates[0].edit :start_date => "09/14/#{@calendar.year}", :use_date_picker => true
 end
 
 Then /^I delete an instructional Key Date Group$/ do

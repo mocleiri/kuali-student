@@ -3,6 +3,7 @@ class EditAcademicTerms < BasePage
   wrapper_elements
   frame_element
   include CalendarStickyFooter
+  include DatePicker
 
   expected_element :terms_tab_link
 
@@ -213,6 +214,9 @@ class EditAcademicTerms < BasePage
   def delete_key_date(row); row.cells[ACTION_COL].link(id: /key_date_delete_button/).click; end
 
   def key_date_start_date(row); row.cells[START_DATE_COL].text_field.value; end
+  def date_picker_keydate_start_date(row, date_str)
+    date_picker_set(row.button(alt: 'Date picker',index: 0), date_str)
+  end
   def key_date_start_time(row); row.cells[START_TIME_COL].text_field.value; end
   def key_date_start_ampm(row)
     return "" unless row.cells[START_AMPM_COL].radio.present?
@@ -223,6 +227,9 @@ class EditAcademicTerms < BasePage
     end
   end
   def key_date_end_date(row); row.cells[END_DATE_COL].text_field.value; end
+  def date_picker_keydate_end_date(row, date_str)
+    date_picker_set(row.button(alt: 'Date picker',index: 1), date_str)
+  end
   def key_date_end_time(row); row.cells[END_TIME_COL].text_field.value; end
   def key_date_end_ampm(row)
     return "" unless row.cells[START_AMPM_COL].radio.present?
@@ -241,7 +248,15 @@ class EditAcademicTerms < BasePage
 
   action(:term_name_edit) { |term_index,b| b.frm.text_field(id: "term_name_line#{term_index}_control") }
   action(:term_start_date) { |term_index,b| b.frm.text_field(id: "term_start_date_line#{term_index}_control") }
+  def date_picker_start_date term_index, date_str #format: 08/20/2433
+    open_date_picker_element = self.div(id: "term_start_date_line#{term_index}").button
+    date_picker_set( open_date_picker_element, date_str)
+  end
   action(:term_end_date) { |term_index,b| b.frm.text_field(id: "term_end_date_line#{term_index}_control") }
+  def date_picker_end_date term_index, date_str #format: 08/20/2433
+    open_date_picker_element = self.div(id: "term_end_date_line#{term_index}").button
+    date_picker_set( open_date_picker_element, date_str)
+  end
 
   action(:key_date_exist) { |term_index, key_date_group_index, key_date_index, b| b.frm.div(id: "key_date_type_line#{term_index}_line#{key_date_group_index}_line#{key_date_index}").span(index: 0).exists?}
 
@@ -268,9 +283,17 @@ class EditAcademicTerms < BasePage
     exam_start_date( term_type).set date
   end
 
+  def date_picker_exams_start_date( term_type, date_str)
+    date_picker_set(final_exam_section(term_type).button(alt: 'Date picker',index: 0), date_str)
+  end
+
   def set_exam_end_date( term_type, date)
     loading.wait_while_present
     exam_end_date( term_type).set date
+  end
+
+  def date_picker_exams_end_date( term_type, date_str)
+    date_picker_set(final_exam_section(term_type).button(alt: 'Date picker',index: 1), date_str)
   end
 
   def get_exam_start_date( term_type)
