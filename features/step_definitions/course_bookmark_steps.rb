@@ -45,8 +45,8 @@ When(/^I bookmark a course$/) do
       else
       page.add_bookmark
       sleep 3
-      @count_bookmark=page.count_for_bookmark.text.to_i
-      puts @count_bookmark
+  #    @count_bookmark=page.count_for_bookmark.text.to_i
+   #   puts @count_bookmark
     end
   end
 
@@ -89,6 +89,7 @@ Then(/^I should be able to remove the bookmark in the course details page$/) do
     page.removebookmark.click
     sleep 5
     page.remove_bookmark_message.exists?.should==true
+    @count_bookmark=page.count_for_bookmark.text.to_i
     page.count_for_bookmark.text.to_i==@count_bookmark-1
     end
 end
