@@ -226,7 +226,7 @@ class CourseOffering < DataFactory
     on ManageCourseOfferings do |page|
       co_copy.course = page.input_code.value
     end
-    ensure_in_single_co_view
+    ensure_in_single_co_view co_copy.course
     co_copy
   end
 
@@ -436,7 +436,7 @@ class CourseOffering < DataFactory
     ensure_in_single_co_view
   end
 
-  def ensure_in_single_co_view
+  def ensure_in_single_co_view course_code=@course
     #check to see if course code returns multiple rows
     begin
       on ManageCourseOfferings do |page|
@@ -444,7 +444,7 @@ class CourseOffering < DataFactory
       end
 
       on ManageCourseOfferingList do |page|
-        page.manage(@course)
+        page.manage course_code
       end
     rescue Watir::Wait::TimeoutError
       #means was single CO returned (or nothing returned), AO list is already displayed
@@ -1035,7 +1035,7 @@ class CourseOffering < DataFactory
       co_copy.course = page.input_code.value
       co_copy.term = options[:target_term]
     end
-    ensure_in_single_co_view
+    ensure_in_single_co_view co_copy.course
     co_copy
   end
 
